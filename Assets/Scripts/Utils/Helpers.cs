@@ -10,11 +10,27 @@ using UnityEngine.UI;
 
 using Random = UnityEngine.Random;
 
+
 /// <summary>
 /// A static class for general helpful methods
 /// </summary>
 public static class Helpers
 {
+  
+  /// <summary>
+  /// Определяет лежит ли число в диапазоне
+  /// <typeparam name="max">Максимальное значение диапазона</typeparam>
+  /// <code>
+  /// if (IsBetween(0, 1, 0.5)) {
+  /// return true;
+  /// }
+  /// </code>
+  /// </summary>
+  public static bool IsBetween(float min, float max, float value)
+  {
+    return value >= min && value <= max;
+  }
+
   /// <summary>
   /// Destroy all child objects of this transform (Unintentionally evil sounding).
   /// Use it like so:

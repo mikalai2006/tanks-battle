@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class Muzzle : BaseMuzzle
@@ -8,7 +9,13 @@ public class Muzzle : BaseMuzzle
     {
         base.Update();
 
-        if (data.timeBeforeShot <= 0 && Machine && Machine.ObjectTarget && Machine.Data.isShot)
+        if (
+            data.timeBeforeShot <= 0
+            && Machine
+            && Machine.ObjectTarget
+            && Machine.Data.isShot
+            && Helpers.IsBetween(-30f, 30f, Mathf.DeltaAngle(Machine.Data.angleTower, Machine.Data.currentAngleTower))
+        )
         {
             data.countShotSeria += 1;
             OnShot(Machine.ObjectTarget.gameObject);
