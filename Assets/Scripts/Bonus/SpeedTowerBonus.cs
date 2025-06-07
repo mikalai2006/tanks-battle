@@ -19,6 +19,9 @@ public class SpeedTowerBonus : BaseBonus
             {
                 bm.LevelManager.UiTopSide.OnCreateUIBonus(Config);
             }
+
+            base.OnDrawText(bm);
+            
             Destroy(gameObject);
         }
     }

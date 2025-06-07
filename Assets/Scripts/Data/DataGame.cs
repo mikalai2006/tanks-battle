@@ -39,8 +39,9 @@ public class StateLevel
 public class MachineLevelData
 {
   public string id;
-  public string logo;
+  public string gerbId;
   public string name;
+  public int rank;
   public bool isBot; 
 }
 

@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78717aa4c393c9646aca609ae13ec5e6, type: 2}
   noiseScaleKoof: 0.2
   noiseMaxKoof: 0.6
-  light: 0.1
+  light: 0.04
   noiseScaleObstacleKoof: 0.2
   noiseObstacleMaxKoof: 0.8
   typeLevel: 2
@@ -38,4 +38,4 @@ MonoBehaviour:
   - Item: {fileID: 11400000, guid: 74f7717d2fba81f488443ab4fcb46c11, type: 2}
     probability: 0.30000001192092896
   - Item: {fileID: 11400000, guid: e08bc53efee6df34b952175251ee1265, type: 2}
-    probability: 0.30000001192092896
+    probability: 0.5

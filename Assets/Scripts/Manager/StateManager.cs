@@ -49,9 +49,10 @@ public class StateManager
       MachineLevelData machine = new()
       {
         id = _gameSetting.machines[UnityEngine.Random.Range(0, _gameSetting.machines.Count - 1)].name,
-        logo = i == 0 ? statePlayer.gerbId : _gameSetting.gerbs[UnityEngine.Random.Range(0, _gameSetting.gerbs.Count - 1)].name,
+        gerbId = i == 0 ? statePlayer.gerbId : _gameSetting.gerbs[UnityEngine.Random.Range(0, _gameSetting.gerbs.Count - 1)].name,
         isBot = i != 0,
         name = i == 0 ? _gameManager.AppInfo.UserInfo.name : listRandomNames.ElementAt(i),
+        rank = i == 0 ? _gameManager.StateManager.statePlayer.rank : UnityEngine.Random.Range(0, _gameSetting.ranks.Count - 1),
       };
 
       stateLevel.machines.Add(machine);

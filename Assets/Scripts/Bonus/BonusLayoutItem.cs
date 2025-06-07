@@ -6,6 +6,7 @@ public class BonusLayoutItem : MonoBehaviour
     [SerializeField] private Image logo;
     [SerializeField] private TMPro.TextMeshProUGUI nameBonus;
     [SerializeField] private RectTransform progressTime;
+    [SerializeField] private Image progressTimeImage;
     private BaseMachine Target;
     private GameBonus Config;
     private float maxWidth = 280f;
@@ -34,6 +35,8 @@ public class BonusLayoutItem : MonoBehaviour
         Target = _target;
         Config = config;
         logo.sprite = config.sprite;
+        logo.color = config.color;
+        progressTimeImage.color = config.color;
         nameBonus.text = config.text.title.GetLocalizedString();
 
     }

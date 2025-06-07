@@ -26,6 +26,7 @@ public class GameSetting : ScriptableObject
   public List<Sprite> gerbs;
   public List<GameLevel> levels;
   public List<GameMachine> machines;
+  public List<GameRank> ranks;
   public List<Color> commandColor;
   // public TypeGame typeGame;
   // [Range(0.1f, 1f)] public float lineWidth;
@@ -86,6 +87,8 @@ public class GameSetting : ScriptableObject
   public bool drawAreaForBot;
   [Tooltip("Коэффициент смещения угла поворота башни при попадании")]
   [Range(0,10f)] public float koofChangeAngleTower;
+  [Tooltip("Скорость изменения размеров зон поиска и сектора атаки")]
+  [Range(1f,20f)] public float speedChangeAreaSize;
 
   [Space(5)]
   [Header("Редактор")]

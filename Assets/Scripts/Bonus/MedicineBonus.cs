@@ -15,6 +15,9 @@ public class MedicineBonus : BaseBonus
         if (bm && am)
         {
             bm.OnSetHP(bm.Config.hp);
+
+            base.OnDrawText(bm);
+            
             Destroy(gameObject);
         }
     }

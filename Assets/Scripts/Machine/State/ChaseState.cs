@@ -43,7 +43,7 @@ public class ChaseState : State
                 {
                     Vector3 dirVector = stateController.Target - stateController.Machine.transform.position;
                     float distance = Vector3.Distance(stateController.Target, stateController.Machine.transform.position);
-                    if (distance < stateController.Machine.Config.distanceSearch)
+                    if (distance < stateController.Machine.AreaSearch.DistanceSearch + 0.5f)
                     {
                         if (distance < 2f)
                         {

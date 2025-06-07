@@ -33,8 +33,8 @@ public abstract class BaseMachine : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private AreaMove areaMove;
     public AreaMove AreaMove => areaMove;
-    [SerializeField] private AreaAttack areaAttack;
-    public AreaAttack AreaAttack => areaAttack;
+    [SerializeField] private AreaSearch areaSearch;
+    public AreaSearch AreaSearch => areaSearch;
     public Badge Badge;
     [SerializeField] private int offset = 90;
 
@@ -99,10 +99,10 @@ public abstract class BaseMachine : MonoBehaviour
 
         MachineLevelData = dataInput;
 
-        Badge.OnSetNameText(MachineLevelData.name);
+        Badge.Init(MachineLevelData);
 
         // установка герба.
-        Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.logo);
+        Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
         body.OnSetSpriteGerb(logo);
 
         // установка основных параметров.
@@ -117,10 +117,9 @@ public abstract class BaseMachine : MonoBehaviour
 
         // устанавливаем настройки для области атаки.
         OnNotViewTarget(null);
-        areaAttack.OnSetSize(Config.distanceSearch * 2);
+        areaSearch.Init(Config);
 
         // инициализируем компоненты машины
-        tower.OnSetSizeSector(Config.distanceAttack * 2);
         body.Init(this);
         tower.Init(this);
         for (int i = 0; i < muzzles.Count; i++)
@@ -211,21 +210,25 @@ public abstract class BaseMachine : MonoBehaviour
         data.directionMove = direction;
     }
 
-    public void OnDrawAnimateText(string text)
-    {
-        // Создаем текст с уроном
-        TextDamage obText = Lean.Pool.LeanPool.Spawn(_gameManager.Settings.prefabTextDamage, levelManager.objectSpawnText.transform);
-        if (obText)
-        {
-            obText.Init(this);
-            obText.OnSetText(text);
-        }
-    }
+    // public void OnDrawAnimateText(string text)
+    // {
+    //     // Создаем текст с уроном
+    //     TextDamage obText = Lean.Pool.LeanPool.Spawn(_gameManager.Settings.prefabTextDamage, levelManager.objectSpawnText.transform);
+    //     if (obText)
+    //     {
+    //         obText.Init(this);
+    //         obText.OnSetColor(_gameManager.Settings.colorTextDamage);
+    //         obText.OnSetText(text);
+    //     }
+    // }
 
     public void OnAddDamage(float v)
     {
         data.hp -= v;
         Badge.OnChangeData(this);
+        if (!MachineLevelData.isBot) {
+            levelManager.UiTopSide.OnChangeData(this);
+        }
         Tower.OnChangeData();
         Indicator.OnChangeData();
         Tower.transform.eulerAngles = new Vector3(0, 0, Tower.transform.eulerAngles.z + UnityEngine.Random.Range(-v * _gameManager.Settings.koofChangeAngleTower, v * _gameManager.Settings.koofChangeAngleTower));
@@ -249,6 +252,9 @@ public abstract class BaseMachine : MonoBehaviour
     {
         data.hp = hp;
         Badge.OnChangeData(this);
+        if (!MachineLevelData.isBot) {
+            levelManager.UiTopSide.OnChangeData(this);
+        }
     }
 
     public void OnSetSpeedRotateTower(float rotateTower)
@@ -287,7 +293,7 @@ public abstract class BaseMachine : MonoBehaviour
     {
         if (_gameManager.Settings.drawAreaForBot || !target.MachineLevelData.isBot || !MachineLevelData.isBot)
         {
-            target.areaAttack.OnSetColor(_gameManager.Settings.colorAreaAttackViewed);
+            target.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackViewed);
 
             tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackViewed);
         }
@@ -307,7 +313,7 @@ public abstract class BaseMachine : MonoBehaviour
         {
             if (_gameManager.Settings.drawAreaForBot || !ObjectTarget.MachineLevelData.isBot || !MachineLevelData.isBot)
             {
-                _objectTarget.areaAttack.OnSetColor(_gameManager.Settings.colorAreaAttackAttack);
+                _objectTarget.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackAttack);
 
                 tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackAttack);
             }
@@ -328,11 +334,11 @@ public abstract class BaseMachine : MonoBehaviour
 
             if (lastTarget)
             {
-                lastTarget.areaAttack.OnSetColor(_gameManager.Settings.colorAreaAttackDefault);
+                lastTarget.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackDefault);
             }
             else
             {
-                areaAttack.OnSetColor(_gameManager.Settings.colorAreaAttackDefault);
+                areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackDefault);
             }
         }
     }
@@ -403,7 +409,7 @@ public abstract class BaseMachine : MonoBehaviour
                 OnSetAngleTower(angleInRadians * Mathf.Rad2Deg);
 
                 float dist = Vector3.Distance(_objectTarget.transform.position, transform.position);
-                if (dist <= Config.distanceAttack)
+                if (dist <= tower.DistanceAttack)
                 {
                     OnAttackTarget();
                     // // SetIsShot(true);
@@ -444,7 +450,7 @@ public abstract class BaseMachine : MonoBehaviour
     void Update()
     {
         // если есть возможные цели
-        List<BaseMachine> _vacantTargets = AreaAttack.Targets
+        List<BaseMachine> _vacantTargets = AreaSearch.Targets
             .Where(t => t.Value >= data.timeBeforeAddTarget || !MachineLevelData.isBot)
             .Select(t => t.Key)
             .ToList();
@@ -488,7 +494,7 @@ public abstract class BaseMachine : MonoBehaviour
 
         // если нет конечного автомата, проверяем есть ли противники в зоне досягаемости
         // и если нет - убираем цель
-        if (AreaAttack.Targets.Count == 0)
+        if (AreaSearch.Targets.Count == 0)
         {
             OnSetTarget(null);
         }
@@ -528,7 +534,7 @@ public abstract class BaseMachine : MonoBehaviour
 
         // провверяем видим ли компонент.
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera);
-        if (GeometryUtility.TestPlanesAABB(planes , areaMove.Collider.bounds))
+        if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
         // if (rd.isVisible == false)
         {
             _indicator.gameObject.SetActive(false);
@@ -536,6 +542,23 @@ public abstract class BaseMachine : MonoBehaviour
         else
         {
             _indicator.gameObject.SetActive(true);
+        }
+
+        // считаем время действия бонусов.
+        for (int i = 0; i < Data.bonuses.Count; i++)
+        {
+            Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
+
+            if (Data.bonuses.ElementAt(i).Value.time <= 0)
+            {
+                TypeBonus key = Data.bonuses.ElementAt(i).Key;
+                Data.bonuses.Remove(key);
+
+                if (levelManager.UiTopSide.Target == this)
+                {
+                    levelManager.UiTopSide.OnRemoveUIBonus(key);
+                }
+            }
         }
     }
 

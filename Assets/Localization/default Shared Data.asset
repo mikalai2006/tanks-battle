@@ -87,6 +87,14 @@ MonoBehaviour:
     m_Key: d_bonus_distanceAttack
     m_Metadata:
       m_Items: []
+  - m_Id: 4007742857367552
+    m_Key: addbonus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4021289389740032
+    m_Key: fullBonusValue
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

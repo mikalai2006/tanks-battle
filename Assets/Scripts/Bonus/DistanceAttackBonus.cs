@@ -19,6 +19,9 @@ public class DistanceAttackBonus : BaseBonus
             {
                 bm.LevelManager.UiTopSide.OnCreateUIBonus(Config);
             }
+
+            base.OnDrawText(bm);
+            
             Destroy(gameObject);
         }
     }

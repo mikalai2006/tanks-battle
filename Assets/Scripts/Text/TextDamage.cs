@@ -4,51 +4,48 @@ public class TextDamage : MonoBehaviour
 {
     private GameManager _gameManager => GameManager.Instance;
     [SerializeField] private TextMesh textMesh;
+    [SerializeField] private Animator animator;
 
     void Awake()
     {
         textMesh = GetComponentInChildren<TextMesh>();
+        animator = GetComponentInChildren<Animator>();
+    }
 
-        // Animator anim = gameObject.GetComponentInChildren<Animator>();
-        // if (anim)
+
+    public void Init(BaseMachine baseMachine, bool isAnimation)
+    {
+        gameObject.transform.localPosition = baseMachine.transform.position;
+
+        Lean.Pool.LeanPool.Despawn(gameObject, 1f);
+
+        // if (!isAnimation)
         // {
-        //     anim.Rebind();
-        //     anim.Update(0f);
+        //     animator.enabled = false; //gameObject.SetActive(false);
+        // }
+        // else
+        // {
+        //     animator.enabled = true;
         // }
     }
 
-    // void Start()
-    // {
-    //     // DestroyDelay().Forget();
-    //     // Destroy(gameObject, 1f);
-    //     Lean.Pool.LeanPool.Despawn(gameObject, 1f);
-    // }
-
-    // private async UniTask DestroyDelay()
-    // {
-    //     await UniTask.Delay(1000);
-
-    //     Lean.Pool.LeanPool.Despawn(gameObject);
-    // }
-
-    public void Init(BaseMachine baseMachine)
+    public void OnSetColor(Color color)
     {
-        gameObject.transform.localPosition = baseMachine.transform.position;
-        
-        Lean.Pool.LeanPool.Despawn(gameObject, 1f);
+        textMesh.color = color;
     }
 
     public void OnSetText(string str)
     {
         textMesh.text = str.ToString();
 
-        if (str.StartsWith("-"))
-        {
-            textMesh.color = _gameManager.Settings.colorTextDamage;
-        }
-        else
-        {
-            textMesh.color = _gameManager.Settings.colorTextDamagePlus;
-        }
+        // if (str.StartsWith("-"))
+        // {
+        //     textMesh.color = _gameManager.Settings.colorTextDamage;
+        // }
+        // else
+        // {
+        //     textMesh.color = _gameManager.Settings.colorTextDamagePlus;
+        // }
     }
 }
+

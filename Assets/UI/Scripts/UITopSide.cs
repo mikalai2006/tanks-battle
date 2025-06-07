@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -12,7 +13,10 @@ public class UITopSide : MonoBehaviour
     [SerializeField] private RectTransform progressHP;
     [SerializeField] public TMPro.TextMeshProUGUI textName;
     [SerializeField] private Image rankImage;
-    [SerializeField] private BaseMachine Target;
+    [SerializeField] private Image gerbImage;
+    private BaseMachine target;
+    public BaseMachine Target => target;
+    private float maxWidth = 280;
     [SerializeField] private SerializedDictionary<TypeBonus, BonusLayoutItem> gameObjectsBonus;
 
     void Awake()
@@ -22,20 +26,20 @@ public class UITopSide : MonoBehaviour
 
     void Update()
     {
-        if (Target != null)
+        if (target != null)
         {
-            for (int i = 0; i < Target.Data.bonuses.Count; i++)
-            {
-                Target.Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
+            // for (int i = 0; i < Target.Data.bonuses.Count; i++)
+            // {
+            //     Target.Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
 
-                if (Target.Data.bonuses.ElementAt(i).Value.time <= 0)
-                {
-                    TypeBonus key = Target.Data.bonuses.ElementAt(i).Key;
-                    Destroy(gameObjectsBonus[key].gameObject);
-                    Target.Data.bonuses.Remove(key);
-                    gameObjectsBonus.Remove(key);
-                }
-            }
+            //     if (Target.Data.bonuses.ElementAt(i).Value.time <= 0)
+            //     {
+            //         TypeBonus key = Target.Data.bonuses.ElementAt(i).Key;
+            //         Destroy(gameObjectsBonus[key].gameObject);
+            //         Target.Data.bonuses.Remove(key);
+            //         gameObjectsBonus.Remove(key);
+            //     }
+            // }
         }
         else
         {
@@ -52,14 +56,44 @@ public class UITopSide : MonoBehaviour
         if (!gameObjectsBonus.ContainsKey(configBonus.typeBonus))
         {
             var obj = Instantiate(configBonus.prefabUI, _objectSpawnBonuses.transform);
-            obj.Init(configBonus, Target);
+            obj.Init(configBonus, target);
             gameObjectsBonus.Add(configBonus.typeBonus, obj);
         }
     }
 
+    public void OnRemoveUIBonus(TypeBonus key)
+    {
+        Destroy(gameObjectsBonus[key].gameObject);
+        gameObjectsBonus.Remove(key);
+    }
+
     public void OnSetTarget(BaseMachine bm)
     {
-        Target = bm;
+        target = bm;
+
+        Init(bm.MachineLevelData);
+    }
+
+    public void Init(MachineLevelData _machineLevelData)
+    {
+        textName.text = _machineLevelData.name;
+
+        var configRank = _gameManager.Settings.ranks.Find(r => r.name.ToString() == _machineLevelData.rank.ToString());
+
+        rankImage.sprite = configRank.sprite;
+
+        // установка герба.
+        Sprite gerb = _gameManager.Settings.gerbs.Find(l => l.name == _machineLevelData.gerbId);
+        if (gerb)
+        {
+            gerbImage.sprite = gerb;
+        }
+    }
+    
+    public void OnChangeData(BaseMachine machine)
+    {
+        var oneProcentHP = maxWidth / machine.Config.hp;
+        progressHP.sizeDelta = new Vector2(oneProcentHP * machine.Data.hp, progressHP.sizeDelta.y);
     }
 
     public void OnToStartMenu()

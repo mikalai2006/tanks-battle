@@ -353,6 +353,7 @@ MonoBehaviour:
   MachineLevelData:
     id: 
     logo: 
+    name: 
     isBot: 0
   stateController: {fileID: 0}
   occupiedNode:
@@ -377,16 +378,22 @@ MonoBehaviour:
     position: {x: 0, y: 0, z: 0}
     directionMove: {x: 0, y: 0, z: 0}
     angleTower: 0
+    currentAngleTower: 0
     angleBody: 0
     directionTower: {x: 0, y: 0, z: 0}
     timeBeforeAddTarget: 0
+    bonuses:
+      m_Keys: 
+      m_Values: []
     muzzles: []
   _objectTarget: {fileID: 0}
   rb: {fileID: 4764750183730353843}
   areaMove: {fileID: 4349892412488850511}
-  areaAttack: {fileID: 2573288531999377546}
+  areaSearch: {fileID: 2573288531999377546}
   Badge: {fileID: 2709680441791774772}
   offset: 90
+  rd: {fileID: 0}
+  _indicator: {fileID: 0}
 --- !u!4 &5375015607039397285 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 284294695693522217, guid: 919e5d9aa712ecb4bab7f25d0d44a4ed, type: 3}

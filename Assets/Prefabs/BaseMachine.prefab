@@ -462,7 +462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2250295315501971728}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 7697717166958465030}
   - component: {fileID: 3507154939317690921}
   m_Layer: 0
-  m_Name: areaAttack
+  m_Name: areaSearch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +650,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 284294695693522217}
@@ -1258,6 +1258,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Indicator: {fileID: 5080222577546010953}
   Target: {fileID: 0}
+  bg: {fileID: 0}
+  progressHP: {fileID: 0}
+  startSize: 0
+  startScale: 0
+  distance: 0
+  oneProcentScale: 0
 --- !u!1 &7977383641182066935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1375,7 @@ RectTransform:
   m_GameObject: {fileID: 8080511583588219517}
   m_LocalRotation: {x: 0, y: 0, z: -0.1564345, w: 0.98768836}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 371619183031273260}
@@ -1822,7 +1828,7 @@ Transform:
   m_GameObject: {fileID: 8974254095793577849}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.236, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

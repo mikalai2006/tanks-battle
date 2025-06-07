@@ -39,6 +39,42 @@ MonoBehaviour:
   - {fileID: -1813033657, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: 1154215941, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1550830682, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -598897537, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1692201982, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1822755044, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1565679227, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1230616992, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 718753598, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1483713705, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1310936144, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 393737438, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -261522713, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1201089502, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -736851783, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -867916029, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1103367839, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1007772184, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -962495228, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1390778144, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1929622801, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1243318116, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1115936992, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 860605118, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1008323980, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1264804971, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -736831537, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1256440326, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -403182052, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 905531624, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1532651048, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 530009053, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1851730208, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -2017732236, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1723925997, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1627058396, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1365675243, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: 1123812706, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
+  - {fileID: -1934825213, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
@@ -53,7 +89,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0dda3ea0ca87d8e4ca97be8b9d9c9bd8, type: 2}
   - {fileID: 11400000, guid: d7be6b7cf6bda3e48bfb2e2726f09600, type: 2}
   - {fileID: 11400000, guid: 55a3b62e4d7fdf84bbf7cb4a6f30f5d3, type: 2}
-  - {fileID: 11400000, guid: 55a3b62e4d7fdf84bbf7cb4a6f30f5d3, type: 2}
+  - {fileID: 11400000, guid: 7d393c1b510bcca48bfb7c5093cbb399, type: 2}
+  ranks:
+  - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
+  - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
+  - {fileID: 11400000, guid: 5ee74d383263a7347a7e5a0549dfb35d, type: 2}
   commandColor:
   - {r: 0.6981132, g: 0.13774194, b: 0.049394794, a: 1}
   - {r: 0.3144711, g: 0.46226418, b: 0.08067818, a: 1}
@@ -72,6 +112,7 @@ MonoBehaviour:
   distanceDisableAttack: 1.5
   drawAreaForBot: 0
   koofChangeAngleTower: 5
+  speedChangeAreaSize: 15
   drawLineAttack: 0
   PopParticle: {fileID: 0}
   PopBig: {fileID: 0}

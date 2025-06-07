@@ -25,6 +25,8 @@ public class GameBonus : ScriptableObject
   public float time;
   [Tooltip("Значение бонуса")]
   public float value;
+  [Tooltip("Цвет бонуса")]
+  public Color color;
 }
 
 
@@ -36,4 +38,5 @@ public enum TypeBonus
   SpeedTower = 3,
   Medicine = 4,
   DistanceAttack = 5,
+  distanceSearch = 6,
 }

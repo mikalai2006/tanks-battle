@@ -47,7 +47,7 @@ public class BaseBullet : MonoBehaviour
         transform.eulerAngles = new Vector3(0,0,Machine.Tower.transform.eulerAngles.z);
 
         Vector3 pos = transform.position;
-        toPoint = pos + forward * Machine.Config.distanceAttack;
+        toPoint = pos + forward * Machine.Tower.DistanceAttack;
 #if UNITY_EDITOR
         if (_gameManager.Settings.drawLineAttack) {
             Debug.DrawLine(pos, forward, Color.magenta);
@@ -69,7 +69,16 @@ public class BaseBullet : MonoBehaviour
 
             if (!_targetMachine.MachineLevelData.isBot || !Machine.MachineLevelData.isBot)
             {
-                _targetMachine.OnDrawAnimateText(string.Concat("-", ConfigMuzzle.Bullet.damage.ToString()));
+                // Создаем текст с уроном
+                TextDamage obText = Lean.Pool.LeanPool.Spawn(_gameManager.Settings.prefabTextDamage, _targetMachine.LevelManager.objectSpawnText.transform);
+                
+                if (obText)
+                {
+                    obText.Init(_targetMachine, true);
+                    obText.OnSetColor(_gameManager.Settings.colorTextDamage);
+                    obText.OnSetText(string.Concat("-", ConfigMuzzle.Bullet.damage.ToString()));
+                }
+                // _targetMachine.OnDrawAnimateText();
             }
         }
         else if (Machine && ConfigMuzzle.Bullet.effectBoom)

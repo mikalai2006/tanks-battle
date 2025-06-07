@@ -38,7 +38,8 @@ MonoBehaviour:
   effectCreate: {fileID: 0}
   effectDestroy: {fileID: 0}
   time: 30
-  value: 5
+  value: 10
+  color: {r: 0, g: 0.8501792, b: 1, a: 1}
   references:
     version: 2
     RefIds: []
