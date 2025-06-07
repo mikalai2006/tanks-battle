@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bece524b33ff5d40b685b33a26ab916, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  idObject: sand
+  typeGround: 8
+  gridSize: {x: 50, y: 50}
+  tileLandscape: {fileID: 11400000, guid: 863afbab29b6d434d97b50fda06d7a3e, type: 2}
+  tileSecondLandscape: {fileID: 11400000, guid: 0e0534f56c77b1e4ca00ed8c6ef184e0, type: 2}
+  tileBorder: {fileID: 11400000, guid: da4f3962ac0f8464599c16f77bfcb555, type: 2}
+  tileObstcles:
+  - {fileID: 11400000, guid: a4b677eb66d30dd4cbde67ea92cbb2de, type: 2}
+  - {fileID: 11400000, guid: d2cbad130f729034c812dbe7d8b95aca, type: 2}
+  - {fileID: 11400000, guid: 78717aa4c393c9646aca609ae13ec5e6, type: 2}
+  noiseScaleKoof: 0.2
+  noiseMaxKoof: 0.6
+  light: 0.1
+  noiseScaleObstacleKoof: 0.2
+  noiseObstacleMaxKoof: 0.8
+  typeLevel: 2
+  countTeam: 0
+  countPlayers: 30
+  bonuses:
+  - Item: {fileID: 11400000, guid: 076361a2a1bdfb84d8dc60de74e12381, type: 2}
+    probability: 0.20000000298023224
+  - Item: {fileID: 11400000, guid: 483ec88419f9b1d409776e665c7cc992, type: 2}
+    probability: 0.4000000059604645
+  - Item: {fileID: 11400000, guid: 74f7717d2fba81f488443ab4fcb46c11, type: 2}
+    probability: 0.30000001192092896
+  - Item: {fileID: 11400000, guid: e08bc53efee6df34b952175251ee1265, type: 2}
+    probability: 0.30000001192092896

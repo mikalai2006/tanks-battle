@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df57a86d86a7084aab1ff303ee5938f, type: 3}
+  m_Name: Muzzle1
+  m_EditorClassIdentifier: 
+  idObject: muzzle1
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefab: {fileID: 991186696476279912, guid: 87890441b1a255e46a05f657e09e36f2, type: 3}
+  fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
+  Bullet: {fileID: 11400000, guid: eea0010cca476ba49b6f5bb8654f5d88, type: 2}
+  material: {fileID: 2100000, guid: 0b477258bcc15e045a4a5189d8a4f93b, type: 2}
+  timeBetweenShot: 1
+  color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9a1ede8576cff4e9192d26595bb2ee, type: 3}
+  m_Name: DistanceAttack
+  m_EditorClassIdentifier: 
+  typeBonus: 5
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 3766987804168192
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 3767055277936640
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefabUI: {fileID: 7795308384581829956, guid: 7cb06fc78b9f08a4397dccc54ee71a6a, type: 3}
+  prefabMap: {fileID: 7100885233020784654, guid: 22d621ad03755ba4784c9bda5b281e8d, type: 3}
+  sprite: {fileID: -672436525, guid: efe61eeefa0542e42b232ced95297165, type: 3}
+  effectCreate: {fileID: 0}
+  effectDestroy: {fileID: 0}
+  time: 30
+  value: 4
+  references:
+    version: 2
+    RefIds: []

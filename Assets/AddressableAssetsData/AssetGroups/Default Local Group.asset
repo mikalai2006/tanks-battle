@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: cb267895b8768114189540c196400a31
+  m_SerializeEntries:
+  - m_GUID: 0771af8fa1f3fcf468ac609073f0a782
+    m_Address: Assets/Sciptables/Data/Setting
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09f016c9cbe9333429e347a9ab660780
+    m_Address: Assets/Prefabs/Panzer2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ccd543179f15a8429bdc85bb50194f9
+    m_Address: Assets/Prefabs/Panzer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e62d6a1e799f3d40b3aadd48480a4cc
+    m_Address: MainScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1762aa8d28f947e41b7c8364a9ac6698
+    m_Address: machine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38447eee2eaa017418c0187ca2ae5a17
+    m_Address: Assets/Sciptables/Data/Theme
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - theme
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38d39c70134adba4687f537de40dadde
+    m_Address: Assets/Prefabs/Catterpillar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 479948a9b95b3714694653d724f89203
+    m_Address: LoaderBar
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87890441b1a255e46a05f657e09e36f2
+    m_Address: Assets/Prefabs/Muzzle/muzzle1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88f57d6206f3216428febb73a1a7ac70
+    m_Address: UIMenuInGame
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93f69927866868b47976e83ca5cc9bc9
+    m_Address: UIInitUser
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99c9720ab356a0642a771bea13969a05
+    m_Address: GameScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fe34892815347b4989e90f0238b6149
+    m_Address: Assets/Prefabs/Panzer5.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5bea38c3aa06bd4b9d6805ac538f14a
+    m_Address: UILoaderScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: abae52a9a31accb49a12ca3bca0b1ba9
+    m_Address: UISettings
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4fa1c66e86c37b42b9bbf3cb5c75800
+    m_Address: Assets/Prefabs/Bullet/bullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf459bb0ad460c94db7def2bd9e65984
+    m_Address: Assets/Prefabs/Tower/tower.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3637931ed7c898448300764ec019dc9
+    m_Address: Assets/Prefabs/WarCar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c667bd80bbc19fd4e84e6b0e71402c5d
+    m_Address: Assets/Prefabs/Body/body.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d17198bc09df11549a0fc5f21f570d1b
+    m_Address: Assets/Prefabs/Panzer6.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d579ae76d2f8ac747b6e9f850de79b41
+    m_Address: Assets/Sciptables/Data/Audio
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6c3f375b75bddf479d199832c29d0ef
+    m_Address: Assets/Prefabs/Panzer3.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6f8e87ebaaa72e43adfd4c2f5097ec7
+    m_Address: Assets/Prefabs/Panzer4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1b5c01fd0484b34d9dd1982e0a1c0d2
+    m_Address: UIStartMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6bb0c509be17c74198e9a58701aedbb
+    m_Address: Assets/Prefabs/Body
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: af167546fa5c6754dbc7f5c998130363, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 436214b2a8994ff488408484b436e5f8, type: 2}
+    - {fileID: 11400000, guid: 8e142272581edd847b0ce6430781d4fb, type: 2}
