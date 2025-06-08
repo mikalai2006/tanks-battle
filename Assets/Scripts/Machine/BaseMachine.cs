@@ -315,10 +315,13 @@ public abstract class BaseMachine : MonoBehaviour
             {
                 _objectTarget.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackAttack);
 
-                tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackAttack);
+                tower.OnSetColorSector(_gameManager.Settings.colorSectorAttack);
             }
 
-            SetIsShot(true);
+            if (Helpers.IsBetween(-_gameManager.Settings.angleStartShot, _gameManager.Settings.angleStartShot, Mathf.DeltaAngle(Data.angleTower, Data.currentAngleTower)))
+            {
+                SetIsShot(true);
+            }
         }
     }
 
@@ -472,7 +475,7 @@ public abstract class BaseMachine : MonoBehaviour
                 }
 
                 float dist = Vector2.Distance(transform.position, mach.transform.position);
-                if (minDistance == 0 || minDistance > dist)
+                if (minDistance == 0 || (minDistance > dist && _gameManager.Settings.takeNearEnemy))
                 {
                     minDistance = dist;
                     minDistanceMachine = mach;

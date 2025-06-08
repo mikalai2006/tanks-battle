@@ -100,6 +100,7 @@ MonoBehaviour:
   colorAreaAttackDefault: {r: 1, g: 1, b: 1, a: 0.039215688}
   colorAreaAttackViewed: {r: 1, g: 0.7112604, b: 0, a: 0.19607843}
   colorAreaAttackAttack: {r: 1, g: 0, b: 0.30238533, a: 0.19607843}
+  colorSectorAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}
@@ -113,6 +114,8 @@ MonoBehaviour:
   drawAreaForBot: 0
   koofChangeAngleTower: 5
   speedChangeAreaSize: 15
+  angleStartShot: 30
+  takeNearEnemy: 0
   drawLineAttack: 0
   PopParticle: {fileID: 0}
   PopBig: {fileID: 0}

@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public GameObject objectSpawnText;
     [SerializeField] public GameObject objectSpawnIndicators;
     [SerializeField] public UITopSide UiTopSide;
+    public VariableJoystick JoystickMove;
+    public VariableJoystick JoystickTower;
     
     [SerializeField] Camera _camera;
     public Camera Camera => _camera;

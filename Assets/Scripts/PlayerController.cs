@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector2 moveDirection = moveActionToUse.action.ReadValue<Vector2>();
+        Vector2 moveDirection = _machine.LevelManager.JoystickMove.Direction;
+        // Vector2 moveDirection = moveActionToUse.action.ReadValue<Vector2>();
 
         // if (_machine.Badge != null)
         // {

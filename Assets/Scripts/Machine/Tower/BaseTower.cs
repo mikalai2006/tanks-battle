@@ -33,6 +33,17 @@ public class BaseTower : MonoBehaviour
         _damageSprite.color = col;
     }
 
+    public void OnSetAngleSector(float angle)
+    {
+        // fillAmount: 1 - 360град.
+        // fillAmount: x - angle
+        // fillAmount: x = 1 * angle / 360.
+        // rectTransform = -(fillAmount * 360) / 2
+        var fillAmount = angle / 360;
+        _spriteSector.fillAmount = fillAmount;
+        _rectSector.localEulerAngles = new Vector3(_rectSector.localEulerAngles.x,_rectSector.localEulerAngles.y, -fillAmount * 360 / 2);
+    }
+
     public void OnSetColorSector(Color color)
     {
         _spriteSector.color = color;
@@ -64,6 +75,13 @@ public class BaseTower : MonoBehaviour
         {
             distanceAttack = Machine.Config.distanceAttack;
             OnSetSizeSector(distanceAttack);
+        }
+
+
+        // изменяем угол сектора и его размер.
+        if (Machine.ObjectTarget != null && (!Machine.MachineLevelData.isBot || !Machine.ObjectTarget.MachineLevelData.isBot))
+        {
+            OnSetAngleSector(Mathf.Max(5, Mathf.Abs(Mathf.DeltaAngle(Machine.Data.angleTower, Machine.Data.currentAngleTower))));
         }
     }
 }

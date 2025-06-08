@@ -50,6 +50,7 @@ public class GameSetting : ScriptableObject
   public Color colorAreaAttackDefault;
   public Color colorAreaAttackViewed;
   public Color colorAreaAttackAttack;
+  public Color colorSectorAttack;
 
   [Space(5)]
   [Header("Текст")]
@@ -89,6 +90,10 @@ public class GameSetting : ScriptableObject
   [Range(0,10f)] public float koofChangeAngleTower;
   [Tooltip("Скорость изменения размеров зон поиска и сектора атаки")]
   [Range(1f,20f)] public float speedChangeAreaSize;
+  [Tooltip("Минимальный угол на котором стартует стрельба")]
+  [Range(5f, 30f)] public float angleStartShot;
+  [Tooltip("Захватывать ли ближайшего противника")]
+  public bool takeNearEnemy;
 
   [Space(5)]
   [Header("Редактор")]

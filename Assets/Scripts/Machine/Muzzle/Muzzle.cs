@@ -14,7 +14,6 @@ public class Muzzle : BaseMuzzle
             && Machine
             && Machine.ObjectTarget
             && Machine.Data.isShot
-            && Helpers.IsBetween(-30f, 30f, Mathf.DeltaAngle(Machine.Data.angleTower, Machine.Data.currentAngleTower))
         )
         {
             data.countShotSeria += 1;
