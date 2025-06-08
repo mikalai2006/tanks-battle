@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235de7640e091a7449fb477bc13720f0, type: 3}
-  m_Name: Bullet7
+  m_Script: {fileID: 11500000, guid: c8e7243a5f8f3ec44b5c6b60b18dd71d, type: 3}
+  m_Name: Moto1
   m_EditorClassIdentifier: 
-  idObject: bullet7
+  idObject: moto1
   text:
     title:
       m_TableReference:
@@ -32,11 +32,16 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 6598650879790203170, guid: d6856fd76fafcee42a7ebb80d9a5d7d3, type: 3}
-  speed: 17
-  damage: 1
-  effectBoom: {fileID: 0}
-  particleBoom: {fileID: 0}
+  machinePrefab: {fileID: 5041492625314783398, guid: 882ea11d001392c49844b907ff391049, type: 3}
+  indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  colorBody: {r: 0.6396737, g: 0.6415094, b: 0.13616946, a: 1}
+  colorTower: {r: 0.6392157, g: 0.6431373, b: 0.13725491, a: 1}
+  speed: 3
+  speedRotateTower: 3
+  distanceSearch: 5
+  distanceAttack: 5
+  hp: 100
+  armour: 100
   references:
     version: 2
     RefIds: []

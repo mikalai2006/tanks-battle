@@ -50,6 +50,7 @@ public class GameSetting : ScriptableObject
   public Color colorAreaAttackDefault;
   public Color colorAreaAttackViewed;
   public Color colorAreaAttackAttack;
+  public Color colorSectorPlayerAttack;
   public Color colorSectorAttack;
 
   [Space(5)]
@@ -94,6 +95,10 @@ public class GameSetting : ScriptableObject
   [Range(5f, 30f)] public float angleStartShot;
   [Tooltip("Захватывать ли ближайшего противника")]
   public bool takeNearEnemy;
+  [Tooltip("Автонаведение на цель (не для ботов)")]
+  public bool autoTakeEnemy;
+  [Tooltip("Автовыстрелы при наведении на цель (не для ботов)")]
+  public bool autoShot;
 
   [Space(5)]
   [Header("Редактор")]

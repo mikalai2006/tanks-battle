@@ -90,6 +90,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7be6b7cf6bda3e48bfb2e2726f09600, type: 2}
   - {fileID: 11400000, guid: 55a3b62e4d7fdf84bbf7cb4a6f30f5d3, type: 2}
   - {fileID: 11400000, guid: 7d393c1b510bcca48bfb7c5093cbb399, type: 2}
+  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
+  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
+  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
+  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
+  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
@@ -100,7 +105,8 @@ MonoBehaviour:
   colorAreaAttackDefault: {r: 1, g: 1, b: 1, a: 0.039215688}
   colorAreaAttackViewed: {r: 1, g: 0.7112604, b: 0, a: 0.19607843}
   colorAreaAttackAttack: {r: 1, g: 0, b: 0.30238533, a: 0.19607843}
-  colorSectorAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
+  colorSectorPlayerAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
+  colorSectorAttack: {r: 1, g: 0.42219353, b: 0, a: 0.5882353}
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}
@@ -116,6 +122,8 @@ MonoBehaviour:
   speedChangeAreaSize: 15
   angleStartShot: 30
   takeNearEnemy: 0
+  autoTakeEnemy: 1
+  autoShot: 1
   drawLineAttack: 0
   PopParticle: {fileID: 0}
   PopBig: {fileID: 0}

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235de7640e091a7449fb477bc13720f0, type: 3}
-  m_Name: Bullet7
+  m_Script: {fileID: 11500000, guid: 8df57a86d86a7084aab1ff303ee5938f, type: 3}
+  m_Name: Muzzle8
   m_EditorClassIdentifier: 
-  idObject: bullet7
+  idObject: muzzle8
   text:
     title:
       m_TableReference:
@@ -32,11 +32,12 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 6598650879790203170, guid: d6856fd76fafcee42a7ebb80d9a5d7d3, type: 3}
-  speed: 17
-  damage: 1
-  effectBoom: {fileID: 0}
-  particleBoom: {fileID: 0}
+  prefab: {fileID: 9072033766332791317, guid: b4810e82fc63f204383ed19218d28645, type: 3}
+  fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
+  Bullet: {fileID: 11400000, guid: 5b52d6c29c27e4e44af8273a86f2e27b, type: 2}
+  material: {fileID: 2100000, guid: 0b477258bcc15e045a4a5189d8a4f93b, type: 2}
+  timeBetweenShot: 0.2
+  color: {r: 0, g: 0, b: 0, a: 1}
   references:
     version: 2
     RefIds: []

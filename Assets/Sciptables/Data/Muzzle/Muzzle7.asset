@@ -36,7 +36,7 @@ MonoBehaviour:
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
   Bullet: {fileID: 11400000, guid: ffdda6bf3da48094784ef3612e14ed19, type: 2}
   material: {fileID: 2100000, guid: 0b477258bcc15e045a4a5189d8a4f93b, type: 2}
-  timeBetweenShot: 0.4
+  timeBetweenShot: 0.2
   color: {r: 0, g: 0, b: 0, a: 1}
   references:
     version: 2

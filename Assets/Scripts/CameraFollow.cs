@@ -6,13 +6,13 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] Vector3 offset;
     [SerializeField] Camera _camera;
 
-    void Awake()
-    {
-        _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
-    }
+    // void Awake()
+    // {
+    // }
 
     void Start()
     {
+        _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
         offset = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.4f, 0));
     }
 
