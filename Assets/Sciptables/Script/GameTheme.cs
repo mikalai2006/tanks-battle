@@ -6,6 +6,14 @@ public class GameTheme : ScriptableObject
 {
 
   [Space(5)]
+  [Header("UI")]
+  public Color colorBg;
+  public Color colorListItemBg;
+  public Color colorListItemBorder;
+  public int padding;
+  public int margin;
+
+  [Space(5)]
   [Header("Game")]
   public Sprite bgImage;
   public Sprite timerProgressBg;

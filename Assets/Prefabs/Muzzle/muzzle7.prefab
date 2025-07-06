@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 575573769745946379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.091, y: -0.015, z: 0}
+  m_LocalPosition: {x: 0.435, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,7 +118,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &5412041257949177344
 Animator:
   serializedVersion: 7
@@ -189,9 +189,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5412041257949177344}
   pointEffects: {fileID: 575573769745946379}
-  Config: {fileID: 11400000, guid: 357f496495ae8724d915daaf40459d5f, type: 2}
+  Option:
+    Config: {fileID: 0}
+    offsetMuzzle: {x: 0, y: 0}
   sprite: {fileID: 7455557558426410912}
   data:
     index: 0
     countShotSeria: 0
     timeBeforeShot: 0
+  Tower: {fileID: 0}

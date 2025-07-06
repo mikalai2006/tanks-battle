@@ -1,0 +1,44 @@
+.health-bar__background {
+    height: 31px;
+    width: 198px;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    -unity-background-scale-mode: stretch-to-fill;
+    flex-direction: column;
+}
+
+.health-bar__progress {
+    background-image: url("project://database/Assets/Sprites/button.png?fileID=21300000&guid=daeb7b6b350ed3149a4cac3832768249&type=3#button");
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100%;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.health-bar__title {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    -unity-font-style: bold;
+    text-overflow: ellipsis;
+}
+
+.health-bar__label {
+    color: rgb(255, 255, 255);
+}

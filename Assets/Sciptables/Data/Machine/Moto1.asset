@@ -16,30 +16,49 @@ MonoBehaviour:
   text:
     title:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9487507417718784
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
     description:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9487559804575744
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
   machinePrefab: {fileID: 5041492625314783398, guid: 882ea11d001392c49844b907ff391049, type: 3}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  body: {fileID: 11400000, guid: bfeb8bacf6633684db29c188238442d8, type: 2}
+  towers:
+  - ido: 
+    Config: {fileID: 0}
+    offsetTower: {x: -0.39, y: 0}
+    colorTower: {r: 0.6392157, g: 0.6431373, b: 0.13725491, a: 1}
+    isRotate: 0
+    muzzles:
+    - Config: {fileID: 11400000, guid: 3928dce836f7adc45b0b6f23a4ccd94b, type: 2}
+      offsetMuzzle: {x: 0.05, y: 0}
+    children: []
+    isChildren: 0
+  catterpillars:
+  - Config: {fileID: 0}
+    offsetCat: {x: -0.35, y: 0}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - Config: {fileID: 0}
+    offsetCat: {x: 0.35, y: 0}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  soundMove: {fileID: 0}
   colorBody: {r: 0.6396737, g: 0.6415094, b: 0.13616946, a: 1}
-  colorTower: {r: 0.6392157, g: 0.6431373, b: 0.13725491, a: 1}
+  updates: []
+  minRank: {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
   speed: 3
-  speedRotateTower: 3
   distanceSearch: 5
-  distanceAttack: 5
   hp: 100
   armour: 100
   references:

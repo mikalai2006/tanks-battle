@@ -48,7 +48,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 29696433410048
-    m_Key: inBattle
+    m_Key: 
     m_Metadata:
       m_Items: []
   - m_Id: 30008116334592
@@ -93,6 +93,122 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 4021289389740032
     m_Key: fullBonusValue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9141018652819456
+    m_Key: garage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9175921511612416
+    m_Key: home
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487507417718784
+    m_Key: moto1_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487559804575744
+    m_Key: moto1_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487671826046976
+    m_Key: tank1_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487753208127488
+    m_Key: tank1_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487801564258304
+    m_Key: tank2_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487855435898880
+    m_Key: tank2_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487879708336128
+    m_Key: tank3_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487917658398720
+    m_Key: tank3_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487938973851648
+    m_Key: tank4_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487974394748928
+    m_Key: tank4_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9487995383046144
+    m_Key: tank5_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488035883245568
+    m_Key: tank5_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488061577551872
+    m_Key: tank6_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488093630423040
+    m_Key: tank6_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488127189049344
+    m_Key: tank7_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488173833904128
+    m_Key: tank7_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488207497388032
+    m_Key: tank8_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488244747001856
+    m_Key: tank8_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488271900925952
+    m_Key: tank9_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488311667122176
+    m_Key: tank9_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488340733648896
+    m_Key: tank10_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488396408840192
+    m_Key: tank10_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488423374020608
+    m_Key: car1_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488479896461312
+    m_Key: car1_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488511446016000
+    m_Key: car2_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9488541670170624
+    m_Key: car2_d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9864789069615104
+    m_Key: tab_machines
     m_Metadata:
       m_Items: []
   m_Metadata:

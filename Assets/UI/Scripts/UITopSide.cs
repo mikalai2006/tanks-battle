@@ -109,8 +109,11 @@ public class UITopSide : MonoBehaviour
 
             _gameManager.ChangeState(GameState.CloseLevel);
 
-            var dashBoard = new StartUIOperation();
-            dashBoard.ShowAndHide().Forget();
+            // var dashBoard = new StartUIOperation();
+            // dashBoard.ShowAndHide().Forget();
+            
+            var uiManager = new UIManagerOperation();
+            uiManager.ShowAndHide().Forget();
         }
 
     }

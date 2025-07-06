@@ -11,13 +11,13 @@ public class Muzzle : BaseMuzzle
 
         if (
             data.timeBeforeShot <= 0
-            && Machine
-            && Machine.ObjectTarget
-            && Machine.Data.isShot
+            && Tower
+            && Tower.ObjectTarget
+            && Tower.Data.isShot
         )
         {
             data.countShotSeria += 1;
-            OnShot(Machine.ObjectTarget.gameObject);
+            OnShot(Tower.ObjectTarget.gameObject);
         }
     }
 
@@ -51,7 +51,7 @@ public class Muzzle : BaseMuzzle
 
         // obj.transform.localPosition = Machine.Tower.transform.position + rotatedOffset;
         obj.transform.localPosition = pointEffects.transform.position;
-        obj.OnInit(Machine, Config);
+        obj.OnInit(Machine, Tower, Config);
 
     }
     

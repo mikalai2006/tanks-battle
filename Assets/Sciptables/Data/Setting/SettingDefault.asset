@@ -78,23 +78,12 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
-  - {fileID: 11400000, guid: 1920e9f1594987049a8d3d28d3916cfa, type: 2}
-  - {fileID: 11400000, guid: bd08c157d8b9d7447915f6edcfa52760, type: 2}
-  - {fileID: 11400000, guid: 712247c2aa902ec40a8bf2734e961d1e, type: 2}
   - {fileID: 11400000, guid: a5e9de1e0e3cfb546b5f6665c317ee34, type: 2}
-  - {fileID: 11400000, guid: 9f3e6b860d5495343874ffe038261897, type: 2}
-  - {fileID: 11400000, guid: 298ff60b71065f74784a144cc25594cc, type: 2}
-  - {fileID: 11400000, guid: 32449ffff48d59e49b26c545c62755ff, type: 2}
-  - {fileID: 11400000, guid: e8e6f0a5ef9d152438143946ec0729ca, type: 2}
-  - {fileID: 11400000, guid: 0dda3ea0ca87d8e4ca97be8b9d9c9bd8, type: 2}
   - {fileID: 11400000, guid: d7be6b7cf6bda3e48bfb2e2726f09600, type: 2}
-  - {fileID: 11400000, guid: 55a3b62e4d7fdf84bbf7cb4a6f30f5d3, type: 2}
-  - {fileID: 11400000, guid: 7d393c1b510bcca48bfb7c5093cbb399, type: 2}
-  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
-  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
-  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
-  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
-  - {fileID: 11400000, guid: aec27d2e7c0f18a45b248d5c43c5649b, type: 2}
+  - {fileID: 11400000, guid: 4167a6e1cb1191247b153416cf157e82, type: 2}
+  - {fileID: 11400000, guid: 8f56c2ea2c72fd34b97a46bd44033bb9, type: 2}
+  - {fileID: 11400000, guid: fc1da79fc1aaa07469cfe8368b325fec, type: 2}
+  - {fileID: 11400000, guid: d7be6b7cf6bda3e48bfb2e2726f09600, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
@@ -102,7 +91,7 @@ MonoBehaviour:
   commandColor:
   - {r: 0.6981132, g: 0.13774194, b: 0.049394794, a: 1}
   - {r: 0.3144711, g: 0.46226418, b: 0.08067818, a: 1}
-  colorAreaAttackDefault: {r: 1, g: 1, b: 1, a: 0.039215688}
+  colorAreaAttackDefault: {r: 1, g: 1, b: 1, a: 0.019607844}
   colorAreaAttackViewed: {r: 1, g: 0.7112604, b: 0, a: 0.19607843}
   colorAreaAttackAttack: {r: 1, g: 0, b: 0.30238533, a: 0.19607843}
   colorSectorPlayerAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
@@ -114,7 +103,7 @@ MonoBehaviour:
   offsetMarkerEdge: {x: 0.015, y: 0.025}
   colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
-  rotateTowerByBody: 0
+  rotateTowerByBody: 1
   timeBeforeAddTarget: {x: 0.1, y: 0.3}
   distanceDisableAttack: 1.5
   drawAreaForBot: 0
@@ -125,6 +114,7 @@ MonoBehaviour:
   autoTakeEnemy: 1
   autoShot: 1
   drawLineAttack: 0
+  spriteArc5px: {fileID: 21300000, guid: 18f1e6a9be39adc45b92dc91a7cd348c, type: 3}
   PopParticle: {fileID: 0}
   PopBig: {fileID: 0}
   PulseParticle: {fileID: 0}

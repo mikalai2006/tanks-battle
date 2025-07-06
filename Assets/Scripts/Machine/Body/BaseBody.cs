@@ -13,6 +13,7 @@ public class BaseBody : MonoBehaviour
         OnChangeData();
 
         _bodySprite.color = Machine.Config.colorBody;
+        _bodySprite.sprite = Machine.Config.body.spriteBody;
     }
 
     public void OnChangeData()

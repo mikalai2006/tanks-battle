@@ -1,0 +1,40 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=0d2d1561a57b70a4798a0a6b1324eaab&amp;type=3#base" />
+    <ui:VisualElement name="menu__screen" picking-mode="Ignore" style="flex-shrink: 0; justify-content: flex-end; width: 100%; height: 100%;">
+        <ui:VisualElement name="menu__container" picking-mode="Ignore" class="menu__container" style="justify-content: flex-end;">
+            <ui:VisualElement name="menu__background" picking-mode="Ignore" class="menu__background">
+                <ui:VisualElement name="menu__safe-area-fill" class="tileable--128px menu__safe-area-fill" />
+            </ui:VisualElement>
+            <ui:VisualElement name="menu__spacer" class="menu__spacer" />
+            <ui:VisualElement name="menu__button-group" picking-mode="Ignore" class="menu__button-group">
+                <ui:Button display-tooltip-when-elided="true" name="menu__home-button" class="menu__button cursor-b">
+                    <ui:VisualElement name="menu-home-icon" picking-mode="Ignore" class="menu__icon" style="background-image: url(&apos;flex-end&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:Label text="Mail" display-tooltip-when-elided="true" name="menu-home-label" enable-rich-text="false" picking-mode="Ignore" class="menu-label menu__label">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:5bdcb541de5b4a3488fe7cac097efa66" entry="Id(9175921511612416)" />
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:Button display-tooltip-when-elided="true" name="menu__garage-button" class="menu__button cursor-b">
+                    <ui:VisualElement name="menu-garage-icon" picking-mode="Ignore" class="menu__icon" style="background-image: url(&apos;project://database/Assets/UI/Textures/UI_atlas.psd?fileID=2475862303943896879&amp;guid=68de98d899585b7469e0fb40a0fcbc56&amp;type=3#Main_menu_icon_05&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:Label text="Mail" display-tooltip-when-elided="true" name="menu-garage-label" enable-rich-text="false" picking-mode="Ignore" class="menu-label menu__label">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:5bdcb541de5b4a3488fe7cac097efa66" entry="Id(9141018652819456)" />
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:Button display-tooltip-when-elided="true" name="menu__game-button" class="menu__button cursor-b">
+                    <ui:VisualElement name="menu-game-icon" picking-mode="Ignore" class="menu__icon" style="background-image: url(&apos;flex-end&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:Label text="Mail" display-tooltip-when-elided="true" name="menu-game-label" enable-rich-text="false" picking-mode="Ignore" class="menu-label menu__label">
+                        <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:5bdcb541de5b4a3488fe7cac097efa66" entry="Id(29696433410048)" />
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:VisualElement name="menu__current-marker" picking-mode="Ignore" class="menu__current-marker">
+                    <ui:VisualElement name="menu__current-marker-graphic" class="menu__marker-graphic" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

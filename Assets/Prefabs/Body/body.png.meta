@@ -655,7 +655,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 85
+        y: 255
         width: 128
         height: 85
       alignment: 0
@@ -676,8 +676,8 @@ TextureImporter:
       name: body_25
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 128
+        y: 255
         width: 128
         height: 85
       alignment: 0
@@ -690,6 +690,72 @@ TextureImporter:
       bones: []
       spriteID: 9a0e72b26e2220941b5d0e9292834984
       internalID: -269731065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: body_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 255
+        width: 128
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c39cf37241acacc4989425e054be8e3a
+      internalID: -114180808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: body_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 85
+        width: 128
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eba5d4c40c1dfc489539efaaf6af139
+      internalID: -327980536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: body_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 402bfddbca13b3b489ad54e3c2aced3a
+      internalID: 307282316
       vertices: []
       indices: 
       edges: []
@@ -727,6 +793,9 @@ TextureImporter:
       body_23: 1658570300
       body_24: -254461564
       body_25: -269731065
+      body_26: -114180808
+      body_27: -327980536
+      body_28: 307282316
       body_3: -762591716
       body_4: 284208300
       body_5: 1156950333

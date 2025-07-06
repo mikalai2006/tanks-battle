@@ -104,6 +104,7 @@ public class GameSetting : ScriptableObject
   [Header("Редактор")]
   [Tooltip("Рисовать вспомогательные линии, которые показывают направление выстрела")]
   public bool drawLineAttack;
+  public Sprite spriteArc5px;
 
   [Space(5)]
   [Header("Particle System")]

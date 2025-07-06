@@ -16,30 +16,49 @@ MonoBehaviour:
   text:
     title:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488061577551872
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
     description:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488093630423040
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+  spriteBody: {fileID: -1511610276, guid: 196bd9e3d0c5cc14fb62506dc3629c6b, type: 3}
   machinePrefab: {fileID: 5041492625314783398, guid: d17198bc09df11549a0fc5f21f570d1b, type: 3}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  body: {fileID: 11400000, guid: 18433114fdece7847a944ff9b69b9a01, type: 2}
+  towers:
+  - spriteTower: {fileID: -1663574220, guid: 9c053f3f940154a47bbe6a145302beed, type: 3}
+    offsetTower: {x: -0.125, y: 0}
+    colorTower: {r: 0.8039216, g: 0.81960785, b: 0.3764706, a: 1}
+    muzzles:
+    - Config: {fileID: 11400000, guid: 2246d3bf7fde00e47aa00ef01d690a11, type: 2}
+      offsetMuzzle: {x: 0.23, y: -0.06}
+    - Config: {fileID: 11400000, guid: 2246d3bf7fde00e47aa00ef01d690a11, type: 2}
+      offsetMuzzle: {x: 0.23, y: 0.06}
+  catterpillars:
+  - spriteCat: {fileID: -1440795375, guid: a9f70bddf71b7f442b69f9ade8bdd332, type: 3}
+    offsetCat: {x: 0, y: 0.3}
+    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  - spriteCat: {fileID: -1440795375, guid: a9f70bddf71b7f442b69f9ade8bdd332, type: 3}
+    offsetCat: {x: 0, y: -0.3}
+    colorCat: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
   colorBody: {r: 0.8028405, g: 0.8207547, b: 0.375534, a: 1}
   colorTower: {r: 0.8039216, g: 0.81960785, b: 0.3764706, a: 1}
+  parent: {fileID: 11400000, guid: 32449ffff48d59e49b26c545c62755ff, type: 2}
+  updates: []
+  minRank: {fileID: 11400000, guid: 5ee74d383263a7347a7e5a0549dfb35d, type: 2}
   speed: 2.45
-  maxSpeed: 3
   speedRotateTower: 1.6
-  maxSpeedRotateTower: 2
   distanceSearch: 6
   distanceAttack: 4
   hp: 500

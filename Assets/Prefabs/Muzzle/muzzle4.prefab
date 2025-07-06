@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2028158762772305872}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5290001, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: -887342514, guid: 8971840edc6410e46be1244c9bad7ec0, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.005072971, g: 0.3584906, b: 0.026274636, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &4591813069054705903
 Animator:
   serializedVersion: 7
@@ -160,6 +160,10 @@ MonoBehaviour:
   pointEffects: {fileID: 8505133542424998156}
   Config: {fileID: 11400000, guid: 9ccb8813f3474aa40a4e722029629ef5, type: 2}
   sprite: {fileID: 2278881730641969135}
+  data:
+    index: 0
+    countShotSeria: 0
+    timeBeforeShot: 0
 --- !u!1 &8505133542424998156
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +189,7 @@ Transform:
   m_GameObject: {fileID: 8505133542424998156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 0, z: 0}
+  m_LocalPosition: {x: 0.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

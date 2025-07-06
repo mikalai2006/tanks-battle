@@ -8,10 +8,10 @@ public class TwoMuzzle : BaseMuzzle
     {
         base.Update();
       
-        if (data.timeBeforeShot <= 0 && Machine && Machine.ObjectTarget && Machine.Data.isShot)
+        if (data.timeBeforeShot <= 0 && Tower && Tower.ObjectTarget && Tower.Data.isShot)
         {
             data.countShotSeria += 1;
-            OnShot(Machine.ObjectTarget.gameObject);
+            OnShot(Tower.ObjectTarget.gameObject);
         }
     }
 
@@ -34,7 +34,7 @@ public class TwoMuzzle : BaseMuzzle
         //Lean.Pool.LeanPool.Spawn(Machine.Config.Muzzle.Bullet.prefab, Machine.LevelManager.objectSpawnEffect.transform, false);
 
         // Преобразуем угол в радианы
-        float angleRad = Machine.Tower.transform.rotation.z * Mathf.Deg2Rad;
+        float angleRad = Tower.transform.rotation.z * Mathf.Deg2Rad;
 
         // Рассчитываем вектор направления (x, y)
         float x = Mathf.Cos(angleRad) * .5f;
@@ -42,11 +42,11 @@ public class TwoMuzzle : BaseMuzzle
 
         // Создаем вектор направления
         Vector3 direction = new Vector2(x, y);
-        Vector3 rotatedOffset = Machine.Tower.transform.rotation * direction; // Преобразуем локальный сдвиг в мировой
+        Vector3 rotatedOffset = Tower.transform.rotation * direction; // Преобразуем локальный сдвиг в мировой
 
         // obj.transform.localPosition = Machine.Tower.transform.position + rotatedOffset;
         obj.transform.position = pointEffects.transform.position;
-        obj.OnInit(Machine, Config);
+        obj.OnInit(Machine, Tower, Config);
     }
     
     

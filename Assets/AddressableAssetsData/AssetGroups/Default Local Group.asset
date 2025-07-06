@@ -66,6 +66,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 931bb25cac6b1d546ba85f2722a3fbfc
+    m_Address: UITreeMachine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93f69927866868b47976e83ca5cc9bc9
     m_Address: UIInitUser
     m_ReadOnly: 0
@@ -96,8 +101,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf459bb0ad460c94db7def2bd9e65984
-    m_Address: Assets/Prefabs/Tower/tower.prefab
+  - m_GUID: bfd0915870db58d47a4b7dfcf30302ee
+    m_Address: UIManager
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

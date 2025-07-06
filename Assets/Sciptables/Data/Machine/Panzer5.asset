@@ -16,32 +16,50 @@ MonoBehaviour:
   text:
     title:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9487995383046144
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
     description:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488035883245568
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
   machinePrefab: {fileID: 5041492625314783398, guid: 9fe34892815347b4989e90f0238b6149, type: 3}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  body: {fileID: 11400000, guid: 18433114fdece7847a944ff9b69b9a01, type: 2}
+  towers:
+  - ido: 
+    Config: {fileID: 0}
+    offsetTower: {x: -0.125, y: 0}
+    colorTower: {r: 0.45490196, g: 0.5372549, b: 0.2627451, a: 1}
+    isRotate: 0
+    muzzles:
+    - Config: {fileID: 11400000, guid: 2720dc3b2d6ed6648853dfb228902349, type: 2}
+      offsetMuzzle: {x: 0.23, y: -0.06}
+    - Config: {fileID: 11400000, guid: 2720dc3b2d6ed6648853dfb228902349, type: 2}
+      offsetMuzzle: {x: 0.23, y: 0.06}
+    children: []
+    isChildren: 0
+  catterpillars:
+  - Config: {fileID: 0}
+    offsetCat: {x: 0, y: 0.35}
+    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  - Config: {fileID: 0}
+    offsetCat: {x: 0, y: -0.35}
+    colorCat: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
+  soundMove: {fileID: 0}
   colorBody: {r: 0.4568156, g: 0.5377358, b: 0.26125845, a: 1}
-  colorTower: {r: 0.45490196, g: 0.5372549, b: 0.2627451, a: 1}
+  minRank: {fileID: 11400000, guid: 5ee74d383263a7347a7e5a0549dfb35d, type: 2}
   speed: 2.4
-  maxSpeed: 3
-  speedRotateTower: 1.6
-  maxSpeedRotateTower: 2
   distanceSearch: 6
-  distanceAttack: 4
   hp: 400
   armour: 500
   references:

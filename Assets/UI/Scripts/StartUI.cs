@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Loader;
+using UIToolkitLibrary;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
@@ -14,8 +15,10 @@ public class StartUI : MonoBehaviour
   private GameManager _gameManager => GameManager.Instance;
   private GameSetting _gameSetting => GameManager.Instance.Settings;
   private StateManager _stateManager => GameManager.Instance.StateManager;
+  [SerializeField] private UIGarageView UIViewMachineInventory;
   [SerializeField] private Button _battleButton;
   [SerializeField] private Button _arcadaButton;
+  [SerializeField] private Button _treeMachineButton;
   [SerializeField] private Button _classicButton;
   [SerializeField] private Button _settingsButton;
   [SerializeField] private Button _throphsButton;
@@ -63,6 +66,10 @@ public class StartUI : MonoBehaviour
       ShowSettings();
     });
 
+    _treeMachineButton.onClick.AddListener(() =>
+    {
+      ShowTreeMachine();
+    });
     // _throphsButton.onClick.AddListener(() =>
     // {
     //   ShowThrophs();
@@ -527,6 +534,17 @@ public class StartUI : MonoBehaviour
     // _gameManager.InputManager.Disable();
     var settingsDialog = new UISettingsOperation();
     await settingsDialog.ShowAndHide();
+    // _gameManager.InputManager.Enable();
+  }
+
+
+  private async void ShowTreeMachine()
+  {
+    // AudioManager.Instance.Click();
+
+    // _gameManager.InputManager.Disable();
+    var treeMachineDialog = new TreeMachineOperation();
+    await treeMachineDialog.ShowAndHide();
     // _gameManager.InputManager.Enable();
   }
 

@@ -9,10 +9,12 @@ public abstract class BaseMuzzle : MonoBehaviour
     [SerializeField] private Animator _animator;
     protected BaseMachine Machine;
     [SerializeField] protected GameObject pointEffects;
-    [SerializeField] protected GameMuzzle Config;
+    [SerializeField] protected GameMuzzleOption Option;
+    [SerializeField] protected GameMuzzle Config => Option.Config;
     [SerializeField] protected SpriteRenderer sprite;
     protected ParticleSystem[] particlesBoom;
     [SerializeField] protected DataMuzzle data;
+    [SerializeField] protected BaseTower Tower;
     public DataMuzzle Data => data;
 
 #region Unity methods
@@ -24,17 +26,21 @@ public abstract class BaseMuzzle : MonoBehaviour
     public virtual void Update()
     {
         // обновляем время до выстрела
-        if (data.timeBeforeShot > 0 && Machine.Data.isShot)
+        if (data.timeBeforeShot > 0 && Tower.Data.isShot)
         {
             OnSetTimeBetweenShot(data.timeBeforeShot - Time.deltaTime);
         }
 
         // 
     }
-#endregion
+    #endregion
 
-    public void Init(BaseMachine _machine, int index)
+    public void Init(BaseMachine _machine, BaseTower tower, GameMuzzleOption option, int index)
     {
+        Option = option;
+
+        Tower = tower;
+
         Machine = _machine;
 
         data.index = index;
@@ -43,6 +49,8 @@ public abstract class BaseMuzzle : MonoBehaviour
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();
 
         OnSetTimeBetweenShot(Config.timeBetweenShot + (data.index * (Config.timeBetweenShot / 2)));
+        
+        transform.localPosition = new Vector3(Option.offsetMuzzle.x, Option.offsetMuzzle.y);
     }
 
 
@@ -60,7 +68,7 @@ public abstract class BaseMuzzle : MonoBehaviour
         if (data.countShotSeria != 0)
         {
             data.countShotSeria = 0;
-            OnSetTimeBetweenShot(Config.timeBetweenShot + (data.index * (Config.timeBetweenShot / 2)));
+            OnSetTimeBetweenShot(data.index * (Config.timeBetweenShot / 2));
         }
     }
 
@@ -71,6 +79,11 @@ public abstract class BaseMuzzle : MonoBehaviour
         if (!Machine)
         {
             return;
+        }
+
+        if (Machine.isVisible)
+        {
+            _gameManager.audioManager.PlayClipEffect(Config.soundShot);
         }
 
         // for (int i = 0; i < particlesBoom.Length; i++)
@@ -96,7 +109,7 @@ public abstract class BaseMuzzle : MonoBehaviour
                 rend.material = Config.material; //gameObject.GetComponent<MeshRenderer>().material;
             }
         }
-        objEffect.transform.eulerAngles = new Vector3(0, 0, Machine.Tower.transform.eulerAngles.z);
+        objEffect.transform.eulerAngles = new Vector3(0, 0, Tower.transform.eulerAngles.z);
         Lean.Pool.LeanPool.Despawn(objEffect, 2);
         
 
@@ -115,7 +128,7 @@ public abstract class BaseMuzzle : MonoBehaviour
             BaseBullet obj = handle.Result.GetComponent<BaseBullet>();
             if (obj != null)
             {
-                obj.OnInit(Machine, Config);
+                obj.OnInit(Machine, Tower, Config);
             }
         }
         else

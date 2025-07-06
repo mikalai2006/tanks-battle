@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9505e0a3fb63c974db87401cabf26aa7, type: 3}
+  m_Name: TowerSmall
+  m_EditorClassIdentifier: 
+  idObject: TowerSmall
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  spriteTower: {fileID: 872871515, guid: 9c053f3f940154a47bbe6a145302beed, type: 3}
+  prefab: {fileID: 1752884538981045036, guid: 598f28ee3549b594fa244e0c7f809b44, type: 3}
+  minRank: {fileID: 0}
+  speedRotateTower: 1.5
+  distanceSearch: 6
+  distanceAttack: 6
+  references:
+    version: 2
+    RefIds: []

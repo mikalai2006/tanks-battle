@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9505e0a3fb63c974db87401cabf26aa7, type: 3}
+  m_Name: F4
+  m_EditorClassIdentifier: 
+  idObject: TowerSquare
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  spriteTower: {fileID: 374400442, guid: d62ef2dde0ff3274e842ae092c5b6b4f, type: 3}
+  prefab: {fileID: 1752884538981045036, guid: 71b2e42d6c3eff54081bfd2165ca528e, type: 3}
+  minRank: {fileID: 0}
+  speedRotateTower: 1.6
+  distanceSearch: 5
+  distanceAttack: 5
+  references:
+    version: 2
+    RefIds: []

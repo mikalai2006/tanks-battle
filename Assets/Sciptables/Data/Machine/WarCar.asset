@@ -16,32 +16,55 @@ MonoBehaviour:
   text:
     title:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488423374020608
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
     description:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488479896461312
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
   machinePrefab: {fileID: 4683721158174018908, guid: c3637931ed7c898448300764ec019dc9, type: 3}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  body: {fileID: 11400000, guid: 003cbc6ebdb5d0f4ca892e2dce5041a7, type: 2}
+  towers:
+  - ido: 
+    Config: {fileID: 0}
+    offsetTower: {x: -0.1, y: 0}
+    colorTower: {r: 0.2901961, g: 0.39215687, b: 0.21568628, a: 1}
+    isRotate: 0
+    muzzles:
+    - Config: {fileID: 11400000, guid: 3928dce836f7adc45b0b6f23a4ccd94b, type: 2}
+      offsetMuzzle: {x: 0.2, y: 0}
+    children: []
+    isChildren: 0
+  catterpillars:
+  - Config: {fileID: 0}
+    offsetCat: {x: -0.35, y: 0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - Config: {fileID: 0}
+    offsetCat: {x: 0.35, y: 0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - Config: {fileID: 0}
+    offsetCat: {x: 0.35, y: -0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - Config: {fileID: 0}
+    offsetCat: {x: -0.35, y: -0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  soundMove: {fileID: 0}
   colorBody: {r: 0.2901961, g: 0.39215687, b: 0.21568628, a: 1}
-  colorTower: {r: 0.2901961, g: 0.39215687, b: 0.21568628, a: 1}
+  updates: []
+  minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   speed: 2
-  maxSpeed: 2.5
-  speedRotateTower: 1.6
-  maxSpeedRotateTower: 2
   distanceSearch: 5
-  distanceAttack: 4
   hp: 100
   armour: 100
   references:

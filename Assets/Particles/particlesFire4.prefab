@@ -4937,7 +4937,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 20
   m_SortAtRoot: 0
 --- !u!1 &2103126592605693938
 GameObject:

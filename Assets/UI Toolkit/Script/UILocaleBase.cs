@@ -18,7 +18,7 @@ public abstract class UILocaleBase : MonoBehaviour
   protected GameSetting _gameSetting => GameManager.Instance.Settings;
   protected AudioManager _audioManager => GameManager.Instance.audioManager;
 
-  public async void Initialize(VisualElement root)
+  public virtual async void Initialize(VisualElement root)
   {
     _box = root;
     await Localize(root);

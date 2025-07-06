@@ -7,7 +7,16 @@ public class GameMuzzle : ScriptableObject
   [Header("Основная информация")]
   public string idObject;
   public TextLocalize text;
-  public GameObject prefab;
+  public BaseMuzzle prefab;
+  [Tooltip("Спрайт дула")]
+  public Sprite spriteMuzzle;
+  // [Tooltip("Аниматор дула")]
+  // public AnimatorOverrideController animator;
+
+  [Space(5)]
+  [Header("Аудио")]
+  [Tooltip("Звук выстрела")]
+  public AudioClip soundShot;
 
   [Space(5)]
   [Header("Параметры")]

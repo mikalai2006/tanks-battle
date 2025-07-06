@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.445
       objectReference: {fileID: 0}
+    - target: {fileID: 3622589296333898214, guid: 919e5d9aa712ecb4bab7f25d0d44a4ed, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8788374011133052475, guid: 919e5d9aa712ecb4bab7f25d0d44a4ed, type: 3}
@@ -352,8 +356,9 @@ MonoBehaviour:
   Config: {fileID: 0}
   MachineLevelData:
     id: 
-    logo: 
+    gerbId: 
     name: 
+    rank: 0
     isBot: 0
   stateController: {fileID: 0}
   occupiedNode:

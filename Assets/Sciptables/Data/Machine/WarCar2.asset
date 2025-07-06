@@ -16,30 +16,57 @@ MonoBehaviour:
   text:
     title:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488511446016000
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
     description:
       m_TableReference:
-        m_TableCollectionName: 
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
       m_TableEntryReference:
-        m_KeyId: 0
+        m_KeyId: 9488541670170624
         m_Key: 
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
+  spriteBody: {fileID: 293248773, guid: 196bd9e3d0c5cc14fb62506dc3629c6b, type: 3}
   machinePrefab: {fileID: 5041492625314783398, guid: 9d3828964656fac41ac2a1f58516fd93, type: 3}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  body: {fileID: 11400000, guid: 003cbc6ebdb5d0f4ca892e2dce5041a7, type: 2}
+  towers:
+  - spriteTower: {fileID: -724454454, guid: 9c053f3f940154a47bbe6a145302beed, type: 3}
+    offsetTower: {x: -0.35, y: 0}
+    colorTower: {r: 0.2901961, g: 0.39215687, b: 0.21568628, a: 1}
+    muzzles:
+    - Config: {fileID: 11400000, guid: 357f496495ae8724d915daaf40459d5f, type: 2}
+      offsetMuzzle: {x: 0.1, y: 0.1}
+    - Config: {fileID: 11400000, guid: 357f496495ae8724d915daaf40459d5f, type: 2}
+      offsetMuzzle: {x: 0.1, y: 0}
+    - Config: {fileID: 11400000, guid: 357f496495ae8724d915daaf40459d5f, type: 2}
+      offsetMuzzle: {x: 0.1, y: -0.1}
+  catterpillars:
+  - spriteCat: {fileID: 1232035101, guid: 96a6288bccbb2c9488578204f17e2927, type: 3}
+    offsetCat: {x: -0.35, y: 0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - spriteCat: {fileID: 1232035101, guid: 96a6288bccbb2c9488578204f17e2927, type: 3}
+    offsetCat: {x: 0.35, y: 0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - spriteCat: {fileID: 1232035101, guid: 96a6288bccbb2c9488578204f17e2927, type: 3}
+    offsetCat: {x: 0.35, y: -0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - spriteCat: {fileID: 1232035101, guid: 96a6288bccbb2c9488578204f17e2927, type: 3}
+    offsetCat: {x: -0.35, y: -0.3}
+    colorCat: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
   colorBody: {r: 0.2901961, g: 0.39215687, b: 0.21568628, a: 1}
   colorTower: {r: 0.2901961, g: 0.39215687, b: 0.21568628, a: 1}
+  parent: {fileID: 11400000, guid: 1920e9f1594987049a8d3d28d3916cfa, type: 2}
+  updates: []
+  minRank: {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
   speed: 2
-  maxSpeed: 2.5
   speedRotateTower: 1.6
-  maxSpeedRotateTower: 2
   distanceSearch: 5
   distanceAttack: 4
   hp: 100

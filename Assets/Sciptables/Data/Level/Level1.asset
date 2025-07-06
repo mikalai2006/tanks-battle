@@ -16,7 +16,7 @@ MonoBehaviour:
   typeGround: 8
   gridSize: {x: 50, y: 50}
   tileLandscape: {fileID: 11400000, guid: 863afbab29b6d434d97b50fda06d7a3e, type: 2}
-  tileSecondLandscape: {fileID: 11400000, guid: 0e0534f56c77b1e4ca00ed8c6ef184e0, type: 2}
+  tileSecondLandscape: {fileID: 11400000, guid: 52461d887de71bc4ea8d41fe26699b8c, type: 2}
   tileBorder: {fileID: 11400000, guid: da4f3962ac0f8464599c16f77bfcb555, type: 2}
   tileObstcles:
   - {fileID: 11400000, guid: a4b677eb66d30dd4cbde67ea92cbb2de, type: 2}
@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78717aa4c393c9646aca609ae13ec5e6, type: 2}
   noiseScaleKoof: 0.2
   noiseMaxKoof: 0.6
-  light: 0.04
+  light: 0.3
   noiseScaleObstacleKoof: 0.2
   noiseObstacleMaxKoof: 0.8
   typeLevel: 2

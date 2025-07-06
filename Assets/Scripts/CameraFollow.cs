@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
-        offset = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.4f, 0));
+        offset = _camera.ViewportToWorldPoint(new Vector3(0.5f, 0.4f, -10f));
     }
 
     void LateUpdate()

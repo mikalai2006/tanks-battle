@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 136932368817898160, guid: de4418a6b9cbde64685469d41156a345, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 136932368817898160, guid: de4418a6b9cbde64685469d41156a345, type: 3}
       propertyPath: m_LocalPosition.y
@@ -327,8 +327,9 @@ MonoBehaviour:
   Config: {fileID: 0}
   MachineLevelData:
     id: 
-    logo: 
+    gerbId: 
     name: 
+    rank: 0
     isBot: 0
   stateController: {fileID: 3583009019340503637}
   occupiedNode:
@@ -399,7 +400,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 136932368817898160, guid: de4418a6b9cbde64685469d41156a345, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 136932368817898160, guid: de4418a6b9cbde64685469d41156a345, type: 3}
       propertyPath: m_LocalPosition.y

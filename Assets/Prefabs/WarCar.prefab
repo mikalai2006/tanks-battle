@@ -48,6 +48,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5684690950995448091, guid: 6ec7a61df8a07834db8936efb5080055, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684690950995448091, guid: 6ec7a61df8a07834db8936efb5080055, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684690950995448091, guid: 6ec7a61df8a07834db8936efb5080055, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260426849591308237, guid: 6ec7a61df8a07834db8936efb5080055, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7700370293602264175, guid: 6ec7a61df8a07834db8936efb5080055, type: 3}
       propertyPath: m_Name
       value: caterpillar2
@@ -283,8 +299,9 @@ MonoBehaviour:
   Config: {fileID: 0}
   MachineLevelData:
     id: 
-    logo: 
+    gerbId: 
     name: 
+    rank: 0
     isBot: 0
   stateController: {fileID: 3796665324244146095}
   occupiedNode:

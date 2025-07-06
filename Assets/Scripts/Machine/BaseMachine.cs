@@ -11,17 +11,18 @@ public abstract class BaseMachine : MonoBehaviour
     private LevelManager levelManager;
     public LevelManager LevelManager => levelManager;
     GameManager _gameManager => GameManager.Instance;
+    public AudioSource AudioSource;
     [SerializeField] public GameMachine Config;
     [SerializeField] public MachineLevelData MachineLevelData;
     [SerializeField] public StateController stateController;
     [SerializeField] private GridTileNode occupiedNode;
     public GridTileNode OccupiedNode => occupiedNode;
-    [SerializeField] List<BaseMuzzle> muzzles;
-    public List<BaseMuzzle> Muzzles => muzzles;
-    [SerializeField] BaseCaterpillar caterpillar;
-    public BaseCaterpillar Caterpillar => caterpillar;
-    [SerializeField] BaseTower tower;
-    public BaseTower Tower => tower;
+    [SerializeField] GameObject CaterpillarBox;
+    [SerializeField] List<BaseCaterpillar> caterpillars;
+    public List<BaseCaterpillar> Caterpillars => caterpillars;
+    [SerializeField] GameObject TowerBox;
+    [SerializeField] List<BaseTower> towers;
+    public List<BaseTower> Towers => towers;
     [SerializeField] BaseBody body;
     public BaseBody Body => body;
     [SerializeField] private GameObject _objAreol;
@@ -35,7 +36,9 @@ public abstract class BaseMachine : MonoBehaviour
     public AreaMove AreaMove => areaMove;
     [SerializeField] private AreaSearch areaSearch;
     public AreaSearch AreaSearch => areaSearch;
-    public Badge Badge;
+    // public Badge Badge;
+    public bool isVisible;
+    private bool isMove;
     [SerializeField] private int offset = 90;
 
     [Space(5)]
@@ -43,6 +46,8 @@ public abstract class BaseMachine : MonoBehaviour
     [SerializeField] private Renderer rd;
     [SerializeField] private IndicatorMachine _indicator;
     public IndicatorMachine Indicator => _indicator;
+
+    [SerializeField] HealthBarController HealthBar;
 
 
     void Awake()
@@ -56,35 +61,20 @@ public abstract class BaseMachine : MonoBehaviour
         rd = body.GetComponentInChildren<Renderer>();
         rb = GetComponent<Rigidbody2D>();
 
+        HealthBar = GetComponentInChildren<HealthBarController>();
+
         data = new();
     }
 
-    void Start()
-    {
+    // void Start()
+    // {
 
-        StartCoroutine(Follow());
-    }
+    //     StartCoroutine(Follow());
+    // }
 
     public void OnSetIndicator(IndicatorMachine im)
     {
         _indicator = im;
-    }
-
-    public void OnSetTarget(BaseMachine target)
-    {
-        // если есть прошлый противник, устанавливаем, что невидим.
-        if (_objectTarget != null)
-        {
-            OnNotViewTarget(_objectTarget);
-        }
-
-        // новому противнику устанавливаем, что видим.
-        if (target != null)
-        {
-            OnViewTarget(target);
-        }
-
-        _objectTarget = target;
     }
 
     public void OnSetConfig(GameMachine _config, MachineLevelData dataInput)
@@ -99,7 +89,11 @@ public abstract class BaseMachine : MonoBehaviour
 
         MachineLevelData = dataInput;
 
-        Badge.Init(MachineLevelData);
+        // Badge.Init(MachineLevelData);
+
+        // устанавливаем звук мотора.
+        AudioSource.clip = Config.soundMove;
+        AudioSource.Play();
 
         // установка герба.
         Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
@@ -107,26 +101,52 @@ public abstract class BaseMachine : MonoBehaviour
 
         // установка основных параметров.
         OnSetSpeed(Config.speed);
+
         OnSetHP(Config.hp);
-        OnSetSpeedRotateTower(Config.speedRotateTower);
-        OnSetAngleTower(0);
+        HealthBar.SetHealth(Config.hp, Config.hp);
         OnSetAngleBody(0);
         data.timeBeforeAddTarget = MachineLevelData.isBot
             ? UnityEngine.Random.Range(_gameManager.Settings.timeBeforeAddTarget.x, _gameManager.Settings.timeBeforeAddTarget.y)
             : 0;
 
         // устанавливаем настройки для области атаки.
-        OnNotViewTarget(null);
         areaSearch.Init(Config);
 
         // инициализируем компоненты машины
         body.Init(this);
-        tower.Init(this);
-        for (int i = 0; i < muzzles.Count; i++)
+
+        // init caterpillars.
+        for (int i = 0; i < Config.catterpillars.Count; i++)
         {
-            BaseMuzzle _muz = muzzles.ElementAt(i);
-            _muz.Init(this, i);
-            data.muzzles.Add(_muz);
+            GameCaterpillarOption _catConfig = Config.catterpillars.ElementAt(i);
+            var _cat = Instantiate(_catConfig.Config.prefab, CaterpillarBox.transform);
+            _cat.Init(this, _catConfig, i);
+            caterpillars.Add(_cat);
+        }
+
+        // init towers.
+        var parentTowers = Config.towers.FindAll(t => !t.isChildren);
+        for (int i = 0; i < parentTowers.Count; i++)
+        {
+            GameTowerOption _optConfig = parentTowers.ElementAt(i);
+            var _tow = Instantiate(_optConfig.Config.prefab, TowerBox.transform);
+            _tow.Init(this, _optConfig, 10 + i);
+            towers.Add(_tow);
+
+            if (_optConfig.children.Count > 0)
+            {
+                for (int j = 0; j < _optConfig.children.Count; j++)
+                {
+                    GameTowerOption _optChildConfig = Config.towers.Find(t => t.ido == _optConfig.children.ElementAt(j));
+                    if (_optChildConfig != null)
+                    {
+                        var _towChild = Instantiate(_optChildConfig.Config.prefab, TowerBox.transform);
+                        _towChild.Init(this, _optChildConfig, 10 + i + j);
+                        _towChild.OnSetParent(_tow);
+                        towers.Add(_towChild);
+                    }
+                }
+            }
         }
 
         // test.
@@ -136,6 +156,8 @@ public abstract class BaseMachine : MonoBehaviour
 
     public void Move(Vector2 moveDirection)
     {
+        isMove = true;
+
         OnSetDirectionMove(moveDirection);
 
         // OnSetNameText(moveDirection.ToString());
@@ -153,7 +175,10 @@ public abstract class BaseMachine : MonoBehaviour
 
         Data.position = transform.position;
 
-        Caterpillar.Move();
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {   
+            Caterpillars[i].Move();
+        }
 
         Vector3Int posTile = levelManager.mapManager.Map.WorldToCell(transform.position);
         GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(posTile);
@@ -179,23 +204,15 @@ public abstract class BaseMachine : MonoBehaviour
 
     public void Stop()
     {
+        isMove = false;
+
         rb.linearVelocity = Vector2.zero;
 
         // _textName.text = _speed.ToString();
 
-        Caterpillar.Stop();
-    }
-
-    public void SetIsShot(bool status)
-    {
-        data.isShot = status;
-
-        if (!status)
-        {
-            for (int i = 0; i < muzzles.Count; i++)
-            {
-                Muzzles[i].OnStopShot();
-            }
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {   
+            Caterpillars[i].Stop();
         }
     }
 
@@ -225,25 +242,39 @@ public abstract class BaseMachine : MonoBehaviour
     public void OnAddDamage(float v)
     {
         data.hp -= v;
-        Badge.OnChangeData(this);
-        if (!MachineLevelData.isBot) {
+        HealthBar.UpdateHealth(data.hp);
+
+        // Badge.OnChangeData(this);
+
+        if (!MachineLevelData.isBot)
+        {
             levelManager.UiTopSide.OnChangeData(this);
         }
-        Tower.OnChangeData();
+
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            Towers[i].OnChangeData();
+            Towers[i].OnDamageEffect(v);
+        }
+
         Indicator.OnChangeData();
-        Tower.transform.eulerAngles = new Vector3(0, 0, Tower.transform.eulerAngles.z + UnityEngine.Random.Range(-v * _gameManager.Settings.koofChangeAngleTower, v * _gameManager.Settings.koofChangeAngleTower));
         Body.OnChangeData();
 
         if (data.hp <= 0)
         {
             data.speed = 0;
+
             Stop();
-            if (_objectTarget)
+            
+            AudioSource.Stop();
+
+            for (int i = 0; i < Towers.Count; i++)
             {
-                _objectTarget.OnSetTarget(null);
-                OnSetTarget(null);
+                Towers[i].PreDestroy();
             }
+
             levelManager.OnRemoveMachine(this);
+
             Destroy(gameObject);
         }
     }
@@ -251,16 +282,16 @@ public abstract class BaseMachine : MonoBehaviour
     public void OnSetHP(float hp)
     {
         data.hp = hp;
-        Badge.OnChangeData(this);
-        if (!MachineLevelData.isBot) {
+        HealthBar.UpdateHealth(data.hp);
+
+        // Badge.OnChangeData(this);
+
+        if (!MachineLevelData.isBot)
+        {
             levelManager.UiTopSide.OnChangeData(this);
         }
     }
 
-    public void OnSetSpeedRotateTower(float rotateTower)
-    {
-        data.speedRotateTower = rotateTower;
-    }
 
     public void OnAddBonus(GameBonus configBonus)
     {
@@ -285,159 +316,6 @@ public abstract class BaseMachine : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Устанавливает, что машина попала в зону поиска врага.
-    /// </summary>
-    /// <param name="target">Машина, которая заметила</param>
-    public void OnViewTarget(BaseMachine target)
-    {
-        if (_gameManager.Settings.drawAreaForBot || !target.MachineLevelData.isBot || !MachineLevelData.isBot)
-        {
-            target.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackViewed);
-
-            tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackViewed);
-        }
-
-        SetIsShot(false);
-    }
-
-    /// <summary>
-    /// Устанавливает, что машина попала в зону атаки врага.
-    /// </summary>
-    public void OnAttackTarget()
-    {
-        // смотрим дистанцию между машинами и выставляем статус, что можно стрелять,
-        // если дистанция больше чем расстояние на котором запрещено стрелять
-        float distance = Vector2.Distance(transform.position, _objectTarget.transform.position);
-        if (distance > _gameManager.Settings.distanceDisableAttack)
-        {
-            if (_gameManager.Settings.drawAreaForBot || !ObjectTarget.MachineLevelData.isBot || !MachineLevelData.isBot)
-            {
-                // _objectTarget.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackAttack);
-
-                tower.OnSetColorSector(MachineLevelData.isBot ? _gameManager.Settings.colorSectorAttack: _gameManager.Settings.colorSectorPlayerAttack);
-            }
-
-            // // если углы поворота башни и угла до цели, попадают в диапазон углов стрельба.
-            // if (Helpers.IsBetween(-_gameManager.Settings.angleStartShot, _gameManager.Settings.angleStartShot, Mathf.DeltaAngle(Data.angleTower, Data.currentAngleTower)))
-            // {
-            //     SetIsShot(true);
-            // }
-            if (MachineLevelData.isBot || _gameManager.Settings.autoShot)
-            {
-                float distanceRay = tower.DistanceAttack;
-                float offsetRay = areaMove.transform.localScale.x;
-                Vector3 dirTower = new Vector2(Mathf.Cos(Data.currentAngleTower * Mathf.Deg2Rad), Mathf.Sin(Data.currentAngleTower * Mathf.Deg2Rad));
-                Vector3 startRay = transform.position + offsetRay * dirTower;
-                RaycastHit2D hit = Physics2D.Raycast(startRay, dirTower, distanceRay, 1 << 7);
-
-                // string str = "";
-                // for (int i = 0; i < hits.Length; i++)
-                // {
-                //     var hit = hits[i];
-                if (hit && !hit.collider.CompareTag("TilemapWithCollider")) //  && dirTower != Vector3.zero
-                {
-                    // Debug.Log($"hit {hit.collider}, {startRay}, {Data.directionTower}, {Config.distanceSearch}");
-
-
-                    float dist = Vector3.Distance(hit.collider.transform.position, transform.position);
-                    // str += hit.collider.gameObject.name;
-                    // str += " dist=" + dist + "(" + distanceRay + ")";
-                    // if (dist <= distanceRay)
-                    // {
-                    BaseMachine bm = hit.collider.GetComponentInParent<BaseMachine>();
-                    AreaMove amove = hit.collider.GetComponent<AreaMove>();
-
-                    if (bm && amove && bm != this)
-                    {
-                        // OnSetTarget(bm);
-                        // if (stateController)
-                        // {
-                        //     stateController.ChangeState(stateController.chaseState);
-                        //     stateController.chaseState.OnSetEnemy(bm);
-                        // }
-                        SetIsShot(true);
-                        Debug.DrawRay(startRay, dirTower * distanceRay, Color.yellow);
-                    } else 
-                    {
-                        SetIsShot(false);
-                        Debug.DrawRay(startRay, dirTower * distanceRay, Color.magenta);
-                    }
-                }
-                else
-                {
-                    SetIsShot(false);
-                    Debug.DrawRay(startRay, dirTower * distanceRay, Color.magenta);
-                }
-                // Debug.Log($"collision {hit}({hit.point}): {str}");
-                // else
-                    // {
-                    //     Debug.DrawRay(startRay, dirTower * distanceRay, Color.magenta);
-                    //     // OnSetTarget(null);
-                    // }
-                }
-        }
-    }
-
-    /// <summary>
-    /// Устанавливает, что машина вышла из зоны поиска врага.
-    /// </summary>
-    /// <param name="lastTarget">Последняя машина, которая видела текущую машину</param>
-    public void OnNotViewTarget(BaseMachine lastTarget)
-    {
-        if (_gameManager.Settings.drawAreaForBot || (lastTarget != null && !lastTarget.MachineLevelData.isBot) || !MachineLevelData.isBot)
-        {
-            tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackDefault);
-
-            if (lastTarget)
-            {
-                lastTarget.areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackDefault);
-            }
-            else
-            {
-                areaSearch.OnSetColor(_gameManager.Settings.colorAreaAttackDefault);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Устанавливает фактический угол поворота башни.
-    /// 
-    /// </summary>
-    /// <param name="angle">Угол, должени читаться из transform</param>
-    public void OnSetCurrentAngleTower(float angle)
-    {
-        data.currentAngleTower = angle;
-    }
-
-    /// <summary>
-    /// Устанавливает угол поворота башни из расчетов направления и поворота базы (body).
-    /// </summary>
-    /// <param name="angle">угол</param>
-    public void OnSetAngleTower(float angle)
-    {
-        data.angleTower = angle;
-
-        DataBonus bonusSpeedTower = null;
-        Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
-        //Tower.transform.rotation = Quaternion.Euler(0, 0, angle);
-        Tower.transform.rotation = Quaternion.Lerp(
-            Tower.transform.rotation,
-            Quaternion.Euler(0, 0, angle),
-            (data.speedRotateTower + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * Time.deltaTime
-        );
-
-        OnSetDirectionTower(angle);
-
-        // устанавливаем угол - разницу углов поворота башни и базы
-        // Data.angleTowerByBody = Body.transform.localEulerAngles.z - Tower.transform.localEulerAngles.z;
-        // Muzzle.transform.rotation = Quaternion.Lerp(Muzzle.transform.rotation, Quaternion.Euler(0, 0, lookRotationTower.eulerAngles.z + 90), .05f);
-    }
-
-    public void OnSetDirectionTower(float angle)
-    {
-        data.directionTower = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
-    }
 
     public void OnSetAngleBody(float angle)
     {
@@ -445,169 +323,74 @@ public abstract class BaseMachine : MonoBehaviour
         data.angleBody = angle + offset;
 
         Body.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
+        // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
         _objAreol.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        Caterpillar.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
+        CaterpillarBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
 
+        // for (int i = 0; i < Towers.Count; i++)
+        // {
+        //     Towers[i].ChangePosition(this);
+        // }
     }
 
-    IEnumerator Follow()
-    {
-        for (; ; ) //while(true)
-        {                
-            if (_objectTarget)
-            {
-                // TOWER
-                var direction = _objectTarget.transform.position - transform.position;
+    // IEnumerator Follow()
+    // {
+    //     for (; ; ) //while(true)
+    //     {                
+    //         if (_objectTarget)
+    //         {
+    //             // TOWER
+    //             var direction = _objectTarget.transform.position - transform.position;
 
-                // // your actual heading as upwards parameter
-                // Quaternion lookRotationTower = Quaternion.LookRotation(Vector3.forward, directionVectorTower);
-                float angleInRadians = Mathf.Atan2(direction.y, direction.x);
+    //             // // your actual heading as upwards parameter
+    //             // Quaternion lookRotationTower = Quaternion.LookRotation(Vector3.forward, directionVectorTower);
+    //             float angleInRadians = Mathf.Atan2(direction.y, direction.x);
 
-                if (MachineLevelData.isBot || _gameManager.Settings.autoTakeEnemy) {
-                    OnSetAngleTower(angleInRadians * Mathf.Rad2Deg);
-                }
+    //             if (MachineLevelData.isBot || _gameManager.Settings.autoTakeEnemy) {
+    //                 OnSetAngleTower(angleInRadians * Mathf.Rad2Deg);
+    //             }
 
-                float dist = Vector3.Distance(_objectTarget.transform.position, transform.position);
-                if (dist <= tower.DistanceAttack)
-                {
-                    OnAttackTarget();
-                    // // SetIsShot(true);
-                    // if (Application.isEditor)
-                    // {
-                    //     Badge.OnSetNameText(dist.ToString());
-                    // }
-                }
-                else
-                {
-                    OnViewTarget(_objectTarget);
-                    // OnSetTarget(null);
-                }
+    //             float dist = Vector3.Distance(_objectTarget.transform.position, transform.position);
+    //             if (dist <= tower.DistanceAttack)
+    //             {
+    //                 OnAttackTarget();
+    //                 // // SetIsShot(true);
+    //                 // if (Application.isEditor)
+    //                 // {
+    //                 //     Badge.OnSetNameText(dist.ToString());
+    //                 // }
+    //             }
+    //             else
+    //             {
+    //                 OnViewTarget(_objectTarget);
+    //                 // OnSetTarget(null);
+    //             }
 
-            }
-            else
-            {
-                if (_gameManager.Settings.rotateTowerByBody)
-                {
-                    OnSetAngleTower(data.angleBody);
-                }
-                // else
-                // {
-                //     if (Data.angleTower != Data.angleTowerByBody)
-                //     {
-                //         Data.angleTowerByBody = Data.angleTower = Tower.transform.rotation.eulerAngles.z; //body.transform.localEulerAngles.z - (body.transform.localEulerAngles.z - tower.transform.localEulerAngles.z);
-                //     }
-                //     // OnSetAngleTower(Data.angleTower);
-                //     Tower.transform.rotation = Quaternion.Euler(0, 0, Data.angleTower);
-                //     // Debug.Log($"set angle {Data.angleTower}");
-                // }
-            }
-            yield return new WaitForSeconds(1f / 100);
-        }
-    }
+    //         }
+    //         else
+    //         {
+    //             if (_gameManager.Settings.rotateTowerByBody)
+    //             {
+    //                 OnSetAngleTower(data.angleBody);
+    //             }
+    //             // else
+    //             // {
+    //             //     if (Data.angleTower != Data.angleTowerByBody)
+    //             //     {
+    //             //         Data.angleTowerByBody = Data.angleTower = Tower.transform.rotation.eulerAngles.z; //body.transform.localEulerAngles.z - (body.transform.localEulerAngles.z - tower.transform.localEulerAngles.z);
+    //             //     }
+    //             //     // OnSetAngleTower(Data.angleTower);
+    //             //     Tower.transform.rotation = Quaternion.Euler(0, 0, Data.angleTower);
+    //             //     // Debug.Log($"set angle {Data.angleTower}");
+    //             // }
+    //         }
+    //         yield return new WaitForSeconds(1f / 100);
+    //     }
+    // }
 
 
     void Update()
     {
-        if (_gameManager.Settings.autoTakeEnemy || MachineLevelData.isBot)
-        {
-            // если есть возможные цели
-            List<BaseMachine> _vacantTargets = AreaSearch.Targets
-                .Where(t => t.Value >= data.timeBeforeAddTarget || !MachineLevelData.isBot)
-                .Select(t => t.Key)
-                .ToList();
-            if (_vacantTargets.Count > 0) //  && !_objectTarget
-            {
-                // вычисляем дистанцию до существующей цели
-                float distanceExistTarget = _objectTarget ? Vector2.Distance(transform.position, _objectTarget.transform.position) : 0;
-
-                // выбираем ближайшую из возможных
-                float minDistance = 0;
-                BaseMachine minDistanceMachine = null;
-                for (int i = 0; i < _vacantTargets.Count; i++)
-                {
-                    BaseMachine mach = _vacantTargets[i];
-
-                    if (!mach)
-                    {
-                        continue;
-                    }
-
-                    float dist = Vector2.Distance(transform.position, mach.transform.position);
-                    if (minDistance == 0 || (minDistance > dist && _gameManager.Settings.takeNearEnemy))
-                    {
-                        minDistance = dist;
-                        minDistanceMachine = mach;
-                    }
-                }
-
-                // если есть выбранная цель или выбранная ближе существующей
-                if (minDistanceMachine != null && (distanceExistTarget == 0 || distanceExistTarget > minDistance))
-                {
-                    OnSetTarget(minDistanceMachine);
-
-                    // if (stateController.enabled)
-                    // {
-                    //     stateController.ChangeState(stateController.chaseState);
-                    // }
-
-                }
-            }
-        }
-        else
-        {
-           if (!MachineLevelData.isBot)
-            {
-                float distanceRay = tower.DistanceAttack;
-                float offsetRay = areaMove.transform.localScale.x;
-                Vector3 dirTower = new Vector2(Mathf.Cos(Data.currentAngleTower * Mathf.Deg2Rad), Mathf.Sin(Data.currentAngleTower * Mathf.Deg2Rad));
-                Vector3 startRay = transform.position + offsetRay * dirTower;
-                RaycastHit2D hit = Physics2D.Raycast(startRay, dirTower, distanceRay, 1 << 7);
-
-                // string str = "";
-                // for (int i = 0; i < hits.Length; i++)
-                // {
-                //     var hit = hits[i];
-                if (hit && !hit.collider.CompareTag("TilemapWithCollider") && dirTower != Vector3.zero)
-                {
-                    // Debug.Log($"hit {hit.collider}, {startRay}, {Data.directionTower}, {Config.distanceSearch}");
-                    
-
-                    float dist = Vector3.Distance(hit.collider.transform.position, transform.position);
-                    // str += hit.collider.gameObject.name;
-                    // str += " dist=" + dist + "(" + distanceRay + ")";
-                    // if (dist <= distanceRay)
-                    // {
-                    BaseMachine bm = hit.collider.GetComponentInParent<BaseMachine>();
-                    AreaMove amove = hit.collider.GetComponent<AreaMove>();
-
-                    if (bm && amove && bm != this && bm != ObjectTarget)
-                    {
-                        // OnSetTarget(bm);
-                        // if (stateController)
-                        // {
-                        //     stateController.ChangeState(stateController.chaseState);
-                        //     stateController.chaseState.OnSetEnemy(bm);
-                        // }
-                        OnSetTarget(bm);
-                        Debug.DrawRay(startRay, dirTower * distanceRay, Color.yellow);
-                    }
-                }
-                // else
-                // {
-                //     OnSetTarget(null);
-                //     Debug.DrawRay(startRay, dirTower * distanceRay, Color.magenta);
-                // }
-                // Debug.Log($"collision {str}");
-            } 
-        }
-
-        // если нет конечного автомата, проверяем есть ли противники в зоне досягаемости
-            // и если нет - убираем цель
-            if (AreaSearch.Targets.Count == 0)
-            {
-                OnSetTarget(null);
-            }
-
         // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
         //     .Where(n => n.OccupiedUnit != null)
         //     .ToList();
@@ -617,11 +400,6 @@ public abstract class BaseMachine : MonoBehaviour
         // }
 
 
-        // если нет цели, отменяем выстрелы
-        if (ObjectTarget == null)
-        {
-            SetIsShot(false);
-        }
         // else
         // {
         //     // если можно стрелять.
@@ -641,16 +419,40 @@ public abstract class BaseMachine : MonoBehaviour
         //     data.timeAfterLastShot += Time.deltaTime;
         // }
 
-        // провверяем видим ли компонент.
+        // проверяем видим ли компонент.
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera);
         if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
         // if (rd.isVisible == false)
         {
             _indicator.gameObject.SetActive(false);
+            isVisible = true;
         }
         else
         {
             _indicator.gameObject.SetActive(true);
+            isVisible = false;
+        }
+
+        // включаем или выключаем звук мотора.
+        if (isVisible)
+        {
+            if (!AudioSource.isPlaying)
+            {
+                AudioSource.Play();
+            }
+
+            if (isMove)
+            {
+                AudioSource.volume = 0.5f;
+            }
+            else
+            {
+                AudioSource.volume = 0.1f;
+            }
+        }
+        else
+        {
+            AudioSource.Stop();
         }
 
         // считаем время действия бонусов.

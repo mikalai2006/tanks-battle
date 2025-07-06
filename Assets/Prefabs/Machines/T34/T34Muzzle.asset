@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df57a86d86a7084aab1ff303ee5938f, type: 3}
+  m_Name: T34Muzzle
+  m_EditorClassIdentifier: 
+  idObject: T34Muzzle
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefab: {fileID: 8115829915854766470, guid: db4b3fdf67891b54899f51bc48f20028, type: 3}
+  spriteMuzzle: {fileID: -1358156707, guid: 3e5b6bf68b015984aa2fcae9390023ed, type: 3}
+  soundShot: {fileID: 8300000, guid: 356ffcb1c16e9594aaf6678c629f3966, type: 3}
+  fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
+  Bullet: {fileID: 11400000, guid: 88f11066d08ffdf4c8da3297c4d8fd0a, type: 2}
+  material: {fileID: 2100000, guid: a421a7090fe94d343aebc6de393476fb, type: 2}
+  timeBetweenShot: 1
+  color: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 1}
+  references:
+    version: 2
+    RefIds: []

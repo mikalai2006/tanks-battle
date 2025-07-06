@@ -14,6 +14,8 @@ public class ConstantsApp
     public const string UI_SHOP = "UIShop";
     public const string UI_NEWGAME = "UINewGame";
     public const string UI_SETTINGS = "UISettings";
+    public const string UI_MANAGER = "UIManager";
+    public const string UI_TREE_MACHINE = "UITreeMachine";
     public const string UI_THROPHS = "UIThrophs";
     public const string UI_INIT_USER = "UIInitUser";
     public const string UI_DIRECTORY = "UIDirectory";

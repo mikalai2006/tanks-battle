@@ -19,8 +19,11 @@ public class StartApp : MonoBehaviour
     // GameManager.Instance.SetAppInfo(appInfoContainer);
     await loaderBarProvider.LoadAndDestroy(loadingOperations);
 
-    var dashBoard = new StartUIOperation();
-    await dashBoard.ShowAndHide();
+    // var dashBoard = new StartUIOperation();
+    // await dashBoard.ShowAndHide();
+    
+    var uiManager = new UIManagerOperation();
+    await uiManager.ShowAndHide();
 
     GameManager.Instance.ChangeState(GameState.StartApp);
   }

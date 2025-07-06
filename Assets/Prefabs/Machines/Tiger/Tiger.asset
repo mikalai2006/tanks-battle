@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e7243a5f8f3ec44b5c6b60b18dd71d, type: 3}
+  m_Name: Tiger
+  m_EditorClassIdentifier: 
+  idObject: tiger
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 9488207497388032
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 9488244747001856
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  machinePrefab: {fileID: 3052865583570816335, guid: 0ccd543179f15a8429bdc85bb50194f9, type: 3}
+  indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  body: {fileID: 11400000, guid: d41c1f931d888e04cbf5ce5aa0e77e10, type: 2}
+  towers:
+  - ido: tower1
+    Config: {fileID: 11400000, guid: 04f3ea636f174314483855314db2f28f, type: 2}
+    offsetTower: {x: 0, y: 0}
+    colorTower: {r: 0.5776787, g: 0.6415094, b: 0.23905303, a: 1}
+    isRotate: 1
+    muzzles:
+    - Config: {fileID: 11400000, guid: d07a5c12e806b0049814b6342e7eec98, type: 2}
+      offsetMuzzle: {x: 0.28, y: 0}
+    children: []
+    isChildren: 0
+  catterpillars:
+  - Config: {fileID: 11400000, guid: 3965c75f1789be44da09a7e294fcdb87, type: 2}
+    offsetCat: {x: 0, y: 0.35}
+    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  - Config: {fileID: 11400000, guid: 3965c75f1789be44da09a7e294fcdb87, type: 2}
+    offsetCat: {x: 0, y: -0.35}
+    colorCat: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
+  soundMove: {fileID: 8300000, guid: 356ffcb1c16e9594aaf6678c629f3966, type: 3}
+  colorBody: {r: 0.5764706, g: 0.6431373, b: 0.23921569, a: 1}
+  updates: []
+  minRank: {fileID: 11400000, guid: 5ee74d383263a7347a7e5a0549dfb35d, type: 2}
+  speed: 2.5
+  distanceSearch: 6
+  hp: 500
+  armour: 500
+  references:
+    version: 2
+    RefIds: []

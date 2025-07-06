@@ -63,7 +63,10 @@ public class PlayerController : MonoBehaviour
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
                 // Debug.Log($"angle = {angle}, direction= {direction}");
-                _machine.OnSetAngleTower(angle);
+                for (int i = 0; i < _machine.Towers.Count; i++)
+                {   
+                    _machine.Towers[i].OnSetAngleTower(angle);
+                }
             }
         }
     }

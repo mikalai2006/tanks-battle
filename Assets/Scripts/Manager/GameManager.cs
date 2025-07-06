@@ -5,14 +5,16 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using System.Collections.Generic;
 using Loader;
 using System.Linq;
-using UnityEngine.Localization.Settings;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 public class GameManager : StaticInstance<GameManager>
 {
   public static event Action OnChangeTheme;
   public static event Action<GameState> OnBeforeStateChanged;
   public static event Action<GameState> OnAfterStateChanged;
+  
+  [SerializeField] private InputActionAsset inputAction;
   [SerializeField] private UnityEngine.UI.Image _imageBg;
   [SerializeField] private UnityEngine.UI.Image _imageWrapper;
   [SerializeField] private UnityEngine.UI.Image _imageShadow;
@@ -35,12 +37,12 @@ public class GameManager : StaticInstance<GameManager>
 //   public AdManager AdManager;
   public ResourceSystem ResourceSystem { get; internal set; }
 
-//   public LevelManager LevelManager { get; private set; }
-//   [HideInInspector] public GamePlayerSetting PlayerSetting { get; private set; }
-//   [HideInInspector] public GameType GameType { get; private set; }
+  //   public LevelManager LevelManager { get; private set; }
+  //   [HideInInspector] public GamePlayerSetting PlayerSetting { get; private set; }
+  //   [HideInInspector] public GameType GameType { get; private set; }
 
   // public SceneInstance environment { get; private set; }
-//   public InputManager InputManager { get; private set; }
+  //   public InputManager InputManager { get; private set; }
 
   // [SerializeField] private ProgressManager _progressManager;
   // public ProgressManager Progress => _progressManager;
@@ -85,17 +87,18 @@ public class GameManager : StaticInstance<GameManager>
     InitUserProvider = new InitUserProvider();
 
     AssetProvider = new AssetProvider();
-    
+
     DataManager = DataManager.Instance;
 
     audioManager = AudioManager.Instance;
-    
+
     base.Awake();
 
     Theme = Settings.ThemeDefault;
 
     ChangeTheme();
 
+    inputAction.Enable();
   }
 
   // private void OnDestroy()

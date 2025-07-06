@@ -20,6 +20,8 @@ public class ChaseState : State
         {
             if (stateController.Target == Vector3.zero)
             {
+                // TODO
+                // сделать чтобы не выходить за рамки размеров карты.
                 stateController.Target = stateController.Machine.ObjectTarget.transform.position + new Vector3(UnityEngine.Random.Range(-3, 3), UnityEngine.Random.Range(-3, 3), 0);
             }
             else
@@ -78,9 +80,9 @@ public class ChaseState : State
 
         stateController.Target = Vector3.zero;
 
-        if (stateController.Machine) {
-            stateController.Machine.OnSetTarget(null);
-        }
+        // if (stateController.Machine) {
+        //     stateController.Machine.OnSetTarget(null);
+        // }
     }
 }
 

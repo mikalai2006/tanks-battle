@@ -1,0 +1,21 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="MachineDashboard" src="project://database/Assets/UI/File/GarageView.uxml?fileID=9197481963319205126&amp;guid=3fde7ba5540aa854a9deb8cde595d4fb&amp;type=3#GarageView" />
+    <ui:Template name="HomeView" src="project://database/Assets/UI/File/HomeView.uxml?fileID=9197481963319205126&amp;guid=1061802b2a8c8c34ea6944d95015a6d7&amp;type=3#HomeView" />
+    <ui:Template name="MenuBar" src="project://database/Assets/UI/File/MenuBar.uxml?fileID=9197481963319205126&amp;guid=033b56f2c7014ca4db173d3ff7fe7f5d&amp;type=3#MenuBar" />
+    <ui:Template name="MachineInfoView" src="project://database/Assets/UI/File/MachineInfoView.uxml?fileID=9197481963319205126&amp;guid=0ffb67dfb403db6448c9c47c35b0febb&amp;type=3#MachineInfoView" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="Wrapper" style="flex-grow: 1; flex-direction: row; -unity-background-scale-mode: scale-and-crop;">
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:Instance template="MachineDashboard" name="GarageScreen" />
+                <ui:Instance template="MachineDashboard" name="MachineInventory" style="display: none;" />
+                <ui:Instance template="HomeView" name="HomeScreen" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; max-width: 300px;">
+                <ui:Instance template="MenuBar" name="MenuBar" />
+            </ui:VisualElement>
+            <ui:VisualElement name="MachineInfo" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.78); align-items: center; justify-content: center;">
+                <ui:Instance template="MachineInfoView" style="flex-grow: 1; width: 100%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

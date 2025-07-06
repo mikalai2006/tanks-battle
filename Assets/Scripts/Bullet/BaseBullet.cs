@@ -15,7 +15,7 @@ public class BaseBullet : MonoBehaviour
     /// Инициализация снаряда
     /// </summary>
     /// <param name="machine">Машина которая произвела снаряд</param>
-    public void OnInit(BaseMachine machine, GameMuzzle confgiMuzzle)
+    public void OnInit(BaseMachine machine, BaseTower Tower, GameMuzzle confgiMuzzle)
     {
         sprite = GetComponent<SpriteRenderer>();
 
@@ -35,7 +35,7 @@ public class BaseBullet : MonoBehaviour
         // определяем фактический угол поворота башни
         // и устанавливаем его для снаряда
         var direction = Vector3.right;
-        float angle = Machine.Tower.transform.eulerAngles.z * Mathf.Deg2Rad;
+        float angle = Tower.transform.eulerAngles.z * Mathf.Deg2Rad;
         float sin = Mathf.Sin(angle);
         float cos = Mathf.Cos(angle);
         forward = new Vector3(
@@ -44,10 +44,10 @@ public class BaseBullet : MonoBehaviour
             0f
         );
 
-        transform.eulerAngles = new Vector3(0,0,Machine.Tower.transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(0,0,Tower.transform.eulerAngles.z);
 
         Vector3 pos = transform.position;
-        toPoint = pos + forward * Machine.Tower.DistanceAttack;
+        toPoint = pos + forward * Tower.DistanceAttack;
 #if UNITY_EDITOR
         if (_gameManager.Settings.drawLineAttack) {
             Debug.DrawLine(pos, forward, Color.magenta);
