@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -17,11 +18,33 @@ public class UITopSide : MonoBehaviour
     private BaseMachine target;
     public BaseMachine Target => target;
     private float maxWidth = 280;
+    public Button fireButton;
+    
+    [SerializeField] private InputActionReference pressSystem;
     [SerializeField] private SerializedDictionary<TypeBonus, BonusLayoutItem> gameObjectsBonus;
 
     void Awake()
     {
         _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+    }
+
+    void Start()
+    {
+
+        fireButton.onClick.AddListener(OnClickBtnFire);
+        pressSystem.action.performed += (InputAction.CallbackContext c) =>
+        {
+            OnClickBtnFire();
+
+        };
+    }
+
+    private void OnClickBtnFire()
+    {
+        if (target.Towers[0].Muzzles.Count > 0)
+        {   
+            target.Towers[0].Muzzles[0].OnShot(null);
+        }
     }
 
     void Update()
@@ -89,7 +112,7 @@ public class UITopSide : MonoBehaviour
             gerbImage.sprite = gerb;
         }
     }
-    
+
     public void OnChangeData(BaseMachine machine)
     {
         var oneProcentHP = maxWidth / machine.Config.hp;
@@ -111,10 +134,12 @@ public class UITopSide : MonoBehaviour
 
             // var dashBoard = new StartUIOperation();
             // dashBoard.ShowAndHide().Forget();
-            
+
             var uiManager = new UIManagerOperation();
             uiManager.ShowAndHide().Forget();
         }
 
     }
+    
+    
 }

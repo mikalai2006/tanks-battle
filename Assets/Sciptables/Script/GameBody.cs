@@ -10,6 +10,7 @@ public class GameBody : ScriptableObject
   public string idObject;
   public TextLocalize text;
   public Sprite spriteBody;
+  public BaseBody prefab;
 
   [Space(5)]
   [Header("Цвета")]
@@ -21,7 +22,7 @@ public class GameBody : ScriptableObject
   [Tooltip("Минимальный ранг для доступа")]
   public GameRank minRank;
   [Tooltip("Скорость")]
-  [Range(1.5f, 6f)] public float speed;
+  [Range(0.2f, 6f)] public float speed;
   [Tooltip("Здоровье")]
   [Range(100f, 1000f)] public int hp;
 

@@ -139,7 +139,7 @@ using UnityEngine.UIElements;
         // moves health bar to match world position
         void MoveToWorldPosition(VisualElement element, Vector3 worldPosition, Vector2 worldSize)
         {
-            Rect rect = RuntimePanelUtils.CameraTransformWorldToPanelRect(element.panel, worldPosition + new Vector3(-1, 1.4f), worldSize, _camera);
+            Rect rect = RuntimePanelUtils.CameraTransformWorldToPanelRect(element.panel, worldPosition + new Vector3(2, 20), worldSize, _camera);
             element.transform.position = rect.position;
 
         }
@@ -156,7 +156,7 @@ using UnityEngine.UIElements;
             MoveToWorldPosition(m_HealthBar, transformToFollow.position, m_WorldSize);
         }
 
-        void LateUpdate()
+        void FixedUpdate()
         {
             UpdateHealthBar();
         }

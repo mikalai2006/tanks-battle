@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -9,11 +10,12 @@ public class LevelManager : MonoBehaviour
     private GameManager _gameManager => GameManager.Instance;
     private GameSetting _gameSetting => GameManager.Instance.Settings;
     [SerializeField] public MapManager mapManager;
-    [SerializeField] public Light2D globalLight;
+    [SerializeField] public Light globalLight;
     [SerializeField] public List<BaseMachine> machines;
     [SerializeField] public List<IndicatorMachine> indicators;
     [SerializeField] public List<BaseBonus> bonuses;
     [SerializeField] public GameObject objectSpawnMachines;
+    public WorldManager WorldManager;
     [SerializeField] public GameObject objectSpawnEffect;
     [SerializeField] public GameObject objectSpawnBonuses;
     [SerializeField] public GameObject objectSpawnText;
@@ -97,7 +99,7 @@ public class LevelManager : MonoBehaviour
                     // Addressables.InstantiateAsync
                     var gObject = Instantiate(
                         configMachine.machinePrefab,
-                        node.position,
+                        new Vector3(node.position.x, 0.5f, node.position.y),
                         Quaternion.identity,
                         objectSpawnMachines.transform
                     );
@@ -110,8 +112,11 @@ public class LevelManager : MonoBehaviour
                         {
                             obj.GetComponent<PlayerController>().enabled = false;
                             obj.GetComponent<PlayerInput>().enabled = false;
-                            obj.GetComponentInChildren<Light2D>().enabled = false;
-                            obj.Areol.SetActive(false);
+                            var lightComponent = obj.GetComponentInChildren<Light>();
+                            if (lightComponent) {
+                                lightComponent.enabled = false;
+                            }
+                            // obj.Areol.SetActive(false);
                             obj.GetComponent<CameraFollow>().enabled = false;
                             obj.GetComponent<StateController>().enabled = true;
                             obj.OnSetConfig(configMachine, data);
@@ -122,8 +127,11 @@ public class LevelManager : MonoBehaviour
                         {
                             obj.GetComponent<PlayerController>().enabled = true;
                             obj.GetComponent<PlayerInput>().enabled = true;
-                            obj.GetComponentInChildren<Light2D>().enabled = true;
-                            obj.Areol.SetActive(true);
+                            var lightComponent = obj.GetComponentInChildren<Light>();
+                            if (lightComponent) {
+                                lightComponent.enabled = true;
+                            }
+                            // obj.Areol.SetActive(true);
                             obj.GetComponent<CameraFollow>().enabled = true;
                             obj.GetComponent<StateController>().enabled = false;
                             obj.OnSetConfig(configMachine, data);
@@ -168,12 +176,12 @@ public class LevelManager : MonoBehaviour
         }
 
         // spawn bonuses.
-        List<GridTileNode> vacantNodes = mapManager.gridTileHelper.GetEmptyNodes().OrderBy(t => UnityEngine.Random.value).ToList();
-        for (int i = 0; i < 15; i++)
-        {
-            GameBonus configB = Helpers.GetProbabilityItem<GameBonus>(_gameManager.LevelConfig.bonuses).Item;
-            OnSpawnBonus(vacantNodes[i], configB);
-        }
+        // List<GridTileNode> vacantNodes = mapManager.gridTileHelper.GetEmptyNodes().OrderBy(t => UnityEngine.Random.value).ToList();
+        // for (int i = 0; i < 15; i++)
+        // {
+        //     GameBonus configB = Helpers.GetProbabilityItem<GameBonus>(_gameManager.LevelConfig.bonuses).Item;
+        //     OnSpawnBonus(vacantNodes[i], configB);
+        // }
 
     }
 

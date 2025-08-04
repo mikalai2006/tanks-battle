@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// [RequireComponent(typeof(GPUInstanceEnabler))]
 public class BaseBody : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _bodySprite;
@@ -12,20 +13,20 @@ public class BaseBody : MonoBehaviour
 
         OnChangeData();
 
-        _bodySprite.color = Machine.Config.colorBody;
-        _bodySprite.sprite = Machine.Config.body.spriteBody;
+        // _bodySprite.color = Machine.Config.colorBody;
+        // _bodySprite.sprite = Machine.Config.body.spriteBody;
     }
 
     public void OnChangeData()
     {
-        Color col = Color.white;
-        col.a = 1f - Mathf.Min(1f, Machine.Data.hp * 100f / Machine.Config.hp * 0.01f);
+        // Color col = Color.white;
+        // col.a = 1f - Mathf.Min(1f, Machine.Data.hp * 100f / Machine.Config.hp * 0.01f);
 
-        _damageSprite.color = col;
+        // _damageSprite.color = col;
     }
 
     public void OnSetSpriteGerb(Sprite sprite)
     {
-        _bodyGerbSprite.sprite = sprite;
+        // _bodyGerbSprite.sprite = sprite;
     }
 }

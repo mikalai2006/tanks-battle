@@ -15,6 +15,8 @@ public class DataMachine
     public Vector3 directionMove;
     [Tooltip("Угол поворота базы")]
     public float angleBody;
+    [Tooltip("Угол поворота базы текущий")]
+    public float currentAngleBody;
     [Tooltip("Время до обнаружения противника")]
     public float timeBeforeAddTarget;
     [Tooltip("Бонусы")]

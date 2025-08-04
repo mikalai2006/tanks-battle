@@ -45,12 +45,12 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         data.index = index;
 
-        sprite.color = Config.color;
+        // sprite.color = Config.color;
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();
 
         OnSetTimeBetweenShot(Config.timeBetweenShot + (data.index * (Config.timeBetweenShot / 2)));
         
-        transform.localPosition = new Vector3(Option.offsetMuzzle.x, Option.offsetMuzzle.y);
+        transform.localPosition = Option.offsetMuzzle;
     }
 
 
@@ -109,7 +109,7 @@ public abstract class BaseMuzzle : MonoBehaviour
                 rend.material = Config.material; //gameObject.GetComponent<MeshRenderer>().material;
             }
         }
-        objEffect.transform.eulerAngles = new Vector3(0, 0, Tower.transform.eulerAngles.z);
+        objEffect.transform.eulerAngles = new Vector3(0, Tower.transform.eulerAngles.z, 0);
         Lean.Pool.LeanPool.Despawn(objEffect, 2);
         
 

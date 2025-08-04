@@ -47,18 +47,17 @@ public class BaseTower : MonoBehaviour
 
         OnChangeData();
 
-        _sprite.color = Option.colorTower;
+        // _sprite.color = Option.colorTower;
 
-        _damageSprite.size = _sprite.size;
+        // _damageSprite.size = _sprite.size;
+
+        // _sprite.sprite = Option.Config.spriteTower;
 
         distanceAttack = Option.Config.distanceAttack;
 
         OnSetSizeSector(distanceAttack);
 
-        _sprite.sprite = Option.Config.spriteTower;
-
-        transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y);
-
+        transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
 
         // инициализируем компоненты машины
         for (int i = 0; i < optConfig.muzzles.Count; i++)
@@ -76,10 +75,10 @@ public class BaseTower : MonoBehaviour
 
     public void OnChangeData()
     {
-        Color col = Color.white;
-        col.a = 1f - Mathf.Min(1f, Machine.Data.hp * 100f / Machine.Config.hp * 0.01f);
+        // Color col = Color.white;
+        // col.a = 1f - Mathf.Min(1f, Machine.Data.hp * 100f / Machine.Config.hp * 0.01f);
 
-        _damageSprite.color = col;
+        // _damageSprite.color = col;
     }
 
     public void OnSetAngleSector(float angle)
@@ -126,18 +125,21 @@ public class BaseTower : MonoBehaviour
     /// <param name="angle">угол</param>
     public void OnSetAngleTower(float angle, bool bySpeed = true)
     {
+
+        // angle = angle + Machine.levelManager.Camera.transform.rotation.eulerAngles.y;
         _data.angleTower = angle;
+        
+        OnSetDirectionTower(angle);
 
         DataBonus bonusSpeedTower = null;
         Machine.Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
         //Tower.transform.rotation = Quaternion.Euler(0, 0, angle);
        transform.rotation = Quaternion.Lerp(
             transform.rotation,
-            Quaternion.Euler(0, 0, angle),
+            Quaternion.Euler(0, angle, 0),
             bySpeed ? (_data.speedRotateTower + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * Time.deltaTime : 1
         );
 
-        OnSetDirectionTower(angle);
 
         // устанавливаем угол - разницу углов поворота башни и базы
         // Data.angleTowerByBody = Body.transform.localEulerAngles.z - Tower.transform.localEulerAngles.z;
@@ -147,7 +149,7 @@ public class BaseTower : MonoBehaviour
 
     public void OnSetDirectionTower(float angle)
     {
-        _data.directionTower = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+        _data.directionTower = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad),0, Mathf.Sin(angle * Mathf.Deg2Rad));
     }
 
     public void SetIsShot(bool status)
@@ -314,9 +316,9 @@ public class BaseTower : MonoBehaviour
     void Update()
     {
         // Записываем в данные угол поворота башни.
-        if (Data.angleTower != Data.currentAngleTower)
+        if (Data.currentAngleTower != transform.localEulerAngles.y)
         {
-            OnSetCurrentAngleTower(transform.localEulerAngles.z);
+            OnSetCurrentAngleTower(transform.localEulerAngles.y);
         }
 
         // проверяем наличие бонуса дистанции атаки.
@@ -604,14 +606,14 @@ public class BaseTower : MonoBehaviour
         var point = Option.offsetTower;
         var x1 = (point.x - offsetParentTower.x) * Mathf.Cos(angle * Mathf.Deg2Rad) - (-point.y - offsetParentTower.y) * Mathf.Sin(angle * Mathf.Deg2Rad) + offsetParentTower.x;
         var y1 = (point.x - offsetParentTower.x) * Mathf.Sin(angle * Mathf.Deg2Rad) + (-point.y - offsetParentTower.y) * Mathf.Cos(angle * Mathf.Deg2Rad) + offsetParentTower.y;
-        transform.localPosition = new Vector3(x1,y1);
+        transform.localPosition = new Vector3(x1,transform.localPosition.y, y1);
     }
 
     public void OnDamageEffect(float v)
     {
         if (Option.isRotate)
         {
-            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + UnityEngine.Random.Range(-v * _gameManager.Settings.koofChangeAngleTower, v * _gameManager.Settings.koofChangeAngleTower));
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + UnityEngine.Random.Range(-v * _gameManager.Settings.koofChangeAngleTower, v * _gameManager.Settings.koofChangeAngleTower), 0);
         }
     }
 

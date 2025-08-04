@@ -41,7 +41,7 @@ public class GameMachine : ScriptableObject
   [Tooltip("Минимальный ранг для доступа")]
   public GameRank minRank;
   [Tooltip("Скорость")]
-  [Range(1.5f, 6f)] public float speed;
+  [Range(0.2f, 1000f)] public float speed;
   // [Tooltip("Максимально возможная скорость")]
   // [Range(1.5f, 6f)] public float maxSpeed;
   // [Tooltip("Скорость вращения башни")]
@@ -73,7 +73,7 @@ public class GameTowerOption
   [Tooltip("Конфигурация")]
   public GameTower Config;
   [Tooltip("Смещение башни")]
-  public Vector2 offsetTower;
+  public Vector3 offsetTower;
   [Tooltip("Цвет башни машины")]
   public Color colorTower;
   [Tooltip("Вращается ли башня")]
@@ -96,7 +96,7 @@ public class GameCaterpillarOption
   [Tooltip("Конфигурация")]
   public GameCaterpillar Config;
   [Tooltip("Смещение")]
-  public Vector2 offsetCat;
+  public Vector3 offsetCat;
   [Tooltip("Цвет")]
   public Color colorCat;
 }
@@ -107,7 +107,7 @@ public class GameMuzzleOption
 {
   [Tooltip("Опции ствола")]
   public GameMuzzle Config;
-  public Vector2 offsetMuzzle;
+  public Vector3 offsetMuzzle;
 }
 
 

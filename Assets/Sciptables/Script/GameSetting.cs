@@ -22,6 +22,10 @@ public class GameSetting : ScriptableObject
   // public GameBonus[] throphs;
 
   [Space(5)]
+  [Header("Настройки игры")]
+  public bool inputJoystick;
+
+  [Space(5)]
   [Header("System")]
   public List<Sprite> gerbs;
   public List<GameLevel> levels;
@@ -52,6 +56,10 @@ public class GameSetting : ScriptableObject
   public Color colorAreaAttackAttack;
   public Color colorSectorPlayerAttack;
   public Color colorSectorAttack;
+
+  [Space(5)]
+  [Header("Глобальные префабы")]
+  public GameObject prefabVoxel;
 
   [Space(5)]
   [Header("Текст")]

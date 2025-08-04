@@ -18,7 +18,7 @@ public class TestRate : MonoBehaviour
             BaseMachine obj = Instantiate(targetObject, transform);
             obj.GetComponent<PlayerController>().enabled = false;
             obj.GetComponent<PlayerInput>().enabled = false;
-            obj.GetComponentInChildren<Light2D>().enabled = false;
+            obj.GetComponentInChildren<Light>().enabled = false;
             obj.Areol.SetActive(false);
             obj.GetComponent<StateController>().enabled = true;
             obj.transform.position = _transform;

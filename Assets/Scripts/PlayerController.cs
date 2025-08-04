@@ -1,5 +1,8 @@
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,14 +20,22 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
+
     }
 
     void Update()
     {
         // захватываем значения джойстика перемещения.
-        // Vector2 moveDirection = moveActionToUse.action.ReadValue<Vector2>();
-        Vector2 moveDirection = _machine.LevelManager.JoystickMove.Direction;
-
+        Vector2 moveDirection = Vector2.zero;
+        if (_gameManager.Settings.inputJoystick)
+        {
+            moveDirection = _machine.LevelManager.JoystickMove.Direction;
+        }
+        else
+        {
+            moveDirection = moveActionToUse.action.ReadValue<Vector2>();
+        }
+        moveDirection.Normalize();
         // if (_machine.Badge != null)
         // {
         //     _machine.Badge.OnSetNameText(moveDirection.ToString());
@@ -36,36 +47,55 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _machine.Stop();
+            if (_machine.IsMove)
+            {
+                _machine.Stop();
+            }
         }
 
         // захватываем позицию мыши или джойстика управления башней.
         if (!_machine.MachineLevelData.isBot && !_gameManager.Settings.autoTakeEnemy)
         {
-#if android
-        // android.
-        Vector3 direction = _machine.LevelManager.JoystickTower.Direction;
-#endif
+            Vector3 direction = Vector3.zero;
 
-#if webgl
-        // WEBGL.
-        Vector3 positionMouse = Mouse.current.position.ReadValue();
-        positionMouse.z = _camera.transform.position.z; //_camera.farClipPlane * .5f;;
-        Vector3 worldPoint = _camera.ScreenToWorldPoint(positionMouse);
-        // Calculate the direction vector from the object to the mouse
-        Vector3 direction = worldPoint - transform.position;
-        // Debug.Log($"angle = {angle}, worldPoint= {worldPoint}, positionMouse= {positionMouse}");
-#endif
+            if (_gameManager.Settings.inputJoystick)
+            {
+                // android.
+                direction = _machine.LevelManager.JoystickTower.Direction;
+            }
+            else
+            {
+                // WEBGL.
+                Vector3 positionMouse = Mouse.current.position.ReadValue();
+                Ray ray = _camera.ScreenPointToRay(positionMouse);
+                // positionMouse.z = transform.position.z - _camera.transform.position.z; //_camera.farClipPlane * .5f;;
+                // Vector3 worldPoint = _camera.ScreenToWorldPoint(positionMouse);
+                // // Calculate the direction vector from the object to the mouse
+                // direction = worldPoint - transform.position;
+                // Debug.Log($"worldPoint= {worldPoint}, positionMouse= {positionMouse}, direction={direction}");
+                if (Physics.Raycast(ray, out RaycastHit hit, 200f))
+                {
+                    Vector3 targetPosition = hit.point;
+                    direction = targetPosition - transform.position;
+                    direction.y = 0;
+                    Debug.DrawRay(targetPosition, direction);
 
+                }
+            }
+
+            // Debug.Log($"direction={direction}");
             if (direction != Vector3.zero)
             {
-                // Calculate the angle in degrees
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                // // Calculate the angle in degrees
+                // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+
 
                 // Debug.Log($"angle = {angle}, direction= {direction}");
                 for (int i = 0; i < _machine.Towers.Count; i++)
-                {   
-                    _machine.Towers[i].OnSetAngleTower(angle);
+                {
+                    // _machine.Towers[i].OnSetAngleTower(angle);
+                    _machine.Towers[i].OnSetAngleTower(lookRotation.eulerAngles.y);
                 }
             }
         }

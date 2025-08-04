@@ -30,7 +30,8 @@ public class GameManager : StaticInstance<GameManager>
 //   // [field: SerializeField]
   public StateManager StateManager;// { get; private set; }
   public SceneInstance currentScene;
-  public LoaderBarProvider LoaderBarProvider { get; private set; }
+
+    public LoaderBarProvider LoaderBarProvider { get; private set; }
   public InitUserProvider InitUserProvider { get; private set; }
   public AssetProvider AssetProvider { get; private set; }
   public GameState State { get; private set; }

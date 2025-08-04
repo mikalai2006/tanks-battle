@@ -1,14 +1,11 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public abstract class BaseMachine : MonoBehaviour
 {
     // public static event Action<BaseMachine> OnChangeData;
-    private LevelManager levelManager;
+    public LevelManager levelManager;
     public LevelManager LevelManager => levelManager;
     GameManager _gameManager => GameManager.Instance;
     public AudioSource AudioSource;
@@ -27,23 +24,23 @@ public abstract class BaseMachine : MonoBehaviour
     public BaseBody Body => body;
     [SerializeField] private GameObject _objAreol;
     public GameObject Areol => _objAreol;
-    [SerializeField] private DataMachine data;
+    [SerializeField] private DataMachine data = new();
     public DataMachine Data => data;
     [SerializeField] private BaseMachine _objectTarget;
     public BaseMachine ObjectTarget => _objectTarget;
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Rigidbody rb;
     [SerializeField] private AreaMove areaMove;
     public AreaMove AreaMove => areaMove;
     [SerializeField] private AreaSearch areaSearch;
     public AreaSearch AreaSearch => areaSearch;
     // public Badge Badge;
     public bool isVisible;
-    private bool isMove;
-    [SerializeField] private int offset = 90;
+    [SerializeField] private bool isMove;
+    public bool IsMove => isMove;
+    [SerializeField] private int offset = 0;
 
     [Space(5)]
     [Header("Можно скрыть эти опции")]
-    [SerializeField] private Renderer rd;
     [SerializeField] private IndicatorMachine _indicator;
     public IndicatorMachine Indicator => _indicator;
 
@@ -58,8 +55,7 @@ public abstract class BaseMachine : MonoBehaviour
         // caterpillar = GetComponentInChildren<BaseCaterpillar>();
         stateController = GetComponent<StateController>();
         areaMove = GetComponentInChildren<AreaMove>();
-        rd = body.GetComponentInChildren<Renderer>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
 
         HealthBar = GetComponentInChildren<HealthBarController>();
 
@@ -103,7 +99,10 @@ public abstract class BaseMachine : MonoBehaviour
         OnSetSpeed(Config.speed);
 
         OnSetHP(Config.hp);
-        HealthBar.SetHealth(Config.hp, Config.hp);
+        if (HealthBar)
+        {
+            HealthBar.SetHealth(Config.hp, Config.hp);
+        }
         OnSetAngleBody(0);
         data.timeBeforeAddTarget = MachineLevelData.isBot
             ? UnityEngine.Random.Range(_gameManager.Settings.timeBeforeAddTarget.x, _gameManager.Settings.timeBeforeAddTarget.y)
@@ -126,6 +125,7 @@ public abstract class BaseMachine : MonoBehaviour
 
         // init towers.
         var parentTowers = Config.towers.FindAll(t => !t.isChildren);
+        Debug.Log($"parentTowers={parentTowers.Count}");
         for (int i = 0; i < parentTowers.Count; i++)
         {
             GameTowerOption _optConfig = parentTowers.ElementAt(i);
@@ -154,9 +154,11 @@ public abstract class BaseMachine : MonoBehaviour
     }
 
 
-    public void Move(Vector2 moveDirection)
+    public void Move(Vector2 _moveDirection)
     {
         isMove = true;
+        
+        Vector3 moveDirection = new Vector3(_moveDirection.x, 0, _moveDirection.y).normalized;
 
         OnSetDirectionMove(moveDirection);
 
@@ -167,18 +169,28 @@ public abstract class BaseMachine : MonoBehaviour
         Data.bonuses.TryGetValue(TypeBonus.Speed, out bonusSpeed);
         rb.linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0));
 
-        var directionVector = (transform.position - Data.position).normalized;
+        //rb.AddForce(moveDirection* (Data.speed * rb.mass + (bonusSpeed != null ? bonusSpeed.value : 0)), ForceMode.Force);
 
-        Quaternion lookRotation = Quaternion.LookRotation(Vector3.forward, directionVector);
+        // var directionVector = (transform.position - Data.position).normalized;
+        // var movement = new Vector3(directionVector.x, 0f, directionVector.y);
 
-        OnSetAngleBody(lookRotation.eulerAngles.z);
+        // Quaternion lookRotation = Quaternion.LookRotation(movement, Vector3.up);
+
+        // Debug.Log($"{lookRotation.eulerAngles}, {lookRotation.x}, {lookRotation.y}, {lookRotation.z}");
+        // OnSetAngleBody(lookRotation.eulerAngles.y);
+
+        OnSetAngleBody(moveDirection);
 
         Data.position = transform.position;
 
         for (int i = 0; i < Caterpillars.Count; i++)
-        {   
+        {  
             Caterpillars[i].Move();
         }
+        // for (int i = 0; i < wheels.Count; i++)
+        // {   
+        //     wheels[i].transform.Rotate(Vector3.right, (20f * Data.speed) * Time.deltaTime);
+        // }
 
         Vector3Int posTile = levelManager.mapManager.Map.WorldToCell(transform.position);
         GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(posTile);
@@ -214,6 +226,7 @@ public abstract class BaseMachine : MonoBehaviour
         {   
             Caterpillars[i].Stop();
         }
+        
     }
 
 
@@ -242,14 +255,17 @@ public abstract class BaseMachine : MonoBehaviour
     public void OnAddDamage(float v)
     {
         data.hp -= v;
-        HealthBar.UpdateHealth(data.hp);
+        if (HealthBar)
+        {
+            HealthBar.UpdateHealth(data.hp);
+        }
 
         // Badge.OnChangeData(this);
 
-        if (!MachineLevelData.isBot)
-        {
-            levelManager.UiTopSide.OnChangeData(this);
-        }
+            if (!MachineLevelData.isBot)
+            {
+                levelManager.UiTopSide.OnChangeData(this);
+            }
 
         for (int i = 0; i < Towers.Count; i++)
         {
@@ -282,14 +298,17 @@ public abstract class BaseMachine : MonoBehaviour
     public void OnSetHP(float hp)
     {
         data.hp = hp;
-        HealthBar.UpdateHealth(data.hp);
+        if (HealthBar)
+        {
+            HealthBar.UpdateHealth(data.hp);
+        }
 
         // Badge.OnChangeData(this);
 
-        if (!MachineLevelData.isBot)
-        {
-            levelManager.UiTopSide.OnChangeData(this);
-        }
+            if (!MachineLevelData.isBot)
+            {
+                levelManager.UiTopSide.OnChangeData(this);
+            }
     }
 
 
@@ -316,16 +335,42 @@ public abstract class BaseMachine : MonoBehaviour
         }
     }
 
+    public void OnSetAngleBody(Vector3 direction)
+    {
+        Body.transform.forward = direction;
+        CaterpillarBox.transform.forward = direction;
+
+        // var rot = Body.transform.rotation;
+        // _objAreol.transform.localEulerAngles = new Vector3(90, rot.eulerAngles.y, rot.eulerAngles.z);
+        _objAreol.transform.forward = direction;
+
+        data.angleBody = Body.transform.eulerAngles.y;
+
+        // Debug.Log($"Current angle body: {data.angleBody}, euler={Body.transform.eulerAngles}");
+
+        // Body.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+        // // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
+        // _objAreol.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+        // CaterpillarBox.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+
+        // for (int i = 0; i < Towers.Count; i++)
+        // {
+        //     Towers[i].ChangePosition(this);
+        // }
+    }
+
 
     public void OnSetAngleBody(float angle)
     {
 
-        data.angleBody = angle + offset;
 
-        Body.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
+        Body.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
         // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        _objAreol.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        CaterpillarBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
+        _objAreol.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+        CaterpillarBox.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+
+        
+        data.angleBody = Body.transform.eulerAngles.y;
 
         // for (int i = 0; i < Towers.Count; i++)
         // {
@@ -391,6 +436,10 @@ public abstract class BaseMachine : MonoBehaviour
 
     void Update()
     {
+        if (Data.currentAngleBody != Body.transform.localEulerAngles.y)
+        {
+            Data.currentAngleBody = Body.transform.localEulerAngles.y;
+        }
         // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
         //     .Where(n => n.OccupiedUnit != null)
         //     .ToList();

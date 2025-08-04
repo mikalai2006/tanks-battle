@@ -78,12 +78,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
-  - {fileID: 11400000, guid: a5e9de1e0e3cfb546b5f6665c317ee34, type: 2}
-  - {fileID: 11400000, guid: d7be6b7cf6bda3e48bfb2e2726f09600, type: 2}
-  - {fileID: 11400000, guid: 4167a6e1cb1191247b153416cf157e82, type: 2}
-  - {fileID: 11400000, guid: 8f56c2ea2c72fd34b97a46bd44033bb9, type: 2}
-  - {fileID: 11400000, guid: fc1da79fc1aaa07469cfe8368b325fec, type: 2}
-  - {fileID: 11400000, guid: d7be6b7cf6bda3e48bfb2e2726f09600, type: 2}
+  - {fileID: 11400000, guid: 9ae17d2b17121d548b5246cc1e57e4a9, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
@@ -96,6 +91,7 @@ MonoBehaviour:
   colorAreaAttackAttack: {r: 1, g: 0, b: 0.30238533, a: 0.19607843}
   colorSectorPlayerAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
   colorSectorAttack: {r: 1, g: 0.42219353, b: 0, a: 0.5882353}
+  prefabVoxel: {fileID: 8765538014590554563, guid: 6e1da3befa2e5eb41ae0c256c49ad53b, type: 3}
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}
@@ -103,7 +99,7 @@ MonoBehaviour:
   offsetMarkerEdge: {x: 0.015, y: 0.025}
   colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
-  rotateTowerByBody: 1
+  rotateTowerByBody: 0
   timeBeforeAddTarget: {x: 0.1, y: 0.3}
   distanceDisableAttack: 1.5
   drawAreaForBot: 0
@@ -111,9 +107,9 @@ MonoBehaviour:
   speedChangeAreaSize: 15
   angleStartShot: 30
   takeNearEnemy: 0
-  autoTakeEnemy: 1
+  autoTakeEnemy: 0
   autoShot: 1
-  drawLineAttack: 0
+  drawLineAttack: 1
   spriteArc5px: {fileID: 21300000, guid: 18f1e6a9be39adc45b92dc91a7cd348c, type: 3}
   PopParticle: {fileID: 0}
   PopBig: {fileID: 0}
