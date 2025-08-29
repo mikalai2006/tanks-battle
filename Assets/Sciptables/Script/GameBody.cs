@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -11,20 +11,23 @@ public class GameBody : ScriptableObject
   public TextLocalize text;
   public Sprite spriteBody;
   public BaseBody prefab;
+  public MeshConfig MeshConfig;
 
   [Space(5)]
   [Header("Цвета")]
   [Tooltip("Цвет машины")]
   public Color colorBody;
 
-  [Space(5)]
-  [Header("Параметры")]
-  [Tooltip("Минимальный ранг для доступа")]
-  public GameRank minRank;
-  [Tooltip("Скорость")]
-  [Range(0.2f, 6f)] public float speed;
-  [Tooltip("Здоровье")]
-  [Range(100f, 1000f)] public int hp;
+  // [Space(5)]
+  // [Header("Параметры")]
+  // [Tooltip("Минимальный ранг для доступа")]
+  // public GameRank minRank;
+  // [Tooltip("Скорость")]
+  // [Range(0.2f, 200f)] public float speed;
+  // [Tooltip("Скорость вращения")]
+  // [Range(0.2f, 50f)] public float speedRotate;
+  // [Tooltip("Здоровье")]
+  // [Range(100f, 1000f)] public int hp;
 
   [Space(5)]
   [Header("Допустимые улучшения")]

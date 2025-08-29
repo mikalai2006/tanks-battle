@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9505e0a3fb63c974db87401cabf26aa7, type: 3}
+  m_Name: T1Tower
+  m_EditorClassIdentifier: 
+  idObject: T1Tower
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  spriteTower: {fileID: -1055482172, guid: 0628ac658fc4fdb438301f1c69483953, type: 3}
+  prefab: {fileID: 1418720958331435104, guid: 09e1c37100b62c148b5a0c0133041240, type: 3}
+  minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
+  speedRotateTower: 10
+  distanceSearch: 4
+  distanceAttack: 10
+  references:
+    version: 2
+    RefIds: []

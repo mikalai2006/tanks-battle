@@ -16,7 +16,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public static class Helpers
 {
-  
+
   /// <summary>
   /// Определяет лежит ли число в диапазоне
   /// <typeparam name="max">Максимальное значение диапазона</typeparam>
@@ -266,6 +266,59 @@ public static class Helpers
       }
     }
     return result;
+  }
+
+  /// <summary>
+  /// Takes 3D indexes and returns a 1D index based on them
+  /// </summary>
+  /// <param name="x"></param>
+  /// <param name="y"></param>
+  /// <param name="z"></param>
+  /// <param name="xMax"></param>
+  /// <param name="yMax"></param>
+  /// <returns>1D index calulation</returns>
+  public static int To1D(int x, int y, int z, int xMax, int yMax)
+  {
+    //return (z * xMax * yMax) + (y * xMax) + x;
+    return x + xMax * (y + yMax * z);
+  }
+
+  /// <summary>
+  /// Takes 2D indexes and returns a 1D index based on them
+  /// </summary>
+  /// <param name="x"></param>
+  /// <param name="y"></param>
+  /// <returns>1D index calulation</returns>
+  public static int To1D(int x, int y, int width)
+  {
+    return y * width + x;
+  }
+
+  /// <summary>
+  /// Takes 1D index and returns 3D indexes based on it
+  /// </summary>
+  /// <param name="index"></param>
+  /// <param name="xMax"></param>
+  /// <param name="yMax"></param>
+  /// <returns></returns>
+  public static Vector3Int To3D(int index, int xMax, int yMax)
+  {
+    int z = index / (xMax * yMax);
+    int idx = index - (z * xMax * yMax);
+    int y = idx / xMax;
+    int x = idx % xMax;
+    return new Vector3Int(x, y, z);
+  }
+  
+  // Helper function to check if a point is inside a sphere
+  public static bool IsInsideSphere(Vector3 point, Vector3 sphereCenter, float sphereRadius)
+  {
+      return Vector3.Distance(point, sphereCenter) <= sphereRadius;
+  }
+  // Helper function to check if a point is inside a sphere and on the border
+  public static bool IsInsideSphereBorder(Vector3 point, Vector3 sphereCenter, float sphereRadius, float innerRadius)
+  {
+      return Vector3.Distance(point, sphereCenter) <= sphereRadius && Vector3.Distance(point, sphereCenter) > innerRadius;
   }
 }
 

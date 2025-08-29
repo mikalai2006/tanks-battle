@@ -20,16 +20,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 09f016c9cbe9333429e347a9ab660780
-    m_Address: Assets/Prefabs/Panzer2.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0ccd543179f15a8429bdc85bb50194f9
-    m_Address: Assets/Prefabs/Panzer.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0e62d6a1e799f3d40b3aadd48480a4cc
     m_Address: MainScene
     m_ReadOnly: 0
@@ -46,18 +36,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - theme
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 38d39c70134adba4687f537de40dadde
-    m_Address: Assets/Prefabs/Catterpillar
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 479948a9b95b3714694653d724f89203
     m_Address: LoaderBar
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87890441b1a255e46a05f657e09e36f2
-    m_Address: Assets/Prefabs/Muzzle/muzzle1.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -81,11 +61,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9fe34892815347b4989e90f0238b6149
-    m_Address: Assets/Prefabs/Panzer5.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a5bea38c3aa06bd4b9d6805ac538f14a
     m_Address: UILoaderScreen
     m_ReadOnly: 0
@@ -106,43 +81,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c3637931ed7c898448300764ec019dc9
-    m_Address: Assets/Prefabs/WarCar.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c667bd80bbc19fd4e84e6b0e71402c5d
-    m_Address: Assets/Prefabs/Body/body.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d17198bc09df11549a0fc5f21f570d1b
-    m_Address: Assets/Prefabs/Panzer6.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d579ae76d2f8ac747b6e9f850de79b41
     m_Address: Assets/Sciptables/Data/Audio
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d6c3f375b75bddf479d199832c29d0ef
-    m_Address: Assets/Prefabs/Panzer3.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e6f8e87ebaaa72e43adfd4c2f5097ec7
-    m_Address: Assets/Prefabs/Panzer4.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f1b5c01fd0484b34d9dd1982e0a1c0d2
     m_Address: UIStartMenu
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f6bb0c509be17c74198e9a58701aedbb
-    m_Address: Assets/Prefabs/Body
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -10,6 +10,7 @@ public class GameMachine : ScriptableObject
   public string idObject;
   public TextLocalize text;
   public GameObject machinePrefab;
+  public Material material;
   public IndicatorMachine indicatorPrefab;
 
   [Space(5)]

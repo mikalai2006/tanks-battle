@@ -24,6 +24,8 @@ public class GameSetting : ScriptableObject
   [Space(5)]
   [Header("Настройки игры")]
   public bool inputJoystick;
+  public bool simpleMove;
+  public bool logEnabled;
 
   [Space(5)]
   [Header("System")]

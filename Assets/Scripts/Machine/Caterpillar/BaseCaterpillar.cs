@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 public class BaseCaterpillar : MonoBehaviour
@@ -11,6 +13,7 @@ public class BaseCaterpillar : MonoBehaviour
     [SerializeField] GameObject Wrapper;
     [SerializeField] List<GameObject> wheels = new();
     bool isMove = false;
+    [SerializeField] protected List<VoxelMeshRender> voxelMeshRenders;
 
     void Awake()
     {
@@ -26,11 +29,14 @@ public class BaseCaterpillar : MonoBehaviour
 
     void Update()
     {
-        if (isMove)
+        if (Option.Config.isRotate)
         {
-            for (int i = 0; i < wheels.Count; i++)
-            {   
-                wheels[i].transform.Rotate(Vector3.right, 20f * Machine.Data.speed * Time.deltaTime);
+            if (isMove)
+            {
+                for (int i = 0; i < wheels.Count; i++)
+                {
+                    wheels[i].transform.Rotate(Vector3.right, 5f * Machine.Data.speed * Time.deltaTime);
+                }
             }
         }
     }
@@ -41,6 +47,11 @@ public class BaseCaterpillar : MonoBehaviour
 
         Option = config;
 
+        Parallel.For(0, voxelMeshRenders.Count, (i) =>
+        {
+            voxelMeshRenders[i].OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+        });
+
         // sprite.sprite = Option.Config.sprite;
         // sprite.color = Option.Config.color;
 
@@ -50,6 +61,7 @@ public class BaseCaterpillar : MonoBehaviour
         for (int j = 0; j < Wrapper.transform.childCount; j++)
         {
             wheels.Add(Wrapper.transform.GetChild(j).gameObject);
+            // Wrapper.transform.GetChild(j).GetChild(0).transform.localPosition = new Vector3(0.5f,0.5f,0.5f);
         }
 
     }
@@ -57,28 +69,28 @@ public class BaseCaterpillar : MonoBehaviour
     public void Move()
     {
         isMove = true;
-        // foreach (Animator animator in animators)
-        // {
-        //     animator.SetBool("move", true);
-        // }
+        // // foreach (Animator animator in animators)
+        // // {
+        // //     animator.SetBool("move", true);
+        // // }
 
-        foreach (TrailRenderer trail in trails)
-        {
-            trail.emitting = true;
-        }
+        // foreach (TrailRenderer trail in trails)
+        // {
+        //     trail.emitting = true;
+        // }
     }
     
     public void Stop()
     {
         isMove = false;
-        // foreach (Animator animator in animators)
+        // // foreach (Animator animator in animators)
+        // // {
+        // //     animator.SetBool("move", false);
+        // // }
+        // foreach (TrailRenderer trail in trails)
         // {
-        //     animator.SetBool("move", false);
+        //     trail.emitting = false;
         // }
-        foreach (TrailRenderer trail in trails)
-        {
-            trail.emitting = false;
-        }
     }
     
 }

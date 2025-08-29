@@ -18,9 +18,9 @@ TagManager:
   - EdgeBox
   - AreaMove
   - 3DModel
-  - 
-  - 
-  - 
+  - Wall
+  - IgnoreBullet
+  - Bullet
   - 
   - 
   - 

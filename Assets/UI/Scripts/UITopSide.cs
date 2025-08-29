@@ -19,9 +19,12 @@ public class UITopSide : MonoBehaviour
     public BaseMachine Target => target;
     private float maxWidth = 280;
     public Button fireButton;
+    public Button changeCamerButton;
     
     [SerializeField] private InputActionReference pressSystem;
     [SerializeField] private SerializedDictionary<TypeBonus, BonusLayoutItem> gameObjectsBonus;
+    [SerializeField] public RectTransform CrossObjectTransform;
+    public CrossHair crossHair;
 
     void Awake()
     {
@@ -30,13 +33,55 @@ public class UITopSide : MonoBehaviour
 
     void Start()
     {
-
         fireButton.onClick.AddListener(OnClickBtnFire);
         pressSystem.action.performed += (InputAction.CallbackContext c) =>
         {
             OnClickBtnFire();
 
         };
+
+        changeCamerButton.onClick.AddListener(OnClickBtnChangeCamera);
+        // pressSystem.action.performed += (InputAction.CallbackContext c) =>
+        // {
+        //     OnClickBtnFire();
+
+        // };
+    }
+
+    public void OnChangeCrossPosition(Vector3 delta)
+    {
+        CrossObjectTransform.localPosition = CrossObjectTransform.localPosition + 10 * new Vector3(delta.x, delta.z, 0);
+    }
+
+    public void OnSetCrossPosition(Vector3 position)
+    {
+        CrossObjectTransform.position = position;
+    }
+
+    private void OnClickBtnChangeCamera()
+    {
+        if (target != null)
+        {
+            CameraFollowFPS cfFPS = target.GetComponent<CameraFollowFPS>();
+            CameraFollow cf = target.GetComponent<CameraFollow>();
+            Camera mainCamera = _levelManager.Camera;
+            if (cfFPS.enabled == true)
+            {
+                cfFPS.enabled = false;
+                cf.enabled = true;
+                // _levelManager.OnSetActiveCamera(mainCamera);
+                target.Camera.gameObject.SetActive(false);
+                mainCamera.gameObject.SetActive(true);
+            }
+            else
+            {
+                cfFPS.enabled = true;
+                cf.enabled = false;
+                // _levelManager.OnSetActiveCamera(target.Camera);
+                target.Camera.gameObject.SetActive(true);
+                mainCamera.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnClickBtnFire()

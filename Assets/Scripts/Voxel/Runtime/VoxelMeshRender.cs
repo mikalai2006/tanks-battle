@@ -1,32 +1,42 @@
-using System.Linq;
+using System;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
-using Unity.Mathematics;
 using UnityEngine;
 
 
-namespace Mikalai2006.Voxel {
-    public class VoxelMeshRender : MonoBehaviour
+namespace Mikalai2006.Voxel
+{
+    public class VoxelMeshRender : MonoBehaviour, IVoxeled
     {
-        [SerializeField] private SOVoxelData sOVoxelData;
-        public Mesh _mesh;
-        [SerializeField] private Material _material;
-        [SerializeField] bool existCollider;
+        // public Mesh _mesh;
+        [SerializeField] private MeshConfig Config;
+        // [SerializeField] private SOVoxelData sOVoxelData;
+        // [SerializeField] private Material _material;
+        // [SerializeField] bool existCollider;
+        // [SerializeField] private bool isGreedy = true;
+        [SerializeField] GameObject Wrapper;
         // private CubePositionJob _job;
         // private NativeArray<float> _nativeCubeYOffsets;
         // private NativeArray<Matrix4x4> _nativeMatrices;
 
         // private NativeArray<float3> _nativePositions;
         // private NativeArray<Vector3> _nativeVoxelsPositions;
-        private Container container;
-        public Container Container => container;
+        private Container[] containers;
+        public Container[] Containers => containers;
         private RenderParams _rp;
         private Vector3 position = Vector3.zero;
 
         private void Start()
         {
-            for (int j = 0; j < sOVoxelData.groups.Count; j++)
+            if (Wrapper == null)
+            {
+                Wrapper = transform.gameObject;
+            }
+
+            containers = new Container[Config.sOVoxelData.groups.Count];
+
+            for (int j = 0; j < Config.sOVoxelData.groups.Count; j++)
             {
                 CreateContainer(j);
             }
@@ -34,7 +44,9 @@ namespace Mikalai2006.Voxel {
 
         private void CreateContainer(int index)
         {
-            int count = sOVoxelData.voxels.Count;
+            Wrapper.transform.localRotation = Config.sOVoxelData.GlobalRotation;
+
+            int count = Config.sOVoxelData.voxels.Count;
             // position = new Vector3(UnityEngine.Random.Range(0, 150), 0.5f, UnityEngine.Random.Range(0, 180));
 
             // _nativePositions = new NativeArray<float3>(count, Allocator.Persistent);
@@ -43,11 +55,12 @@ namespace Mikalai2006.Voxel {
             // _nativeVoxelsPositions = new NativeArray<Vector3>(count, Allocator.Persistent);
 
             GameObject cont = new GameObject("Container");
-            cont.transform.parent = transform;
-            container = cont.AddComponent<Container>();
-            container.Initialize(_material, Vector3.zero, existCollider);
+            cont.transform.parent = Wrapper.transform;
+            var container = cont.AddComponent<Container>();
+            containers[index] = container;
+            container.Initialize(Config, Vector3.zero);
             container.transform.SetPositionAndRotation(position, Quaternion.identity);
-            container.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
             // container.gameObject.isStatic = true;
 
             // SceneTools.LoopPositions((i, p) =>
@@ -70,21 +83,21 @@ namespace Mikalai2006.Voxel {
             //     // container = container
             // };
 
-            _rp = new RenderParams(_material);
+            _rp = new RenderParams(Config._material);
 
-            container.SetSizeVoxel(sOVoxelData.sizeVoxel);
+            container.SetSizeVoxel(Config.sOVoxelData.sizeVoxel);
             // container.GetComponent<Collider>().isTrigger = true;
 
             // var segment = new ArraySegment<Vector3>(voxelList, 1, 10);
             // container.SetData(segment.ToArray(), scale);
-            
+
             //  for (int j = 0; j < sOVoxelData.groups.Count; j++)
             // {
             //     // Vector3[] voxelList = sOVoxelData.voxels.AsParallel().ToArray();
             //     // Vector3[] voxelList = sOVoxelData.groups.ElementAt(j).voxels.AsParallel().ToArray();
             //     // Color groupColor = sOVoxelData.groups.ElementAt(j).color;
-                
-            container.SetData(sOVoxelData, index, 1);
+
+            container.SetData(Config.sOVoxelData, index, Config.isGreedy, 1);
             // }
 
             container.GenerateMesh();
@@ -92,7 +105,7 @@ namespace Mikalai2006.Voxel {
 
             // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(new Vector3(0f, 0.5f, 0f)));
         }
-        
+
         private void Update()
         {
             // _job.Matrices = _nativeMatrices;
@@ -107,6 +120,15 @@ namespace Mikalai2006.Voxel {
             // _nativePositions.Dispose();
             // _nativeMatrices.Dispose();
             // _nativeCubeYOffsets.Dispose();
+        }
+
+        public void OnSetConfigMeshGenerator(MeshConfig config)
+        {
+            // Config._material = config._material;
+            // Config.sOVoxelData = config.sOVoxelData;
+            // Config.existCollider = config.existCollider;
+            // Config.isGreedy = config.isGreedy;
+            Config = config;
         }
     }
 
@@ -133,5 +155,15 @@ namespace Mikalai2006.Voxel {
             // Matrices[index] = Matrix4x4.TRS(pos, rot, SceneTools.CubeScale);
 
         }
+    }
+
+    [Serializable]
+    public struct MeshConfig
+    {
+        public SOVoxelData sOVoxelData;
+        public Material _material;
+        public bool existCollider;
+        public bool isGreedy;
+        public bool isRigidbody;
     }
 }

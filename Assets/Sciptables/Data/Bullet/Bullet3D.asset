@@ -33,7 +33,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   prefab: {fileID: 8234590559901381435, guid: fe5f44a455df01c4c8eceec4df608b11, type: 3}
-  speed: 6
+  speed: 1
   damage: 10
   effectBoom: {fileID: 3862267629786060469, guid: 79b8d16096caabb46a3c8a6c351345a9, type: 3}
   particleBoom: {fileID: 173993176318110863, guid: e0a35134ec4ab79469ecdb91736391d2, type: 3}

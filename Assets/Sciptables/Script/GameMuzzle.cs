@@ -1,3 +1,4 @@
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -10,6 +11,7 @@ public class GameMuzzle : ScriptableObject
   public BaseMuzzle prefab;
   [Tooltip("Спрайт дула")]
   public Sprite spriteMuzzle;
+  public MeshConfig MeshConfig;
   // [Tooltip("Аниматор дула")]
   // public AnimatorOverrideController animator;
 

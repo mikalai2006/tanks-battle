@@ -12,7 +12,7 @@ public class GameBullet : ScriptableObject
   [Space(5)]
   [Header("Параметры")]
   [Tooltip("Скорость")]
-  [Range(6f, 20f)] public float speed;
+  [Range(1f, 20f)] public float speed;
   [Tooltip("Урон от одного попадания")]
   [Range(1f, 1000f)] public int damage;
   [Tooltip("След от взрыва")]

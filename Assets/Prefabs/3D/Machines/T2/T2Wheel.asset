@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52864495aabc34247803b26f8b61eb93, type: 3}
+  m_Name: T2Wheel
+  m_EditorClassIdentifier: 
+  idObject: T2Caterpillars
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefab: {fileID: 296304405608595272, guid: 75595ac37e46e134eb5f119d547d3cfd, type: 3}
+  MeshConfig:
+    sOVoxelData: {fileID: 11400000, guid: 82e136c6fd7a55b48b1757f5cb8e7e7c, type: 2}
+    _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    existCollider: 0
+    isGreedy: 1
+    isRigidbody: 0
+  isRotate: 1
+  sprite: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 1}
+  references:
+    version: 2
+    RefIds: []

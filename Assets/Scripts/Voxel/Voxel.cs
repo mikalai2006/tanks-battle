@@ -8,6 +8,7 @@ namespace Mikalai2006.Voxel
     {
         public byte ID;
         public Color color;
+        public VoxelType type;
         public int IndexSubMesh;
 
         public bool isSolid
@@ -19,3 +20,12 @@ namespace Mikalai2006.Voxel
         }
     }
 }
+
+public enum VoxelType : byte
+	{
+		Air, // Or None
+		Grass,
+		Dirt,
+		Stone,
+		OakLog
+	}

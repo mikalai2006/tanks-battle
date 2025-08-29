@@ -6,14 +6,17 @@ using UnityEngine;
 public class SOVoxelData : ScriptableObject
 {
     public List<SubmeshesData> groups;
-    public List<Vector3> voxels;
+    public List<Vector3Int> voxels;
     public List<Color> colors;
     public float sizeVoxel;
-    public Vector3 GlobalSize;
+    public Vector3 Pivot;
+    public Vector3Int Bounds;
+    public Vector3Int GlobalSize;
     public Vector3 GlobalPosition;
-    // public Vector3 GlobalRotation;
-    public Vector3 LocalSize;
+    public Quaternion GlobalRotation;
+    public Vector3Int LocalSize;
     public Vector3 LocalPosition;
+    public Quaternion LocalRotation;
     public UnityEngine.Rendering.ShadowCastingMode shadowCastingMode;
 }
 
@@ -22,5 +25,5 @@ public class SOVoxelData : ScriptableObject
 public struct SubmeshesData
 {
     public Color color;
-    public List<Vector3> voxels;
+    public List<Vector3Int> voxels;
 }

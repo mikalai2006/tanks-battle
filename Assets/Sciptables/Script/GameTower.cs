@@ -1,4 +1,5 @@
 using System;
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -10,6 +11,7 @@ public class GameTower : ScriptableObject
   public TextLocalize text;
   public Sprite spriteTower;
   public BaseTower prefab;
+  public MeshConfig MeshConfig;
 
   // [Space(5)]
   // [Header("Допустимые улучшения")]
@@ -22,7 +24,7 @@ public class GameTower : ScriptableObject
   [Tooltip("Минимальный ранг для доступа")]
   public GameRank minRank;
   [Tooltip("Скорость вращения башни")]
-  [Range(0f, 10f)] public float speedRotateTower;
+  [Range(0f, 720f)] public float speedRotateTower;
   [Tooltip("Дистанция обнаружения противника")]
   [Range(1f, 15f)] public int distanceSearch;
   [Tooltip("Дистанция атаки")]

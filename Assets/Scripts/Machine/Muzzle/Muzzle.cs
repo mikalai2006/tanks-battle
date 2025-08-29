@@ -50,8 +50,8 @@ public class Muzzle : BaseMuzzle
         // Vector3 rotatedOffset = Machine.Tower.transform.rotation * direction; // Преобразуем локальный сдвиг в мировой
 
         // obj.transform.localPosition = Machine.Tower.transform.position + rotatedOffset;
-        obj.transform.localPosition = pointEffects.transform.position;
-        obj.OnInit(Machine, Tower, Config);
+        obj.transform.localPosition = pointEffects.transform.position + transform.forward * 2;
+        obj.OnInit(Machine, Tower, this, Config);
 
     }
     

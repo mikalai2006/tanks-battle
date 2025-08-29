@@ -1,32 +1,38 @@
-using UnityEditor.Localization.Plugins.XLIFF.V12;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 
 public class PlayerController : MonoBehaviour
 {
     private GameManager _gameManager = GameManager.Instance;
     [SerializeField] private InputActionReference moveActionToUse;
+    [SerializeField] private InputActionReference attackActionInput;
     [SerializeField] private BaseMachine _machine;
     [SerializeField] Camera _camera;
+    [SerializeField] Camera _cameraFPS;
+    [SerializeField] Vector3 moveDirection;
+    [SerializeField] Vector3 rotateDirection;
+    Camera Camera => _camera.gameObject.activeSelf == true ? _camera : _cameraFPS;
 
     void Awake()
     {
         _machine = GetComponent<BaseMachine>();
         moveActionToUse.action.Enable();
+        attackActionInput.action.Enable();
     }
 
     void Start()
     {
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
-
+        _cameraFPS = _machine.Camera;
     }
 
     void Update()
     {
         // захватываем значения джойстика перемещения.
-        Vector2 moveDirection = Vector2.zero;
+        moveDirection = Vector2.zero;
+
         if (_gameManager.Settings.inputJoystick)
         {
             moveDirection = _machine.LevelManager.JoystickMove.Direction;
@@ -35,70 +41,203 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection = moveActionToUse.action.ReadValue<Vector2>();
         }
-        moveDirection.Normalize();
-        // if (_machine.Badge != null)
-        // {
-        //     _machine.Badge.OnSetNameText(moveDirection.ToString());
-        // }
 
-        if (moveDirection != Vector2.zero)
-        {
-            _machine.Move(moveDirection);
-        }
-        else
-        {
-            if (_machine.IsMove)
-            {
-                _machine.Stop();
-            }
-        }
+        // if (moveDirection != Vector3.zero)
+        // {
+        //     // Debug.Log($"moveDirection = {moveDirection}");
+        //     moveDirection.Normalize();
+        // }
 
         // захватываем позицию мыши или джойстика управления башней.
         if (!_machine.MachineLevelData.isBot && !_gameManager.Settings.autoTakeEnemy)
         {
-            Vector3 direction = Vector3.zero;
+            rotateDirection = Vector3.zero;
 
             if (_gameManager.Settings.inputJoystick)
             {
                 // android.
-                direction = _machine.LevelManager.JoystickTower.Direction;
-            }
-            else
-            {
-                // WEBGL.
-                Vector3 positionMouse = Mouse.current.position.ReadValue();
-                Ray ray = _camera.ScreenPointToRay(positionMouse);
-                // positionMouse.z = transform.position.z - _camera.transform.position.z; //_camera.farClipPlane * .5f;;
-                // Vector3 worldPoint = _camera.ScreenToWorldPoint(positionMouse);
-                // // Calculate the direction vector from the object to the mouse
-                // direction = worldPoint - transform.position;
-                // Debug.Log($"worldPoint= {worldPoint}, positionMouse= {positionMouse}, direction={direction}");
-                if (Physics.Raycast(ray, out RaycastHit hit, 200f))
-                {
-                    Vector3 targetPosition = hit.point;
-                    direction = targetPosition - transform.position;
-                    direction.y = 0;
-                    Debug.DrawRay(targetPosition, direction);
+                rotateDirection = _machine.LevelManager.JoystickTower.Direction;
+                rotateDirection.z = rotateDirection.y;
+                rotateDirection.y = 0;
 
-                }
-            }
-
-            // Debug.Log($"direction={direction}");
-            if (direction != Vector3.zero)
-            {
-                // // Calculate the angle in degrees
-                // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-
-                // Debug.Log($"angle = {angle}, direction= {direction}");
-                for (int i = 0; i < _machine.Towers.Count; i++)
-                {
-                    // _machine.Towers[i].OnSetAngleTower(angle);
-                    _machine.Towers[i].OnSetAngleTower(lookRotation.eulerAngles.y);
-                }
+                
+                        // android.
+                        if (_machine.LevelManager.cinemachineOrbitalFollow != null)
+                        {
+                            if (_machine.LevelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == -180)
+                            {
+                                _machine.LevelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = 180;
+                            } else if (_machine.LevelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == 180)
+                            {
+                                _machine.LevelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = -180;
+                            }
+                            _machine.LevelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = Mathf.Clamp(
+                                _machine.LevelManager.cinemachineOrbitalFollow.HorizontalAxis.Value + rotateDirection.x,
+                                -180,
+                                180
+                            );
+                            _machine.LevelManager.cinemachineOrbitalFollow.VerticalAxis.Value = Mathf.Clamp(
+                                _machine.LevelManager.cinemachineOrbitalFollow.VerticalAxis.Value - rotateDirection.z,
+                                -10,
+                                25
+                            );
+                        }
             }
         }
     }
 
-}
+            void FixedUpdate()
+            {
+                // if (_machine.Badge != null)
+                // {
+                //     _machine.Badge.OnSetNameText(moveDirection.ToString());
+                // }
+
+                if (moveDirection != Vector3.zero)
+                {
+                    // if (moveDirection.x > 0.5f || moveDirection.x < -0.5f)
+                    // {
+                    //     _machine.Rotate(moveDirection);
+                    // }
+                    // else
+                    // {
+                    //     _machine.Rotate(Vector3.zero);
+                    // }
+
+                    _machine.Move(moveDirection);
+                }
+                else
+                {
+                    // if (_machine.IsMove)
+                    // {
+                    // }
+                    _machine.Stop();
+                }
+
+                // захват клика мыши для стрельбы.
+                if (!_gameManager.Settings.inputJoystick && !_machine.MachineLevelData.isBot)
+                {
+                    attackActionInput.action.performed += _machine.OnShot;
+                }
+
+                // обработка вращения башни.
+                if (!_machine.MachineLevelData.isBot && !_gameManager.Settings.autoTakeEnemy && rotateDirection != Vector3.zero)
+                {
+                    if (_gameManager.Settings.inputJoystick)
+                    {
+                        // // android.
+                        // if (_machine.levelManager.cinemachineOrbitalFollow != null)
+                        // {
+                        //     if (_machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == -180)
+                        //     {
+                        //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = 180;
+                        //     } else if (_machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == 180)
+                        //     {
+                        //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = -180;
+                        //     }
+                        //     _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = Mathf.Clamp(
+                        //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value + rotateDirection.x,
+                        //         -180,
+                        //         180
+                        //     );
+                        //     _machine.levelManager.cinemachineOrbitalFollow.VerticalAxis.Value = Mathf.Clamp(
+                        //         _machine.levelManager.cinemachineOrbitalFollow.VerticalAxis.Value - rotateDirection.z,
+                        //         -10,
+                        //         25
+                        //     );
+                        // }
+                        // _machine.levelManager.UiTopSide.OnChangeCrossPosition(direction);
+
+                        // // Vector3 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
+                        // // Vector3 worldPosition = Camera.ScreenToWorldPoint(_machine.levelManager.UiTopSide.CrossObjectTransform.position);
+                        // // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
+
+                        // // Vector3 worldPoint;
+                        // // RectTransformUtility.ScreenPointToWorldPointInRectangle(_machine.levelManager.UiTopSide.CrossObjectTransform, screenPoint, Camera, out worldPoint);
+
+                        // Ray ray = Camera.ScreenPointToRay(_machine.levelManager.UiTopSide.CrossObjectTransform.position);
+                        // if (Physics.Raycast(ray, out RaycastHit hit))
+                        // {
+                        //     Vector3 targetPosition = hit.point;
+                        //     directionRotation = targetPosition - transform.position;
+                        //     //direction.y = 0;
+                        //     Debug.DrawRay(Camera.transform.position, directionRotation);
+                        //     // Debug.Log($"Camera name: {Camera.name}, POINT={hit.point}");
+
+                        // }
+
+                        // // Vector3 directionToTarget = worldPoint - transform.position;
+                        // // Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+                        // // Debug.Log($"targetRotation={targetRotation.eulerAngles}, worldPoint={worldPoint}");
+                    }
+                    // else
+                    // {
+                    //     // WEBGL.
+                    //     Vector3 positionMouse = Mouse.current.position.ReadValue();
+
+                    //     // positionMouse.z = Camera.transform.position.z;
+
+                    //     Vector3 positionMouseWorld = Camera.ScreenToWorldPoint(positionMouse);
+                    //     // Debug.Log($"positionMouseWorld = {positionMouseWorld}, positionMouse={positionMouse}");
+
+                    //     _machine.levelManager.UiTopSide.OnSetCrossPosition(positionMouse);
+
+                    //     // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
+
+                    //     // Vector3 worldPoint;
+                    //     // RectTransformUtility.ScreenPointToWorldPointInRectangle(_machine.levelManager.UiTopSide.CrossObjectTransform, screenPoint, Camera, out worldPoint);
+
+                    //     Ray ray = Camera.ScreenPointToRay(positionMouse);
+                    //     // positionMouse.z = transform.position.z - _camera.transform.position.z; //_camera.farClipPlane * .5f;;
+                    //     // Vector3 worldPoint = _camera.ScreenToWorldPoint(positionMouse);
+                    //     // // Calculate the direction vector from the object to the mouse
+                    //     // direction = worldPoint - transform.position;
+                    //     // Debug.Log($"worldPoint= {worldPoint}, positionMouse= {positionMouse}, direction={direction}");
+                    //     if (Physics.Raycast(ray, out RaycastHit hit))
+                    //     {
+                    //         Vector3 targetPosition = hit.point;
+                    //         direction = targetPosition - transform.position;
+                    //         //direction.y = 0;
+                    //         Debug.DrawRay(Camera.transform.position, direction, Color.magenta);
+                    //         // Debug.Log($"Camera name: {Camera.name}, hit name={hit.collider.name}, POINT={hit.point}");
+                    //     }
+                    // }
+
+                    // if (direction != Vector3.zero)
+                    // {
+                    //     Debug.Log($"direction={direction}");
+                    //     // // Calculate the angle in degrees
+                    //     // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+                    //     Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+
+                    //     // Debug.Log($"angle = {angle}, direction= {direction}");
+                    //     for (int i = 0; i < _machine.Towers.Count; i++)
+                    //     {
+                    //         // _machine.Towers[i].OnSetAngleTower(angle);
+                    //         _machine.Towers[i].OnSetAngleTower(lookRotation.eulerAngles.y);
+                    //     }
+                    // }
+                    // if (rotateDirection != Vector3.zero)
+                    // {
+                    //     // Debug.Log($"direction={direction}");
+                    //     // // Calculate the angle in degrees
+                    //     // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+                    //     // Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+
+                    //     // Debug.Log($"angle = {angle}, direction= {direction}");
+                    //     for (int i = 0; i < _machine.Towers.Count; i++)
+                    //     {
+                    //         _machine.Towers[i].OnSetAngleTower(rotateDirection);
+                    //     }
+                    // }
+                }
+            }
+
+
+            void OnDestroy()
+            {
+                attackActionInput.action.performed -= _machine.OnShot;
+            }
+        }

@@ -1,3 +1,4 @@
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -8,6 +9,9 @@ public class GameCaterpillar : ScriptableObject
   public string idObject;
   public TextLocalize text;
   public BaseCaterpillar prefab;
+  public MeshConfig MeshConfig;
+  public bool isRotate;
+
   [Tooltip("Спрайт дула")]
   public Sprite sprite;
   // [Tooltip("Аниматор дула")]

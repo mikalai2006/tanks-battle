@@ -2,20 +2,28 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System;
+using Mikalai2006.Voxel;
 
 public abstract class BaseMuzzle : MonoBehaviour
 {
     protected GameManager _gameManager = GameManager.Instance;
     [SerializeField] private Animator _animator;
     protected BaseMachine Machine;
+    [SerializeField] protected GameObject pivot;
     [SerializeField] protected GameObject pointEffects;
+    public GameObject PointEffects => pointEffects;
     [SerializeField] protected GameMuzzleOption Option;
     [SerializeField] protected GameMuzzle Config => Option.Config;
     [SerializeField] protected SpriteRenderer sprite;
     protected ParticleSystem[] particlesBoom;
     [SerializeField] protected DataMuzzle data;
     [SerializeField] protected BaseTower Tower;
+    [SerializeField] protected GameObject MaxDistanceObject;
     public DataMuzzle Data => data;
+    public TrajectoryRenderer trajectoryRenderer;
+    public GameObject decal;
+    [SerializeField] protected VoxelMeshRender voxelMeshRender;
+    [SerializeField] private LayerMask ignoreMask;
 
 #region Unity methods
     void Awake()
@@ -31,7 +39,6 @@ public abstract class BaseMuzzle : MonoBehaviour
             OnSetTimeBetweenShot(data.timeBeforeShot - Time.deltaTime);
         }
 
-        // 
     }
     #endregion
 
@@ -45,12 +52,88 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         data.index = index;
 
+        // MeshConfig meshConfig = Config.MeshConfig;
+        // meshConfig.sOVoxelData.Pivot = new Vector3(meshConfig.sOVoxelData.Pivot.x,meshConfig.sOVoxelData.Pivot.y,1);
+
+        voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
+
         // sprite.color = Config.color;
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();
 
         OnSetTimeBetweenShot(Config.timeBetweenShot + (data.index * (Config.timeBetweenShot / 2)));
-        
+
         transform.localPosition = Option.offsetMuzzle;
+
+        pointEffects.transform.localPosition = new Vector3(Config.MeshConfig.sOVoxelData.Bounds.x + 2.5f,0,0);
+
+        pivot.transform.localPosition = new Vector3(-Config.MeshConfig.sOVoxelData.Bounds.x, 0, 0);
+
+        MaxDistanceObject.transform.localPosition = new Vector3(200f, 0, 0);
+
+        transform.localRotation = Quaternion.Euler(0,90,0);
+    }
+
+    public void OnSetAngle(Quaternion rotation, Vector3 point,  float speed)
+    {
+        transform.localRotation = Quaternion.Lerp(
+            transform.localRotation,
+            Quaternion.Euler(rotation.eulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z),
+            speed
+        );
+
+        Vector3 speedForce = transform.forward * 20000 / 30;
+
+        // trajectoryRenderer.ShowTrajectory(pointEffects.transform.position, speedForce);
+        trajectoryRenderer.ShowStretchTrajectory(pointEffects.transform.position, point);
+    }
+
+    public void OnSetRotation(Vector3 pointCenterScreen, float speedRotate)
+    {
+        // var offset = Machine.LevelManager.Camera.WorldToScreenPoint(new Vector3(0,0,Option.offsetMuzzle.z));
+        // Debug.Log($"forward={transform.forward}");
+        // Vector2 screenCenterPoint = new Vector2(Screen.width / 2f - offset.x, Screen.height / 2f);
+        // Vector3 centerScreenWithOffsetMuzzle = Machine.LevelManager.Camera.ScreenToWorldPoint(screenCenterPoint);
+        // MaxDistanceObject.transform.position = new Vector3(MaxDistanceObject.transform.position.x,pointCenterScreen.y,MaxDistanceObject.transform.position.z);
+
+        // бросаем линию вперед на расстояние атаки.
+        RaycastHit hit;
+        Vector3 distanceAndDirection = transform.forward * 500f;
+        Vector3 endPoint = MaxDistanceObject.transform.position; // pointEffects.transform.position + distanceAndDirection;
+        Vector3 pointTarget;
+        Vector3 castPoint;
+        if (Physics.Linecast(pointEffects.transform.position, endPoint, out hit, ~(ignoreMask)))
+        {
+            pointTarget = hit.point;
+            castPoint = pointCenterScreen;
+        }
+        else
+        {
+            pointTarget = MaxDistanceObject.transform.position; //transform.position + distanceAndDirection;
+            castPoint = pointCenterScreen;
+        };
+
+        decal.transform.position = pointTarget - distanceAndDirection.normalized * 0.1f;
+        decal.transform.rotation = Quaternion.LookRotation(-distanceAndDirection.normalized);
+
+        var directionLook = castPoint - pivot.transform.position;
+
+        Quaternion lookRotation = Quaternion.LookRotation(directionLook, Vector3.up);
+        OnSetAngle(lookRotation, pointTarget, speedRotate);
+
+
+        Debug.DrawLine(pointEffects.transform.position, pointTarget, Color.white);
+
+
+        // Debug.DrawLine(pivot.transform.position, pointCenterScreen, Color.yellow);
+        // var offset = Machine.LevelManager.Camera.WorldToScreenPoint(new Vector3(0,0,Option.offsetMuzzle.z));
+
+        // decal.transform.position = pointCenterScreen - pointCenterScreen.normalized * 0.1f;
+        // decal.transform.rotation = Quaternion.LookRotation(-pointCenterScreen.normalized);
+
+        // var direction = pointCenterScreen - Option.offsetMuzzle - pivot.transform.position;
+        // Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        // OnSetAngle(lookRotation, pointCenterScreen, speedRotate);
     }
 
 
@@ -111,7 +194,7 @@ public abstract class BaseMuzzle : MonoBehaviour
         }
         objEffect.transform.eulerAngles = new Vector3(0, Tower.transform.eulerAngles.z, 0);
         Lean.Pool.LeanPool.Despawn(objEffect, 2);
-        
+
 
         OnSetTimeBetweenShot(Config.timeBetweenShot);
     }
@@ -128,7 +211,7 @@ public abstract class BaseMuzzle : MonoBehaviour
             BaseBullet obj = handle.Result.GetComponent<BaseBullet>();
             if (obj != null)
             {
-                obj.OnInit(Machine, Tower, Config);
+                obj.OnInit(Machine, Tower, this, Config);
             }
         }
         else
@@ -136,5 +219,4 @@ public abstract class BaseMuzzle : MonoBehaviour
             Debug.LogError($"Error Load prefab::: {handle.Status}");
         }
     }
-
 }

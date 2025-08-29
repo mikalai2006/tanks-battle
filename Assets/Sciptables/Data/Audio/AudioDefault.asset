@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ede769cf6db5489b6eee87981c7d6, type: 3}
   m_Name: AudioDefault
   m_EditorClassIdentifier: 
-  volumeEffect: 0.127
+  volumeEffect: 0.05
   volumeMusic: 0.228
   clickButton: {fileID: 0}
   go: {fileID: 0}

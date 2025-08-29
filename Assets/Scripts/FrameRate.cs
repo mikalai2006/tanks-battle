@@ -4,6 +4,6 @@ public class FrameRate : MonoBehaviour
 {
     void Awake()
     {
-        Application.targetFrameRate = 360;
+        Application.targetFrameRate = GameManager.Instance.Settings.inputJoystick ? 60 : 1000;
     }
 }

@@ -131,10 +131,10 @@ namespace UIToolkitLibrary
 
 
 
-                VisualElement mach = DrawCurrentMachine(machine);
-                // mach.style.marginTop = 25;
-                // mach.style.marginRight = 25;
-                mBox.Add(mach);
+                // VisualElement mach = DrawCurrentMachine(machine);
+                // // mach.style.marginTop = 25;
+                // // mach.style.marginRight = 25;
+                // mBox.Add(mach);
 
                 // add rank image.
                 VisualElement rankImage = new VisualElement();

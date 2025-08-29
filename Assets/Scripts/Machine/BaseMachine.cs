@@ -1,31 +1,53 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class BaseMachine : MonoBehaviour
 {
     // public static event Action<BaseMachine> OnChangeData;
-    public LevelManager levelManager;
+    [SerializeField]private LevelManager levelManager;
     public LevelManager LevelManager => levelManager;
     GameManager _gameManager => GameManager.Instance;
     public AudioSource AudioSource;
-    [SerializeField] public GameMachine Config;
-    [SerializeField] public MachineLevelData MachineLevelData;
-    [SerializeField] public StateController stateController;
-    [SerializeField] private GridTileNode occupiedNode;
-    public GridTileNode OccupiedNode => occupiedNode;
-    [SerializeField] GameObject CaterpillarBox;
-    [SerializeField] List<BaseCaterpillar> caterpillars;
-    public List<BaseCaterpillar> Caterpillars => caterpillars;
-    [SerializeField] GameObject TowerBox;
-    [SerializeField] List<BaseTower> towers;
-    public List<BaseTower> Towers => towers;
+    [HideInInspector] public GameMachine Config;
+    [HideInInspector] public MachineLevelData MachineLevelData;
+    [HideInInspector] public StateController stateController;
+
+    [Space(5)]
+    [Header("Wrappers")]
+    [SerializeField] GameObject BodyWrapper;
+    [SerializeField] GameObject TowerWrapper;
+    [SerializeField] GameObject CaterpillarWrapper;
+
+    [Space(5)]
+    [Header("Elements vehicle")]
     [SerializeField] BaseBody body;
     public BaseBody Body => body;
-    [SerializeField] private GameObject _objAreol;
-    public GameObject Areol => _objAreol;
+    [SerializeField] List<BaseTower> towers;
+    public List<BaseTower> Towers => towers;
+    [SerializeField] List<BaseCaterpillar> caterpillars;
+    public List<BaseCaterpillar> Caterpillars => caterpillars;
+
+    
+    [Space(5)]
+    [Header("Data")]
+    public bool isVisible;
+    [SerializeField] private bool isMove;
+    public bool IsMove => isMove;
+    [SerializeField] private int offset = 90;
+    public int OffsetRotate => offset;
     [SerializeField] private DataMachine data = new();
     public DataMachine Data => data;
+    [SerializeField] private GridTileNode occupiedNode;
+    public GridTileNode OccupiedNode => occupiedNode;
+
+    
+    [Space(5)]
+    [Header("Other")]
+    [SerializeField] private GameObject _objAreol;
+    public GameObject Areol => _objAreol;
     [SerializeField] private BaseMachine _objectTarget;
     public BaseMachine ObjectTarget => _objectTarget;
     [SerializeField] private Rigidbody rb;
@@ -33,11 +55,12 @@ public abstract class BaseMachine : MonoBehaviour
     public AreaMove AreaMove => areaMove;
     [SerializeField] private AreaSearch areaSearch;
     public AreaSearch AreaSearch => areaSearch;
+    [SerializeField] Camera _camera;
+    public Camera Camera => _camera;
+    public GameObject objectTargetCamera;
     // public Badge Badge;
-    public bool isVisible;
-    [SerializeField] private bool isMove;
-    public bool IsMove => isMove;
-    [SerializeField] private int offset = 0;
+    // [SerializeField] private GameObject _wrapperCamera;
+    // public GameObject WrapperCamera => _wrapperCamera;
 
     [Space(5)]
     [Header("Можно скрыть эти опции")]
@@ -49,14 +72,9 @@ public abstract class BaseMachine : MonoBehaviour
 
     void Awake()
     {
-        // tower = GetComponentInChildren<BaseTower>();
-        // body = GetComponentInChildren<BaseBody>();
-        // muzzle = GetComponentInChildren<BaseMuzzle>();
-        // caterpillar = GetComponentInChildren<BaseCaterpillar>();
         stateController = GetComponent<StateController>();
         areaMove = GetComponentInChildren<AreaMove>();
         rb = GetComponent<Rigidbody>();
-
         HealthBar = GetComponentInChildren<HealthBarController>();
 
         data = new();
@@ -91,19 +109,16 @@ public abstract class BaseMachine : MonoBehaviour
         AudioSource.clip = Config.soundMove;
         AudioSource.Play();
 
-        // установка герба.
-        Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
-        body.OnSetSpriteGerb(logo);
-
         // установка основных параметров.
         OnSetSpeed(Config.speed);
 
         OnSetHP(Config.hp);
+
         if (HealthBar)
         {
             HealthBar.SetHealth(Config.hp, Config.hp);
         }
-        OnSetAngleBody(0);
+
         data.timeBeforeAddTarget = MachineLevelData.isBot
             ? UnityEngine.Random.Range(_gameManager.Settings.timeBeforeAddTarget.x, _gameManager.Settings.timeBeforeAddTarget.y)
             : 0;
@@ -112,13 +127,17 @@ public abstract class BaseMachine : MonoBehaviour
         areaSearch.Init(Config);
 
         // инициализируем компоненты машины
+        GameBody _bodyConfig = Config.body;
+        var _body = Instantiate(_bodyConfig.prefab, BodyWrapper.transform);
+        body = _body;
         body.Init(this);
+
 
         // init caterpillars.
         for (int i = 0; i < Config.catterpillars.Count; i++)
         {
             GameCaterpillarOption _catConfig = Config.catterpillars.ElementAt(i);
-            var _cat = Instantiate(_catConfig.Config.prefab, CaterpillarBox.transform);
+            var _cat = Instantiate(_catConfig.Config.prefab, CaterpillarWrapper.transform);
             _cat.Init(this, _catConfig, i);
             caterpillars.Add(_cat);
         }
@@ -129,7 +148,7 @@ public abstract class BaseMachine : MonoBehaviour
         for (int i = 0; i < parentTowers.Count; i++)
         {
             GameTowerOption _optConfig = parentTowers.ElementAt(i);
-            var _tow = Instantiate(_optConfig.Config.prefab, TowerBox.transform);
+            var _tow = Instantiate(_optConfig.Config.prefab, TowerWrapper.transform);
             _tow.Init(this, _optConfig, 10 + i);
             towers.Add(_tow);
 
@@ -140,7 +159,7 @@ public abstract class BaseMachine : MonoBehaviour
                     GameTowerOption _optChildConfig = Config.towers.Find(t => t.ido == _optConfig.children.ElementAt(j));
                     if (_optChildConfig != null)
                     {
-                        var _towChild = Instantiate(_optChildConfig.Config.prefab, TowerBox.transform);
+                        var _towChild = Instantiate(_optChildConfig.Config.prefab, TowerWrapper.transform);
                         _towChild.Init(this, _optChildConfig, 10 + i + j);
                         _towChild.OnSetParent(_tow);
                         towers.Add(_towChild);
@@ -149,25 +168,126 @@ public abstract class BaseMachine : MonoBehaviour
             }
         }
 
+        OnSetAngleBody(0);
+
+        // // установка герба.
+        // Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
+        // body.OnSetSpriteGerb(logo);
+
         // test.
         // Badge.OnSetNameText(Data.speed.ToString());
     }
 
+    public void Rotate(Vector2 moveDirection)
+    {
+
+        // float turnInputValue = moveDirection.x;
+        // float turn = turnInputValue * Data.speed * Time.fixedDeltaTime;
+        // Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
+        // rb.MoveRotation(rb.rotation * turnRotation);
+        // // rb.AddTorque(new Vector3(0f, turn, 0f));
+        // // Debug.Log($"Rotate::::: {new Vector3(0f, turn, 0f)}");
+        if (rb.linearVelocity != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(rb.linearVelocity);
+            // Debug.Log($"Rotate::::: {targetRotation}");
+            Quaternion stepRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
+
+            // rb.MoveRotation(stepRotation);
+            Body.transform.rotation = CaterpillarWrapper.transform.rotation =  Quaternion.Slerp(
+                Body.transform.rotation,
+                Quaternion.Euler(0, targetRotation.eulerAngles.y + OffsetRotate, 0),
+                10f * Time.fixedDeltaTime
+            );
+
+            // Debug.Log($"ROTATION::::: stepRotation={stepRotation}");
+        }
+
+        // // Получаем вектор скорости объекта
+        // Vector3 movementDirection = rb.linearVelocity.normalized;
+
+        // // Если объект движется (скорость не равна нулю)
+        // if (movementDirection != Vector3.zero)
+        // {
+        //     // Вычисляем целевое вращение: объект должен смотреть вперед в направлении движения
+        //     Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
+
+        //     // Плавное вращение к целевой ориентации
+        //     // <<!nav>>Quaternion.Slerp<<!/nav>> ( сферическая линейная интерполяция) обеспечивает плавное вращение
+        //     Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, 1f * Time.fixedDeltaTime);
+
+        //     // Применяем новое вращение к Rigidbody
+        //     rb.MoveRotation(newRotation);
+        // }
+    }
 
     public void Move(Vector2 _moveDirection)
     {
+        // if (_moveDirection.y == 0)
+        // {
+        //     Stop();
+        //     return;
+        // }  
+
         isMove = true;
+
+        Vector3 forward;
+        Vector3 right;
+
+        if (_gameManager.Settings.simpleMove && !MachineLevelData.isBot)
+        {
+            forward = levelManager.cinemachineCamera.transform.forward;  //(transform.position - levelManager.cinemachineCamera.transform.position).normalized;
+            right = levelManager.cinemachineCamera.transform.right;
+        }
+        else
+        {
+            forward = transform.forward;
+            right = transform.right;
+        };
         
-        Vector3 moveDirection = new Vector3(_moveDirection.x, 0, _moveDirection.y).normalized;
+        forward.Normalize();
+        right.Normalize();
+
+        // Vector3 moveDirection = Vector3.zero;
+        // if (_moveDirection.y <= 0.1f && _moveDirection.y >= -0.1f)
+        // {
+        //     moveDirection = Vector3.Cross(transform.up, forward) * _moveDirection.x;
+        // }
+        // else
+        // {
+        //     moveDirection = forward * _moveDirection.y;
+        // }
+
+        Vector3 moveDirection = (forward * _moveDirection.y + right * _moveDirection.x).normalized;
+
+        // if (moveDirection != Vector3.zero)
+        // {
+        //     Debug.Log($"moveDirection2 = {moveDirection}");
+        // }
+
+        Rotate(moveDirection);
 
         OnSetDirectionMove(moveDirection);
 
         // OnSetNameText(moveDirection.ToString());
         // transform.Translate(moveDirection * speed * Time.deltaTime);
-        // rb.MovePosition((Vector2)transform.position + (moveDirection * speed * Time.deltaTime));
         DataBonus bonusSpeed = null;
         Data.bonuses.TryGetValue(TypeBonus.Speed, out bonusSpeed);
+        var speed = Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0);
+
+        // kinematic.
+        // rb.MovePosition((Vector3)transform.position + (moveDirection * speed * Time.deltaTime));
+
+        // dynamic.
         rb.linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0));
+        // if (rb.linearVelocity.magnitude < 50f)
+        // {
+        //     rb.AddRelativeForce(moveDirection * (100f * Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)), ForceMode.Impulse); //linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0));
+        // }
+        // else
+        // {
+        // }
+        //     Debug.Log($"Magnitude={rb.linearVelocity.magnitude}");
 
         //rb.AddForce(moveDirection* (Data.speed * rb.mass + (bonusSpeed != null ? bonusSpeed.value : 0)), ForceMode.Force);
 
@@ -179,12 +299,12 @@ public abstract class BaseMachine : MonoBehaviour
         // Debug.Log($"{lookRotation.eulerAngles}, {lookRotation.x}, {lookRotation.y}, {lookRotation.z}");
         // OnSetAngleBody(lookRotation.eulerAngles.y);
 
-        OnSetAngleBody(moveDirection);
+        // OnSetAngleBody(moveDirection);
 
         Data.position = transform.position;
 
         for (int i = 0; i < Caterpillars.Count; i++)
-        {  
+        {
             Caterpillars[i].Move();
         }
         // for (int i = 0; i < wheels.Count; i++)
@@ -196,6 +316,25 @@ public abstract class BaseMachine : MonoBehaviour
         GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(posTile);
         SetOccupiedNode(node);
     }
+
+    public void Stop()
+    {
+        // Debug.Log($"stop={rb.linearVelocity.magnitude}");
+        isMove = false;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        // rb.AddRelativeForce(Vector2.zero);
+
+        // _textName.text = _speed.ToString();
+
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {
+            Caterpillars[i].Stop();
+        }
+        
+    }
+
 
     public void SetOccupiedNode(GridTileNode node)
     {
@@ -213,22 +352,6 @@ public abstract class BaseMachine : MonoBehaviour
         occupiedNode = node;
         // Debug.Log($"OccupiedNode = {OccupiedNode.ToString()}");
     }
-
-    public void Stop()
-    {
-        isMove = false;
-
-        rb.linearVelocity = Vector2.zero;
-
-        // _textName.text = _speed.ToString();
-
-        for (int i = 0; i < Caterpillars.Count; i++)
-        {   
-            Caterpillars[i].Stop();
-        }
-        
-    }
-
 
     public void OnSetSpeed(float speed)
     {
@@ -338,7 +461,7 @@ public abstract class BaseMachine : MonoBehaviour
     public void OnSetAngleBody(Vector3 direction)
     {
         Body.transform.forward = direction;
-        CaterpillarBox.transform.forward = direction;
+        CaterpillarWrapper.transform.forward = direction;
 
         // var rot = Body.transform.rotation;
         // _objAreol.transform.localEulerAngles = new Vector3(90, rot.eulerAngles.y, rot.eulerAngles.z);
@@ -364,10 +487,10 @@ public abstract class BaseMachine : MonoBehaviour
     {
 
 
-        Body.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+        Body.transform.rotation = Quaternion.Euler(0, angle + OffsetRotate, 0);
         // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        _objAreol.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
-        CaterpillarBox.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
+        _objAreol.transform.rotation = Quaternion.Euler(0, angle + OffsetRotate, 0);
+        CaterpillarWrapper.transform.rotation = Quaternion.Euler(0, angle + OffsetRotate, 0);
 
         
         data.angleBody = Body.transform.eulerAngles.y;
@@ -469,7 +592,7 @@ public abstract class BaseMachine : MonoBehaviour
         // }
 
         // проверяем видим ли компонент.
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera);
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
         if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
         // if (rd.isVisible == false)
         {
@@ -483,7 +606,7 @@ public abstract class BaseMachine : MonoBehaviour
         }
 
         // включаем или выключаем звук мотора.
-        if (isVisible)
+        if (isVisible && isMove)
         {
             if (!AudioSource.isPlaying)
             {
@@ -518,6 +641,18 @@ public abstract class BaseMachine : MonoBehaviour
                 {
                     levelManager.UiTopSide.OnRemoveUIBonus(key);
                 }
+            }
+        }
+    }
+
+    public void OnShot(InputAction.CallbackContext context)
+    {
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            BaseTower bt = Towers.ElementAt(i);
+            for (int j = 0; j < bt.Muzzles.Count; j++)
+            {
+                bt.Muzzles.ElementAt(j).OnShot(null);
             }
         }
     }
@@ -573,4 +708,34 @@ public abstract class BaseMachine : MonoBehaviour
     //         }
     //     // }
     // }
+    // public void OnCollisionEnter(Collision collision)
+    // {
+    //     Debug.Log($"Oncollision baseMachine {collision.gameObject.name}");
+    //     Body.OnCollision(collision.contacts[0].point, true, collision);
+    // }
+
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject)
+    {
+        // for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        // {
+        // }
+        Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject);
+    }
+
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(Body.transform.position, Body.transform.forward * 50);
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            Gizmos.DrawRay(Towers[i].transform.position, Towers[i].transform.forward * 30);
+            Gizmos.color = Color.blue;
+            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+            {
+                Gizmos.DrawRay(Towers[i].Muzzles[j].transform.position, Towers[i].Muzzles[j].transform.forward * 30);
+            }
+        }
+    }
 }

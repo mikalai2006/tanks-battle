@@ -29,7 +29,7 @@ MonoBehaviour:
   noiseObstacleMaxKoof: 0.8
   typeLevel: 2
   countTeam: 0
-  countPlayers: 5
+  countPlayers: 2
   bonuses:
   - Item: {fileID: 11400000, guid: 076361a2a1bdfb84d8dc60de74e12381, type: 2}
     probability: 0.20000000298023224

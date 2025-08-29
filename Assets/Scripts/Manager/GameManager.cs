@@ -118,10 +118,14 @@ public class GameManager : StaticInstance<GameManager>
     // ChangeState(GameState.StartApp);
 
     // InputManager = new();
-
   }
 
-  public void ChangeState(GameState newState, object Params = null)
+    void Update()
+    {
+      Debug.unityLogger.logEnabled = Settings.logEnabled;
+    }
+
+    public void ChangeState(GameState newState, object Params = null)
   {
     OnBeforeStateChanged?.Invoke(newState);
     Debug.Log($"GAME state => {newState}");

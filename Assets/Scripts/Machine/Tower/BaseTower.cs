@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -28,6 +29,10 @@ public class BaseTower : MonoBehaviour
     public DataTower Data => _data;
     protected BaseTower parent;
     public BaseTower Parent => parent;
+    [SerializeField] private LayerMask ignoreMask;
+    [SerializeField] private Vector3 targetPoint;
+    // public float offset = 0;
+    [SerializeField] protected VoxelMeshRender voxelMeshRender;
 
     void Start()
     {
@@ -40,8 +45,10 @@ public class BaseTower : MonoBehaviour
 
         Machine = baseMachine;
 
+        voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+
         OnSetSpeedRotateTower(optConfig.Config.speedRotateTower);
-        OnSetAngleTower(0);
+        // OnSetAngleTower(0);
 
         sortingGroup.sortingOrder = index;
 
@@ -70,7 +77,7 @@ public class BaseTower : MonoBehaviour
 
         OnNotViewTarget(null);
 
-        ChangePosition(baseMachine);
+        // ChangePosition(baseMachine);
     }
 
     public void OnChangeData()
@@ -122,34 +129,91 @@ public class BaseTower : MonoBehaviour
     /// <summary>
     /// Устанавливает угол поворота башни из расчетов направления и поворота базы (body).
     /// </summary>
-    /// <param name="angle">угол</param>
-    public void OnSetAngleTower(float angle, bool bySpeed = true)
+    public void OnSetAngleTower(Vector3 point, bool bySpeed = true, float deltaTime = 0)
     {
+        Vector3 direction = point - transform.position;
 
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        float angle = lookRotation.eulerAngles.y; // + offset;
         // angle = angle + Machine.levelManager.Camera.transform.rotation.eulerAngles.y;
         _data.angleTower = angle;
+
         
-        OnSetDirectionTower(angle);
+        float distance = Vector3.Distance(targetPoint, point);
+        // Debug.Log($"_data.angleTower = {_data.angleTower}:::{_data.currentAngleTower}");
+        // TODO
+        // if (Math.Truncate(_data.angleTower) != Math.Truncate(_data.currentAngleTower))
+        if (true)
+        {
 
-        DataBonus bonusSpeedTower = null;
-        Machine.Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
-        //Tower.transform.rotation = Quaternion.Euler(0, 0, angle);
-       transform.rotation = Quaternion.Lerp(
-            transform.rotation,
-            Quaternion.Euler(0, angle, 0),
-            bySpeed ? (_data.speedRotateTower + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * Time.deltaTime : 1
-        );
+            OnSetDirectionTower(angle);
+
+            DataBonus bonusSpeedTower = null;
+            Machine.Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
+            //Tower.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            // Machine.WrapperCamera.transform.rotation = Quaternion.Lerp(
+            //     transform.rotation,
+            //     Quaternion.Euler(0, angle, 0),
+            //     bySpeed ? (_data.speedRotateTower + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * Time.deltaTime : 1
+            // );
+            float speedRotation = bySpeed ? (_data.speedRotateTower * (_gameManager.Settings.inputJoystick ? 1 : 1) + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * deltaTime : 1;
+            // Debug.Log($"rotation speed={speedRotation}-{transform.rotation}");
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.Euler(0, angle, 0),
+                speedRotation
+            );
+
+            for (int j = 0; j < Muzzles.Count; j++)
+            {
+                Muzzles[j].OnSetRotation(point, speedRotation);
+            }
 
 
+        }
         // устанавливаем угол - разницу углов поворота башни и базы
         // Data.angleTowerByBody = Body.transform.localEulerAngles.z - Tower.transform.localEulerAngles.z;
         // Muzzle.transform.rotation = Quaternion.Lerp(Muzzle.transform.rotation, Quaternion.Euler(0, 0, lookRotationTower.eulerAngles.z + 90), .05f);
     }
+
+    // public void OnSetAngleTower(Vector3 direction, bool bySpeed = true)
+    // {
+    //     Quaternion lookRotation = Quaternion.LookRotation(direction);
+    //     var angleY = lookRotation.eulerAngles.y;
+
+    //     // angle = angle + Machine.levelManager.Camera.transform.rotation.eulerAngles.y;
+    //     _data.angleTower = angleY;
+
+    //     OnSetDirectionTower(angleY);
+
+    //     DataBonus bonusSpeedTower = null;
+    //     Machine.Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
+    //     //Tower.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+    //     // Machine.WrapperCamera.transform.rotation = Quaternion.Lerp(
+    //     //     transform.rotation,
+    //     //     Quaternion.Euler(0, angle, 0),
+    //     //     bySpeed ? (_data.speedRotateTower + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * Time.deltaTime : 1
+    //     // );
+    //     var speedRotate = bySpeed ? (_data.speedRotateTower + (bonusSpeedTower != null ? bonusSpeedTower.value : 0)) * Time.deltaTime : 1;
+    //     transform.rotation = Quaternion.Lerp(
+    //         transform.rotation,
+    //         Quaternion.Euler(0, angleY, 0),
+    //         speedRotate
+    //     );
+
+    //     for (int i = 0; i < Muzzles.Count; i++)
+    //     {
+    //         // Muzzles.ElementAt(i).OnSetAngle(lookRotation.eulerAngles.x, speedRotate);
+    //         Muzzles.ElementAt(i).OnSetRotation(lookRotation, speedRotate);
+    //     }
+    // }
     
 
     public void OnSetDirectionTower(float angle)
     {
-        _data.directionTower = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad),0, Mathf.Sin(angle * Mathf.Deg2Rad));
+        _data.directionTower = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), 0, Mathf.Sin(angle * Mathf.Deg2Rad));
     }
 
     public void SetIsShot(bool status)
@@ -315,11 +379,6 @@ public class BaseTower : MonoBehaviour
 
     void Update()
     {
-        // Записываем в данные угол поворота башни.
-        if (Data.currentAngleTower != transform.localEulerAngles.y)
-        {
-            OnSetCurrentAngleTower(transform.localEulerAngles.y);
-        }
 
         // проверяем наличие бонуса дистанции атаки.
         DataBonus bonusDistanceAttack = null;
@@ -449,69 +508,118 @@ public class BaseTower : MonoBehaviour
             SetIsShot(false);
         }
 
-        // синхронизируем позицию башни
-        ChangePosition(Machine);
 
-        // Отслеживание противников.
-        if (ObjectTarget)
+        // // Отслеживание противников.
+        // if (ObjectTarget)
+        //     {
+        //         // Если башня вращается, начинаем поворот в сторону врага.
+        //         if (Option.isRotate)
+        //         {
+        //             var direction = ObjectTarget.transform.position - transform.position;
+
+        //             // // your actual heading as upwards parameter
+        //             // Quaternion lookRotationTower = Quaternion.LookRotation(Vector3.forward, directionVectorTower);
+        //             float angleInRadians = Mathf.Atan2(direction.y, direction.x);
+
+        //             if (Machine.MachineLevelData.isBot || _gameManager.Settings.autoTakeEnemy)
+        //             {
+        //                 OnSetAngleTower(angleInRadians * Mathf.Rad2Deg);
+        //             }
+        //         }
+        //         // если башня не вращается - указываем ей угол поворота = углу поворота базы машины (мгновенно).
+        //         else
+        //         {
+        //             OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
+        //         }
+
+        //         // считаем дистанцию до врага, если дистанция меньше или равна указанной в параметрах - атакуем врага.
+        //         float dist = Vector3.Distance(ObjectTarget.transform.position, transform.position);
+        //         if (dist <= DistanceAttack)
+        //         {
+        //             OnAttackTarget();
+        //             // // SetIsShot(true);
+        //             // if (Application.isEditor)
+        //             // {
+        //             //     Badge.OnSetNameText(dist.ToString());
+        //             // }
+        //         }
+        //         else
+        //         {
+        //             OnViewTarget(ObjectTarget);
+        //             // OnSetTarget(null);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         if (_gameManager.Settings.rotateTowerByBody || !Option.isRotate)
+        //         {
+        //             OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
+        //         }
+        //         // else
+        //         // {
+        //         //     if (Data.angleTower != Data.angleTowerByBody)
+        //         //     {
+        //         //         Data.angleTowerByBody = Data.angleTower = Tower.transform.rotation.eulerAngles.z; //body.transform.localEulerAngles.z - (body.transform.localEulerAngles.z - tower.transform.localEulerAngles.z);
+        //         //     }
+        //         //     // OnSetAngleTower(Data.angleTower);
+        //         //     Tower.transform.rotation = Quaternion.Euler(0, 0, Data.angleTower);
+        //         //     // Debug.Log($"set angle {Data.angleTower}");
+        //         // }
+        //     }
+
+
+
+
+
+        // наводим башню на центр экрана.
+        if (Machine.MachineLevelData.isBot == false)
+        {
+
+            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            Ray ray = Machine.LevelManager.Camera.ScreenPointToRay(screenCenterPoint);
+            Vector3 direction;
+            Vector3 point;
+            RaycastHit raycastHit;
+
+            if (Physics.Raycast(ray, out raycastHit, 999f, ~(ignoreMask)))
             {
-                // Если башня вращается, начинаем поворот в сторону врага.
-                if (Option.isRotate)
-                {
-                    var direction = ObjectTarget.transform.position - transform.position;
-
-                    // // your actual heading as upwards parameter
-                    // Quaternion lookRotationTower = Quaternion.LookRotation(Vector3.forward, directionVectorTower);
-                    float angleInRadians = Mathf.Atan2(direction.y, direction.x);
-
-                    if (Machine.MachineLevelData.isBot || _gameManager.Settings.autoTakeEnemy)
-                    {
-                        OnSetAngleTower(angleInRadians * Mathf.Rad2Deg);
-                    }
-                }
-                // если башня не вращается - указываем ей угол поворота = углу поворота базы машины (мгновенно).
-                else
-                {
-                    OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
-                }
-                
-                // считаем дистанцию до врага, если дистанция меньше или равна указанной в параметрах - атакуем врага.
-                float dist = Vector3.Distance(ObjectTarget.transform.position, transform.position);
-                if (dist <= DistanceAttack)
-                {
-                    OnAttackTarget();
-                    // // SetIsShot(true);
-                    // if (Application.isEditor)
-                    // {
-                    //     Badge.OnSetNameText(dist.ToString());
-                    // }
-                }
-                else
-                {
-                    OnViewTarget(ObjectTarget);
-                    // OnSetTarget(null);
-                }
+                direction = raycastHit.point - transform.position;
+                point = raycastHit.point;
             }
             else
             {
-                if (_gameManager.Settings.rotateTowerByBody || !Option.isRotate)
-                {
-                    OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
-                }
-                // else
-                // {
-                //     if (Data.angleTower != Data.angleTowerByBody)
-                //     {
-                //         Data.angleTowerByBody = Data.angleTower = Tower.transform.rotation.eulerAngles.z; //body.transform.localEulerAngles.z - (body.transform.localEulerAngles.z - tower.transform.localEulerAngles.z);
-                //     }
-                //     // OnSetAngleTower(Data.angleTower);
-                //     Tower.transform.rotation = Quaternion.Euler(0, 0, Data.angleTower);
-                //     // Debug.Log($"set angle {Data.angleTower}");
-                // }
+                point = ray.GetPoint(999f); // Machine.levelManager.CameraHandler.TargetLook.transform.position;
+                direction = point - transform.position; //Machine.levelManager.CameraHandler.TargetLook.transform.position - transform.position;
             }
+            // Debug.DrawRay(ray.origin, direction, Color.cyan);
+
+            // point = Machine.levelManager.CameraHandler.TargetLook.transform.position;
+            // Debug.DrawLine(point, transform.position, Color.white);
+            // Debug.Log($"ray {hit2.point}, direction={direction}");
+            // Quaternion lookRotation = Quaternion.LookRotation(direction);
+            OnSetAngleTower(point, true, Time.deltaTime);
+            Debug.DrawRay(Machine.LevelManager.Camera.transform.position, point - Machine.LevelManager.Camera.transform.position, Color.magenta);
+            // targetPoint = point;
+        }
     }
-    
-    
+
+    void LateUpdate()
+    {
+        
+        // Записываем в данные угол поворота башни.
+        if (Data.currentAngleTower != transform.eulerAngles.y)
+        {
+            OnSetCurrentAngleTower(transform.rotation.eulerAngles.y);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // синхронизируем позицию башни
+        ChangePosition(Machine);
+    }
+
+
     // IEnumerator Follow()
     // {
     //     for (; ; ) //while(true)
@@ -537,7 +645,7 @@ public class BaseTower : MonoBehaviour
     //             {
     //                 OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
     //             }
-                
+
     //             // считаем дистанцию до врага, если дистанция меньше или равна указанной в параметрах - атакуем врага.
     //             float dist = Vector3.Distance(ObjectTarget.transform.position, transform.position);
     //             if (dist <= DistanceAttack)
@@ -601,12 +709,15 @@ public class BaseTower : MonoBehaviour
         // (x₀, y₀) - координаты центра поворота;
         // α - угол поворота в радианах;
         // (x', y') - новые координаты точки после поворота.
-        var angle = Parent == null ? baseMachine.Data.angleBody : parent.Data.currentAngleTower;
+        var angle = Parent == null ? baseMachine.Body.transform.rotation.eulerAngles.y : parent.Data.currentAngleTower;
         var offsetParentTower = Vector2.zero; // Parent == null ? Vector2.zero : parent.Option.offsetTower;
         var point = Option.offsetTower;
-        var x1 = (point.x - offsetParentTower.x) * Mathf.Cos(angle * Mathf.Deg2Rad) - (-point.y - offsetParentTower.y) * Mathf.Sin(angle * Mathf.Deg2Rad) + offsetParentTower.x;
-        var y1 = (point.x - offsetParentTower.x) * Mathf.Sin(angle * Mathf.Deg2Rad) + (-point.y - offsetParentTower.y) * Mathf.Cos(angle * Mathf.Deg2Rad) + offsetParentTower.y;
-        transform.localPosition = new Vector3(x1,transform.localPosition.y, y1);
+        // var x1 = (point.x - offsetParentTower.x) * Mathf.Cos(angle * Mathf.Deg2Rad) - (point.z - offsetParentTower.y) * Mathf.Sin(angle * Mathf.Deg2Rad) + offsetParentTower.x;
+        // var z1 = (point.x - offsetParentTower.x) * Mathf.Sin(angle * Mathf.Deg2Rad) + (point.z - offsetParentTower.y) * Mathf.Cos(angle * Mathf.Deg2Rad) + offsetParentTower.y;
+        var x1 = point.x + Mathf.Cos(angle) * 1;
+        var z1 = point.z + Mathf.Sin(angle) * 1;
+        var n = baseMachine.Body.transform.TransformPoint(point);
+        transform.position = baseMachine.Body.transform.TransformPoint(point);
     }
 
     public void OnDamageEffect(float v)

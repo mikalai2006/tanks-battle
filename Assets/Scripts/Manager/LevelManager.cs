@@ -3,7 +3,7 @@ using System.Linq;
 using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
+using Unity.Cinemachine;
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,7 +15,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public List<IndicatorMachine> indicators;
     [SerializeField] public List<BaseBonus> bonuses;
     [SerializeField] public GameObject objectSpawnMachines;
-    public WorldManager WorldManager;
     [SerializeField] public GameObject objectSpawnEffect;
     [SerializeField] public GameObject objectSpawnBonuses;
     [SerializeField] public GameObject objectSpawnText;
@@ -26,9 +25,16 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] Camera _camera;
     public Camera Camera => _camera;
+    [SerializeField] CameraHandler _cameraHandler;
+    public CameraHandler CameraHandler => _cameraHandler;
+    public CinemachineCamera cinemachineCamera;
+    public CinemachineOrbitalFollow cinemachineOrbitalFollow;
 
     void Start()
     {
+        cinemachineOrbitalFollow = cinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
+
+        // OnSetActiveCamera(null);
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
 
         globalLight.intensity = _gameManager.LevelConfig.light;
@@ -99,7 +105,8 @@ public class LevelManager : MonoBehaviour
                     // Addressables.InstantiateAsync
                     var gObject = Instantiate(
                         configMachine.machinePrefab,
-                        new Vector3(node.position.x, 0.5f, node.position.y),
+                        new Vector3(data.isBot ? 30 : 5, 0.5f, data.isBot ? 30 : 5),
+                        // new Vector3(node.position.x, 0.5f, node.position.y),
                         Quaternion.identity,
                         objectSpawnMachines.transform
                     );
@@ -113,11 +120,13 @@ public class LevelManager : MonoBehaviour
                             obj.GetComponent<PlayerController>().enabled = false;
                             obj.GetComponent<PlayerInput>().enabled = false;
                             var lightComponent = obj.GetComponentInChildren<Light>();
-                            if (lightComponent) {
+                            if (lightComponent)
+                            {
                                 lightComponent.enabled = false;
                             }
                             // obj.Areol.SetActive(false);
-                            obj.GetComponent<CameraFollow>().enabled = false;
+                            // obj.GetComponent<CameraFollow>().enabled = false;
+                            // obj.GetComponent<CameraFollowFPS>().enabled = false;
                             obj.GetComponent<StateController>().enabled = true;
                             obj.OnSetConfig(configMachine, data);
                             obj.SetOccupiedNode(node);
@@ -128,14 +137,34 @@ public class LevelManager : MonoBehaviour
                             obj.GetComponent<PlayerController>().enabled = true;
                             obj.GetComponent<PlayerInput>().enabled = true;
                             var lightComponent = obj.GetComponentInChildren<Light>();
-                            if (lightComponent) {
+                            if (lightComponent)
+                            {
                                 lightComponent.enabled = true;
                             }
                             // obj.Areol.SetActive(true);
-                            obj.GetComponent<CameraFollow>().enabled = true;
+                            // obj.GetComponent<CameraFollow>().enabled = false;
+                            // obj.GetComponent<CameraFollowFPS>().enabled = false;
                             obj.GetComponent<StateController>().enabled = false;
                             obj.OnSetConfig(configMachine, data);
                             obj.SetOccupiedNode(node);
+
+                            CameraHandler.OnSetCharacter(obj);
+                            CinemachineBrain brain = Camera.GetComponent<CinemachineBrain>();
+                            if (brain != null)
+                            {
+                                // if (brain.ActiveVirtualCamera is CinemachineVirtualCamera activeCam)
+                                // {
+                                // }
+                                cinemachineCamera.Follow = obj.objectTargetCamera.transform;
+                                cinemachineCamera.LookAt = obj.objectTargetCamera.transform;
+                            }
+
+                            UiTopSide.crossHair.OnSetTarget(obj);
+                        }
+
+                        if (obj.Camera != null)
+                        {
+                            obj.Camera.gameObject.SetActive(false);
                         }
 
                         machines.Add(obj);
@@ -184,6 +213,18 @@ public class LevelManager : MonoBehaviour
         // }
 
     }
+
+    // public void OnSetActiveCamera(Camera value)
+    // {
+    //     if (value == null)
+    //     {
+    //         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
+    //     }
+    //     else
+    //     {
+    //         // _camera = value;
+    //     }
+    // }
 
     public void OnRemoveMachine(BaseMachine _mach)
     {

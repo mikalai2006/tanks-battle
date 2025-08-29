@@ -46,7 +46,7 @@ public class TwoMuzzle : BaseMuzzle
 
         // obj.transform.localPosition = Machine.Tower.transform.position + rotatedOffset;
         obj.transform.position = pointEffects.transform.position;
-        obj.OnInit(Machine, Tower, Config);
+        obj.OnInit(Machine, Tower, this, Config);
     }
     
     
