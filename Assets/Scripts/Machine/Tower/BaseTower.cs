@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -694,6 +695,16 @@ public class BaseTower : MonoBehaviour
             }
 
             OnSetTarget(null);
+        }
+    }
+
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    {
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
+            Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {localPoint}</color>");
+            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
         }
     }
 

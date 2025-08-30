@@ -165,5 +165,6 @@ namespace Mikalai2006.Voxel
         public bool existCollider;
         public bool isGreedy;
         public bool isRigidbody;
+        public bool isConvex;
     }
 }

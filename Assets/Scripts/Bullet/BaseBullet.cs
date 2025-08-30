@@ -197,92 +197,97 @@ public class BaseBullet : MonoBehaviour
             return;
         }
 
-        Debug.Log($"<color=yellow>================Colission=====================================</color>");
-        // foreach (ContactPoint contact in collision.contacts)
-        // {
-        //     // Access the collision point's position
-        //     Vector3 collisionPoint = contact.point;
-
-        //     // You can also access the normal at the collision point
-        //     Vector3 collisionNormal = contact.normal;
-
-        //     // Do something with the collision point and normal
-        //     Debug.Log("Collision point: " + collisionPoint + ", Normal: " + collisionNormal);
-
-        //     Machine.levelManager.WorldManager.Container.ExposionVoxels(collisionPoint);
-        // }
-
-        for (int q = 0; q < 1; q++)
+        if (!collisionsObjects.Contains(collision.gameObject))
         {
-            var contact = collision.contacts[q];
-            // Debug.Log($"collision.gameObject={collision.gameObject.name}, position={collision.transform.position}");
-            Vector3 localPoint = collision.gameObject.transform.InverseTransformPoint(contact.point);
+            Debug.Log($"<color=green>OnTriggerEnter {collision.gameObject.name}</color>");
+            // Debug.Log($"<color=yellow>================Colission=====================================</color>");
+            // foreach (ContactPoint contact in collision.contacts)
+            // {
+            //     // Access the collision point's position
+            //     Vector3 collisionPoint = contact.point;
 
-            // Debug.Log($"point = {contact.point}, localPositionPoint={localPoint}");
+            //     // You can also access the normal at the collision point
+            //     Vector3 collisionNormal = contact.normal;
 
-            List<Container> collisionContainers = new List<Container>();
-            Container voxelContainer = collision.gameObject.GetComponent<Container>();
-            if (voxelContainer == null)
+            //     // Do something with the collision point and normal
+            //     Debug.Log("Collision point: " + collisionPoint + ", Normal: " + collisionNormal);
+
+            //     Machine.levelManager.WorldManager.Container.ExposionVoxels(collisionPoint);
+            // }
+
+            for (int q = 0; q < 1; q++)
             {
-                BaseMachine bm = collision.gameObject.GetComponent<BaseMachine>();
-                if (bm)
+                var contact = collision.contacts[q];
+                // Debug.Log($"collision.gameObject={collision.gameObject.name}, position={collision.transform.position}");
+                Vector3 localPoint = collision.gameObject.transform.InverseTransformPoint(contact.point);
+
+                // Debug.Log($"point = {contact.point}, localPositionPoint={localPoint}");
+
+                List<Container> collisionContainers = new List<Container>();
+                Container voxelContainer = collision.gameObject.GetComponent<Container>();
+                if (voxelContainer == null)
                 {
-                    bm.OnCollision(contact.point, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius);
-                    // collisionContainers.AddRange(bm.Body.GetComponentsInChildren<Container>());
-                    // collisionContainers.AddRange(bm.Towers[0].GetComponentsInChildren<Container>());
+                    BaseMachine bm = collision.gameObject.GetComponent<BaseMachine>();
+                    if (bm)
+                    {
+                        collisionsObjects.Add(collision.transform.gameObject);
+                        bm.OnCollision(contact.point, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius);
+                        // collisionContainers.AddRange(bm.Body.GetComponentsInChildren<Container>());
+                        // collisionContainers.AddRange(bm.Towers[0].GetComponentsInChildren<Container>());
+                    }
                 }
-            }
-            else
-            {
-                collisionContainers.Add(voxelContainer);
-            }
-
-            if (collisionContainers.Count > 0)
-            {
-                collisionsObjects.Add(collision.transform.gameObject);
-                // Debug.Log($"collisionContainers.Count={collisionContainers.Count}");
-                for (int x = 0; x < collisionContainers.Count; x++)
+                else
                 {
-
-                    collisionContainers[x].ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
-                    // for (int t=0; t < 100; t++) {
-
-                    //     float forceMagnitude = 3 * 100;
-                    //     // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
-                    //     GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, Machine.LevelManager.objectSpawnEffect.transform);
-                    //     Vector3 pointSpawnVoxel = new Vector3(0,0,0);
-                    //     gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
-                    //     // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
-                    //     // gObj.gameObject.AddComponent<BoxCollider>();
-
-                    //     var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
-                    //     var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
-                    //     RenderParams _rp = new RenderParams(mat);
-                    //     Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));   
-
-                    //     var r = gObj.gameObject.GetComponent<Rigidbody>();
-                    //     if (r == null)
-                    //     {
-                    //         r = gObj.gameObject.AddComponent<Rigidbody>();
-                    //     }
-                    //     r.mass = 50f;
-                    //     r.useGravity = true;
-                    //     var forceDirection = Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
-                    //     r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
-                    //     // gObj.isStatic = false;
-                    //     // Destroy(gObj, 15);
-                    //     Lean.Pool.LeanPool.Despawn(gObj, 15);
-                    // }
+                    collisionContainers.Add(voxelContainer);
                 }
-            }
 
-            Debug.Log($"================/Colission=====================================");
+                if (collisionContainers.Count > 0)
+                {
+                    collisionsObjects.Add(collision.transform.gameObject);
+                    // Debug.Log($"collisionContainers.Count={collisionContainers.Count}");
+                    for (int x = 0; x < collisionContainers.Count; x++)
+                    {
+
+                        collisionContainers[x].ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+                        // for (int t=0; t < 100; t++) {
+
+                        //     float forceMagnitude = 3 * 100;
+                        //     // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
+                        //     GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, Machine.LevelManager.objectSpawnEffect.transform);
+                        //     Vector3 pointSpawnVoxel = new Vector3(0,0,0);
+                        //     gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
+                        //     // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
+                        //     // gObj.gameObject.AddComponent<BoxCollider>();
+
+                        //     var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
+                        //     var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
+                        //     RenderParams _rp = new RenderParams(mat);
+                        //     Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));   
+
+                        //     var r = gObj.gameObject.GetComponent<Rigidbody>();
+                        //     if (r == null)
+                        //     {
+                        //         r = gObj.gameObject.AddComponent<Rigidbody>();
+                        //     }
+                        //     r.mass = 50f;
+                        //     r.useGravity = true;
+                        //     var forceDirection = Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
+                        //     r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                        //     // gObj.isStatic = false;
+                        //     // Destroy(gObj, 15);
+                        //     Lean.Pool.LeanPool.Despawn(gObj, 15);
+                        // }
+                    }
+                }
+
+                // Debug.Log($"================/Colission=====================================");
+            }
         }
 
         if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
-        {
-            OnBoom(null);
-        }
+            {
+                OnBoom(null);
+            }
             
         // Machine.levelManager.WorldManager.Container.ExposionVoxels(contact.point, true);
         // Destroy(gameObject);

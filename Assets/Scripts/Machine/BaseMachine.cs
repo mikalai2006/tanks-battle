@@ -720,6 +720,19 @@ public abstract class BaseMachine : MonoBehaviour
         // {
         // }
         Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            Towers[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+            {
+                Towers[i].Muzzles[j].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+            }
+        }
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {
+            Caterpillars[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+        }
     }
 
 

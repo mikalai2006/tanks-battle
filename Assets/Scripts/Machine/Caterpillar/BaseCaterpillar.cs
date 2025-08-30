@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
@@ -64,6 +65,19 @@ public class BaseCaterpillar : MonoBehaviour
             // Wrapper.transform.GetChild(j).GetChild(0).transform.localPosition = new Vector3(0.5f,0.5f,0.5f);
         }
 
+    }
+
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    {
+        for (int x = 0; x < voxelMeshRenders.Count; x++)
+        {
+            for (int i = 0; i < voxelMeshRenders[x].Containers.Length; i++)
+            {
+                Vector3 localPoint = voxelMeshRenders[x].Containers[i].transform.InverseTransformPoint(_pointCollision);
+                // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+                voxelMeshRenders[x].Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
+            }
+        }
     }
 
     public void Move()

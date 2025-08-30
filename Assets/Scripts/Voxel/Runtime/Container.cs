@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Unity.Burst;
@@ -77,6 +78,10 @@ namespace Mikalai2006.Voxel
             {
                 meshCollider.enabled = false;
             }
+            // else
+            // {
+            //     meshCollider.convex = config.isConvex;
+            // }
 
             if (config.isRigidbody)
             {
@@ -332,53 +337,53 @@ namespace Mikalai2006.Voxel
         //     meshCollider.sharedMesh = mesh;
         // }
 
-        private int GetVoxelNeighbours(Vector3 pos, Dictionary<Vector3, bool> allVoxels)
-        {
-            int i = 0;
+        // private int GetVoxelNeighbours(Vector3 pos, Dictionary<Vector3, bool> allVoxels)
+        // {
+        //     int i = 0;
 
-            Vector3[] coordsNeighbours = new Vector3[]{
-                new Vector3(-1,-1,-1),
-                new Vector3(-1,-1,0),
-                new Vector3(-1,-1,1),
-                new Vector3(-1,0,0),
-                new Vector3(-1,0,1),
-                new Vector3(-1,1,-1),
-                new Vector3(-1,1,0),
-                new Vector3(-1,1,1),
-                new Vector3(0,-1,-1),
-                new Vector3(0,-1,0),
-                new Vector3(0,-1,1),
-                new Vector3(0,-1,0),
-                new Vector3(0,-1,1),
-                new Vector3(0,0,-1),
-                new Vector3(0,0,0),
-                new Vector3(0,0,1),
-                new Vector3(0,1,-1),
-                new Vector3(0,1,0),
-                new Vector3(0,1,1),
-                new Vector3(1,-1,-1),
-                new Vector3(1,-1,0),
-                new Vector3(1,-1,1),
-                new Vector3(1,0,-1),
-                new Vector3(1,0,0),
-                new Vector3(1,0,1),
-                new Vector3(1,1,-1),
-                new Vector3(1,1,0),
-                new Vector3(1,1,1),
-            };
+        //     Vector3[] coordsNeighbours = new Vector3[]{
+        //         new Vector3(-1,-1,-1),
+        //         new Vector3(-1,-1,0),
+        //         new Vector3(-1,-1,1),
+        //         new Vector3(-1,0,0),
+        //         new Vector3(-1,0,1),
+        //         new Vector3(-1,1,-1),
+        //         new Vector3(-1,1,0),
+        //         new Vector3(-1,1,1),
+        //         new Vector3(0,-1,-1),
+        //         new Vector3(0,-1,0),
+        //         new Vector3(0,-1,1),
+        //         new Vector3(0,-1,0),
+        //         new Vector3(0,-1,1),
+        //         new Vector3(0,0,-1),
+        //         new Vector3(0,0,0),
+        //         new Vector3(0,0,1),
+        //         new Vector3(0,1,-1),
+        //         new Vector3(0,1,0),
+        //         new Vector3(0,1,1),
+        //         new Vector3(1,-1,-1),
+        //         new Vector3(1,-1,0),
+        //         new Vector3(1,-1,1),
+        //         new Vector3(1,0,-1),
+        //         new Vector3(1,0,0),
+        //         new Vector3(1,0,1),
+        //         new Vector3(1,1,-1),
+        //         new Vector3(1,1,0),
+        //         new Vector3(1,1,1),
+        //     };
 
-            for (int x = 0; x < coordsNeighbours.Length; x++)
-            {
-                Vector3 nPos = pos + coordsNeighbours[x];
-                bool value = false;
-                if (allVoxels.TryGetValue(nPos, out value))
-                {
-                    i++;
-                }
-            }
+        //     for (int x = 0; x < coordsNeighbours.Length; x++)
+        //     {
+        //         Vector3 nPos = pos + coordsNeighbours[x];
+        //         bool value = false;
+        //         if (allVoxels.TryGetValue(nPos, out value))
+        //         {
+        //             i++;
+        //         }
+        //     }
 
-            return i;
-        }
+        //     return i;
+        // }
 
 
         public MeshData UploadMesh(bool isDrawMesh)
@@ -497,14 +502,14 @@ namespace Mikalai2006.Voxel
 
         #region My functions
 
-        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
+        async public UniTaskVoid ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
         {
-            float startTime = Time.realtimeSinceStartup;
+            // float startTime = Time.realtimeSinceStartup;
 
             pointCollision = _pointCollision;
             explodeGameObject = _explodeGameObject;
 
-            var list = new Dictionary<Vector3, Voxel>();
+            // var list = new Dictionary<Vector3, Voxel>();
             // var x = Mathf.RoundToInt(pos.x);
             // var y = Mathf.RoundToInt(pos.y);
             // var z = Mathf.RoundToInt(pos.z);
@@ -557,7 +562,6 @@ namespace Mikalai2006.Voxel
                 }
             };
 
-
             // for (int j = 0; j < keys.Length; j++)
             // {
             //     Vector3 posx = keys.ElementAt(j);
@@ -574,25 +578,25 @@ namespace Mikalai2006.Voxel
             //     }
             // }
 
-            Debug.Log($"Time for create data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+            // Debug.Log($"Time for create data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
             // list.Add(new Vector3(x,y,z),data[new Vector3(x,y,z)]);
-            if (data.Count() > 10)
+
+            if (needCreateElements.Count > 0)
             {
                 GenerateMesh();
+                // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
+                UploadMesh(isDrawMesh);
+                // Debug.Log($"Time upload mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
+                // Debug.Log($"Exploded {needCreateElements.Count} voxels!");
+                // StartCoroutine(createGO());
+                await CreateObjectsAsync();
             }
-            else
+                
+            if (data.Count() < 10)
             {
                 transform.gameObject.SetActive(false);
             }
-
-            // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
-            UploadMesh(isDrawMesh);
-            Debug.Log($"Time upload mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
-
-            // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
-            Debug.Log($"Exploded {needCreateElements.Count} voxels!");
-            // StartCoroutine(createGO());
-            await CreateObjectsAsync();
 
             _needCreateElements.Dispose();
             _needRemoveElements.Dispose();

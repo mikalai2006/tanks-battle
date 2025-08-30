@@ -25,7 +25,7 @@ public abstract class BaseMuzzle : MonoBehaviour
     [SerializeField] protected VoxelMeshRender voxelMeshRender;
     [SerializeField] private LayerMask ignoreMask;
 
-#region Unity methods
+    #region Unity methods
     void Awake()
     {
         data = new();
@@ -64,16 +64,16 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         transform.localPosition = Option.offsetMuzzle;
 
-        pointEffects.transform.localPosition = new Vector3(Config.MeshConfig.sOVoxelData.Bounds.x + 2.5f,0,0);
+        pointEffects.transform.localPosition = new Vector3(Config.MeshConfig.sOVoxelData.Bounds.x + 2.5f, 0, 0);
 
         pivot.transform.localPosition = new Vector3(-Config.MeshConfig.sOVoxelData.Bounds.x, 0, 0);
 
         MaxDistanceObject.transform.localPosition = new Vector3(200f, 0, 0);
 
-        transform.localRotation = Quaternion.Euler(0,90,0);
+        transform.localRotation = Quaternion.Euler(0, 90, 0);
     }
 
-    public void OnSetAngle(Quaternion rotation, Vector3 point,  float speed)
+    public void OnSetAngle(Quaternion rotation, Vector3 point, float speed)
     {
         transform.localRotation = Quaternion.Lerp(
             transform.localRotation,
@@ -110,7 +110,8 @@ public abstract class BaseMuzzle : MonoBehaviour
         {
             pointTarget = MaxDistanceObject.transform.position; //transform.position + distanceAndDirection;
             castPoint = pointCenterScreen;
-        };
+        }
+        ;
 
         decal.transform.position = pointTarget - distanceAndDirection.normalized * 0.1f;
         decal.transform.rotation = Quaternion.LookRotation(-distanceAndDirection.normalized);
@@ -197,6 +198,16 @@ public abstract class BaseMuzzle : MonoBehaviour
 
 
         OnSetTimeBetweenShot(Config.timeBetweenShot);
+    }
+    
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    {
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
+            // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
+        }
     }
 
     // bool AnimatorIsPlaying(string stateName) {
