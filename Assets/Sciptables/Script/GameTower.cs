@@ -9,15 +9,11 @@ public class GameTower : ScriptableObject
   [Header("Основная информация")]
   public string idObject;
   public TextLocalize text;
-  public Sprite spriteTower;
   public BaseTower prefab;
+  
+  [Space(5)]
+  [Header("Настройки меша")]
   public MeshConfig MeshConfig;
-
-  // [Space(5)]
-  // [Header("Допустимые улучшения")]
-  // [Tooltip("Список улучшений")]
-  // public GameMachine parent;
-  // public List<MachineUpdateItem> updates;
 
   [Space(5)]
   [Header("Параметры")]

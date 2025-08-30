@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -496,7 +497,7 @@ namespace Mikalai2006.Voxel
 
         #region My functions
 
-        public Dictionary<Vector3, Voxel> ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject)
+        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
         {
             float startTime = Time.realtimeSinceStartup;
 
@@ -532,7 +533,8 @@ namespace Mikalai2006.Voxel
                 _needCreateElements = _needCreateElements,
                 _pointCollision = pointCollision,
                 points = points,
-                needRemoveElements = _needRemoveElements
+                needRemoveElements = _needRemoveElements,
+                _radiusExplode = radiusExplode
             };
             JobHandle collisionJobHandle = collisionJob.Schedule(points.Length, 64);
             collisionJobHandle.Complete(); // Or use dependency
@@ -590,12 +592,11 @@ namespace Mikalai2006.Voxel
             // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
             Debug.Log($"Exploded {needCreateElements.Count} voxels!");
             // StartCoroutine(createGO());
-            CreateObjectsAsync().Forget();
+            await CreateObjectsAsync();
 
             _needCreateElements.Dispose();
             _needRemoveElements.Dispose();
             points.Dispose();
-            return list;
         }
 
         // public Dictionary<Vector3, Voxel> ExposionVoxels2(Vector3 _pointCollision, bool isDrawMesh, Collision _collision)
@@ -795,7 +796,7 @@ namespace Mikalai2006.Voxel
                 float forceMagnitude = 10 * 1000;
                 // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
                 GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
-                Vector3 pointSpawnVoxel = explodeGameObject.transform.TransformPoint(elem);
+                Vector3 pointSpawnVoxel = transform.TransformPoint(elem);
                 gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
                 // gObj.isStatic = true;
                 // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
@@ -820,7 +821,7 @@ namespace Mikalai2006.Voxel
                 // gameObjects[count - 1] = gObj;
                 // gObj.isStatic = false;
                 // Destroy(gObj, 15);
-                Lean.Pool.LeanPool.Despawn(gObj, UnityEngine.Random.Range(1, 5));
+                Lean.Pool.LeanPool.Despawn(gObj, UnityEngine.Random.Range(1, 3));
 
 
                 // // simulate paraboloid.
@@ -1195,13 +1196,14 @@ namespace Mikalai2006.Voxel
     {
         public NativeArray<float3> points;
         public float3 _pointCollision;
+        public float _radiusExplode;
         public NativeArray<float3> _needCreateElements;
         public NativeArray<float3> needRemoveElements;
 
         public void Execute(int index)
         {
             float3 point = points[index];
-            if (Helpers.IsInsideSphere(point, _pointCollision, 4))
+            if (Helpers.IsInsideSphere(point, _pointCollision, _radiusExplode))
             {
                 // list.Add(posx, data.ElementAt(j).Value);
                 // // data[posx] = new Voxel()
@@ -1211,7 +1213,7 @@ namespace Mikalai2006.Voxel
                 // data.Remove(posx);
                 needRemoveElements[index] = point;
 
-                if (Helpers.IsInsideSphere(point, _pointCollision, 2))
+                if (Helpers.IsInsideSphere(point, _pointCollision, _radiusExplode > 4 ? Math.Max(4, _radiusExplode / 2) : _radiusExplode))
                 {
                     _needCreateElements[index] = point;
                 }

@@ -1,7 +1,7 @@
+using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
-// [RequireComponent(typeof(GPUInstanceEnabler))]
 public class BaseBody : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _bodySprite;
@@ -33,11 +33,13 @@ public class BaseBody : MonoBehaviour
         // _damageSprite.color = col;
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
     {
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
-            voxelMeshRender.Containers[i].ExposionVoxels(_pointCollision, isDrawMesh, explodeGameObject);
+            Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
+            // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
         }
     }
 

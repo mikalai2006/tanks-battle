@@ -9,16 +9,15 @@ public class GameCaterpillar : ScriptableObject
   public string idObject;
   public TextLocalize text;
   public BaseCaterpillar prefab;
-  public MeshConfig MeshConfig;
+  [Tooltip("Будет ли вращаться")]
   public bool isRotate;
 
-  [Tooltip("Спрайт дула")]
-  public Sprite sprite;
-  // [Tooltip("Аниматор дула")]
-  // public AnimatorOverrideController animator;
-
   [Space(5)]
-  [Header("Параметры")]
-  [Tooltip("Цвет")]
-  public Color color;
+  [Header("Настройки меша")]
+  public MeshConfig MeshConfig;
+
+  // [Space(5)]
+  // [Header("Параметры")]
+  // [Tooltip("Цвет")]
+  // public Color color;
 }

@@ -26,6 +26,13 @@ public class PlayerController : MonoBehaviour
     {
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
         _cameraFPS = _machine.Camera;
+        
+        // захват клика мыши для стрельбы.
+        if (!_gameManager.Settings.inputJoystick && !_machine.MachineLevelData.isBot)
+        {
+            attackActionInput.action.performed += _machine.OnShot;
+        }
+
     }
 
     void Update()
@@ -112,12 +119,6 @@ public class PlayerController : MonoBehaviour
                     // {
                     // }
                     _machine.Stop();
-                }
-
-                // захват клика мыши для стрельбы.
-                if (!_gameManager.Settings.inputJoystick && !_machine.MachineLevelData.isBot)
-                {
-                    attackActionInput.action.performed += _machine.OnShot;
                 }
 
                 // обработка вращения башни.

@@ -169,14 +169,14 @@ public abstract class BaseMuzzle : MonoBehaviour
             _gameManager.audioManager.PlayClipEffect(Config.soundShot);
         }
 
-        // for (int i = 0; i < particlesBoom.Length; i++)
+        // // for (int i = 0; i < particlesBoom.Length; i++)
+        // // {
+        // //     particlesBoom[i].gameObject.SetActive(true);
+        // // }
+        // if (_animator)
         // {
-        //     particlesBoom[i].gameObject.SetActive(true);
+        //     _animator.SetTrigger("shot");
         // }
-        if (_animator)
-        {
-            _animator.SetTrigger("shot");
-        }
 
         // TODO Effect stretch fire muzzle
         GameObject objEffect = Lean.Pool.LeanPool.Spawn(Config.fireEffect, Machine.LevelManager.objectSpawnEffect.transform, false);
@@ -204,19 +204,19 @@ public abstract class BaseMuzzle : MonoBehaviour
     //         && _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
     // }
 
-     public void LoadedAsset(AsyncOperationHandle<GameObject> handle)
-    {
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            BaseBullet obj = handle.Result.GetComponent<BaseBullet>();
-            if (obj != null)
-            {
-                obj.OnInit(Machine, Tower, this, Config);
-            }
-        }
-        else
-        {
-            Debug.LogError($"Error Load prefab::: {handle.Status}");
-        }
-    }
+    //  public void LoadedAsset(AsyncOperationHandle<GameObject> handle)
+    // {
+    //     if (handle.Status == AsyncOperationStatus.Succeeded)
+    //     {
+    //         BaseBullet obj = handle.Result.GetComponent<BaseBullet>();
+    //         if (obj != null)
+    //         {
+    //             obj.OnInit(Machine, Tower, this, Config);
+    //         }
+    //     }
+    //     else
+    //     {
+    //         Debug.LogError($"Error Load prefab::: {handle.Status}");
+    //     }
+    // }
 }

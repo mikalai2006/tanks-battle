@@ -411,7 +411,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &95788491
 GameObject:
@@ -1010,7 +1010,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &258458607
 GameObject:
@@ -1061,7 +1061,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &265300644
 GameObject:
@@ -1728,7 +1728,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &334008409
 GameObject:
@@ -1779,7 +1779,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &344780307
 GameObject:
@@ -2688,6 +2688,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &552866922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 552866923}
+  - component: {fileID: 552866924}
+  m_Layer: 0
+  m_Name: Bullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &552866923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552866922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1142989211}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &552866924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552866922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d7594e0ec10fe94b89b1b3c92febf9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 7056810224777368569, guid: fe5f44a455df01c4c8eceec4df608b11, type: 3}
+  count: 10
+  poolObjs: []
 --- !u!1 &577907228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2737,7 +2784,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &601035230
 GameObject:
@@ -4218,6 +4265,7 @@ MonoBehaviour:
   _cameraHandler: {fileID: 1403102074}
   cinemachineCamera: {fileID: 95788492}
   cinemachineOrbitalFollow: {fileID: 0}
+  poolBullet: {fileID: 552866924}
 --- !u!1 &835842425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,7 +4315,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &894495586
 GameObject:
@@ -4415,7 +4463,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &967407354
 GameObject:
@@ -4600,7 +4648,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1007556943
 GameObject:
@@ -4651,7 +4699,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1048832953
 GameObject:
@@ -5400,7 +5448,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1142989210
 GameObject:
@@ -5437,6 +5485,7 @@ Transform:
   - {fileID: 1430675561}
   - {fileID: 814549441}
   - {fileID: 2071391372}
+  - {fileID: 552866923}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1143462062
@@ -5904,7 +5953,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1239241955
 GameObject:
@@ -6261,7 +6310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1335075958
 Transform:
   m_ObjectHideFlags: 0
@@ -6432,7 +6481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1402579460
 Transform:
   m_ObjectHideFlags: 0
@@ -6460,7 +6509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2154205968863589958, guid: b4fa1c66e86c37b42b9bbf3cb5c75800, type: 3}
+  prefab: {fileID: 7056810224777368569, guid: fe5f44a455df01c4c8eceec4df608b11, type: 3}
   notification: 3
   strategy: 0
   preload: 500
@@ -6863,7 +6912,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1478188671
 GameObject:
@@ -7926,7 +7975,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1702803107
 GameObject:
@@ -8088,7 +8137,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1729474790
 GameObject:
@@ -8272,7 +8321,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1786128234
 GameObject:
@@ -8668,7 +8717,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1816977601
 GameObject:
@@ -9232,7 +9281,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1934791842
 GameObject:
@@ -9493,7 +9542,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1999755600
 GameObject:
@@ -9733,7 +9782,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2071391371
 GameObject:
@@ -9976,7 +10025,7 @@ MonoBehaviour:
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
-    isRigidbody: 1
+    isRigidbody: 0
   Wrapper: {fileID: 0}
 --- !u!4 &2115139622
 Transform:

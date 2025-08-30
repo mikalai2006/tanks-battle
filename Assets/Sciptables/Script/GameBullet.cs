@@ -7,14 +7,22 @@ public class GameBullet : ScriptableObject
   [Header("Основная информация")]
   public string idObject;
   public TextLocalize text;
-  public BaseBullet prefab;
+  public GameObject prefab;
 
   [Space(5)]
   [Header("Параметры")]
+  [Tooltip("Время жизни")]
+  [Range(0.1f, 5f)] public float lifeTime;
   [Tooltip("Скорость")]
   [Range(1f, 20f)] public float speed;
-  [Tooltip("Урон от одного попадания")]
-  [Range(1f, 1000f)] public int damage;
+  [Tooltip("Радиус поражения вокселей (Влияет на количество вокселей, которые будут разрушены)")]
+  [Range(1f, 12f)] public int damageRadius;
+  [Tooltip("Максимальное количество коллизий")]
+  [Range(1f, 5f)] public int countCollisions;
+
+  
+  [Space(5)]
+  [Header("Эффекты")]
   [Tooltip("След от взрыва")]
   public GameObject effectBoom;
   [Tooltip("Эффект взрыва")]

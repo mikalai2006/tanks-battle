@@ -714,12 +714,12 @@ public abstract class BaseMachine : MonoBehaviour
     //     Body.OnCollision(collision.contacts[0].point, true, collision);
     // }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
     {
         // for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         // {
         // }
-        Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject);
+        Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
     }
 
 
@@ -734,7 +734,7 @@ public abstract class BaseMachine : MonoBehaviour
             Gizmos.color = Color.blue;
             for (int j = 0; j < Towers[i].Muzzles.Count; j++)
             {
-                Gizmos.DrawRay(Towers[i].Muzzles[j].transform.position, Towers[i].Muzzles[j].transform.forward * 30);
+                Gizmos.DrawRay(Towers[i].Muzzles[j].transform.position, Towers[i].Muzzles[j].transform.forward * 50);
             }
         }
     }

@@ -212,101 +212,101 @@ namespace UIToolkitLibrary
             mBox.style.alignSelf = Align.Center;
             mBox.name = "Machine";
 
-            float pixelsPerUnit = machine.body.spriteBody.pixelsPerUnit;
-            var widthMachine = machine.body.spriteBody.bounds.size.x * pixelsPerUnit;
-            var heightMachine = machine.body.spriteBody.bounds.size.y * pixelsPerUnit;
+            // float pixelsPerUnit = machine.body.spriteBody.pixelsPerUnit;
+            // var widthMachine = machine.body.spriteBody.bounds.size.x * pixelsPerUnit;
+            // var heightMachine = machine.body.spriteBody.bounds.size.y * pixelsPerUnit;
 
-            // draw caterpillar.
-            for (int j = 0; j < machine.catterpillars.Count; j++)
-            {
-                var catConfig = machine.catterpillars[j];
-                VisualElement vC = new VisualElement();
-                vC.name = "Caterpillar";
-                vC.style.justifyContent = Justify.Center;
-                vC.style.alignContent = Align.Center;
-                vC.style.alignItems = Align.Center;
-                vC.style.alignSelf = Align.Center;
-                vC.style.flexShrink = 0;
-                vC.style.flexGrow = 0;
-                vC.style.justifyContent = Justify.Center;
-                vC.style.alignContent = Align.Center;
+            // // draw caterpillar.
+            // for (int j = 0; j < machine.catterpillars.Count; j++)
+            // {
+            //     var catConfig = machine.catterpillars[j];
+            //     VisualElement vC = new VisualElement();
+            //     vC.name = "Caterpillar";
+            //     vC.style.justifyContent = Justify.Center;
+            //     vC.style.alignContent = Align.Center;
+            //     vC.style.alignItems = Align.Center;
+            //     vC.style.alignSelf = Align.Center;
+            //     vC.style.flexShrink = 0;
+            //     vC.style.flexGrow = 0;
+            //     vC.style.justifyContent = Justify.Center;
+            //     vC.style.alignContent = Align.Center;
 
-                vC.style.backgroundImage = new StyleBackground(catConfig.Config.sprite);
-                float pixelsPerUnit3 = catConfig.Config.sprite.pixelsPerUnit;
-                vC.style.width = catConfig.Config.sprite.bounds.size.x * pixelsPerUnit3;
-                vC.style.height = catConfig.Config.sprite.bounds.size.y * pixelsPerUnit3;
-                vC.style.position = Position.Absolute;
-                vC.style.translate = new Translate(
-                    new Length((catConfig.offsetCat.x * pixelsPerUnit3), LengthUnit.Pixel),
-                    new Length(catConfig.offsetCat.y * pixelsPerUnit3, LengthUnit.Pixel)
-                );
-                vC.style.unityBackgroundImageTintColor = new StyleColor(catConfig.colorCat);
+            //     vC.style.backgroundImage = new StyleBackground(catConfig.Config.sprite);
+            //     float pixelsPerUnit3 = catConfig.Config.sprite.pixelsPerUnit;
+            //     vC.style.width = catConfig.Config.sprite.bounds.size.x * pixelsPerUnit3;
+            //     vC.style.height = catConfig.Config.sprite.bounds.size.y * pixelsPerUnit3;
+            //     vC.style.position = Position.Absolute;
+            //     vC.style.translate = new Translate(
+            //         new Length((catConfig.offsetCat.x * pixelsPerUnit3), LengthUnit.Pixel),
+            //         new Length(catConfig.offsetCat.y * pixelsPerUnit3, LengthUnit.Pixel)
+            //     );
+            //     vC.style.unityBackgroundImageTintColor = new StyleColor(catConfig.colorCat);
 
-                mBox.Add(vC);
-            }
+            //     mBox.Add(vC);
+            // }
 
-            // draw body.
-            VisualElement mBody = new VisualElement();
-            mBody.name = "Body";
-            mBody.style.backgroundImage = new StyleBackground(machine.body.spriteBody);
-            mBody.style.width = mBox.style.width = widthMachine;
-            mBody.style.height = mBox.style.height = heightMachine;
-            mBody.style.unityBackgroundImageTintColor = new StyleColor(machine.colorBody);
-            mBox.Add(mBody);
+            // // draw body.
+            // VisualElement mBody = new VisualElement();
+            // mBody.name = "Body";
+            // mBody.style.backgroundImage = new StyleBackground(machine.body.spriteBody);
+            // mBody.style.width = mBox.style.width = widthMachine;
+            // mBody.style.height = mBox.style.height = heightMachine;
+            // mBody.style.unityBackgroundImageTintColor = new StyleColor(machine.colorBody);
+            // mBox.Add(mBody);
 
-            // draw towers.
-            for (int i = 0; i < machine.towers.Count; i++)
-            {
-                var towerConfig = machine.towers[i];
-                VisualElement vE = new VisualElement();
-                vE.name = "Tower";
-                vE.style.flexShrink = 0;
-                vE.style.flexGrow = 0;
-                vE.style.justifyContent = Justify.Center;
-                vE.style.alignContent = Align.Center;
+            // // draw towers.
+            // for (int i = 0; i < machine.towers.Count; i++)
+            // {
+            //     var towerConfig = machine.towers[i];
+            //     VisualElement vE = new VisualElement();
+            //     vE.name = "Tower";
+            //     vE.style.flexShrink = 0;
+            //     vE.style.flexGrow = 0;
+            //     vE.style.justifyContent = Justify.Center;
+            //     vE.style.alignContent = Align.Center;
 
-                vE.style.backgroundImage = new StyleBackground(towerConfig.Config.spriteTower);
-                float pixelsPerUnit2 = towerConfig.Config.spriteTower.pixelsPerUnit;
-                vE.style.width = towerConfig.Config.spriteTower.bounds.size.x * pixelsPerUnit2;
-                vE.style.height = towerConfig.Config.spriteTower.bounds.size.y * pixelsPerUnit2;
-                vE.style.position = Position.Absolute;
-                // vE.style.left = 0;
-                // vE.style.right = 0;
-                // vE.style.top = 0;
-                // vE.style.bottom = 0;
-                var xTower = towerConfig.offsetTower.x * pixelsPerUnit2;
-                var yTower = towerConfig.offsetTower.y * pixelsPerUnit2;
-                vE.style.translate = new Translate(new Length(xTower, LengthUnit.Pixel), new Length(yTower, LengthUnit.Pixel));
-                vE.style.unityBackgroundImageTintColor = new StyleColor(towerConfig.colorTower);
-
-
-                for (int j = 0; j < towerConfig.muzzles.Count; j++)
-                {
-                    var muzzleConfig = towerConfig.muzzles[j];
-                    VisualElement vM = new VisualElement();
-                    vM.name = "Muzzle";
-                    vM.style.flexShrink = 0;
-                    vM.style.flexGrow = 0;
-                    vM.style.justifyContent = Justify.Center;
-                    vM.style.alignContent = Align.Center;
-
-                    vM.style.backgroundImage = new StyleBackground(muzzleConfig.Config.spriteMuzzle);
-                    float pixelsPerUnit3 = muzzleConfig.Config.spriteMuzzle.pixelsPerUnit;
-                    vM.style.width = muzzleConfig.Config.spriteMuzzle.bounds.size.x * pixelsPerUnit3;
-                    vM.style.height = muzzleConfig.Config.spriteMuzzle.bounds.size.y * pixelsPerUnit3;
-                    vM.style.position = Position.Absolute;
-                    vM.style.translate = new Translate(
-                        new Length((muzzleConfig.offsetMuzzle.x * pixelsPerUnit3) + (muzzleConfig.Config.spriteMuzzle.bounds.size.x / 2 * pixelsPerUnit3), LengthUnit.Pixel),
-                        new Length(muzzleConfig.offsetMuzzle.y * pixelsPerUnit3, LengthUnit.Pixel)
-                    );
-                    vM.style.unityBackgroundImageTintColor = new StyleColor(muzzleConfig.Config.color);
-
-                    vE.Add(vM);
-                }
+            //     vE.style.backgroundImage = new StyleBackground(towerConfig.Config.spriteTower);
+            //     float pixelsPerUnit2 = towerConfig.Config.spriteTower.pixelsPerUnit;
+            //     vE.style.width = towerConfig.Config.spriteTower.bounds.size.x * pixelsPerUnit2;
+            //     vE.style.height = towerConfig.Config.spriteTower.bounds.size.y * pixelsPerUnit2;
+            //     vE.style.position = Position.Absolute;
+            //     // vE.style.left = 0;
+            //     // vE.style.right = 0;
+            //     // vE.style.top = 0;
+            //     // vE.style.bottom = 0;
+            //     var xTower = towerConfig.offsetTower.x * pixelsPerUnit2;
+            //     var yTower = towerConfig.offsetTower.y * pixelsPerUnit2;
+            //     vE.style.translate = new Translate(new Length(xTower, LengthUnit.Pixel), new Length(yTower, LengthUnit.Pixel));
+            //     vE.style.unityBackgroundImageTintColor = new StyleColor(towerConfig.colorTower);
 
 
-                mBox.Add(vE);
-            }
+            //     for (int j = 0; j < towerConfig.muzzles.Count; j++)
+            //     {
+            //         var muzzleConfig = towerConfig.muzzles[j];
+            //         VisualElement vM = new VisualElement();
+            //         vM.name = "Muzzle";
+            //         vM.style.flexShrink = 0;
+            //         vM.style.flexGrow = 0;
+            //         vM.style.justifyContent = Justify.Center;
+            //         vM.style.alignContent = Align.Center;
+
+            //         vM.style.backgroundImage = new StyleBackground(muzzleConfig.Config.spriteMuzzle);
+            //         float pixelsPerUnit3 = muzzleConfig.Config.spriteMuzzle.pixelsPerUnit;
+            //         vM.style.width = muzzleConfig.Config.spriteMuzzle.bounds.size.x * pixelsPerUnit3;
+            //         vM.style.height = muzzleConfig.Config.spriteMuzzle.bounds.size.y * pixelsPerUnit3;
+            //         vM.style.position = Position.Absolute;
+            //         vM.style.translate = new Translate(
+            //             new Length((muzzleConfig.offsetMuzzle.x * pixelsPerUnit3) + (muzzleConfig.Config.spriteMuzzle.bounds.size.x / 2 * pixelsPerUnit3), LengthUnit.Pixel),
+            //             new Length(muzzleConfig.offsetMuzzle.y * pixelsPerUnit3, LengthUnit.Pixel)
+            //         );
+            //         vM.style.unityBackgroundImageTintColor = new StyleColor(muzzleConfig.Config.color);
+
+            //         vE.Add(vM);
+            //     }
+
+
+            //     mBox.Add(vE);
+            // }
 
             return mBox;
         }

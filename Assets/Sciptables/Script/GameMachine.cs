@@ -24,10 +24,10 @@ public class GameMachine : ScriptableObject
   [Tooltip("Звук мотора")]
   public AudioClip soundMove;
 
-  [Space(5)]
-  [Header("Цвета")]
-  [Tooltip("Цвет машины")]
-  public Color colorBody;
+  // [Space(5)]
+  // [Header("Цвета")]
+  // [Tooltip("Цвет машины")]
+  // public Color colorBody;
   // [Tooltip("Цвет башни машины")]
   // public Color colorTower; 
 
@@ -35,7 +35,7 @@ public class GameMachine : ScriptableObject
   // [Header("Допустимые улучшения")]
   // [Tooltip("Список улучшений")]
   // public GameMachine parent;
-  public List<MachineUpdateItem> updates;
+  // public List<MachineUpdateItem> updates;
 
   [Space(5)]
   [Header("Параметры")]

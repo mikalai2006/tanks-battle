@@ -33,14 +33,13 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   prefab: {fileID: 296304405608595272, guid: 75595ac37e46e134eb5f119d547d3cfd, type: 3}
+  isRotate: 1
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 424574f24b1675b419dfac1e0aa147e7, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-    existCollider: 0
+    existCollider: 1
     isGreedy: 1
-  isRotate: 1
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 1}
+    isRigidbody: 0
   references:
     version: 2
     RefIds: []

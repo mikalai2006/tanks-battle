@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
@@ -29,6 +28,10 @@ public class LevelManager : MonoBehaviour
     public CameraHandler CameraHandler => _cameraHandler;
     public CinemachineCamera cinemachineCamera;
     public CinemachineOrbitalFollow cinemachineOrbitalFollow;
+
+    [Space(5)]
+    [Header("Pools")]
+    public ObjectPool poolBullet;
 
     void Start()
     {
@@ -105,7 +108,7 @@ public class LevelManager : MonoBehaviour
                     // Addressables.InstantiateAsync
                     var gObject = Instantiate(
                         configMachine.machinePrefab,
-                        new Vector3(data.isBot ? 30 : 5, 0.5f, data.isBot ? 30 : 5),
+                        new Vector3(data.isBot ? 30 : 241, 0.5f, data.isBot ? 30 : 22),
                         // new Vector3(node.position.x, 0.5f, node.position.y),
                         Quaternion.identity,
                         objectSpawnMachines.transform

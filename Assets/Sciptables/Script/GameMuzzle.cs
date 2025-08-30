@@ -9,21 +9,24 @@ public class GameMuzzle : ScriptableObject
   public string idObject;
   public TextLocalize text;
   public BaseMuzzle prefab;
-  [Tooltip("Спрайт дула")]
-  public Sprite spriteMuzzle;
+  
+  [Space(5)]
+  [Header("Настройки меша")]
   public MeshConfig MeshConfig;
-  // [Tooltip("Аниматор дула")]
-  // public AnimatorOverrideController animator;
 
   [Space(5)]
   [Header("Аудио")]
   [Tooltip("Звук выстрела")]
   public AudioClip soundShot;
 
+
   [Space(5)]
-  [Header("Параметры")]
+  [Header("Эффекты")]
   [Tooltip("Эффект выстрела")]
   public GameObject fireEffect;
+
+  [Space(5)]
+  [Header("Параметры")]
   [Tooltip("Снаряды")]
   public GameBullet Bullet;
   [Tooltip("Материал")]

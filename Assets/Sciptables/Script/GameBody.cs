@@ -9,8 +9,10 @@ public class GameBody : ScriptableObject
   [Header("Основная информация")]
   public string idObject;
   public TextLocalize text;
-  public Sprite spriteBody;
   public BaseBody prefab;
+  
+  [Space(5)]
+  [Header("Настройки меша")]
   public MeshConfig MeshConfig;
 
   [Space(5)]
@@ -18,22 +20,12 @@ public class GameBody : ScriptableObject
   [Tooltip("Цвет машины")]
   public Color colorBody;
 
-  // [Space(5)]
-  // [Header("Параметры")]
-  // [Tooltip("Минимальный ранг для доступа")]
-  // public GameRank minRank;
-  // [Tooltip("Скорость")]
-  // [Range(0.2f, 200f)] public float speed;
-  // [Tooltip("Скорость вращения")]
-  // [Range(0.2f, 50f)] public float speedRotate;
-  // [Tooltip("Здоровье")]
-  // [Range(100f, 1000f)] public int hp;
 
-  [Space(5)]
-  [Header("Допустимые улучшения")]
-  [Tooltip("Список улучшений")]
-  public GameMachine parent;
-  public List<MachineUpdateItem> updates;
+  // [Space(5)]
+  // [Header("Допустимые улучшения")]
+  // [Tooltip("Список улучшений")]
+  // public GameMachine parent;
+  // public List<MachineUpdateItem> updates;
 
   // [Tooltip("Задержка выстрела следующего ствола, чтобы имитировать очередь, а не стрелять сразу всеми стволами")]
   // [Range(0f, 0.5f)] public float timeDelayNextMuzzle;
