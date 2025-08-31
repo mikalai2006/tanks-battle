@@ -3,6 +3,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class LevelManager : MonoBehaviour
 {
@@ -28,6 +30,8 @@ public class LevelManager : MonoBehaviour
     public CameraHandler CameraHandler => _cameraHandler;
     public CinemachineCamera cinemachineCamera;
     public CinemachineOrbitalFollow cinemachineOrbitalFollow;
+    public NavMeshSurface NavMeshSurface;
+    public MazeGenerator MazeGenerator;
 
     [Space(5)]
     [Header("Pools")]
@@ -43,7 +47,9 @@ public class LevelManager : MonoBehaviour
         globalLight.intensity = _gameManager.LevelConfig.light;
 
         // создаем карту
-        mapManager.CreateMap();
+        // mapManager.CreateMap();
+        MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
+        NavMeshSurface.BuildNavMesh();
 
         // создаем игровые комманды
         if (_gameManager.LevelConfig.typeLevel == TypeLevel.Command)
@@ -91,24 +97,26 @@ public class LevelManager : MonoBehaviour
             foreach (MachineLevelData data in _gameManager.StateManager.stateLevel.machines)
             {
 
-                GridTileNode node = mapManager.gridTileHelper.GetAllGridNodes().Where(n =>
-                    // !n.OccupiedUnit
-                    // && n.StateNode.HasFlag(StateNode.Empty)
-                    n.X > 1
-                    && n.X < _gameManager.LevelConfig.gridSize.x
-                    && n.Y > 1
-                    && n.Y < _gameManager.LevelConfig.gridSize.y
-                    && !n.StateNode.HasFlag(StateNode.Disable)
-                ).OrderBy(t => UnityEngine.Random.value).First();
+                // GridTileNode node = mapManager.gridTileHelper.GetAllGridNodes().Where(n =>
+                //     // !n.OccupiedUnit
+                //     // && n.StateNode.HasFlag(StateNode.Empty)
+                //     n.X > 1
+                //     && n.X < _gameManager.LevelConfig.gridSize.x
+                //     && n.Y > 1
+                //     && n.Y < _gameManager.LevelConfig.gridSize.y
+                //     && !n.StateNode.HasFlag(StateNode.Disable)
+                // ).OrderBy(t => UnityEngine.Random.value).First();
+                Vector3 pointSpawn = MazeGenerator.GetRandomNavmeshLocation(10);
 
-                if (node != null)
+                if (pointSpawn != null)
                 {
                     GameMachine configMachine = _gameSetting.machines.Find(m => m.name == data.id);
 
                     // Addressables.InstantiateAsync
                     var gObject = Instantiate(
                         configMachine.machinePrefab,
-                        new Vector3(data.isBot ? 30 : 241, 0.5f, data.isBot ? 30 : 22),
+                        pointSpawn,
+                        //new Vector3(data.isBot ? 30 : 241, 0.5f, data.isBot ? 30 : 22),
                         // new Vector3(node.position.x, 0.5f, node.position.y),
                         Quaternion.identity,
                         objectSpawnMachines.transform
@@ -122,6 +130,7 @@ public class LevelManager : MonoBehaviour
                         {
                             obj.GetComponent<PlayerController>().enabled = false;
                             obj.GetComponent<PlayerInput>().enabled = false;
+                            obj.GetComponent<NavMeshAgent>().enabled = true;
                             var lightComponent = obj.GetComponentInChildren<Light>();
                             if (lightComponent)
                             {
@@ -132,13 +141,14 @@ public class LevelManager : MonoBehaviour
                             // obj.GetComponent<CameraFollowFPS>().enabled = false;
                             obj.GetComponent<StateController>().enabled = true;
                             obj.OnSetConfig(configMachine, data);
-                            obj.SetOccupiedNode(node);
+                            // obj.SetOccupiedNode(node);
                             // obj.transform.position = _transform;
                         }
                         else
                         {
                             obj.GetComponent<PlayerController>().enabled = true;
                             obj.GetComponent<PlayerInput>().enabled = true;
+                            obj.GetComponent<NavMeshAgent>().enabled = false;
                             var lightComponent = obj.GetComponentInChildren<Light>();
                             if (lightComponent)
                             {
@@ -149,7 +159,7 @@ public class LevelManager : MonoBehaviour
                             // obj.GetComponent<CameraFollowFPS>().enabled = false;
                             obj.GetComponent<StateController>().enabled = false;
                             obj.OnSetConfig(configMachine, data);
-                            obj.SetOccupiedNode(node);
+                            // obj.SetOccupiedNode(node);
 
                             CameraHandler.OnSetCharacter(obj);
                             CinemachineBrain brain = Camera.GetComponent<CinemachineBrain>();

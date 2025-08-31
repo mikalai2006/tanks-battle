@@ -412,6 +412,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &95788491
 GameObject:
@@ -459,7 +460,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 40
+    FieldOfView: 8
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -505,15 +506,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetOffset: {x: 0, y: 20, z: 0}
+  TargetOffset: {x: 0, y: 5, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 0.2, y: 0.2, z: 0.2}
+    PositionDamping: {x: 0.1, y: 0.1, z: 0.1}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 5
+  Radius: 3
   Orbits:
     Top:
       Radius: 2
@@ -528,7 +529,7 @@ MonoBehaviour:
   RecenteringTarget: 2
   HorizontalAxis:
     Value: -46.14438
-    Center: 19.507978
+    Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
@@ -539,7 +540,7 @@ MonoBehaviour:
   VerticalAxis:
     Value: 13.590089
     Center: 0
-    Range: {x: -10, y: 25}
+    Range: {x: -3, y: 25}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -548,7 +549,7 @@ MonoBehaviour:
     Restrictions: 0
   RadialAxis:
     Value: 20.018574
-    Center: 10
+    Center: 0.0001
     Range: {x: 0.0001, y: 50}
     Wrap: 0
     Recentering:
@@ -578,7 +579,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: 2
+        Gain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -589,7 +590,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: -2
+        Gain: -1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -600,7 +601,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: 5082991133974614888, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: 2
+        Gain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -620,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookAtOffset: {x: 0, y: 20, z: 0}
+  LookAtOffset: {x: 0, y: 3, z: 0}
 --- !u!114 &95788498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,6 +1012,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &258458607
 GameObject:
@@ -1062,6 +1064,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &265300644
 GameObject:
@@ -1729,6 +1732,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &334008409
 GameObject:
@@ -1780,6 +1784,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &344780307
 GameObject:
@@ -2308,7 +2313,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 8
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -2386,6 +2391,7 @@ GameObject:
   - component: {fileID: 425636790}
   - component: {fileID: 425636789}
   - component: {fileID: 425636788}
+  - component: {fileID: 425636793}
   m_Layer: 0
   m_Name: Plane
   m_TagString: IgnoreCollision
@@ -2498,12 +2504,45 @@ Transform:
   m_GameObject: {fileID: 425636787}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1000, y: 1, z: 1000}
+  m_LocalPosition: {x: 500, y: 0, z: 500}
+  m_LocalScale: {x: 100, y: 1, z: 100}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1825572891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &425636793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425636787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: e2be07689b85b5b488708b640ba93108, type: 2}
+  m_BuildHeightMesh: 1
 --- !u!1 &489954613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,6 +2824,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &601035230
 GameObject:
@@ -3646,7 +3686,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1157579205}
@@ -4265,6 +4305,8 @@ MonoBehaviour:
   _cameraHandler: {fileID: 1403102074}
   cinemachineCamera: {fileID: 95788492}
   cinemachineOrbitalFollow: {fileID: 0}
+  NavMeshSurface: {fileID: 425636793}
+  MazeGenerator: {fileID: 1335075959}
   poolBullet: {fileID: 552866924}
 --- !u!1 &835842425
 GameObject:
@@ -4316,6 +4358,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &894495586
 GameObject:
@@ -4464,6 +4507,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &967407354
 GameObject:
@@ -4649,6 +4693,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1007556943
 GameObject:
@@ -4700,6 +4745,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1048832953
 GameObject:
@@ -5449,6 +5495,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1142989210
 GameObject:
@@ -5954,6 +6001,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1239241955
 GameObject:
@@ -6310,7 +6358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1335075958
 Transform:
   m_ObjectHideFlags: 0
@@ -6320,8 +6368,8 @@ Transform:
   m_GameObject: {fileID: 1335075957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 300, y: 50, z: 300}
+  m_LocalPosition: {x: 25, y: 1, z: 25}
+  m_LocalScale: {x: 50, y: 1, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6913,6 +6961,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1478188671
 GameObject:
@@ -7976,6 +8025,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1702803107
 GameObject:
@@ -8138,6 +8188,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1729474790
 GameObject:
@@ -8322,6 +8373,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1786128234
 GameObject:
@@ -8718,6 +8770,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1816977601
 GameObject:
@@ -8840,6 +8893,70 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1825572889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825572891}
+  - component: {fileID: 1825572890}
+  m_Layer: 0
+  m_Name: NavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1825572890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825572889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 1
+--- !u!4 &1825572891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825572889}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: -5}
+  m_LocalScale: {x: 0.01, y: 1, z: 0.01}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 425636792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1835252475
 GameObject:
   m_ObjectHideFlags: 0
@@ -9282,6 +9399,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1934791842
 GameObject:
@@ -9543,6 +9661,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1999755600
 GameObject:
@@ -9783,6 +9902,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2071391371
 GameObject:
@@ -10026,6 +10146,7 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 0}
 --- !u!4 &2115139622
 Transform:

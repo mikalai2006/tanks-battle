@@ -421,18 +421,24 @@ namespace Mikalai2006.Voxel
 
                     Voxel[] voxArray = new Voxel[_sOVoxelData.Bounds.x * _sOVoxelData.Bounds.y * _sOVoxelData.Bounds.z];
                     var mesh = meshFilter.sharedMesh;
+                    Debug.Log($"Time greedy mesh step-1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                     var meshArray = Mesh.AllocateWritableMeshData(mesh);
                     var _job = new MeshGreedyJob();
                     _job.mesh = meshArray[0];
                     _job.chunkSize = new int3(_sOVoxelData.Bounds.x, _sOVoxelData.Bounds.y, _sOVoxelData.Bounds.z);
                     _job.blockSize = 1;
+                    
+                    Debug.Log($"Time greedy mesh step0: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                     Parallel.For(0, data.Count, (g) =>
                     {
                         Vector3Int pos = Vector3Int.FloorToInt(data.ElementAt(g).Key);
                         voxArray[Helpers.To1D(pos.x, pos.y, pos.z, _sOVoxelData.Bounds.x, _sOVoxelData.Bounds.y)] = data.ElementAt(g).Value;
                     });
+                    Debug.Log($"Time greedy mesh step1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                     _job.voxels = new NativeArray<Voxel>(voxArray, Allocator.TempJob);
                     _job.Schedule().Complete();
+                    
+                    Debug.Log($"Time greedy mesh step2: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                     Mesh.ApplyAndDisposeWritableMeshData(meshArray, mesh);
 
                     // FIXME: For some reason setting bounds directly doesn't work so this is needed as a workaround, investigate
@@ -440,7 +446,7 @@ namespace Mikalai2006.Voxel
                     meshFilter.mesh = mesh;
 
                     _job.voxels.Dispose();
-                    Debug.Log($"Time greedy mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                    Debug.Log($"Time greedy mesh step3: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                 }
 
                 if (meshData.vertices.Count > 3)
@@ -502,7 +508,7 @@ namespace Mikalai2006.Voxel
 
         #region My functions
 
-        async public UniTaskVoid ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
+        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
         {
             // float startTime = Time.realtimeSinceStartup;
 
@@ -581,11 +587,15 @@ namespace Mikalai2006.Voxel
             // Debug.Log($"Time for create data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
             // list.Add(new Vector3(x,y,z),data[new Vector3(x,y,z)]);
 
-            if (needCreateElements.Count > 0)
+            if (data.Count >= 10 && needCreateElements.Count > 0)
             {
                 GenerateMesh();
                 // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
                 UploadMesh(isDrawMesh);
+            }
+            
+            if (needCreateElements.Count > 0)
+            {
                 // Debug.Log($"Time upload mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                 // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
                 // Debug.Log($"Exploded {needCreateElements.Count} voxels!");
@@ -802,6 +812,7 @@ namespace Mikalai2006.Voxel
                 GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
                 Vector3 pointSpawnVoxel = transform.TransformPoint(elem);
                 gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
+                gObj.GetComponent<VoxelPrefab>().Init();
                 // gObj.isStatic = true;
                 // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
                 // gObj.gameObject.AddComponent<BoxCollider>();

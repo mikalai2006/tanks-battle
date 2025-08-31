@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System;
 using Mikalai2006.Voxel;
+using System.Collections.Generic;
 
 public abstract class BaseMuzzle : MonoBehaviour
 {
@@ -199,15 +200,17 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         OnSetTimeBetweenShot(Config.timeBetweenShot);
     }
-    
+
     public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
     {
+        List<UniTask> tasks = new List<UniTask>(0);
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
             Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
             // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
+            tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius));
         }
+        UniTask.WhenAll(tasks).Forget();
     }
 
     // bool AnimatorIsPlaying(string stateName) {

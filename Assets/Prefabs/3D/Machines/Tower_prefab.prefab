@@ -348,10 +348,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 0}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 0
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 4320643712399650395}
 --- !u!114 &8372265709631624150
 MonoBehaviour:
@@ -384,7 +387,7 @@ MonoBehaviour:
     muzzles: []
   ignoreMask:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 5632
   targetPoint: {x: 0, y: 0, z: 0}
   voxelMeshRender: {fileID: 2449489760672056418}
 --- !u!210 &5783888175842329176

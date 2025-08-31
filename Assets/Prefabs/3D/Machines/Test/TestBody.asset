@@ -37,9 +37,9 @@ MonoBehaviour:
     sOVoxelData: {fileID: 11400000, guid: 43fe402a31b00c74cb0d6f39f3627a0c, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
-    isGreedy: 1
+    isGreedy: 0
     isRigidbody: 0
-    isConvex: 1
+    isConvex: 0
   colorBody: {r: 0, g: 0, b: 0, a: 0}
   references:
     version: 2

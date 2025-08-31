@@ -1,7 +1,7 @@
-using System.Collections;
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.AI;
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField] MazeCell _mazeCellPrefab;
@@ -9,8 +9,10 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private int _mazeHeight;
     [SerializeField] private MazeCell[,] _mazeGrid;
 
-    void Start()
+    public void Create(int width, int height)
     {
+        _mazeWidth = width;
+        _mazeHeight = height;
         _mazeGrid = new MazeCell[_mazeWidth, _mazeHeight];
 
         for (int x = 0; x < _mazeWidth; x++)
@@ -31,6 +33,24 @@ public class MazeGenerator : MonoBehaviour
         }
 
         GenerateMaze(null, _mazeGrid[0,0]);
+    }
+
+    public Vector3 GetRandomNavmeshLocation(float sampleRadius)
+    {
+        // 1. Generate a random origin point near the NavMeshSurface's center
+        Vector3 randomDirection = Random.insideUnitSphere * sampleRadius;
+        Vector3 origin = transform.position + randomDirection; // Use the spawner's position or a known center
+
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+
+        // 2. Sample the position on the NavMesh
+        if (NavMesh.SamplePosition(origin, out hit, sampleRadius, NavMesh.AllAreas))
+        {
+            // 3. Return the valid position
+            finalPosition = hit.position;
+        }
+        return finalPosition;
     }
 
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)

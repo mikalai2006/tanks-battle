@@ -95,7 +95,7 @@ public class BaseBullet : MonoBehaviour
         // #endif
         if (!rb.isKinematic)
         {
-            Vector3 speedForce = muzzle.transform.forward * ConfigMuzzle.Bullet.speed * 100;
+            Vector3 speedForce = muzzle.transform.forward * ConfigMuzzle.Bullet.speed * 100 * _gameManager.Settings.scaleObjects;
             rb.AddForce(speedForce, ForceMode.Impulse);
         }
         isActive = true;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idObject: sand
   typeGround: 8
-  gridSize: {x: 200, y: 200}
+  gridSize: {x: 20, y: 20}
   tileLandscape: {fileID: 11400000, guid: 863afbab29b6d434d97b50fda06d7a3e, type: 2}
   tileSecondLandscape: {fileID: 11400000, guid: 52461d887de71bc4ea8d41fe26699b8c, type: 2}
   tileBorder: {fileID: 11400000, guid: da4f3962ac0f8464599c16f77bfcb555, type: 2}
@@ -29,7 +29,7 @@ MonoBehaviour:
   noiseObstacleMaxKoof: 0.8
   typeLevel: 2
   countTeam: 0
-  countPlayers: 2
+  countPlayers: 5
   bonuses:
   - Item: {fileID: 11400000, guid: 076361a2a1bdfb84d8dc60de74e12381, type: 2}
     probability: 0.20000000298023224

@@ -284,10 +284,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 0}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 0
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
   Wrapper: {fileID: 5311629721760465526}
 --- !u!114 &6956179497362671940
 MonoBehaviour:
@@ -319,7 +322,7 @@ MonoBehaviour:
   voxelMeshRender: {fileID: 4578221365697212566}
   ignoreMask:
     serializedVersion: 2
-    m_Bits: 3076
+    m_Bits: 7172
 --- !u!1 &9189856959237785062
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,8 +411,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.51190567
+        time: 0.015872955
+        value: 0.06850815
         inSlope: 0
         outSlope: 0
         tangentMode: 0

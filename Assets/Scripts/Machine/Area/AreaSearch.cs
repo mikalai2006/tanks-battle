@@ -5,7 +5,8 @@ using UnityEngine;
 public class AreaSearch : MonoBehaviour
 {
     GameManager _gameManager = GameManager.Instance;
-    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Transform transformArea;
+    [SerializeField] GPUInstanceEnabler gPUInstanceEnabler;
     [SerializeField] BaseMachine machine;
     [SerializeField] Dictionary<BaseMachine, float> targets;
     public Dictionary<BaseMachine, float> Targets => targets;
@@ -16,14 +17,12 @@ public class AreaSearch : MonoBehaviour
     void Awake()
     {
         targets = new();
-
-        sprite = GetComponent<SpriteRenderer>();
         machine = GetComponentInParent<BaseMachine>();
     }
 
     public void OnSetColor(Color color)
     {
-        sprite.color = color;
+        gPUInstanceEnabler.SetColor(color);
     }
 
     public void Init(GameMachine configMachine)
@@ -33,8 +32,9 @@ public class AreaSearch : MonoBehaviour
         OnSetSize(distanceSearch);
     }
 
-    public void OnSetSize(float size)
+    public void OnSetSize(float _size)
     {
+        float size = _size * (1 /_gameManager.Settings.scaleObjects);
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(size, size, size), _gameManager.Settings.speedChangeAreaSize * Time.deltaTime);
     }
 

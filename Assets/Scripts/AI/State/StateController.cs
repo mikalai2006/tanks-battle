@@ -11,6 +11,7 @@ public class StateController : MonoBehaviour
     public PatrolState patrolState = new PatrolState();
     public HurtState hurtState = new HurtState();
     public AttackState attackState = new AttackState();
+    public IdleState idleState = new IdleState();
 
     // [SerializeField] public BaseMachine Enemy;
     [SerializeField] public Vector3 Obstacle;
@@ -24,7 +25,7 @@ public class StateController : MonoBehaviour
 
     private void Start()
     {
-        ChangeState(patrolState);
+        ChangeState(idleState);
     }
 
     void Update()
@@ -36,6 +37,13 @@ public class StateController : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (currentState != null)
+        {
+            currentState.OnFixedUpdate();
+        }
+    }
     public void ChangeState(State newState)
     {
         if (currentState != null)

@@ -162,6 +162,7 @@ public class GameSetting : ScriptableObject
   [Tooltip("Количество видимых следующих пазлов")]
   public int countNextPuzzle;
   public TileBase tileSquare;
+  public float scaleObjects;
 }
 
 // [System.Serializable]

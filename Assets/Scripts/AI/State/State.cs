@@ -19,6 +19,10 @@ public abstract class State
 
     }
 
+    public virtual void OnFixedUpdate()
+    {
+
+    }
     public virtual void OnHurt()
     {
 

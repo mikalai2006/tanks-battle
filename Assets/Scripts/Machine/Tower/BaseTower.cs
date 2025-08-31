@@ -700,12 +700,15 @@ public class BaseTower : MonoBehaviour
 
     public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
     {
+        List<UniTask> tasks = new List<UniTask>();
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
             Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
-            Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {localPoint}</color>");
-            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
+            // Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {localPoint}</color>");
+            tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius));
         }
+
+        UniTask.WhenAll(tasks).Forget();
     }
 
     public void ChangePosition(BaseMachine baseMachine)

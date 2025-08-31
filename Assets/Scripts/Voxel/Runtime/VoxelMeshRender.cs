@@ -59,6 +59,7 @@ namespace Mikalai2006.Voxel
             var container = cont.AddComponent<Container>();
             containers[index] = container;
             container.Initialize(Config, Vector3.zero);
+            container.transform.localScale = new Vector3(1, 1, 1);
             container.transform.SetPositionAndRotation(position, Quaternion.identity);
             container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
             // container.gameObject.isStatic = true;
