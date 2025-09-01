@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Audio: {fileID: 11400000, guid: 6e6d27b434636fd48855242580e09e89, type: 2}
   ThemeDefault: {fileID: 11400000, guid: 397876dbbb99649498afeade60f99939, type: 2}
-  inputJoystick: 1
+  inputJoystick: 0
   simpleMove: 1
-  logEnabled: 0
+  logEnabled: 1
+  scaleObjects: 0.1
+  maxRadiusCreateVoxels: 11
   gerbs:
   - {fileID: -1690008810, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1606978075, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
@@ -82,8 +84,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
-  - {fileID: 11400000, guid: 119de03e21ae99f4983fbbfbb37b7339, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
+  - {fileID: 11400000, guid: 119de03e21ae99f4983fbbfbb37b7339, type: 2}
   - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
@@ -248,7 +250,6 @@ MonoBehaviour:
   isDisableNextButton: 0
   countNextPuzzle: 0
   tileSquare: {fileID: 0}
-  scaleObjects: 0.1
   references:
     version: 2
     RefIds: []

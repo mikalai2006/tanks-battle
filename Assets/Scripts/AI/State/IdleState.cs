@@ -16,7 +16,7 @@ public class IdleState : State
 
         timeWait = 2f;
 
-        stateController.Target = stateController.Machine.LevelManager.MazeGenerator.GetRandomNavmeshLocation(20);
+        stateController.Target = stateController.Machine.LevelManager.MazeGenerator.GetRandomNavmeshLocation(100);
     }
 
     public override void OnUpdate()

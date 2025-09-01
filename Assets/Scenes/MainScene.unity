@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   files: []
-  folderPrefix: tree
+  folderPrefix: tanks
   isGlobalPosition: 0
 --- !u!1 &614055048
 GameObject:

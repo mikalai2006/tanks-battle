@@ -26,6 +26,10 @@ public class GameSetting : ScriptableObject
   public bool inputJoystick;
   public bool simpleMove;
   public bool logEnabled;
+  [Tooltip("Размер масшатаба игровых объектов")]
+  public float scaleObjects;
+  [Tooltip("Максимальный радиус создания вокселей")]
+  [Range(6,15)] public int maxRadiusCreateVoxels;
 
   [Space(5)]
   [Header("System")]
@@ -162,7 +166,6 @@ public class GameSetting : ScriptableObject
   [Tooltip("Количество видимых следующих пазлов")]
   public int countNextPuzzle;
   public TileBase tileSquare;
-  public float scaleObjects;
 }
 
 // [System.Serializable]

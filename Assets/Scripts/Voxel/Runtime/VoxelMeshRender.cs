@@ -24,7 +24,7 @@ namespace Mikalai2006.Voxel
         // private NativeArray<Vector3> _nativeVoxelsPositions;
         private Container[] containers;
         public Container[] Containers => containers;
-        private RenderParams _rp;
+        // private RenderParams _rp;
         private Vector3 position = Vector3.zero;
 
         private void Start()
@@ -84,9 +84,9 @@ namespace Mikalai2006.Voxel
             //     // container = container
             // };
 
-            _rp = new RenderParams(Config._material);
+            // _rp = new RenderParams(Config._material);
 
-            container.SetSizeVoxel(Config.sOVoxelData.sizeVoxel);
+            // container.SetSizeVoxel(Config.sOVoxelData.sizeVoxel);
             // container.GetComponent<Collider>().isTrigger = true;
 
             // var segment = new ArraySegment<Vector3>(voxelList, 1, 10);

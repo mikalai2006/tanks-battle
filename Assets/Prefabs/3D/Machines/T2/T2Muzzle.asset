@@ -33,13 +33,13 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   prefab: {fileID: 6956179497362671940, guid: 0afcb59b404efa440965a04db8f6959c, type: 3}
-  spriteMuzzle: {fileID: 1032060671, guid: 8971840edc6410e46be1244c9bad7ec0, type: 3}
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 9aa45a32588b3fa419b6d291e1615beb, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 26e76acee85091d43a1d619a176b696e, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 0
   soundShot: {fileID: 8300000, guid: 79e79ae94ef85b14699eddfb6ec59e3c, type: 3}
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
   Bullet: {fileID: 11400000, guid: eea0010cca476ba49b6f5bb8654f5d88, type: 2}

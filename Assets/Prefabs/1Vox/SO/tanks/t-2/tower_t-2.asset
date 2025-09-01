@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: tower_t-2
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0, g: 0.4509804, b: 0.81960785, a: 1}
+  - color: {r: 0.827451, g: 0.6901961, b: 0.23137255, a: 1}
     voxels:
     - {x: 6, y: 0, z: 10}
     - {x: 6, y: 0, z: 9}

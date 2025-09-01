@@ -44,9 +44,11 @@ MonoBehaviour:
     isRotate: 1
     muzzles:
     - Config: {fileID: 11400000, guid: 2216f64ec05275847b95d613629a13e8, type: 2}
-      offsetMuzzle: {x: 6, y: 0, z: 3}
+      offsetMuzzle: {x: 6, y: 0, z: 6}
     - Config: {fileID: 11400000, guid: 2216f64ec05275847b95d613629a13e8, type: 2}
-      offsetMuzzle: {x: 6, y: 0, z: -3}
+      offsetMuzzle: {x: 6, y: 0, z: 0}
+    - Config: {fileID: 11400000, guid: 2216f64ec05275847b95d613629a13e8, type: 2}
+      offsetMuzzle: {x: 6, y: 0, z: -6}
     children: []
     isChildren: 0
   catterpillars:
@@ -57,8 +59,6 @@ MonoBehaviour:
     offsetCat: {x: 0, y: 4, z: 0}
     colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   soundMove: {fileID: 8300000, guid: 71d39ac5da02fea4084632c39f81960e, type: 3}
-  colorBody: {r: 0.6901961, g: 0.8, b: 0.1254902, a: 1}
-  updates: []
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   speed: 100
   distanceSearch: 5

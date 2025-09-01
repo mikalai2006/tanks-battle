@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: body_t-2
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0, g: 0.45206922, b: 0.8207547, a: 1}
+  - color: {r: 0.827451, g: 0.6901961, b: 0.23137255, a: 1}
     voxels:
     - {x: 26, y: 0, z: 6}
     - {x: 26, y: 0, z: 7}
@@ -8910,7 +8910,7 @@ MonoBehaviour:
   - {r: 0.827451, g: 0.6901961, b: 0.23137255, a: 1}
   - {r: 0.827451, g: 0.6901961, b: 0.23137255, a: 1}
   sizeVoxel: 1
-  Pivot: {x: 16, y: -2, z: 12}
+  Pivot: {x: 16, y: 4, z: 12}
   Bounds: {x: 32, y: 8, z: 24}
   GlobalSize: {x: 32, y: 32, z: 32}
   GlobalPosition: {x: 0, y: 0, z: 16}

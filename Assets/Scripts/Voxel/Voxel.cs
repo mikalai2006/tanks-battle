@@ -22,10 +22,11 @@ namespace Mikalai2006.Voxel
 }
 
 public enum VoxelType : byte
-	{
-		Air, // Or None
-		Grass,
-		Dirt,
-		Stone,
-		OakLog
-	}
+{
+    Air, // Or None
+    Grass,
+    Dirt,
+    Stone,
+    OakLog,
+    Empty
+}
