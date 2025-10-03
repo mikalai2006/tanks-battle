@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Mikalai2006.Voxel;
+using Unity.Collections;
+using Unity.Jobs;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
-using VoxReader;
 using VoxReader.Interfaces;
 
+[RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(MeshRenderer))]
 public class VoxParser : MonoBehaviour
 {
     [SerializeField] private string[] files;
     // [SerializeField] private TextAsset asset;
-    [SerializeField] private string folderPrefix = "panzers";
+    // [SerializeField] private string folderPrefix = "panzers";
     [SerializeField] private bool isGlobalPosition;
+    public MeshRenderer meshRenderer;
+    public MeshFilter meshFilter;
     string OutputPath = "Assets/Prefabs/1Vox";
+
 
     void Start()
     {
         // CreateData();
+        meshFilter = GetComponent<MeshFilter>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     public void OnSetFiles(string[] paths)
@@ -35,10 +45,10 @@ public class VoxParser : MonoBehaviour
 
     void CreateData(string pathFile)
     {
-        if (!AssetDatabase.IsValidFolder($"{OutputPath}/SO/{folderPrefix}"))
-        {
-            AssetDatabase.CreateFolder($"{OutputPath}/SO", folderPrefix);
-        }
+        // if (!AssetDatabase.IsValidFolder($"{OutputPath}/SO/{folderPrefix}"))
+        // {
+        //     AssetDatabase.CreateFolder($"{OutputPath}/SO", folderPrefix);
+        // }
 
         IVoxFile voxFile = VoxReader.VoxReader.Read(pathFile);
 
@@ -50,7 +60,7 @@ public class VoxParser : MonoBehaviour
         for (int m = 0; m < models.Length; m++)
         {
             var model = models[m];
-            Voxel[] voxels = model.Voxels;
+            VoxReader.Voxel[] voxels = model.Voxels;
 
             Debug.Log($"Voxels: name={model.Name} count={voxels.Length}, global size = {model.GlobalSize}, isCopy={model.IsCopy}");
 
@@ -72,7 +82,7 @@ public class VoxParser : MonoBehaviour
             // Проходим по всем точкам и находим смещения по всем осям.
             for (int x = 0; x < voxels.Count(); x++) // Используем ref для изменения оригинальных значений
             {
-                Voxel voxel = voxels[x];
+                VoxReader.Voxel voxel = voxels[x];
                 if (isGlobalPosition == false)
                 {
                     min = new Vector3Int(
@@ -89,7 +99,7 @@ public class VoxParser : MonoBehaviour
             Debug.Log($"min:{min}, max:{max}");
 
 
-            foreach (Voxel voxel in voxels) // Используем ref для изменения оригинальных значений
+            foreach (VoxReader.Voxel voxel in voxels) // Используем ref для изменения оригинальных значений
             {
                 pointsColors.Add(
                     isGlobalPosition
@@ -183,11 +193,16 @@ public class VoxParser : MonoBehaviour
             string nameFolderModel = Path.GetFileNameWithoutExtension(namePathArray[namePathArray.Length - 1]);
 
             string modelName = models[m].Name;
-            if (!AssetDatabase.IsValidFolder($"{OutputPath}/SO/{folderPrefix}/{nameFolderModel}"))
+            if (!AssetDatabase.IsValidFolder($"{OutputPath}/SO/{nameFolderModel}"))
             {
-                AssetDatabase.CreateFolder($"{OutputPath}/SO/{folderPrefix}", nameFolderModel);
+                AssetDatabase.CreateFolder($"{OutputPath}/SO", nameFolderModel);
             }
-            string path = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/SO/{folderPrefix}/{nameFolderModel}/{modelName}_{nameFolderModel}.asset");
+            string path = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/SO/{nameFolderModel}/{modelName}_{nameFolderModel}.asset");
+            string pathMesh = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/SO/{nameFolderModel}/{modelName}_{nameFolderModel}_mesh.asset");
+
+
+            Mesh mesh = CreateMesh(nameFolderModel, asset, pathMesh);
+            asset.startMesh = mesh;
 
             AssetDatabase.CreateAsset(asset, path);
             AssetDatabase.SaveAssets();
@@ -197,6 +212,82 @@ public class VoxParser : MonoBehaviour
 
         }
 
+    }
+
+    private Mesh CreateMesh(string meshName, SOVoxelData sOVoxelData, string path)
+    {
+        Mesh mesh = new Mesh();  //meshFilter.sharedMesh;
+        mesh.name = meshName;
+
+        NativeArray<Mikalai2006.Voxel.Voxel> arrayVoxels = new NativeArray<Mikalai2006.Voxel.Voxel>(sOVoxelData.Bounds.x * sOVoxelData.Bounds.y * sOVoxelData.Bounds.z, Allocator.Persistent);
+        NativeArray<VoxelColors> arrayVoxelColors = new NativeArray<VoxelColors>(sOVoxelData.groups.Count + 1, Allocator.Persistent);
+
+        // parse list voxels and create data. 
+        for (int j = 0; j < sOVoxelData.groups.Count; j++)
+        {
+            Color color = sOVoxelData.groups[j].color;
+            color.a = 1;
+            arrayVoxelColors[j + 1] = new VoxelColors()
+            {
+                color = color,
+                type = (VoxelType)(j + 1)
+            };
+
+
+            for (int i = 0; i < sOVoxelData.groups[j].voxels.Count; i++)
+            {
+
+                Vector3Int pos = Vector3Int.FloorToInt(sOVoxelData.groups[j].voxels[i]);
+                var vox = new Voxel() // * scale
+                {
+                    ID = 1,
+                    color = color, //meshConfig.sOVoxelData.colors.ElementAt(i),
+                    type = (VoxelType)(j + 1),
+                    position = pos,
+                    IndexSubMesh = j,
+                };
+
+                arrayVoxels[Helpers.To1D(pos.x, pos.y, pos.z, sOVoxelData.Bounds.x, sOVoxelData.Bounds.y)] = vox;
+            }
+        }
+
+
+        var meshArray = Mesh.AllocateWritableMeshData(mesh);
+        var _job = new MeshGreedyJob();
+        _job.mesh = meshArray[0];
+        _job.chunkSize = new int3(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
+        _job.blockSize = 1;
+        _job.voxelColors = arrayVoxelColors;
+        _job.voxels = arrayVoxels;
+        _job.Schedule().Complete();
+
+        Mesh.ApplyAndDisposeWritableMeshData(meshArray, mesh);
+
+        // FIXME: For some reason setting bounds directly doesn't work so this is needed as a workaround, investigate
+        mesh.RecalculateBounds();
+
+        meshFilter.sharedMesh = mesh;
+
+        // Get the mesh from the MeshFilter
+        Mesh meshToSave = meshFilter.sharedMesh;
+
+        // Define the save path and filename
+        // string path = EditorUtility.SaveFilePanelInProject("Save Procedural Mesh", "NewProceduralMesh", "mesh", "Save the generated mesh asset.");
+
+        if (string.IsNullOrEmpty(path))
+        {
+            return null; // User cancelled the save operation
+        }
+
+        // Create and save the mesh asset
+        AssetDatabase.CreateAsset(meshToSave, path);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
+        arrayVoxels.Dispose();
+        arrayVoxelColors.Dispose();
+
+        return meshToSave;
     }
 
 }

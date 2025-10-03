@@ -1,15 +1,9 @@
-using System;
-using Unity.Burst;
-using Unity.Collections;
-using Unity.Jobs;
 using UnityEngine;
-
 
 namespace Mikalai2006.Voxel
 {
     public class VoxelMeshRender : MonoBehaviour, IVoxeled
     {
-        // public Mesh _mesh;
         [SerializeField] private MeshConfig Config;
         // [SerializeField] private SOVoxelData sOVoxelData;
         // [SerializeField] private Material _material;
@@ -34,11 +28,18 @@ namespace Mikalai2006.Voxel
                 Wrapper = transform.gameObject;
             }
 
-            containers = new Container[Config.sOVoxelData.groups.Count];
-
-            for (int j = 0; j < Config.sOVoxelData.groups.Count; j++)
+            if (Config.isOneMesh)
             {
-                CreateContainer(j);
+                containers = new Container[1];
+                CreateContainer(0);
+            }
+            else
+            {
+                containers = new Container[Config.sOVoxelData.groups.Count];
+                for (int j = 0; j < Config.sOVoxelData.groups.Count; j++)
+                {
+                    CreateContainer(j);
+                }
             }
         }
 
@@ -46,7 +47,7 @@ namespace Mikalai2006.Voxel
         {
             Wrapper.transform.localRotation = Config.sOVoxelData.GlobalRotation;
 
-            int count = Config.sOVoxelData.voxels.Count;
+            // int count = Config.sOVoxelData.voxels.Count;
             // position = new Vector3(UnityEngine.Random.Range(0, 150), 0.5f, UnityEngine.Random.Range(0, 180));
 
             // _nativePositions = new NativeArray<float3>(count, Allocator.Persistent);
@@ -54,7 +55,7 @@ namespace Mikalai2006.Voxel
             // _nativeCubeYOffsets = new NativeArray<float>(count, Allocator.Persistent);
             // _nativeVoxelsPositions = new NativeArray<Vector3>(count, Allocator.Persistent);
 
-            GameObject cont = new GameObject("Container");
+            GameObject cont = new GameObject($"Container_{Config.sOVoxelData.name}___{index}");
             cont.transform.parent = Wrapper.transform;
             var container = cont.AddComponent<Container>();
             containers[index] = container;
@@ -98,23 +99,37 @@ namespace Mikalai2006.Voxel
             //     // Vector3[] voxelList = sOVoxelData.groups.ElementAt(j).voxels.AsParallel().ToArray();
             //     // Color groupColor = sOVoxelData.groups.ElementAt(j).color;
 
-            container.SetData(Config.sOVoxelData, index, Config.isGreedy, 1);
             // }
+            if (Config.isOneMesh)
+            {
+                container.SetData();
+            }
+            else
+            {
+                container.SetData(index);
+            }
 
-            container.GenerateMesh();
-            container.UploadMesh(true);
+            if (Config.isGreedy)
+            {
+                container.UploadMeshGreedy(Config.sOVoxelData.startMesh == null);
+            }
+            else
+            {
+                container.GenerateMesh();
+                container.UploadMesh(Config.sOVoxelData.startMesh == null);
+            }
 
             // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(new Vector3(0f, 0.5f, 0f)));
         }
 
-        private void Update()
-        {
-            // _job.Matrices = _nativeMatrices;
-            // _job.Time = Time.time;
-            // _job.Schedule(_nativeMatrices.Length, 64).Complete();
-            // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(position));
+        // private void Update()
+        // {
+        //     // _job.Matrices = _nativeMatrices;
+        //     // _job.Time = Time.time;
+        //     // _job.Schedule(_nativeMatrices.Length, 64).Complete();
+        //     // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(position));
 
-        }
+        // }
 
         private void OnDestroy()
         {
@@ -133,39 +148,28 @@ namespace Mikalai2006.Voxel
         }
     }
 
-    [BurstCompile]
-    public struct CubePositionJob : IJobParallelFor
-    {
-        public NativeArray<Vector3> Voxels;
-        // public Mesh mesh;
-        // public NativeArray<float3> Positions;
-        // [ReadOnly] public NativeArray<float> YOffsets;
-        public NativeArray<Matrix4x4> Matrices;
-        public float Time;
-        // [ReadOnly] public Container container;
+    // [BurstCompile]
+    // public struct CubePositionJob : IJobParallelFor
+    // {
+    //     public NativeArray<Vector3> Voxels;
+    //     // public Mesh mesh;
+    //     // public NativeArray<float3> Positions;
+    //     // [ReadOnly] public NativeArray<float> YOffsets;
+    //     public NativeArray<Matrix4x4> Matrices;
+    //     public float Time;
+    //     // [ReadOnly] public Container container;
 
-        public void Execute(int index)
-        {
-            // container.SetData(Voxels.ToArray(), 1);
+    //     public void Execute(int index)
+    //     {
+    //         // container.SetData(Voxels.ToArray(), 1);
 
-            // container.GenerateMesh();
-            // mesh = container.UploadMesh(false).mesh;
-            // var (pos, rot) = Positions[index].CalculatePosBurst(YOffsets[index], Time);
+    //         // container.GenerateMesh();
+    //         // mesh = container.UploadMesh(false).mesh;
+    //         // var (pos, rot) = Positions[index].CalculatePosBurst(YOffsets[index], Time);
 
-            // Positions[index] = pos;
-            // Matrices[index] = Matrix4x4.TRS(pos, rot, SceneTools.CubeScale);
+    //         // Positions[index] = pos;
+    //         // Matrices[index] = Matrix4x4.TRS(pos, rot, SceneTools.CubeScale);
 
-        }
-    }
-
-    [Serializable]
-    public struct MeshConfig
-    {
-        public SOVoxelData sOVoxelData;
-        public Material _material;
-        public bool existCollider;
-        public bool isGreedy;
-        public bool isRigidbody;
-        public bool isConvex;
-    }
+    //     }
+    // }
 }

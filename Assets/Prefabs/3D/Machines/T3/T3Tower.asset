@@ -32,13 +32,16 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  spriteTower: {fileID: -1055482172, guid: 0628ac658fc4fdb438301f1c69483953, type: 3}
   prefab: {fileID: 8372265709631624150, guid: dcffc923e008def4f9d5c16ef5b04b17, type: 3}
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 72c79c61111307141a5124c598070ed0, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
     existCollider: 1
     isGreedy: 1
+    isRigidbody: 0
+    isConvex: 1
+    isOneMesh: 0
+    shadowCastingMode: 0
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   speedRotateTower: 10
   distanceSearch: 4

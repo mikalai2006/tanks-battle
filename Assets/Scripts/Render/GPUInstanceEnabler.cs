@@ -19,6 +19,11 @@ public class GPUInstanceEnabler : MonoBehaviour
         //SetColor(UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f));
     }
 
+    void Start()
+    {
+        SetColor(color1);
+    }
+
     private IEnumerator ChangeColor()
     {
         while (true)
@@ -28,12 +33,12 @@ public class GPUInstanceEnabler : MonoBehaviour
         }
     }
 
-    public void SetColor(Color color)
+    public void SetColor(Color color, int indexSubmesh = 0)
     {
         if (_meshRenderer)
         {
             _materialPropertyBlock.SetColor("_NoiseColor", color);
-            _meshRenderer.SetPropertyBlock(_materialPropertyBlock, 0);
+            _meshRenderer.SetPropertyBlock(_materialPropertyBlock, indexSubmesh);
             color1 = color;
         }
     }

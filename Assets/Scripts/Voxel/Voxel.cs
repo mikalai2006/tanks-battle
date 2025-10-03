@@ -7,7 +7,8 @@ namespace Mikalai2006.Voxel
     public struct Voxel
     {
         public byte ID;
-        public Color color;
+        public Color32 color;
+        public Vector3 position;
         public VoxelType type;
         public int IndexSubMesh;
 
@@ -18,6 +19,18 @@ namespace Mikalai2006.Voxel
                 return ID != 0;
             }
         }
+
+        public void SetType(VoxelType _type)
+        {
+            type = _type;
+        }
+    }
+
+    [Serializable]
+    public struct VoxelColors
+    {
+        public VoxelType type;
+        public Color color;
     }
 }
 
@@ -28,5 +41,13 @@ public enum VoxelType : byte
     Dirt,
     Stone,
     OakLog,
-    Empty
+    Destroyed
+}
+
+
+[Serializable]
+public struct RemoveVoxel
+{
+    public Vector3 position;
+    public Color color;
 }

@@ -39,7 +39,9 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
-    isConvex: 0
+    isConvex: 1
+    isOneMesh: 1
+    shadowCastingMode: 0
   soundShot: {fileID: 8300000, guid: 79e79ae94ef85b14699eddfb6ec59e3c, type: 3}
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
   Bullet: {fileID: 11400000, guid: eea0010cca476ba49b6f5bb8654f5d88, type: 2}

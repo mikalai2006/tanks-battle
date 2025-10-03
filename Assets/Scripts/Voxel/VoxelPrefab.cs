@@ -3,8 +3,8 @@ using UnityEngine;
 public class VoxelPrefab : MonoBehaviour
 {
     GameManager gameManager => GameManager.Instance;
-    GPUInstanceEnabler gPUInstanceEnabler;
-    void Start()
+    public GPUInstanceEnabler gPUInstanceEnabler;
+    void Awake()
     {
         gPUInstanceEnabler = GetComponent<GPUInstanceEnabler>();
 
@@ -15,6 +15,14 @@ public class VoxelPrefab : MonoBehaviour
     {
 
         transform.localScale = new Vector3(gameManager.Settings.scaleObjects, gameManager.Settings.scaleObjects, gameManager.Settings.scaleObjects);
-    
+
+    }
+
+    public void SetColor(Color color)
+    {
+        if (gPUInstanceEnabler)
+        {
+            gPUInstanceEnabler.SetColor(color);
+        }
     }
 }

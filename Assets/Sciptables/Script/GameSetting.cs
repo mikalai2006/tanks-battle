@@ -30,6 +30,8 @@ public class GameSetting : ScriptableObject
   public float scaleObjects;
   [Tooltip("Максимальный радиус создания вокселей")]
   [Range(6,15)] public int maxRadiusCreateVoxels;
+  [Tooltip("Количество вокселей, которые будут созданы за кадр")]
+  [Range(10,500)] public int countCreateVoxelByFrame;
 
   [Space(5)]
   [Header("System")]

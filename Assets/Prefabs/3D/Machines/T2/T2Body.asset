@@ -39,7 +39,9 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
-    isConvex: 0
+    isConvex: 1
+    isOneMesh: 0
+    shadowCastingMode: 0
   colorBody: {r: 0, g: 0, b: 0, a: 0}
   references:
     version: 2

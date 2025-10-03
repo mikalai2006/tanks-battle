@@ -17,7 +17,9 @@ public class SOVoxelData : ScriptableObject
     public Vector3Int LocalSize;
     public Vector3 LocalPosition;
     public Quaternion LocalRotation;
-    public UnityEngine.Rendering.ShadowCastingMode shadowCastingMode;
+    
+    [Tooltip("Меш для начальной загрузки (позволяет использовать все возможности GPU Instancing до начала разрушения)")]
+    public Mesh startMesh;
 }
 
 

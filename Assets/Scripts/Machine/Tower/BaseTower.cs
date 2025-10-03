@@ -703,9 +703,10 @@ public class BaseTower : MonoBehaviour
         List<UniTask> tasks = new List<UniTask>();
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
-            Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
-            // Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {localPoint}</color>");
-            tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius));
+            var el = voxelMeshRender.Containers[i];
+            Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
+            Vector3 localPoint = el.transform.InverseTransformPoint(_pointCollision);
+            tasks.Add(el.ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius));
         }
 
         UniTask.WhenAll(tasks).Forget();

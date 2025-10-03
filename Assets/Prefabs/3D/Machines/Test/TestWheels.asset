@@ -40,7 +40,9 @@ MonoBehaviour:
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
-    isConvex: 0
+    isConvex: 1
+    isOneMesh: 0
+    shadowCastingMode: 0
   references:
     version: 2
     RefIds: []

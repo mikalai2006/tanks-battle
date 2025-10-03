@@ -47,8 +47,8 @@ public class LevelManager : MonoBehaviour
         globalLight.intensity = _gameManager.LevelConfig.light;
 
         // создаем карту
-        // mapManager.CreateMap();
-        MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
+        mapManager.CreateMap();
+        // MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
         NavMeshSurface.BuildNavMesh();
 
         // создаем игровые комманды
@@ -106,7 +106,7 @@ public class LevelManager : MonoBehaviour
                 //     && n.Y < _gameManager.LevelConfig.gridSize.y
                 //     && !n.StateNode.HasFlag(StateNode.Disable)
                 // ).OrderBy(t => UnityEngine.Random.value).First();
-                Vector3 pointSpawn = MazeGenerator.GetRandomNavmeshLocation(10);
+                Vector3 pointSpawn = MazeGenerator.GetRandomNavmeshLocation(100);
 
                 if (pointSpawn != null)
                 {

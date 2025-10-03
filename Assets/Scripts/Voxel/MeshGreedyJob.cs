@@ -12,7 +12,7 @@ namespace Mikalai2006.Voxel
     public struct MeshGreedyJob : IJob
     {
         public Mesh.MeshData mesh;
-
+        [ReadOnly] public NativeArray<VoxelColors> voxelColors;
         [ReadOnly] public NativeArray<Voxel> voxels;
         [ReadOnly] public int3 chunkSize;
         [ReadOnly] public float blockSize;
@@ -45,17 +45,19 @@ namespace Mikalai2006.Voxel
             var estimateVertices = chunkSize.x * chunkSize.y * chunkSize.z * 4;
             var estimateIndexes = chunkSize.x * chunkSize.y * chunkSize.z * 6;
 
-            NativeArray<VertexAttributeDescriptor> attributes = new(3, Allocator.Temp,
+            NativeArray<VertexAttributeDescriptor> attributes = new(4, Allocator.Temp,
                 NativeArrayOptions.UninitializedMemory);
             attributes[0] = new VertexAttributeDescriptor(VertexAttribute.Position);
             attributes[1] = new VertexAttributeDescriptor(VertexAttribute.Normal, stream: 1);
             attributes[2] = new VertexAttributeDescriptor(VertexAttribute.TexCoord0, dimension: 3, stream: 2);
+            attributes[3] = new VertexAttributeDescriptor(VertexAttribute.Color, VertexAttributeFormat.Float32, 4, stream: 3);
             mesh.SetVertexBufferParams(estimateVertices, attributes);
             mesh.SetIndexBufferParams(estimateIndexes, IndexFormat.UInt16);
 
             var vertexData = mesh.GetVertexData<Vector3>();
             var normalData = mesh.GetVertexData<Vector3>(stream: 1);
             var uvData = mesh.GetVertexData<Vector3>(stream: 2);
+            var colorsData = mesh.GetVertexData<Color>(stream: 3);
             var indexData = mesh.GetIndexData<ushort>();
 
             // Cycle through all 3 axis
@@ -89,8 +91,8 @@ namespace Mikalai2006.Voxel
                             var blockCurrent = (x[d] >= min) ? GetVoxel(x) : default;
                             var blockCompare = (x[d] < max) ? GetVoxel(x + q) : default;
 
-                            bool bCurrentOpaque = blockCurrent != default;
-                            bool bCompareOpaque = blockCompare != default;
+                            bool bCurrentOpaque = blockCurrent != default && blockCurrent != VoxelType.Destroyed;
+                            bool bCompareOpaque = blockCompare != default && blockCompare != VoxelType.Destroyed;
 
                             if (bCurrentOpaque == bCompareOpaque)
                                 mask[n++] = emptyBlock;
@@ -196,7 +198,9 @@ namespace Mikalai2006.Voxel
                                     vertexData,
                                     normalData,
                                     uvData,
-                                    indexData
+                                    indexData,
+                                    colorsData
+                                    // voxels
                                 );
 
                                 // Clear this part of the mask, so we don't add duplicate faces
@@ -253,7 +257,9 @@ namespace Mikalai2006.Voxel
             NativeArray<Vector3> vertexData,
             NativeArray<Vector3> normalData,
             NativeArray<Vector3> uvData,
-            NativeArray<ushort> indexData
+            NativeArray<ushort> indexData,
+            NativeArray<Color> colorsData
+            // NativeArray<Voxel> voxels
         )
         {
             int maskNormal = (int)(mask >> 32 & 0x3UL) - 1;
@@ -275,7 +281,16 @@ namespace Mikalai2006.Voxel
             normalData[_vertexCount + 2] = normal;
             normalData[_vertexCount + 3] = normal;
 
-            AddUVForSide(height, width, side, normal, (VoxelType)(mask & 0xFFFFFFFFUL), uvData);
+            if (voxelColors.Length > 0)
+            {
+                Color col = voxelColors[(int)(mask & 0xFFFFFFFFUL)].color;
+                colorsData[_vertexCount + 0] = col;
+                colorsData[_vertexCount + 1] = col;
+                colorsData[_vertexCount + 2] = col;
+                colorsData[_vertexCount + 3] = col;
+            }
+
+            // AddUVForSide(height, width, side, normal, (VoxelType)(mask & 0xFFFFFFFFUL), uvData);
 
             _vertexCount += 4;
             _indexCount += 6;

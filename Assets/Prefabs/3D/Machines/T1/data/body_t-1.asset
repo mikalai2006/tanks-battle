@@ -8618,4 +8618,4 @@ MonoBehaviour:
   LocalSize: {x: 0, y: 0, z: 16}
   LocalPosition: {x: 0, y: 0, z: 16}
   LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  shadowCastingMode: 0
+  startMesh: {fileID: 4300000, guid: a26e7014d8003b54f9c3b26efd8a30e7, type: 2}

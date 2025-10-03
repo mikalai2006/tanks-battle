@@ -36,10 +36,13 @@ MonoBehaviour:
   isRotate: 1
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 424574f24b1675b419dfac1e0aa147e7, type: 2}
-    _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
+    isConvex: 1
+    isOneMesh: 1
+    shadowCastingMode: 0
   references:
     version: 2
     RefIds: []

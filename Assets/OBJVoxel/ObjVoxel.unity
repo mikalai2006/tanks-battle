@@ -169,6 +169,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &87775009
 GameObject:
@@ -220,6 +223,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &205576358
 GameObject:
@@ -373,6 +379,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &335428375
 GameObject:
@@ -577,6 +586,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &402986912
 GameObject:
@@ -737,6 +749,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &432426879
 GameObject:
@@ -1039,6 +1054,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!4 &800688247
 Transform:
@@ -1258,6 +1276,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &941655889
 GameObject:
@@ -1405,6 +1426,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1365737920
 GameObject:
@@ -1456,6 +1480,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1460793080
 GameObject:
@@ -1507,6 +1534,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1475073993
 GameObject:
@@ -1558,6 +1588,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1482234919
 GameObject:
@@ -1603,6 +1636,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1568500127}
   - component: {fileID: 1568500126}
+  - component: {fileID: 1568500129}
+  - component: {fileID: 1568500128}
   m_Layer: 0
   m_Name: VoxParser
   m_TagString: Untagged
@@ -1623,8 +1658,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   files: []
-  folderPrefix: tanks2
+  folderPrefix: tree
   isGlobalPosition: 0
+  meshRenderer: {fileID: 1568500128}
+  meshFilter: {fileID: 1568500129}
 --- !u!4 &1568500127
 Transform:
   m_ObjectHideFlags: 0
@@ -1640,6 +1677,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1568500128
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568500125}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1568500129
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568500125}
+  m_Mesh: {fileID: 4300000, guid: 27689a002b23bf84eb790149708cb4f6, type: 2}
 --- !u!1 &1574395332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,6 +1780,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1588252269
 GameObject:
@@ -2194,6 +2287,9 @@ MonoBehaviour:
     existCollider: 0
     isGreedy: 0
     isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

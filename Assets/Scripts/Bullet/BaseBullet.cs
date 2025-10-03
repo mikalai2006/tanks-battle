@@ -223,6 +223,13 @@ public class BaseBullet : MonoBehaviour
 
                 // Debug.Log($"point = {contact.point}, localPositionPoint={localPoint}");
 
+                VoxelMeshRenderWithSubmeshes voxelMesh = collision.gameObject.GetComponent<VoxelMeshRenderWithSubmeshes>();
+                if (voxelMesh != null)
+                {
+                    collisionsObjects.Add(collision.transform.gameObject);
+                    voxelMesh.ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+                }
+
                 List<Container> collisionContainers = new List<Container>();
                 Container voxelContainer = collision.gameObject.GetComponent<Container>();
                 if (voxelContainer == null)
@@ -335,6 +342,12 @@ public class BaseBullet : MonoBehaviour
 
             Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
             // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
+
+            VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
+            if (voxelMesh != null)
+            {
+                voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+            }
 
             List<Container> collisionContainers = new List<Container>();
             Container voxelContainer = other.gameObject.GetComponent<Container>();

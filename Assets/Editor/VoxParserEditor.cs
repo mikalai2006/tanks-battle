@@ -9,6 +9,9 @@ public class VoxParserEditor : Editor
     public override void OnInspectorGUI()
         {
         VoxParser target = (VoxParser)base.target;
+        
+        target.meshFilter = target.GetComponent<MeshFilter>();
+        target.meshRenderer = target.GetComponent<MeshRenderer>();
 
         // Draw default Inspector properties for properties not handled below
         DrawDefaultInspector();
@@ -68,7 +71,8 @@ public class VoxParserEditor : Editor
         {
             GUIStyle myLabelStyle = new GUIStyle();
             myLabelStyle.normal.textColor = Color.yellow;
-            GUILayout.Label("Выберите во вкладке проекта файлы VOX");
+            myLabelStyle.wordWrap = true;
+            GUILayout.Label("Зафиксируйте в инспекторе этот компонент и выберите во вкладке проекта файлы VOX", myLabelStyle);
         }
 
         // Apply changes if any
