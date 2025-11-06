@@ -211,6 +211,34 @@ MonoBehaviour:
     m_Key: tab_machines
     m_Metadata:
       m_Items: []
+  - m_Id: 58830133596606464
+    m_Key: createmap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58830463700914176
+    m_Key: loadingGameScene
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58836766083076096
+    m_Key: createVariantsTiles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58836812094590976
+    m_Key: createTiles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58836915375132672
+    m_Key: createFixedTiles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58849827082817536
+    m_Key: createGameObjects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58851271538200576
+    m_Key: createPlayers
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

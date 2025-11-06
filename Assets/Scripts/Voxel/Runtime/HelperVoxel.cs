@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -65,6 +66,68 @@ namespace Mikalai2006.Voxel
             0,1,2,1,3,2,
             0,2,3,0,3,1,
         };
+
+        public static bool AreListsEqual<T>(List<T> list1, List<T> list2)
+        {
+            if (list1.Count != list2.Count)
+                return false;
+
+            for (int i = 0; i < list1.Count; i++)
+            {
+                if (!EqualityComparer<T>.Default.Equals(list1[i], list2[i]))
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool AreArraysEqual<T>(T[] list1, T[] list2)
+        {
+            if (list1.Length != list2.Length)
+                return false;
+
+            for (int i = 0; i < list1.Length; i++)
+            {
+                if (!EqualityComparer<T>.Default.Equals(list1[i], list2[i]))
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool AreColorEqual(Voxel[] list1, Voxel[] list2)
+        {
+            if (list1.Length != list2.Length)
+                return false;
+            // Debug.Log($"{GetArrayHashCode(list1) == GetArrayHashCode(list2)}, {GetArrayHashCode(list1)}, {GetArrayHashCode(list2)}");
+
+            for (int i = 0; i < list1.Length; i++)
+            {
+                if (
+                    list1[i].color.r != list2[i].color.r
+                    || list1[i].color.g != list2[i].color.g
+                    || list1[i].color.b != list2[i].color.b
+                    || list1[i].color.a != list2[i].color.a)
+                    return false;
+            }
+
+            return true;
+        }
+        
+        // Метод для вычисления хеш-кода на основе содержимого массива
+        public static int GetArrayHashCode<T>(T[] array)
+        {
+            if (array == null)
+            {
+                return 0;
+            }
+
+            // Для примера используем простой метод: суммирование хеш-кодов элементов
+            int hash = 17; // Начальное значение
+            foreach (var element in array)
+            {
+                hash = hash * 31 + (element?.GetHashCode() ?? 0);
+            }
+            return hash;
+        }
         #endregion
     }
 }

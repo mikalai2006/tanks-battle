@@ -36,8 +36,8 @@ public class UILoaderScreen : MonoBehaviour
   {
     try
     {
-      // Root.rootVisualElement.Q<VisualElement>("OverBG").style.backgroundColor
-      //   = new StyleColor(GameManager.Instance.Theme.bgColor);
+      Root.rootVisualElement.Q<VisualElement>("OverBG").style.backgroundColor
+        = new StyleColor(GameManager.Instance.Theme.bgColor);
       var settings = GameManager.Instance.Theme;
       if (settings == null)
       {

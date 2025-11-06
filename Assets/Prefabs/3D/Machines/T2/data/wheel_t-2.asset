@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: wheel_t-2
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0.46666667, g: 0.46666667, b: 0.46666667, a: 1}
+  - color: {r: 0.8301887, g: 0, b: 0, a: 1}
     voxels:
     - {x: 3, y: 0, z: 0}
     - {x: 3, y: 0, z: 1}
@@ -239,7 +239,1019 @@ MonoBehaviour:
   GlobalSize: {x: 32, y: 32, z: 32}
   GlobalPosition: {x: 1, y: 0, z: 16}
   GlobalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  LocalSize: {x: 0, y: 0, z: 0}
-  LocalPosition: {x: 0, y: 0, z: 0}
+  LocalSize: {x: 0, y: 1, z: -4}
+  LocalPosition: {x: 0, y: 1, z: -4}
   LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  shadowCastingMode: 0
+  startMesh: {fileID: 0}
+  ColorsRight:
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 2, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 2, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 2, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 2, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 3, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 3, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 3, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 3, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  ColorsForward:
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 2, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 3, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 1, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 4, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 5, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 1, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 4, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 2, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 3, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  ColorsLeft:
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 2, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 2, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 2, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 2, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 2, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 3, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 3, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 3, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 4286019447
+    position: {x: 0, y: 3, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 3, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 0}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 1}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  ColorsBack:
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 0, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 1, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 2, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 3, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 4, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 0, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 1, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 2, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 3, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 4, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 5, z: 5}
+    type: 0
+    IndexSubMesh: 0

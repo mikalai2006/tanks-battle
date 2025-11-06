@@ -32,9 +32,11 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 6598650879790203170, guid: d6856fd76fafcee42a7ebb80d9a5d7d3, type: 3}
+  prefab: {fileID: 0}
+  lifeTime: 0.1
   speed: 17
-  damage: 1
+  damageRadius: 1
+  countCollisions: 1
   effectBoom: {fileID: 0}
   particleBoom: {fileID: 0}
   references:

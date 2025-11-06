@@ -83,6 +83,7 @@ namespace Mikalai2006.Voxel
             else
             {
                 meshCollider.convex = config.isConvex;
+                meshCollider.providesContacts = true;
             }
 
             if (config.isRigidbody)
@@ -629,10 +630,21 @@ namespace Mikalai2006.Voxel
         public static Voxel emptyVoxel = new Voxel() { ID = 0 };
 
         #region My functions
+        public Voxel GetVoxel(Vector3Int pos)
+        {
+            Voxel voxel = default;
+
+            if (pos.x < meshConfig.sOVoxelData.Bounds.x && pos.y < meshConfig.sOVoxelData.Bounds.y && pos.z < meshConfig.sOVoxelData.Bounds.z)
+            {
+                voxel = arrayVoxels[Helpers.To1D(pos.x, pos.y, pos.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
+            }
+
+            return voxel;
+        }
 
         async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
         {
-           float startTime = Time.realtimeSinceStartup;
+            float startTime = Time.realtimeSinceStartup;
 
             pointCollision = _pointCollision;
             explodeGameObject = _explodeGameObject;
@@ -684,7 +696,8 @@ namespace Mikalai2006.Voxel
                         color = data[collisionJob._needCreateElements[el]].color
                     });
                 }
-            };
+            }
+            ;
             // Debug.Log($"Time JOB create data2: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
 
             for (int el = 0; el < collisionJob.needRemoveElements.Length; el++)
@@ -700,7 +713,8 @@ namespace Mikalai2006.Voxel
                     // vox = default;
                     arrayVoxels[Helpers.To1D(posInt.x, posInt.y, posInt.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = vox;
                 }
-            };
+            }
+            ;
             // Debug.Log($"collisionJob._needCreateElements={collisionJob._needCreateElements.Length}, needRemoveElements={collisionJob.needRemoveElements.Length}");
 
             // for (int j = 0; j < keys.Length; j++)
@@ -915,7 +929,7 @@ namespace Mikalai2006.Voxel
 
 
 
-            Debug.Log($"Time checkAirVoxels1: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
+            // Debug.Log($"Time checkAirVoxels1: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
 
             if (maxY > -1)
             {
@@ -944,10 +958,11 @@ namespace Mikalai2006.Voxel
                 }
 
             }
-Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
+            
+            // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
 
-            
-            
+
+
             // if (needGravityCreateElements.Count > 0)
             // {
             //     CreateGravityObjectsAsync().Forget();
@@ -1176,7 +1191,7 @@ Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 100
                 Vector3 pointSpawnVoxel = transform.TransformPoint(elem.position);
                 gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
                 var voxPrefab = gObj.GetComponent<VoxelPrefab>();
-                voxPrefab.Init();
+                voxPrefab.Init(meshConfig.sOVoxelData);
                 voxPrefab.SetColor(elem.color);
                 // gObj.isStatic = true;
                 // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
@@ -1235,7 +1250,7 @@ Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 100
                 Vector3 pointSpawnVoxel = transform.TransformPoint(elem.position);
                 gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
                 var voxPrefab = gObj.GetComponent<VoxelPrefab>();
-                voxPrefab.Init();
+                voxPrefab.Init(meshConfig.sOVoxelData);
                 voxPrefab.SetColor(elem.color);
                 // gObj.isStatic = true;
                 // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);

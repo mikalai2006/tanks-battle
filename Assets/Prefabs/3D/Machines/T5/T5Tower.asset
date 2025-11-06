@@ -34,13 +34,15 @@ MonoBehaviour:
       m_LocalVariables: []
   prefab: {fileID: 8372265709631624150, guid: dcffc923e008def4f9d5c16ef5b04b17, type: 3}
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: cfb629f46e70c5849ba31f2bf07edbfa, type: 2}
-    _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 92f937c003652eb4fac999ceaa1767aa, type: 2}
+    _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
     isConvex: 1
-    isOneMesh: 0
+    isOneMesh: 1
+    useGlobalScale: 0
+    isTile: 0
     shadowCastingMode: 0
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   speedRotateTower: 10

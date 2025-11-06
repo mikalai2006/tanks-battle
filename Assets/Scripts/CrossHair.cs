@@ -13,20 +13,22 @@ public class CrossHair : MonoBehaviour
 
     void Update()
     {
-        // float diffAngle = Mathf.Abs(Mathf.Abs(baseMachine.Towers[0].Data.angleTower) - Mathf.Abs(baseMachine.Towers[0].Data.currentAngleTower));
-        var rotationA = Quaternion.Euler(0, baseMachine.Towers[0].Data.angleTower, 0); // Identity rotation
-        var rotationB = Quaternion.Euler(0, baseMachine.Towers[0].Data.currentAngleTower, 0);
-        float diffAngle = Quaternion.Angle(rotationA, rotationB);
-        if (diffAngle > 5)
-        {
-            currentSpread = diffAngle * 20;
-        }
-        else
-        {
-            currentSpread = 20;
-        }
+        if (baseMachine != null) {
+            // float diffAngle = Mathf.Abs(Mathf.Abs(baseMachine.Towers[0].Data.angleTower) - Mathf.Abs(baseMachine.Towers[0].Data.currentAngleTower));
+            var rotationA = Quaternion.Euler(0, baseMachine.Towers[0].Data.angleTower, 0); // Identity rotation
+            var rotationB = Quaternion.Euler(0, baseMachine.Towers[0].Data.currentAngleTower, 0);
+            float diffAngle = Quaternion.Angle(rotationA, rotationB);
+            if (diffAngle > 5)
+            {
+                currentSpread = diffAngle * 20;
+            }
+            else
+            {
+                currentSpread = 20;
+            }
 
-        CrossUpdate();
+            CrossUpdate();
+        }
     }
 
     public void OnSetTarget(BaseMachine _baseMachine)

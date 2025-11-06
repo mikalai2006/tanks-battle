@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.Localization.Settings;
 
 namespace Loader
@@ -13,9 +12,9 @@ namespace Loader
 
       await LocalizationSettings.InitializationOperation.Task;
 
-      onProgress?.Invoke(0.1f);
+      onProgress?.Invoke(0f);
 
-      var t = await Helpers.GetLocaledString("loading");
+      var t = await Helpers.GetLocaledString("loadingGameScene");
       onSetNotify?.Invoke(t);
       var environment = await _gameManager.AssetProvider.LoadSceneAdditive(ConstantsApp.Scenes.SCENE_GAME);
       var rootObjects = environment.Scene.GetRootGameObjects();
@@ -32,7 +31,7 @@ namespace Loader
       // }
 
 
-      onProgress?.Invoke(.2f);
+      // onProgress?.Invoke(.15f);
     }
   }
 }

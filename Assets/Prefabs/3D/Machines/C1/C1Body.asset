@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4338595c66ae443830c5678b4e8f4e, type: 3}
+  m_Name: C1Body
+  m_EditorClassIdentifier: 
+  idObject: C1Body
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefab: {fileID: 5346976342083063153, guid: 2a2f5155759968e46aa83090c963e466, type: 3}
+  MeshConfig:
+    sOVoxelData: {fileID: 11400000, guid: 2378a1421ff9a0c4cbaf24d2be027da4, type: 2}
+    _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    existCollider: 1
+    isGreedy: 1
+    isRigidbody: 0
+    isConvex: 1
+    isOneMesh: 1
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
+  colorBody: {r: 0, g: 0, b: 0, a: 0}
+  references:
+    version: 2
+    RefIds: []

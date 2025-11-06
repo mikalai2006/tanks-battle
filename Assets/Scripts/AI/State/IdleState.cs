@@ -12,11 +12,14 @@ public class IdleState : State
         // Debug.Log($"<color=green>IdleState Start</color>");
 
         stateController.Machine.Stop();
-        stateController.Machine.navMeshAgent.isStopped = true;
+        if (stateController.Machine.navMeshAgent.isActiveAndEnabled)
+        {
+            stateController.Machine.navMeshAgent.isStopped = true;
+        }
 
         timeWait = 2f;
 
-        stateController.Target = stateController.Machine.LevelManager.MazeGenerator.GetRandomNavmeshLocation(100);
+        stateController.Target = stateController.Machine.LevelManager.mapManager.GetRandomNavmeshLocation(100);
     }
 
     public override void OnUpdate()
@@ -37,7 +40,10 @@ public class IdleState : State
     public override void OnExit()
     {
         base.OnExit();
-        stateController.Machine.navMeshAgent.isStopped = false;
+        if (stateController.Machine.navMeshAgent.isActiveAndEnabled)
+        {
+            stateController.Machine.navMeshAgent.isStopped = false;
+        }
         // Debug.Log($"<color=green>IdleState Stop</color>");
     }
 }

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52864495aabc34247803b26f8b61eb93, type: 3}
+  m_Name: T6Wheels
+  m_EditorClassIdentifier: 
+  idObject: T6Wheels
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefab: {fileID: 296304405608595272, guid: 75595ac37e46e134eb5f119d547d3cfd, type: 3}
+  isRotate: 1
+  MeshConfig:
+    sOVoxelData: {fileID: 11400000, guid: 039fdc1542f1a8342b8643dbf917449e, type: 2}
+    _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    existCollider: 1
+    isGreedy: 1
+    isRigidbody: 0
+    isConvex: 1
+    isOneMesh: 1
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
+  references:
+    version: 2
+    RefIds: []

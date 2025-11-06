@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
@@ -10,11 +9,17 @@ public class BaseBullet : MonoBehaviour
     BaseMachine Machine;
     GameMuzzle ConfigMuzzle;
     [SerializeField] Rigidbody rb;
+    [SerializeField] BoxCollider boxCollider;
     Vector3 forward;
     int countCollisions;
     [SerializeField] float lifeTime;
     [SerializeField] bool isActive;
     List<GameObject> collisionsObjects = new();
+
+    void Awake()
+    {
+        boxCollider = transform.GetComponent<BoxCollider>();
+    }
 
     /// <summary>
     /// Инициализация снаряда
@@ -23,6 +28,10 @@ public class BaseBullet : MonoBehaviour
     public void OnInit(BaseMachine machine, BaseTower Tower, BaseMuzzle muzzle, GameMuzzle confgiMuzzle)
     {
         forward = muzzle.transform.forward;
+
+        transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+        
+        boxCollider.size = new Vector3(5,5,5);
 
         rb.position = transform.position;
 
@@ -95,7 +104,7 @@ public class BaseBullet : MonoBehaviour
         // #endif
         if (!rb.isKinematic)
         {
-            Vector3 speedForce = muzzle.transform.forward * ConfigMuzzle.Bullet.speed * 100 * _gameManager.Settings.scaleObjects;
+            Vector3 speedForce = muzzle.transform.forward * ConfigMuzzle.Bullet.speed * 10;
             rb.AddForce(speedForce, ForceMode.Impulse);
         }
         isActive = true;
@@ -331,6 +340,56 @@ public class BaseBullet : MonoBehaviour
         if (!collisionsObjects.Contains(other.gameObject))
         {
             Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
+
+            // Получаем позицию другого объекта
+            // Vector3 otherObjectPosition = other.transform.position;
+            // Debug.Log("Объект вошел в триггер с позицией: " + otherObjectPosition);
+
+            // Определяем точку касания на поверхности нашего триггера
+            Vector3 contactPoint = other.ClosestPoint(transform.position);
+            // Debug.Log("Точка касания на триггере: " + contactPoint);
+
+            Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
+            // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
+
+            VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
+            if (voxelMesh != null)
+            {
+                voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+            }
+
+            List<Container> collisionContainers = new List<Container>();
+            Container voxelContainer = other.gameObject.GetComponent<Container>();
+            if (voxelContainer != null)
+            {
+                collisionContainers.Add(voxelContainer);
+            }
+
+            if (collisionContainers.Count > 0)
+            {
+                collisionsObjects.Add(other.gameObject);
+
+                for (int x = 0; x < collisionContainers.Count; x++)
+                {
+
+                    collisionContainers[x].ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+                }
+            }
+
+
+            Debug.Log($"<color=green>Count collision ={countCollisions}</color>");
+            if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
+            {
+                OnBoom(null);
+            }
+        }
+    }
+    
+    void OnTriggerStay(Collider other)
+    {
+        if (!collisionsObjects.Contains(other.gameObject))
+        {
+            Debug.Log($"<color=magenta>OnTriggerStay {other.name}</color>");
 
             // Получаем позицию другого объекта
             // Vector3 otherObjectPosition = other.transform.position;

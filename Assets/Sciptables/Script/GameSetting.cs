@@ -68,6 +68,7 @@ public class GameSetting : ScriptableObject
   [Space(5)]
   [Header("Глобальные префабы")]
   public GameObject prefabVoxel;
+  public Material materialTransparent;
 
   [Space(5)]
   [Header("Текст")]

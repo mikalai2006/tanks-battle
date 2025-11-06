@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3288064911615906041}
+  boxCollider: {fileID: 0}
   lifeTime: 0
   isActive: 0
 --- !u!54 &3288064911615906041

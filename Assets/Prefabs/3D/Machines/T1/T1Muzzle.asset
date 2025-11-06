@@ -36,11 +36,13 @@ MonoBehaviour:
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 0563cbcc93eb93b4190deeadcebe8273, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
-    existCollider: 0
+    existCollider: 1
     isGreedy: 1
     isRigidbody: 0
     isConvex: 1
     isOneMesh: 1
+    useGlobalScale: 0
+    isTile: 0
     shadowCastingMode: 0
   soundShot: {fileID: 8300000, guid: 79e79ae94ef85b14699eddfb6ec59e3c, type: 3}
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}

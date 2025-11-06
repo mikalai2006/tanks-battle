@@ -17,7 +17,7 @@ MonoBehaviour:
   inputJoystick: 0
   simpleMove: 1
   logEnabled: 1
-  scaleObjects: 0.1
+  scaleObjects: 0.03125
   maxRadiusCreateVoxels: 6
   countCreateVoxelByFrame: 30
   gerbs:
@@ -84,10 +84,13 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
+  - {fileID: 11400000, guid: 9ddc95e9a2516c44099c2b41c4fc8ffa, type: 2}
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
-  - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
-  - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
-  - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
+  - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
+  - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
+  - {fileID: 11400000, guid: da3e7403be56f0748b9f25df94cb188b, type: 2}
+  - {fileID: 11400000, guid: 6abe5dfb79cf82340bf0e912a5081bbc, type: 2}
+  - {fileID: 11400000, guid: df1dbefa263c43e4190d67228e940652, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
@@ -101,6 +104,7 @@ MonoBehaviour:
   colorSectorPlayerAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
   colorSectorAttack: {r: 1, g: 0.42219353, b: 0, a: 0.5882353}
   prefabVoxel: {fileID: 8765538014590554563, guid: 6e1da3befa2e5eb41ae0c256c49ad53b, type: 3}
+  materialTransparent: {fileID: 2100000, guid: 7fd9cedb25c36714c948511cb3fdc30f, type: 2}
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}

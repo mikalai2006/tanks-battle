@@ -1,15 +1,20 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using UnityEngine.AI;
-using Unity.AI.Navigation;
+using Cysharp.Threading.Tasks;
+using Loader;
 
 public class LevelManager : MonoBehaviour
 {
+    public static event System.Action<string> OnSetNotify;
+    public static event System.Action<float> OnAddProgress;
+    public LoaderBarProvider LoaderBarProvider { get; private set; }
     private GameManager _gameManager => GameManager.Instance;
     private GameSetting _gameSetting => GameManager.Instance.Settings;
+    [SerializeField] public Tile3DGenerator tile3DGenerator;
+    [SerializeField] public WFCGenerator wFCGenerator;
     [SerializeField] public MapManager mapManager;
     [SerializeField] public Light globalLight;
     [SerializeField] public List<BaseMachine> machines;
@@ -30,14 +35,52 @@ public class LevelManager : MonoBehaviour
     public CameraHandler CameraHandler => _cameraHandler;
     public CinemachineCamera cinemachineCamera;
     public CinemachineOrbitalFollow cinemachineOrbitalFollow;
-    public NavMeshSurface NavMeshSurface;
     public MazeGenerator MazeGenerator;
+    private CreateMapOperation createMapOperation;
+    System.Threading.CancellationTokenSource cancelToken;
 
     [Space(5)]
     [Header("Pools")]
     public ObjectPool poolBullet;
 
-    void Start()
+#region  Unity methods
+    void Awake()
+    {
+        cancelToken = new System.Threading.CancellationTokenSource();
+        LoaderBarProvider = new LoaderBarProvider();
+        
+        MapManager.OnCompleteBakeMap += OnSpawnObjects;
+    }
+
+    async void Start()
+    {
+        await Init();
+    }
+
+    void OnDestroy()
+    {
+
+        MapManager.OnCompleteBakeMap -= OnSpawnObjects;
+
+        createMapOperation.Dispose();
+
+        cancelToken.Cancel();
+        cancelToken.Dispose();
+    }
+    #endregion
+
+    async UniTask Init()
+    {
+        createMapOperation = new CreateMapOperation(this);
+
+        var operations = new Queue<ILoadingOperation>();
+        operations.Enqueue(createMapOperation);
+        await LoaderBarProvider.LoadAndDestroy(operations);
+
+        // await StartGame(cancelToken);
+    }
+
+    public async UniTask StartGame(System.Threading.CancellationTokenSource cancelToken)
     {
         cinemachineOrbitalFollow = cinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
 
@@ -47,10 +90,19 @@ public class LevelManager : MonoBehaviour
         globalLight.intensity = _gameManager.LevelConfig.light;
 
         // создаем карту
+        mapManager.OnInit(this);
         mapManager.CreateMap();
+        // mapManager.OnCreateTestObjects();
         // MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
-        NavMeshSurface.BuildNavMesh();
+        // tile3DGenerator.CreateMap();
+        wFCGenerator.OnCreateVariantsPrefabs();
+        await wFCGenerator.OnGenerateTiles(cancelToken);
+    }
 
+    private void OnSpawnObjects()
+    {
+        OnSetNotify?.Invoke("createPlayers");
+        OnAddProgress?.Invoke(.1f);
         // создаем игровые комманды
         if (_gameManager.LevelConfig.typeLevel == TypeLevel.Command)
         {
@@ -106,7 +158,8 @@ public class LevelManager : MonoBehaviour
                 //     && n.Y < _gameManager.LevelConfig.gridSize.y
                 //     && !n.StateNode.HasFlag(StateNode.Disable)
                 // ).OrderBy(t => UnityEngine.Random.value).First();
-                Vector3 pointSpawn = MazeGenerator.GetRandomNavmeshLocation(100);
+                Vector3 pointSpawn = mapManager.GetRandomNavmeshLocation(_gameManager.LevelConfig.gridSize.x);
+
 
                 if (pointSpawn != null)
                 {
@@ -121,6 +174,8 @@ public class LevelManager : MonoBehaviour
                         Quaternion.identity,
                         objectSpawnMachines.transform
                     );
+                    
+                // Debug.Log($"pointSpawn => {pointSpawn}, gObject position={gObject.transform.position}");
 
                     BaseMachine obj = gObject.GetComponent<BaseMachine>();
                     if (obj != null)
@@ -130,7 +185,12 @@ public class LevelManager : MonoBehaviour
                         {
                             obj.GetComponent<PlayerController>().enabled = false;
                             obj.GetComponent<PlayerInput>().enabled = false;
-                            obj.GetComponent<NavMeshAgent>().enabled = true;
+                            var navMeshAgent = obj.GetComponent<NavMeshAgent>();
+                            if (navMeshAgent != null)
+                            {
+                                navMeshAgent.Warp(pointSpawn);
+                                navMeshAgent.enabled = true;
+                            };
                             var lightComponent = obj.GetComponentInChildren<Light>();
                             if (lightComponent)
                             {
@@ -224,7 +284,6 @@ public class LevelManager : MonoBehaviour
         //     GameBonus configB = Helpers.GetProbabilityItem<GameBonus>(_gameManager.LevelConfig.bonuses).Item;
         //     OnSpawnBonus(vacantNodes[i], configB);
         // }
-
     }
 
     // public void OnSetActiveCamera(Camera value)

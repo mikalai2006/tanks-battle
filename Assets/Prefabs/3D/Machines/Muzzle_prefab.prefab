@@ -291,6 +291,10 @@ MonoBehaviour:
     isGreedy: 0
     isRigidbody: 0
     isConvex: 0
+    isOneMesh: 0
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 5311629721760465526}
 --- !u!114 &6956179497362671940
 MonoBehaviour:
@@ -322,7 +326,7 @@ MonoBehaviour:
   voxelMeshRender: {fileID: 4578221365697212566}
   ignoreMask:
     serializedVersion: 2
-    m_Bits: 7172
+    m_Bits: 7174
 --- !u!1 &9189856959237785062
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,8 +415,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.015872955
-        value: 0.06850815
+        time: 0.011890411
+        value: 0.0024757385
         inSlope: 0
         outSlope: 0
         tangentMode: 0

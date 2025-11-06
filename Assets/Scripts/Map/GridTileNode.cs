@@ -1,6 +1,6 @@
 
 using System;
-
+using System.Collections.Generic;
 using UnityEngine;
 
 [Flags]
@@ -8,7 +8,9 @@ public enum StateNode
 {
     Disable = 1 << 0,
     Empty = 1 << 1,
-    Occupied = 1 << 2
+    Occupied = 1 << 2,
+    Tiled = 1 << 3,
+    TiledInner = 1 << 4
 }
 
 [Serializable]
@@ -23,9 +25,12 @@ public class GridTileNode : IHeapItem<GridTileNode>
 
     [NonSerialized] public int level;
     [NonSerialized] public Vector3Int position;
-
     [NonSerialized] private BaseMachine _ocuppiedUnit = null;
     public BaseMachine OccupiedUnit => _ocuppiedUnit;
+    // public GridTileNode leftDown => _grid.GetGridObject(new Vector3Int(position.x - 1, position.y - 1, 0));
+    // public GridTileNode leftUp => _grid.GetGridObject(new Vector3Int(position.x - 1, position.y + 1, 0));
+    // public GridTileNode rightDown => _grid.GetGridObject(new Vector3Int(position.x + 1, position.y - 1, 0));
+    // public GridTileNode rightUp => _grid.GetGridObject(new Vector3Int(position.x + 1, position.y + 1, 0));
     public bool IsAllowSpawn =>
         StateNode.HasFlag(StateNode.Empty)
         && !StateNode.HasFlag(StateNode.Occupied);
@@ -54,6 +59,19 @@ public class GridTileNode : IHeapItem<GridTileNode>
     [NonSerialized] public bool isCreated = false;
     [NonSerialized] public bool isEdge = false;
 
+    public Tile3D[] tileOptions;
+    public bool isCollapsed;
+    public void CreateTiles(bool collapseState, List<Tile3D> tiles)
+    {
+        isCollapsed = collapseState;
+        tileOptions = tiles.ToArray();
+    }
+
+    public void RecreateTiles(Tile3D[] tiles)
+    {
+        tileOptions = tiles;
+    }
+
     public GridTileNode(GridTile<GridTileNode> grid, GridTileHelper gridHelper, int x, int y)
     {
         position = new Vector3Int(x, y, 0);
@@ -61,6 +79,21 @@ public class GridTileNode : IHeapItem<GridTileNode>
         _grid = grid;
         this.X = x;
         this.Y = y;
+    }
+
+    public Vector3Int positionXZ()
+    {
+        return new Vector3Int(X, 0, Y);
+    }
+
+    public bool HasAnyState(StateNode any)
+    {
+        return (StateNode & any) != 0;
+    }
+
+    public bool HasAllState(StateNode all)
+    {
+        return (StateNode & all) == all;
     }
 
     public int CompareTo(GridTileNode nodeToCompare)
@@ -104,7 +137,7 @@ public class GridTileNode : IHeapItem<GridTileNode>
             StateNode |= StateNode.Occupied;
         }
     }
-
+    
     public void CalculateFCost()
     {
         fCost = gCost + hCost;

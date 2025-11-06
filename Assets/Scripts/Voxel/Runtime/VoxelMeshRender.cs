@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace Mikalai2006.Voxel
 {
     public class VoxelMeshRender : MonoBehaviour, IVoxeled
     {
-        [SerializeField] private MeshConfig Config;
+        public Action OnSetData;
+        GameManager _gameManager => GameManager.Instance;
+        [SerializeField] public MeshConfig Config;
         // [SerializeField] private SOVoxelData sOVoxelData;
         // [SerializeField] private Material _material;
         // [SerializeField] bool existCollider;
@@ -23,6 +26,12 @@ namespace Mikalai2006.Voxel
 
         private void Start()
         {
+            Container[] existCntainers = GetComponentsInChildren<Container>();
+            if (existCntainers.Length > 0)
+            {
+                Helpers.DestroyChildren(transform); 
+            }
+
             if (Wrapper == null)
             {
                 Wrapper = transform.gameObject;
@@ -45,7 +54,14 @@ namespace Mikalai2006.Voxel
 
         private void CreateContainer(int index)
         {
+            // Debug.Log($"CreateContainer {gameObject.name}");
             Wrapper.transform.localRotation = Config.sOVoxelData.GlobalRotation;
+
+            if (Config.useGlobalScale)
+            {
+                // var maxBoundsSize = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z);
+                Wrapper.transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+            }
 
             // int count = Config.sOVoxelData.voxels.Count;
             // position = new Vector3(UnityEngine.Random.Range(0, 150), 0.5f, UnityEngine.Random.Range(0, 180));
@@ -57,12 +73,20 @@ namespace Mikalai2006.Voxel
 
             GameObject cont = new GameObject($"Container_{Config.sOVoxelData.name}___{index}");
             cont.transform.parent = Wrapper.transform;
+            cont.layer = transform.gameObject.layer;// LayerMask.NameToLayer("Wall");
             var container = cont.AddComponent<Container>();
             containers[index] = container;
             container.Initialize(Config, Vector3.zero);
             container.transform.localScale = new Vector3(1, 1, 1);
             container.transform.SetPositionAndRotation(position, Quaternion.identity);
-            container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
+            if (Config.isTile)
+            {
+                var maxAxis = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z) / 2f;
+                container.transform.SetLocalPositionAndRotation((-1 * new Vector3(maxAxis, 0.5f, maxAxis)) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);           
+            } else
+            {
+                container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
+            }
             // container.gameObject.isStatic = true;
 
             // SceneTools.LoopPositions((i, p) =>
@@ -109,6 +133,8 @@ namespace Mikalai2006.Voxel
                 container.SetData(index);
             }
 
+            OnSetData?.Invoke();
+
             if (Config.isGreedy)
             {
                 container.UploadMeshGreedy(Config.sOVoxelData.startMesh == null);
@@ -130,6 +156,11 @@ namespace Mikalai2006.Voxel
         //     // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(position));
 
         // }
+
+        public Voxel GetVoxel(int indexContainer, Vector3Int position)
+        {
+            return containers[indexContainer].GetVoxel(position);
+        }
 
         private void OnDestroy()
         {

@@ -8,11 +8,14 @@ public class VoxelPrefab : MonoBehaviour
     {
         gPUInstanceEnabler = GetComponent<GPUInstanceEnabler>();
 
-        Init();
+        // Init();
     }
 
-    public void Init()
+    public void Init(SOVoxelData sOVoxelData)
     {
+        
+        // var maxBoundsSize = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
+        // transform.localScale = new Vector3(1f/maxBoundsSize, 1f/maxBoundsSize, 1f/maxBoundsSize);
 
         transform.localScale = new Vector3(gameManager.Settings.scaleObjects, gameManager.Settings.scaleObjects, gameManager.Settings.scaleObjects);
 

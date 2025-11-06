@@ -320,6 +320,7 @@ public static class Helpers
   {
       return Vector3.Distance(point, sphereCenter) <= sphereRadius && Vector3.Distance(point, sphereCenter) > innerRadius;
   }
+
 }
 
 

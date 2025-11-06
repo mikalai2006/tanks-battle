@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 17895403934022817}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9, y: 0, z: 9}
+  m_LocalPosition: {x: -9, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -57,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 1756383949059357859}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: -9}
+  m_LocalPosition: {x: 9, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -108,10 +108,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 11400000, guid: 2e515e0010305fb4bacb9b86c4c7016a, type: 2}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 0
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &4756917410700354212
 GameObject:
@@ -138,7 +145,7 @@ Transform:
   m_GameObject: {fileID: 4756917410700354212}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9, y: 0, z: -9}
+  m_LocalPosition: {x: -9, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -189,10 +196,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 11400000, guid: 2e515e0010305fb4bacb9b86c4c7016a, type: 2}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 0
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &6290602128579096627
 GameObject:
@@ -238,10 +252,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 11400000, guid: 2e515e0010305fb4bacb9b86c4c7016a, type: 2}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 0
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}
 --- !u!1 &6508422843292153629
 GameObject:
@@ -328,7 +349,7 @@ Transform:
   m_GameObject: {fileID: 6516165153091690516}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: 9}
+  m_LocalPosition: {x: 9, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -379,8 +400,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 11400000, guid: 2e515e0010305fb4bacb9b86c4c7016a, type: 2}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 0
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    useGlobalScale: 0
+    isTile: 0
+    shadowCastingMode: 0
   Wrapper: {fileID: 0}

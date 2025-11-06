@@ -404,6 +404,64 @@ public class GridTileHelper
         return neighbourList;
     }
 
+    public List<GridTileNode> GetNeighbourListWithTiled(GridTileNode currentNode, bool isDiagonal)
+    {
+        List<GridTileNode> neighbourList = new List<GridTileNode>();
+
+        if (currentNode.X - 1 >= 0)
+        {
+            //left
+            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y);
+            if (left.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(left);
+            if (isDiagonal)
+            {
+                // left down
+                // if (currentNode.y - 1 >= 0) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
+                var leftDown = GetNode(currentNode.X - 1, currentNode.Y - 1);
+                if (leftDown != default && leftDown.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(leftDown);
+                // left up
+                // if (currentNode.y + 1 < gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
+                var leftUp = GetNode(currentNode.X - 1, currentNode.Y + 1);
+                if (leftUp != default && leftUp.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(leftUp);
+            }
+        }
+
+        if (currentNode.X + 1 < _gridTile.GetWidth())
+        {
+            // right
+            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y);
+            if (right.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(right);
+            if (isDiagonal)
+            {
+                //// right down
+                //GridTileNode rightDown = GetNode(currentNode.x + 1, currentNode.y);
+                //if (currentNode.y - 1 >= 0) neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
+                var rightDown = GetNode(currentNode.X + 1, currentNode.Y - 1);
+                if (rightDown != default && rightDown.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(rightDown);
+                ////right up
+                //if (currentNode.y + 1 < gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y + 1));
+                var rightUp = GetNode(currentNode.X + 1, currentNode.Y + 1);
+                if (rightUp != default && rightUp.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(rightUp);
+            }
+        }
+
+        // down
+        if (currentNode.Y - 1 >= 0)
+        {
+            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1);
+            if (down.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(down);
+        }
+        // up
+        if (currentNode.Y + 1 < _gridTile.GetHeight())
+        {
+
+            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1);
+            if (up.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(up);
+        }
+
+        return neighbourList;
+    }
+
     public List<GridTileNode> GetNeighbourListWithTypeGroundOrNone(GridTileNode currentNode)
     {
         List<GridTileNode> neighbourList = new List<GridTileNode>();

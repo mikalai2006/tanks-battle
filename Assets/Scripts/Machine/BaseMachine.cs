@@ -225,7 +225,7 @@ public abstract class BaseMachine : MonoBehaviour
         {
             navMeshAgent.angularSpeed = 0;
             navMeshAgent.updateRotation = false;
-            navMeshAgent.speed = Config.speed * 0.2f;
+            navMeshAgent.speed = Config.speed * 0.01f;
             navMeshAgent.updatePosition = false;
         }
 
@@ -440,6 +440,10 @@ public abstract class BaseMachine : MonoBehaviour
     public void OnSetSpeed(float speed)
     {
         data.speed = speed;
+        if (navMeshAgent != null)
+        {
+            navMeshAgent.speed = speed / 100;
+        }
     }
 
     public void OnSetDirectionMove(Vector3 direction)

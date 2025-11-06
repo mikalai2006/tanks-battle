@@ -301,7 +301,7 @@ namespace Mikalai2006.Voxel
                 GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
                 Vector3 pointSpawnVoxel = transform.TransformPoint(elem);
                 gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
-                gObj.GetComponent<VoxelPrefab>().Init();
+                gObj.GetComponent<VoxelPrefab>().Init(Config.sOVoxelData);
                 // gObj.isStatic = true;
                 // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
                 // gObj.gameObject.AddComponent<BoxCollider>();

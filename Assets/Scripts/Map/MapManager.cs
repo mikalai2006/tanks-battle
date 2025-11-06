@@ -1,20 +1,61 @@
+using System;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
+    public static event Action<string> OnSetNotify;
+    public static event Action OnCompleteBakeMap;
     private GameManager _gameManager => GameManager.Instance;
+    private LevelManager _levelManager;
     private GameSetting _gameSetting => GameManager.Instance.Settings;
+    [SerializeField] private ParserHeight ParserHeight;
     public GridTileHelper gridTileHelper;
     [SerializeField] Tilemap map;
     public Tilemap Map => map;
+    public GameObject plane;
     [SerializeField] Tilemap mapBorder;
     [SerializeField] Tilemap mapObjects;
     [SerializeField] Tilemap mapDamages;
+    public NavMeshSurface NavMeshSurface;
+
+    public void OnInit(LevelManager levelManager)
+    {
+        _levelManager = levelManager;
+    }
+
+    void Awake()
+    {
+        WFCGenerator.OnCompleteTiled += OnBakeMap;
+    }
+
+    void OnDestroy()
+    {
+
+        WFCGenerator.OnCompleteTiled -= OnBakeMap;
+    }
+    
+    private void OnBakeMap()
+    {
+        NavMeshSurface.BuildNavMesh();
+
+        OnCompleteBakeMap?.Invoke();
+    }
 
     public void CreateMap()
     {
-        gridTileHelper = new GridTileHelper(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
+        ParserHeight.SetConfig(_gameManager.LevelConfig.tileSettings);
+        ParserHeight.Init();
+        _gameManager.LevelConfig.gridSize = new Vector3Int(ParserHeight.gridSize.x, 1, ParserHeight.gridSize.y);
+
+        gridTileHelper = new GridTileHelper(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.z);
+
+        var scaleX = _gameManager.LevelConfig.gridSize.x / 10f;
+        var scaleZ = _gameManager.LevelConfig.gridSize.z / 10f;
+        plane.transform.localScale = new Vector3(scaleX, 1, scaleZ);
+        plane.transform.position = new Vector3(0.5f * _gameManager.LevelConfig.gridSize.x, 0, 0.5f * _gameManager.LevelConfig.gridSize.z);
 
         // // Random value for noise.
         // var xOffSet = Random.Range(-10000f, 10000f);
@@ -70,6 +111,119 @@ public class MapManager : MonoBehaviour
         //         }
         //     }
         // }
+
+        // OnCreateNoise();
+        OnCreateTiles();
+        OnCreateFixedTiles();
+    }
+
+    public void OnCreateTiles()
+    {
+        OnSetNotify?.Invoke("createTiles");
+
+        var tilesHeights = ParserHeight.GenerateHeightMap();
+
+        for (int x = 0; x < _gameManager.LevelConfig.gridSize.x; x++)
+        {
+            for (int z = 0; z < _gameManager.LevelConfig.gridSize.z; z++)
+            {
+                GridTileNode node = gridTileHelper.GetNode(new Vector3Int(x, z));
+                int height = tilesHeights[new Vector2Int(x, z)];
+
+                if (height > 0 )
+                {
+                    node.StateNode = StateNode.Tiled;
+                    map.SetTileFlags(node.position, TileFlags.None);
+                    map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
+                    map.SetTileFlags(node.position, TileFlags.LockAll);
+                }
+            }
+        }
+    }
+
+    public void OnCreateNoise()
+    {
+        // Random value for noise.
+        var xOffSet = UnityEngine.Random.Range(-10000f, 10000f);
+        var zOffSet = UnityEngine.Random.Range(-10000f, 10000f);
+        
+        for (int x = 0; x < _gameManager.LevelConfig.gridSize.x; x++)
+        {
+            for (int z = 0; z < _gameManager.LevelConfig.gridSize.z; z++)
+            {
+                GridTileNode node = gridTileHelper.GetNode(new Vector3Int(x, z));
+
+                float noiseValue = Mathf.PerlinNoise(
+                    x * _gameManager.LevelConfig.noiseScaleKoof + xOffSet,
+                    z * _gameManager.LevelConfig.noiseScaleKoof + zOffSet
+                );
+
+                bool isNeedCreate = noiseValue < _gameManager.LevelConfig.noiseMaxKoof;
+                if (isNeedCreate)
+                {
+                    node.StateNode = StateNode.Tiled;
+                    map.SetTileFlags(node.position, TileFlags.None);
+                    map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
+                    map.SetTileFlags(node.position, TileFlags.LockAll);
+                }
+            }
+        }
+    }
+
+    public void OnCreateFixedTiles()
+    {
+        OnSetNotify?.Invoke("createFixedTiles");
+        for (int x = 0; x < _gameManager.LevelConfig.gridSize.x; x++)
+        {
+            for (int z = 0; z < _gameManager.LevelConfig.gridSize.z; z++)
+            {
+                GridTileNode node = gridTileHelper.GetNode(new Vector3Int(x, z));
+                
+                if (node.StateNode.HasFlag(StateNode.Tiled)) {
+                    var allNeighbours = gridTileHelper.GetNeighbourListWithTiled(node, true);
+
+                    if (allNeighbours.Count >= 8 || x == 0 || x == _gameManager.LevelConfig.gridSize.x - 1 || z == 0 || z == _gameManager.LevelConfig.gridSize.z - 1)
+                    {
+                        node.StateNode = StateNode.TiledInner;
+                        map.SetTileFlags(node.position, TileFlags.None);
+                        map.SetTile(node.position, _gameManager.LevelConfig.tileLandscape);
+                        map.SetTileFlags(node.position, TileFlags.LockAll);
+                    }
+
+                }
+            }
+        }
+    }
+    public void OnCreateTestObjects()
+    {
+        // Random value for noise.
+        var xOffSet = UnityEngine.Random.Range(-10000f, 10000f);
+        var zOffSet = UnityEngine.Random.Range(-10000f, 10000f);
+        
+        for (int x = 0; x < _gameManager.LevelConfig.gridSize.x; x++)
+        {
+            for (int z = 0; z < _gameManager.LevelConfig.gridSize.z; z++)
+            {
+                var position = new Vector3Int(x, 0, z);
+
+                GridTileNode node = gridTileHelper.GetNode(new Vector3Int(x, z));
+
+                float noiseValue = Mathf.PerlinNoise(
+                    x * _gameManager.LevelConfig.noiseScaleKoof + xOffSet,
+                    z * _gameManager.LevelConfig.noiseScaleKoof + zOffSet
+                );
+
+                bool isNeedCreate = noiseValue < _gameManager.LevelConfig.noiseMaxKoof;
+                if (isNeedCreate)
+                {
+                    // Instantiate(_gameManager.LevelConfig.testObjects[UnityEngine.Random.Range(0, _gameManager.LevelConfig.testObjects.Length)], position, Quaternion.identity, _levelManager.objectSpawnEffect.transform);
+                    map.SetTileFlags(node.position, TileFlags.None);
+                    map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
+                    map.SetTileFlags(node.position, TileFlags.LockAll);
+                    // Debug.Log($"Draw tile to position {position}-{node.position}");
+                }
+            }
+        }
     }
 
     public void OnSetColor(GridTileNode node, Color color)
@@ -77,5 +231,25 @@ public class MapManager : MonoBehaviour
         Vector3Int posTile = map.WorldToCell(node.position);
 
         map.SetColor(posTile, color);
+    }
+
+    
+    public Vector3 GetRandomNavmeshLocation(float sampleRadius)
+    {
+        // 1. Generate a random origin point near the NavMeshSurface's center
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * sampleRadius;
+        randomDirection.y = 0.7f;
+        Vector3 origin = transform.position + randomDirection; // Use the spawner's position or a known center
+
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+
+        // 2. Sample the position on the NavMesh
+        if (NavMesh.SamplePosition(origin, out hit, sampleRadius, NavMesh.AllAreas))
+        {
+            // 3. Return the valid position
+            finalPosition = hit.position;
+        }
+        return finalPosition;
     }
 }

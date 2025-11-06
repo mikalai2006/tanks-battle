@@ -41,6 +41,8 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 1
     isOneMesh: 1
+    useGlobalScale: 0
+    isTile: 0
     shadowCastingMode: 0
   colorBody: {r: 0, g: 0, b: 0, a: 0}
   references:

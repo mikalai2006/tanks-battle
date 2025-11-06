@@ -17,6 +17,7 @@ public class VoxParser : MonoBehaviour
     [SerializeField] private string[] files;
     // [SerializeField] private TextAsset asset;
     // [SerializeField] private string folderPrefix = "panzers";
+    [Tooltip("Если активировать, то не будут сжиматься модели. Будут записаны координаты как есть и ограничивающая рамка будет как задана в редакторе VoxelMagic")]
     [SerializeField] private bool isGlobalPosition;
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
@@ -96,14 +97,14 @@ public class VoxParser : MonoBehaviour
                     max.z = Mathf.Max(max.z, voxel.LocalPosition.Y);
                 }
             }
-            Debug.Log($"min:{min}, max:{max}");
+            // Debug.Log($"min:{min}, max:{max}");
 
 
             foreach (VoxReader.Voxel voxel in voxels) // Используем ref для изменения оригинальных значений
             {
                 pointsColors.Add(
                     isGlobalPosition
-                        ? new UnityEngine.Vector3Int(voxel.GlobalPosition.X, voxel.GlobalPosition.Z, voxel.GlobalPosition.Y)
+                        ? new UnityEngine.Vector3Int(voxel.LocalPosition.X, voxel.LocalPosition.Z, voxel.LocalPosition.Y)
                         : new UnityEngine.Vector3Int(voxel.LocalPosition.X - min.x, voxel.LocalPosition.Z - min.y, voxel.LocalPosition.Y - min.z),
                     new UnityEngine.Color(voxel.Color.R / 255f, voxel.Color.G / 255f, voxel.Color.B / 255f, voxel.Color.A / 255f)
                 );
@@ -152,7 +153,7 @@ public class VoxParser : MonoBehaviour
             // Create ScriptableObject with data voxels and colors.
             SOVoxelData asset = ScriptableObject.CreateInstance<SOVoxelData>();
             asset.groups = submeshesDatas;
-            asset.voxels = pointsColors.Keys.AsParallel().ToList();
+            asset.voxels = pointsColors.Keys.ToList(); // .AsParallel()
             asset.Pivot = pivot;
             asset.Bounds = bounds;
             asset.colors = pointsColors.Values.AsParallel().ToList();
@@ -193,6 +194,7 @@ public class VoxParser : MonoBehaviour
             string nameFolderModel = Path.GetFileNameWithoutExtension(namePathArray[namePathArray.Length - 1]);
 
             string modelName = models[m].Name;
+
             if (!AssetDatabase.IsValidFolder($"{OutputPath}/SO/{nameFolderModel}"))
             {
                 AssetDatabase.CreateFolder($"{OutputPath}/SO", nameFolderModel);
@@ -201,8 +203,12 @@ public class VoxParser : MonoBehaviour
             string pathMesh = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/SO/{nameFolderModel}/{modelName}_{nameFolderModel}_mesh.asset");
 
 
+            // Create mesh.
             Mesh mesh = CreateMesh(nameFolderModel, asset, pathMesh);
             asset.startMesh = mesh;
+
+            // Create arrays colors for tileGenerator.
+            CreateArraysColors(ref asset);
 
             AssetDatabase.CreateAsset(asset, path);
             AssetDatabase.SaveAssets();
@@ -214,8 +220,72 @@ public class VoxParser : MonoBehaviour
 
     }
 
+    private void CreateArraysColors(ref SOVoxelData sOVoxelData) {
+        var TileSideVoxels = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
+
+        sOVoxelData.ColorsRight = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsForward = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsLeft = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsBack = new Voxel[TileSideVoxels * TileSideVoxels];
+        // ColorsTop = new Voxel[TileSideVoxels * TileSideVoxels];
+        // ColorsBottom = new Voxel[TileSideVoxels * TileSideVoxels];
+
+        for (int row = 0; row < TileSideVoxels; row++)
+        {
+            for (int column = 0; column < TileSideVoxels; column++)
+            {
+                sOVoxelData.ColorsForward[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Forward, sOVoxelData);
+                sOVoxelData.ColorsRight[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Right, sOVoxelData);
+                sOVoxelData.ColorsLeft[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Left, sOVoxelData);
+                sOVoxelData.ColorsBack[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Back, sOVoxelData);
+            }
+        }
+    }
+    
+    public Voxel GetVoxelColor(int y, int column, DirectionSideTile direction, SOVoxelData sOVoxelData)
+    {
+        var TileSideVoxels = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
+
+        Vector3Int position = Vector3Int.zero;
+
+        if (direction == DirectionSideTile.Forward)
+        {
+            position = new Vector3Int(column, y, 0);
+        }
+        else if (direction == DirectionSideTile.Right)
+        {
+            position = new Vector3Int(TileSideVoxels - 1, y, column);
+        }
+        else if (direction == DirectionSideTile.Back)
+        {
+            position = new Vector3Int(column, y, TileSideVoxels - 1);
+        }
+        else if (direction == DirectionSideTile.Left)
+        {
+            position = new Vector3Int(0, y, column);
+        }
+
+        var index = sOVoxelData.voxels.FindIndex(x => x == position);
+        Color color = Color.clear;
+
+        if (index > -1)
+        {
+            color = sOVoxelData.colors[index];
+        }
+
+        Voxel vox = new Voxel()
+        {
+            color = color,
+            position = position,
+
+        };
+
+        return vox;
+    }
+
     private Mesh CreateMesh(string meshName, SOVoxelData sOVoxelData, string path)
     {
+        var TileSideVoxels = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
         Mesh mesh = new Mesh();  //meshFilter.sharedMesh;
         mesh.name = meshName;
 
@@ -247,7 +317,7 @@ public class VoxParser : MonoBehaviour
                     IndexSubMesh = j,
                 };
 
-                arrayVoxels[Helpers.To1D(pos.x, pos.y, pos.z, sOVoxelData.Bounds.x, sOVoxelData.Bounds.y)] = vox;
+                arrayVoxels[Helpers.To1D(pos.x, pos.y, pos.z, isGlobalPosition ? TileSideVoxels :  sOVoxelData.Bounds.x, isGlobalPosition ? TileSideVoxels : sOVoxelData.Bounds.y)] = vox;
             }
         }
 
