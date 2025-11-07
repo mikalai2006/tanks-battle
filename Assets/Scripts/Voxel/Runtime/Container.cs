@@ -87,7 +87,7 @@ namespace Mikalai2006.Voxel
             else
             {
                 meshCollider.convex = config.isConvex;
-                meshCollider.providesContacts = true;
+                // meshCollider.providesContacts = true;
             }
 
             if (config.isRigidbody)

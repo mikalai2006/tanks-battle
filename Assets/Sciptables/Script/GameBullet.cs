@@ -5,9 +5,10 @@ public class GameBullet : ScriptableObject
 {
   [Space(5)]
   [Header("Основная информация")]
-  public string idObject;
+  // public string idObject;
   public TextLocalize text;
   public GameObject prefab;
+  public Material material;
 
   [Space(5)]
   [Header("Параметры")]
@@ -19,6 +20,7 @@ public class GameBullet : ScriptableObject
   [Range(1f, 20f)] public int damageRadius;
   [Tooltip("Максимальное количество коллизий")]
   [Range(1f, 5f)] public int countCollisions;
+
 
   
   [Space(5)]

@@ -26,7 +26,8 @@ public class GameSetting : ScriptableObject
   public bool inputJoystick;
   public bool simpleMove;
   public bool logEnabled;
-  [Tooltip("Размер масшатаба игровых объектов")]
+  public PlayerOptions playerOptions;
+  [Tooltip("Размер масштаба игровых объектов")]
   public float scaleObjects;
   [Tooltip("Максимальный радиус создания вокселей")]
   [Range(6,15)] public int maxRadiusCreateVoxels;
@@ -200,4 +201,10 @@ public struct TextLocalize
 {
   public LocalizedString title;
   public LocalizedString description;
+}
+
+[System.Serializable]
+public struct PlayerOptions
+{
+  public bool showTrajectory;
 }

@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8264362197529664385}
   - component: {fileID: 8041318944702470968}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MaxDistance
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}

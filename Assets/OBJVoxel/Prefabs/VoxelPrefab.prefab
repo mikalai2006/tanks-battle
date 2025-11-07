@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2221232677640191134}
   - component: {fileID: 8730926685709544208}
   - component: {fileID: -5096389174699566197}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VoxelPrefab
   m_TagString: IgnoreCollision
   m_Icon: {fileID: 0}
@@ -163,3 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19653257bb372649bbb05cacdef8ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gPUInstanceEnabler: {fileID: 0}

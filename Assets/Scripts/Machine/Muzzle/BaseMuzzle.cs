@@ -82,7 +82,10 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         // Vector3 speedForce = transform.forward * 20000 / 30;
         // trajectoryRenderer.ShowTrajectory(pointEffects.transform.position, speedForce);
-        trajectoryRenderer.ShowStretchTrajectory(pointEffects.transform.position, point);
+        if (_gameManager.Settings.playerOptions.showTrajectory)
+        {
+            trajectoryRenderer.ShowStretchTrajectory(pointEffects.transform.position, point);
+        }
     }
 
     public void OnSetRotation(Vector3 pointCenterScreen, float speedRotate)

@@ -15,6 +15,7 @@ public class BaseBullet : MonoBehaviour
     [SerializeField] float lifeTime;
     [SerializeField] bool isActive;
     TrailRenderer trailRenderer;
+    MeshRenderer meshRenderer;
     List<GameObject> collisionsObjects = new();
     [SerializeField] private LayerMask ignoreMask;
     Vector3 startPosition;
@@ -28,6 +29,7 @@ public class BaseBullet : MonoBehaviour
     {
         boxCollider = transform.GetComponent<BoxCollider>();
 
+        meshRenderer = transform.GetComponentInChildren<MeshRenderer>();
         trailRenderer = transform.GetComponentInChildren<TrailRenderer>();
     }
 
@@ -35,7 +37,7 @@ public class BaseBullet : MonoBehaviour
     /// Инициализация снаряда
     /// </summary>
     /// <param name="machine">Машина которая произвела снаряд</param>
-    public void OnInit(BaseMachine machine, BaseTower Tower, BaseMuzzle muzzle, GameMuzzle confgiMuzzle)
+    public void OnInit(BaseMachine machine, BaseTower Tower, BaseMuzzle muzzle, GameMuzzle configMuzzle)
     {
 
         hit = default;
@@ -59,7 +61,10 @@ public class BaseBullet : MonoBehaviour
 
         Machine = machine;
 
-        ConfigMuzzle = confgiMuzzle;
+        ConfigMuzzle = configMuzzle;
+
+        trailRenderer.material = ConfigMuzzle.Bullet.material;
+        meshRenderer.material = ConfigMuzzle.Bullet.material;
 
 
         // #if UNITY_EDITOR
@@ -477,55 +482,55 @@ public class BaseBullet : MonoBehaviour
         // Debug.Log($"collision {collision.collider.name}, point={collision.collide}");
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (!collisionsObjects.Contains(other.gameObject))
-    //     {
-    //         Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
+    void OnTriggerEnter(Collider other)
+    {
+        if (!collisionsObjects.Contains(other.gameObject))
+        {
+            Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
 
-    //         // Получаем позицию другого объекта
-    //         // Vector3 otherObjectPosition = other.transform.position;
-    //         // Debug.Log("Объект вошел в триггер с позицией: " + otherObjectPosition);
+            // Получаем позицию другого объекта
+            // Vector3 otherObjectPosition = other.transform.position;
+            // Debug.Log("Объект вошел в триггер с позицией: " + otherObjectPosition);
 
-    //         // Определяем точку касания на поверхности нашего триггера
-    //         Vector3 contactPoint = other.ClosestPoint(transform.position);
-    //         // Debug.Log("Точка касания на триггере: " + contactPoint);
+            // Определяем точку касания на поверхности нашего триггера
+            Vector3 contactPoint = other.ClosestPoint(transform.position);
+            // Debug.Log("Точка касания на триггере: " + contactPoint);
 
-    //         Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
-    //         // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
+            Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
+            // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
 
-    //         VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
-    //         if (voxelMesh != null)
-    //         {
-    //             voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
-    //         }
+            VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
+            if (voxelMesh != null)
+            {
+                voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+            }
 
-    //         List<Container> collisionContainers = new List<Container>();
-    //         Container voxelContainer = other.gameObject.GetComponent<Container>();
-    //         if (voxelContainer != null)
-    //         {
-    //             collisionContainers.Add(voxelContainer);
-    //         }
+            List<Container> collisionContainers = new List<Container>();
+            Container voxelContainer = other.gameObject.GetComponent<Container>();
+            if (voxelContainer != null)
+            {
+                collisionContainers.Add(voxelContainer);
+            }
 
-    //         if (collisionContainers.Count > 0)
-    //         {
-    //             collisionsObjects.Add(other.gameObject);
+            if (collisionContainers.Count > 0)
+            {
+                collisionsObjects.Add(other.gameObject);
 
-    //             for (int x = 0; x < collisionContainers.Count; x++)
-    //             {
+                for (int x = 0; x < collisionContainers.Count; x++)
+                {
 
-    //                 collisionContainers[x].ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius,forward).Forget();
-    //             }
-    //         }
+                    collisionContainers[x].ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius,forward).Forget();
+                }
+            }
 
 
-    //         Debug.Log($"<color=green>Count collision ={countCollisions}</color>");
-    //         if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
-    //         {
-    //             OnBoom(null);
-    //         }
-    //     }
-    // }
+            Debug.Log($"<color=green>Count collision ={countCollisions}</color>");
+            if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
+            {
+                OnBoom(null);
+            }
+        }
+    }
     
     // void OnTriggerStay(Collider other)
     // {
