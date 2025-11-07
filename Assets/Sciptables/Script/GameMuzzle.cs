@@ -32,7 +32,11 @@ public class GameMuzzle : ScriptableObject
   [Tooltip("Материал")]
   public Material material;
   [Tooltip("Время перезарядки (сек)")]
+  [Range(0f, 100f)] public float distanceAttack;
+  [Tooltip("Дистанция стрельбы")]
   [Range(0f, 100f)] public float timeBetweenShot;
+  [Tooltip("Скорость снарядов")]
+  [Range(0f, 100f)] public float speedBullet;
   [Tooltip("Цвет")]
   public Color color;
 }

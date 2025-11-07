@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 namespace Mikalai2006.Voxel
@@ -38,9 +39,10 @@ namespace Mikalai2006.Voxel
         private Stack<RemoveVoxel> needCreateElements;
         private Stack<RemoveVoxel> needGravityCreateElements;
         // private Collision collision;
-        private GameObject explodeGameObject;
+        // private GameObject explodeGameObject;
         // private SOVoxelData _sOVoxelData;
         // [SerializeField] private bool isGreedy = true;
+        List<Vector3> prevContacts;
         [SerializeField] private LevelManager _levelManager;
 
         void OnDestroy()
@@ -64,6 +66,8 @@ namespace Mikalai2006.Voxel
 
         public void Initialize(MeshConfig config, Vector3 position)
         {
+            prevContacts = new();
+
             meshConfig = config;
 
             // isGreedy = _isGreedy;
@@ -642,12 +646,27 @@ namespace Mikalai2006.Voxel
             return voxel;
         }
 
-        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode)
+        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode, Vector3 direction)
         {
             float startTime = Time.realtimeSinceStartup;
 
             pointCollision = _pointCollision;
-            explodeGameObject = _explodeGameObject;
+
+            // проверяем - было ли попадание в это место.
+            for (int i = 0; i < prevContacts.Count; i++)
+            {
+                if (Helpers.IsInsideSphere(pointCollision, prevContacts[i], radiusExplode))
+                {
+                    Vector3 worldPoint = _explodeGameObject.transform.parent.TransformPoint(pointCollision);
+                    var normalizeVector = direction.normalized;
+                    Vector3 worldPointCollisionWithOffset = worldPoint + (normalizeVector * radiusExplode * GameManager.Instance.Settings.scaleObjects);
+                    pointCollision = _explodeGameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
+                    // Debug.Log($"point  collision {_pointCollision} => new point => {pointCollision}[direction={direction}/{normalizeVector}]");
+                }
+            }
+            prevContacts.Add(pointCollision);
+
+            // explodeGameObject = _explodeGameObject;
 
             // var list = new Dictionary<Vector3, Voxel>();
             // var x = Mathf.RoundToInt(pos.x);
@@ -733,11 +752,13 @@ namespace Mikalai2006.Voxel
             //     }
             // }
 
-            // Debug.Log($"Time for create data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
             // list.Add(new Vector3(x,y,z),data[new Vector3(x,y,z)]);
 
-
-
+            Debug.Log($"Time find exploded data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+            // if (numberIterate < 2)
+            // {
+            //     await ExposionVoxels(_pointCollision, isDrawMesh, _explodeGameObject, radiusExplode, numberIterate + 1);
+            // }
 
             CheckTopAirVoxels().Forget();
 

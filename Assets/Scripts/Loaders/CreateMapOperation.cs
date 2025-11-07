@@ -59,7 +59,7 @@ public class CreateMapOperation : ILoadingOperation
         onSetNotify?.Invoke(t);
     }
 
-    private async void OnAddProgress(float addValue)
+    private void OnAddProgress(float addValue)
     {
         progressValue = progressValue + addValue;
         UnityEngine.Debug.Log($"OnAddProgress : {addValue}, {progressValue}");

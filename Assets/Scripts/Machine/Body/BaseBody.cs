@@ -33,13 +33,13 @@ public class BaseBody : MonoBehaviour
         // _damageSprite.color = col;
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction)
     {
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
             Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
             // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius).Forget();
+            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction).Forget();
         }
     }
 

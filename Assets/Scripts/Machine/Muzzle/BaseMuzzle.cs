@@ -1,7 +1,5 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using System;
 using Mikalai2006.Voxel;
 using System.Collections.Generic;
 
@@ -69,7 +67,7 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         pivot.transform.localPosition = new Vector3(-Config.MeshConfig.sOVoxelData.Bounds.x, 0, 0);
 
-        MaxDistanceObject.transform.localPosition = new Vector3(200f, 0, 0);
+        MaxDistanceObject.transform.localPosition = new Vector3(Config.distanceAttack * (1 / _gameManager.Settings.scaleObjects), 0, 0);
 
         transform.localRotation = Quaternion.Euler(0, 90, 0);
     }
@@ -82,8 +80,7 @@ public abstract class BaseMuzzle : MonoBehaviour
             speed
         );
 
-        Vector3 speedForce = transform.forward * 20000 / 30;
-
+        // Vector3 speedForce = transform.forward * 20000 / 30;
         // trajectoryRenderer.ShowTrajectory(pointEffects.transform.position, speedForce);
         trajectoryRenderer.ShowStretchTrajectory(pointEffects.transform.position, point);
     }
@@ -201,14 +198,14 @@ public abstract class BaseMuzzle : MonoBehaviour
         OnSetTimeBetweenShot(Config.timeBetweenShot);
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction)
     {
         List<UniTask> tasks = new List<UniTask>(0);
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
             Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
             // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-            tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius));
+            tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
         }
         UniTask.WhenAll(tasks).Forget();
     }

@@ -33,8 +33,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   prefab: {fileID: 7056810224777368569, guid: fe5f44a455df01c4c8eceec4df608b11, type: 3}
-  lifeTime: 5
-  speed: 4
+  lifeTime: 3
   damageRadius: 8
   countCollisions: 1
   effectBoom: {fileID: 3862267629786060469, guid: 79b8d16096caabb46a3c8a6c351345a9, type: 3}

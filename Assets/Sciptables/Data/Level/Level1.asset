@@ -10035,7 +10035,7 @@ MonoBehaviour:
   tileLandscape: {fileID: 11400000, guid: 863afbab29b6d434d97b50fda06d7a3e, type: 2}
   noiseScaleKoof: 0.2
   noiseMaxKoof: 0.444
-  light: 0.2
+  light: 0
   typeLevel: 2
   countTeam: 0
-  countPlayers: 20
+  countPlayers: 5

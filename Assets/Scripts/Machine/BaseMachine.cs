@@ -167,24 +167,31 @@ public abstract class BaseMachine : MonoBehaviour
     }
     #endregion
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    /// <summary>
+    /// Функция обходит все комплектующие машины и проверяет на воксели в локальной точке (точке сопрокосновения со снарядом).
+    /// </summary>
+    /// <param name="_pointCollision">Точка контакта</param>
+    /// <param name="isDrawMesh">Рисовать ли измененный меш</param>
+    /// <param name="explodeGameObject"></param>
+    /// <param name="damageRadius">Радиус уничтожения вокселей</param>
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction)
     {
         // for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         // {
         // }
-        Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+        Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
 
         for (int i = 0; i < Towers.Count; i++)
         {
-            Towers[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+            Towers[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
             for (int j = 0; j < Towers[i].Muzzles.Count; j++)
             {
-                Towers[i].Muzzles[j].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+                Towers[i].Muzzles[j].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
             }
         }
         for (int i = 0; i < Caterpillars.Count; i++)
         {
-            Caterpillars[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius);
+            Caterpillars[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
         }
     }
 

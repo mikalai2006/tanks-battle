@@ -698,7 +698,7 @@ public class BaseTower : MonoBehaviour
         }
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction)
     {
         List<UniTask> tasks = new List<UniTask>();
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
@@ -706,7 +706,7 @@ public class BaseTower : MonoBehaviour
             var el = voxelMeshRender.Containers[i];
             Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
             Vector3 localPoint = el.transform.InverseTransformPoint(_pointCollision);
-            tasks.Add(el.ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius));
+            tasks.Add(el.ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
         }
 
         UniTask.WhenAll(tasks).Forget();

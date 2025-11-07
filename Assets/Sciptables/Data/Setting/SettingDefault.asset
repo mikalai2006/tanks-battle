@@ -86,7 +86,6 @@ MonoBehaviour:
   machines:
   - {fileID: 11400000, guid: 9ddc95e9a2516c44099c2b41c4fc8ffa, type: 2}
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
-  - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
   - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
   - {fileID: 11400000, guid: da3e7403be56f0748b9f25df94cb188b, type: 2}
   - {fileID: 11400000, guid: 6abe5dfb79cf82340bf0e912a5081bbc, type: 2}

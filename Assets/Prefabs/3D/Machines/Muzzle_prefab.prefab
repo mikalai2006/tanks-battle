@@ -326,7 +326,7 @@ MonoBehaviour:
   voxelMeshRender: {fileID: 4578221365697212566}
   ignoreMask:
     serializedVersion: 2
-    m_Bits: 7174
+    m_Bits: 7172
 --- !u!1 &9189856959237785062
 GameObject:
   m_ObjectHideFlags: 0

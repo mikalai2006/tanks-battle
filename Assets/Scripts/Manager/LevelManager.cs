@@ -174,6 +174,7 @@ public class LevelManager : MonoBehaviour
                         Quaternion.identity,
                         objectSpawnMachines.transform
                     );
+                    gObject.name = $"{configMachine.name}_{data.id}";
                     
                 // Debug.Log($"pointSpawn => {pointSpawn}, gObject position={gObject.transform.position}");
 
