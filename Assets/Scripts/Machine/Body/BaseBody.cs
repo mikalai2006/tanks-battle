@@ -37,9 +37,12 @@ public class BaseBody : MonoBehaviour
     {
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
-            Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
-            // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-            voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction).Forget();
+            if (voxelMeshRender.Containers[i].IsDestructible())
+            {
+                Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
+                // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+                voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction).Forget();
+            }
         }
     }
 

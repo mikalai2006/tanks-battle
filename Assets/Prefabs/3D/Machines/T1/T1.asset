@@ -35,6 +35,7 @@ MonoBehaviour:
   machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
   material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  customScale: 0.015
   body: {fileID: 11400000, guid: 3f2712aa9590e234bb9682773317dfe1, type: 2}
   towers:
   - ido: 
@@ -56,7 +57,7 @@ MonoBehaviour:
     colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   soundMove: {fileID: 8300000, guid: 71d39ac5da02fea4084632c39f81960e, type: 3}
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
-  speed: 200
+  speed: 100
   distanceSearch: 5
   hp: 300
   armour: 300

@@ -44,6 +44,7 @@ MonoBehaviour:
     isOneMesh: 1
     useGlobalScale: 0
     isTile: 0
+    isDestructible: 1
     shadowCastingMode: 0
   references:
     version: 2

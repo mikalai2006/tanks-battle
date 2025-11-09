@@ -5,7 +5,7 @@ using UnityEngine;
 public class ParserHeight : MonoBehaviour
 {
     public TextureHeightMapperSettings _settings;
-    public Dictionary<Vector2Int, int> data;
+    public Dictionary<Vector2Int, Color> data;
     public Vector2Int gridSize;
 
     public void SetConfig(TextureHeightMapperSettings settings)
@@ -15,7 +15,7 @@ public class ParserHeight : MonoBehaviour
 
     public void Init()
     {
-        data = new Dictionary<Vector2Int, int>();
+        data = new Dictionary<Vector2Int, Color>();
 
         gridSize = new Vector2Int(_settings.texture.width, _settings.texture.height);
         
@@ -27,7 +27,7 @@ public class ParserHeight : MonoBehaviour
     //     GenerateHeightMap();
     // }
 
-    public Dictionary<Vector2Int, int> GenerateHeightMap()
+    public Dictionary<Vector2Int, Color> GenerateHeightMap()
     {
 
         for (var x = 0; x < gridSize.x; x++)
@@ -37,7 +37,7 @@ public class ParserHeight : MonoBehaviour
                 var color = _settings.texture.GetPixel(x, y);
                 var position = new Vector2Int(x, y);
                 var height = Mathf.RoundToInt(color.r * _settings.heightSize);
-                data[position] = Mathf.RoundToInt(height);
+                data[position] = color; //Mathf.RoundToInt(height);
                 // Debug.Log($"pos: {position}, height: {data[position]}[{color.r}]");
             }
         }

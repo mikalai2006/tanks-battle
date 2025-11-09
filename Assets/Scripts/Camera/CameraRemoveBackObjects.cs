@@ -35,6 +35,8 @@ public class CameraRemoveBackObjects : MonoBehaviour
                 // }
 
                 if (prevHideObjects[i] && prevHideObjects[i].gameObject) {
+                    prevHideObjects[i].layer = LayerMask.NameToLayer("Wall");
+
                     var goRenderer = prevHideObjects[i].gameObject.GetComponent<Renderer>();
                     if (goRenderer != null)
                     {
@@ -54,11 +56,12 @@ public class CameraRemoveBackObjects : MonoBehaviour
         if (cinemachineCamera.Target.TrackingTarget != null)
         {
             Vector3 targetPos = cinemachineCamera.Target.TrackingTarget.position;
-            RaycastHit[] hits = Physics.RaycastAll(transform.position, targetPos - transform.position, 999f, layerMask);
-            Debug.DrawRay(transform.position, targetPos - transform.position, Color.red);
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, targetPos - transform.position, Vector3.Distance(targetPos, transform.position), layerMask);
+            // Debug.DrawRay(transform.position, targetPos - transform.position, Color.red);
             for (int i = 0; i < hits.Count(); i++)
             {
                 GameObject go = hits[i].collider.gameObject;
+                go.layer = LayerMask.NameToLayer("TransparentFX");;
                 // var gpuIE = go.gameObject.GetComponentInChildren<GPUInstanceEnabler>();
                 var goRenderer = go.gameObject.GetComponent<Renderer>();
                 if (goRenderer != null)

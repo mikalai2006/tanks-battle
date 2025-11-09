@@ -43,6 +43,7 @@ MonoBehaviour:
     isOneMesh: 1
     useGlobalScale: 0
     isTile: 0
+    isDestructible: 1
     shadowCastingMode: 0
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   speedRotateTower: 10

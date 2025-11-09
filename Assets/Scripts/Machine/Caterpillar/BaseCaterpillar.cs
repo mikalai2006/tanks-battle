@@ -74,9 +74,12 @@ public class BaseCaterpillar : MonoBehaviour
         {
             for (int i = 0; i < voxelMeshRenders[x].Containers.Length; i++)
             {
-                Vector3 localPoint = voxelMeshRenders[x].Containers[i].transform.InverseTransformPoint(_pointCollision);
-                // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                tasks.Add(voxelMeshRenders[x].Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
+                if (voxelMeshRenders[x].Containers[i].IsDestructible())
+                {
+                    Vector3 localPoint = voxelMeshRenders[x].Containers[i].transform.InverseTransformPoint(_pointCollision);
+                    // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+                    tasks.Add(voxelMeshRenders[x].Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
+                }
             }
         }
         UniTask.WhenAll(tasks).Forget();

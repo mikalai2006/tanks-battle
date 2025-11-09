@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 586464742990593523}
   - component: {fileID: 3568825291301627716}
+  - component: {fileID: 8106977003513939870}
   m_Layer: 0
   m_Name: House2
   m_TagString: Untagged
@@ -52,6 +53,29 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
+    isTile: 0
+    isDestructible: 1
+    shadowCastingMode: 1
     useGlobalScale: 1
-    shadowCastingMode: 0
+    customScale: 0
   Wrapper: {fileID: 2163701539362945806}
+--- !u!114 &8106977003513939870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2163701539362945806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

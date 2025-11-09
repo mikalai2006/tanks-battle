@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2821393535912470438}
   - component: {fileID: 1602150319550486619}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: Cave0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28739,6 +28739,7 @@ MonoBehaviour:
     isOneMesh: 1
     useGlobalScale: 1
     isTile: 1
+    isDestructible: 1
     shadowCastingMode: 0
   tileOptions: []
   isCollapsed: 0
@@ -28753,7 +28754,7 @@ GameObject:
   - component: {fileID: 7194217022407148005}
   - component: {fileID: 2281112968338799281}
   - component: {fileID: 8950245523605281006}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28797,6 +28798,7 @@ MonoBehaviour:
     isOneMesh: 1
     useGlobalScale: 1
     isTile: 1
+    isDestructible: 1
     shadowCastingMode: 0
   Wrapper: {fileID: 5904951459879370605}
 --- !u!114 &8950245523605281006

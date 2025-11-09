@@ -32,10 +32,10 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 296304405608595272, guid: 4beeef27960bb77419cbf0d8adc5a81b, type: 3}
+  prefab: {fileID: 296304405608595272, guid: dd574b1478c8f164aa3f1c9782abe9ec, type: 3}
   isRotate: 1
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 2f3feac04c2e0d1459d1960575e91148, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 10ae4194976d9df4bacc49eae064fdd7, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     existCollider: 1
     isGreedy: 1
@@ -44,6 +44,7 @@ MonoBehaviour:
     isOneMesh: 1
     useGlobalScale: 0
     isTile: 0
+    isDestructible: 1
     shadowCastingMode: 0
   references:
     version: 2

@@ -128,15 +128,34 @@ public class MapManager : MonoBehaviour
             for (int z = 0; z < _gameManager.LevelConfig.gridSize.z; z++)
             {
                 GridTileNode node = gridTileHelper.GetNode(new Vector3Int(x, z));
-                int height = tilesHeights[new Vector2Int(x, z)];
+                int redColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(x, z)].r * _gameManager.LevelConfig.tileSettings.heightSize);
 
-                if (height > 0 )
+                if (redColor > 0)
                 {
                     node.StateNode = StateNode.Tiled;
                     map.SetTileFlags(node.position, TileFlags.None);
                     map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
                     map.SetTileFlags(node.position, TileFlags.LockAll);
                 }
+
+                int greenColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(x, z)].g);
+                if (redColor == 0 && greenColor > 0)
+                {
+                    node.StateNode = StateNode.Tree;
+                    var treePrefab = _gameManager.LevelConfig.TreePrefabs[UnityEngine.Random.Range(0, _gameManager.LevelConfig.TreePrefabs.Count)];
+                    var obj = Instantiate(treePrefab, transform.position, Quaternion.identity, transform);
+                    obj.transform.localPosition = node.positionXZ();
+                }
+
+                int blueColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(x, z)].b);
+                if (redColor == 0 && greenColor == 0 && blueColor > 0)
+                {
+                    node.StateNode = StateNode.Tree;
+                    var housePrefab = _gameManager.LevelConfig.HousePrefabs[UnityEngine.Random.Range(0, _gameManager.LevelConfig.HousePrefabs.Count)];
+                    var obj = Instantiate(housePrefab, transform.position, Quaternion.identity, transform);
+                    obj.transform.localPosition = node.positionXZ();
+                }
+                Debug.Log($"greenColor={greenColor}[{blueColor}]<{redColor}>");
             }
         }
     }
@@ -238,7 +257,7 @@ public class MapManager : MonoBehaviour
     {
         // 1. Generate a random origin point near the NavMeshSurface's center
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * sampleRadius;
-        randomDirection.y = 0.7f;
+        // randomDirection.y = 0.05f;
         Vector3 origin = transform.position + randomDirection; // Use the spawner's position or a known center
 
         NavMeshHit hit;

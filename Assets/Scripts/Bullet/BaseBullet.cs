@@ -136,12 +136,19 @@ public class BaseBullet : MonoBehaviour
         var ra = Random.value;
         if (ra < chanceReflex)
         {
-            if (Physics.Raycast(transform.position, forward, out hit, ConfigMuzzle.distanceAttack, ~(ignoreMask)))
+            if (Physics.Raycast(transform.position, forward, out hit, ConfigMuzzle.distanceAttack * (1 / _gameManager.Settings.scaleObjects), ~(ignoreMask)))
             {
-                Debug.Log($"<color=#FFA500FF>Raycast find gameObject {hit.collider.name}<{hit.point}></color>");
-                startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                endPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-                hitDistance = Vector3.Distance(startPosition, endPosition);
+                Container voxelContainer = hit.collider.gameObject.GetComponent<Container>();
+                if (voxelContainer != null && voxelContainer.IsDestructible())
+                {
+                    Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}></color>");
+                    startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    endPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+                    hitDistance = Vector3.Distance(startPosition, endPosition);
+                } else
+                {
+                    Debug.Log($"<color=#7ccf00>Raycast ударил в объект {hit.collider.name}<{hit.point}> без Container или он не разрушаемый</color>");
+                }
 
                 // Vector3 localPoint = hit.collider.gameObject.transform.parent.InverseTransformPoint(hit.point);
 
@@ -313,11 +320,14 @@ public class BaseBullet : MonoBehaviour
     void Update()
     {
 
-        currentDistance = Vector3.Distance(transform.position, endPosition);
-        if (currentDistance <= 1)
+        if (endPosition != Vector3.zero)
         {
-            // Debug.Log($"currentDistance={currentDistance} [{hitDistance}]<{Vector3.Distance(transform.position, startPosition)}>");
-            OnCreateContact(hit);
+            currentDistance = Vector3.Distance(transform.position, endPosition);
+            if (currentDistance <= 1)
+            {
+                // Debug.Log($"currentDistance={currentDistance} [{hitDistance}]<{Vector3.Distance(transform.position, startPosition)}>");
+                OnCreateContact(hit);
+            }
         }
 
         lifeTime += Time.deltaTime;
@@ -379,12 +389,12 @@ public class BaseBullet : MonoBehaviour
 
                 // Debug.Log($"point = {contact.point}, localPositionPoint={localPoint}");
 
-                VoxelMeshRenderWithSubmeshes voxelMesh = collision.gameObject.GetComponent<VoxelMeshRenderWithSubmeshes>();
-                if (voxelMesh != null)
-                {
-                    collisionsObjects.Add(collision.transform.gameObject);
-                    voxelMesh.ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
-                }
+                // VoxelMeshRenderWithSubmeshes voxelMesh = collision.gameObject.GetComponent<VoxelMeshRenderWithSubmeshes>();
+                // if (voxelMesh != null)
+                // {
+                //     collisionsObjects.Add(collision.transform.gameObject);
+                //     voxelMesh.ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+                // }
 
                 List<Container> collisionContainers = new List<Container>();
                 Container voxelContainer = collision.gameObject.GetComponent<Container>();
@@ -401,7 +411,10 @@ public class BaseBullet : MonoBehaviour
                 }
                 else
                 {
-                    collisionContainers.Add(voxelContainer);
+                    if (voxelContainer.IsDestructible())
+                    {
+                        collisionContainers.Add(voxelContainer);
+                    }
                 }
 
                 if (collisionContainers.Count > 0)
@@ -499,15 +512,15 @@ public class BaseBullet : MonoBehaviour
             Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
             // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
 
-            VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
-            if (voxelMesh != null)
-            {
-                voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
-            }
+            // VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
+            // if (voxelMesh != null)
+            // {
+            //     voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+            // }
 
             List<Container> collisionContainers = new List<Container>();
             Container voxelContainer = other.gameObject.GetComponent<Container>();
-            if (voxelContainer != null)
+            if (voxelContainer != null && voxelContainer.IsDestructible())
             {
                 collisionContainers.Add(voxelContainer);
             }

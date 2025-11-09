@@ -43,6 +43,7 @@ MonoBehaviour:
     isOneMesh: 1
     useGlobalScale: 0
     isTile: 0
+    isDestructible: 1
     shadowCastingMode: 0
   soundShot: {fileID: 8300000, guid: 79e79ae94ef85b14699eddfb6ec59e3c, type: 3}
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}

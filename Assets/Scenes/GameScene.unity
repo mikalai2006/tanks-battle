@@ -171,9 +171,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &3032581
 GameObject:
@@ -227,9 +229,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &9453897
 GameObject:
@@ -279,7 +283,7 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
+  m_BuildHeightMesh: 1
 --- !u!4 &9453899
 Transform:
   m_ObjectHideFlags: 0
@@ -392,9 +396,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &27040711
 GameObject:
@@ -448,9 +454,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &39970013
 GameObject:
@@ -747,9 +755,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &51714182
 GameObject:
@@ -849,9 +859,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &60023454
 GameObject:
@@ -905,9 +917,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &63434754
 GameObject:
@@ -965,9 +979,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 123042846}
 --- !u!64 &63434757
 MeshCollider:
@@ -1152,6 +1168,7 @@ GameObject:
   - component: {fileID: 95788492}
   - component: {fileID: 95788495}
   - component: {fileID: 95788497}
+  - component: {fileID: 95788500}
   - component: {fileID: 95788498}
   - component: {fileID: 95788496}
   - component: {fileID: 95788499}
@@ -1186,7 +1203,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 3
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -1232,15 +1249,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetOffset: {x: 0, y: 2, z: 0}
+  TargetOffset: {x: 0, y: 0.5, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 0.1, y: 0.1, z: 0.1}
+    PositionDamping: {x: 0, y: 0, z: 0}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   OrbitStyle: 0
-  Radius: 4
+  Radius: 0.25
   Orbits:
     Top:
       Radius: 2
@@ -1254,7 +1271,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: -46.14438
+    Value: 112.22115
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -1264,9 +1281,9 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 13.590089
+    Value: -15
     Center: 0
-    Range: {x: -25, y: 25}
+    Range: {x: -17, y: 25}
     Wrap: 0
     Recentering:
       Enabled: 0
@@ -1274,7 +1291,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   RadialAxis:
-    Value: 10
+    Value: 9.743863
     Center: 0.0001
     Range: {x: 0.0001, y: 50}
     Wrap: 0
@@ -1347,7 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookAtOffset: {x: 0, y: 0.4, z: 0}
+  LookAtOffset: {x: 0, y: 0.2, z: 0}
 --- !u!114 &95788498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,6 +1395,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cinemachineInputAxisController: {fileID: 95788496}
+--- !u!114 &95788500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95788491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe43d662878a7c43bcd44d43c9e2094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1
+  IgnoreTag: 
+  TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  MinimumDistanceFromTarget: 0.3
+  AvoidObstacles:
+    Enabled: 1
+    DistanceLimit: 0
+    MinimumOcclusionTime: 0
+    CameraRadius: 0.25
+    UseFollowTarget:
+      Enabled: 0
+      YOffset: 0
+    Strategy: 0
+    MaximumEffort: 3
+    SmoothingTime: 0
+    Damping: 0
+    DampingWhenOccluded: 0
+  ShotQualityEvaluation:
+    Enabled: 1
+    OptimalDistance: 10
+    NearLimit: 5
+    FarLimit: 30
+    MaxQualityBoost: 0.2
 --- !u!1 &104651765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,9 +1526,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &110639631
 GameObject:
@@ -1558,9 +1616,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &120454261
 GameObject:
@@ -1614,9 +1674,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &123042846
 GameObject:
@@ -1894,9 +1956,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &190429672
 GameObject:
@@ -2050,9 +2114,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &223198927
 GameObject:
@@ -2185,9 +2251,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 851200805}
 --- !u!64 &223887284
 MeshCollider:
@@ -2316,9 +2384,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &252738776
 GameObject:
@@ -2372,9 +2442,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &257448292
 GameObject:
@@ -2428,9 +2500,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &258358704
 GameObject:
@@ -2522,9 +2596,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &261137174
 GameObject:
@@ -2578,9 +2654,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &265300644
 GameObject:
@@ -3159,9 +3237,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &299584227
 GameObject:
@@ -3215,9 +3295,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &303796639
 GameObject:
@@ -3271,9 +3353,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &304421453
 GameObject:
@@ -3327,9 +3411,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
@@ -3520,9 +3606,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &334008409
 GameObject:
@@ -3576,9 +3664,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &340418898
 GameObject:
@@ -3632,9 +3722,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &344780307
 GameObject:
@@ -3914,9 +4006,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &379505501
 GameObject:
@@ -3970,9 +4064,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &382989806
 GameObject:
@@ -4026,9 +4122,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &384759948
 GameObject:
@@ -4202,9 +4300,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &393779592
 GameObject:
@@ -4258,9 +4358,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &401547315
 GameObject:
@@ -4314,9 +4416,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &402898088
 GameObject:
@@ -4370,9 +4474,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &406464819
 GameObject:
@@ -4462,9 +4568,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1364489322}
 --- !u!64 &409908712
 MeshCollider:
@@ -4748,9 +4856,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &419233437
 GameObject:
@@ -4865,7 +4975,7 @@ Camera:
   m_GameObject: {fileID: 420079060}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -4889,7 +4999,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 3
+  field of view: 25
   orthographic: 0
   orthographic size: 10
   m_Depth: 0
@@ -5175,9 +5285,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1808498864}
 --- !u!64 &430389354
 MeshCollider:
@@ -5306,9 +5418,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &449839676
 GameObject:
@@ -5362,9 +5476,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &458285132
 GameObject:
@@ -5418,9 +5534,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &461177841
 GameObject:
@@ -5474,9 +5592,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &468947784
 GameObject:
@@ -5530,9 +5650,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &475893072
 GameObject:
@@ -5586,9 +5708,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &476358198
 GameObject:
@@ -5642,9 +5766,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &479032592
 GameObject:
@@ -5730,9 +5856,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &482970633
 GameObject:
@@ -5786,9 +5914,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &489954613
 GameObject:
@@ -5995,9 +6125,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &520936591
 GameObject:
@@ -6051,9 +6183,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &528753112
 GameObject:
@@ -6139,9 +6273,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &544558788
 GameObject:
@@ -6195,9 +6331,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &544736695
 GameObject:
@@ -6251,9 +6389,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &546412749
 GameObject:
@@ -6385,9 +6525,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &562495943
 GameObject:
@@ -6441,9 +6583,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &573729402
 GameObject:
@@ -6497,9 +6641,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &577907228
 GameObject:
@@ -6553,9 +6699,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &579820719
 GameObject:
@@ -6609,9 +6757,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &585675390
 GameObject:
@@ -6665,9 +6815,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &596183804
 GameObject:
@@ -6881,9 +7033,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 136214386}
 --- !u!64 &604457571
 MeshCollider:
@@ -7012,9 +7166,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &611741835
 GameObject:
@@ -7068,9 +7224,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &611897500
 GameObject:
@@ -7181,9 +7339,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &615957058
 GameObject:
@@ -7241,9 +7401,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 94893104}
 --- !u!64 &615957061
 MeshCollider:
@@ -7756,9 +7918,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 632790874}
-    m_ColliderPaths: []
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths: []
   m_VertexDistance: 0.0005
@@ -7931,9 +8091,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &645428956
 GameObject:
@@ -7987,9 +8149,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &650912459
 GameObject:
@@ -8043,9 +8207,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &676091692
 GameObject:
@@ -8099,9 +8265,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &680933461
 GameObject:
@@ -8155,9 +8323,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &697935907
 GameObject:
@@ -8313,9 +8483,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 2054616493}
 --- !u!64 &709060262
 MeshCollider:
@@ -8444,9 +8616,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &725670845
 GameObject:
@@ -8536,9 +8710,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1015872103}
 --- !u!64 &725970396
 MeshCollider:
@@ -8667,9 +8843,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &753995705
 GameObject:
@@ -8723,9 +8901,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &755099062
 GameObject:
@@ -8816,9 +8996,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &760881923
 GameObject:
@@ -8872,9 +9054,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &762594341
 GameObject:
@@ -9040,9 +9224,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &770267096
 GameObject:
@@ -9144,9 +9330,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &801494034
 GameObject:
@@ -9200,9 +9388,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &809414349
 GameObject:
@@ -9256,9 +9446,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &813668206
 GameObject:
@@ -9465,9 +9657,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &814549440
 GameObject:
@@ -9745,9 +9939,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
@@ -9915,9 +10111,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &839999149
 GameObject:
@@ -9971,9 +10169,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &844122719
 GameObject:
@@ -10072,9 +10272,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &849708777
 GameObject:
@@ -10128,9 +10330,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &851200805
 GameObject:
@@ -10216,9 +10420,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &894495586
 GameObject:
@@ -10405,9 +10611,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 91377402}
 --- !u!64 &905889593
 MeshCollider:
@@ -10536,9 +10744,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &939014622
 GameObject:
@@ -10592,9 +10802,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &947002609
 GameObject:
@@ -10648,9 +10860,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &963218392
 GameObject:
@@ -10704,9 +10918,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &967407354
 GameObject:
@@ -10894,9 +11110,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1007140855
 GameObject:
@@ -10950,9 +11168,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1007556943
 GameObject:
@@ -11006,9 +11226,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1014415454
 GameObject:
@@ -11062,9 +11284,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1015872103
 GameObject:
@@ -11150,9 +11374,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1039602560
 GameObject:
@@ -11206,9 +11432,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1045329976
 GameObject:
@@ -11262,9 +11490,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1045376533
 GameObject:
@@ -11318,9 +11548,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1048832953
 GameObject:
@@ -11791,9 +12023,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 197262062}
 --- !u!64 &1065199504
 MeshCollider:
@@ -12103,9 +12337,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1091219930
 GameObject:
@@ -12255,9 +12491,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1106898107
 GameObject:
@@ -12468,9 +12706,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1380320955}
 --- !u!64 &1108651311
 MeshCollider:
@@ -12599,9 +12839,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1114561204
 GameObject:
@@ -12655,9 +12897,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1120716822
 GameObject:
@@ -12711,9 +12955,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1122998484
 GameObject:
@@ -12767,9 +13013,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1131318229
 GameObject:
@@ -12823,9 +13071,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1133906923
 GameObject:
@@ -12879,9 +13129,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1134761015
 GameObject:
@@ -12935,9 +13187,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1142989210
 GameObject:
@@ -13165,9 +13419,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1159787203
 GameObject:
@@ -13221,9 +13477,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1165236037
 GameObject:
@@ -13330,9 +13588,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1173466991
 GameObject:
@@ -13386,9 +13646,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1173956571
 GameObject:
@@ -13442,9 +13704,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1178872489
 GameObject:
@@ -13498,9 +13762,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1184395475
 GameObject:
@@ -13634,9 +13900,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1091385459}
 --- !u!64 &1192047498
 MeshCollider:
@@ -13765,9 +14033,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1202987771
 GameObject:
@@ -13900,9 +14170,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1423263356}
 --- !u!64 &1203375245
 MeshCollider:
@@ -14111,9 +14383,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 85724922}
 --- !u!64 &1208635854
 MeshCollider:
@@ -14242,9 +14516,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1215245710
 GameObject:
@@ -14377,9 +14653,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 905406417}
 --- !u!64 &1219365446
 MeshCollider:
@@ -14508,9 +14786,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1228403361
 GameObject:
@@ -14564,9 +14844,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1231633745
 GameObject:
@@ -14695,9 +14977,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1239241955
 GameObject:
@@ -14904,9 +15188,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1250197737
 GameObject:
@@ -15013,9 +15299,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1256926571
 GameObject:
@@ -15182,9 +15470,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1276235445
 GameObject:
@@ -15242,9 +15532,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 2043500079}
 --- !u!64 &1276235448
 MeshCollider:
@@ -15373,9 +15665,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1285693593
 GameObject:
@@ -15429,9 +15723,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1297488109
 GameObject:
@@ -15517,9 +15813,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1316759184
 GameObject:
@@ -15871,9 +16169,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1345553292
 GameObject:
@@ -16051,9 +16351,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1378713318
 GameObject:
@@ -16107,9 +16409,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1380320955
 GameObject:
@@ -16326,9 +16630,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 157877623}
 --- !u!64 &1391301266
 MeshCollider:
@@ -16457,9 +16763,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1391975017
 GameObject:
@@ -16513,9 +16821,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1394371045
 GameObject:
@@ -16573,9 +16883,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1784867031}
 --- !u!64 &1394371048
 MeshCollider:
@@ -16708,9 +17020,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1761650504}
 --- !u!64 &1396498286
 MeshCollider:
@@ -16839,9 +17153,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1400617170
 GameObject:
@@ -16895,9 +17211,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1402579459
 GameObject:
@@ -17183,9 +17501,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1152211575}
 --- !u!64 &1414518138
 MeshCollider:
@@ -17314,9 +17634,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1419053094
 GameObject:
@@ -17370,9 +17692,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1423263356
 GameObject:
@@ -17462,9 +17786,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1091219930}
 --- !u!64 &1423773164
 MeshCollider:
@@ -17634,9 +17960,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1092526814}
 --- !u!64 &1427004871
 MeshCollider:
@@ -17765,9 +18093,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1430675560
 GameObject:
@@ -17878,9 +18208,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1449535778
 GameObject:
@@ -17934,9 +18266,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1454332267
 GameObject:
@@ -18138,9 +18472,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1467693416
 GameObject:
@@ -18194,9 +18530,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1476072543
 GameObject:
@@ -18284,9 +18622,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1477146224
 GameObject:
@@ -18340,9 +18680,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1478188671
 GameObject:
@@ -18476,9 +18818,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1991280086}
 --- !u!64 &1482687058
 MeshCollider:
@@ -18607,9 +18951,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1490497323
 GameObject:
@@ -18888,9 +19234,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1520542802
 GameObject:
@@ -18944,9 +19292,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1536137573
 GameObject:
@@ -19000,9 +19350,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!224 &1548135058 stripped
 RectTransform:
@@ -19358,9 +19710,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1584100513
 GameObject:
@@ -19672,9 +20026,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1597237306
 GameObject:
@@ -19760,9 +20116,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1619127927
 GameObject:
@@ -19816,9 +20174,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1633781921
 GameObject:
@@ -19876,9 +20236,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 479032592}
 --- !u!64 &1633781924
 MeshCollider:
@@ -20161,9 +20523,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1664016779
 GameObject:
@@ -20217,9 +20581,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1665560247
 GameObject:
@@ -20273,9 +20639,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1666621465
 GameObject:
@@ -20374,9 +20742,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1693157933
 GameObject:
@@ -20430,9 +20800,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1701696982
 GameObject:
@@ -20486,9 +20858,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1702803107
 GameObject:
@@ -20653,9 +21027,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1714059360
 GameObject:
@@ -20741,9 +21117,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1729474790
 GameObject:
@@ -20930,9 +21308,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1736021939
 GameObject:
@@ -20986,9 +21366,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1738029554
 GameObject:
@@ -21087,9 +21469,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1751689057
 GameObject:
@@ -21143,9 +21527,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1761650504
 GameObject:
@@ -21231,9 +21617,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1767481889
 GameObject:
@@ -21287,9 +21675,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1784867031
 GameObject:
@@ -21375,9 +21765,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1786128234
 GameObject:
@@ -21689,9 +22081,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 419233437}
 --- !u!64 &1794711695
 MeshCollider:
@@ -21820,9 +22214,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1799552475
 GameObject:
@@ -21876,9 +22272,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1802062902
 GameObject:
@@ -22023,9 +22421,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1808498864
 GameObject:
@@ -22076,7 +22476,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1816977603
 Transform:
   m_ObjectHideFlags: 0
@@ -22232,9 +22632,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1821311128
 GameObject:
@@ -22401,9 +22803,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1835252475
 GameObject:
@@ -22594,9 +22998,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1297488109}
 --- !u!64 &1838313787
 MeshCollider:
@@ -22725,9 +23131,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1861262988
 GameObject:
@@ -22781,9 +23189,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1866625906
 GameObject:
@@ -23096,9 +23506,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1890356916
 GameObject:
@@ -23152,9 +23564,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1907948851
 GameObject:
@@ -23212,9 +23626,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1714059360}
 --- !u!64 &1907948854
 MeshCollider:
@@ -23375,9 +23791,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1923599434
 GameObject:
@@ -23431,9 +23849,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1931902839
 GameObject:
@@ -23487,9 +23907,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1933524039
 GameObject:
@@ -23543,9 +23965,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1934791842
 GameObject:
@@ -23726,9 +24150,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 2018318318}
 --- !u!64 &1936872808
 MeshCollider:
@@ -23857,9 +24283,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1951422445
 GameObject:
@@ -23913,9 +24341,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1953294865
 GameObject:
@@ -23973,9 +24403,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 406464819}
 --- !u!64 &1953294868
 MeshCollider:
@@ -24191,9 +24623,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1969979345
 GameObject:
@@ -24247,9 +24681,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1979269465
 GameObject:
@@ -24303,9 +24739,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1982042688
 GameObject:
@@ -24359,9 +24797,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1984393700
 GameObject:
@@ -24415,9 +24855,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1991280086
 GameObject:
@@ -24503,9 +24945,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &1999755600
 GameObject:
@@ -24523,7 +24967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &1999755601
 Grid:
   m_ObjectHideFlags: 0
@@ -24612,9 +25056,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1190078097}
 --- !u!64 &2000675769
 MeshCollider:
@@ -24743,9 +25189,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2018318318
 GameObject:
@@ -24907,9 +25355,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2029759008
 GameObject:
@@ -25095,9 +25545,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 528753112}
 --- !u!64 &2058342394
 MeshCollider:
@@ -25226,9 +25678,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2061260831
 GameObject:
@@ -25282,9 +25736,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2067413769
 GameObject:
@@ -25342,9 +25798,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 725670845}
 --- !u!64 &2067413772
 MeshCollider:
@@ -25530,9 +25988,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2083902680
 GameObject:
@@ -25586,9 +26046,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2089886991
 GameObject:
@@ -25642,9 +26104,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2095688883
 GameObject:
@@ -25702,9 +26166,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 1915651344}
 --- !u!64 &2095688886
 MeshCollider:
@@ -25833,9 +26299,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2096918691
 GameObject:
@@ -25964,9 +26432,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2098562421
 GameObject:
@@ -26095,9 +26565,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1 &2115139620
 GameObject:
@@ -26136,9 +26608,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!4 &2115139622
 Transform:
@@ -26207,9 +26681,11 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 0
-    useGlobalScale: 0
     isTile: 0
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}
 --- !u!1001 &3648623667952305871
 PrefabInstance:

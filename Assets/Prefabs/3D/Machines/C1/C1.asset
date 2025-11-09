@@ -35,16 +35,17 @@ MonoBehaviour:
   machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
   material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  customScale: 0.015
   body: {fileID: 11400000, guid: 00c301c00ec96af4ab0a07e7fbbab28a, type: 2}
   towers:
   - ido: 
     Config: {fileID: 11400000, guid: 67305f31261d6e64eb32d326139360ee, type: 2}
-    offsetTower: {x: 0, y: 19, z: 0}
+    offsetTower: {x: 0, y: 15, z: 0}
     colorTower: {r: 0.6901382, g: 0.8018868, b: 0.12482201, a: 1}
     isRotate: 1
     muzzles:
     - Config: {fileID: 11400000, guid: d33d59e688b572c4e90508c6b5ae7995, type: 2}
-      offsetMuzzle: {x: 6, y: 0, z: 0}
+      offsetMuzzle: {x: 3, y: 0, z: 0}
     children: []
     isChildren: 0
   catterpillars:

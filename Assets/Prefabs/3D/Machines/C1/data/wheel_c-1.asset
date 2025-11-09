@@ -15,325 +15,103 @@ MonoBehaviour:
   groups:
   - color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     voxels:
-    - {x: 4, y: 0, z: 0}
-    - {x: 4, y: 0, z: 1}
-    - {x: 4, y: 0, z: 2}
-    - {x: 4, y: 0, z: 3}
-    - {x: 4, y: 0, z: 4}
     - {x: 3, y: 0, z: 0}
     - {x: 3, y: 0, z: 1}
     - {x: 3, y: 0, z: 2}
-    - {x: 3, y: 0, z: 3}
-    - {x: 3, y: 0, z: 4}
     - {x: 2, y: 0, z: 0}
     - {x: 2, y: 0, z: 1}
     - {x: 2, y: 0, z: 2}
-    - {x: 2, y: 0, z: 3}
-    - {x: 2, y: 0, z: 4}
-    - {x: 5, y: 1, z: 0}
-    - {x: 5, y: 1, z: 1}
-    - {x: 5, y: 1, z: 2}
-    - {x: 5, y: 1, z: 3}
-    - {x: 5, y: 1, z: 4}
     - {x: 4, y: 1, z: 0}
     - {x: 4, y: 1, z: 1}
     - {x: 4, y: 1, z: 2}
-    - {x: 4, y: 1, z: 3}
-    - {x: 4, y: 1, z: 4}
     - {x: 3, y: 1, z: 1}
-    - {x: 3, y: 1, z: 2}
-    - {x: 3, y: 1, z: 3}
-    - {x: 2, y: 1, z: 0}
     - {x: 2, y: 1, z: 1}
-    - {x: 2, y: 1, z: 2}
-    - {x: 2, y: 1, z: 3}
-    - {x: 2, y: 1, z: 4}
     - {x: 1, y: 1, z: 0}
     - {x: 1, y: 1, z: 1}
     - {x: 1, y: 1, z: 2}
-    - {x: 1, y: 1, z: 3}
-    - {x: 1, y: 1, z: 4}
-    - {x: 6, y: 2, z: 0}
-    - {x: 6, y: 2, z: 1}
-    - {x: 6, y: 2, z: 2}
-    - {x: 6, y: 2, z: 3}
-    - {x: 6, y: 2, z: 4}
     - {x: 5, y: 2, z: 0}
     - {x: 5, y: 2, z: 1}
     - {x: 5, y: 2, z: 2}
-    - {x: 5, y: 2, z: 3}
-    - {x: 5, y: 2, z: 4}
     - {x: 4, y: 2, z: 1}
-    - {x: 4, y: 2, z: 2}
-    - {x: 4, y: 2, z: 3}
     - {x: 3, y: 2, z: 1}
-    - {x: 3, y: 2, z: 2}
-    - {x: 3, y: 2, z: 3}
     - {x: 2, y: 2, z: 1}
-    - {x: 2, y: 2, z: 2}
-    - {x: 2, y: 2, z: 3}
-    - {x: 1, y: 2, z: 0}
     - {x: 1, y: 2, z: 1}
-    - {x: 1, y: 2, z: 2}
-    - {x: 1, y: 2, z: 3}
-    - {x: 1, y: 2, z: 4}
     - {x: 0, y: 2, z: 0}
     - {x: 0, y: 2, z: 1}
     - {x: 0, y: 2, z: 2}
-    - {x: 0, y: 2, z: 3}
-    - {x: 0, y: 2, z: 4}
-    - {x: 6, y: 3, z: 0}
-    - {x: 6, y: 3, z: 1}
-    - {x: 6, y: 3, z: 2}
-    - {x: 6, y: 3, z: 3}
-    - {x: 6, y: 3, z: 4}
+    - {x: 5, y: 3, z: 0}
     - {x: 5, y: 3, z: 1}
     - {x: 5, y: 3, z: 2}
-    - {x: 5, y: 3, z: 3}
     - {x: 4, y: 3, z: 1}
-    - {x: 4, y: 3, z: 2}
-    - {x: 4, y: 3, z: 3}
     - {x: 3, y: 3, z: 1}
-    - {x: 3, y: 3, z: 2}
-    - {x: 3, y: 3, z: 3}
     - {x: 2, y: 3, z: 1}
-    - {x: 2, y: 3, z: 2}
-    - {x: 2, y: 3, z: 3}
     - {x: 1, y: 3, z: 1}
-    - {x: 1, y: 3, z: 2}
-    - {x: 1, y: 3, z: 3}
     - {x: 0, y: 3, z: 0}
     - {x: 0, y: 3, z: 1}
     - {x: 0, y: 3, z: 2}
-    - {x: 0, y: 3, z: 3}
-    - {x: 0, y: 3, z: 4}
-    - {x: 6, y: 4, z: 0}
-    - {x: 6, y: 4, z: 1}
-    - {x: 6, y: 4, z: 2}
-    - {x: 6, y: 4, z: 3}
-    - {x: 6, y: 4, z: 4}
-    - {x: 5, y: 4, z: 0}
-    - {x: 5, y: 4, z: 1}
-    - {x: 5, y: 4, z: 2}
-    - {x: 5, y: 4, z: 3}
-    - {x: 5, y: 4, z: 4}
+    - {x: 4, y: 4, z: 0}
     - {x: 4, y: 4, z: 1}
     - {x: 4, y: 4, z: 2}
-    - {x: 4, y: 4, z: 3}
     - {x: 3, y: 4, z: 1}
-    - {x: 3, y: 4, z: 2}
-    - {x: 3, y: 4, z: 3}
     - {x: 2, y: 4, z: 1}
-    - {x: 2, y: 4, z: 2}
-    - {x: 2, y: 4, z: 3}
     - {x: 1, y: 4, z: 0}
     - {x: 1, y: 4, z: 1}
     - {x: 1, y: 4, z: 2}
-    - {x: 1, y: 4, z: 3}
-    - {x: 1, y: 4, z: 4}
-    - {x: 0, y: 4, z: 0}
-    - {x: 0, y: 4, z: 1}
-    - {x: 0, y: 4, z: 2}
-    - {x: 0, y: 4, z: 3}
-    - {x: 0, y: 4, z: 4}
-    - {x: 5, y: 5, z: 0}
-    - {x: 5, y: 5, z: 1}
-    - {x: 5, y: 5, z: 2}
-    - {x: 5, y: 5, z: 3}
-    - {x: 5, y: 5, z: 4}
-    - {x: 4, y: 5, z: 0}
-    - {x: 4, y: 5, z: 1}
-    - {x: 4, y: 5, z: 2}
-    - {x: 4, y: 5, z: 3}
-    - {x: 4, y: 5, z: 4}
+    - {x: 3, y: 5, z: 0}
     - {x: 3, y: 5, z: 1}
     - {x: 3, y: 5, z: 2}
-    - {x: 3, y: 5, z: 3}
     - {x: 2, y: 5, z: 0}
     - {x: 2, y: 5, z: 1}
     - {x: 2, y: 5, z: 2}
-    - {x: 2, y: 5, z: 3}
-    - {x: 2, y: 5, z: 4}
-    - {x: 1, y: 5, z: 0}
-    - {x: 1, y: 5, z: 1}
-    - {x: 1, y: 5, z: 2}
-    - {x: 1, y: 5, z: 3}
-    - {x: 1, y: 5, z: 4}
-    - {x: 4, y: 6, z: 0}
-    - {x: 4, y: 6, z: 1}
-    - {x: 4, y: 6, z: 2}
-    - {x: 4, y: 6, z: 3}
-    - {x: 4, y: 6, z: 4}
-    - {x: 3, y: 6, z: 0}
-    - {x: 3, y: 6, z: 1}
-    - {x: 3, y: 6, z: 2}
-    - {x: 3, y: 6, z: 3}
-    - {x: 3, y: 6, z: 4}
-    - {x: 2, y: 6, z: 0}
-    - {x: 2, y: 6, z: 1}
-    - {x: 2, y: 6, z: 2}
-    - {x: 2, y: 6, z: 3}
-    - {x: 2, y: 6, z: 4}
   voxels:
-  - {x: 4, y: 0, z: 0}
-  - {x: 4, y: 0, z: 1}
-  - {x: 4, y: 0, z: 2}
-  - {x: 4, y: 0, z: 3}
-  - {x: 4, y: 0, z: 4}
   - {x: 3, y: 0, z: 0}
   - {x: 3, y: 0, z: 1}
   - {x: 3, y: 0, z: 2}
-  - {x: 3, y: 0, z: 3}
-  - {x: 3, y: 0, z: 4}
   - {x: 2, y: 0, z: 0}
   - {x: 2, y: 0, z: 1}
   - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 3}
-  - {x: 2, y: 0, z: 4}
-  - {x: 5, y: 1, z: 0}
-  - {x: 5, y: 1, z: 1}
-  - {x: 5, y: 1, z: 2}
-  - {x: 5, y: 1, z: 3}
-  - {x: 5, y: 1, z: 4}
   - {x: 4, y: 1, z: 0}
   - {x: 4, y: 1, z: 1}
   - {x: 4, y: 1, z: 2}
-  - {x: 4, y: 1, z: 3}
-  - {x: 4, y: 1, z: 4}
   - {x: 3, y: 1, z: 1}
-  - {x: 3, y: 1, z: 2}
-  - {x: 3, y: 1, z: 3}
-  - {x: 2, y: 1, z: 0}
   - {x: 2, y: 1, z: 1}
-  - {x: 2, y: 1, z: 2}
-  - {x: 2, y: 1, z: 3}
-  - {x: 2, y: 1, z: 4}
   - {x: 1, y: 1, z: 0}
   - {x: 1, y: 1, z: 1}
   - {x: 1, y: 1, z: 2}
-  - {x: 1, y: 1, z: 3}
-  - {x: 1, y: 1, z: 4}
-  - {x: 6, y: 2, z: 0}
-  - {x: 6, y: 2, z: 1}
-  - {x: 6, y: 2, z: 2}
-  - {x: 6, y: 2, z: 3}
-  - {x: 6, y: 2, z: 4}
   - {x: 5, y: 2, z: 0}
   - {x: 5, y: 2, z: 1}
   - {x: 5, y: 2, z: 2}
-  - {x: 5, y: 2, z: 3}
-  - {x: 5, y: 2, z: 4}
   - {x: 4, y: 2, z: 1}
-  - {x: 4, y: 2, z: 2}
-  - {x: 4, y: 2, z: 3}
   - {x: 3, y: 2, z: 1}
-  - {x: 3, y: 2, z: 2}
-  - {x: 3, y: 2, z: 3}
   - {x: 2, y: 2, z: 1}
-  - {x: 2, y: 2, z: 2}
-  - {x: 2, y: 2, z: 3}
-  - {x: 1, y: 2, z: 0}
   - {x: 1, y: 2, z: 1}
-  - {x: 1, y: 2, z: 2}
-  - {x: 1, y: 2, z: 3}
-  - {x: 1, y: 2, z: 4}
   - {x: 0, y: 2, z: 0}
   - {x: 0, y: 2, z: 1}
   - {x: 0, y: 2, z: 2}
-  - {x: 0, y: 2, z: 3}
-  - {x: 0, y: 2, z: 4}
-  - {x: 6, y: 3, z: 0}
-  - {x: 6, y: 3, z: 1}
-  - {x: 6, y: 3, z: 2}
-  - {x: 6, y: 3, z: 3}
-  - {x: 6, y: 3, z: 4}
+  - {x: 5, y: 3, z: 0}
   - {x: 5, y: 3, z: 1}
   - {x: 5, y: 3, z: 2}
-  - {x: 5, y: 3, z: 3}
   - {x: 4, y: 3, z: 1}
-  - {x: 4, y: 3, z: 2}
-  - {x: 4, y: 3, z: 3}
   - {x: 3, y: 3, z: 1}
-  - {x: 3, y: 3, z: 2}
-  - {x: 3, y: 3, z: 3}
   - {x: 2, y: 3, z: 1}
-  - {x: 2, y: 3, z: 2}
-  - {x: 2, y: 3, z: 3}
   - {x: 1, y: 3, z: 1}
-  - {x: 1, y: 3, z: 2}
-  - {x: 1, y: 3, z: 3}
   - {x: 0, y: 3, z: 0}
   - {x: 0, y: 3, z: 1}
   - {x: 0, y: 3, z: 2}
-  - {x: 0, y: 3, z: 3}
-  - {x: 0, y: 3, z: 4}
-  - {x: 6, y: 4, z: 0}
-  - {x: 6, y: 4, z: 1}
-  - {x: 6, y: 4, z: 2}
-  - {x: 6, y: 4, z: 3}
-  - {x: 6, y: 4, z: 4}
-  - {x: 5, y: 4, z: 0}
-  - {x: 5, y: 4, z: 1}
-  - {x: 5, y: 4, z: 2}
-  - {x: 5, y: 4, z: 3}
-  - {x: 5, y: 4, z: 4}
+  - {x: 4, y: 4, z: 0}
   - {x: 4, y: 4, z: 1}
   - {x: 4, y: 4, z: 2}
-  - {x: 4, y: 4, z: 3}
   - {x: 3, y: 4, z: 1}
-  - {x: 3, y: 4, z: 2}
-  - {x: 3, y: 4, z: 3}
   - {x: 2, y: 4, z: 1}
-  - {x: 2, y: 4, z: 2}
-  - {x: 2, y: 4, z: 3}
   - {x: 1, y: 4, z: 0}
   - {x: 1, y: 4, z: 1}
   - {x: 1, y: 4, z: 2}
-  - {x: 1, y: 4, z: 3}
-  - {x: 1, y: 4, z: 4}
-  - {x: 0, y: 4, z: 0}
-  - {x: 0, y: 4, z: 1}
-  - {x: 0, y: 4, z: 2}
-  - {x: 0, y: 4, z: 3}
-  - {x: 0, y: 4, z: 4}
-  - {x: 5, y: 5, z: 0}
-  - {x: 5, y: 5, z: 1}
-  - {x: 5, y: 5, z: 2}
-  - {x: 5, y: 5, z: 3}
-  - {x: 5, y: 5, z: 4}
-  - {x: 4, y: 5, z: 0}
-  - {x: 4, y: 5, z: 1}
-  - {x: 4, y: 5, z: 2}
-  - {x: 4, y: 5, z: 3}
-  - {x: 4, y: 5, z: 4}
+  - {x: 3, y: 5, z: 0}
   - {x: 3, y: 5, z: 1}
   - {x: 3, y: 5, z: 2}
-  - {x: 3, y: 5, z: 3}
   - {x: 2, y: 5, z: 0}
   - {x: 2, y: 5, z: 1}
   - {x: 2, y: 5, z: 2}
-  - {x: 2, y: 5, z: 3}
-  - {x: 2, y: 5, z: 4}
-  - {x: 1, y: 5, z: 0}
-  - {x: 1, y: 5, z: 1}
-  - {x: 1, y: 5, z: 2}
-  - {x: 1, y: 5, z: 3}
-  - {x: 1, y: 5, z: 4}
-  - {x: 4, y: 6, z: 0}
-  - {x: 4, y: 6, z: 1}
-  - {x: 4, y: 6, z: 2}
-  - {x: 4, y: 6, z: 3}
-  - {x: 4, y: 6, z: 4}
-  - {x: 3, y: 6, z: 0}
-  - {x: 3, y: 6, z: 1}
-  - {x: 3, y: 6, z: 2}
-  - {x: 3, y: 6, z: 3}
-  - {x: 3, y: 6, z: 4}
-  - {x: 2, y: 6, z: 0}
-  - {x: 2, y: 6, z: 1}
-  - {x: 2, y: 6, z: 2}
-  - {x: 2, y: 6, z: 3}
-  - {x: 2, y: 6, z: 4}
   colors:
   - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
@@ -383,469 +161,267 @@ MonoBehaviour:
   - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
-  - {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
   sizeVoxel: 1
-  Pivot: {x: 3.5, y: 3.5, z: 2.5}
-  Bounds: {x: 7, y: 7, z: 5}
+  Pivot: {x: 3, y: 3, z: 1.5}
+  Bounds: {x: 6, y: 6, z: 3}
   GlobalSize: {x: 40, y: 40, z: 40}
   GlobalPosition: {x: 0, y: -1, z: 20}
   GlobalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   LocalSize: {x: 0, y: 0, z: 4}
   LocalPosition: {x: 0, y: 0, z: 4}
   LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  startMesh: {fileID: 4300000, guid: 0ea3746766f62e44c850b0d95b7e59b4, type: 2}
+  startMesh: {fileID: 4300000, guid: bceb0a582c80f3c4084132cadb71bc8a, type: 2}
   ColorsRight:
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 0}
+    position: {x: 5, y: 0, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 1}
+    position: {x: 5, y: 0, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 2}
+    position: {x: 5, y: 0, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 3}
+    position: {x: 5, y: 0, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 4}
+    position: {x: 5, y: 0, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 5}
+    position: {x: 5, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 6}
+    position: {x: 5, y: 1, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 0}
+    position: {x: 5, y: 1, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 1}
+    position: {x: 5, y: 1, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 2}
+    position: {x: 5, y: 1, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 3}
+    position: {x: 5, y: 1, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 4}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 1, z: 5}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 1, z: 6}
+    position: {x: 5, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 4283782485
-    position: {x: 6, y: 2, z: 0}
+    position: {x: 5, y: 2, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 4283782485
-    position: {x: 6, y: 2, z: 1}
+    position: {x: 5, y: 2, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 4283782485
-    position: {x: 6, y: 2, z: 2}
+    position: {x: 5, y: 2, z: 2}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 2, z: 3}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 2, z: 4}
+    type: 0
+    IndexSubMesh: 0
+  - ID: 0
+    color:
+      serializedVersion: 2
+      rgba: 0
+    position: {x: 5, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 4283782485
-    position: {x: 6, y: 2, z: 3}
+    position: {x: 5, y: 3, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 4283782485
-    position: {x: 6, y: 2, z: 4}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 2, z: 5}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 2, z: 6}
+    position: {x: 5, y: 3, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 4283782485
-    position: {x: 6, y: 3, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 3, z: 1}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 3, z: 2}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 3, z: 3}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 3, z: 4}
+    position: {x: 5, y: 3, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 3, z: 5}
+    position: {x: 5, y: 3, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 3, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 4, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 4, z: 1}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 4, z: 2}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 4, z: 3}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 4, z: 4}
+    position: {x: 5, y: 3, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 4, z: 5}
+    position: {x: 5, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 4, z: 6}
+    position: {x: 5, y: 4, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 0}
+    position: {x: 5, y: 4, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 1}
+    position: {x: 5, y: 4, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 2}
+    position: {x: 5, y: 4, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 3}
+    position: {x: 5, y: 4, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 4}
+    position: {x: 5, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 5}
+    position: {x: 5, y: 5, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 5, z: 6}
+    position: {x: 5, y: 5, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 6, z: 0}
+    position: {x: 5, y: 5, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 6, z: 1}
+    position: {x: 5, y: 5, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 6, z: 2}
+    position: {x: 5, y: 5, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 6, z: 3}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 6, z: 4}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 6, z: 5}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 6, z: 6}
+    position: {x: 5, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
   ColorsForward:
@@ -880,7 +456,7 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 4, y: 0, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -889,13 +465,6 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 0
     position: {x: 5, y: 0, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 0, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
@@ -915,7 +484,7 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 2, y: 1, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -936,15 +505,8 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 5, y: 1, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 0}
+    position: {x: 5, y: 1, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
@@ -957,7 +519,7 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 1, y: 2, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -987,13 +549,6 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4283782485
     position: {x: 5, y: 2, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 2, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
@@ -1034,21 +589,14 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4283782485
     position: {x: 5, y: 3, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 3, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 4, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -1076,22 +624,15 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4283782485
     position: {x: 4, y: 4, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 5, y: 4, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 6, y: 4, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
@@ -1104,7 +645,7 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 1, y: 5, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -1118,78 +659,22 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 0
+      rgba: 4283782485
     position: {x: 3, y: 5, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 4, y: 5, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 5, y: 5, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 5, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 1, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 2, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 3, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
-    position: {x: 4, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 5, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 6, z: 0}
     type: 0
     IndexSubMesh: 0
   ColorsLeft:
@@ -1239,13 +724,6 @@ MonoBehaviour:
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 0, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
     position: {x: 0, y: 1, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -1287,13 +765,6 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 1, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
       rgba: 4283782485
     position: {x: 0, y: 2, z: 0}
     type: 0
@@ -1315,14 +786,14 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 2, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 2, z: 4}
     type: 0
     IndexSubMesh: 0
@@ -1331,13 +802,6 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 0
     position: {x: 0, y: 2, z: 5}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 2, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
@@ -1364,14 +828,14 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 3, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 3, z: 4}
     type: 0
     IndexSubMesh: 0
@@ -1386,41 +850,34 @@ MonoBehaviour:
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 3, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 4283782485
     position: {x: 0, y: 4, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 4, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 4, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 4, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283782485
+      rgba: 0
     position: {x: 0, y: 4, z: 4}
     type: 0
     IndexSubMesh: 0
@@ -1429,13 +886,6 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 0
     position: {x: 0, y: 4, z: 5}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 4, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
@@ -1480,403 +930,256 @@ MonoBehaviour:
     position: {x: 0, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 0}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 1}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 2}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 3}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 4}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 5}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
   ColorsBack:
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 0, z: 6}
+    position: {x: 0, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 1, y: 0, z: 6}
+    position: {x: 1, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 2, y: 0, z: 6}
+    position: {x: 2, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 3, y: 0, z: 6}
+    position: {x: 3, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 4, y: 0, z: 6}
+    position: {x: 4, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 5, y: 0, z: 6}
+    position: {x: 5, y: 0, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 0, z: 6}
+    position: {x: 0, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 1, z: 6}
+    position: {x: 1, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 1, y: 1, z: 6}
+    position: {x: 2, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 2, y: 1, z: 6}
+    position: {x: 3, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 3, y: 1, z: 6}
+    position: {x: 4, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 4, y: 1, z: 6}
+    position: {x: 5, y: 1, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 5, y: 1, z: 6}
+    position: {x: 0, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 1, z: 6}
+    position: {x: 1, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 2, z: 6}
+    position: {x: 2, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 1, y: 2, z: 6}
+    position: {x: 3, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 2, y: 2, z: 6}
+    position: {x: 4, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 3, y: 2, z: 6}
+    position: {x: 5, y: 2, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 4, y: 2, z: 6}
+    position: {x: 0, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 5, y: 2, z: 6}
+    position: {x: 1, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 2, z: 6}
+    position: {x: 2, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 3, z: 6}
+    position: {x: 3, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 1, y: 3, z: 6}
+    position: {x: 4, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 2, y: 3, z: 6}
+    position: {x: 5, y: 3, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 3, y: 3, z: 6}
+    position: {x: 0, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 4, y: 3, z: 6}
+    position: {x: 1, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 5, y: 3, z: 6}
+    position: {x: 2, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 3, z: 6}
+    position: {x: 3, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 4, z: 6}
+    position: {x: 4, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 1, y: 4, z: 6}
+    position: {x: 5, y: 4, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 2, y: 4, z: 6}
+    position: {x: 0, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 3, y: 4, z: 6}
+    position: {x: 1, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 4, y: 4, z: 6}
+    position: {x: 2, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 5, y: 4, z: 6}
+    position: {x: 3, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 6, y: 4, z: 6}
+    position: {x: 4, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
       rgba: 0
-    position: {x: 0, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 1, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 2, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 3, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 4, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 5, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 5, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 0, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 1, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 2, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 3, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 4, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 5, y: 6, z: 6}
-    type: 0
-    IndexSubMesh: 0
-  - ID: 0
-    color:
-      serializedVersion: 2
-      rgba: 0
-    position: {x: 6, y: 6, z: 6}
+    position: {x: 5, y: 5, z: 5}
     type: 0
     IndexSubMesh: 0

@@ -32,9 +32,11 @@ public class BaseTower : MonoBehaviour
     public BaseTower Parent => parent;
     [SerializeField] private LayerMask ignoreMask;
     [SerializeField] private Vector3 targetPoint;
+    [SerializeField] private Light PointLight;
+    [SerializeField] private Light DirectionLight;
+    
     // public float offset = 0;
     [SerializeField] protected VoxelMeshRender voxelMeshRender;
-
     void Start()
     {
         // StartCoroutine(Follow());
@@ -45,6 +47,10 @@ public class BaseTower : MonoBehaviour
         Option = optConfig;
 
         Machine = baseMachine;
+
+        PointLight.enabled = Machine.MachineLevelData.isBot;
+        DirectionLight.enabled = !Machine.MachineLevelData.isBot;
+        DirectionLight.intensity = _gameManager.LevelConfig.light;
 
         voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
 
@@ -599,7 +605,7 @@ public class BaseTower : MonoBehaviour
             // Debug.Log($"ray {hit2.point}, direction={direction}");
             // Quaternion lookRotation = Quaternion.LookRotation(direction);
             OnSetAngleTower(point, true, Time.deltaTime);
-            Debug.DrawRay(Machine.LevelManager.Camera.transform.position, point - Machine.LevelManager.Camera.transform.position, Color.magenta);
+            // Debug.DrawRay(Machine.LevelManager.Camera.transform.position, point - Machine.LevelManager.Camera.transform.position, Color.magenta);
             // targetPoint = point;
         }
     }
@@ -704,9 +710,12 @@ public class BaseTower : MonoBehaviour
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
             var el = voxelMeshRender.Containers[i];
-            Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
-            Vector3 localPoint = el.transform.InverseTransformPoint(_pointCollision);
-            tasks.Add(el.ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
+            if (el.IsDestructible())
+            {
+                Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
+                Vector3 localPoint = el.transform.InverseTransformPoint(_pointCollision);
+                tasks.Add(el.ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
+            }
         }
 
         UniTask.WhenAll(tasks).Forget();

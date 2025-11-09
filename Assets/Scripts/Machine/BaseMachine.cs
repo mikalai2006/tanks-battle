@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -208,9 +209,15 @@ public abstract class BaseMachine : MonoBehaviour
             levelManager = _levelManager;
         }
 
-        transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
-
         Config = _config;
+
+        // устанавливаем масштаб для машины.
+        var scale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+        if (Config.customScale > 0)
+        {
+            scale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
+        }
+        transform.localScale = scale;
 
         MachineLevelData = dataInput;
 
@@ -527,6 +534,27 @@ public abstract class BaseMachine : MonoBehaviour
             }
         }
     }
+
+    
+
+    void OnCollisionEnter(Collision collision)
+    {
+        
+        Container voxelContainer = collision.collider.GetComponent<Container>();
+        if (voxelContainer != null)
+        {
+            Debug.Log($"<color=#FFA500FF>OnCollisionEnter {collision.collider.name}<{collision.contacts}></color>");
+        }
+    }
+
+    // void OnTriggerEnter(Collider collider)
+    // {
+    //     Container voxelContainer = collider.GetComponent<Container>();
+    //     if (voxelContainer != null)
+    //     {
+    //         Debug.Log($"<color=#FFA500FF>OnTriggerEnter {collider.name}<{collider.ClosestPoint(transform.position)}></color>");
+    //     }
+    // }
 
 
 

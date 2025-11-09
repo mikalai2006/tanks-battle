@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -10,6 +11,8 @@ public class GameLevel : ScriptableObject
     public TextureHeightMapperSettings tileSettings;
     public SaveTiled saveTiled;
     public Vector3Int gridSize;
+    public List<VoxelMeshRender> TreePrefabs;
+    public List<VoxelMeshRender> HousePrefabs;
     public List<Tile3D> TilePrefabs;
     public List<Tile3D> TilePrefabsEmpty;
     public List<Tile3D> TilePrefabsInner;

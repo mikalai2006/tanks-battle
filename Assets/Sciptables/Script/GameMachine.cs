@@ -12,6 +12,7 @@ public class GameMachine : ScriptableObject
   public GameObject machinePrefab;
   public Material material;
   public IndicatorMachine indicatorPrefab;
+  [Range(0,1f)] public float customScale;
 
   [Space(5)]
   [Header("Составные части")]

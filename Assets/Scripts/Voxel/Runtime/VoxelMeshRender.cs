@@ -57,7 +57,9 @@ namespace Mikalai2006.Voxel
             // Debug.Log($"CreateContainer {gameObject.name}");
             Wrapper.transform.localRotation = Config.sOVoxelData.GlobalRotation;
 
-            if (Config.useGlobalScale)
+            if (Config.customScale > 0) {
+                Wrapper.transform.localScale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
+            }  else if (Config.useGlobalScale)
             {
                 // var maxBoundsSize = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z);
                 Wrapper.transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);

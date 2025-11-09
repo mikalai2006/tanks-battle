@@ -62,8 +62,8 @@ public class ParserHeightEditor : Editor
                     rect.y += allSpace - (y * (cellSize + padding) + margin);
                     rect.width = cellSize;
                     rect.height = cellSize;
-                    var valueHeight = target.data[new Vector2Int(x, y)];
-                    Color color = new Color(valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, 1);
+                    var color = target.data[new Vector2Int(x, y)];
+                    // Color color = new Color(valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, 1);
                     // Debug.Log($"r={row},c={column}::: rect.x={rect.x}, rect.y={rect.y}, rect.width={rect.width}, rect.height={rect.height}, color={color}");
 
                     // Draw the rectangle
