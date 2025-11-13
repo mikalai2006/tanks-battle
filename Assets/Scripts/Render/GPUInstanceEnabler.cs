@@ -38,6 +38,7 @@ public class GPUInstanceEnabler : MonoBehaviour
         if (_meshRenderer)
         {
             _materialPropertyBlock.SetColor("_NoiseColor", color);
+            // _materialPropertyBlock.SetColor("_Color", color);
             _meshRenderer.SetPropertyBlock(_materialPropertyBlock, indexSubmesh);
             color1 = color;
         }

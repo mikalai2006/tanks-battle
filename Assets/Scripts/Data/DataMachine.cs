@@ -24,6 +24,8 @@ public class DataMachine
     // [Tooltip("Значения бонусов")]
     // public SerializedDictionary<TypeBonus, float> bonusesValue;
     public List<BaseTower> towers;
+    [Tooltip("Уровень разрушения")]
+    public float levelDestruction;
 
     // [Tooltip("Время от последнего выстрела")]
     // public float timeAfterLastShot;
@@ -46,6 +48,24 @@ public class DataMuzzle
     public float countShotSeria;
     [Tooltip("Время до перезарядки")]
     public float timeBeforeShot;
+    [Tooltip("Уровень разрушения")]
+    public float levelDestruction;
+}
+
+[Serializable]
+public class DataBody
+{
+    public int index;
+    [Tooltip("Уровень разрушения")]
+    public float levelDestruction;
+}
+
+[Serializable]
+public class DataCaterpillar
+{
+    public int index;
+    [Tooltip("Уровень разрушения")]
+    public float levelDestruction;
 }
 
 [Serializable]
@@ -63,6 +83,8 @@ public class DataTower
     public bool isShot;
     [Tooltip("Столы башни")]
     public List<BaseMuzzle> muzzles;
+    [Tooltip("Уровень разрушения")]
+    public float levelDestruction;
     public DataTower() {
         muzzles = new();
     }

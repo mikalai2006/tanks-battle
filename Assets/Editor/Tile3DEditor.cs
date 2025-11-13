@@ -1,4 +1,3 @@
-using System.Linq;
 using Mikalai2006.Voxel;
 using UnityEditor;
 using UnityEngine;
@@ -38,12 +37,17 @@ public class Tile3DEditor : Editor
 
         target.voxelMeshRender = voxelMeshRender;
 
+        if (GUILayout.Button("Refresh data"))
+        {
+            target.OnRefreshData();
+        }
+
         if (!Application.isPlaying)
         {
             target.OnStart();
         }
 
-        if (target.ColorsForward.Length == 0)
+        if (target.ColorsForward == null || target.ColorsForward.Length == 0)
         {
             return;
         }

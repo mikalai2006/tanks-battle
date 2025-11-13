@@ -122,7 +122,7 @@ public class GameManager : StaticInstance<GameManager>
 
     void Update()
     {
-      Debug.unityLogger.logEnabled = Settings.logEnabled;
+      Debug.unityLogger.logEnabled = Settings.DebugSettings.logEnabled;
     }
 
     public void ChangeState(GameState newState, object Params = null)

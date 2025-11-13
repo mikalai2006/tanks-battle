@@ -1,34 +1,35 @@
 
+using System.Collections.Generic;
 using UIToolkitLibrary;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-    [RequireComponent(typeof(UIDocument))]
-    public class HealthBarController : MonoBehaviour
-    {
+[RequireComponent(typeof(UIDocument))]
+public class HealthBarController : MonoBehaviour
+{
+    GameManager gameManager => GameManager.Instance;
+    [Header("HealthBar Elements")]
+    [SerializeField] string m_HealthBarName = "HealthBarBase";
+    [SerializeField] string m_CharacterName = "Character Name";
 
-        [Header("HealthBar Elements")]
-        [SerializeField] string m_HealthBarName = "HealthBarBase";
-        [SerializeField] string m_CharacterName = "Character Name";
+    [SerializeField] Vector2 m_WorldSize = new Vector2(1.2f, 0.6f);
+    [SerializeField] Vector3 offset = new Vector3(0f, 1f, 0);
+    [Tooltip("x - нижняя граница(от), y - верхняя граница(до), z - значение maxOffset")]
+    // [SerializeField] private List<Vector3> maxOffsets;
+    public Vector2 rangeLerp = new Vector2(4f, 10f);
+    public float delimiter;
+    [SerializeField] bool m_ShowStat = true;
+    [SerializeField] bool m_ShowNameplate = true;
+    [SerializeField] StyleSheet m_StyleSheetOverride;
 
-        [SerializeField] Vector2 m_WorldSize = new Vector2(1.2f, 0.6f);
-        [SerializeField] bool m_ShowStat = true;
-        [SerializeField] bool m_ShowNameplate = true;
-        [SerializeField] StyleSheet m_StyleSheetOverride;
+    [SerializeField] float m_LowHPPercent = 25;
+    [SerializeField] Transform transformToFollow;
 
-        [SerializeField] float m_LowHPPercent = 25;
-        [SerializeField] Sprite m_LowHPImage;
-        [SerializeField] Transform transformToFollow;
-
-        // string IDs
-        const string k_NamePlate = "HealthBarTitleBackground";
-        const string k_Stat = "HealthBarStat";
-        const string k_HPFillImage = "HealthBarProgress";
-
-       [SerializeField]  HealthBarComponent m_HealthBar;
-        [SerializeField] StyleBackground m_OriginalHPImage;
-        [SerializeField] UIDocument m_HealthBarDoc;
-        Camera _camera;
+    [SerializeField]  HealthBarComponent m_HealthBar;
+    // [SerializeField] Sprite m_LowHPImage;
+    // [SerializeField] StyleBackground m_OriginalHPImage;
+    [SerializeField] UIDocument m_HealthBarDoc;
+    Camera _camera;
 
 
     // void OnEnable()
@@ -44,120 +45,152 @@ using UnityEngine.UIElements;
     {
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
         HealthBarSetup();
+
+        // maxOffsets = new List<Vector3>()
+        // {
+        //     new Vector3(0, 10, 8),
+        //     new Vector3(11, 20, 15),
+        //     new Vector3(21, 30, 25),
+        // };
     }
 
     void HealthBarSetup()
+    {
+        m_HealthBarDoc = GetComponent<UIDocument>();
+        
+        VisualElement rootElement = m_HealthBarDoc.rootVisualElement;
+        
+        if (m_StyleSheetOverride != null)
         {
-            m_HealthBarDoc = GetComponent<UIDocument>();
-            
-            VisualElement rootElement = m_HealthBarDoc.rootVisualElement;
-            
-            if (m_StyleSheetOverride != null)
-            {
-                rootElement.styleSheets.Clear();
-                rootElement.styleSheets.Add(m_StyleSheetOverride);
-            }
-            
-            m_HealthBar = rootElement.Q<HealthBarComponent>(m_HealthBarName);
-            m_HealthBar.HealthBarTitle = m_CharacterName;
-
-            m_HealthBar.HealthData = new HealthData();
-
-            ShowNameAndStats(m_ShowNameplate, m_ShowStat);
-            MoveToWorldPosition(m_HealthBar, transformToFollow.position, m_WorldSize);
-
+            rootElement.styleSheets.Clear();
+            rootElement.styleSheets.Add(m_StyleSheetOverride);
         }
+        
+        m_HealthBar = rootElement.Q<HealthBarComponent>(m_HealthBarName);
+        m_HealthBar.HealthBarTitle = m_CharacterName;
 
-        public void DisplayHealthBar(bool state)
-        {
-            if (m_HealthBarDoc == null)
-                return;
+        m_HealthBar.HealthData = new HealthData();
 
-            VisualElement rootElement = m_HealthBarDoc.rootVisualElement;
-            rootElement.style.display = (state) ? DisplayStyle.Flex : DisplayStyle.None;
-        }
+        m_HealthBar.style.backgroundColor = new StyleColor(gameManager.Theme.bgColor);
+        m_HealthBar.style.flexShrink = 1;
+        VisualElement healthBarBg = m_HealthBar.Q<VisualElement>(HealthBarComponent.IDNames.HealthBarBackground);
+        healthBarBg.style.backgroundColor = new StyleColor(gameManager.Theme.bgColor);
 
+        ShowNameAndStats(m_ShowNameplate, m_ShowStat);
+        MoveToWorldPosition(m_HealthBar, transformToFollow.position, m_WorldSize);
 
-        /// <summary>
-        /// Setup a health bar
-        /// </summary>
-        /// <param name="health"></param>
-        /// <param name="maxHealth"></param>
-        public void SetHealth(float health, float maxHealth)
-        {
-            if (m_HealthBar == null)
-            {
-                HealthBarSetup();
-            }
-            
-            m_HealthBar.HealthData.CurrentHealth = health;
-            m_HealthBar.HealthData.MaximumHealth = maxHealth;
-        }
-
-      
-        // Switch health bar sprites when low on HP
-        public void UpdateHealth(float health)
-        {
-            if (m_OriginalHPImage == null)
-            {
-                // Store the original background style to reset the health bar sprite
-                m_OriginalHPImage = m_HealthBar.Q<VisualElement>(k_HPFillImage).style.backgroundImage;
-            }
-
-            float lowHealth = m_HealthBar.HealthData.MaximumHealth * m_LowHPPercent / 100;
-            VisualElement fill = m_HealthBar.Q<VisualElement>(k_HPFillImage);
-
-            if (health < lowHealth && m_LowHPImage != null)
-            {
-                fill.style.backgroundImage = new StyleBackground(m_LowHPImage);
-            }
-            else
-            {
-                fill.style.backgroundImage = m_OriginalHPImage;
-            }
-
-            m_HealthBar.HealthData.CurrentHealth = health;
-        }
-
-        void ShowNameAndStats(bool nameVisible, bool statVisible)
-        {
-            VisualElement nameplate = m_HealthBar.Q<VisualElement>(k_NamePlate);
-            VisualElement stat = m_HealthBar.Q<Label>(k_Stat);
-
-            if (nameplate != null)
-            {
-                nameplate.visible = nameVisible;
-            }
-
-            if (stat != null)
-            {
-                stat.visible = statVisible;
-            }
- 
-        }
-
-        // moves health bar to match world position
-        void MoveToWorldPosition(VisualElement element, Vector3 worldPosition, Vector2 worldSize)
-        {
-            Rect rect = RuntimePanelUtils.CameraTransformWorldToPanelRect(element.panel, worldPosition + new Vector3(2, 20), worldSize, _camera);
-            element.transform.position = rect.position;
-
-        }
-
-        // Refresh health bar setup when camera updates
-        void OnCameraResized()
-        {
-            UpdateHealthBar();
-        }
-
-        void UpdateHealthBar()
-        {
-            ShowNameAndStats(m_ShowNameplate, m_ShowStat);
-            MoveToWorldPosition(m_HealthBar, transformToFollow.position, m_WorldSize);
-        }
-
-        void FixedUpdate()
-        {
-            UpdateHealthBar();
-        }
     }
+
+    public void DisplayHealthBar(bool state)
+    {
+        if (m_HealthBarDoc == null)
+            return;
+
+        VisualElement rootElement = m_HealthBarDoc.rootVisualElement;
+        rootElement.style.display = (state) ? DisplayStyle.Flex : DisplayStyle.None;
+    }
+
+
+    /// <summary>
+    /// Setup a health bar
+    /// </summary>
+    /// <param name="health"></param>
+    /// <param name="maxHealth"></param>
+    public void SetHealth(float health, float maxHealth)
+    {
+        if (m_HealthBar == null)
+        {
+            HealthBarSetup();
+        }
+        
+        m_HealthBar.HealthData.CurrentHealth = health;
+        m_HealthBar.HealthData.MaximumHealth = maxHealth;
+    }
+
+    
+    // Switch health bar sprites when low on HP
+    public void UpdateHealth(float health)
+    {
+        // if (m_OriginalHPImage == null)
+        // {
+        //     // Store the original background style to reset the health bar sprite
+        //     m_OriginalHPImage = m_HealthBar.Q<VisualElement>(k_HPFillImage).style.backgroundImage;
+        // }
+
+        float lowHealth = m_HealthBar.HealthData.MaximumHealth * m_LowHPPercent / 100;
+        VisualElement healthBarProgress = m_HealthBar.Q<VisualElement>(HealthBarComponent.IDNames.HealthBarProgress);
+
+        if (health < lowHealth)
+        {
+            // fill.style.backgroundImage = new StyleBackground(m_LowHPImage);
+            healthBarProgress.style.unityBackgroundImageTintColor = new StyleColor(gameManager.Theme.colorAccent);
+        }
+        else
+        {
+            healthBarProgress.style.unityBackgroundImageTintColor = new StyleColor(gameManager.Theme.colorCompleted);
+            // fill.style.backgroundImage = m_OriginalHPImage;
+        }
+
+        m_HealthBar.HealthData.CurrentHealth = health;
+    }
+
+    void ShowNameAndStats(bool nameVisible, bool statVisible)
+    {
+        VisualElement nameplate = m_HealthBar.Q<VisualElement>(HealthBarComponent.IDNames.HealthBarTitleBackground);
+        VisualElement stat = m_HealthBar.Q<Label>(HealthBarComponent.IDNames.HealthBarStat);
+
+        if (nameplate != null)
+        {
+            nameplate.visible = nameVisible;
+        }
+
+        if (stat != null)
+        {
+            stat.visible = statVisible;
+        }
+
+    }
+
+    // moves health bar to match world position
+    void MoveToWorldPosition(VisualElement element, Vector3 worldPosition, Vector2 worldSize)
+    {
+        BaseMachine bm = transformToFollow.GetComponent<BaseMachine>();
+        var distance = Vector3.Distance(_camera.transform.position, transformToFollow.transform.position);
+
+        if (bm.isVisible)
+        {
+            var lerpStep = distance / delimiter;
+
+            Rect rect = RuntimePanelUtils.CameraTransformWorldToPanelRect(element.panel, worldPosition + (offset * Mathf.Min(15, Mathf.Max(4f, lerpStep))), worldSize, _camera); //  + new Vector3(0, 0.5f, 0)
+
+            // element.transform.position = rect.position;
+            element.style.display = DisplayStyle.Flex;
+
+            // Debug.Log($"rect size = {rect}/ {distance} [[[{rangeLerp}<{Mathf.Min(rangeLerp.y, Mathf.Max(rangeLerp.x, lerpStep))}><{lerpStep}>]]]");
+            // element.style.scale = new StyleScale(new Vector3(2,2,2));
+            element.style.translate = new StyleTranslate(new Translate(rect.x, rect.y));
+        }
+        else
+        {
+            element.style.display = DisplayStyle.None;
+        }
+
+    }
+
+    // Refresh health bar setup when camera updates
+    void OnCameraResized()
+    {
+        UpdateHealthBar();
+    }
+
+    void UpdateHealthBar()
+    {
+        ShowNameAndStats(m_ShowNameplate, m_ShowStat);
+        MoveToWorldPosition(m_HealthBar, transformToFollow.position, m_WorldSize);
+    }
+
+    void FixedUpdate()
+    {
+        UpdateHealthBar();
+    }
+}

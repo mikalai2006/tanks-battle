@@ -16,12 +16,11 @@ MonoBehaviour:
   ThemeDefault: {fileID: 11400000, guid: 397876dbbb99649498afeade60f99939, type: 2}
   inputJoystick: 0
   simpleMove: 1
-  logEnabled: 1
   playerOptions:
     showTrajectory: 0
   scaleObjects: 0.03125
-  maxRadiusCreateVoxels: 15
-  countCreateVoxelByFrame: 30
+  maxRadiusCreateVoxels: 10
+  countMaxCreateVoxelsByStep: 1000
   gerbs:
   - {fileID: -1690008810, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1606978075, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
@@ -86,8 +85,14 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
-  - {fileID: 11400000, guid: 9ddc95e9a2516c44099c2b41c4fc8ffa, type: 2}
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
+  - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
+  - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
+  - {fileID: 11400000, guid: da3e7403be56f0748b9f25df94cb188b, type: 2}
+  - {fileID: 11400000, guid: 6abe5dfb79cf82340bf0e912a5081bbc, type: 2}
+  - {fileID: 11400000, guid: df1dbefa263c43e4190d67228e940652, type: 2}
+  - {fileID: 11400000, guid: 9ddc95e9a2516c44099c2b41c4fc8ffa, type: 2}
+  - {fileID: 11400000, guid: bd5e43aa588fc974bb140b2b8f4bfd4d, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
@@ -252,6 +257,10 @@ MonoBehaviour:
   isDisableNextButton: 0
   countNextPuzzle: 0
   tileSquare: {fileID: 0}
+  DebugSettings:
+    disableCreateTiles: 0
+    logEnabled: 0
+    ECSColliderSphere: 0
   references:
     version: 2
     RefIds: []

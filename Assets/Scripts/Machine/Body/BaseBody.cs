@@ -9,6 +9,8 @@ public class BaseBody : MonoBehaviour
     [SerializeField] private SpriteRenderer _damageSprite;
     protected BaseMachine Machine;
     protected GameBody Config;
+    [SerializeField] protected DataBody data;
+    public DataBody Data => data;
     [SerializeField] protected VoxelMeshRender voxelMeshRender;
 
     public void Init(BaseMachine _machine)
@@ -49,5 +51,24 @@ public class BaseBody : MonoBehaviour
     public void OnSetSpriteGerb(Sprite sprite)
     {
         // _bodyGerbSprite.sprite = sprite;
+    }
+    
+   public float GetValueDestructible()
+    {
+        float totalVoxels = 0f;
+        float totalVoxelsDestructible = 0f;
+
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            totalVoxelsDestructible += voxelMeshRender.Containers[i].ContainerData.countVoxelsDestructible;
+            totalVoxels += voxelMeshRender.Containers[i].ContainerData.countVoxels;
+            Debug.Log($"_containerData: {voxelMeshRender.Containers[i].ContainerData.countVoxels}/{voxelMeshRender.Containers[i].ContainerData.countVoxelsDestructible}");
+        }
+
+        float result = totalVoxelsDestructible / totalVoxels;
+
+        Data.levelDestruction = result;
+
+        return result;
     }
 }

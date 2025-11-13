@@ -29,7 +29,7 @@ namespace Mikalai2006.Voxel
             Container[] existCntainers = GetComponentsInChildren<Container>();
             if (existCntainers.Length > 0)
             {
-                Helpers.DestroyChildren(transform); 
+                Helpers.DestroyChildren(transform);
             }
 
             if (Wrapper == null)

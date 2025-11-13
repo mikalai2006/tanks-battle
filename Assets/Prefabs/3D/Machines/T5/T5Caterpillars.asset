@@ -35,17 +35,18 @@ MonoBehaviour:
   prefab: {fileID: 296304405608595272, guid: f7e0ec108305b2b418a0b85d151f84eb, type: 3}
   isRotate: 0
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 93b5491f1da4eb2438977bddd6d26619, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 65e030949d3135f4cacc51cb60436619, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     existCollider: 1
     isGreedy: 1
     isRigidbody: 0
     isConvex: 1
     isOneMesh: 1
-    useGlobalScale: 0
     isTile: 0
     isDestructible: 1
     shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   references:
     version: 2
     RefIds: []

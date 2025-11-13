@@ -35,15 +35,99 @@ public class WFCGenerator : MonoBehaviour {
         cts.Dispose();
     }
 
+    public void OnUpdateColors()
+    {
+        for (int i = 0; i < _gameManager.LevelConfig.TilePrefabs.Count; i++)
+        {
+            var vmRenderer = _gameManager.LevelConfig.TilePrefabs[i].GetComponentInChildren<VoxelMeshRender>();
+
+            if (vmRenderer.Config.sOVoxelData.groups.Count > 0)
+            {
+                var a = vmRenderer.Config.sOVoxelData.groups[0];
+                a.color = _gameManager.LevelConfig.colorGround;
+                vmRenderer.Config.sOVoxelData.groups[0] = a;
+            }
+            if (vmRenderer.Config.sOVoxelData.groups.Count > 1)
+            {
+                var b = vmRenderer.Config.sOVoxelData.groups[1];
+                b.color = _gameManager.LevelConfig.colorNature;
+                vmRenderer.Config.sOVoxelData.groups[1] = b;
+            }
+        }
+
+        for (int i = 0; i < _gameManager.LevelConfig.TilePrefabsInner.Count; i++)
+        {
+            var vmRenderer = _gameManager.LevelConfig.TilePrefabsInner[i].GetComponentInChildren<VoxelMeshRender>();
+
+            if (vmRenderer.Config.sOVoxelData.groups.Count > 0)
+            {
+                var a = vmRenderer.Config.sOVoxelData.groups[0];
+                a.color = _gameManager.LevelConfig.colorGround;
+                vmRenderer.Config.sOVoxelData.groups[0] = a;
+            }
+            if (vmRenderer.Config.sOVoxelData.groups.Count > 1)
+            {
+                var b = vmRenderer.Config.sOVoxelData.groups[1];
+                b.color = _gameManager.LevelConfig.colorNature;
+                vmRenderer.Config.sOVoxelData.groups[1] = b;
+            }
+        }
+        for (int i = 0; i < _gameManager.LevelConfig.TilePrefabsEmpty.Count; i++)
+        {
+            var vmRenderer = _gameManager.LevelConfig.TilePrefabsEmpty[i].GetComponentInChildren<VoxelMeshRender>();
+
+            if (vmRenderer.Config.sOVoxelData.groups.Count > 0)
+            {
+                var a = vmRenderer.Config.sOVoxelData.groups[0];
+                a.color = _gameManager.LevelConfig.colorGround;
+                vmRenderer.Config.sOVoxelData.groups[0] = a;
+            }
+            if (vmRenderer.Config.sOVoxelData.groups.Count > 1)
+            {
+                var b = vmRenderer.Config.sOVoxelData.groups[1];
+                b.color = _gameManager.LevelConfig.colorNature;
+                vmRenderer.Config.sOVoxelData.groups[1] = b;
+            }
+        }
+
+        VoxelMeshRender vmGround = _gameManager.LevelConfig.planePrefab;
+
+        if (vmGround.Config.sOVoxelData.groups.Count > 0)
+        {
+            var a = vmGround.Config.sOVoxelData.groups[0];
+            a.color = _gameManager.LevelConfig.colorGround;
+            vmGround.Config.sOVoxelData.groups[0] = a;
+        }
+        if (vmGround.Config.sOVoxelData.groups.Count > 1)
+        {
+            var b = vmGround.Config.sOVoxelData.groups[1];
+            b.color = _gameManager.LevelConfig.colorNature;
+            vmGround.Config.sOVoxelData.groups[1] = b;
+        }
+    }
+
     public void OnCreateVariantsPrefabs()
     {
         OnSetNotify?.Invoke("createVariantsTiles");
         int countBeforeAdding = _gameManager.LevelConfig.TilePrefabs.Count;
+
         for (int i = 0; i < countBeforeAdding; i++)
         {
 
             Vector3 pos = new Vector3(0, -100, 0);
             Tile3D tile = _gameManager.LevelConfig.TilePrefabs[i];
+
+            // var a = tile.meshConfig.sOVoxelData.groups[0];
+            // a.color = _gameManager.LevelConfig.colorGround;
+            // tile.meshConfig.sOVoxelData.groups[0] = a;
+            // if (tile.meshConfig.sOVoxelData.groups.Count > 1)
+            // {
+            //     var b = tile.meshConfig.sOVoxelData.groups[1];
+            //     a.color = _gameManager.LevelConfig.colorNature;
+            //     tile.meshConfig.sOVoxelData.groups[1] = b;
+            // }
+            // tile.OnRefreshData();
+
             switch (tile.Rotation)
             {
                 case Tile3D.RotationType.OnlyRotation:
@@ -97,67 +181,73 @@ public class WFCGenerator : MonoBehaviour {
 
     public async UniTask OnGenerateTiles(CancellationTokenSource cancelToken)
     {
-        if (!cancelToken.IsCancellationRequested)
+        if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
         {
-            gridComponents = new Cell3D[_gameManager.LevelConfig.gridSize.x * _gameManager.LevelConfig.gridSize.z];
-
-            TilePrefabs.AddRange(_gameManager.LevelConfig.TilePrefabs);
-
-
-            if (_gameManager.LevelConfig.saveTiled.nameMap == _gameManager.LevelConfig.tileSettings.nameMap)
+            if (!cancelToken.IsCancellationRequested)
             {
-                OnSetNotify?.Invoke("loadMap");
-                // если в сохраненных тайлах находится карта с текущим именем,
-                // значит карта уже сгенерирована и осталось только создать игровые объекты.
-                var savedTiles = _gameManager.LevelConfig.saveTiled.gridComponents;
+                gridComponents = new Cell3D[_gameManager.LevelConfig.gridSize.x * _gameManager.LevelConfig.gridSize.z];
 
-                Stack<Cell3D> stackCellNeedCreate = new Stack<Cell3D>();
-                for (int i = 0; i < savedTiles.Length; i++)
+                TilePrefabs.AddRange(_gameManager.LevelConfig.TilePrefabs);
+
+
+                if (_gameManager.LevelConfig.saveTiled.nameMap == _gameManager.LevelConfig.tileSettings.nameMap)
                 {
-                    Cell3DData cell3DData = savedTiles[i];
-                    Vector3Int position = new Vector3Int(cell3DData.position.x, 0, cell3DData.position.z);
-                    GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(cell3DData.position.x, cell3DData.position.z);
+                    OnSetNotify?.Invoke("loadMap");
+                    // если в сохраненных тайлах находится карта с текущим именем,
+                    // значит карта уже сгенерирована и осталось только создать игровые объекты.
+                    var savedTiles = _gameManager.LevelConfig.saveTiled.gridComponents;
 
-                    Cell3D loadCell = new Cell3D();
-                    List<Tile3D> tileForCell = new List<Tile3D>();
-
-                    switch (cell3DData.stateNode)
+                    Stack<Cell3D> stackCellNeedCreate = new Stack<Cell3D>();
+                    for (int i = 0; i < savedTiles.Length; i++)
                     {
-                        case (int)StateNode.TiledInner:
-                            node.StateNode = StateNode.TiledInner;
-                            tileForCell = TilePrefabsInner.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
-                            break;
-                        case (int)StateNode.Tiled:
-                            node.StateNode = StateNode.Tiled;
-                            tileForCell = TilePrefabs.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
-                            break;
-                        default:
-                            node.StateNode = (StateNode)cell3DData.stateNode;
-                            tileForCell = TilePrefabsEmpty.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
-                            break;
-                    }
-                    if (tileForCell.Count == 0)
-                    {
+                        Cell3DData cell3DData = savedTiles[i];
+                        Vector3Int position = new Vector3Int(cell3DData.position.x, 0, cell3DData.position.z);
+                        GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(cell3DData.position.x, cell3DData.position.z);
 
-                        Debug.LogWarning($"node.StateNode={node.StateNode}[{cell3DData.stateNode}, {cell3DData.uid}, {cell3DData.RotationY}], position={position}, tileForCell={tileForCell.Count}");
+                        Cell3D loadCell = new Cell3D();
+                        List<Tile3D> tileForCell = new List<Tile3D>();
+
+                        switch (cell3DData.stateNode)
+                        {
+                            case (int)StateNode.TiledInner:
+                                node.StateNode = StateNode.TiledInner;
+                                tileForCell = TilePrefabsInner.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
+                                break;
+                            case (int)StateNode.Tiled:
+                                node.StateNode = StateNode.Tiled;
+                                tileForCell = TilePrefabs.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
+                                break;
+                            default:
+                                node.StateNode = (StateNode)cell3DData.stateNode;
+                                tileForCell = TilePrefabsEmpty.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
+                                break;
+                        }
+                        if (tileForCell.Count == 0)
+                        {
+
+                            Debug.LogWarning($"node.StateNode={node.StateNode}[{cell3DData.stateNode}, {cell3DData.uid}, {cell3DData.RotationY}], position={position}, tileForCell={tileForCell.Count}");
+                        }
+
+                        loadCell.CreateCell(false, tileForCell, position, new Vector3(0, cell3DData.RotationY, 0));
+                        node.isCollapsed = true;
+                        gridComponents[i] = loadCell;
+                        stackCellNeedCreate.Push(gridComponents[i]);
                     }
 
-                    loadCell.CreateCell(false, tileForCell, position, new Vector3(0, cell3DData.RotationY, 0));
-                    node.isCollapsed = true;
-                    gridComponents[i] = loadCell;
-                    stackCellNeedCreate.Push(gridComponents[i]);
+                    await CreateTiles(cts, stackCellNeedCreate);
+
+                    OnCompleteTiled?.Invoke();
                 }
-
-                await CreateTiles(cts, stackCellNeedCreate);
-                
-                OnCompleteTiled?.Invoke();
+                else
+                {
+                    OnSetNotify?.Invoke("generateMap");
+                    // генерируем карту и создаем игровые объекты.
+                    await InitializeGrid(cts);
+                }
             }
-            else
-            {
-                OnSetNotify?.Invoke("generateMap");
-                // генерируем карту и создаем игровые объекты.
-                await InitializeGrid(cts);
-            }
+        } else
+        {
+            OnCompleteTiled?.Invoke();
         }
     }
 
@@ -247,7 +337,7 @@ public class WFCGenerator : MonoBehaviour {
                 if (count < 0)
                 {
                     count = 25;
-                    await UniTask.NextFrame();
+                    await UniTask.Delay(System.TimeSpan.FromSeconds(0.00001f));
                     OnAddProgress?.Invoke(stepProgress);
                 }
             }
@@ -285,7 +375,7 @@ public class WFCGenerator : MonoBehaviour {
             }
         
             // yield return new WaitForSeconds(0.0001f);
-            await UniTask.Delay(System.TimeSpan.FromSeconds(0.00001f));
+            await UniTask.Delay(System.TimeSpan.FromSeconds(0.01f));
             // await UniTask.NextFrame();
 
             CollapseCell(tempGrid);

@@ -25,14 +25,13 @@ public class GameSetting : ScriptableObject
   [Header("Настройки игры")]
   public bool inputJoystick;
   public bool simpleMove;
-  public bool logEnabled;
   public PlayerOptions playerOptions;
   [Tooltip("Размер масштаба игровых объектов")]
   public float scaleObjects;
   [Tooltip("Максимальный радиус создания вокселей")]
-  [Range(6,15)] public int maxRadiusCreateVoxels;
+  [Range(6,10)] public int maxRadiusCreateVoxels;
   [Tooltip("Количество вокселей, которые будут созданы за кадр")]
-  [Range(10,500)] public int countCreateVoxelByFrame;
+  [Range(10,1000)] public int countMaxCreateVoxelsByStep;
 
   [Space(5)]
   [Header("System")]
@@ -70,6 +69,11 @@ public class GameSetting : ScriptableObject
   [Header("Глобальные префабы")]
   public GameObject prefabVoxel;
   public Material materialTransparent;
+
+  // [Space(5)]
+  // [Header("Конфигурации тайлов")]
+  // [Tooltip("Конфигурации тайлов, используются для изменения цветов на лету")]
+  // public List<SOVoxelData> tailsConfigs;
 
   [Space(5)]
   [Header("Текст")]
@@ -170,6 +174,8 @@ public class GameSetting : ScriptableObject
   [Tooltip("Количество видимых следующих пазлов")]
   public int countNextPuzzle;
   public TileBase tileSquare;
+
+  public DebugSettings DebugSettings;
 }
 
 // [System.Serializable]
@@ -207,4 +213,13 @@ public struct TextLocalize
 public struct PlayerOptions
 {
   public bool showTrajectory;
+}
+
+[Serializable]
+public struct DebugSettings
+{
+  public bool disableCreateTiles;
+  public bool logEnabled;
+  [Tooltip("Если включено, то объекты ECS будут создаваться с коллайдером сферы(более производительны, но менее эффектны), иначе BoxCollider")]
+  public bool ECSColliderSphere;
 }

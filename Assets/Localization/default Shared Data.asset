@@ -239,6 +239,10 @@ MonoBehaviour:
     m_Key: createPlayers
     m_Metadata:
       m_Items: []
+  - m_Id: 61384237787205632
+    m_Key: generateMap
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

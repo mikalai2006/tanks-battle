@@ -17,9 +17,7 @@ public class IdleState : State
             stateController.Machine.navMeshAgent.isStopped = true;
         }
 
-        timeWait = 2f;
-
-        stateController.Target = stateController.Machine.LevelManager.mapManager.GetRandomNavmeshLocation(100);
+        timeWait = 1.0f;
     }
 
     public override void OnUpdate()
@@ -28,6 +26,8 @@ public class IdleState : State
         {
             if (!stateController.Machine.navMeshAgent.pathPending)
             {
+
+                stateController.Target = stateController.Machine.LevelManager.mapManager.GetRandomNavmeshLocation(100);
                 stateController.ChangeState(stateController.patrolState);
             }
         }

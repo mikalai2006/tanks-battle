@@ -16,6 +16,7 @@ public class GameLevel : ScriptableObject
     public List<Tile3D> TilePrefabs;
     public List<Tile3D> TilePrefabsEmpty;
     public List<Tile3D> TilePrefabsInner;
+    public VoxelMeshRender planePrefab;
 
     [Space(5)]
     [Header("Map")]
@@ -30,6 +31,11 @@ public class GameLevel : ScriptableObject
     [Range(0.1f, 1f)] public float noiseScaleKoof = 0.2f;
     [Range(0.1f, 1f)] public float noiseMaxKoof = 0.4f;
     [Range(0f, 1f)] public float light;
+
+    [Header("Цвета карты")]
+    public Color colorGround;
+    public Color colorNature;
+
 
     // [Space(5)]
     // [Header("Prefabs GameObjects")]

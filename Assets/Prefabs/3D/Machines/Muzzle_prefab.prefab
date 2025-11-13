@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4935029677889497295
 Transform:
   m_ObjectHideFlags: 0
@@ -443,6 +443,7 @@ MonoBehaviour:
     index: 0
     countShotSeria: 0
     timeBeforeShot: 0
+    levelDestruction: 0
   Tower: {fileID: 0}
   MaxDistanceObject: {fileID: 5579542577821838823}
   trajectoryRenderer: {fileID: 4928087593905777}

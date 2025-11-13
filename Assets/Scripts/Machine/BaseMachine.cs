@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mikalai2006.Voxel;
@@ -8,6 +9,7 @@ using UnityEngine.InputSystem;
 public abstract class BaseMachine : MonoBehaviour
 {
     // public static event Action<BaseMachine> OnChangeData;
+    // public static event System.Action<BaseMachine> OnChangeHPs;
     [SerializeField] protected LevelManager levelManager;
     public LevelManager LevelManager => levelManager;
     protected GameManager _gameManager => GameManager.Instance;
@@ -18,6 +20,7 @@ public abstract class BaseMachine : MonoBehaviour
 
     [Space(5)]
     [Header("Wrappers")]
+    [SerializeField] protected GameObject Wrapper;
     [SerializeField] protected GameObject BodyWrapper;
     [SerializeField] protected GameObject TowerWrapper;
     [SerializeField] protected GameObject CaterpillarWrapper;
@@ -67,6 +70,7 @@ public abstract class BaseMachine : MonoBehaviour
     public IndicatorMachine Indicator => _indicator;
     [SerializeField] HealthBarController HealthBar;
     public NavMeshAgent navMeshAgent;
+    public NavMeshObstacle navMeshObstacle;
 
     #region Unity
     public virtual void Awake()
@@ -217,7 +221,7 @@ public abstract class BaseMachine : MonoBehaviour
         {
             scale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
         }
-        transform.localScale = scale;
+        Wrapper.transform.localScale = scale;
 
         MachineLevelData = dataInput;
 
@@ -243,11 +247,15 @@ public abstract class BaseMachine : MonoBehaviour
             navMeshAgent.updatePosition = false;
         }
 
-        OnSetHP(Config.hp);
+        OnSetHP(1); // Config.hp
 
         if (HealthBar)
         {
-            HealthBar.SetHealth(Config.hp, Config.hp);
+            HealthBar.SetHealth(1, 1);
+        }
+        if (stateController.enabled == false)
+        {
+            HealthBar.enabled = false;
         }
 
         data.timeBeforeAddTarget = stateController.enabled
@@ -352,6 +360,8 @@ public abstract class BaseMachine : MonoBehaviour
         if (stateController.enabled)
         {
             rb.linearVelocity = navMeshAgent.velocity;
+            navMeshAgent.nextPosition = transform.position;
+            // Debug.Log($"navMeshAgent.velocity={navMeshAgent.velocity}");
             Rotate(_moveDirection);
         }
         else
@@ -561,6 +571,12 @@ public abstract class BaseMachine : MonoBehaviour
     #region Debug
     void OnDrawGizmos()
     {
+        if (!Application.isPlaying)
+        {
+            return;
+        }
+
+        
         Gizmos.color = Color.green;
         Gizmos.DrawRay(Body.transform.position, Body.transform.forward * 50);
         Gizmos.color = Color.yellow;
@@ -670,6 +686,49 @@ public abstract class BaseMachine : MonoBehaviour
         // {
         //     Towers[i].ChangePosition(this);
         // }
+    }
+
+    public void OnRefreshValueDestructible()
+    {
+        float allDetailsValue = 0;
+
+        allDetailsValue += Body.GetValueDestructible();
+        int countDetails = 1;
+
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            allDetailsValue += Towers[i].GetValueDestructible();
+            countDetails++;
+
+            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+            {
+                allDetailsValue += Towers[i].Muzzles[j].GetValueDestructible();
+                countDetails++;
+            }
+        }
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {
+            allDetailsValue += Caterpillars[i].GetValueDestructible();
+            countDetails++;
+        }
+
+        Data.levelDestruction = (float)allDetailsValue / countDetails;
+
+
+        OnSetHP(1 - Data.levelDestruction);
+        // if (MachineLevelData.isBot)
+        // {
+        //     OnChangeHPs?.Invoke(this);
+        // }
+    }
+
+    public void SetNavObstacle()
+    {
+        navMeshObstacle = gameObject.AddComponent<NavMeshObstacle>();
+        navMeshObstacle.center = Vector3.zero;
+        navMeshObstacle.shape = NavMeshObstacleShape.Capsule;
+        navMeshObstacle.radius = 0.3f;
+        navMeshObstacle.height = 0.5f;
     }
 
     // IEnumerator Follow()
@@ -786,5 +845,5 @@ public abstract class BaseMachine : MonoBehaviour
     //     Body.OnCollision(collision.contacts[0].point, true, collision);
     // }
 
-    #endregion    
+    #endregion
 }

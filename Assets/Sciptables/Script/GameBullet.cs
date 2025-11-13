@@ -17,7 +17,7 @@ public class GameBullet : ScriptableObject
   // [Tooltip("Скорость")]
   // [Range(1f, 20f)] public float speed;
   [Tooltip("Радиус поражения вокселей (Влияет на количество вокселей, которые будут разрушены)")]
-  [Range(1f, 20f)] public int damageRadius;
+  [Range(1f, 10f)] public int damageRadius;
   [Tooltip("Максимальное количество коллизий")]
   [Range(1f, 5f)] public int countCollisions;
 

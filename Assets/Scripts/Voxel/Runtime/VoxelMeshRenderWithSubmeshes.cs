@@ -290,7 +290,7 @@ namespace Mikalai2006.Voxel
         
         public async UniTask CreateObjectsAsync()
         {
-            int count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+            int count = GameManager.Instance.Settings.countMaxCreateVoxelsByStep;
 
             while (needCreateElements.Count > 0)
             {
@@ -338,7 +338,7 @@ namespace Mikalai2006.Voxel
 
                 if (count < 0)
                 {
-                    count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+                    count = GameManager.Instance.Settings.countMaxCreateVoxelsByStep;
                     await UniTask.NextFrame();
                 }
             }

@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 using UnityEngine.AI;
 using Cysharp.Threading.Tasks;
 using Loader;
+using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class LevelManager : MonoBehaviour
     public CinemachineOrbitalFollow cinemachineOrbitalFollow;
     public MazeGenerator MazeGenerator;
     private CreateMapOperation createMapOperation;
+    public ECSManager ECSManager;
     System.Threading.CancellationTokenSource cancelToken;
 
     [Space(5)]
@@ -95,6 +97,7 @@ public class LevelManager : MonoBehaviour
         // mapManager.OnCreateTestObjects();
         // MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
         // tile3DGenerator.CreateMap();
+        wFCGenerator.OnUpdateColors();
         wFCGenerator.OnCreateVariantsPrefabs();
         await wFCGenerator.OnGenerateTiles(cancelToken);
     }
@@ -161,7 +164,7 @@ public class LevelManager : MonoBehaviour
                 Vector3 pointSpawn = mapManager.GetRandomNavmeshLocation(_gameManager.LevelConfig.gridSize.x);
 
 
-                if (pointSpawn != null)
+                if (pointSpawn != Vector3.zero)
                 {
                     GameMachine configMachine = _gameSetting.machines.Find(m => m.name == data.id);
 
@@ -176,7 +179,6 @@ public class LevelManager : MonoBehaviour
                     );
                     gObject.name = $"{configMachine.name}_{data.id}";
                     
-                // Debug.Log($"pointSpawn => {pointSpawn}, gObject position={gObject.transform.position}");
 
                     BaseMachine obj = gObject.GetComponent<BaseMachine>();
                     if (obj != null)
@@ -186,10 +188,13 @@ public class LevelManager : MonoBehaviour
                         {
                             obj.GetComponent<PlayerController>().enabled = false;
                             obj.GetComponent<PlayerInput>().enabled = false;
-                            var navMeshAgent = obj.GetComponent<NavMeshAgent>();
+                            var navMeshAgent = obj.navMeshAgent; //obj.GetComponent<NavMeshAgent>();
                             if (navMeshAgent != null)
                             {
                                 navMeshAgent.Warp(pointSpawn);
+                                navMeshAgent.updatePosition = false;
+                                navMeshAgent.updateRotation = false;
+                                // Debug.LogWarning($"pointSpawn => {pointSpawn}, gObject position={gObject.transform.position}");
                                 navMeshAgent.enabled = true;
                             };
                             var lightComponent = obj.GetComponentInChildren<Light>();
@@ -209,7 +214,7 @@ public class LevelManager : MonoBehaviour
                         {
                             obj.GetComponent<PlayerController>().enabled = true;
                             obj.GetComponent<PlayerInput>().enabled = true;
-                            obj.GetComponent<NavMeshAgent>().enabled = false;
+                            // obj.GetComponentInChildren<NavMeshAgent>().enabled = false;
                             var lightComponent = obj.GetComponentInChildren<Light>();
                             if (lightComponent)
                             {
@@ -221,6 +226,15 @@ public class LevelManager : MonoBehaviour
                             obj.GetComponent<StateController>().enabled = false;
                             obj.OnSetConfig(configMachine, data);
                             // obj.SetOccupiedNode(node);
+                            
+                            var navMeshAgent = obj.navMeshAgent;
+                            if (navMeshAgent != null)
+                            {
+                                navMeshAgent.Warp(pointSpawn);
+                                navMeshAgent.enabled = false;
+                            };
+
+                            obj.SetNavObstacle();
 
                             CameraHandler.OnSetCharacter(obj);
                             CinemachineBrain brain = Camera.GetComponent<CinemachineBrain>();

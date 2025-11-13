@@ -13,7 +13,7 @@ public class CubeAuthoring : MonoBehaviour
 
             AddComponent(entity, new CubeComponent
             {
-                moveSpeed = authoring.moveSpeed
+                moveSpeed = authoring.moveSpeed,
             });
         }
     }

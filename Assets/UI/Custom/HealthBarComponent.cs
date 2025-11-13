@@ -22,6 +22,16 @@ namespace UIToolkitLibrary
            public static string HealthBarContainer = "health-bar__container";
            public static string HealthBarTitleBackground = "health-bar__title_background";
        }
+       public static class IDNames
+       {
+           public static string HealthBarBackground = "HealthBarBackground";
+           public static string HealthBarProgress = "HealthBarProgress";
+           public static string HealthBarTitle = "HealthBarTitle";
+           public static string HealthBarLabel = "HealthBarLabel";
+           public static string HealthBarContainer = "HealthBarContainer";
+           public static string HealthBarTitleBackground = "HealthBarTitleBackground";
+           public static string HealthBarStat = "HealthBarStat";
+       }
 
         // Backing fields for health values
        string m_HealthBarTitle;
@@ -52,35 +62,39 @@ namespace UIToolkitLibrary
        public HealthBarComponent()
        {
            // Title background element
-           m_TitleBackground = new VisualElement {name = "HealthBarTitleBackground"};
+           m_TitleBackground = new VisualElement {name = IDNames.HealthBarTitleBackground};
            m_TitleBackground.AddToClassList(ClassNames.HealthBarTitleBackground);
             m_TitleBackground.pickingMode = PickingMode.Ignore;
            Add(m_TitleBackground);
            
            // Title label
-           m_TitleLabel = new Label() {name = "HealthBarTitle"};
+           m_TitleLabel = new Label() {name = IDNames.HealthBarTitle};
            m_TitleLabel.AddToClassList(ClassNames.HealthBarTitle);
-            m_TitleLabel.text = "Character Name";
+            m_TitleLabel.text = "Character Name Character Name ";
             m_TitleLabel.pickingMode = PickingMode.Ignore;
            m_TitleBackground.Add(m_TitleLabel);
-           
-           // Add container class for overall styling
-           AddToClassList(ClassNames.HealthBarContainer);
+
+            // Add container class for overall styling
+            AddToClassList(ClassNames.HealthBarContainer);
+            // this.style.flexShrink = 1;
+            style.width = new StyleLength(250);
            
            // Background element of the health bar
-           m_Background = new VisualElement {name = "HealthBarBackground"};
+           m_Background = new VisualElement {name = IDNames.HealthBarBackground};
            m_Background.AddToClassList(ClassNames.HealthBarBackground);
             m_Background.pickingMode = PickingMode.Ignore;
+            // m_Background.style.flexShrink = 0;
+            
            Add(m_Background);
 
            // Progress bar element showing current health
-           m_Progress = new VisualElement {name = "HealthBarProgress"};
+           m_Progress = new VisualElement {name = IDNames.HealthBarProgress};
            m_Progress.AddToClassList(ClassNames.HealthBarProgress);
             m_Progress.pickingMode = PickingMode.Ignore;
            m_Background.Add(m_Progress);
 
            // Label displaying current and maximum health
-           m_HealthStat = new Label() {name = "HealthBarStat"};
+           m_HealthStat = new Label() {name = IDNames.HealthBarStat};
            m_HealthStat.AddToClassList(ClassNames.HealthBarLabel);
             m_HealthStat.pickingMode = PickingMode.Ignore;
             m_HealthStat.text = "200/300";

@@ -36,8 +36,8 @@ namespace Mikalai2006.Voxel
         private MeshFilter meshFilter;
         private GPUInstanceEnabler gPUInstanceEnabler;
         private MeshCollider meshCollider;
-        private Stack<RemoveVoxel> needCreateElements;
-        private Stack<RemoveVoxel> needGravityCreateElements;
+        // private Stack<RemoveVoxel> needCreateElements;
+        // private Stack<RemoveVoxel> needGravityCreateElements;
         // private Collision collision;
         // private GameObject explodeGameObject;
         // private SOVoxelData _sOVoxelData;
@@ -109,8 +109,8 @@ namespace Mikalai2006.Voxel
             // material = config._material;
             // _rp = new RenderParams(config._material);
 
-            needCreateElements = new Stack<RemoveVoxel>();
-            needGravityCreateElements = new Stack<RemoveVoxel>();
+            // needCreateElements = new Stack<RemoveVoxel>();
+            // needGravityCreateElements = new Stack<RemoveVoxel>();
 
             _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
         }
@@ -716,11 +716,12 @@ namespace Mikalai2006.Voxel
             collisionJobHandle.Complete(); // Or use dependency
 
             // Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
+            List<RemoveVoxel> needCreateElements = new();
             for (int el = 0; el < collisionJob._needCreateElements.Length; el++)
             {
                 if (!collisionJob._needCreateElements[el].Equals(float3.zero))
                 {
-                    needCreateElements.Push(new RemoveVoxel()
+                    needCreateElements.Add(new RemoveVoxel()
                     {
                         position = collisionJob._needCreateElements[el],
                         color = dataVoxels[collisionJob._needCreateElements[el]].color
@@ -766,13 +767,15 @@ namespace Mikalai2006.Voxel
             // list.Add(new Vector3(x,y,z),data[new Vector3(x,y,z)]);
 
             Debug.Log($"Time find exploded data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+            _containerData.countVoxelsDestructible = _containerData.countVoxels - dataVoxels.Count();
+            
             // if (numberIterate < 2)
             // {
             //     await ExposionVoxels(_pointCollision, isDrawMesh, _explodeGameObject, radiusExplode, numberIterate + 1);
             // }
             
 
-            CheckTopAirVoxels().Forget();
+            await CheckTopAirVoxels(_explodeGameObject);
 
             if (dataVoxels.Count >= 10 && needCreateElements.Count > 0)
             {
@@ -788,9 +791,10 @@ namespace Mikalai2006.Voxel
                 }
             }
 
-            if (dataVoxels.Count() < 10)
+            BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
+            if (bm)
             {
-                transform.gameObject.SetActive(false);
+                bm.OnRefreshValueDestructible();
             }
 
 
@@ -800,17 +804,21 @@ namespace Mikalai2006.Voxel
                 // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
                 // Debug.Log($"needCreateElements {needCreateElements.Count} voxels!");
                 // StartCoroutine(createGO());
-                CreateObjectsAsync().Forget();
+                await CreateECS(needCreateElements, Mathf.Min(radiusExplode, GameManager.Instance.Settings.maxRadiusCreateVoxels), direction);
             }
-            
-            _containerData.countVoxelsDestructible = _containerData.countVoxels - dataVoxels.Count();
+
+
+            if (dataVoxels.Count() < 10)
+            {
+                transform.gameObject.SetActive(false);
+            }
 
             _needCreateElements.Dispose();
             _needRemoveElements.Dispose();
             points.Dispose();
         }
 
-        async private UniTaskVoid CheckTopAirVoxels()
+        async private UniTask CheckTopAirVoxels(GameObject _explodeGameObject)
         {
             float startTime = Time.realtimeSinceStartup;
             List<KeyValuePair<float3, Voxel>> airVoxels = new List<KeyValuePair<float3, Voxel>>();
@@ -964,13 +972,15 @@ namespace Mikalai2006.Voxel
 
 
 
-            // Debug.Log($"Time checkAirVoxels1: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
+
+            List<RemoveVoxel> needGravityCreateElements = new();
 
             if (maxY > -1)
             {
                 airVoxels = dataVoxels.Where(v => v.Key.y > maxY && !v.Value.type.HasFlag(VoxelType.Destroyed)).OrderBy(t => -t.Key.y).ToList();//.ToDictionary(t => t.Key, t => t.Value);
 
                 // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}");
+
 
                 for (int i = 0; i < airVoxels.Count; i++)
                 {
@@ -985,7 +995,7 @@ namespace Mikalai2006.Voxel
                     arrayVoxels[index] = voxelItem2;
                     dataVoxels.Remove(voxelItem.Key);
 
-                    needGravityCreateElements.Push(new RemoveVoxel()
+                    needGravityCreateElements.Add(new RemoveVoxel()
                     {
                         position = voxelItem2.position,
                         color = voxelItem2.color
@@ -993,14 +1003,24 @@ namespace Mikalai2006.Voxel
                 }
 
             }
+            Debug.Log($"Time checkAirVoxels1: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
 
             // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
 
+            _containerData.countVoxelsDestructible = _containerData.countVoxels - dataVoxels.Count();
+            
+            BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
+            if (bm)
+            {
+                bm.OnRefreshValueDestructible();
+            }
 
 
             if (needGravityCreateElements.Count > 0)
             {
-                CreateGravityObjectsAsync().Forget();
+                // CreateGravityObjectsAsync().Forget();
+                // await UniTask.NextFrame();
+                CreateGravityECS(needGravityCreateElements).Forget();
             }
 
 
@@ -1211,124 +1231,189 @@ namespace Mikalai2006.Voxel
         //     return list;
         // }
 
-
-        public async UniTask CreateObjectsAsync()
+        public async UniTask CreateECS(List<RemoveVoxel> needCreateElements, float radiusExplode, Vector3 direction)
         {
-            int count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+            float startTime = Time.realtimeSinceStartup;
 
-            while (needCreateElements.Count > 0)
+            needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
+            List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
+            var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needCreateElements.Count);
+
+            for (int i = 0; i < maxCount; i++)
             {
-                RemoveVoxel elem = needCreateElements.Pop();
-
-                float forceMagnitude = 10 * 30;
-                // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
-                GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
-                Vector3 pointSpawnVoxel = transform.TransformPoint(elem.position);
-                gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
-                var voxPrefab = gObj.GetComponent<VoxelPrefab>();
-                voxPrefab.Init(meshConfig.sOVoxelData);
-                voxPrefab.SetColor(elem.color);
-                // gObj.isStatic = true;
-                // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
-                // gObj.gameObject.AddComponent<BoxCollider>();
-
-
-                // var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
-                // var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
-                // RenderParams _rp = new RenderParams(WorldManager.Instance.worldMaterial);
-                // Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));
-
-                var r = gObj.gameObject.GetComponent<Rigidbody>();
-                if (r == null)
+                var position = transform.TransformPoint(needCreateElements[i].position);
+                var rot = Quaternion.Euler(
+                    UnityEngine.Random.Range(0, 90),
+                    UnityEngine.Random.Range(0, 90),
+                    UnityEngine.Random.Range(0, 90)
+                );
+                var dir = rot * -direction;
+                listData.Add(new ECSDataSpawn
                 {
-                    r = gObj.gameObject.AddComponent<Rigidbody>();
-                }
-                r.collisionDetectionMode = CollisionDetectionMode.Continuous;
-                r.mass = 100f;
-                r.useGravity = true;
-                var forceDirection = UnityEngine.Random.onUnitSphere; //Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
-                r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
-                // gameObjects[count - 1] = gObj;
-                // gObj.isStatic = false;
-                // Destroy(gObj, 15);
-                Lean.Pool.LeanPool.Despawn(gObj, UnityEngine.Random.Range(1, 3));
-
-
-                // // simulate paraboloid.
-                // var forceDirection = UnityEngine.Random.onUnitSphere;
-                // float time = UnityEngine.Random.Range(1, 5);
-                // gObj.Init(forceDirection * 10, UnityEngine.Random.onUnitSphere, time * 0.5f);
-                // Lean.Pool.LeanPool.Despawn(gObj, time);
-
-                count--;
-
-                if (count < 0)
-                {
-                    count = GameManager.Instance.Settings.countCreateVoxelByFrame;
-                    await UniTask.NextFrame();
-                }
+                    color = needCreateElements[i].color,
+                    direction = dir, // UnityEngine.Random.onUnitSphere,
+                    forceAmount = UnityEngine.Random.Range(radiusExplode, 300 * radiusExplode),
+                    lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
+                    position = position,
+                    scale = GameManager.Instance.Settings.scaleObjects
+                });
             }
 
+            // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+            // Debug.Log($"CreateGravityECS: {listData.Count}");
+
+            // await UniTask.NextFrame();
+            _levelManager.ECSManager.UpdateDataDots(listData).Forget();
+            Debug.Log($"Time CreateESC: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateECS: {maxCount}");
         }
 
-        public async UniTask CreateGravityObjectsAsync()
+        // public async UniTask CreateObjectsAsync()
+        // {
+        //     int count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+
+        //     while (needCreateElements.Count > 0)
+        //     {
+        //         RemoveVoxel elem = needCreateElements.Pop();
+
+        //         float forceMagnitude = 10 * 30;
+        //         // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
+        //         GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
+        //         Vector3 pointSpawnVoxel = transform.TransformPoint(elem.position);
+        //         gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
+        //         var voxPrefab = gObj.GetComponent<VoxelPrefab>();
+        //         voxPrefab.Init(meshConfig.sOVoxelData);
+        //         voxPrefab.SetColor(elem.color);
+        //         // gObj.isStatic = true;
+        //         // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
+        //         // gObj.gameObject.AddComponent<BoxCollider>();
+
+
+        //         // var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
+        //         // var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
+        //         // RenderParams _rp = new RenderParams(WorldManager.Instance.worldMaterial);
+        //         // Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));
+
+        //         var r = gObj.gameObject.GetComponent<Rigidbody>();
+        //         if (r == null)
+        //         {
+        //             r = gObj.gameObject.AddComponent<Rigidbody>();
+        //         }
+        //         r.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        //         r.mass = 100f;
+        //         r.useGravity = true;
+        //         var forceDirection = UnityEngine.Random.onUnitSphere; //Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
+        //         r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+        //         // gameObjects[count - 1] = gObj;
+        //         // gObj.isStatic = false;
+        //         // Destroy(gObj, 15);
+        //         Lean.Pool.LeanPool.Despawn(gObj, UnityEngine.Random.Range(1, 3));
+
+
+        //         // // simulate paraboloid.
+        //         // var forceDirection = UnityEngine.Random.onUnitSphere;
+        //         // float time = UnityEngine.Random.Range(1, 5);
+        //         // gObj.Init(forceDirection * 10, UnityEngine.Random.onUnitSphere, time * 0.5f);
+        //         // Lean.Pool.LeanPool.Despawn(gObj, time);
+
+        //         count--;
+
+        //         if (count < 0)
+        //         {
+        //             count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+        //             await UniTask.NextFrame();
+        //         }
+        //     }
+
+        // }
+
+        async private UniTaskVoid CreateGravityECS(List<RemoveVoxel> needGravityCreateElements)
         {
-            int count = GameManager.Instance.Settings.countCreateVoxelByFrame;
 
-            while (needGravityCreateElements.Count > 0)
+            float startTime = Time.realtimeSinceStartup;
+
+            needGravityCreateElements = needGravityCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
+            List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
+            var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needGravityCreateElements.Count); //needGravityCreateElements.Count; //Mathf.Min(200, needGravityCreateElements.Count);
+
+            for (int i = 0; i < maxCount; i++)
             {
-                RemoveVoxel elem = needGravityCreateElements.Pop();
-
-                float forceMagnitude = 10;
-                // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
-                GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
-                Vector3 pointSpawnVoxel = transform.TransformPoint(elem.position);
-                gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
-                var voxPrefab = gObj.GetComponent<VoxelPrefab>();
-                voxPrefab.Init(meshConfig.sOVoxelData);
-                voxPrefab.SetColor(elem.color);
-                // gObj.isStatic = true;
-                // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
-                // gObj.gameObject.AddComponent<BoxCollider>();
-
-
-                // var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
-                // var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
-                // RenderParams _rp = new RenderParams(WorldManager.Instance.worldMaterial);
-                // Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));
-
-                var r = gObj.gameObject.GetComponent<Rigidbody>();
-                if (r == null)
+                listData.Add(new ECSDataSpawn
                 {
-                    r = gObj.gameObject.AddComponent<Rigidbody>();
-                }
-                r.collisionDetectionMode = CollisionDetectionMode.Continuous;
-                // r.mass = 1f;
-                r.useGravity = true;
-                var forceDirection = transform.up;// UnityEngine.Random.onUnitSphere; //Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
-                r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
-                // gameObjects[count - 1] = gObj;
-                // gObj.isStatic = false;
-                // Destroy(gObj, 15);
-                Lean.Pool.LeanPool.Despawn(gObj, UnityEngine.Random.Range(1, 3));
-
-
-                // // simulate paraboloid.
-                // var forceDirection = UnityEngine.Random.onUnitSphere;
-                // float time = UnityEngine.Random.Range(1, 5);
-                // gObj.Init(forceDirection * 10, UnityEngine.Random.onUnitSphere, time * 0.5f);
-                // Lean.Pool.LeanPool.Despawn(gObj, time);
-
-                count--;
-
-                if (count < 0)
-                {
-                    count = GameManager.Instance.Settings.countCreateVoxelByFrame;
-                    await UniTask.NextFrame();
-                }
+                    color = needGravityCreateElements[i].color,
+                    direction = UnityEngine.Random.onUnitSphere.normalized,
+                    forceAmount = 0, //UnityEngine.Random.Range(20000, 30000),
+                    lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
+                    position = transform.TransformPoint(needGravityCreateElements[i].position),
+                    scale = GameManager.Instance.Settings.scaleObjects
+                });
             }
 
+            // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+            // Debug.Log($"CreateGravityECS: {listData.Count}");
+
+            // await UniTask.NextFrame();
+            await _levelManager.ECSManager.UpdateDataDots(listData);
+            Debug.Log($"Time GenerateDots: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateGravityECS: {maxCount}");
         }
+
+        // public async UniTask CreateGravityObjectsAsync()
+        // {
+        //     int count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+
+        //     while (needGravityCreateElements.Count > 0)
+        //     {
+        //         RemoveVoxel elem = needGravityCreateElements.Pop();
+
+        //         float forceMagnitude = 10;
+        //         // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
+        //         GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, _levelManager.objectSpawnEffect.transform);
+        //         Vector3 pointSpawnVoxel = transform.TransformPoint(elem.position);
+        //         gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
+        //         var voxPrefab = gObj.GetComponent<VoxelPrefab>();
+        //         voxPrefab.Init(meshConfig.sOVoxelData);
+        //         voxPrefab.SetColor(elem.color);
+        //         // gObj.isStatic = true;
+        //         // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
+        //         // gObj.gameObject.AddComponent<BoxCollider>();
+
+
+        //         // var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
+        //         // var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
+        //         // RenderParams _rp = new RenderParams(WorldManager.Instance.worldMaterial);
+        //         // Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));
+
+        //         var r = gObj.gameObject.GetComponent<Rigidbody>();
+        //         if (r == null)
+        //         {
+        //             r = gObj.gameObject.AddComponent<Rigidbody>();
+        //         }
+        //         r.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        //         // r.mass = 1f;
+        //         r.useGravity = true;
+        //         var forceDirection = transform.up;// UnityEngine.Random.onUnitSphere; //Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
+        //         r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+        //         // gameObjects[count - 1] = gObj;
+        //         // gObj.isStatic = false;
+        //         // Destroy(gObj, 15);
+        //         Lean.Pool.LeanPool.Despawn(gObj, UnityEngine.Random.Range(1, 3));
+
+
+        //         // // simulate paraboloid.
+        //         // var forceDirection = UnityEngine.Random.onUnitSphere;
+        //         // float time = UnityEngine.Random.Range(1, 5);
+        //         // gObj.Init(forceDirection * 10, UnityEngine.Random.onUnitSphere, time * 0.5f);
+        //         // Lean.Pool.LeanPool.Despawn(gObj, time);
+
+        //         count--;
+
+        //         if (count < 0)
+        //         {
+        //             count = GameManager.Instance.Settings.countCreateVoxelByFrame;
+        //             await UniTask.NextFrame();
+        //         }
+        //     }
+
+        // }
 
         public bool IsDestructible()
         {

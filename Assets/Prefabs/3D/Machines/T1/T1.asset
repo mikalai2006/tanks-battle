@@ -40,7 +40,7 @@ MonoBehaviour:
   towers:
   - ido: 
     Config: {fileID: 11400000, guid: d24638cbce1929d4195b10eb8913ba76, type: 2}
-    offsetTower: {x: 0, y: 12, z: -6}
+    offsetTower: {x: 0, y: 15, z: -6}
     colorTower: {r: 0.6901382, g: 0.8018868, b: 0.12482201, a: 1}
     isRotate: 1
     muzzles:

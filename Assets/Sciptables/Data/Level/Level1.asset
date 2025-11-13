@@ -10037,11 +10037,14 @@ MonoBehaviour:
   - {fileID: 1602150319550486619, guid: b5ef970c5be330848bfbddc9ef5cad0a, type: 3}
   TilePrefabsInner:
   - {fileID: 1602150319550486619, guid: a593489927505f941a02d147bc5bd726, type: 3}
+  planePrefab: {fileID: 1085465455510754055, guid: 7a72e3064fa997047b9cb25c37f3f593, type: 3}
   tileRuleCave: {fileID: 11400000, guid: 52461d887de71bc4ea8d41fe26699b8c, type: 2}
   tileLandscape: {fileID: 11400000, guid: 863afbab29b6d434d97b50fda06d7a3e, type: 2}
   noiseScaleKoof: 0.2
   noiseMaxKoof: 0.444
-  light: 0.1
+  light: 1
+  colorGround: {r: 0.4528302, g: 0.34282663, b: 0.23282307, a: 1}
+  colorNature: {r: 0.45748246, g: 0.6132076, b: 0.14173195, a: 1}
   typeLevel: 2
   countTeam: 0
-  countPlayers: 5
+  countPlayers: 10

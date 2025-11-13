@@ -12,6 +12,8 @@ public class BaseCaterpillar : MonoBehaviour
     GameCaterpillarOption Option;
     BaseMachine Machine;
     [SerializeField] GameObject Wrapper;
+    [SerializeField] protected DataCaterpillar data;
+    public DataCaterpillar Data => data;
     [SerializeField] List<GameObject> wheels = new();
     bool isMove = false;
     [SerializeField] protected List<VoxelMeshRender> voxelMeshRenders;
@@ -112,4 +114,22 @@ public class BaseCaterpillar : MonoBehaviour
         // }
     }
     
+    public float GetValueDestructible()
+    {
+        float totalVoxels = 0f;
+        float totalVoxelsDestructible = 0f;
+
+        for (int x = 0; x < voxelMeshRenders.Count; x++)
+        {
+            for (int i = 0; i < voxelMeshRenders[x].Containers.Length; i++)
+            {
+                totalVoxelsDestructible += voxelMeshRenders[x].Containers[i].ContainerData.countVoxelsDestructible;
+                totalVoxels += voxelMeshRenders[x].Containers[i].ContainerData.countVoxels;
+            }
+        }
+
+        float result = totalVoxelsDestructible / totalVoxels;
+
+        return result;
+    }
 }

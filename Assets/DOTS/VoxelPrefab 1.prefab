@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3446739270796297606}
   - component: {fileID: 8730926685709544208}
   - component: {fileID: 710189271974663392}
+  - component: {fileID: 8289713333888735556}
   - component: {fileID: 7120631096461696199}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: VoxelPrefab 1
   m_TagString: IgnoreCollision
   m_Icon: {fileID: 0}
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c51e797857e71d14ba34221d0370f14c, type: 2}
+  - {fileID: 2100000, guid: 0d6c8f73d7ca8d64984fd7cd0237d235, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,12 +97,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765538014590554563}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0a2454160013574cb924cedda051744, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color1: {r: 0, g: 0, b: 0, a: 0}
+  color1: {r: 0.6415094, g: 0.3935566, b: 0.105909556, a: 1}
 --- !u!65 &710189271974663392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119,9 +120,30 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &8289713333888735556
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8765538014590554563}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7120631096461696199
 Rigidbody:

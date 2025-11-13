@@ -19,6 +19,7 @@ public class VoxParser : MonoBehaviour
     // [SerializeField] private string folderPrefix = "panzers";
     [Tooltip("Если активировать, то не будут сжиматься модели. Будут записаны координаты как есть и ограничивающая рамка будет как задана в редакторе VoxelMagic")]
     [SerializeField] private bool isGlobalPosition;
+    [SerializeField] private bool isCreateMesh;
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
     string OutputPath = "Assets/Prefabs/1Vox";
@@ -120,10 +121,11 @@ public class VoxParser : MonoBehaviour
                 bounds.y = max.y - min.y + 1;
                 bounds.z = max.z - min.z + 1;
 
-                pivot.x = bounds.x / 2f;
-                pivot.y = bounds.y / 2f;
-                pivot.z = bounds.z / 2f;
             }
+            
+            pivot.x = bounds.x / 2f;
+            pivot.y = bounds.y / 2f;
+            pivot.z = bounds.z / 2f;
 
             var groupSubMeshes = pointsColors.GroupBy(obj => obj.Value)
                 .AsParallel()
@@ -153,10 +155,10 @@ public class VoxParser : MonoBehaviour
             // Create ScriptableObject with data voxels and colors.
             SOVoxelData asset = ScriptableObject.CreateInstance<SOVoxelData>();
             asset.groups = submeshesDatas;
-            asset.voxels = pointsColors.Keys.ToList(); // .AsParallel()
+            // asset.voxels = pointsColors.Keys.ToList(); // .AsParallel()
             asset.Pivot = pivot;
             asset.Bounds = bounds;
-            asset.colors = pointsColors.Values.AsParallel().ToList();
+            // asset.colors = pointsColors.Values.AsParallel().ToList();
             asset.GlobalSize = new UnityEngine.Vector3Int(model.GlobalSize.X, model.GlobalSize.Y, model.GlobalSize.Z);
             asset.GlobalPosition = new UnityEngine.Vector3(model.GlobalPosition.X, model.GlobalPosition.Y, model.GlobalPosition.Z);
 
@@ -204,8 +206,11 @@ public class VoxParser : MonoBehaviour
 
 
             // Create mesh.
-            Mesh mesh = CreateMesh(nameFolderModel, asset, pathMesh);
-            asset.startMesh = mesh;
+            if (isCreateMesh)
+            {
+                Mesh mesh = CreateMesh(nameFolderModel, asset, pathMesh);
+                asset.startMesh = mesh;
+            }
 
             // Create arrays colors for tileGenerator.
             CreateArraysColors(ref asset);
@@ -265,12 +270,31 @@ public class VoxParser : MonoBehaviour
             position = new Vector3Int(0, y, column);
         }
 
-        var index = sOVoxelData.voxels.FindIndex(x => x == position);
         Color color = Color.clear;
+        // var index = sOVoxelData.voxels.FindIndex(x => x == position);
 
-        if (index > -1)
+        // if (index > -1)
+        // {
+        //     color = sOVoxelData.colors[index];
+        // }
+        var positionVoxel = position;
+
+        for (int g = 0; g < sOVoxelData.groups.Count; g++)
         {
-            color = sOVoxelData.colors[index];
+            for (int el = 0; el < sOVoxelData.groups[g].voxels.Count; el++)
+            {
+                if (sOVoxelData.groups[g].voxels[el].x == positionVoxel.x
+                    && sOVoxelData.groups[g].voxels[el].y == positionVoxel.y
+                    && sOVoxelData.groups[g].voxels[el].z == positionVoxel.z)
+                {
+                    color = sOVoxelData.groups[g].color;
+                    break;
+                }
+            }
+            if (color != Color.clear)
+            {
+                break;
+            }
         }
 
         Voxel vox = new Voxel()

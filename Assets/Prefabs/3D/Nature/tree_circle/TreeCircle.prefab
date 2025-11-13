@@ -55,7 +55,7 @@ MonoBehaviour:
     isOneMesh: 1
     isTile: 0
     isDestructible: 1
-    shadowCastingMode: 0
+    shadowCastingMode: 1
     useGlobalScale: 1
     customScale: 0
   Wrapper: {fileID: 3628153009335952969}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4391933390922725474}
   - component: {fileID: 7273024346422099289}
+  - component: {fileID: 8525557945762748131}
   m_Layer: 0
   m_Name: Wrapper
   m_TagString: Untagged
@@ -52,10 +53,32 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 1
     isTile: 1
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 1
+    customScale: 0
   Wrapper: {fileID: 2435754120068715757}
+--- !u!114 &8525557945762748131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2435754120068715757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &5416833857333836325
 GameObject:
   m_ObjectHideFlags: 0
@@ -28793,8 +28816,10 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 0
     isOneMesh: 1
-    useGlobalScale: 1
     isTile: 1
+    isDestructible: 0
     shadowCastingMode: 0
+    useGlobalScale: 1
+    customScale: 0
   tileOptions: []
   isCollapsed: 0

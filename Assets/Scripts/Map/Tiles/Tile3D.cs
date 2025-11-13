@@ -7,6 +7,7 @@ using UnityEngine;
 // [RequireComponent(typeof(VoxelMeshRender))]
 public class Tile3D : MonoBehaviour
 {
+    GameManager gameManager => GameManager.Instance;
     public string UID;
     // public float VoxelSize = 0.1f;
     public int TileSideVoxels = 5;
@@ -58,6 +59,10 @@ public class Tile3D : MonoBehaviour
             Debug.Log($"<color=red>Ошибка тайла {gameObject.name}: Не найден компонент VoxelMeshRender</color>");
             return;
         }
+        // else
+        // {
+        //     Debug.Log("Start Tile3D");
+        // }
 
         //voxelMeshRender.OnSetData += OnStart;
     }
@@ -110,21 +115,21 @@ public class Tile3D : MonoBehaviour
         // CalculateSidesColors();
     }
 
-    public void CalculateSidesColors()
-    {
-        for (int i = 0; i < TileSideVoxels; i++)
-        {
-            for (int y = 0; y < TileSideVoxels; y++)
-            {
-                ColorsForward[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Forward);
-                ColorsRight[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Right);
-                ColorsLeft[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Left);
-                ColorsBack[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Back);
-                // ColorsTop[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Top);
-                // ColorsBottom[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Bottom);
-            }
-        }
-    }
+    // public void CalculateSidesColors()
+    // {
+    //     for (int i = 0; i < TileSideVoxels; i++)
+    //     {
+    //         for (int y = 0; y < TileSideVoxels; y++)
+    //         {
+    //             ColorsForward[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Forward);
+    //             ColorsRight[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Right);
+    //             ColorsLeft[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Left);
+    //             ColorsBack[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Back);
+    //             // ColorsTop[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Top);
+    //             // ColorsBottom[i * TileSideVoxels + y] = GetVoxelColor(y, i, DirectionSideTile.Bottom);
+    //         }
+    //     }
+    // }
 
     public void Rotate90()
     {
@@ -164,76 +169,168 @@ public class Tile3D : MonoBehaviour
         ColorsBack = colorsBackNew;
     }
 
-    public Voxel GetVoxelColor(int verticalLayer, int horizontalOffset, DirectionSideTile direction)
+    // public Voxel GetVoxelColor(int verticalLayer, int horizontalOffset, DirectionSideTile direction)
+    // {
+    //     Voxel vox = default;
+
+    //     if (direction == DirectionSideTile.Forward)
+    //     {
+    //         vox = voxelMeshRender.GetVoxel(0, new Vector3Int(horizontalOffset, verticalLayer, 0));
+    //     }
+    //     else if (direction == DirectionSideTile.Right)
+    //     {
+    //         vox = voxelMeshRender.GetVoxel(0, new Vector3Int(0, verticalLayer,  horizontalOffset));
+    //     }
+    //     else if (direction == DirectionSideTile.Back)
+    //     {
+    //         vox = voxelMeshRender.GetVoxel(0, new Vector3Int(horizontalOffset, verticalLayer, TileSideVoxels - 1)); // TileSideVoxels - horizontalOffset - 1
+    //     }
+    //     else if (direction == DirectionSideTile.Left)
+    //     {
+    //         vox = voxelMeshRender.GetVoxel(0, new Vector3Int(TileSideVoxels - 1, verticalLayer, horizontalOffset)); // TileSideVoxels - horizontalOffset - 1
+    //     }
+    //     // Color32 voxColor = (Color32)vox.color;
+    //     // var meshCollider = GetComponentInChildren<MeshCollider>();
+
+    //     // float vox = VoxelSize;
+    //     // float half = VoxelSize / 2;
+
+    //     // Vector3 rayStart;
+    //     // Vector3 rayDir;
+    //     // if (direction == Direction.Right)
+    //     // {
+    //     //     rayStart = meshCollider.bounds.min +
+    //     //                new Vector3(-half, 0, half + horizontalOffset * vox);
+    //     //     rayDir = Vector3.right;
+    //     // }
+    //     // else if (direction == Direction.Forward)
+    //     // {
+    //     //     rayStart = meshCollider.bounds.min +
+    //     //                new Vector3(half + horizontalOffset * vox, 0, -half);
+    //     //     rayDir = Vector3.forward;
+    //     // }
+    //     // else if (direction == Direction.Left)
+    //     // {
+    //     //     rayStart = meshCollider.bounds.max +
+    //     //                new Vector3(half, 0, -half - (TileSideVoxels - horizontalOffset - 1) * vox);
+    //     //     rayDir = Vector3.left;
+    //     // }
+    //     // else if (direction == Direction.Back)
+    //     // {
+    //     //     rayStart = meshCollider.bounds.max +
+    //     //                new Vector3(-half - (TileSideVoxels - horizontalOffset - 1) * vox, 0, half);
+    //     //     rayDir = Vector3.back;
+    //     // }
+    //     // else
+    //     // {
+    //     //     throw new ArgumentException("Wrong direction value, should be Direction.left/right/back/forward",
+    //     //         nameof(direction));
+    //     // }
+
+    //     // rayStart.y = meshCollider.bounds.min.y + half + verticalLayer * vox;
+
+    //     // //Debug.DrawRay(rayStart, direction * .1f, Color.blue, 2);
+
+    //     // if (Physics.Raycast(new Ray(rayStart, rayDir), out RaycastHit hit, vox))
+    //     // {
+    //     //     byte colorIndex = (byte)(hit.textureCoord.x * 256);
+
+    //     //     if (colorIndex == 0) Debug.LogWarning("Found color 0 in mesh palette, this can cause conflicts");
+
+    //     //     return colorIndex;
+    //     // }
+
+    //     return vox;
+    // }
+
+    public void OnRefreshData()
     {
-        Voxel vox = default;
+        Start();
+
+        CreateArraysColors(ref voxelMeshRender.Config.sOVoxelData);
+    }
+
+    
+    private void CreateArraysColors(ref SOVoxelData sOVoxelData) {
+        var TileSideVoxels = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
+
+        sOVoxelData.ColorsRight = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsForward = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsLeft = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsBack = new Voxel[TileSideVoxels * TileSideVoxels];
+        // ColorsTop = new Voxel[TileSideVoxels * TileSideVoxels];
+        // ColorsBottom = new Voxel[TileSideVoxels * TileSideVoxels];
+
+        for (int row = 0; row < TileSideVoxels; row++)
+        {
+            for (int column = 0; column < TileSideVoxels; column++)
+            {
+                sOVoxelData.ColorsForward[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Forward, sOVoxelData);
+                sOVoxelData.ColorsRight[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Right, sOVoxelData);
+                sOVoxelData.ColorsLeft[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Left, sOVoxelData);
+                sOVoxelData.ColorsBack[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Back, sOVoxelData);
+            }
+        }
+    }
+    
+    public Voxel GetVoxelColor(int y, int column, DirectionSideTile direction, SOVoxelData sOVoxelData)
+    {
+        var TileSideVoxels = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
+
+        Vector3Int position = Vector3Int.zero;
 
         if (direction == DirectionSideTile.Forward)
         {
-            vox = voxelMeshRender.GetVoxel(0, new Vector3Int(horizontalOffset, verticalLayer, 0));
+            position = new Vector3Int(column, y, 0);
         }
         else if (direction == DirectionSideTile.Right)
         {
-            vox = voxelMeshRender.GetVoxel(0, new Vector3Int(0, verticalLayer,  horizontalOffset));
+            position = new Vector3Int(TileSideVoxels - 1, y, column);
         }
         else if (direction == DirectionSideTile.Back)
         {
-            vox = voxelMeshRender.GetVoxel(0, new Vector3Int(horizontalOffset, verticalLayer, TileSideVoxels - 1)); // TileSideVoxels - horizontalOffset - 1
+            position = new Vector3Int(column, y, TileSideVoxels - 1);
         }
         else if (direction == DirectionSideTile.Left)
         {
-            vox = voxelMeshRender.GetVoxel(0, new Vector3Int(TileSideVoxels - 1, verticalLayer, horizontalOffset)); // TileSideVoxels - horizontalOffset - 1
+            position = new Vector3Int(0, y, column);
         }
-        // Color32 voxColor = (Color32)vox.color;
-        // var meshCollider = GetComponentInChildren<MeshCollider>();
 
-        // float vox = VoxelSize;
-        // float half = VoxelSize / 2;
+        // var index = sOVoxelData.voxels.FindIndex(x => x == position);
+        Color color = Color.clear;
 
-        // Vector3 rayStart;
-        // Vector3 rayDir;
-        // if (direction == Direction.Right)
+
+        // if (index > -1)
         // {
-        //     rayStart = meshCollider.bounds.min +
-        //                new Vector3(-half, 0, half + horizontalOffset * vox);
-        //     rayDir = Vector3.right;
-        // }
-        // else if (direction == Direction.Forward)
-        // {
-        //     rayStart = meshCollider.bounds.min +
-        //                new Vector3(half + horizontalOffset * vox, 0, -half);
-        //     rayDir = Vector3.forward;
-        // }
-        // else if (direction == Direction.Left)
-        // {
-        //     rayStart = meshCollider.bounds.max +
-        //                new Vector3(half, 0, -half - (TileSideVoxels - horizontalOffset - 1) * vox);
-        //     rayDir = Vector3.left;
-        // }
-        // else if (direction == Direction.Back)
-        // {
-        //     rayStart = meshCollider.bounds.max +
-        //                new Vector3(-half - (TileSideVoxels - horizontalOffset - 1) * vox, 0, half);
-        //     rayDir = Vector3.back;
-        // }
-        // else
-        // {
-        //     throw new ArgumentException("Wrong direction value, should be Direction.left/right/back/forward",
-        //         nameof(direction));
+            var positionVoxel = position;
+
+            for (int g = 0; g < sOVoxelData.groups.Count; g++)
+            {
+                for (int el = 0; el < sOVoxelData.groups[g].voxels.Count; el++)
+                {
+                    if (sOVoxelData.groups[g].voxels[el].x == positionVoxel.x
+                        && sOVoxelData.groups[g].voxels[el].y == positionVoxel.y
+                        && sOVoxelData.groups[g].voxels[el].z == positionVoxel.z)
+                    {
+                        color = sOVoxelData.groups[g].color;
+                        break;
+                    }
+                }
+                if (color != Color.clear)
+                {
+                    break;
+                }
+            }
+
+        // color = sOVoxelData.colors[index];
         // }
 
-        // rayStart.y = meshCollider.bounds.min.y + half + verticalLayer * vox;
+        Voxel vox = new Voxel()
+        {
+            color = color,
+            position = position,
 
-        // //Debug.DrawRay(rayStart, direction * .1f, Color.blue, 2);
-
-        // if (Physics.Raycast(new Ray(rayStart, rayDir), out RaycastHit hit, vox))
-        // {
-        //     byte colorIndex = (byte)(hit.textureCoord.x * 256);
-
-        //     if (colorIndex == 0) Debug.LogWarning("Found color 0 in mesh palette, this can cause conflicts");
-
-        //     return colorIndex;
-        // }
+        };
 
         return vox;
     }

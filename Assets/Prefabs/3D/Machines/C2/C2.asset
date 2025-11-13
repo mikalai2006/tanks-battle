@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e7243a5f8f3ec44b5c6b60b18dd71d, type: 3}
+  m_Name: C2
+  m_EditorClassIdentifier: 
+  idObject: C2
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 9487801564258304
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 9487855435898880
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
+  material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+  indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  customScale: 0.015
+  body: {fileID: 11400000, guid: d909b04eef04bb842a770913b204c5e9, type: 2}
+  towers:
+  - ido: 
+    Config: {fileID: 11400000, guid: 22c645a4daa41b246b08a915d0a0a5e2, type: 2}
+    offsetTower: {x: 0, y: 15, z: 0}
+    colorTower: {r: 0.6901382, g: 0.8018868, b: 0.12482201, a: 1}
+    isRotate: 1
+    muzzles:
+    - Config: {fileID: 11400000, guid: 3f1ff767f05ec7b4b843802799310610, type: 2}
+      offsetMuzzle: {x: 3, y: 0, z: 0}
+    children: []
+    isChildren: 0
+  catterpillars:
+  - Config: {fileID: 11400000, guid: dee6438c79798d242bd085d71d671856, type: 2}
+    offsetCat: {x: 0, y: 4, z: 0}
+    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
+  soundMove: {fileID: 8300000, guid: 71d39ac5da02fea4084632c39f81960e, type: 3}
+  minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
+  speed: 100
+  distanceSearch: 5
+  hp: 300
+  armour: 300
+  references:
+    version: 2
+    RefIds: []

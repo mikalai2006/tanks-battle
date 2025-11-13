@@ -29,7 +29,14 @@ public class UITopSide : MonoBehaviour
     void Awake()
     {
         _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+
+        // BaseMachine.OnChangeHPs += OnChangeData;
     }
+
+    // void OnDestroy()
+    // {
+    //     BaseMachine.OnChangeHPs -= OnChangeData;
+    // }
 
     void Start()
     {
@@ -160,8 +167,8 @@ public class UITopSide : MonoBehaviour
 
     public void OnChangeData(BaseMachine machine)
     {
-        var oneProcentHP = maxWidth / machine.Config.hp;
-        progressHP.sizeDelta = new Vector2(oneProcentHP * machine.Data.hp, progressHP.sizeDelta.y);
+        var oneProcentHP = maxWidth / 1; //machine.Config.hp;
+        progressHP.sizeDelta = new Vector2(oneProcentHP * machine.Data.levelDestruction, progressHP.sizeDelta.y);
     }
 
     public void OnToStartMenu()

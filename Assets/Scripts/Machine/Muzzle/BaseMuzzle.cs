@@ -16,9 +16,9 @@ public abstract class BaseMuzzle : MonoBehaviour
     [SerializeField] protected SpriteRenderer sprite;
     protected ParticleSystem[] particlesBoom;
     [SerializeField] protected DataMuzzle data;
+    public DataMuzzle Data => data;
     [SerializeField] protected BaseTower Tower;
     [SerializeField] protected GameObject MaxDistanceObject;
-    public DataMuzzle Data => data;
     public TrajectoryRenderer trajectoryRenderer;
     public GameObject decal;
     [SerializeField] protected VoxelMeshRender voxelMeshRender;
@@ -218,6 +218,21 @@ public abstract class BaseMuzzle : MonoBehaviour
         UniTask.WhenAll(tasks).Forget();
     }
 
+    public float GetValueDestructible()
+    {
+        float totalVoxels = 0f;
+        float totalVoxelsDestructible = 0f;
+
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            totalVoxelsDestructible += voxelMeshRender.Containers[i].ContainerData.countVoxelsDestructible;
+            totalVoxels += voxelMeshRender.Containers[i].ContainerData.countVoxels;
+        }
+
+        float result = totalVoxelsDestructible / totalVoxels;
+
+        return result;
+    }
     // bool AnimatorIsPlaying(string stateName) {
     //     return _animator.GetCurrentAnimatorStateInfo(0).length > _animator.GetCurrentAnimatorStateInfo(0).normalizedTime
     //         && _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);

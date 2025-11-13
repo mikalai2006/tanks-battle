@@ -691,6 +691,24 @@ public class BaseTower : MonoBehaviour
     //     }
     // }
 
+   public float GetValueDestructible()
+    {
+        float totalVoxels = 0f;
+        float totalVoxelsDestructible = 0f;
+
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            totalVoxelsDestructible += voxelMeshRender.Containers[i].ContainerData.countVoxelsDestructible;
+            totalVoxels += voxelMeshRender.Containers[i].ContainerData.countVoxels;
+        }
+
+        float result = totalVoxelsDestructible / totalVoxels;
+
+        Data.levelDestruction = result;
+
+        return result;
+    }
+
     public void PreDestroy()
     {
         if (_objectTarget)

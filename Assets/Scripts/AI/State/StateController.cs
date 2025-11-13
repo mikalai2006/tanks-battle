@@ -5,6 +5,7 @@ public class StateController : MonoBehaviour
 {
     public BaseMachine Machine { get; private set; }
     [SerializeField] private State currentState;
+    [SerializeField] private string currentStateName;
 
     // public SleepState sleepState = new SleepState();
     public ChaseState chaseState = new ChaseState();
@@ -52,6 +53,7 @@ public class StateController : MonoBehaviour
         }
         currentState = newState;
         currentState.OnEnter(this);
+        currentStateName = newState.GetType().ToString();
         
         // if (Machine)
         // {

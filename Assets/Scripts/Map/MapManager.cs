@@ -52,10 +52,23 @@ public class MapManager : MonoBehaviour
 
         gridTileHelper = new GridTileHelper(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.z);
 
+        // var scaleX = _gameManager.LevelConfig.gridSize.x - 10f;
+        // var scaleZ = _gameManager.LevelConfig.gridSize.z - 10f;
+        // plane.transform.localScale = new Vector3(scaleX, 1, scaleZ);
+        // plane.transform.position = new Vector3(0.5f * _gameManager.LevelConfig.gridSize.x - 0.5f, 0, 0.5f * _gameManager.LevelConfig.gridSize.z - 0.5f);
+        // var obj = Instantiate(_gameManager.LevelConfig.planePrefab, Vector3.zero, Quaternion.identity, plane.transform);
+        // obj.transform.localPosition = Vector3.zero;
+
+        
         var scaleX = _gameManager.LevelConfig.gridSize.x / 10f;
         var scaleZ = _gameManager.LevelConfig.gridSize.z / 10f;
         plane.transform.localScale = new Vector3(scaleX, 1, scaleZ);
-        plane.transform.position = new Vector3(0.5f * _gameManager.LevelConfig.gridSize.x, 0, 0.5f * _gameManager.LevelConfig.gridSize.z);
+        plane.transform.position = new Vector3(0.5f * _gameManager.LevelConfig.gridSize.x - 0.5f, 0, 0.5f * _gameManager.LevelConfig.gridSize.z - 0.5f);
+        GPUInstanceEnabler gPUInstanceEnabler = plane.transform.GetComponent<GPUInstanceEnabler>();
+        if (gPUInstanceEnabler)
+        {
+            gPUInstanceEnabler.SetColor(_gameManager.LevelConfig.colorGround);
+        }
 
         // // Random value for noise.
         // var xOffSet = Random.Range(-10000f, 10000f);
@@ -113,8 +126,11 @@ public class MapManager : MonoBehaviour
         // }
 
         // OnCreateNoise();
-        OnCreateTiles();
-        OnCreateFixedTiles();
+        if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
+        {
+            OnCreateTiles();
+            OnCreateFixedTiles();
+        }
     }
 
     public void OnCreateTiles()
@@ -155,7 +171,7 @@ public class MapManager : MonoBehaviour
                     var obj = Instantiate(housePrefab, transform.position, Quaternion.identity, transform);
                     obj.transform.localPosition = node.positionXZ();
                 }
-                Debug.Log($"greenColor={greenColor}[{blueColor}]<{redColor}>");
+                // Debug.Log($"greenColor={greenColor}[{blueColor}]<{redColor}>");
             }
         }
     }
@@ -256,19 +272,26 @@ public class MapManager : MonoBehaviour
     public Vector3 GetRandomNavmeshLocation(float sampleRadius)
     {
         // 1. Generate a random origin point near the NavMeshSurface's center
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * sampleRadius;
-        // randomDirection.y = 0.05f;
-        Vector3 origin = transform.position + randomDirection; // Use the spawner's position or a known center
+        Vector3 randomPoint = new Vector3(
+            UnityEngine.Random.Range(2f, _gameManager.LevelConfig.gridSize.x - 2),
+            1,
+            UnityEngine.Random.Range(2f, _gameManager.LevelConfig.gridSize.x - 2)
+        ); //UnityEngine.Random.insideUnitSphere * sampleRadius;
+        // randomDirection.y = 1f;
+        // Vector3 origin = transform.position + randomDirection; // Use the spawner's position or a known center
 
         NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
 
         // 2. Sample the position on the NavMesh
-        if (NavMesh.SamplePosition(origin, out hit, sampleRadius, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomPoint, out hit, sampleRadius, NavMesh.AllAreas))
         {
             // 3. Return the valid position
             finalPosition = hit.position;
         }
+        // finalPosition.y = 0.01f;
+
+        // Debug.LogWarning($"GetRandomNavmeshLocation: randomPoint={randomPoint}, finalPosition={finalPosition}");
         return finalPosition;
     }
 }
