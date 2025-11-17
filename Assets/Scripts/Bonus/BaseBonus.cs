@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class BaseBonus : MonoBehaviour
 {
-    protected GameManager _gameManager = GameManager.Instance;
+    protected GameManager _gameManager => GameManager.Instance;
     [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] protected GameBonus _config;
     public GameBonus Config => _config;

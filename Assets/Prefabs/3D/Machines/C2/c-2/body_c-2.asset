@@ -1937,6 +1937,7 @@ MonoBehaviour:
     - {x: 18, y: 9, z: 10}
     - {x: 18, y: 9, z: 11}
     - {x: 18, y: 9, z: 12}
+  countVoxels: 1910
   sizeVoxel: 1
   Pivot: {x: 13, y: -2, z: 8}
   Bounds: {x: 26, y: 12, z: 16}

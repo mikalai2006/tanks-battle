@@ -20,10 +20,12 @@ public abstract class BaseMachine : MonoBehaviour
 
     [Space(5)]
     [Header("Wrappers")]
-    [SerializeField] protected GameObject Wrapper;
+    public GameObject Wrapper;
+    public GameObject WrapperTools;
     [SerializeField] protected GameObject BodyWrapper;
     [SerializeField] protected GameObject TowerWrapper;
-    [SerializeField] protected GameObject CaterpillarWrapper;
+    [SerializeField] public GameObject MuzzleWrapper;
+    [SerializeField] public GameObject CaterpillarWrapper;
 
     [Space(5)]
     [Header("Elements vehicle")]
@@ -38,23 +40,22 @@ public abstract class BaseMachine : MonoBehaviour
     [Space(5)]
     [Header("Data")]
     public bool isVisible;
-    [SerializeField] protected bool isMove;
-    public bool IsMove => isMove;
     [SerializeField] protected int offset = 90;
     public int OffsetRotate => offset;
     [SerializeField] protected DataMachine data = new();
     public DataMachine Data => data;
     [SerializeField] protected GridTileNode occupiedNode;
-    public GridTileNode OccupiedNode => occupiedNode;
+    // public GridTileNode OccupiedNode => occupiedNode;
 
 
     [Space(5)]
     [Header("Other")]
     [SerializeField] private GameObject _objAreol;
     public GameObject Areol => _objAreol;
-    [SerializeField] private BaseMachine _objectTarget;
-    public BaseMachine ObjectTarget => _objectTarget;
+    // [SerializeField] private BaseMachine _objectTarget;
+    // public BaseMachine ObjectTarget => _objectTarget;
     [SerializeField] protected Rigidbody rb;
+    public Rigidbody Rb => rb;
     [SerializeField] private AreaMove areaMove;
     public AreaMove AreaMove => areaMove;
     [SerializeField] private AreaSearch areaSearch;
@@ -71,8 +72,9 @@ public abstract class BaseMachine : MonoBehaviour
     [SerializeField] HealthBarController HealthBar;
     public NavMeshAgent navMeshAgent;
     public NavMeshObstacle navMeshObstacle;
+    public bool IsMove => Body != null && Body.IsMove;
 
-    #region Unity
+#region Unity methods
     public virtual void Awake()
     {
         areaMove = GetComponentInChildren<AreaMove>();
@@ -85,10 +87,6 @@ public abstract class BaseMachine : MonoBehaviour
 
     void Update()
     {
-        if (Data.currentAngleBody != Body.transform.localEulerAngles.y)
-        {
-            Data.currentAngleBody = Body.transform.localEulerAngles.y;
-        }
         // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
         //     .Where(n => n.OccupiedUnit != null)
         //     .ToList();
@@ -117,60 +115,86 @@ public abstract class BaseMachine : MonoBehaviour
         //     data.timeAfterLastShot += Time.deltaTime;
         // }
 
-        // проверяем видим ли компонент.
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
-        if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
-        // if (rd.isVisible == false)
+        if (MachineLevelData.isBot)
         {
-            _indicator.gameObject.SetActive(false);
-            isVisible = true;
-        }
-        else
-        {
-            _indicator.gameObject.SetActive(true);
-            isVisible = false;
-        }
-
-        // включаем или выключаем звук мотора.
-        if (isVisible && isMove)
-        {
-            if (!AudioSource.isPlaying)
+            // проверяем видим ли компонент.
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
+            if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
             {
-                AudioSource.Play();
+                Vector3 dir = (transform.position - levelManager.Camera.transform.position).normalized;
+                float distance = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
+
+                // Debug.DrawLine(levelManager.Camera.transform.position, transform.position, Color.blue);
+                if (Physics.Raycast(levelManager.Camera.transform.position, dir, out RaycastHit hit, distance, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
+                {
+                    
+                    Debug.Log($"hit{hit.collider.name}");
+                    if (hit.transform != transform)
+                    {
+                        isVisible = false;
+                    } else
+                    {
+                        isVisible = true;
+                    }
+                    Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
+                } else
+                {
+                    Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
+                }
+            } else
+            {
+                isVisible = false;
             }
 
-            if (isMove)
-            {
-                AudioSource.volume = 0.5f;
+            if (isVisible) {
+                _indicator.gameObject.SetActive(false);
+                isVisible = true;
             }
             else
             {
-                AudioSource.volume = 0.1f;
+                _indicator.gameObject.SetActive(true);
+                isVisible = false;
             }
         }
-        else
-        {
-            AudioSource.Stop();
-        }
 
-        // считаем время действия бонусов.
-        for (int i = 0; i < Data.bonuses.Count; i++)
-        {
-            Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
 
-            if (Data.bonuses.ElementAt(i).Value.time <= 0)
-            {
-                TypeBonus key = Data.bonuses.ElementAt(i).Key;
-                Data.bonuses.Remove(key);
+        // // считаем время действия бонусов.
+        // for (int i = 0; i < Data.bonuses.Count; i++)
+        // {
+        //     Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
 
-                if (levelManager.UiTopSide.Target == this)
-                {
-                    levelManager.UiTopSide.OnRemoveUIBonus(key);
-                }
-            }
-        }
+        //     if (Data.bonuses.ElementAt(i).Value.time <= 0)
+        //     {
+        //         TypeBonus key = Data.bonuses.ElementAt(i).Key;
+        //         Data.bonuses.Remove(key);
+
+        //         if (levelManager.UiTopSide.Target == this)
+        //         {
+        //             levelManager.UiTopSide.OnRemoveUIBonus(key);
+        //         }
+        //     }
+        // }
     }
-    #endregion
+
+    // void OnCollisionEnter(Collision collision)
+    // {
+        
+    //     Container voxelContainer = collision.collider.GetComponent<Container>();
+    //     if (voxelContainer != null)
+    //     {
+    //         Debug.Log($"<color=#FFA500FF>OnCollisionEnter {collision.collider.name}<{collision.contacts}></color>");
+    //     }
+    // }
+
+    // void OnTriggerEnter(Collider collider)
+    // {
+    //     Container voxelContainer = collider.GetComponent<Container>();
+    //     if (voxelContainer != null)
+    //     {
+    //         Debug.Log($"<color=#FFA500FF>OnTriggerEnter {collider.name}<{collider.ClosestPoint(transform.position)}></color>");
+    //     }
+    // }
+#endregion
 
     /// <summary>
     /// Функция обходит все комплектующие машины и проверяет на воксели в локальной точке (точке сопрокосновения со снарядом).
@@ -179,24 +203,24 @@ public abstract class BaseMachine : MonoBehaviour
     /// <param name="isDrawMesh">Рисовать ли измененный меш</param>
     /// <param name="explodeGameObject"></param>
     /// <param name="damageRadius">Радиус уничтожения вокселей</param>
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
     {
         // for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         // {
         // }
-        Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
+        if (Body)
+        {
+            Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
+        }
 
         for (int i = 0; i < Towers.Count; i++)
         {
-            Towers[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
-            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
-            {
-                Towers[i].Muzzles[j].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
-            }
+            Towers[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
         }
+
         for (int i = 0; i < Caterpillars.Count; i++)
         {
-            Caterpillars[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction);
+            Caterpillars[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
         }
     }
 
@@ -205,7 +229,8 @@ public abstract class BaseMachine : MonoBehaviour
         _indicator = im;
     }
 
-    public void OnSetConfig(GameMachine _config, MachineLevelData dataInput)
+
+    public void Init(GameMachine _config, MachineLevelData dataInput)
     {
         LevelManager _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
         if (_levelManager != null)
@@ -230,9 +255,6 @@ public abstract class BaseMachine : MonoBehaviour
         // устанавливаем звук мотора.
         AudioSource.clip = Config.soundMove;
         AudioSource.Play();
-
-        // установка основных параметров.
-        OnSetSpeed(Config.speed);
         
         // if (stateController.enabled)
         // {
@@ -243,16 +265,18 @@ public abstract class BaseMachine : MonoBehaviour
         {
             navMeshAgent.angularSpeed = 0;
             navMeshAgent.updateRotation = false;
-            navMeshAgent.speed = Config.speed * 0.01f;
+            // navMeshAgent.speed = Config.speed * 0.01f;
             navMeshAgent.updatePosition = false;
         }
 
-        OnSetHP(1); // Config.hp
 
         if (HealthBar)
         {
             HealthBar.SetHealth(1, 1);
         }
+
+        OnSetHP(1); // Config.hp
+
         if (stateController.enabled == false)
         {
             HealthBar.enabled = false;
@@ -266,11 +290,12 @@ public abstract class BaseMachine : MonoBehaviour
         areaSearch.Init(Config);
 
         // инициализируем компоненты машины
-        GameBody _bodyConfig = Config.body;
-        var _body = Instantiate(_bodyConfig.prefab, BodyWrapper.transform);
-        body = _body;
-        body.Init(this);
+        if (Config.body)
+        {
+            body = Instantiate(Config.body.prefab, BodyWrapper.transform);
+            body.Init(this);
 
+        }
 
         // init caterpillars.
         for (int i = 0; i < Config.catterpillars.Count; i++)
@@ -283,7 +308,6 @@ public abstract class BaseMachine : MonoBehaviour
 
         // init towers.
         var parentTowers = Config.towers.FindAll(t => !t.isChildren);
-        Debug.Log($"parentTowers={parentTowers.Count}");
         for (int i = 0; i < parentTowers.Count; i++)
         {
             GameTowerOption _optConfig = parentTowers.ElementAt(i);
@@ -298,7 +322,7 @@ public abstract class BaseMachine : MonoBehaviour
                     GameTowerOption _optChildConfig = Config.towers.Find(t => t.ido == _optConfig.children.ElementAt(j));
                     if (_optChildConfig != null)
                     {
-                        var _towChild = Instantiate(_optChildConfig.Config.prefab, TowerWrapper.transform);
+                        var _towChild = Instantiate(_optChildConfig.Config.prefab, _tow.transform);
                         _towChild.Init(this, _optChildConfig, 10 + i + j);
                         _towChild.OnSetParent(_tow);
                         towers.Add(_towChild);
@@ -307,180 +331,22 @@ public abstract class BaseMachine : MonoBehaviour
             }
         }
 
-        OnSetAngleBody(0);
-
         // // установка герба.
         // Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
         // body.OnSetSpriteGerb(logo);
 
         // test.
         // Badge.OnSetNameText(Data.speed.ToString());
-    }
 
-    public virtual void Rotate(Vector2 moveDirection)
-    {
-        if (stateController.enabled)
-        {
-            if (navMeshAgent.velocity != Vector3.zero)
-            {
-                
-            Quaternion targetRotation = Quaternion.LookRotation(navMeshAgent.velocity);
-
-            Body.transform.rotation = CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
-                Body.transform.rotation,
-                Quaternion.Euler(0, targetRotation.eulerAngles.y + OffsetRotate, 0),
-                10f * Time.fixedDeltaTime
-            );
-            }
-        }
-        else
-        {
-            if (rb.linearVelocity != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(rb.linearVelocity);
-                // Debug.Log($"Rotate::::: {targetRotation}");
-                // Quaternion stepRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
-
-                // rb.MoveRotation(stepRotation);
-                Body.transform.rotation = CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
-                    Body.transform.rotation,
-                    Quaternion.Euler(0, targetRotation.eulerAngles.y + OffsetRotate, 0),
-                    10f * Time.fixedDeltaTime
-                );
-
-                // Debug.Log($"ROTATION::::: stepRotation={stepRotation}");
-            }
-        }
-    }
-
-    public virtual void Move(Vector2 _moveDirection)
-    {
-        isMove = true;
-
-        if (stateController.enabled)
-        {
-            rb.linearVelocity = navMeshAgent.velocity;
-            navMeshAgent.nextPosition = transform.position;
-            // Debug.Log($"navMeshAgent.velocity={navMeshAgent.velocity}");
-            Rotate(_moveDirection);
-        }
-        else
-        {
-
-            Vector3 forward;
-            Vector3 right;
-
-            if (_gameManager.Settings.simpleMove)
-            {
-                forward = levelManager.cinemachineCamera.transform.forward;  //(transform.position - levelManager.cinemachineCamera.transform.position).normalized;
-                right = levelManager.cinemachineCamera.transform.right;
-            }
-            else
-            {
-                forward = transform.forward;
-                right = transform.right;
-            }
-            ;
-
-            forward.Normalize();
-            right.Normalize();
-
-            Vector3 moveDirection = (forward * _moveDirection.y + right * _moveDirection.x).normalized;
-
-            Rotate(moveDirection);
-
-            OnSetDirectionMove(moveDirection);
-
-            // OnSetNameText(moveDirection.ToString());
-            // transform.Translate(moveDirection * speed * Time.deltaTime);
-            DataBonus bonusSpeed = null;
-            Data.bonuses.TryGetValue(TypeBonus.Speed, out bonusSpeed);
-            var speed = Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0);
-
-            // kinematic.
-            // rb.MovePosition((Vector3)transform.position + (moveDirection * speed * Time.deltaTime));
-
-            // dynamic.
-            rb.linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)) * _gameManager.Settings.scaleObjects;
-            // if (rb.linearVelocity.magnitude < 50f)
-            // {
-            //     rb.AddRelativeForce(moveDirection * (100f * Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)), ForceMode.Impulse); //linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0));
-            // }
-            // else
-            // {
-            // }
-            //     Debug.Log($"Magnitude={rb.linearVelocity.magnitude}");
-
-            //rb.AddForce(moveDirection* (Data.speed * rb.mass + (bonusSpeed != null ? bonusSpeed.value : 0)), ForceMode.Force);
-
-            // var directionVector = (transform.position - Data.position).normalized;
-            // var movement = new Vector3(directionVector.x, 0f, directionVector.y);
-
-            // Quaternion lookRotation = Quaternion.LookRotation(movement, Vector3.up);
-
-            // Debug.Log($"{lookRotation.eulerAngles}, {lookRotation.x}, {lookRotation.y}, {lookRotation.z}");
-            // OnSetAngleBody(lookRotation.eulerAngles.y);
-
-            // OnSetAngleBody(moveDirection);
-
-            Data.position = transform.position;
-
-            // for (int i = 0; i < Caterpillars.Count; i++)
-            // {
-            //     Caterpillars[i].Move();
-            // }
-            // for (int i = 0; i < wheels.Count; i++)
-            // {   
-            //     wheels[i].transform.Rotate(Vector3.right, (20f * Data.speed) * Time.deltaTime);
-            // }
-
-            // Vector3Int posTile = levelManager.mapManager.Map.WorldToCell(transform.position);
-            // GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(posTile);
-            // SetOccupiedNode(node);
-        }
-        
-        for (int i = 0; i < Caterpillars.Count; i++)
-        {
-            Caterpillars[i].Move();
-        }
-    }
-
-    public virtual void Stop()
-    {
-        isMove = false;
-
-        if (!rb.isKinematic)
-        {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-
-        for (int i = 0; i < Caterpillars.Count; i++)
-        {
-            Caterpillars[i].Stop();
-        }
-    }
-
-    public void OnSetSpeed(float speed)
-    {
-        data.speed = speed;
-        if (navMeshAgent != null)
-        {
-            navMeshAgent.speed = speed / 100;
-        }
-    }
-
-    public void OnSetDirectionMove(Vector3 direction)
-    {
-        data.directionMove = direction;
+        RefreshHP();
     }
 
     public void OnSetHP(float hp)
     {
-        data.hp = hp;
+        // data.hp = hp;
         if (HealthBar)
         {
-            HealthBar.UpdateHealth(data.hp);
+            HealthBar.UpdateHealth(hp);
         }
 
         // Badge.OnChangeData(this);
@@ -515,83 +381,101 @@ public abstract class BaseMachine : MonoBehaviour
         }
     }
 
-    public void OnSetAngleBody(float angle)
-    {
-
-
-        Body.transform.rotation = Quaternion.Euler(0, angle + OffsetRotate, 0);
-        // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        _objAreol.transform.rotation = Quaternion.Euler(0, angle + OffsetRotate, 0);
-        CaterpillarWrapper.transform.rotation = Quaternion.Euler(0, angle + OffsetRotate, 0);
-
-
-        data.angleBody = Body.transform.eulerAngles.y;
-
-        // for (int i = 0; i < Towers.Count; i++)
-        // {
-        //     Towers[i].ChangePosition(this);
-        // }
-    }
-
-    public void OnShot(InputAction.CallbackContext context)
+    public void OnShot()
     {
         for (int i = 0; i < Towers.Count; i++)
         {
-            BaseTower bt = Towers.ElementAt(i);
-            for (int j = 0; j < bt.Muzzles.Count; j++)
+            BaseTower tower = Towers.ElementAt(i);
+
+            if (tower.IsBusy())
             {
-                bt.Muzzles.ElementAt(j).OnShot(null);
+                continue;
+            }
+
+            tower.OnShot();
+        }
+    }
+
+
+    /// <summary>
+    /// Функция рассчитывает HP (от 0 до 1, как отношение разрушенных ко всем вокселям)
+    /// для всех комплектующих машины.
+    /// </summary>
+    public void RefreshHP()
+    {
+        int countVoxels = 0;
+        int countVoxelsDestructed = 0;
+
+        if (Body)
+        {
+            ContainerData value = Body.RefreshHP();
+            countVoxels += value.countVoxels;
+            countVoxelsDestructed += value.countVoxelsDestructible;
+        }
+
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            ContainerData value = Towers[i].RefreshHP();
+            countVoxels += value.countVoxels;
+            countVoxelsDestructed += value.countVoxelsDestructible;
+
+            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+            {
+                ContainerData valueMuzze = Towers[i].Muzzles[j].RefreshHP();
+                countVoxels += valueMuzze.countVoxels;
+                countVoxelsDestructed += valueMuzze.countVoxelsDestructible;
             }
         }
-    }
 
-    
-
-    void OnCollisionEnter(Collision collision)
-    {
-        
-        Container voxelContainer = collision.collider.GetComponent<Container>();
-        if (voxelContainer != null)
+        for (int i = 0; i < Caterpillars.Count; i++)
         {
-            Debug.Log($"<color=#FFA500FF>OnCollisionEnter {collision.collider.name}<{collision.contacts}></color>");
+            ContainerData value = Caterpillars[i].RefreshHP();
+            countVoxels += value.countVoxels;
+            countVoxelsDestructed += value.countVoxelsDestructible;
         }
+
+        Data.ContainerData.countVoxels = countVoxels;
+        Data.ContainerData.countVoxelsDestructible = countVoxelsDestructed;
+
+        Data.ContainerData.levelDestruction = (float)countVoxelsDestructed / countVoxels;
+
+        OnSetHP(1 - Data.ContainerData.levelDestruction);
+        // if (MachineLevelData.isBot)
+        // {
+        //     OnChangeHPs?.Invoke(this);
+        // }
     }
 
-    // void OnTriggerEnter(Collider collider)
-    // {
-    //     Container voxelContainer = collider.GetComponent<Container>();
-    //     if (voxelContainer != null)
-    //     {
-    //         Debug.Log($"<color=#FFA500FF>OnTriggerEnter {collider.name}<{collider.ClosestPoint(transform.position)}></color>");
-    //     }
-    // }
-
-
-
-    #region Debug
-    void OnDrawGizmos()
+    public void SetNavObstacle()
     {
-        if (!Application.isPlaying)
+        navMeshObstacle = gameObject.AddComponent<NavMeshObstacle>();
+        navMeshObstacle.center = Vector3.zero;
+        navMeshObstacle.shape = NavMeshObstacleShape.Capsule;
+        navMeshObstacle.radius = 0.3f;
+        navMeshObstacle.height = 0.5f;
+    }
+
+    public virtual void Move(Vector3 moveDirection)
+    {
+        if (!Body)
         {
             return;
         }
 
-        
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(Body.transform.position, Body.transform.forward * 50);
-        Gizmos.color = Color.yellow;
-        for (int i = 0; i < Towers.Count; i++)
-        {
-            Gizmos.DrawRay(Towers[i].transform.position, Towers[i].transform.forward * 30);
-            Gizmos.color = Color.blue;
-            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
-            {
-                Gizmos.DrawRay(Towers[i].Muzzles[j].transform.position, Towers[i].Muzzles[j].transform.forward * 50);
-            }
-        }
+        Body.Move(moveDirection);
     }
-    #endregion
-    
+
+    public virtual void Stop()
+    {
+        if (!Body)
+        {
+            return;
+        }
+
+        Body.Stop();
+    }
+
+
     #region  Delete
     // public void SetOccupiedNode(GridTileNode node)
     // {
@@ -621,115 +505,48 @@ public abstract class BaseMachine : MonoBehaviour
     //     }
     // }
 
-    public void OnAddDamage(float v)
-    {
-        data.hp -= v;
-        if (HealthBar)
-        {
-            HealthBar.UpdateHealth(data.hp);
-        }
+    // public void OnAddDamage(float v)
+    // {
+    //     // data.hp -= v;
+    //     if (HealthBar)
+    //     {
+    //         HealthBar.UpdateHealth(data.hp);
+    //     }
 
-        // Badge.OnChangeData(this);
+    //     // Badge.OnChangeData(this);
 
-        if (!stateController.enabled)
-        {
-            levelManager.UiTopSide.OnChangeData(this);
-        }
+    //     if (!stateController.enabled)
+    //     {
+    //         levelManager.UiTopSide.OnChangeData(this);
+    //     }
 
-        for (int i = 0; i < Towers.Count; i++)
-        {
-            Towers[i].OnChangeData();
-            Towers[i].OnDamageEffect(v);
-        }
+    //     for (int i = 0; i < Towers.Count; i++)
+    //     {
+    //         Towers[i].OnChangeData();
+    //         Towers[i].OnDamageEffect(v);
+    //     }
 
-        Indicator.OnChangeData();
-        Body.OnChangeData();
+    //     Indicator.OnChangeData();
+    //     // Body.OnChangeData();
 
-        if (data.hp <= 0)
-        {
-            data.speed = 0;
+    //     if (data.ContainerData.levelDestruction <= 0)
+    //     {
+    //         data.speed = 0;
 
-            Stop();
+    //         Stop();
 
-            AudioSource.Stop();
+    //         AudioSource.Stop();
 
-            for (int i = 0; i < Towers.Count; i++)
-            {
-                Towers[i].PreDestroy();
-            }
+    //         for (int i = 0; i < Towers.Count; i++)
+    //         {
+    //             Towers[i].PreDestroy();
+    //         }
 
-            levelManager.OnRemoveMachine(this);
+    //         levelManager.OnRemoveMachine(this);
 
-            Destroy(gameObject);
-        }
-    }
-
-    public void OnSetAngleBody(Vector3 direction)
-    {
-        Body.transform.forward = direction;
-        CaterpillarWrapper.transform.forward = direction;
-
-        // var rot = Body.transform.rotation;
-        // _objAreol.transform.localEulerAngles = new Vector3(90, rot.eulerAngles.y, rot.eulerAngles.z);
-        _objAreol.transform.forward = direction;
-
-        data.angleBody = Body.transform.eulerAngles.y;
-
-        // Debug.Log($"Current angle body: {data.angleBody}, euler={Body.transform.eulerAngles}");
-
-        // Body.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
-        // // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        // _objAreol.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
-        // CaterpillarBox.transform.rotation = Quaternion.Euler(0, angle + offset, 0);
-
-        // for (int i = 0; i < Towers.Count; i++)
-        // {
-        //     Towers[i].ChangePosition(this);
-        // }
-    }
-
-    public void OnRefreshValueDestructible()
-    {
-        float allDetailsValue = 0;
-
-        allDetailsValue += Body.GetValueDestructible();
-        int countDetails = 1;
-
-        for (int i = 0; i < Towers.Count; i++)
-        {
-            allDetailsValue += Towers[i].GetValueDestructible();
-            countDetails++;
-
-            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
-            {
-                allDetailsValue += Towers[i].Muzzles[j].GetValueDestructible();
-                countDetails++;
-            }
-        }
-        for (int i = 0; i < Caterpillars.Count; i++)
-        {
-            allDetailsValue += Caterpillars[i].GetValueDestructible();
-            countDetails++;
-        }
-
-        Data.levelDestruction = (float)allDetailsValue / countDetails;
-
-
-        OnSetHP(1 - Data.levelDestruction);
-        // if (MachineLevelData.isBot)
-        // {
-        //     OnChangeHPs?.Invoke(this);
-        // }
-    }
-
-    public void SetNavObstacle()
-    {
-        navMeshObstacle = gameObject.AddComponent<NavMeshObstacle>();
-        navMeshObstacle.center = Vector3.zero;
-        navMeshObstacle.shape = NavMeshObstacleShape.Capsule;
-        navMeshObstacle.radius = 0.3f;
-        navMeshObstacle.height = 0.5f;
-    }
+    //         Destroy(gameObject);
+    //     }
+    // }
 
     // IEnumerator Follow()
     // {
@@ -846,4 +663,40 @@ public abstract class BaseMachine : MonoBehaviour
     // }
 
     #endregion
+
+
+
+    // #region Debug
+    // void OnDrawGizmos()
+    // {
+    //     if (!Application.isPlaying)
+    //     {
+    //         return;
+    //     }
+
+    //     if (_gameManager.Settings.DebugSettings.gizmoBodyForwards)
+    //     {
+    //         Gizmos.color = Color.green;
+    //         Gizmos.DrawRay(Body.transform.position, Body.transform.forward * 50);
+    //     }
+
+    //     for (int i = 0; i < Towers.Count; i++)
+    //     {
+    //         if (_gameManager.Settings.DebugSettings.gizmoTowersForwards)
+    //         {
+    //             Gizmos.color = Color.yellow;
+    //             Gizmos.DrawRay(Towers[i].transform.position, Towers[i].transform.forward * 30);
+    //         }
+
+    //         // if (_gameManager.Settings.DebugSettings.gizmoMuzzlesForwards)
+    //         // {
+    //         //     Gizmos.color = Color.blue;
+    //         //     for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+    //         //     {
+    //         //         Gizmos.DrawRay(Towers[i].Muzzles[j].transform.position, Towers[i].Muzzles[j].transform.forward * 50);
+    //         //     }
+    //         // }
+    //     }
+    // }
+    // #endregion
 }

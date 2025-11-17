@@ -14,7 +14,9 @@ public class MedicineBonus : BaseBonus
         AreaMove am = collision.gameObject.GetComponent<AreaMove>();
         if (bm && am)
         {
-            bm.OnSetHP(bm.Config.hp);
+            // TODO
+            Debug.LogWarning($"Бонус здоровья нужно сделать");
+            // bm.OnSetHP(bm.Config.hp);
 
             base.OnDrawText(bm);
             

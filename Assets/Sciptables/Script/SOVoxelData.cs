@@ -7,6 +7,7 @@ using UnityEngine;
 public class SOVoxelData : ScriptableObject
 {
     public List<SubmeshesData> groups;
+    public int countVoxels;
     // public List<Vector3Int> voxels;
     // public List<Color> colors;
     public float sizeVoxel;

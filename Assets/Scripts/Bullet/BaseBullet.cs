@@ -8,6 +8,7 @@ public class BaseBullet : MonoBehaviour
     GameManager _gameManager => GameManager.Instance;
     BaseMachine Machine;
     GameMuzzle ConfigMuzzle;
+    BaseMuzzle Muzzle;
     [SerializeField] Rigidbody rb;
     [SerializeField] BoxCollider boxCollider;
     Vector3 forward;
@@ -15,7 +16,7 @@ public class BaseBullet : MonoBehaviour
     [SerializeField] float lifeTime;
     [SerializeField] bool isActive;
     TrailRenderer trailRenderer;
-    MeshRenderer meshRenderer;
+    // MeshRenderer meshRenderer;
     List<GameObject> collisionsObjects = new();
     [SerializeField] private LayerMask ignoreMask;
     Vector3 startPosition;
@@ -24,14 +25,255 @@ public class BaseBullet : MonoBehaviour
     float currentDistance = 0;
     RaycastHit hit;
     float chanceReflex = 0.8f;
+    public GPUInstanceEnabler gPUInstanceEnabler;
+    [SerializeField] private GameObject trail;
+    // private MeshFilter meshFilter;
+    public VoxelMeshRender voxelMeshRender;
 
+#region Unity methods
     void Awake()
     {
         boxCollider = transform.GetComponent<BoxCollider>();
-
-        meshRenderer = transform.GetComponentInChildren<MeshRenderer>();
+        // meshRenderer = transform.GetComponentInChildren<MeshRenderer>();
         trailRenderer = transform.GetComponentInChildren<TrailRenderer>();
+        // meshFilter = transform.GetComponentInChildren<MeshFilter>();
+        voxelMeshRender = transform.GetComponentInChildren<VoxelMeshRender>();
     }
+
+
+    void Update()
+    {
+        if (!isActive) return;
+        
+        lifeTime += Time.deltaTime;
+        if (lifeTime > ConfigMuzzle.Bullet.lifeTime)
+        {
+            OnBoom(null);
+        }
+        
+        if (endPosition != Vector3.zero)
+        {
+            currentDistance = Vector3.Distance(transform.position, endPosition);
+            // Debug.Log($"currentDistance={currentDistance} [{hitDistance}]<{Vector3.Distance(transform.position, startPosition)}>");
+            if (currentDistance <= 1)
+            {
+                OnCreateContact(hit);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (!isActive) return;
+
+        // if (rb.isKinematic)
+        // {
+        //     Vector3 targetPosition = rb.position + (forward * Muzzle.Data.speedBullet * 100f * Time.fixedDeltaTime); // Example: moving forward
+        //     rb.MovePosition(targetPosition);
+        // }
+    }
+
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}</color>");
+
+        if (collision.gameObject.CompareTag("IgnoreCollision"))
+        {
+            return;
+        }
+
+        var ra = Random.value;
+        if (ra > chanceReflex)
+        {
+            Debug.Log($"<color=#7ccf00>РИКОШЕТ</color>");
+            return;
+        }
+
+        if (!collisionsObjects.Contains(collision.gameObject))
+        {
+            Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}</color>");
+            // Debug.Log($"<color=yellow>================Colission=====================================</color>");
+            // foreach (ContactPoint contact in collision.contacts)
+            // {
+            //     // Access the collision point's position
+            //     Vector3 collisionPoint = contact.point;
+
+            //     // You can also access the normal at the collision point
+            //     Vector3 collisionNormal = contact.normal;
+
+            //     // Do something with the collision point and normal
+            //     Debug.Log("Collision point: " + collisionPoint + ", Normal: " + collisionNormal);
+
+            //     Machine.levelManager.WorldManager.Container.ExposionVoxels(collisionPoint);
+            // }
+
+            for (int q = 0; q < 1; q++)
+            {
+                var contact = collision.contacts[q];
+                // Debug.Log($"collision.gameObject={collision.gameObject.name}, position={collision.transform.position}");
+                Vector3 localPoint = collision.gameObject.transform.InverseTransformPoint(contact.point);
+
+                // Debug.Log($"point = {contact.point}, localPositionPoint={localPoint}");
+
+                // VoxelMeshRenderWithSubmeshes voxelMesh = collision.gameObject.GetComponent<VoxelMeshRenderWithSubmeshes>();
+                // if (voxelMesh != null)
+                // {
+                //     collisionsObjects.Add(collision.transform.gameObject);
+                //     voxelMesh.ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+                // }
+
+                List<Container> collisionContainers = new List<Container>();
+                Container voxelContainer = collision.gameObject.GetComponent<Container>();
+                if (voxelContainer == null)
+                {
+                    BaseMachine bm = collision.gameObject.GetComponent<BaseMachine>();
+                    if (bm)
+                    {
+                        collisionsObjects.Add(collision.transform.gameObject);
+                        bm.OnCollision(contact.point, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal);
+                        // collisionContainers.AddRange(bm.Body.GetComponentsInChildren<Container>());
+                        // collisionContainers.AddRange(bm.Towers[0].GetComponentsInChildren<Container>());
+                    }
+                }
+                else
+                {
+                    if (voxelContainer.IsDestructible())
+                    {
+                        collisionContainers.Add(voxelContainer);
+                    }
+                }
+
+                if (collisionContainers.Count > 0)
+                {
+                    collisionsObjects.Add(collision.transform.gameObject);
+                    // Debug.Log($"collisionContainers.Count={collisionContainers.Count}");
+                    for (int x = 0; x < collisionContainers.Count; x++)
+                    {
+
+                        collisionContainers[x].ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal).Forget();
+                        // for (int t=0; t < 100; t++) {
+
+                        //     float forceMagnitude = 3 * 100;
+                        //     // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
+                        //     GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, Machine.LevelManager.objectSpawnEffect.transform);
+                        //     Vector3 pointSpawnVoxel = new Vector3(0,0,0);
+                        //     gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
+                        //     // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
+                        //     // gObj.gameObject.AddComponent<BoxCollider>();
+
+                        //     var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
+                        //     var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
+                        //     RenderParams _rp = new RenderParams(mat);
+                        //     Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));   
+
+                        //     var r = gObj.gameObject.GetComponent<Rigidbody>();
+                        //     if (r == null)
+                        //     {
+                        //         r = gObj.gameObject.AddComponent<Rigidbody>();
+                        //     }
+                        //     r.mass = 50f;
+                        //     r.useGravity = true;
+                        //     var forceDirection = Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
+                        //     r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                        //     // gObj.isStatic = false;
+                        //     // Destroy(gObj, 15);
+                        //     Lean.Pool.LeanPool.Despawn(gObj, 15);
+                        // }
+                    }
+                }
+
+                // Debug.Log($"================/Colission=====================================");
+            }
+        }
+
+        if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
+            {
+                OnBoom(null);
+            }
+            
+        // Machine.levelManager.WorldManager.Container.ExposionVoxels(contact.point, true);
+        // Destroy(gameObject);
+        // if (collision.gameObject.CompareTag("TilemapWithCollider"))
+        // {
+        //     OnBoom(null);
+        //     // Debug.Log($"Collision border to point {transform.position}");
+        // }
+        // else
+        // {
+        //     AreaMove areaMoveObject = collision.gameObject.GetComponent<AreaMove>();
+        //     if (areaMoveObject != null && Machine != null && Machine.AreaMove != areaMoveObject)
+        //     {
+        //         BaseMachine enemy = collision.gameObject.GetComponentInParent<BaseMachine>();
+        //         if (enemy != null)
+        //         {
+        //             // Debug.Log($"Collision enemy - {enemy.gameObject}");
+        //             OnBoom(enemy);
+        //         }
+        //     }
+
+        //     BaseBullet otherBullet = collision.gameObject.GetComponent<BaseBullet>();
+        //     if (otherBullet != null)
+        //     {
+        //         OnBoom(null);
+        //     }
+        // }
+
+        // Debug.Log($"collision {collision.collider.name}, point={collision.collide}");
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
+        if (!collisionsObjects.Contains(other.gameObject))
+        {
+            // Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
+
+            // Получаем позицию другого объекта
+            // Vector3 otherObjectPosition = other.transform.position;
+            // Debug.Log("Объект вошел в триггер с позицией: " + otherObjectPosition);
+
+            // Определяем точку касания на поверхности нашего триггера
+            Vector3 contactPoint = other.ClosestPoint(transform.position);
+            // Debug.Log("Точка касания на триггере: " + contactPoint);
+
+            Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
+            // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
+
+            // VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
+            // if (voxelMesh != null)
+            // {
+            //     voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
+            // }
+
+            List<Container> collisionContainers = new List<Container>();
+            Container voxelContainer = other.gameObject.GetComponent<Container>();
+            if (voxelContainer != null && voxelContainer.IsDestructible())
+            {
+                collisionContainers.Add(voxelContainer);
+            }
+
+            if (collisionContainers.Count > 0)
+            {
+                collisionsObjects.Add(other.gameObject);
+
+                for (int x = 0; x < collisionContainers.Count; x++)
+                {
+
+                    collisionContainers[x].ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius,forward, hit.normal).Forget();
+                }
+            }
+
+
+            Debug.Log($"<color=green>Count collision ={countCollisions}</color>");
+            if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
+            {
+                OnBoom(null);
+            }
+        }
+    }
+    
+#endregion
 
     /// <summary>
     /// Инициализация снаряда
@@ -39,7 +281,6 @@ public class BaseBullet : MonoBehaviour
     /// <param name="machine">Машина которая произвела снаряд</param>
     public void OnInit(BaseMachine machine, BaseTower Tower, BaseMuzzle muzzle, GameMuzzle configMuzzle)
     {
-
         hit = default;
         startPosition = Vector3.zero;
         endPosition = Vector3.zero;
@@ -47,6 +288,10 @@ public class BaseBullet : MonoBehaviour
         hitDistance = 0;
 
         forward = new Vector3(muzzle.transform.forward.x, muzzle.transform.forward.y, muzzle.transform.forward.z);
+
+        // Quaternion targetRotation = Quaternion.LookRotation(forward);
+        // transform.rotation = targetRotation;
+        // trail.transform.rotation = targetRotation;
 
         transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
 
@@ -62,11 +307,33 @@ public class BaseBullet : MonoBehaviour
         Machine = machine;
 
         ConfigMuzzle = configMuzzle;
+        
+        voxelMeshRender.OnSetConfigMeshGenerator(ConfigMuzzle.Bullet.MeshConfig);
 
-        trailRenderer.material = ConfigMuzzle.Bullet.material;
-        meshRenderer.material = ConfigMuzzle.Bullet.material;
+        Muzzle = muzzle;
 
+        if (trailRenderer)
+        {
+            trailRenderer.material = ConfigMuzzle.Bullet.material;
+        }
+        
+        // if (meshFilter)
+        // {
+        //     Color32[] colors = new Color32[meshFilter.sharedMesh.vertices.Length];
+        //     for (int i = 0; i < colors.Length; i++)
+        //     {
+        //         colors[i] = Color.red; // Set all vertices to red
+        //         // Or, for example, assign colors based on vertex position or other criteria
+        //         // colors[i] = new Color(mesh.vertices[i].x, mesh.vertices[i].y, mesh.vertices[i].z, 1f);
+        //     }
+        //     meshFilter.mesh.colors32 = colors;
+        // }
+        // meshRenderer.material = ConfigMuzzle.Bullet.material;
 
+        // if (gPUInstanceEnabler)
+        // {
+        //     gPUInstanceEnabler.SetColor(Color.red);
+        // }
         // #if UNITY_EDITOR
         //         if (_gameManager.Settings.drawLineAttack)
         //         {
@@ -125,26 +392,19 @@ public class BaseBullet : MonoBehaviour
         //             // Debug.Log($"position = {pos}, toPoint = {toPoint}");
         //         }
         // #endif
-        if (!rb.isKinematic)
-        {
-            Vector3 speedForce = forward * ConfigMuzzle.speedBullet * 100;
-            rb.AddForce(speedForce, ForceMode.Acceleration);
-        }
-
-
         
         var ra = Random.value;
         if (ra < chanceReflex)
         {
-            if (Physics.Raycast(transform.position, forward, out hit, ConfigMuzzle.distanceAttack * (1 / _gameManager.Settings.scaleObjects), ~(ignoreMask)))
+            if (Physics.Raycast(transform.position, forward, out hit, Muzzle.Data.distanceAttack, ~(ignoreMask)))
             {
                 Container voxelContainer = hit.collider.gameObject.GetComponent<Container>();
                 if (voxelContainer != null && voxelContainer.IsDestructible())
                 {
-                    Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}></color>");
                     startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     endPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                     hitDistance = Vector3.Distance(startPosition, endPosition);
+                    Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}>[distance={hitDistance}]</color>");
                 } else
                 {
                     Debug.Log($"<color=#7ccf00>Raycast ударил в объект {hit.collider.name}<{hit.point}> без Container или он не разрушаемый</color>");
@@ -164,13 +424,19 @@ public class BaseBullet : MonoBehaviour
         }
 
 
-            isActive = true;
+        if (!rb.isKinematic)
+        {
+            Vector3 speedForce = forward * Muzzle.Data.speedBullet * 100;
+            rb.AddForce(speedForce, ForceMode.Acceleration);
+        }
+        isActive = true;
     }
 
     private void OnCreateContact(RaycastHit hit)
     {
         if (hit.collider != null)
         {
+            Debug.Log($"<color=magenta>Count collision ={hit.collider.name}</color>");
 
             if (!collisionsObjects.Contains(hit.collider.gameObject))
             {
@@ -201,7 +467,7 @@ public class BaseBullet : MonoBehaviour
                     for (int x = 0; x < collisionContainers.Count; x++)
                     {
 
-                        collisionContainers[x].ExposionVoxels(localPoint, true, hit.collider.gameObject, ConfigMuzzle.Bullet.damageRadius, forward).Forget();
+                        collisionContainers[x].ExposionVoxels(localPoint, true, hit.collider.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal).Forget();
                         // for (int t=0; t < 100; t++) {
 
                         //     float forceMagnitude = 3 * 100;
@@ -317,234 +583,7 @@ public class BaseBullet : MonoBehaviour
         Machine.LevelManager.poolBullet.ReturnObject(gameObject);
     }
 
-    void Update()
-    {
 
-        if (endPosition != Vector3.zero)
-        {
-            currentDistance = Vector3.Distance(transform.position, endPosition);
-            if (currentDistance <= 1)
-            {
-                // Debug.Log($"currentDistance={currentDistance} [{hitDistance}]<{Vector3.Distance(transform.position, startPosition)}>");
-                OnCreateContact(hit);
-            }
-        }
-
-        lifeTime += Time.deltaTime;
-        if (lifeTime > ConfigMuzzle.Bullet.lifeTime)
-        {
-            OnBoom(null);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (!isActive) return;
-
-        if (rb.isKinematic)
-        {
-            Vector3 targetPosition = rb.position + (forward * ConfigMuzzle.speedBullet * 100f * Time.fixedDeltaTime); // Example: moving forward
-            rb.MovePosition(targetPosition);
-        }
-    }
-
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("IgnoreCollision"))
-        {
-            return;
-        }
-
-        var ra = Random.value;
-        if (ra > chanceReflex)
-        {
-            Debug.Log($"<color=#7ccf00>РИКОШЕТ</color>");
-            return;
-        }
-
-        if (!collisionsObjects.Contains(collision.gameObject))
-        {
-            Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}</color>");
-            // Debug.Log($"<color=yellow>================Colission=====================================</color>");
-            // foreach (ContactPoint contact in collision.contacts)
-            // {
-            //     // Access the collision point's position
-            //     Vector3 collisionPoint = contact.point;
-
-            //     // You can also access the normal at the collision point
-            //     Vector3 collisionNormal = contact.normal;
-
-            //     // Do something with the collision point and normal
-            //     Debug.Log("Collision point: " + collisionPoint + ", Normal: " + collisionNormal);
-
-            //     Machine.levelManager.WorldManager.Container.ExposionVoxels(collisionPoint);
-            // }
-
-            for (int q = 0; q < 1; q++)
-            {
-                var contact = collision.contacts[q];
-                // Debug.Log($"collision.gameObject={collision.gameObject.name}, position={collision.transform.position}");
-                Vector3 localPoint = collision.gameObject.transform.InverseTransformPoint(contact.point);
-
-                // Debug.Log($"point = {contact.point}, localPositionPoint={localPoint}");
-
-                // VoxelMeshRenderWithSubmeshes voxelMesh = collision.gameObject.GetComponent<VoxelMeshRenderWithSubmeshes>();
-                // if (voxelMesh != null)
-                // {
-                //     collisionsObjects.Add(collision.transform.gameObject);
-                //     voxelMesh.ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
-                // }
-
-                List<Container> collisionContainers = new List<Container>();
-                Container voxelContainer = collision.gameObject.GetComponent<Container>();
-                if (voxelContainer == null)
-                {
-                    BaseMachine bm = collision.gameObject.GetComponent<BaseMachine>();
-                    if (bm)
-                    {
-                        collisionsObjects.Add(collision.transform.gameObject);
-                        bm.OnCollision(contact.point, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward);
-                        // collisionContainers.AddRange(bm.Body.GetComponentsInChildren<Container>());
-                        // collisionContainers.AddRange(bm.Towers[0].GetComponentsInChildren<Container>());
-                    }
-                }
-                else
-                {
-                    if (voxelContainer.IsDestructible())
-                    {
-                        collisionContainers.Add(voxelContainer);
-                    }
-                }
-
-                if (collisionContainers.Count > 0)
-                {
-                    collisionsObjects.Add(collision.transform.gameObject);
-                    // Debug.Log($"collisionContainers.Count={collisionContainers.Count}");
-                    for (int x = 0; x < collisionContainers.Count; x++)
-                    {
-
-                        collisionContainers[x].ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward).Forget();
-                        // for (int t=0; t < 100; t++) {
-
-                        //     float forceMagnitude = 3 * 100;
-                        //     // GameObject gObj = Instantiate(GameManager.Instance.Settings.prefabVoxel, Machine.levelManager.objectSpawnEffect.transform);
-                        //     GameObject gObj = Lean.Pool.LeanPool.Spawn(GameManager.Instance.Settings.prefabVoxel, Machine.LevelManager.objectSpawnEffect.transform);
-                        //     Vector3 pointSpawnVoxel = new Vector3(0,0,0);
-                        //     gObj.transform.SetPositionAndRotation(pointSpawnVoxel, Quaternion.identity);
-                        //     // gObj.transform.SetLocalPositionAndRotation(listVoxels.ElementAt(k).Key, Quaternion.identity);
-                        //     // gObj.gameObject.AddComponent<BoxCollider>();
-
-                        //     var mat = gObj.gameObject.GetComponent<MeshRenderer>().material;
-                        //     var mesh = gObj.gameObject.GetComponent<MeshFilter>().mesh;
-                        //     RenderParams _rp = new RenderParams(mat);
-                        //     Graphics.RenderMesh(_rp, mesh, 0, Matrix4x4.Translate(pointSpawnVoxel));   
-
-                        //     var r = gObj.gameObject.GetComponent<Rigidbody>();
-                        //     if (r == null)
-                        //     {
-                        //         r = gObj.gameObject.AddComponent<Rigidbody>();
-                        //     }
-                        //     r.mass = 50f;
-                        //     r.useGravity = true;
-                        //     var forceDirection = Vector3.Scale(UnityEngine.Random.onUnitSphere, transform.forward);
-                        //     r.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
-                        //     // gObj.isStatic = false;
-                        //     // Destroy(gObj, 15);
-                        //     Lean.Pool.LeanPool.Despawn(gObj, 15);
-                        // }
-                    }
-                }
-
-                // Debug.Log($"================/Colission=====================================");
-            }
-        }
-
-        if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
-            {
-                OnBoom(null);
-            }
-            
-        // Machine.levelManager.WorldManager.Container.ExposionVoxels(contact.point, true);
-        // Destroy(gameObject);
-        // if (collision.gameObject.CompareTag("TilemapWithCollider"))
-        // {
-        //     OnBoom(null);
-        //     // Debug.Log($"Collision border to point {transform.position}");
-        // }
-        // else
-        // {
-        //     AreaMove areaMoveObject = collision.gameObject.GetComponent<AreaMove>();
-        //     if (areaMoveObject != null && Machine != null && Machine.AreaMove != areaMoveObject)
-        //     {
-        //         BaseMachine enemy = collision.gameObject.GetComponentInParent<BaseMachine>();
-        //         if (enemy != null)
-        //         {
-        //             // Debug.Log($"Collision enemy - {enemy.gameObject}");
-        //             OnBoom(enemy);
-        //         }
-        //     }
-
-        //     BaseBullet otherBullet = collision.gameObject.GetComponent<BaseBullet>();
-        //     if (otherBullet != null)
-        //     {
-        //         OnBoom(null);
-        //     }
-        // }
-
-        // Debug.Log($"collision {collision.collider.name}, point={collision.collide}");
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (!collisionsObjects.Contains(other.gameObject))
-        {
-            Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
-
-            // Получаем позицию другого объекта
-            // Vector3 otherObjectPosition = other.transform.position;
-            // Debug.Log("Объект вошел в триггер с позицией: " + otherObjectPosition);
-
-            // Определяем точку касания на поверхности нашего триггера
-            Vector3 contactPoint = other.ClosestPoint(transform.position);
-            // Debug.Log("Точка касания на триггере: " + contactPoint);
-
-            Vector3 localPoint = other.gameObject.transform.InverseTransformPoint(contactPoint);
-            // Debug.Log($"point = {contactPoint}, localPositionPoint={localPoint}");
-
-            // VoxelMeshRenderWithSubmeshes voxelMesh = other.GetComponent<VoxelMeshRenderWithSubmeshes>();
-            // if (voxelMesh != null)
-            // {
-            //     voxelMesh.ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius).Forget();
-            // }
-
-            List<Container> collisionContainers = new List<Container>();
-            Container voxelContainer = other.gameObject.GetComponent<Container>();
-            if (voxelContainer != null && voxelContainer.IsDestructible())
-            {
-                collisionContainers.Add(voxelContainer);
-            }
-
-            if (collisionContainers.Count > 0)
-            {
-                collisionsObjects.Add(other.gameObject);
-
-                for (int x = 0; x < collisionContainers.Count; x++)
-                {
-
-                    collisionContainers[x].ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius,forward).Forget();
-                }
-            }
-
-
-            Debug.Log($"<color=green>Count collision ={countCollisions}</color>");
-            if (collisionsObjects.Count >= ConfigMuzzle.Bullet.countCollisions)
-            {
-                OnBoom(null);
-            }
-        }
-    }
-    
     // void OnTriggerStay(Collider other)
     // {
     //     if (!collisionsObjects.Contains(other.gameObject))

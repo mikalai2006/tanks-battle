@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CameraHandler : MonoBehaviour
 {
-    private GameManager _gameManager = GameManager.Instance;
+    private GameManager _gameManager => GameManager.Instance;
     public Transform camTrans;
     public Transform pivot;
     public BaseMachine Character;
@@ -72,7 +72,7 @@ public class CameraHandler : MonoBehaviour
     void HandleRotation()
     {
         var mousePosition = Vector2.zero;
-        if (_gameManager.Settings.inputJoystick == true)
+        if (_gameManager.Settings.DebugSettings.mode == AppMode.Mobile)
         {
             mousePosition = Character.LevelManager.JoystickTower.Direction;
         }

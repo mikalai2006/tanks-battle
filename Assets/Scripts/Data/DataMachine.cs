@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 [Serializable]
 public class DataMachine
 {
-    public float speed;
-    public float armour;
-    public float hp;
+    // [Tooltip("Скорость передвижения")]
+    // public float speed;
+    // public float armour;
+    // [Tooltip("Здоровье")]
+    // public float hp;
     [Tooltip("Позиция машины")]
     public Vector3 position;
     [Tooltip("Направление передвижения")]
@@ -23,9 +26,9 @@ public class DataMachine
     public SerializedDictionary<TypeBonus, DataBonus> bonuses;
     // [Tooltip("Значения бонусов")]
     // public SerializedDictionary<TypeBonus, float> bonusesValue;
-    public List<BaseTower> towers;
-    [Tooltip("Уровень разрушения")]
-    public float levelDestruction;
+    // public List<BaseTower> towers;
+    [Tooltip("Данные вокселей - разрушения")]
+    public ContainerData ContainerData;
 
     // [Tooltip("Время от последнего выстрела")]
     // public float timeAfterLastShot;
@@ -34,8 +37,9 @@ public class DataMachine
 
     public DataMachine()
     {
-        bonuses = new();
-        towers = new();
+        this.ContainerData = new();
+        this.bonuses = new();
+        // towers = new();
         // bonusesValue = new();
     }
 }
@@ -44,28 +48,51 @@ public class DataMachine
 public class DataMuzzle
 {
     public int index;
-    [Tooltip("Количество выстрелов в серии")]
-    public float countShotSeria;
+    [Tooltip("Может ли ствол стрелять")]
+    public bool isShot;
+    [Tooltip("Точка куда смотрит ствол")]
+    public Vector3 pointTarget;
     [Tooltip("Время до перезарядки")]
     public float timeBeforeShot;
-    [Tooltip("Уровень разрушения")]
-    public float levelDestruction;
+    [Tooltip("Время между выстрелами")]
+    public float timeBetweenShot;
+    [Tooltip("Начальная скорость полета снарядов")]
+    public float speedBullet;
+    [Tooltip("Дистанция атаки (как далеко полетят снаряды)")]
+    public float distanceAttack;
+    public ContainerData containerData;
+
+    // [Tooltip("Уровень разрушения")]
+    // public float levelDestruction;
+    public DataMuzzle() {
+        containerData = new();
+    }
 }
 
 [Serializable]
 public class DataBody
 {
     public int index;
-    [Tooltip("Уровень разрушения")]
-    public float levelDestruction;
+    [Tooltip("Скорость")]
+    [Range(0.2f, 1000f)] public float speed;
+    [Tooltip("Угол поворота базы")]
+    public float angleBody;
+    [Tooltip("Угол поворота базы текущий")]
+    public float currentAngleBody;
+    public ContainerData containerData;
+    public DataBody() {
+        containerData = new();
+    }
 }
 
 [Serializable]
 public class DataCaterpillar
 {
     public int index;
-    [Tooltip("Уровень разрушения")]
-    public float levelDestruction;
+    public ContainerData containerData;
+    public DataCaterpillar() {
+        containerData = new();
+    }
 }
 
 [Serializable]
@@ -79,14 +106,12 @@ public class DataTower
     public float angleTower;
     [Tooltip("Фактический угол поворота башни")]
     public float currentAngleTower;
-    [Tooltip("Может ли башня стрелять")]
-    public bool isShot;
-    [Tooltip("Столы башни")]
+    [Tooltip("Стволы башни")]
     public List<BaseMuzzle> muzzles;
-    [Tooltip("Уровень разрушения")]
-    public float levelDestruction;
+    public ContainerData containerData;
     public DataTower() {
         muzzles = new();
+        containerData = new();
     }
 }
 

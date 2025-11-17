@@ -10,11 +10,11 @@ namespace Mikalai2006.Voxel
 [BurstCompile]
     struct CheckCollisionJob : IJobParallelFor
     {
-        public NativeArray<float3> points;
-        public float3 _pointCollision;
-        public float _radiusExplode;
-        public NativeArray<float3> _needCreateElements;
-        public NativeArray<float3> needRemoveElements;
+        [ReadOnly] public NativeArray<float3> points;
+        [ReadOnly] public float3 _pointCollision;
+        [ReadOnly] public float _radiusExplode;
+        [WriteOnly]public NativeArray<float3> _needCreateElements;
+        [WriteOnly]public NativeArray<float3> needRemoveElements;
         public int maxRadius;
 
         public void Execute(int index)

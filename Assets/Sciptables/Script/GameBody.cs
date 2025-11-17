@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
@@ -21,6 +20,10 @@ public class GameBody : ScriptableObject
   public Color colorBody;
 
 
+  [Space(5)]
+  [Header("Параметры")]
+  [Tooltip("Скорость")]
+  [Range(0.2f, 1000f)] public float speed;
   // [Space(5)]
   // [Header("Допустимые улучшения")]
   // [Tooltip("Список улучшений")]

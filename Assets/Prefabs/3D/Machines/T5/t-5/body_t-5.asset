@@ -2685,6 +2685,7 @@ MonoBehaviour:
     - {x: 3, y: 6, z: 13}
     - {x: 3, y: 6, z: 14}
     - {x: 3, y: 6, z: 15}
+  countVoxels: 2564
   sizeVoxel: 1
   Pivot: {x: 16, y: -2, z: 12}
   Bounds: {x: 32, y: 7, z: 24}

@@ -15,7 +15,7 @@ namespace Mikalai2006.Voxel
         public bool isOneMesh;
         // [Tooltip("Принудительное включение GPU Instances.Включение этой опции принудительно заставит меши использовать GPU Instances, если он активирован в материале")]
         // public bool enableGPUInstances;
-
+        public float emissionValue;
 
         public bool isTile;
         [Tooltip("Указывает разрушаемый ли объект")]

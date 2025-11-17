@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Mikalai2006.Voxel
@@ -139,7 +140,7 @@ namespace Mikalai2006.Voxel
 
             if (Config.isGreedy)
             {
-                container.UploadMeshGreedy(Config.sOVoxelData.startMesh == null);
+                container.UploadMeshGreedy(Config.sOVoxelData.startMesh == null).Forget();
             }
             else
             {

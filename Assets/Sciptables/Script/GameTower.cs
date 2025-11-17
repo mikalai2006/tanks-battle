@@ -21,9 +21,9 @@ public class GameTower : ScriptableObject
   public GameRank minRank;
   [Tooltip("Скорость вращения башни")]
   [Range(0f, 720f)] public float speedRotateTower;
-  [Tooltip("Дистанция обнаружения противника")]
-  [Range(1f, 15f)] public int distanceSearch;
-  [Tooltip("Дистанция атаки")]
-  [Range(1f, 10f)] public int distanceAttack;
+  // [Tooltip("Дистанция атаки")]
+  // [Range(1f, 15f)] public int distanceAttack;
+  // [Tooltip("Дистанция атаки")]
+  // [Range(1f, 10f)] public int distanceAttack;
 }
 

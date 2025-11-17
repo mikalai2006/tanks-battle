@@ -44,7 +44,7 @@ public class WFCGenerator : MonoBehaviour {
             if (vmRenderer.Config.sOVoxelData.groups.Count > 0)
             {
                 var a = vmRenderer.Config.sOVoxelData.groups[0];
-                a.color = _gameManager.LevelConfig.colorGround;
+                a.color = _gameManager.LevelConfig.colorWall;
                 vmRenderer.Config.sOVoxelData.groups[0] = a;
             }
             if (vmRenderer.Config.sOVoxelData.groups.Count > 1)
@@ -62,7 +62,7 @@ public class WFCGenerator : MonoBehaviour {
             if (vmRenderer.Config.sOVoxelData.groups.Count > 0)
             {
                 var a = vmRenderer.Config.sOVoxelData.groups[0];
-                a.color = _gameManager.LevelConfig.colorGround;
+                a.color = _gameManager.LevelConfig.colorWall;
                 vmRenderer.Config.sOVoxelData.groups[0] = a;
             }
             if (vmRenderer.Config.sOVoxelData.groups.Count > 1)
@@ -79,7 +79,7 @@ public class WFCGenerator : MonoBehaviour {
             if (vmRenderer.Config.sOVoxelData.groups.Count > 0)
             {
                 var a = vmRenderer.Config.sOVoxelData.groups[0];
-                a.color = _gameManager.LevelConfig.colorGround;
+                a.color = _gameManager.LevelConfig.colorWall;
                 vmRenderer.Config.sOVoxelData.groups[0] = a;
             }
             if (vmRenderer.Config.sOVoxelData.groups.Count > 1)
@@ -95,7 +95,7 @@ public class WFCGenerator : MonoBehaviour {
         if (vmGround.Config.sOVoxelData.groups.Count > 0)
         {
             var a = vmGround.Config.sOVoxelData.groups[0];
-            a.color = _gameManager.LevelConfig.colorGround;
+            a.color = _gameManager.LevelConfig.colorWall;
             vmGround.Config.sOVoxelData.groups[0] = a;
         }
         if (vmGround.Config.sOVoxelData.groups.Count > 1)

@@ -25,7 +25,7 @@ public class ECSManager : MonoBehaviour
     public Vector2 forceAmount;
     public Vector2 lifeTimeRange;
     [SerializeField] private int countCreatePerFrame;
-    BlobAssetReference<Unity.Physics.Collider> collider;
+    BlobAssetReference<Unity.Physics.Collider> _collider;
 
     void Start()
     {
@@ -487,16 +487,16 @@ public class ECSManager : MonoBehaviour
 
         if (GameManager.Instance.Settings.DebugSettings.ECSColliderSphere)
         {
-            collider = Unity.Physics.SphereCollider.Create(new SphereGeometry { Center = float3.zero, Radius = 0.5f });
+            _collider = Unity.Physics.SphereCollider.Create(new SphereGeometry { Center = float3.zero, Radius = 0.5f });
         } else
         {
-            collider = Unity.Physics.BoxCollider.Create(new BoxGeometry { Center = float3.zero, Size = new float3(1, 1, 1), BevelRadius = 0, Orientation = quaternion.identity });
+            _collider = Unity.Physics.BoxCollider.Create(new BoxGeometry { Center = float3.zero, Size = new float3(1, 1, 1), BevelRadius = 0, Orientation = quaternion.identity });
         }
 
 
         uint defaultLayerMask = (uint)1 << LayerMask.NameToLayer("Default");
 
-        collider.Value.SetCollisionFilter(new CollisionFilter
+        _collider.Value.SetCollisionFilter(new CollisionFilter
         {
             BelongsTo = defaultLayerMask,
             CollidesWith = defaultLayerMask
@@ -504,8 +504,8 @@ public class ECSManager : MonoBehaviour
 
 
         // TODO Leak
-        entityManager.AddComponentData(prototype, new PhysicsCollider { Value = collider });
-        entityManager.AddComponentData(prototype, PhysicsMass.CreateDynamic(collider.Value.MassProperties, 100.0f)); // 1.0f is mass
+        entityManager.AddComponentData(prototype, new PhysicsCollider { Value = _collider });
+        entityManager.AddComponentData(prototype, PhysicsMass.CreateDynamic(_collider.Value.MassProperties, 100.0f)); // 1.0f is mass
         entityManager.AddComponentData(prototype, new PhysicsVelocity { Linear = float3.zero, Angular = float3.zero });
         entityManager.AddComponentData(prototype, new PhysicsDamping { Linear = 1f, Angular = 0f });
         entityManager.AddComponentData(prototype, new LifetimeComponent { LifetimeRemaining = 1000f });
@@ -536,7 +536,7 @@ public class ECSManager : MonoBehaviour
 
     void OnDestroy()
     {
-        collider.Dispose();
+        _collider.Dispose();
     }
 }
 

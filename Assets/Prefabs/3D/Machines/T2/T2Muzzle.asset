@@ -41,6 +41,7 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 1
     isOneMesh: 1
+    emissionValue: 0
     isTile: 0
     isDestructible: 1
     shadowCastingMode: 0
@@ -50,9 +51,9 @@ MonoBehaviour:
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
   Bullet: {fileID: 11400000, guid: 71c2729b0226e924c8ff69521de58b83, type: 2}
   material: {fileID: 2100000, guid: aea35b8f4d6187847be7fad4fe70f981, type: 2}
-  distanceAttack: 30
+  distanceAttack: 10
   timeBetweenShot: 1
-  speedBullet: 30
+  speedBullet: 10
   color: {r: 0, g: 0.61455005, b: 0.7924528, a: 1}
   references:
     version: 2

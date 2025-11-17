@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4391933390922725474}
   - component: {fileID: 7273024346422099289}
   - component: {fileID: 8525557945762748131}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2821393535912470438}
   - component: {fileID: 1602150319550486619}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cave_empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}

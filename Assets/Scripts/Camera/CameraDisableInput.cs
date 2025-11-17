@@ -7,7 +7,7 @@ public class CameraDisableInput : MonoBehaviour
     public CinemachineInputAxisController cinemachineInputAxisController;
     void Start()
     {
-        if (_gameSetting.inputJoystick)
+        if (_gameSetting.DebugSettings.mode == AppMode.Mobile)
         {
             cinemachineInputAxisController = GetComponent<CinemachineInputAxisController>();
             if (cinemachineInputAxisController != null)

@@ -46,8 +46,19 @@ MonoBehaviour:
     muzzles:
     - Config: {fileID: 11400000, guid: fef3fa0bb148674468c4daee60b42d8c, type: 2}
       offsetMuzzle: {x: 6, y: 0, z: 0}
-    children: []
+    children:
+    - 1
     isChildren: 0
+  - ido: 1
+    Config: {fileID: 11400000, guid: 22c645a4daa41b246b08a915d0a0a5e2, type: 2}
+    offsetTower: {x: 5, y: 4, z: 0}
+    colorTower: {r: 0.6901382, g: 0.8018868, b: 0.12482201, a: 1}
+    isRotate: 0
+    muzzles:
+    - Config: {fileID: 11400000, guid: 3f1ff767f05ec7b4b843802799310610, type: 2}
+      offsetMuzzle: {x: 3, y: 0, z: 0}
+    children: []
+    isChildren: 1
   catterpillars:
   - Config: {fileID: 11400000, guid: b739f6aabc651594da91d47f55079936, type: 2}
     offsetCat: {x: 0, y: 3.5, z: 0}

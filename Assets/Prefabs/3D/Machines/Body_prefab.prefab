@@ -46,10 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 0}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 1
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    isTile: 0
+    isDestructible: 0
+    shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 6055776688510446438}
 --- !u!114 &5346976342083063153
 MonoBehaviour:
@@ -66,6 +75,16 @@ MonoBehaviour:
   _bodySprite: {fileID: 0}
   _bodyGerbSprite: {fileID: 0}
   _damageSprite: {fileID: 0}
+  _data:
+    index: 0
+    speed: 0.2
+    angleBody: 0
+    currentAngleBody: 0
+    containerData:
+      countVoxels: 0
+      countVoxelsDestructible: 0
+      levelDestruction: 0
+  isMove: 0
   voxelMeshRender: {fileID: 6618992736826821596}
 --- !u!1 &6055776688510446438
 GameObject:
@@ -111,8 +130,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19734c1b9437dd54dbfcd66a18a38887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sOVoxelData: {fileID: 0}
-  _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
-  existCollider: 1
-  isGreedy: 1
+  Config:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    existCollider: 0
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 0
+    isOneMesh: 0
+    isTile: 0
+    isDestructible: 0
+    shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0
   Wrapper: {fileID: 0}

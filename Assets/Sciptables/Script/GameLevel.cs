@@ -34,6 +34,7 @@ public class GameLevel : ScriptableObject
 
     [Header("Цвета карты")]
     public Color colorGround;
+    public Color colorWall;
     public Color colorNature;
 
 

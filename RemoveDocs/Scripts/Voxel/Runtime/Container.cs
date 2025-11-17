@@ -453,7 +453,7 @@ namespace Mikalai2006.Voxel
                     meshFilter.mesh = mesh;
 
                     // _job.voxels.Dispose();
-                    Debug.Log($"Time greedy mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                    // Debug.Log($"Time greedy mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
                 }
 
                 if (meshData.vertices.Count > 3)

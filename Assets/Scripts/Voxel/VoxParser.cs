@@ -156,6 +156,7 @@ public class VoxParser : MonoBehaviour
             SOVoxelData asset = ScriptableObject.CreateInstance<SOVoxelData>();
             asset.groups = submeshesDatas;
             // asset.voxels = pointsColors.Keys.ToList(); // .AsParallel()
+            asset.countVoxels = pointsColors.Count;
             asset.Pivot = pivot;
             asset.Bounds = bounds;
             // asset.colors = pointsColors.Values.AsParallel().ToList();

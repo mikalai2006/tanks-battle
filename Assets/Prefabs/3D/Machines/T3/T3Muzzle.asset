@@ -41,6 +41,7 @@ MonoBehaviour:
     isRigidbody: 0
     isConvex: 1
     isOneMesh: 1
+    emissionValue: 0
     isTile: 0
     isDestructible: 1
     shadowCastingMode: 0

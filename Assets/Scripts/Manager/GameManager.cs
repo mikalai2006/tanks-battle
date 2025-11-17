@@ -37,47 +37,48 @@ public class GameManager : StaticInstance<GameManager>
   public GameState State { get; private set; }
 //   public AdManager AdManager;
   public ResourceSystem ResourceSystem { get; internal set; }
+  public ECSManager ECSManager;
 
-  //   public LevelManager LevelManager { get; private set; }
-  //   [HideInInspector] public GamePlayerSetting PlayerSetting { get; private set; }
-  //   [HideInInspector] public GameType GameType { get; private set; }
+    //   public LevelManager LevelManager { get; private set; }
+    //   [HideInInspector] public GamePlayerSetting PlayerSetting { get; private set; }
+    //   [HideInInspector] public GameType GameType { get; private set; }
 
-  // public SceneInstance environment { get; private set; }
-  //   public InputManager InputManager { get; private set; }
+    // public SceneInstance environment { get; private set; }
+    //   public InputManager InputManager { get; private set; }
 
-  // [SerializeField] private ProgressManager _progressManager;
-  // public ProgressManager Progress => _progressManager;
-
-
-  // void OnApplicationFocus(bool hasFocus)
-  // {
-  //   Debug.Log($"OnApplicationFocus {hasFocus}");
-  //   if (hasFocus)
-  //   {
-  //     Time.timeScale = 1;
-  //   }
-  //   else
-  //   {
-  //     Time.timeScale = 0;
-  //   }
-  // }
-
-  // void OnApplicationPause(bool pauseStatus)
-  // {
-  //   Debug.Log($"OnApplicationPause {pauseStatus}");
-
-  //   if (pauseStatus)
-  //   {
-  //     Time.timeScale = 0;
-  //   }
-  //   else
-  //   {
-  //     Time.timeScale = 1;
-  //   }
-  // }
+    // [SerializeField] private ProgressManager _progressManager;
+    // public ProgressManager Progress => _progressManager;
 
 
-  protected override void Awake()
+    // void OnApplicationFocus(bool hasFocus)
+    // {
+    //   Debug.Log($"OnApplicationFocus {hasFocus}");
+    //   if (hasFocus)
+    //   {
+    //     Time.timeScale = 1;
+    //   }
+    //   else
+    //   {
+    //     Time.timeScale = 0;
+    //   }
+    // }
+
+    // void OnApplicationPause(bool pauseStatus)
+    // {
+    //   Debug.Log($"OnApplicationPause {pauseStatus}");
+
+    //   if (pauseStatus)
+    //   {
+    //     Time.timeScale = 0;
+    //   }
+    //   else
+    //   {
+    //     Time.timeScale = 1;
+    //   }
+    // }
+
+
+    protected override void Awake()
   {
     LoaderBarProvider = new LoaderBarProvider();
 

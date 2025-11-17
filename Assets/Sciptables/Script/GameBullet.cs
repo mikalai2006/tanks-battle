@@ -1,3 +1,4 @@
+using Mikalai2006.Voxel;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -9,6 +10,7 @@ public class GameBullet : ScriptableObject
   public TextLocalize text;
   public GameObject prefab;
   public Material material;
+  public MeshConfig MeshConfig;
 
   [Space(5)]
   [Header("Параметры")]

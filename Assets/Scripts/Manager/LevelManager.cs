@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
     public CinemachineOrbitalFollow cinemachineOrbitalFollow;
     public MazeGenerator MazeGenerator;
     private CreateMapOperation createMapOperation;
-    public ECSManager ECSManager;
+    public ECSManager ECSManager => _gameManager.ECSManager;
     System.Threading.CancellationTokenSource cancelToken;
 
     [Space(5)]
@@ -89,6 +89,16 @@ public class LevelManager : MonoBehaviour
         // OnSetActiveCamera(null);
         _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
 
+        // if (_gameManager.LevelConfig.light >= .5f)
+        // {
+        //     globalLight.intensity = _gameManager.LevelConfig.light / 2;
+        //     globalLight.enabled = true;
+        // } else
+        // {
+        //     globalLight.enabled = false;
+        // }
+        
+        globalLight.enabled = true;
         globalLight.intensity = _gameManager.LevelConfig.light;
 
         // создаем карту
@@ -183,6 +193,22 @@ public class LevelManager : MonoBehaviour
                     BaseMachine obj = gObject.GetComponent<BaseMachine>();
                     if (obj != null)
                     {
+
+                    IndicatorMachine indicatorObject = Instantiate(
+                        configMachine.indicatorPrefab,
+                        Vector3.zero,
+                        Quaternion.identity,
+                        objectSpawnIndicators.transform
+                    );
+                    if (indicatorObject != null)
+                    {
+                        obj.OnSetIndicator(indicatorObject);
+                        indicatorObject.OnSetMachine(obj);
+                        OnAddIndicator(indicatorObject);
+                    }
+
+
+
                         // Debug.Log($"load {obj.name}/{team.index}");
                         if (data.isBot)
                         {
@@ -206,7 +232,7 @@ public class LevelManager : MonoBehaviour
                             // obj.GetComponent<CameraFollow>().enabled = false;
                             // obj.GetComponent<CameraFollowFPS>().enabled = false;
                             obj.GetComponent<StateController>().enabled = true;
-                            obj.OnSetConfig(configMachine, data);
+                            // obj.OnSetConfig(configMachine, data);
                             // obj.SetOccupiedNode(node);
                             // obj.transform.position = _transform;
                         }
@@ -215,16 +241,16 @@ public class LevelManager : MonoBehaviour
                             obj.GetComponent<PlayerController>().enabled = true;
                             obj.GetComponent<PlayerInput>().enabled = true;
                             // obj.GetComponentInChildren<NavMeshAgent>().enabled = false;
-                            var lightComponent = obj.GetComponentInChildren<Light>();
-                            if (lightComponent)
-                            {
-                                lightComponent.enabled = true;
-                            }
+                            // var lightComponent = obj.GetComponentInChildren<Light>();
+                            // if (lightComponent)
+                            // {
+                            //     lightComponent.enabled = true;
+                            // }
                             // obj.Areol.SetActive(true);
                             // obj.GetComponent<CameraFollow>().enabled = false;
                             // obj.GetComponent<CameraFollowFPS>().enabled = false;
                             obj.GetComponent<StateController>().enabled = false;
-                            obj.OnSetConfig(configMachine, data);
+                            // obj.OnSetConfig(configMachine, data);
                             // obj.SetOccupiedNode(node);
                             
                             var navMeshAgent = obj.navMeshAgent;
@@ -248,7 +274,13 @@ public class LevelManager : MonoBehaviour
                             }
 
                             UiTopSide.crossHair.OnSetTarget(obj);
+                            if (_gameManager.Settings.autoTakeEnemy)
+                            {
+                                UiTopSide.crossHair.gameObject.SetActive(false);
+                            }
                         }
+
+                        obj.Init(configMachine, data);
 
                         if (obj.Camera != null)
                         {
@@ -258,20 +290,6 @@ public class LevelManager : MonoBehaviour
                         machines.Add(obj);
                         // team.machines.Add(obj);
                     }
-
-                    IndicatorMachine indicatorObject = Instantiate(
-                        configMachine.indicatorPrefab,
-                        Vector3.zero,
-                        Quaternion.identity,
-                        objectSpawnIndicators.transform
-                    );
-                    if (indicatorObject != null)
-                    {
-                        obj.OnSetIndicator(indicatorObject);
-                        indicatorObject.OnSetMachine(obj);
-                        OnAddIndicator(indicatorObject);
-                    }
-
 
                     //.Completed += (AsyncOperationHandle<GameObject> handle) => LoadedAsset(handle, configMachine, data, node);
                 }

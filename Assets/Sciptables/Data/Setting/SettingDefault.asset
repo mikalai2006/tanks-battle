@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Audio: {fileID: 11400000, guid: 6e6d27b434636fd48855242580e09e89, type: 2}
   ThemeDefault: {fileID: 11400000, guid: 397876dbbb99649498afeade60f99939, type: 2}
-  inputJoystick: 0
   simpleMove: 1
   playerOptions:
     showTrajectory: 0
+    showOtherTrajectory: 0
   scaleObjects: 0.03125
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
@@ -83,14 +83,13 @@ MonoBehaviour:
   - {fileID: 1123812706, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1934825213, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   levels:
-  - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
+  - {fileID: 11400000, guid: 63f7498c09b8a8245a8df354dd4555dc, type: 2}
   machines:
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
   - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
   - {fileID: 11400000, guid: da3e7403be56f0748b9f25df94cb188b, type: 2}
   - {fileID: 11400000, guid: 6abe5dfb79cf82340bf0e912a5081bbc, type: 2}
-  - {fileID: 11400000, guid: df1dbefa263c43e4190d67228e940652, type: 2}
   - {fileID: 11400000, guid: 9ddc95e9a2516c44099c2b41c4fc8ffa, type: 2}
   - {fileID: 11400000, guid: bd5e43aa588fc974bb140b2b8f4bfd4d, type: 2}
   ranks:
@@ -106,6 +105,7 @@ MonoBehaviour:
   colorSectorPlayerAttack: {r: 1, g: 0, b: 0.3019608, a: 0.5882353}
   colorSectorAttack: {r: 1, g: 0.42219353, b: 0, a: 0.5882353}
   prefabVoxel: {fileID: 8765538014590554563, guid: 6e1da3befa2e5eb41ae0c256c49ad53b, type: 3}
+  sectorVoxel: {fileID: 6423673945417182926, guid: ca8115febc395234ea9097c741744566, type: 3}
   materialTransparent: {fileID: 2100000, guid: 7fd9cedb25c36714c948511cb3fdc30f, type: 2}
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
@@ -114,6 +114,25 @@ MonoBehaviour:
   offsetMarkerEdge: {x: 0.015, y: 0.025}
   colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
+  DebugSettings:
+    mode: 2
+    disableCreateTiles: 0
+    logEnabled: 0
+    ECSColliderSphere: 0
+    muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
+    gizmoBodyForwards: 0
+    gizmoBodyLength: 5
+    gizmoBodyColor: {r: 0, g: 0.5930424, b: 1, a: 1}
+    gizmoTowersForwards: 0
+    gizmoTowersLength: 5
+    gizmoTowersColor: {r: 1, g: 0.6698078, b: 0, a: 1}
+    gizmoMuzzlesForwards: 0
+    gizmoMuzzleLength: 5
+    gizmoMuzzleColor: {r: 0.46724558, g: 1, b: 0, a: 1}
+    gizmoTrajectory: 0
+    gizmoTrajectoryColor: {r: 1, g: 0.027940515, b: 0, a: 1}
+    gizmoMuzzleDistanseAttack: 0
+    gizmoMuzzleDistanseAttackColor: {r: 1, g: 0, b: 0.7673602, a: 0.38431373}
   rotateTowerByBody: 0
   timeBeforeAddTarget: {x: 0.1, y: 0.3}
   distanceDisableAttack: 1.5
@@ -257,10 +276,6 @@ MonoBehaviour:
   isDisableNextButton: 0
   countNextPuzzle: 0
   tileSquare: {fileID: 0}
-  DebugSettings:
-    disableCreateTiles: 0
-    logEnabled: 0
-    ECSColliderSphere: 0
   references:
     version: 2
     RefIds: []

@@ -12,14 +12,15 @@ public class BaseCaterpillar : MonoBehaviour
     GameCaterpillarOption Option;
     BaseMachine Machine;
     [SerializeField] GameObject Wrapper;
-    [SerializeField] protected DataCaterpillar data;
-    public DataCaterpillar Data => data;
+    [SerializeField] protected DataCaterpillar _data;
+    public DataCaterpillar Data => _data;
     [SerializeField] List<GameObject> wheels = new();
-    bool isMove = false;
     [SerializeField] protected List<VoxelMeshRender> voxelMeshRenders;
 
+#region Unity methods
     void Awake()
     {
+        _data= new();
         wheels = new();
         // sprite = GetComponent<SpriteRenderer>();
         Stop();
@@ -32,17 +33,15 @@ public class BaseCaterpillar : MonoBehaviour
 
     void Update()
     {
-        if (Option.Config.isRotate)
+        if (Option.Config.isRotate && Machine.IsMove)
         {
-            if (isMove)
+            for (int i = 0; i < wheels.Count; i++)
             {
-                for (int i = 0; i < wheels.Count; i++)
-                {
-                    wheels[i].transform.Rotate(Vector3.right, 5f * Machine.Data.speed * Time.deltaTime);
-                }
+                wheels[i].transform.Rotate(Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
             }
         }
     }
+#endregion
 
     public void Init(BaseMachine baseMachine, GameCaterpillarOption config, int i)
     {
@@ -69,7 +68,7 @@ public class BaseCaterpillar : MonoBehaviour
 
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction)
+    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
     {
         List<UniTask> tasks = new List<UniTask>();
         for (int x = 0; x < voxelMeshRenders.Count; x++)
@@ -80,7 +79,7 @@ public class BaseCaterpillar : MonoBehaviour
                 {
                     Vector3 localPoint = voxelMeshRenders[x].Containers[i].transform.InverseTransformPoint(_pointCollision);
                     // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                    tasks.Add(voxelMeshRenders[x].Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction));
+                    tasks.Add(voxelMeshRenders[x].Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
                 }
             }
         }
@@ -89,7 +88,6 @@ public class BaseCaterpillar : MonoBehaviour
 
     public void Move()
     {
-        isMove = true;
         // // foreach (Animator animator in animators)
         // // {
         // //     animator.SetBool("move", true);
@@ -103,7 +101,6 @@ public class BaseCaterpillar : MonoBehaviour
     
     public void Stop()
     {
-        isMove = false;
         // // foreach (Animator animator in animators)
         // // {
         // //     animator.SetBool("move", false);
@@ -114,21 +111,32 @@ public class BaseCaterpillar : MonoBehaviour
         // }
     }
     
-    public float GetValueDestructible()
+    /// <summary>
+    /// Функция расчета ХР для шасси машины.
+    /// </summary>
+    /// <returns>кол-во всех вокселей и кол-во разрушенных, ХР - от 0 до 1</returns>
+    public ContainerData RefreshHP()
     {
-        float totalVoxels = 0f;
-        float totalVoxelsDestructible = 0f;
+        var result = new ContainerData();
 
         for (int x = 0; x < voxelMeshRenders.Count; x++)
         {
-            for (int i = 0; i < voxelMeshRenders[x].Containers.Length; i++)
+            result.countVoxels += voxelMeshRenders[x].Config.sOVoxelData.countVoxels;
+
+            if (voxelMeshRenders[x].Containers != null)
             {
-                totalVoxelsDestructible += voxelMeshRenders[x].Containers[i].ContainerData.countVoxelsDestructible;
-                totalVoxels += voxelMeshRenders[x].Containers[i].ContainerData.countVoxels;
+                for (int i = 0; i < voxelMeshRenders[x].Containers.Length; i++)
+                {
+                    result.countVoxelsDestructible += voxelMeshRenders[x].Containers[i].ContainerData.countVoxelsDestructible;
+                    // result.countVoxels += voxelMeshRenders[x].Containers[i].ContainerData.countVoxels;
+                    // Debug.Log($"_containerData: {voxelMeshRender.Containers[i].ContainerData.countVoxels}/{voxelMeshRender.Containers[i].ContainerData.countVoxelsDestructible}");
+                }
             }
         }
+        
+        result.levelDestruction = (float)result.countVoxelsDestructible / result.countVoxels;
 
-        float result = totalVoxelsDestructible / totalVoxels;
+        _data.containerData = result;
 
         return result;
     }

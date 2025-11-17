@@ -42,8 +42,6 @@ public class GameMachine : ScriptableObject
   [Header("Параметры")]
   [Tooltip("Минимальный ранг для доступа")]
   public GameRank minRank;
-  [Tooltip("Скорость")]
-  [Range(0.2f, 1000f)] public float speed;
   // [Tooltip("Максимально возможная скорость")]
   // [Range(1.5f, 6f)] public float maxSpeed;
   // [Tooltip("Скорость вращения башни")]
@@ -52,12 +50,10 @@ public class GameMachine : ScriptableObject
   // [Range(0f, 10f)] public float maxSpeedRotateTower;
   [Tooltip("Дистанция обнаружения противника")]
   [Range(1f, 15f)] public int distanceSearch;
-  // [Tooltip("Дистанция атаки")]
-  // [Range(1f, 10f)] public int distanceAttack;
-  [Tooltip("Здоровье")]
-  [Range(100f, 1000f)] public int hp;
-  [Tooltip("Броня")]
-  [Range(100f, 1000f)] public int armour;
+  // [Tooltip("Здоровье")]
+  // [Range(100f, 1000f)] public int hp;
+  // [Tooltip("Броня")]
+  // [Range(100f, 1000f)] public int armour;
 
   // [Tooltip("Задержка выстрела следующего ствола, чтобы имитировать очередь, а не стрелять сразу всеми стволами")]
   // [Range(0f, 0.5f)] public float timeDelayNextMuzzle;

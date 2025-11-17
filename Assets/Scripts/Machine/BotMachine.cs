@@ -9,14 +9,8 @@ public class BotMachine : BaseMachine
 
     }
 
-    public override void Rotate(Vector2 moveDirection)
-    {
-        base.Rotate(moveDirection);
 
-
-    }
-
-    public override void Move(Vector2 _moveDirection)
+    public override void Move(Vector3 _moveDirection)
     {
         base.Move(_moveDirection);
 

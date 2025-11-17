@@ -55,9 +55,9 @@ public class IndicatorMachine : MonoBehaviour
 
     public void OnChangeData()
     {
-        var oneProcentHP = startSize / Machine.Config.hp;
+        // var oneProcentHP = startSize / Machine.Config.hp;
 
-        progressHP.size = new Vector2(progressHP.size.x, Mathf.Min(1, oneProcentHP * Machine.Data.hp));
+        progressHP.size = new Vector2(progressHP.size.x, Mathf.Min(1, startSize * (1 - Machine.Data.ContainerData.levelDestruction)));
     }
 
     public void OnSetMachine(BaseMachine bm)

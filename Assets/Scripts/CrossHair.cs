@@ -18,7 +18,7 @@ public class CrossHair : MonoBehaviour
             var rotationA = Quaternion.Euler(0, baseMachine.Towers[0].Data.angleTower, 0); // Identity rotation
             var rotationB = Quaternion.Euler(0, baseMachine.Towers[0].Data.currentAngleTower, 0);
             float diffAngle = Quaternion.Angle(rotationA, rotationB);
-            if (diffAngle > 5)
+            if (diffAngle > 1)
             {
                 currentSpread = diffAngle * 20;
             }

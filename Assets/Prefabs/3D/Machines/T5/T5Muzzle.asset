@@ -51,7 +51,7 @@ MonoBehaviour:
   Bullet: {fileID: 11400000, guid: eea0010cca476ba49b6f5bb8654f5d88, type: 2}
   material: {fileID: 2100000, guid: aea35b8f4d6187847be7fad4fe70f981, type: 2}
   distanceAttack: 30
-  timeBetweenShot: 1
+  timeBetweenShot: 3
   speedBullet: 30
   color: {r: 0, g: 0.61455005, b: 0.7924528, a: 1}
   references:

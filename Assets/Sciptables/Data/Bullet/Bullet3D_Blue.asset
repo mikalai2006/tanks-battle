@@ -33,6 +33,20 @@ MonoBehaviour:
       m_LocalVariables: []
   prefab: {fileID: 7056810224777368569, guid: fe5f44a455df01c4c8eceec4df608b11, type: 3}
   material: {fileID: 2100000, guid: a40e27233b9dde947a560990527cfeef, type: 2}
+  MeshConfig:
+    sOVoxelData: {fileID: 11400000, guid: 2acedc23f2570a44fb1af0c838e5d7d4, type: 2}
+    _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    existCollider: 1
+    isGreedy: 0
+    isRigidbody: 0
+    isConvex: 1
+    isOneMesh: 1
+    emissionValue: 3
+    isTile: 0
+    isDestructible: 0
+    shadowCastingMode: 0
+    useGlobalScale: 0
+    customScale: 0.03
   lifeTime: 3
   damageRadius: 3
   countCollisions: 1

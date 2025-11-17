@@ -2,50 +2,7 @@ using UnityEngine;
 
 public class Tank : BaseMachine
 {
-    public override void Rotate(Vector2 moveDirection)
-    {
-        base.Rotate(moveDirection);
-        // // float turnInputValue = moveDirection.x;
-        // // float turn = turnInputValue * Data.speed * Time.fixedDeltaTime;
-        // // Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-        // // rb.MoveRotation(rb.rotation * turnRotation);
-        // // // rb.AddTorque(new Vector3(0f, turn, 0f));
-        // // // Debug.Log($"Rotate::::: {new Vector3(0f, turn, 0f)}");
-        // if (rb.linearVelocity != Vector3.zero)
-        // {
-        //     Quaternion targetRotation = Quaternion.LookRotation(rb.linearVelocity);
-        //     // Debug.Log($"Rotate::::: {targetRotation}");
-        //     Quaternion stepRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
-
-        //     // rb.MoveRotation(stepRotation);
-        //     Body.transform.rotation = CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
-        //         Body.transform.rotation,
-        //         Quaternion.Euler(0, targetRotation.eulerAngles.y + OffsetRotate, 0),
-        //         10f * Time.fixedDeltaTime
-        //     );
-
-        //     // Debug.Log($"ROTATION::::: stepRotation={stepRotation}");
-        // }
-
-        // // // Получаем вектор скорости объекта
-        // // Vector3 movementDirection = rb.linearVelocity.normalized;
-
-        // // // Если объект движется (скорость не равна нулю)
-        // // if (movementDirection != Vector3.zero)
-        // // {
-        // //     // Вычисляем целевое вращение: объект должен смотреть вперед в направлении движения
-        // //     Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
-
-        // //     // Плавное вращение к целевой ориентации
-        // //     // <<!nav>>Quaternion.Slerp<<!/nav>> ( сферическая линейная интерполяция) обеспечивает плавное вращение
-        // //     Quaternion newRotation = Quaternion.Slerp(rb.rotation, targetRotation, 1f * Time.fixedDeltaTime);
-
-        // //     // Применяем новое вращение к Rigidbody
-        // //     rb.MoveRotation(newRotation);
-        // // }
-    }
-
-    public override void Move(Vector2 _moveDirection)
+    public override void Move(Vector3 _moveDirection)
     {
         base.Move(_moveDirection);
 

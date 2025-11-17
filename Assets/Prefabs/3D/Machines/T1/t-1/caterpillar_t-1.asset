@@ -575,6 +575,7 @@ MonoBehaviour:
     - {x: 19, y: 6, z: 29}
     - {x: 20, y: 6, z: 29}
     - {x: 21, y: 6, z: 29}
+  countVoxels: 560
   sizeVoxel: 1
   Pivot: {x: 11, y: 3.5, z: 15}
   Bounds: {x: 22, y: 7, z: 30}

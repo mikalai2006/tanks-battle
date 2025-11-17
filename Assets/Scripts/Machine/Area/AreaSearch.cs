@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AreaSearch : MonoBehaviour
 {
-    GameManager _gameManager = GameManager.Instance;
-    [SerializeField] private Transform transformArea;
+    GameManager _gameManager => GameManager.Instance;
+    private MeshRenderer meshRenderer;
     [SerializeField] GPUInstanceEnabler gPUInstanceEnabler;
     [SerializeField] BaseMachine machine;
     [SerializeField] Dictionary<BaseMachine, float> targets;
@@ -17,6 +17,8 @@ public class AreaSearch : MonoBehaviour
     void Awake()
     {
         targets = new();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.enabled = false;
         machine = GetComponentInParent<BaseMachine>();
     }
 
@@ -34,13 +36,13 @@ public class AreaSearch : MonoBehaviour
 
     public void OnSetSize(float _size)
     {
-        float size = _size * (1 /_gameManager.Settings.scaleObjects);
-        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(size, size, size), _gameManager.Settings.speedChangeAreaSize * Time.deltaTime);
+        float size = _size; // * (1 /_gameManager.Settings.scaleObjects);
+        transform.localScale = new Vector3(size, 0.1f, size); // Vector3.Lerp(transform.localScale, new Vector3(size, 0.1f, size), _gameManager.Settings.speedChangeAreaSize * Time.deltaTime);
     }
 
     private void OnAddMachine(BaseMachine _machine)
     {
-         if (_machine != null)
+        if (_machine != null)
         {
             // float distance = Vector2.Distance(machine.transform.position, _machine.transform.position);
             if (!targets.ContainsKey(_machine)) //  && distance <= machine.Config.distanceAttack - 1
@@ -57,14 +59,15 @@ public class AreaSearch : MonoBehaviour
         {
             if (targets.ContainsKey(_machine))
             {
-                targets[_machine] = 0;
+                // targets[_machine] = 0;
                 targets.Remove(_machine);
             }
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        // TODO 
         for (int i = targets.Count - 1; i >= 0; i--)
         {
             if (targets.ElementAt(i).Key == null)
@@ -78,26 +81,26 @@ public class AreaSearch : MonoBehaviour
             targets[targets.ElementAt(i).Key] += Time.deltaTime;
         }
 
-        // Test.
-        testTargets = Targets.Keys.ToList();
+        // // Test.
+        // testTargets = Targets.Keys.ToList();
 
-        // проверяем наличие бонуса дистанции поиска.
-        DataBonus bonusDistanceSearch = null;
-        machine.Data.bonuses.TryGetValue(TypeBonus.distanceSearch, out bonusDistanceSearch);
-        if (bonusDistanceSearch != null)
-        {
-            distanceSearch = machine.Config.distanceSearch * 2 + bonusDistanceSearch.value * 2;
-            OnSetSize(distanceSearch);
-        }
-        else
-        {
-            distanceSearch = machine.Config.distanceSearch * 2;
-            OnSetSize(distanceSearch);
-        }
+        // // проверяем наличие бонуса дистанции поиска.
+        // machine.Data.bonuses.TryGetValue(TypeBonus.distanceSearch, out DataBonus bonusDistanceSearch);
+        // if (bonusDistanceSearch != null)
+        // {
+        //     distanceSearch = machine.Config.distanceSearch * 2 + bonusDistanceSearch.value * 2;
+        //     OnSetSize(distanceSearch);
+        // }
+        // else
+        // {
+        //     distanceSearch = machine.Config.distanceSearch * 2;
+        //     OnSetSize(distanceSearch);
+        // }
     }
 
-    void OnTriggerStay2D(Collider2D collider)
+    void OnTriggerEnter(Collider collider)
     {
+        // Debug.Log($"OnTriggerEnter AreaSearch: {collider.name}");
         var _baseMachine = collider.GetComponentInParent<BaseMachine>();
 
         if (_baseMachine != null)
@@ -125,6 +128,7 @@ public class AreaSearch : MonoBehaviour
                     {
                         continue;
                     }
+
                     // игнорируем проверку зоны поиска
                     if (isColliderAreaSearch)
                     {
@@ -155,12 +159,12 @@ public class AreaSearch : MonoBehaviour
                 }
                 if (!isObstacle)
                 {
-                    Debug.DrawRay(startRay, direction, Color.green);
+                    // Debug.DrawRay(startRay, direction, Color.green);
                     OnAddMachine(_baseMachine);
                 }
                 else
                 {
-                    Debug.DrawRay(startRay, direction, Color.red);
+                    // Debug.DrawRay(startRay, direction, Color.red);
                     OnRemoveMachine(_baseMachine);
                 }
                 // Tilemap tm = hit.collider.GetComponent<Tilemap>();
@@ -188,7 +192,7 @@ public class AreaSearch : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collider)
+    void OnTriggerExit(Collider collider)
     {
         var _baseMachine = collider.GetComponentInParent<BaseMachine>();
         OnRemoveMachine(_baseMachine);

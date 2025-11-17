@@ -61,7 +61,7 @@ public class CameraRemoveBackObjects : MonoBehaviour
             for (int i = 0; i < hits.Count(); i++)
             {
                 GameObject go = hits[i].collider.gameObject;
-                go.layer = LayerMask.NameToLayer("TransparentFX");;
+                go.layer = LayerMask.NameToLayer("TransparentFX");
                 // var gpuIE = go.gameObject.GetComponentInChildren<GPUInstanceEnabler>();
                 var goRenderer = go.gameObject.GetComponent<Renderer>();
                 if (goRenderer != null)

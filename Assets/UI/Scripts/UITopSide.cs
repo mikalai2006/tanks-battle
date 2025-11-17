@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +16,7 @@ public class UITopSide : MonoBehaviour
     private BaseMachine target;
     public BaseMachine Target => target;
     private float maxWidth = 280;
-    public Button fireButton;
+    // public Button fireButton;
     public Button changeCamerButton;
     
     [SerializeField] private InputActionReference pressSystem;
@@ -40,14 +38,14 @@ public class UITopSide : MonoBehaviour
 
     void Start()
     {
-        fireButton.onClick.AddListener(OnClickBtnFire);
-        pressSystem.action.performed += (InputAction.CallbackContext c) =>
-        {
-            OnClickBtnFire();
+        // fireButton.onClick.AddListener(OnClickBtnFire);
+        // pressSystem.action.performed += (InputAction.CallbackContext c) =>
+        // {
+        //     OnClickBtnFire();
 
-        };
+        // };
 
-        changeCamerButton.onClick.AddListener(OnClickBtnChangeCamera);
+        // changeCamerButton.onClick.AddListener(OnClickBtnChangeCamera);
         // pressSystem.action.performed += (InputAction.CallbackContext c) =>
         // {
         //     OnClickBtnFire();
@@ -91,14 +89,6 @@ public class UITopSide : MonoBehaviour
         }
     }
 
-    private void OnClickBtnFire()
-    {
-        if (target.Towers[0].Muzzles.Count > 0)
-        {   
-            target.Towers[0].Muzzles[0].OnShot(null);
-        }
-    }
-
     void Update()
     {
         if (target != null)
@@ -118,6 +108,7 @@ public class UITopSide : MonoBehaviour
         }
         else
         {
+            // TODO
             BaseMachine bm = _levelManager.machines.Find(m => !m.MachineLevelData.isBot);
             if (bm != null)
             {
@@ -168,7 +159,7 @@ public class UITopSide : MonoBehaviour
     public void OnChangeData(BaseMachine machine)
     {
         var oneProcentHP = maxWidth / 1; //machine.Config.hp;
-        progressHP.sizeDelta = new Vector2(oneProcentHP * machine.Data.levelDestruction, progressHP.sizeDelta.y);
+        progressHP.sizeDelta = new Vector2(oneProcentHP * (1 - machine.Data.ContainerData.levelDestruction), progressHP.sizeDelta.y);
     }
 
     public void OnToStartMenu()

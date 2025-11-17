@@ -15,8 +15,8 @@ namespace Mikalai2006.Voxel
     public class Container : MonoBehaviour
     {
         private Dictionary<float3, Voxel> dataVoxels;
-        [SerializeField] private containerData _containerData;
-        public containerData ContainerData => _containerData;
+        [SerializeField] private ContainerData _containerData;
+        public ContainerData ContainerData => _containerData;
         MeshConfig meshConfig;
         string meshName = "procedure";
         // private NativeArray<Vector3> vertices;
@@ -35,6 +35,7 @@ namespace Mikalai2006.Voxel
         private MeshRenderer meshRenderer;
         private MeshFilter meshFilter;
         private GPUInstanceEnabler gPUInstanceEnabler;
+        // private PropertyBlockChanger propertyBlockChanger;
         private MeshCollider meshCollider;
         // private Stack<RemoveVoxel> needCreateElements;
         // private Stack<RemoveVoxel> needGravityCreateElements;
@@ -44,6 +45,12 @@ namespace Mikalai2006.Voxel
         // [SerializeField] private bool isGreedy = true;
         List<Vector3> prevContacts;
         [SerializeField] private LevelManager _levelManager;
+        private System.Threading.CancellationTokenSource cancelTokenSrc;
+
+        void Awake()
+        {
+            cancelTokenSrc = new System.Threading.CancellationTokenSource();           
+        }
 
         void OnDestroy()
         {
@@ -53,6 +60,9 @@ namespace Mikalai2006.Voxel
             // newTriangles.Dispose();
             arrayVoxels.Dispose();
             arrayVoxelColors.Dispose();
+
+            cancelTokenSrc.Cancel();
+            cancelTokenSrc.Dispose();
         }
 
         // void OnCollisionEnter(Collision collision)
@@ -121,6 +131,10 @@ namespace Mikalai2006.Voxel
             {
                 gPUInstanceEnabler.SetColor(meshConfig.sOVoxelData.groups[indexGroup].color);
             }
+            // if (propertyBlockChanger != null)
+            // {
+            //     propertyBlockChanger.SetData(meshConfig.emissionValue);
+            // }
 
             // for (int i = 0; i < voxelList.Length; i++)
             // {
@@ -168,11 +182,15 @@ namespace Mikalai2006.Voxel
             }
             // }
 
-            _containerData.countVoxels = arrayVoxels.Length;
+            _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
         }
 
         public void SetData()
         {
+            // if (propertyBlockChanger != null)
+            // {
+            //     propertyBlockChanger.SetData(meshConfig.emissionValue);
+            // }
             // Vector3Int[] voxelList = meshConfig.sOVoxelData.groups[indexSubMesh].voxels.AsParallel().ToArray();
 
             arrayVoxelColors = new NativeArray<VoxelColors>(meshConfig.sOVoxelData.groups.Count + 1, Allocator.Persistent);
@@ -210,7 +228,7 @@ namespace Mikalai2006.Voxel
                 }
             }
 
-            _containerData.countVoxels = arrayVoxels.Length;
+            _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
         }
 
         public void ClearData()
@@ -259,7 +277,7 @@ namespace Mikalai2006.Voxel
                 // }
 
                 // voxelColor = WorldManager.Instance.WorldColors[block.ID - 1];
-                Color voxelColorAlpha = Color.blue;
+                Color voxelColorAlpha = block.color;
                 voxelColorAlpha.a = 1;
                 // voxelSmoothness = new Vector2(voxelColor.metallic, voxelColor.smoothness);
 
@@ -448,7 +466,7 @@ namespace Mikalai2006.Voxel
 
         public MeshData UploadMesh(bool isDrawMesh)
         {
-            meshData.mesh.name = meshName;
+            meshData.mesh.name = $"{meshName}_{gameObject.name}";
             meshData.UploadMesh();
 
             if (isDrawMesh)
@@ -538,63 +556,68 @@ namespace Mikalai2006.Voxel
             return meshData;
         }
 
-        public Mesh UploadMeshGreedy(bool isDrawMesh)
+        async public UniTask<Mesh> UploadMeshGreedy(bool isDrawMesh)
         {
-            if (meshRenderer == null)
-                ConfigureComponents();
+            if (!cancelTokenSrc.IsCancellationRequested)
+            {
+                if (meshRenderer == null)
+                    ConfigureComponents();
 
-            meshData.ClearData();
+                meshData.ClearData();
 
-            // meshFilter.sharedMesh = meshData.mesh;
+                Mesh mesh = meshData.mesh;  //meshFilter.sharedMesh;
 
-            Mesh mesh = meshData.mesh;  //meshFilter.sharedMesh;
-            mesh.name = meshName;
+                // meshFilter.sharedMesh = meshData.mesh;
+
+                mesh.name = $"{meshName}_{gameObject.name}";
 #if UNITY_EDITOR
-            float startTime = Time.realtimeSinceStartup;
+                float startTime = Time.realtimeSinceStartup;
 #endif
-            var meshArray = Mesh.AllocateWritableMeshData(mesh);
-            var _job = new MeshGreedyJob();
-            _job.mesh = meshArray[0];
-            _job.chunkSize = new int3(meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y, meshConfig.sOVoxelData.Bounds.z);
-            _job.blockSize = 1;
-            _job.voxelColors = arrayVoxelColors;
-            _job.voxels = arrayVoxels;
-            _job.Schedule().Complete();
+                var meshArray = Mesh.AllocateWritableMeshData(mesh);
+                var _job = new MeshGreedyJob();
+                _job.mesh = meshArray[0];
+                _job.chunkSize = new int3(meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y, meshConfig.sOVoxelData.Bounds.z);
+                _job.blockSize = 1;
+                _job.voxelColors = arrayVoxelColors;
+                _job.voxels = arrayVoxels;
+                _job.ScheduleByRef().Complete();
 
-            Mesh.ApplyAndDisposeWritableMeshData(meshArray, mesh);
+                Mesh.ApplyAndDisposeWritableMeshData(meshArray, mesh);
 
-            // FIXME: For some reason setting bounds directly doesn't work so this is needed as a workaround, investigate
+                // FIXME: For some reason setting bounds directly doesn't work so this is needed as a workaround, investigate
 
-            // mesh.Optimize();
+                // mesh.Optimize();
 
-            // mesh.RecalculateNormals();
+                // mesh.RecalculateNormals();
 
-            // mesh.RecalculateBounds();
+                // mesh.RecalculateBounds();
 
-            // mesh.UploadMeshData(false);
-            mesh.RecalculateBounds();
+                // mesh.UploadMeshData(false);
+                mesh.RecalculateBounds();
 
-            if (isDrawMesh)
-            {
-                meshFilter.sharedMesh = mesh;
+                if (isDrawMesh)
+                {
+                    meshFilter.sharedMesh = mesh;
 
-                // _job.voxels.Dispose();
-            }
-            else
-            {
-                // подставляем готовый меш, чтобы получить GPU Instancing в начале
-                meshFilter.sharedMesh = meshConfig.sOVoxelData.startMesh;
-            }
+                    // _job.voxels.Dispose();
+                }
+                else
+                {
+                    // подставляем готовый меш, чтобы получить GPU Instancing в начале
+                    meshFilter.sharedMesh = meshConfig.sOVoxelData.startMesh;
+                }
 
-            if (meshFilter.sharedMesh.vertices.Length > 3)
-            {
-                // meshData.mesh.Optimize();
-                meshCollider.sharedMesh = meshFilter.sharedMesh; //meshData.mesh;
-            }
+                if (meshFilter.sharedMesh.vertices.Length > 3)
+                {
+                    // meshData.mesh.Optimize();
+                    meshCollider.sharedMesh = meshFilter.sharedMesh; //meshData.mesh;
+                }
 #if UNITY_EDITOR
-            Debug.Log($"Time greedy mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                // Debug.Log($"Time greedy mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
 #endif
             return mesh;
+            }
+            return default;
         }
 
         // void Update()
@@ -611,6 +634,10 @@ namespace Mikalai2006.Voxel
             {
                 gPUInstanceEnabler = gameObject.AddComponent<GPUInstanceEnabler>();
             }
+            // if (meshConfig.emissionValue > 0)
+            // {
+            //     propertyBlockChanger = gameObject.AddComponent<PropertyBlockChanger>();
+            // }
 
             // устанавливаем режим отображения теней.
             meshRenderer.shadowCastingMode = meshConfig.shadowCastingMode;
@@ -650,399 +677,443 @@ namespace Mikalai2006.Voxel
             return voxel;
         }
 
-        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode, Vector3 direction)
+        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode, Vector3 direction, Vector3 normal)
         {
             if (!meshConfig.isDestructible)
             {
                 return;
             }
 
-            float startTime = Time.realtimeSinceStartup;
-
-            pointCollision = _pointCollision;
-
-            // проверяем - было ли попадание в это место.
-            for (int i = 0; i < prevContacts.Count; i++)
+            if (!cancelTokenSrc.IsCancellationRequested)
             {
-                if (Helpers.IsInsideSphere(pointCollision, prevContacts[i], radiusExplode))
+                float startTime = Time.realtimeSinceStartup;
+
+                pointCollision = _pointCollision;
+
+                // проверяем - было ли попадание в это место.
+                for (int i = 0; i < prevContacts.Count; i++)
                 {
-                    Vector3 worldPoint = _explodeGameObject.transform.parent.TransformPoint(pointCollision);
-                    var normalizeVector = direction.normalized;
-                    float scaleValue = _explodeGameObject.transform.lossyScale.x;
-                    // Debug.Log($"scale={_explodeGameObject.transform.lossyScale}");
-                    Vector3 worldPointCollisionWithOffset = worldPoint + (normalizeVector * radiusExplode * scaleValue);
-                    pointCollision = _explodeGameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
-                    // Debug.Log($"point  collision {_pointCollision} => new point => {pointCollision}[direction={direction}/{normalizeVector}]");
-                }
-            }
-            prevContacts.Add(pointCollision);
-
-            // explodeGameObject = _explodeGameObject;
-
-            // var list = new Dictionary<Vector3, Voxel>();
-            // var x = Mathf.RoundToInt(pos.x);
-            // var y = Mathf.RoundToInt(pos.y);
-            // var z = Mathf.RoundToInt(pos.z);
-            // Debug.Log($"Vector3Int {new Vector3(x, y, z)}, [{pos}]");
-
-            // Voxel first;
-            // List<Vector3> checkPositions = new List<Vector3>()
-            //     {
-            //         new Vector3(x, y, z),
-            //         new Vector3(x+1, y, z),
-            //         new Vector3(x-1, y, z),
-            //         new Vector3(x, y+1, z),
-            //         new Vector3(x, y-1, z),
-            //         new Vector3(x, y, z+1),
-            //         new Vector3(x, y, z-1)
-            //     };
-
-            float3[] keys = dataVoxels.Keys.ToArray();
-            NativeArray<float3> _needCreateElements = new NativeArray<float3>(keys.Length, Allocator.Persistent);
-            NativeArray<float3> _needRemoveElements = new NativeArray<float3>(keys.Length, Allocator.Persistent);
-            NativeArray<float3> points = new NativeArray<float3>(keys, Allocator.Persistent);
-            // points.CopyFrom(keys);
-
-            var collisionJob = new CheckCollisionJob
-            {
-                _needCreateElements = _needCreateElements,
-                _pointCollision = pointCollision,
-                points = points,
-                needRemoveElements = _needRemoveElements,
-                _radiusExplode = radiusExplode,
-                maxRadius = GameManager.Instance.Settings.maxRadiusCreateVoxels
-            };
-            JobHandle collisionJobHandle = collisionJob.Schedule(points.Length, 64);
-            collisionJobHandle.Complete(); // Or use dependency
-
-            // Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
-            List<RemoveVoxel> needCreateElements = new();
-            for (int el = 0; el < collisionJob._needCreateElements.Length; el++)
-            {
-                if (!collisionJob._needCreateElements[el].Equals(float3.zero))
-                {
-                    needCreateElements.Add(new RemoveVoxel()
+                    if (Helpers.IsInsideSphere(pointCollision, prevContacts[i], radiusExplode))
                     {
-                        position = collisionJob._needCreateElements[el],
-                        color = dataVoxels[collisionJob._needCreateElements[el]].color
-                    });
+                        Vector3 worldPoint = _explodeGameObject.transform.parent.TransformPoint(pointCollision);
+                        var normalizeVector = direction.normalized;
+                        float scaleValue = _explodeGameObject.transform.lossyScale.x;
+                        // Debug.Log($"scale={_explodeGameObject.transform.lossyScale}");
+                        Vector3 worldPointCollisionWithOffset = worldPoint + (normalizeVector * radiusExplode * scaleValue);
+                        pointCollision = _explodeGameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
+                        // Debug.Log($"point  collision {_pointCollision} => new point => {pointCollision}[direction={direction}/{normalizeVector}]");
+                    }
                 }
-            }
-            ;
-            // Debug.Log($"Time JOB create data2: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
+                prevContacts.Add(pointCollision);
 
-            for (int el = 0; el < collisionJob.needRemoveElements.Length; el++)
-            {
-                if (!collisionJob.needRemoveElements[el].Equals(float3.zero))
+                // explodeGameObject = _explodeGameObject;
+
+                // var list = new Dictionary<Vector3, Voxel>();
+                // var x = Mathf.RoundToInt(pos.x);
+                // var y = Mathf.RoundToInt(pos.y);
+                // var z = Mathf.RoundToInt(pos.z);
+                // Debug.Log($"Vector3Int {new Vector3(x, y, z)}, [{pos}]");
+
+                // Voxel first;
+                // List<Vector3> checkPositions = new List<Vector3>()
+                //     {
+                //         new Vector3(x, y, z),
+                //         new Vector3(x+1, y, z),
+                //         new Vector3(x-1, y, z),
+                //         new Vector3(x, y+1, z),
+                //         new Vector3(x, y-1, z),
+                //         new Vector3(x, y, z+1),
+                //         new Vector3(x, y, z-1)
+                //     };
+
+                float3[] keys = dataVoxels.Keys.ToArray();
+                NativeArray<float3> _needCreateElements = new NativeArray<float3>(keys.Length, Allocator.Persistent);
+                NativeArray<float3> _needRemoveElements = new NativeArray<float3>(keys.Length, Allocator.Persistent);
+                NativeArray<float3> points = new NativeArray<float3>(keys, Allocator.Persistent);
+                // points.CopyFrom(keys);
+
+                var collisionJob = new CheckCollisionJob
                 {
-                    float3 pos = collisionJob.needRemoveElements[el];
-                    dataVoxels.Remove(pos);
-                    Vector3Int posInt = Vector3Int.FloorToInt(pos);
+                    _needCreateElements = _needCreateElements,
+                    _pointCollision = pointCollision,
+                    points = points,
+                    needRemoveElements = _needRemoveElements,
+                    _radiusExplode = radiusExplode,
+                    maxRadius = GameManager.Instance.Settings.maxRadiusCreateVoxels
+                };
+                JobHandle collisionJobHandle = collisionJob.ScheduleByRef(points.Length, 1);
+                collisionJobHandle.Complete(); // Or use dependency
 
-                    var vox = arrayVoxels[Helpers.To1D(posInt.x, posInt.y, posInt.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
-                    vox.type = VoxelType.Destroyed;
-                    // vox = default;
-                    arrayVoxels[Helpers.To1D(posInt.x, posInt.y, posInt.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = vox;
+                // Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
+                List<RemoveVoxel> needCreateElements = new();
+                for (int el = 0; el < collisionJob._needCreateElements.Length; el++)
+                {
+                    if (!collisionJob._needCreateElements[el].Equals(float3.zero))
+                    {
+                        needCreateElements.Add(new RemoveVoxel()
+                        {
+                            position = collisionJob._needCreateElements[el],
+                            color = dataVoxels[collisionJob._needCreateElements[el]].color
+                        });
+                    }
                 }
-            };
+                ;
+                // Debug.Log($"Time JOB create data2: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
 
-            // Debug.Log($"collisionJob._needCreateElements={collisionJob._needCreateElements.Length}, needRemoveElements={collisionJob.needRemoveElements.Length}");
-
-            // for (int j = 0; j < keys.Length; j++)
-            // {
-            //     Vector3 posx = keys.ElementAt(j);
-            //     if (TestHelpers.IsInsideSphere(posx, _pointCollision, 3))
-            //     {
-            //         // list.Add(posx, data.ElementAt(j).Value);
-            //         // data[posx] = new Voxel()
-            //         // {
-            //         //     ID = 0,
-            //         // };
-            //         data.Remove(posx);
-
-            //         // needCreateElements.Push(posx);
-            //     }
-            // }
-
-            // list.Add(new Vector3(x,y,z),data[new Vector3(x,y,z)]);
-
-            Debug.Log($"Time find exploded data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
-            _containerData.countVoxelsDestructible = _containerData.countVoxels - dataVoxels.Count();
-            
-            // if (numberIterate < 2)
-            // {
-            //     await ExposionVoxels(_pointCollision, isDrawMesh, _explodeGameObject, radiusExplode, numberIterate + 1);
-            // }
-            
-
-            await CheckTopAirVoxels(_explodeGameObject);
-
-            if (dataVoxels.Count >= 10 && needCreateElements.Count > 0)
-            {
-                if (!meshConfig.isGreedy)
+                int countRemoved = 0;
+                for (int el = 0; el < collisionJob.needRemoveElements.Length; el++)
                 {
-                    GenerateMesh();
-                    UploadMesh(isDrawMesh);
-                    // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
-                }
-                else
-                {
-                    UploadMeshGreedy(isDrawMesh);
-                }
-            }
+                    if (!collisionJob.needRemoveElements[el].Equals(float3.zero))
+                    {
+                        float3 pos = collisionJob.needRemoveElements[el];
+                        dataVoxels.Remove(pos);
+                        Vector3Int posInt = Vector3Int.FloorToInt(pos);
 
-            BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
-            if (bm)
-            {
-                bm.OnRefreshValueDestructible();
-            }
+                        var vox = arrayVoxels[Helpers.To1D(posInt.x, posInt.y, posInt.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
+                        vox.type = VoxelType.Destroyed;
+                        // vox = default;
+                        arrayVoxels[Helpers.To1D(posInt.x, posInt.y, posInt.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = vox;
 
-
-            if (needCreateElements.Count > 0)
-            {
-                // Debug.Log($"Time upload mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
-                // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
-                // Debug.Log($"needCreateElements {needCreateElements.Count} voxels!");
-                // StartCoroutine(createGO());
-                await CreateECS(needCreateElements, Mathf.Min(radiusExplode, GameManager.Instance.Settings.maxRadiusCreateVoxels), direction);
-            }
-
-
-            if (dataVoxels.Count() < 10)
-            {
-                transform.gameObject.SetActive(false);
-            }
-
-            _needCreateElements.Dispose();
-            _needRemoveElements.Dispose();
-            points.Dispose();
-        }
-
-        async private UniTask CheckTopAirVoxels(GameObject _explodeGameObject)
-        {
-            float startTime = Time.realtimeSinceStartup;
-            List<KeyValuePair<float3, Voxel>> airVoxels = new List<KeyValuePair<float3, Voxel>>();
-            // var groupY = arrayVoxels.GroupBy(x => x.position.y);
-            // Debug.Log($"groupY: {groupY.Count()}");
-
-            float maxY = -1f;
-            // for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
-            // {
-            //     var isY = arrayVoxels.FirstOrDefault(x => x.position.y == y && x.type != VoxelType.Destroyed && x.type != VoxelType.Air);
-
-            //     if (isY.type == default)
-            //     {
-            //         maxY = y;
-            //         break;
-            //     }
-            // }
-            // Debug.Log($"maxY={maxY}");
-
-            // // filter jobs.
-            // JobHandle lastJobHandle = default;
-            // for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
-            // {
-            //     NativeList<int> filteredIndices = new NativeList<int>(Allocator.TempJob);
-            //     FilterYJob filterJob = new FilterYJob
-            //     {
-            //         dataToFilter = arrayVoxels,
-            //         y = y
-            //     };
-
-            //     // ScheduleAppend добавит индексы, которые возвращают true в Execute, в filteredIndices.
-            //     lastJobHandle = filterJob.ScheduleAppend(filteredIndices, arrayVoxels.Length, lastJobHandle);
-            //     lastJobHandle.Complete(); // Дождитесь завершения работы.
-
-            //     // int countY = data.Where(v => (int)v.Key.y == y).Count();
-
-            //     if (filteredIndices.Length == 0)
-            //     {
-            //         maxY = y;
-            //     }
-
-            //     // if (maxY != -1)
-            //     // {
-            //     //     for (int i = 0; i < filteredIndices.Length; i++)
-            //     //     {
-            //     //         // airVoxels.Add(arrayVoxels[filteredIndices[i]].position, arrayVoxels[filteredIndices[i]]);
-            //     //         needGravityCreateElements.Push(new RemoveVoxel()
-            //     //         {
-            //     //             color = arrayVoxels[filteredIndices[i]].color,
-            //     //             position = arrayVoxels[filteredIndices[i]].position
-            //     //         });
-            //     //     }
-            //     // }
-
-            //     filteredIndices.Dispose();
-
-            //     if (maxY != -1)
-            //     {
-            //         break;
-            //     }
-            //     // // bool noBottomVoxel = false;
-            //     // int countVoxel = 0;
-
-            //     // for (int x = 0; x < meshConfig.sOVoxelData.Bounds.z; x++) // Проход по второму измерению (Y)
-            //     // {
-
-            //     //     for (int z = 0; z < meshConfig.sOVoxelData.Bounds.y; z++) // Проход по третьему измерению (Z)
-            //     //     {
-            //     //         Voxel voxel = arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
-            //     //         if (voxel.type.HasFlag(VoxelType.Destroyed))
-            //     //         {
-            //     //             noBottomVoxel = true;
-            //     //         }
-
-            //     //         if (noBottomVoxel && !voxel.type.HasFlag(VoxelType.Destroyed))
-            //     //         {
-            //     //             airVoxels.Add(voxel);
-            //     //             voxel.type = VoxelType.Destroyed;
-            //     //             // vox = default;
-            //     //             arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = voxel;
-            //     //         }
-            //     //     }
-            //     // }
-            // }
-
-
-            // find jobs.
-            JobHandle lastJobHandle = default;
-            for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
-            {
-                NativeArray<bool> foundResult = new NativeArray<bool>(1, Allocator.TempJob);
-                FilterYJobFind findJob = new FilterYJobFind
-                {
-                    data = arrayVoxels,
-                    y = y,
-                    found = foundResult
+                        countRemoved++;
+                    }
                 };
 
+                // Debug.Log($"collisionJob._needCreateElements={collisionJob._needCreateElements.Length}, needRemoveElements={collisionJob.needRemoveElements.Length}");
 
-                lastJobHandle = findJob.Schedule(lastJobHandle);
-                lastJobHandle.Complete();
-
-                if (!foundResult[0])
-                {
-                    maxY = y;
-                }
-
-                // if (maxY != -1)
+                // for (int j = 0; j < keys.Length; j++)
                 // {
-                //     for (int i = 0; i < filteredIndices.Length; i++)
+                //     Vector3 posx = keys.ElementAt(j);
+                //     if (TestHelpers.IsInsideSphere(posx, _pointCollision, 3))
                 //     {
-                //         // airVoxels.Add(arrayVoxels[filteredIndices[i]].position, arrayVoxels[filteredIndices[i]]);
-                //         needGravityCreateElements.Push(new RemoveVoxel()
-                //         {
-                //             color = arrayVoxels[filteredIndices[i]].color,
-                //             position = arrayVoxels[filteredIndices[i]].position
-                //         });
+                //         // list.Add(posx, data.ElementAt(j).Value);
+                //         // data[posx] = new Voxel()
+                //         // {
+                //         //     ID = 0,
+                //         // };
+                //         data.Remove(posx);
+
+                //         // needCreateElements.Push(posx);
                 //     }
                 // }
 
-                foundResult.Dispose();
+                // list.Add(new Vector3(x,y,z),data[new Vector3(x,y,z)]);
 
-                if (maxY != -1)
-                {
-                    break;
-                }
-                // // bool noBottomVoxel = false;
-                // int countVoxel = 0;
-
-                // for (int x = 0; x < meshConfig.sOVoxelData.Bounds.z; x++) // Проход по второму измерению (Y)
+                // Debug.Log($"Time find exploded data: {(Time.realtimeSinceStartup - startTime) * 1000f} ms; \r\ncountRemoved={countRemoved}, needCreate={needCreateElements.Count}");
+                _containerData.countVoxelsDestructible += countRemoved;
+                
+                // if (numberIterate < 2)
                 // {
-
-                //     for (int z = 0; z < meshConfig.sOVoxelData.Bounds.y; z++) // Проход по третьему измерению (Z)
-                //     {
-                //         Voxel voxel = arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
-                //         if (voxel.type.HasFlag(VoxelType.Destroyed))
-                //         {
-                //             noBottomVoxel = true;
-                //         }
-
-                //         if (noBottomVoxel && !voxel.type.HasFlag(VoxelType.Destroyed))
-                //         {
-                //             airVoxels.Add(voxel);
-                //             voxel.type = VoxelType.Destroyed;
-                //             // vox = default;
-                //             arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = voxel;
-                //         }
-                //     }
+                //     await ExposionVoxels(_pointCollision, isDrawMesh, _explodeGameObject, radiusExplode, numberIterate + 1);
                 // }
-            }
 
-
-
-
-            List<RemoveVoxel> needGravityCreateElements = new();
-
-            if (maxY > -1)
-            {
-                airVoxels = dataVoxels.Where(v => v.Key.y > maxY && !v.Value.type.HasFlag(VoxelType.Destroyed)).OrderBy(t => -t.Key.y).ToList();//.ToDictionary(t => t.Key, t => t.Value);
-
-                // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}");
-
-
-                for (int i = 0; i < airVoxels.Count; i++)
+                // проверяем видим ли компонент в камере.
+                bool isVisibleExplodeObject = false;
+                Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_levelManager.Camera);
+                if (GeometryUtility.TestPlanesAABB(planes, meshRenderer.bounds))
                 {
-                    var voxelItem = airVoxels.ElementAt(i);
-                    Vector3Int pos = Vector3Int.FloorToInt(voxelItem.Value.position);
+                    isVisibleExplodeObject = true;
+                }
 
-                    var index = Helpers.To1D(pos.x, pos.y, pos.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y);
+                // если прошли предыдущую проверку, выполняем райкаст, чтобы проверить препятствия.
+                if (isVisibleExplodeObject)
+                {
+                    Vector3 worldPointCollision = transform.TransformPoint(_pointCollision);
+                    Vector3 dir = (worldPointCollision - _levelManager.Camera.transform.position).normalized;
+                    float distance = Vector3.Distance(worldPointCollision, _levelManager.Camera.transform.position);
 
-                    var voxelItem2 = arrayVoxels[index];
-                    voxelItem2.type = VoxelType.Destroyed;
-                    // vox = default;
-                    arrayVoxels[index] = voxelItem2;
-                    dataVoxels.Remove(voxelItem.Key);
-
-                    needGravityCreateElements.Add(new RemoveVoxel()
+                    if (Physics.Raycast(_levelManager.Camera.transform.position, dir, out RaycastHit hit, distance, LayerMask.GetMask("Wall", "Machine", "Build", "Nature")))
                     {
-                        position = voxelItem2.position,
-                        color = voxelItem2.color
-                    });
+                        // Debug.DrawRay(_levelManager.Camera.transform.position, dir * distance, Color.yellow,10);
+                        // Debug.Log($"hits:::::{hit.transform.name}/{transform.name}");
+                        if (hit.transform != transform)
+                        {
+                            isVisibleExplodeObject = false;
+                        }
+                    }
+                }
+                
+                // if (!isVisibleExplodeObject)
+                // {
+                //     Debug.Log($"container not visible");
+                // } else
+                // {
+                //     Debug.Log($"container visible");
+                // }
+
+                await CheckTopAirVoxels(_explodeGameObject, isVisibleExplodeObject);
+
+                if (dataVoxels.Count >= 10 && needCreateElements.Count > 0)
+                {
+                    if (!meshConfig.isGreedy)
+                    {
+                        GenerateMesh();
+                        UploadMesh(isDrawMesh);
+                        // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
+                    }
+                    else
+                    {
+                        UploadMeshGreedy(isDrawMesh).Forget();
+                    }
                 }
 
+                BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
+                if (bm)
+                {
+                    bm.RefreshHP();
+                }
+
+
+                if (needCreateElements.Count > 0 && isVisibleExplodeObject)
+                {
+                    // Debug.Log($"Time upload mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                    // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
+                    // Debug.Log($"needCreateElements {needCreateElements.Count} voxels!");
+                    // StartCoroutine(createGO());
+                    await CreateECS(needCreateElements, Mathf.Min(radiusExplode, GameManager.Instance.Settings.maxRadiusCreateVoxels), direction, normal);
+                }
+
+
+                if (dataVoxels.Count() < 10)
+                {
+                    transform.gameObject.SetActive(false);
+                }
+
+                _needCreateElements.Dispose();
+                _needRemoveElements.Dispose();
+                points.Dispose();
             }
-            Debug.Log($"Time checkAirVoxels1: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
+        }
 
-            // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
-
-            _containerData.countVoxelsDestructible = _containerData.countVoxels - dataVoxels.Count();
-            
-            BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
-            if (bm)
+        async private UniTask CheckTopAirVoxels(GameObject _explodeGameObject, bool isVisibleExplodeObject)
+        {
+            if (!cancelTokenSrc.IsCancellationRequested)
             {
-                bm.OnRefreshValueDestructible();
+                float startTime = Time.realtimeSinceStartup;
+                List<KeyValuePair<float3, Voxel>> airVoxels = new List<KeyValuePair<float3, Voxel>>();
+                // var groupY = arrayVoxels.GroupBy(x => x.position.y);
+                // Debug.Log($"groupY: {groupY.Count()}");
+
+                float maxY = -1f;
+                // for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
+                // {
+                //     var isY = arrayVoxels.FirstOrDefault(x => x.position.y == y && x.type != VoxelType.Destroyed && x.type != VoxelType.Air);
+
+                //     if (isY.type == default)
+                //     {
+                //         maxY = y;
+                //         break;
+                //     }
+                // }
+                // Debug.Log($"maxY={maxY}");
+
+                // // filter jobs.
+                // JobHandle lastJobHandle = default;
+                // for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
+                // {
+                //     NativeList<int> filteredIndices = new NativeList<int>(Allocator.TempJob);
+                //     FilterYJob filterJob = new FilterYJob
+                //     {
+                //         dataToFilter = arrayVoxels,
+                //         y = y
+                //     };
+
+                //     // ScheduleAppend добавит индексы, которые возвращают true в Execute, в filteredIndices.
+                //     lastJobHandle = filterJob.ScheduleAppend(filteredIndices, arrayVoxels.Length, lastJobHandle);
+                //     lastJobHandle.Complete(); // Дождитесь завершения работы.
+
+                //     // int countY = data.Where(v => (int)v.Key.y == y).Count();
+
+                //     if (filteredIndices.Length == 0)
+                //     {
+                //         maxY = y;
+                //     }
+
+                //     // if (maxY != -1)
+                //     // {
+                //     //     for (int i = 0; i < filteredIndices.Length; i++)
+                //     //     {
+                //     //         // airVoxels.Add(arrayVoxels[filteredIndices[i]].position, arrayVoxels[filteredIndices[i]]);
+                //     //         needGravityCreateElements.Push(new RemoveVoxel()
+                //     //         {
+                //     //             color = arrayVoxels[filteredIndices[i]].color,
+                //     //             position = arrayVoxels[filteredIndices[i]].position
+                //     //         });
+                //     //     }
+                //     // }
+
+                //     filteredIndices.Dispose();
+
+                //     if (maxY != -1)
+                //     {
+                //         break;
+                //     }
+                //     // // bool noBottomVoxel = false;
+                //     // int countVoxel = 0;
+
+                //     // for (int x = 0; x < meshConfig.sOVoxelData.Bounds.z; x++) // Проход по второму измерению (Y)
+                //     // {
+
+                //     //     for (int z = 0; z < meshConfig.sOVoxelData.Bounds.y; z++) // Проход по третьему измерению (Z)
+                //     //     {
+                //     //         Voxel voxel = arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
+                //     //         if (voxel.type.HasFlag(VoxelType.Destroyed))
+                //     //         {
+                //     //             noBottomVoxel = true;
+                //     //         }
+
+                //     //         if (noBottomVoxel && !voxel.type.HasFlag(VoxelType.Destroyed))
+                //     //         {
+                //     //             airVoxels.Add(voxel);
+                //     //             voxel.type = VoxelType.Destroyed;
+                //     //             // vox = default;
+                //     //             arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = voxel;
+                //     //         }
+                //     //     }
+                //     // }
+                // }
+
+
+                // find jobs.
+                JobHandle lastJobHandle = default;
+                for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
+                {
+                    NativeArray<bool> foundResult = new NativeArray<bool>(1, Allocator.TempJob);
+                    FilterYJobFind findJob = new FilterYJobFind
+                    {
+                        data = arrayVoxels,
+                        y = y,
+                        found = foundResult
+                    };
+
+
+                    lastJobHandle = findJob.Schedule(lastJobHandle);
+                    lastJobHandle.Complete();
+
+                    if (!foundResult[0])
+                    {
+                        maxY = y;
+                    }
+
+                    // if (maxY != -1)
+                    // {
+                    //     for (int i = 0; i < filteredIndices.Length; i++)
+                    //     {
+                    //         // airVoxels.Add(arrayVoxels[filteredIndices[i]].position, arrayVoxels[filteredIndices[i]]);
+                    //         needGravityCreateElements.Push(new RemoveVoxel()
+                    //         {
+                    //             color = arrayVoxels[filteredIndices[i]].color,
+                    //             position = arrayVoxels[filteredIndices[i]].position
+                    //         });
+                    //     }
+                    // }
+
+                    foundResult.Dispose();
+
+                    if (maxY != -1)
+                    {
+                        break;
+                    }
+                    // // bool noBottomVoxel = false;
+                    // int countVoxel = 0;
+
+                    // for (int x = 0; x < meshConfig.sOVoxelData.Bounds.z; x++) // Проход по второму измерению (Y)
+                    // {
+
+                    //     for (int z = 0; z < meshConfig.sOVoxelData.Bounds.y; z++) // Проход по третьему измерению (Z)
+                    //     {
+                    //         Voxel voxel = arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
+                    //         if (voxel.type.HasFlag(VoxelType.Destroyed))
+                    //         {
+                    //             noBottomVoxel = true;
+                    //         }
+
+                    //         if (noBottomVoxel && !voxel.type.HasFlag(VoxelType.Destroyed))
+                    //         {
+                    //             airVoxels.Add(voxel);
+                    //             voxel.type = VoxelType.Destroyed;
+                    //             // vox = default;
+                    //             arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = voxel;
+                    //         }
+                    //     }
+                    // }
+                }
+
+
+
+
+                List<RemoveVoxel> needGravityCreateElements = new();
+
+                if (maxY > -1)
+                {
+                    airVoxels = dataVoxels.Where(v => v.Key.y > maxY && !v.Value.type.HasFlag(VoxelType.Destroyed)).OrderBy(t => -t.Key.y).ToList();//.ToDictionary(t => t.Key, t => t.Value);
+
+                    // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}");
+
+
+                    for (int i = 0; i < airVoxels.Count; i++)
+                    {
+                        var voxelItem = airVoxels.ElementAt(i);
+                        Vector3Int pos = Vector3Int.FloorToInt(voxelItem.Value.position);
+
+                        var index = Helpers.To1D(pos.x, pos.y, pos.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y);
+
+                        var voxelItem2 = arrayVoxels[index];
+                        voxelItem2.type = VoxelType.Destroyed;
+                        // vox = default;
+                        arrayVoxels[index] = voxelItem2;
+                        dataVoxels.Remove(voxelItem.Key);
+
+                        needGravityCreateElements.Add(new RemoveVoxel()
+                        {
+                            position = voxelItem2.position,
+                            color = voxelItem2.color
+                        });
+                    }
+
+                    // Обновляем данные о разрушенных вокселях.
+                    _containerData.countVoxelsDestructible += airVoxels.Count();
+                    
+                    BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
+                    if (bm)
+                    {
+                        bm.RefreshHP();
+                    }
+                }
+
+                // Debug.Log($"Time checkAirVoxels1: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
+
+                // Debug.Log($"Time checkAirVoxels2: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={needGravityCreateElements.Count}, maxY={maxY}");
+
+
+
+                if (needGravityCreateElements.Count > 0 && isVisibleExplodeObject)
+                {
+                    // CreateGravityObjectsAsync().Forget();
+                    // await UniTask.NextFrame();
+                    CreateGravityECS(needGravityCreateElements).Forget();
+                }
+
+
+                // // Debug.Log($"airVoxels.count={airVoxels.Count}");
+
+
+                // if (airVoxels.Count > 0)
+                // {
+                //     if (!meshConfig.isGreedy)
+                //     {
+                //         GenerateMesh();
+                //         UploadMesh(true);
+                //         // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
+                //     }
+                //     else
+                //     {
+                //         UploadMeshGreedy(true);
+                //     }
+                // }
+
+
+                // Debug.Log($"Time checkAirVoxels: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={airVoxels.Count}");
             }
-
-
-            if (needGravityCreateElements.Count > 0)
-            {
-                // CreateGravityObjectsAsync().Forget();
-                // await UniTask.NextFrame();
-                CreateGravityECS(needGravityCreateElements).Forget();
-            }
-
-
-            // // Debug.Log($"airVoxels.count={airVoxels.Count}");
-
-
-            // if (airVoxels.Count > 0)
-            // {
-            //     if (!meshConfig.isGreedy)
-            //     {
-            //         GenerateMesh();
-            //         UploadMesh(true);
-            //         // Debug.Log("Time generate mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
-            //     }
-            //     else
-            //     {
-            //         UploadMeshGreedy(true);
-            //     }
-            // }
-
-
-            // Debug.Log($"Time checkAirVoxels: {(Time.realtimeSinceStartup - startTime) * 1000f}. \r\n airVoxels.count={airVoxels.Count}");
         }
 
         // public Dictionary<Vector3, Voxel> ExposionVoxels2(Vector3 _pointCollision, bool isDrawMesh, Collision _collision)
@@ -1231,40 +1302,43 @@ namespace Mikalai2006.Voxel
         //     return list;
         // }
 
-        public async UniTask CreateECS(List<RemoveVoxel> needCreateElements, float radiusExplode, Vector3 direction)
+        public async UniTask CreateECS(List<RemoveVoxel> needCreateElements, float radiusExplode, Vector3 direction, Vector3 normal)
         {
-            float startTime = Time.realtimeSinceStartup;
-
-            needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
-            List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
-            var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needCreateElements.Count);
-
-            for (int i = 0; i < maxCount; i++)
+            if (!cancelTokenSrc.IsCancellationRequested)
             {
-                var position = transform.TransformPoint(needCreateElements[i].position);
-                var rot = Quaternion.Euler(
-                    UnityEngine.Random.Range(0, 90),
-                    UnityEngine.Random.Range(0, 90),
-                    UnityEngine.Random.Range(0, 90)
-                );
-                var dir = rot * -direction;
-                listData.Add(new ECSDataSpawn
+                float startTime = Time.realtimeSinceStartup;
+
+                needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
+                List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
+                var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needCreateElements.Count);
+
+                for (int i = 0; i < maxCount; i++)
                 {
-                    color = needCreateElements[i].color,
-                    direction = dir, // UnityEngine.Random.onUnitSphere,
-                    forceAmount = UnityEngine.Random.Range(radiusExplode, 300 * radiusExplode),
-                    lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
-                    position = position,
-                    scale = GameManager.Instance.Settings.scaleObjects
-                });
+                    var reflexDirection = Vector3.Reflect(direction, normal);
+                    var rot = Quaternion.Euler(
+                        UnityEngine.Random.Range(0, 90),
+                        UnityEngine.Random.Range(0, 90),
+                        UnityEngine.Random.Range(0, 90)
+                    );
+                    var dir = rot * reflexDirection;
+                    listData.Add(new ECSDataSpawn
+                    {
+                        color = needCreateElements[i].color,
+                        direction = i % 50 != 0 ?  dir.normalized : UnityEngine.Random.onUnitSphere.normalized, // UnityEngine.Random.onUnitSphere,
+                        forceAmount = UnityEngine.Random.Range(radiusExplode, 100 * radiusExplode),
+                        lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
+                        position = transform.TransformPoint(needCreateElements[i].position),
+                        scale = GameManager.Instance.Settings.scaleObjects
+                    });
+                }
+
+                // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                // Debug.Log($"CreateGravityECS: {listData.Count}");
+
+                // await UniTask.NextFrame();
+                _levelManager.ECSManager.UpdateDataDots(listData).Forget();
+                // Debug.Log($"Time CreateESC: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateECS: {maxCount}");
             }
-
-            // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
-            // Debug.Log($"CreateGravityECS: {listData.Count}");
-
-            // await UniTask.NextFrame();
-            _levelManager.ECSManager.UpdateDataDots(listData).Forget();
-            Debug.Log($"Time CreateESC: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateECS: {maxCount}");
         }
 
         // public async UniTask CreateObjectsAsync()
@@ -1328,32 +1402,34 @@ namespace Mikalai2006.Voxel
 
         async private UniTaskVoid CreateGravityECS(List<RemoveVoxel> needGravityCreateElements)
         {
-
-            float startTime = Time.realtimeSinceStartup;
-
-            needGravityCreateElements = needGravityCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
-            List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
-            var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needGravityCreateElements.Count); //needGravityCreateElements.Count; //Mathf.Min(200, needGravityCreateElements.Count);
-
-            for (int i = 0; i < maxCount; i++)
+            if (!cancelTokenSrc.IsCancellationRequested)
             {
-                listData.Add(new ECSDataSpawn
+                float startTime = Time.realtimeSinceStartup;
+
+                needGravityCreateElements = needGravityCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
+                List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
+                var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needGravityCreateElements.Count); //needGravityCreateElements.Count; //Mathf.Min(200, needGravityCreateElements.Count);
+
+                for (int i = 0; i < maxCount; i++)
                 {
-                    color = needGravityCreateElements[i].color,
-                    direction = UnityEngine.Random.onUnitSphere.normalized,
-                    forceAmount = 0, //UnityEngine.Random.Range(20000, 30000),
-                    lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
-                    position = transform.TransformPoint(needGravityCreateElements[i].position),
-                    scale = GameManager.Instance.Settings.scaleObjects
-                });
+                    listData.Add(new ECSDataSpawn
+                    {
+                        color = needGravityCreateElements[i].color,
+                        direction = UnityEngine.Random.onUnitSphere.normalized,
+                        forceAmount = 0, //UnityEngine.Random.Range(20000, 30000),
+                        lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
+                        position = transform.TransformPoint(needGravityCreateElements[i].position),
+                        scale = GameManager.Instance.Settings.scaleObjects
+                    });
+                }
+
+                // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                // Debug.Log($"CreateGravityECS: {listData.Count}");
+
+                // await UniTask.NextFrame();
+                await _levelManager.ECSManager.UpdateDataDots(listData);
+                Debug.Log($"Time GenerateDots: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateGravityECS: {maxCount}");
             }
-
-            // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
-            // Debug.Log($"CreateGravityECS: {listData.Count}");
-
-            // await UniTask.NextFrame();
-            await _levelManager.ECSManager.UpdateDataDots(listData);
-            Debug.Log($"Time GenerateDots: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateGravityECS: {maxCount}");
         }
 
         // public async UniTask CreateGravityObjectsAsync()
@@ -1641,10 +1717,10 @@ namespace Mikalai2006.Voxel
     }
     
     [Serializable]
-    public struct containerData
+    public struct ContainerData
     {
         public int countVoxels;
         public int countVoxelsDestructible;
-
+        public float levelDestruction;
     }
 }

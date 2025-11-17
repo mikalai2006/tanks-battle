@@ -10043,7 +10043,8 @@ MonoBehaviour:
   noiseScaleKoof: 0.2
   noiseMaxKoof: 0.444
   light: 1
-  colorGround: {r: 0.4528302, g: 0.34282663, b: 0.23282307, a: 1}
+  colorGround: {r: 0.5377358, g: 0.50108355, b: 0.40837485, a: 1}
+  colorWall: {r: 0.4509804, g: 0.34117648, b: 0.23137255, a: 1}
   colorNature: {r: 0.45748246, g: 0.6132076, b: 0.14173195, a: 1}
   typeLevel: 2
   countTeam: 0

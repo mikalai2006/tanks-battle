@@ -23,7 +23,6 @@ public class GameSetting : ScriptableObject
 
   [Space(5)]
   [Header("Настройки игры")]
-  public bool inputJoystick;
   public bool simpleMove;
   public PlayerOptions playerOptions;
   [Tooltip("Размер масштаба игровых объектов")]
@@ -68,6 +67,7 @@ public class GameSetting : ScriptableObject
   [Space(5)]
   [Header("Глобальные префабы")]
   public GameObject prefabVoxel;
+  public GameObject sectorVoxel;
   public Material materialTransparent;
 
   // [Space(5)]
@@ -99,6 +99,10 @@ public class GameSetting : ScriptableObject
   public Color colorMarkerProgress;
 
 
+  [Space(5)]
+  [Header("Настройки отладки")]
+  public DebugSettings DebugSettings;
+  
   [Space(5)]
   [Header("Плейгейм")]
   [Tooltip("Поворачивать башню по ходу машины, если нет врага")]
@@ -174,8 +178,6 @@ public class GameSetting : ScriptableObject
   [Tooltip("Количество видимых следующих пазлов")]
   public int countNextPuzzle;
   public TileBase tileSquare;
-
-  public DebugSettings DebugSettings;
 }
 
 // [System.Serializable]
@@ -213,13 +215,39 @@ public struct TextLocalize
 public struct PlayerOptions
 {
   public bool showTrajectory;
+  public bool showOtherTrajectory;
 }
 
 [Serializable]
 public struct DebugSettings
 {
+  public AppMode mode;
   public bool disableCreateTiles;
   public bool logEnabled;
   [Tooltip("Если включено, то объекты ECS будут создаваться с коллайдером сферы(более производительны, но менее эффектны), иначе BoxCollider")]
   public bool ECSColliderSphere;
+  [Tooltip("Смещение точки спавна bullet")]
+  public Vector3 muzzleOffsetEffectPoint;
+
+  [Header("Gizmos")]
+  public bool gizmoBodyForwards;
+  public float gizmoBodyLength;
+  public Color gizmoBodyColor;
+  public bool gizmoTowersForwards;
+  public float gizmoTowersLength;
+  public Color gizmoTowersColor;
+  public bool gizmoMuzzlesForwards;
+  public float gizmoMuzzleLength;
+  public Color gizmoMuzzleColor;
+  public bool gizmoTrajectory;
+  public Color gizmoTrajectoryColor;
+  public bool gizmoMuzzleDistanseAttack;
+  public Color gizmoMuzzleDistanseAttackColor;
+}
+
+[Serializable]
+public enum AppMode
+{
+    Desktop = 1,
+    Mobile = 2
 }
