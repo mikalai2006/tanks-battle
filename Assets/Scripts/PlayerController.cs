@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -7,32 +8,42 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference moveActionToUse;
     [SerializeField] public InputActionAsset playerInputActions;
     [SerializeField] private InputActionReference attackActionInput;
-    [SerializeField] private InputAction doubleTapAction;
+    // [SerializeField] private InputAction doubleTapAction;
     [SerializeField] private BaseMachine _machine;
     [SerializeField] Camera _camera;
     [SerializeField] Camera _cameraFPS;
     [SerializeField] Vector3 moveDirection;
     [SerializeField] Vector3 rotateDirection;
     Camera Camera => _camera.gameObject.activeSelf == true ? _camera : _cameraFPS;
+    
+    [Header("Настройки зажатой кнопки стрельбы")]
     [SerializeField] private bool holdShot;
+    
+    [Header("Настройки двойного клика")]
+    private float lastClickTime = 0f;
+    private bool firstClickDetected = false;
 
     void Awake()
     {
         _machine = GetComponent<BaseMachine>();
-        moveActionToUse.action.Enable();
-        attackActionInput.action.Enable();
 
-        doubleTapAction = playerInputActions.FindActionMap("Player").FindAction("DoubleTap");
+        // doubleTapAction = playerInputActions.FindActionMap("Player").FindAction("DoubleTap");
     }
 
     void OnEnable()
     {
-        doubleTapAction.Enable();
+        moveActionToUse.action.Enable();
+        attackActionInput.action.Enable();
+
+        // doubleTapAction.Enable();
     }
 
     void OnDisable()
     {
-        doubleTapAction.Disable();
+        moveActionToUse.action.Disable();
+        attackActionInput.action.Disable();
+
+        // doubleTapAction.Disable();
     }
 
     void Start()
@@ -47,12 +58,26 @@ public class PlayerController : MonoBehaviour
             {
                 attackActionInput.action.started += EnableShot;
                 attackActionInput.action.canceled += DisableShot;
-            } else
-            {
-                doubleTapAction.performed += OnDoubleTapPerformed;
             }
+            // else
+            // {
+            //     doubleTapAction.performed += OnDoubleTapPerformed;
+            // }
         }
 
+        // вешаем событие на нажатие правого джойстика.
+        JoystickController.RunPointerDown += OnPointerDownRightJoystick;
+    }
+
+    void OnDestroy()
+    {
+        attackActionInput.action.started -= EnableShot;
+        attackActionInput.action.canceled -= DisableShot;
+
+        // doubleTapAction.performed -= OnDoubleTapPerformed;
+
+        
+        JoystickController.RunPointerDown -= OnPointerDownRightJoystick;
     }
 
     void Update()
@@ -84,8 +109,9 @@ public class PlayerController : MonoBehaviour
             {
                 // android.
                 rotateDirection = _machine.LevelManager.JoystickTower.Direction;
-                rotateDirection.z = rotateDirection.y;
+                rotateDirection.z = rotateDirection.y * _gameManager.Settings.playerOptions.speedRotateCamera;
                 rotateDirection.y = 0;
+                rotateDirection.x = rotateDirection.x * _gameManager.Settings.playerOptions.speedRotateCamera;
 
                 
                         // android.
@@ -262,16 +288,37 @@ public class PlayerController : MonoBehaviour
             // }
         }
     }
-
-
-    void OnDestroy()
-    {
-        attackActionInput.action.started -= EnableShot;
-        attackActionInput.action.canceled -= DisableShot;
-
-        doubleTapAction.performed -= OnDoubleTapPerformed;
-    }
     
+
+    private void OnPointerDownRightJoystick(PointerEventData eventData)
+    {
+        if (firstClickDetected && Time.time - lastClickTime < _gameManager.Settings.playerOptions.doubleClickThreshold)
+        {
+            // Обнаружен двойной щелчок.
+
+            // запускаем функции.
+            _machine.OnShot();
+
+            firstClickDetected = false; // Сброс для следующего потенциального двойного щелчка
+        }
+        else
+        {
+            // Обнаружен первый щелчок, запущен таймер
+            firstClickDetected = true;
+            lastClickTime = Time.time;
+        }
+        
+        // Если был обнаружен первый щелчок, но порог двойного щелчка превышен
+        if (firstClickDetected && Time.time - lastClickTime >= _gameManager.Settings.playerOptions.doubleClickThreshold)
+        {
+            // Обнаружен одиночный щелчок (если необходимо дифференцировать)
+            
+            firstClickDetected = false; // Сброс
+        }
+    }
+
+
+
     public void EnableShot(InputAction.CallbackContext context)
     {
         holdShot = true;
@@ -282,10 +329,10 @@ public class PlayerController : MonoBehaviour
         holdShot = false;
     }
 
-    private void OnDoubleTapPerformed(InputAction.CallbackContext context)
-    {
-        Debug.Log("Double Tap Detected!");
-        // Add your double-tap specific logic here
-        _machine.OnShot();
-    }
+    // private void OnDoubleTapPerformed(InputAction.CallbackContext context)
+    // {
+    //     Debug.Log("Double Tap Detected!");
+    //     // Add your double-tap specific logic here
+    //     _machine.OnShot();
+    // }
 }

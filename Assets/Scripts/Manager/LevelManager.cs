@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
-using UnityEngine.AI;
 using Cysharp.Threading.Tasks;
 using Loader;
-using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -27,8 +25,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public GameObject objectSpawnText;
     [SerializeField] public GameObject objectSpawnIndicators;
     [SerializeField] public UITopSide UiTopSide;
-    public VariableJoystick JoystickMove;
-    public VariableJoystick JoystickTower;
+    [SerializeField] public VariableJoystick JoystickMove;
+    [SerializeField] public JoystickController JoystickTower;
     
     [SerializeField] Camera _camera;
     public Camera Camera => _camera;

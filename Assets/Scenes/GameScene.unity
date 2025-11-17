@@ -10307,7 +10307,7 @@ MonoBehaviour:
   objectSpawnIndicators: {fileID: 1584100513}
   UiTopSide: {fileID: 1051046479}
   JoystickMove: {fileID: 697935909}
-  JoystickTower: {fileID: 984950975}
+  JoystickTower: {fileID: 984950978}
   _camera: {fileID: 420079063}
   _cameraHandler: {fileID: 1403102074}
   cinemachineCamera: {fileID: 95788492}
@@ -11236,7 +11236,7 @@ GameObject:
   - component: {fileID: 984950974}
   - component: {fileID: 984950977}
   - component: {fileID: 984950976}
-  - component: {fileID: 984950975}
+  - component: {fileID: 984950978}
   m_Layer: 5
   m_Name: Variable Joystick Tower
   m_TagString: Untagged
@@ -11264,27 +11264,6 @@ RectTransform:
   m_AnchoredPosition: {x: -960, y: 0}
   m_SizeDelta: {x: 960, y: 1080}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &984950975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984950973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42844a4fccbd54746b90cade4ff70f73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handleRange: 1
-  deadZone: 0
-  axisOptions: 0
-  snapX: 0
-  snapY: 0
-  background: {fileID: 818888677}
-  handle: {fileID: 1202987772}
-  moveThreshold: 1
-  joystickType: 1
 --- !u!114 &984950976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11323,6 +11302,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984950973}
   m_CullTransparentMesh: 0
+--- !u!114 &984950978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984950973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06839e6a0944f254ebea88d0136f9d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handleRange: 1
+  deadZone: 0
+  axisOptions: 0
+  snapX: 0
+  snapY: 0
+  background: {fileID: 818888677}
+  handle: {fileID: 1202987772}
+  moveThreshold: 1
+  joystickType: 2
 --- !u!1 &995181130
 GameObject:
   m_ObjectHideFlags: 0

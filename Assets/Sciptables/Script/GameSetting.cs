@@ -214,8 +214,14 @@ public struct TextLocalize
 [System.Serializable]
 public struct PlayerOptions
 {
+  [Tooltip("Показать траекторию прицеливания мою")]
   public bool showTrajectory;
+  [Tooltip("Показать траекторию прицеливания врага")]
   public bool showOtherTrajectory;
+  [Tooltip("Максимальное время между щелчками, при котором щелчок считается двойным")]
+  public float doubleClickThreshold;
+  [Tooltip("Начальная скорость вращения камеры")]
+  public float speedRotateCamera;
 }
 
 [Serializable]
