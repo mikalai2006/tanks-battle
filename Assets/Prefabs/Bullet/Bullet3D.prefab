@@ -253,7 +253,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 1
@@ -281,6 +281,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   gPUInstanceEnabler: {fileID: 646386849906474536}
+  trail: {fileID: 0}
+  voxelMeshRender: {fileID: 0}
 --- !u!54 &3288064911615906041
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -777,7 +777,7 @@ public class BaseTower : MonoBehaviour
             var el = voxelMeshRender.Containers[i];
             if (el.IsDestructible())
             {
-                Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
+                // Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
                 Vector3 localPoint = el.transform.InverseTransformPoint(_pointCollision);
                 tasks.Add(el.ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
             }

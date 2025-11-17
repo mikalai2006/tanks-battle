@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
@@ -8,8 +9,9 @@ public class GameBullet : ScriptableObject
   [Header("Основная информация")]
   // public string idObject;
   public TextLocalize text;
-  public GameObject prefab;
+  // public GameObject prefab;
   public Material material;
+  public List<Color> color;
   public MeshConfig MeshConfig;
 
   [Space(5)]

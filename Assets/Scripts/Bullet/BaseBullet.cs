@@ -76,7 +76,7 @@ public class BaseBullet : MonoBehaviour
     
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}</color>");
+        // Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}[detect object => {gameObject.name}]</color>");
 
         if (collision.gameObject.CompareTag("IgnoreCollision"))
         {
@@ -92,7 +92,10 @@ public class BaseBullet : MonoBehaviour
 
         if (!collisionsObjects.Contains(collision.gameObject))
         {
-            Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}</color>");
+            if (!Machine.MachineLevelData.isBot)
+                    {
+            Debug.Log($"<color=green>OnCollisionEnter {collision.gameObject.name}[detect object => {gameObject.name}]</color>");
+                    }
             // Debug.Log($"<color=yellow>================Colission=====================================</color>");
             // foreach (ContactPoint contact in collision.contacts)
             // {
@@ -224,7 +227,7 @@ public class BaseBullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
+        Debug.Log($"<color=green>OnTriggerEnter {other.name}[detect object => {gameObject.name}]</color>");
         if (!collisionsObjects.Contains(other.gameObject))
         {
             // Debug.Log($"<color=green>OnTriggerEnter {other.name}</color>");
@@ -404,10 +407,16 @@ public class BaseBullet : MonoBehaviour
                     startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     endPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                     hitDistance = Vector3.Distance(startPosition, endPosition);
-                    Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}>[distance={hitDistance}]</color>");
+                    if (!Machine.MachineLevelData.isBot)
+                    {
+                        Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}>[distance={hitDistance}]</color>");
+                    }
                 } else
                 {
-                    Debug.Log($"<color=#7ccf00>Raycast ударил в объект {hit.collider.name}<{hit.point}> без Container или он не разрушаемый</color>");
+                    if (!Machine.MachineLevelData.isBot)
+                    {
+                        Debug.Log($"<color=#7ccf00>Raycast ударил в объект {hit.collider.name}<{hit.point}> без Container или он не разрушаемый</color>");
+                    }
                 }
 
                 // Vector3 localPoint = hit.collider.gameObject.transform.parent.InverseTransformPoint(hit.point);

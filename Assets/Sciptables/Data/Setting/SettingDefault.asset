@@ -18,6 +18,8 @@ MonoBehaviour:
   playerOptions:
     showTrajectory: 0
     showOtherTrajectory: 0
+    doubleClickThreshold: 0.2
+    speedRotateCamera: {x: 2, y: 0.5}
   scaleObjects: 0.03125
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
@@ -115,9 +117,9 @@ MonoBehaviour:
   colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
   DebugSettings:
-    mode: 2
-    disableCreateTiles: 0
-    logEnabled: 0
+    mode: 1
+    disableCreateTiles: 1
+    logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
     gizmoBodyForwards: 0

@@ -201,7 +201,7 @@ namespace Mikalai2006.Voxel
             // parse list voxels and create data. 
             for (int j = 0; j < meshConfig.sOVoxelData.groups.Count; j++)
             {
-                Color color = meshConfig.sOVoxelData.groups[j].color;
+                Color color = meshConfig.color.Length > j ? meshConfig.color[j] : meshConfig.sOVoxelData.groups[j].color;
                 color.a = 1;
                 arrayVoxelColors[j + 1] = new VoxelColors()
                 {
@@ -664,7 +664,33 @@ namespace Mikalai2006.Voxel
 
         public static Voxel emptyVoxel = new Voxel() { ID = 0 };
 
-        #region My functions
+#region My functions
+        /// <summary>
+        /// Замена цветов вершин.
+        /// </summary>
+        public void UploadColors()
+        {
+            Dictionary<Color, int> replacements = new Dictionary<Color, int>();
+            
+            // формируем цвета из групп вокселей.
+            for (int i = 0; i < meshConfig.sOVoxelData.groups.Count; i++)
+            {
+                replacements[meshConfig.sOVoxelData.groups[i].color] = i;
+            }
+
+            // проходим по всем данным.
+            for (int i = 0; i < dataVoxels.Count; i++) {
+                // если цвет вершины, есть в группе, получаем его индекс.
+                if (replacements.TryGetValue(dataVoxels[i].color, out int indexNewValue))
+                {
+                    // используем индекс, чтобы выбрать новый цвет из настроек.
+                    Voxel _vox = dataVoxels[i];
+                    _vox.color = meshConfig.color.Length > indexNewValue ? meshConfig.color[i] : dataVoxels[i].color;
+                    dataVoxels[i] = _vox;
+                }
+            }
+        }
+
         public Voxel GetVoxel(Vector3Int pos)
         {
             Voxel voxel = default;

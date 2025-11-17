@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector3 moveDirection;
     [SerializeField] Vector3 rotateDirection;
     Camera Camera => _camera.gameObject.activeSelf == true ? _camera : _cameraFPS;
+
+    private float speedRotateCameraDiff;
     
     [Header("Настройки зажатой кнопки стрельбы")]
     [SerializeField] private bool holdShot;
@@ -107,11 +109,17 @@ public class PlayerController : MonoBehaviour
 
             if (_gameManager.Settings.DebugSettings.mode == AppMode.Mobile)
             {
+
+                // добавляем время удержания джойстика.
+                if (_machine.LevelManager.JoystickTower.TimeTouch > 0) {
+                    _machine.LevelManager.JoystickTower.AddTimeTouch(Time.deltaTime);
+                }
+
                 // android.
                 rotateDirection = _machine.LevelManager.JoystickTower.Direction;
-                rotateDirection.z = rotateDirection.y * _gameManager.Settings.playerOptions.speedRotateCamera;
+                rotateDirection.z = rotateDirection.y * _gameManager.Settings.playerOptions.speedRotateCamera.y * _machine.LevelManager.JoystickTower.TimeTouch;
                 rotateDirection.y = 0;
-                rotateDirection.x = rotateDirection.x * _gameManager.Settings.playerOptions.speedRotateCamera;
+                rotateDirection.x = rotateDirection.x * _gameManager.Settings.playerOptions.speedRotateCamera.x * _machine.LevelManager.JoystickTower.TimeTouch;
 
                 
                         // android.

@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ namespace Mikalai2006.Voxel
 {
     public class VoxelMeshRender : MonoBehaviour, IVoxeled
     {
-        public Action OnSetData;
+        // public Action OnSetData;
         GameManager _gameManager => GameManager.Instance;
         [SerializeField] public MeshConfig Config;
         // [SerializeField] private SOVoxelData sOVoxelData;
@@ -136,7 +135,7 @@ namespace Mikalai2006.Voxel
                 container.SetData(index);
             }
 
-            OnSetData?.Invoke();
+            // OnSetData?.Invoke();
 
             if (Config.isGreedy)
             {
@@ -179,6 +178,27 @@ namespace Mikalai2006.Voxel
             // Config.existCollider = config.existCollider;
             // Config.isGreedy = config.isGreedy;
             Config = config;
+
+            if (Config.color.Length == 0)
+            {
+                if (containers != null && containers.Length > 0)
+                {
+                    for (int i = 0; i < containers.Length; i++)
+                    {
+                        containers[i].UploadColors();
+
+                        if (Config.isGreedy)
+                        {
+                            containers[i].UploadMeshGreedy(Config.sOVoxelData.startMesh == null).Forget();
+                        }
+                        else
+                        {
+                            containers[i].GenerateMesh();
+                            containers[i].UploadMesh(Config.sOVoxelData.startMesh == null);
+                        }
+                    }
+                }
+            }
         }
     }
 

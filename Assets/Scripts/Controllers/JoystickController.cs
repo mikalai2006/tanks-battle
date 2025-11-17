@@ -7,6 +7,8 @@ public class JoystickController : Joystick
     public static event System.Action<PointerEventData> RunPointerDown;
     public static event System.Action<PointerEventData> RunPointerUp;
     [SerializeField] private float moveThreshold = 1;
+    [SerializeField] private float timeTouch = 0;
+    public float TimeTouch => timeTouch;
     [SerializeField] private JoystickControllerType joystickType = JoystickControllerType.Fixed;
     public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
     private Vector2 fixedPosition = Vector2.zero;
@@ -30,6 +32,11 @@ public class JoystickController : Joystick
         SetMode(joystickType);
     }
 
+    public void AddTimeTouch(float _time)
+    {
+        timeTouch += _time;
+    }
+
     public override void OnPointerDown(PointerEventData eventData)
     {
         if(joystickType != JoystickControllerType.Fixed)
@@ -38,6 +45,8 @@ public class JoystickController : Joystick
             background.gameObject.SetActive(true);
         }
         base.OnPointerDown(eventData);
+
+        timeTouch = Time.deltaTime;
 
         RunPointerDown?.Invoke(eventData);
     }
@@ -48,6 +57,8 @@ public class JoystickController : Joystick
             background.gameObject.SetActive(false);
 
         base.OnPointerUp(eventData);
+
+        timeTouch = 0;
 
         RunPointerUp?.Invoke(eventData);
     }

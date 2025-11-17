@@ -221,7 +221,7 @@ public struct PlayerOptions
   [Tooltip("Максимальное время между щелчками, при котором щелчок считается двойным")]
   public float doubleClickThreshold;
   [Tooltip("Начальная скорость вращения камеры")]
-  public float speedRotateCamera;
+  public Vector2 speedRotateCamera;
 }
 
 [Serializable]
