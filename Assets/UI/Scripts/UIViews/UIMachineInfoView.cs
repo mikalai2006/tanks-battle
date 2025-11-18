@@ -343,7 +343,7 @@ namespace UIToolkitLibrary
             base.Show();
 
             // add short transition
-            m_MachineInfoWrapper.transform.scale = new Vector3(0.1f, 0.1f, 0.1f);
+            m_MachineInfoWrapper.style.scale = new Vector3(0.1f, 0.1f, 0.1f);
             m_MachineInfoWrapper.experimental.animation.Scale(1f, 200);
         }
 

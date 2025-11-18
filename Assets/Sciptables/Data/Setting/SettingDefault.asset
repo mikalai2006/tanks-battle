@@ -118,7 +118,7 @@ MonoBehaviour:
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
   DebugSettings:
     mode: 1
-    disableCreateTiles: 1
+    disableCreateTiles: 0
     logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}

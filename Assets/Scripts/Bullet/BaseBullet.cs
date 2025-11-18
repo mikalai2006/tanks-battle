@@ -24,7 +24,6 @@ public class BaseBullet : MonoBehaviour
     float hitDistance = 0;
     float currentDistance = 0;
     RaycastHit hit;
-    float chanceReflex = 0.8f;
     public GPUInstanceEnabler gPUInstanceEnabler;
     [SerializeField] private GameObject trail;
     // private MeshFilter meshFilter;
@@ -83,8 +82,9 @@ public class BaseBullet : MonoBehaviour
             return;
         }
 
-        var ra = Random.value;
-        if (ra > chanceReflex)
+        // var ra = Random.value;
+        // if (ra >= (1 - _gameManager.Settings.playerOptions.chanceReflex))
+        if (Helpers.GetChance(_gameManager.Settings.playerOptions.chanceReflex))
         {
             Debug.Log($"<color=#7ccf00>РИКОШЕТ</color>");
             return;
@@ -312,6 +312,7 @@ public class BaseBullet : MonoBehaviour
         ConfigMuzzle = configMuzzle;
         
         voxelMeshRender.OnSetConfigMeshGenerator(ConfigMuzzle.Bullet.MeshConfig);
+        voxelMeshRender.UploadedAllMeshes();
 
         Muzzle = muzzle;
 
@@ -396,8 +397,8 @@ public class BaseBullet : MonoBehaviour
         //         }
         // #endif
         
-        var ra = Random.value;
-        if (ra < chanceReflex)
+        // var ra = Random.value;
+        if (!Helpers.GetChance(_gameManager.Settings.playerOptions.chanceReflex))
         {
             if (Physics.Raycast(transform.position, forward, out hit, Muzzle.Data.distanceAttack, ~(ignoreMask)))
             {

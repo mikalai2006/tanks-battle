@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Mikalai2006.Voxel
         // public Action OnSetData;
         GameManager _gameManager => GameManager.Instance;
         [SerializeField] public MeshConfig Config;
+        [SerializeField] public MeshConfigModify ConfigModify;
         // [SerializeField] private SOVoxelData sOVoxelData;
         // [SerializeField] private Material _material;
         // [SerializeField] bool existCollider;
@@ -73,10 +75,23 @@ namespace Mikalai2006.Voxel
             // _nativeCubeYOffsets = new NativeArray<float>(count, Allocator.Persistent);
             // _nativeVoxelsPositions = new NativeArray<Vector3>(count, Allocator.Persistent);
 
-            GameObject cont = new GameObject($"Container_{Config.sOVoxelData.name}___{index}");
+            GameObject cont = new GameObject($"Container{Config.typeCollider}_{Config.sOVoxelData.name}___{index}");
             cont.transform.parent = Wrapper.transform;
             cont.layer = transform.gameObject.layer;// LayerMask.NameToLayer("Wall");
-            var container = cont.AddComponent<Container>();
+            Container container;
+            switch (Config.typeCollider)
+            {
+                case TypeCollider.BoxCollider:
+                    container = cont.AddComponent<ContainerBox>();
+                break;
+                case TypeCollider.SphereCollider:
+                    container = cont.AddComponent<ContainerSphere>();
+                break;
+                default:
+                    container = cont.AddComponent<ContainerMesh>();
+                break;
+            }
+            
             containers[index] = container;
             container.Initialize(Config, Vector3.zero);
             container.transform.localScale = new Vector3(1, 1, 1);
@@ -89,43 +104,71 @@ namespace Mikalai2006.Voxel
             {
                 container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
             }
-            // container.gameObject.isStatic = true;
+            // // container.gameObject.isStatic = true;
 
-            // SceneTools.LoopPositions((i, p) =>
+            // // SceneTools.LoopPositions((i, p) =>
+            // // {
+            // //     _nativeCubeYOffsets[i] = p.y;
+            // //     _nativePositions[i] = p;
+            // // });
+            // // for (int x = 0; x < count; x++)
+            // // {
+            // //     _nativePositions[x] = sOVoxelData.voxels[x];
+            // //     _nativeVoxelsPositions[x] = sOVoxelData.voxels[x];
+            // // }
+
+            // // _job = new CubePositionJob
+            // // {
+            // //     // Positions = _nativePositions,
+            // //     // YOffsets = _nativeCubeYOffsets
+            // //     Voxels = _nativeVoxelsPositions,
+            // //     // mesh = _mesh,
+            // //     // container = container
+            // // };
+
+            // // _rp = new RenderParams(Config._material);
+
+            // // container.SetSizeVoxel(Config.sOVoxelData.sizeVoxel);
+            // // container.GetComponent<Collider>().isTrigger = true;
+
+            // // var segment = new ArraySegment<Vector3>(voxelList, 1, 10);
+            // // container.SetData(segment.ToArray(), scale);
+
+            // //  for (int j = 0; j < sOVoxelData.groups.Count; j++)
+            // // {
+            // //     // Vector3[] voxelList = sOVoxelData.voxels.AsParallel().ToArray();
+            // //     // Vector3[] voxelList = sOVoxelData.groups.ElementAt(j).voxels.AsParallel().ToArray();
+            // //     // Color groupColor = sOVoxelData.groups.ElementAt(j).color;
+
+            // // }
+            // if (Config.isOneMesh)
             // {
-            //     _nativeCubeYOffsets[i] = p.y;
-            //     _nativePositions[i] = p;
-            // });
-            // for (int x = 0; x < count; x++)
+            //     container.SetData();
+            // }
+            // else
             // {
-            //     _nativePositions[x] = sOVoxelData.voxels[x];
-            //     _nativeVoxelsPositions[x] = sOVoxelData.voxels[x];
+            //     container.SetData(index);
+            // }
+            UpdateMeshContainer(container, index);
+
+            // // OnSetData?.Invoke();
+
+            // if (Config.isGreedy)
+            // {
+            //     container.UploadMeshGreedy(Config.sOVoxelData.startMesh == null).Forget();
+            // }
+            // else
+            // {
+            //     container.GenerateMesh();
+            //     container.UploadMesh(Config.sOVoxelData.startMesh == null);
             // }
 
-            // _job = new CubePositionJob
-            // {
-            //     // Positions = _nativePositions,
-            //     // YOffsets = _nativeCubeYOffsets
-            //     Voxels = _nativeVoxelsPositions,
-            //     // mesh = _mesh,
-            //     // container = container
-            // };
+            // // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(new Vector3(0f, 0.5f, 0f)));
+        }
 
-            // _rp = new RenderParams(Config._material);
-
-            // container.SetSizeVoxel(Config.sOVoxelData.sizeVoxel);
-            // container.GetComponent<Collider>().isTrigger = true;
-
-            // var segment = new ArraySegment<Vector3>(voxelList, 1, 10);
-            // container.SetData(segment.ToArray(), scale);
-
-            //  for (int j = 0; j < sOVoxelData.groups.Count; j++)
-            // {
-            //     // Vector3[] voxelList = sOVoxelData.voxels.AsParallel().ToArray();
-            //     // Vector3[] voxelList = sOVoxelData.groups.ElementAt(j).voxels.AsParallel().ToArray();
-            //     // Color groupColor = sOVoxelData.groups.ElementAt(j).color;
-
-            // }
+        private void UpdateMeshContainer(Container container, int index)
+        {
+            
             if (Config.isOneMesh)
             {
                 container.SetData();
@@ -146,8 +189,18 @@ namespace Mikalai2006.Voxel
                 container.GenerateMesh();
                 container.UploadMesh(Config.sOVoxelData.startMesh == null);
             }
+        }
 
-            // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(new Vector3(0f, 0.5f, 0f)));
+        public void UploadedAllMeshes()
+        {
+            if (containers != null)
+            {
+                // Debug.Log($"Set color 3 UploadedAllMeshes lenght={containers.Length}");
+                for (int index = 0; index < containers.Length; index++)
+                {
+                    UpdateMeshContainer(containers[index], index);
+                }
+            }
         }
 
         // private void Update()
@@ -179,26 +232,34 @@ namespace Mikalai2006.Voxel
             // Config.isGreedy = config.isGreedy;
             Config = config;
 
-            if (Config.color.Length == 0)
+            // если есть контейнеры, обновляем в них Config.
+            if (containers != null)
             {
-                if (containers != null && containers.Length > 0)
+                for (int index = 0; index < containers.Length; index++)
                 {
-                    for (int i = 0; i < containers.Length; i++)
-                    {
-                        containers[i].UploadColors();
-
-                        if (Config.isGreedy)
-                        {
-                            containers[i].UploadMeshGreedy(Config.sOVoxelData.startMesh == null).Forget();
-                        }
-                        else
-                        {
-                            containers[i].GenerateMesh();
-                            containers[i].UploadMesh(Config.sOVoxelData.startMesh == null);
-                        }
-                    }
+                    containers[index].SetConfig(Config);
                 }
             }
+            // if (Config.meshConfigModify != default)
+            // {
+            //     for (int i = 0; i < Config.sOVoxelData.groups.Count; i++)
+            //     {
+            //         var group = Config.sOVoxelData.groups[i];
+            //         group.color = Config.color.Length > i ? Config.color[i] : group.color;
+            //         Config.sOVoxelData.groups[i] = group;
+            //         Debug.Log($"Set color {group.color} ///{Config.sOVoxelData.groups[i].color}");
+            //         // if (Config.isGreedy)
+            //         // {
+            //         //     containers[i].UploadMeshGreedy(Config.sOVoxelData.startMesh == null).Forget();
+            //         // }
+            //         // else
+            //         // {
+            //         //     containers[i].GenerateMesh();
+            //         //     containers[i].UploadMesh(Config.sOVoxelData.startMesh == null);
+            //         // }
+            //     }
+            //     Debug.Log($"Set color 2 {Config.color[0]} ///{Config.sOVoxelData.groups[0].color}");
+            // }
         }
     }
 
@@ -226,4 +287,10 @@ namespace Mikalai2006.Voxel
 
     //     }
     // }
+}
+
+[System.Serializable]
+public struct MeshConfigModify
+{
+    public List<Color> colors;
 }

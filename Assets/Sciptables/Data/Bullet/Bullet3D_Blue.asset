@@ -32,12 +32,11 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   material: {fileID: 2100000, guid: a40e27233b9dde947a560990527cfeef, type: 2}
-  color:
-  - {r: 0, g: 1.8515066, b: 2.9960783, a: 1}
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 2acedc23f2570a44fb1af0c838e5d7d4, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     existCollider: 1
+    typeCollider: 2
     isGreedy: 0
     isRigidbody: 0
     isConvex: 1
@@ -48,8 +47,9 @@ MonoBehaviour:
     shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0.03
-    color:
-    - {r: 0, g: 1.8515066, b: 2.9960783, a: 1}
+    meshConfigModify:
+      colors:
+      - {r: 0, g: 1.8515066, b: 2.9960783, a: 1}
   lifeTime: 3
   damageRadius: 3
   countCollisions: 1

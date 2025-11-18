@@ -11,13 +11,13 @@ namespace Mikalai2006.Voxel
 {
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
-    [RequireComponent(typeof(MeshCollider))]
-    public class Container : MonoBehaviour
+    // [RequireComponent(typeof(MeshCollider))]
+    public abstract class Container : MonoBehaviour
     {
         private Dictionary<float3, Voxel> dataVoxels;
         [SerializeField] private ContainerData _containerData;
         public ContainerData ContainerData => _containerData;
-        MeshConfig meshConfig;
+        [SerializeField] private MeshConfig meshConfig;
         string meshName = "procedure";
         // private NativeArray<Vector3> vertices;
         // private NativeArray<int> triangles;
@@ -27,16 +27,16 @@ namespace Mikalai2006.Voxel
         private NativeArray<VoxelColors> arrayVoxelColors;
 
         private Vector3 pointCollision;
-        private MeshData meshData = new MeshData();
+        protected MeshData meshData = new MeshData();
         // private float sizeVoxel = 1;
         // private RenderParams _rp;
         // [SerializeField] private Material material;
 
         private MeshRenderer meshRenderer;
-        private MeshFilter meshFilter;
+        protected MeshFilter meshFilter;
         private GPUInstanceEnabler gPUInstanceEnabler;
         // private PropertyBlockChanger propertyBlockChanger;
-        private MeshCollider meshCollider;
+        // private MeshCollider meshCollider;
         // private Stack<RemoveVoxel> needCreateElements;
         // private Stack<RemoveVoxel> needGravityCreateElements;
         // private Collision collision;
@@ -52,17 +52,41 @@ namespace Mikalai2006.Voxel
             cancelTokenSrc = new System.Threading.CancellationTokenSource();           
         }
 
+        void OnEnable()
+        {
+            cancelTokenSrc = new System.Threading.CancellationTokenSource();   
+        }
+
+        void OnDisable()
+        {
+            arrayVoxels.Dispose();
+            arrayVoxelColors.Dispose();
+
+            cancelTokenSrc.Cancel();
+            cancelTokenSrc.Dispose();
+        }
+
         void OnDestroy()
         {
             // vertices.Dispose();
             // triangles.Dispose();
             // newVertices.Dispose();
             // newTriangles.Dispose();
-            arrayVoxels.Dispose();
-            arrayVoxelColors.Dispose();
+            
+            if (arrayVoxels.IsCreated)
+            {
+                arrayVoxels.Dispose();
+            }
 
-            cancelTokenSrc.Cancel();
-            cancelTokenSrc.Dispose();
+            if (arrayVoxelColors.IsCreated) {
+                arrayVoxelColors.Dispose();
+            }
+
+            if (cancelTokenSrc != null && !cancelTokenSrc.IsCancellationRequested)
+            {
+                cancelTokenSrc.Cancel();
+                cancelTokenSrc.Dispose();
+            }
         }
 
         // void OnCollisionEnter(Collision collision)
@@ -74,11 +98,16 @@ namespace Mikalai2006.Voxel
         //     Debug.Log($"<color=green>Trigger: Container is collision with trigger {collision.gameObject.name}</color>");
         // }
 
-        public void Initialize(MeshConfig config, Vector3 position)
+        public virtual void SetConfig(MeshConfig config)
+        {
+            meshConfig = config;
+        }
+
+        public virtual void Initialize(MeshConfig config, Vector3 position)
         {
             prevContacts = new();
 
-            meshConfig = config;
+            SetConfig(config);
 
             // isGreedy = _isGreedy;
             // vertices = new NativeArray<Vector3>();
@@ -90,15 +119,15 @@ namespace Mikalai2006.Voxel
 
             ConfigureComponents();
 
-            if (!config.existCollider)
-            {
-                meshCollider.enabled = false;
-            }
-            else
-            {
-                meshCollider.convex = config.isConvex;
-                // meshCollider.providesContacts = true;
-            }
+            // if (!config.existCollider)
+            // {
+            //     meshCollider.enabled = false;
+            // }
+            // else
+            // {
+            //     meshCollider.convex = config.isConvex;
+            //     // meshCollider.providesContacts = true;
+            // }
 
             if (config.isRigidbody)
             {
@@ -168,10 +197,11 @@ namespace Mikalai2006.Voxel
             // parse list voxels and create data. 
             for (int i = 0; i < voxelList.Length; i++)
             {
+                Color groupColor = meshConfig.meshConfigModify.colors != null && meshConfig.meshConfigModify.colors.Count > indexGroup ? meshConfig.meshConfigModify.colors[indexGroup] : meshConfig.sOVoxelData.groups[indexGroup].color;
                 var vox = new Voxel() // * scale
                 {
                     ID = 1,
-                    color = meshConfig.sOVoxelData.groups[indexGroup].color, // groupColor, 
+                    color = groupColor, // meshConfig.sOVoxelData.groups[indexGroup].color
                     type = VoxelType.Grass,
                     // IndexSubMesh = j
                 };
@@ -201,8 +231,8 @@ namespace Mikalai2006.Voxel
             // parse list voxels and create data. 
             for (int j = 0; j < meshConfig.sOVoxelData.groups.Count; j++)
             {
-                Color color = meshConfig.color.Length > j ? meshConfig.color[j] : meshConfig.sOVoxelData.groups[j].color;
-                color.a = 1;
+                Color color = meshConfig.meshConfigModify.colors != null && meshConfig.meshConfigModify.colors.Count > j ? meshConfig.meshConfigModify.colors[j] : meshConfig.sOVoxelData.groups[j].color;
+                // TODO color.a = 1;
                 arrayVoxelColors[j + 1] = new VoxelColors()
                 {
                     color = color,
@@ -278,7 +308,7 @@ namespace Mikalai2006.Voxel
 
                 // voxelColor = WorldManager.Instance.WorldColors[block.ID - 1];
                 Color voxelColorAlpha = block.color;
-                voxelColorAlpha.a = 1;
+                // voxelColorAlpha.a = 1;
                 // voxelSmoothness = new Vector2(voxelColor.metallic, voxelColor.smoothness);
 
                 // Iterate over each face direction
@@ -313,7 +343,7 @@ namespace Mikalai2006.Voxel
 
             }
 
-            Debug.Log($"Time generate mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms.\r\nData count ={dataVoxels.Count}, Create {meshData.vertices.Count} vertices, {meshData.triangles.Count} triangles");
+            Debug.Log($"Time generate mesh {gameObject.name}: {(Time.realtimeSinceStartup - startTime) * 1000f} ms.\r\nData count ={dataVoxels.Count}, Create {meshData.vertices.Count} vertices, {meshData.triangles.Count} triangles");
 
             // var a = meshData.vertices.GroupBy(ff => ff).ToList();
             // Debug.Log($"uniqueVertice: {a.Count()}");
@@ -464,7 +494,7 @@ namespace Mikalai2006.Voxel
         // }
 
 
-        public MeshData UploadMesh(bool isDrawMesh)
+        public virtual MeshData UploadMesh(bool isDrawMesh)
         {
             meshData.mesh.name = $"{meshName}_{gameObject.name}";
             meshData.UploadMesh();
@@ -536,11 +566,11 @@ namespace Mikalai2006.Voxel
             }
 
 
-            if (meshData.vertices.Count > 3)
-            {
-                // meshData.mesh.Optimize();
-                meshCollider.sharedMesh = meshData.mesh;
-            }
+            // if (meshData.vertices.Count > 3)
+            // {
+            //     // meshData.mesh.Optimize();
+            //     meshCollider.sharedMesh = meshData.mesh;
+            // }
 
             // _rp = new RenderParams[meshData.subMeshCount];
             // Material[] materials = new Material[meshData.subMeshCount];
@@ -556,7 +586,7 @@ namespace Mikalai2006.Voxel
             return meshData;
         }
 
-        async public UniTask<Mesh> UploadMeshGreedy(bool isDrawMesh)
+        async virtual public UniTask<Mesh> UploadMeshGreedy(bool isDrawMesh)
         {
             if (!cancelTokenSrc.IsCancellationRequested)
             {
@@ -607,13 +637,13 @@ namespace Mikalai2006.Voxel
                     meshFilter.sharedMesh = meshConfig.sOVoxelData.startMesh;
                 }
 
-                if (meshFilter.sharedMesh.vertices.Length > 3)
-                {
-                    // meshData.mesh.Optimize();
-                    meshCollider.sharedMesh = meshFilter.sharedMesh; //meshData.mesh;
-                }
+                // if (meshFilter.sharedMesh.vertices.Length > 3)
+                // {
+                //     // meshData.mesh.Optimize();
+                //     meshCollider.sharedMesh = meshFilter.sharedMesh; //meshData.mesh;
+                // }
 #if UNITY_EDITOR
-                // Debug.Log($"Time greedy mesh: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                // Debug.Log($"Time greedy mesh {gameObject.name}: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
 #endif
             return mesh;
             }
@@ -625,11 +655,11 @@ namespace Mikalai2006.Voxel
         //     Graphics.RenderMesh(_rp, meshFilter.mesh, 0, Matrix4x4.Translate(transform.position));           
         // }
 
-        private void ConfigureComponents()
+        virtual protected void ConfigureComponents()
         {
             meshFilter = GetComponent<MeshFilter>();
             meshRenderer = GetComponent<MeshRenderer>();
-            meshCollider = GetComponent<MeshCollider>();
+            // meshCollider = GetComponent<MeshCollider>();
             if (!meshConfig.isOneMesh)
             {
                 gPUInstanceEnabler = gameObject.AddComponent<GPUInstanceEnabler>();
@@ -665,31 +695,32 @@ namespace Mikalai2006.Voxel
         public static Voxel emptyVoxel = new Voxel() { ID = 0 };
 
 #region My functions
-        /// <summary>
-        /// Замена цветов вершин.
-        /// </summary>
-        public void UploadColors()
-        {
-            Dictionary<Color, int> replacements = new Dictionary<Color, int>();
+        // /// <summary>
+        // /// Замена цветов вершин.
+        // /// </summary>
+        // public void UploadColors()
+        // {
+        //     Dictionary<Color, int> replacements = new Dictionary<Color, int>();
             
-            // формируем цвета из групп вокселей.
-            for (int i = 0; i < meshConfig.sOVoxelData.groups.Count; i++)
-            {
-                replacements[meshConfig.sOVoxelData.groups[i].color] = i;
-            }
+        //     // формируем цвета из групп вокселей.
+        //     for (int i = 0; i < meshConfig.sOVoxelData.groups.Count; i++)
+        //     {
+        //         replacements[meshConfig.sOVoxelData.groups[i].color] = i;
+        //     }
 
-            // проходим по всем данным.
-            for (int i = 0; i < dataVoxels.Count; i++) {
-                // если цвет вершины, есть в группе, получаем его индекс.
-                if (replacements.TryGetValue(dataVoxels[i].color, out int indexNewValue))
-                {
-                    // используем индекс, чтобы выбрать новый цвет из настроек.
-                    Voxel _vox = dataVoxels[i];
-                    _vox.color = meshConfig.color.Length > indexNewValue ? meshConfig.color[i] : dataVoxels[i].color;
-                    dataVoxels[i] = _vox;
-                }
-            }
-        }
+        //     // проходим по всем данным.
+        //     for (int i = 0; i < dataVoxels.Count; i++) {
+        //         // если цвет вершины, есть в группе, получаем его индекс.
+        //         if (replacements.TryGetValue(dataVoxels[i].color, out int indexNewValue))
+        //         {
+        //             // используем индекс, чтобы выбрать новый цвет из настроек.
+        //             Voxel _vox = dataVoxels[i];
+        //             _vox.color = meshConfig.color.Length > indexNewValue ? meshConfig.color[indexNewValue] : dataVoxels[i].color;
+        //             dataVoxels[i] = _vox;
+        //             Debug.Log($"OnSetConfig::: change color {dataVoxels[i].color}");
+        //         }
+        //     }
+        // }
 
         public Voxel GetVoxel(Vector3Int pos)
         {

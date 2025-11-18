@@ -128,7 +128,7 @@ public abstract class BaseMachine : MonoBehaviour
                 if (Physics.Raycast(levelManager.Camera.transform.position, dir, out RaycastHit hit, distance, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
                 {
                     
-                    Debug.Log($"hit{hit.collider.name}");
+                    // Debug.Log($"hit{hit.collider.name}");
                     if (hit.transform != transform)
                     {
                         isVisible = false;
@@ -323,8 +323,8 @@ public abstract class BaseMachine : MonoBehaviour
                     if (_optChildConfig != null)
                     {
                         var _towChild = Instantiate(_optChildConfig.Config.prefab, _tow.transform);
-                        _towChild.Init(this, _optChildConfig, 10 + i + j);
                         _towChild.OnSetParent(_tow);
+                        _towChild.Init(this, _optChildConfig, 10 + i + j);
                         towers.Add(_towChild);
                     }
                 }

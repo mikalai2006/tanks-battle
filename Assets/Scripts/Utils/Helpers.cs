@@ -269,6 +269,21 @@ public static class Helpers
   }
 
   /// <summary>
+  /// Возвращает вероятность события, как булево значение, принимая долю происхождения
+  /// </summary>
+  /// <returns></returns>
+  public static bool GetChance(float chance)
+    {
+        float randomValue = Random.Range(0f, 1f); // Сгенерировать случайное число от 0 до 1
+
+        if (randomValue <= chance)
+        {
+            return true;
+        }
+        return false;
+    }
+
+  /// <summary>
   /// Takes 3D indexes and returns a 1D index based on them
   /// </summary>
   /// <param name="x"></param>

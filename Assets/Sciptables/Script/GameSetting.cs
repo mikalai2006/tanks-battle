@@ -222,6 +222,8 @@ public struct PlayerOptions
   public float doubleClickThreshold;
   [Tooltip("Начальная скорость вращения камеры")]
   public Vector2 speedRotateCamera;
+  [Tooltip("Шанс рикошета (1 - все рикошет, 0 - без рикошета)")]
+  [Range(0f, 1)] public float chanceReflex;
 }
 
 [Serializable]

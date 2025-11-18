@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5952807819810108520}
   - component: {fileID: 3953542177465897504}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Decal-Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,6 +588,7 @@ MonoBehaviour:
     sOVoxelData: {fileID: 0}
     _material: {fileID: 0}
     existCollider: 0
+    typeCollider: 0
     isGreedy: 0
     isRigidbody: 0
     isConvex: 0
@@ -598,6 +599,10 @@ MonoBehaviour:
     shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
+    meshConfigModify:
+      colors: []
+  ConfigModify:
+    colors: []
   Wrapper: {fileID: 5311629721760465526}
 --- !u!114 &6956179497362671940
 MonoBehaviour:
@@ -655,7 +660,7 @@ GameObject:
   - component: {fileID: 2373457716641464117}
   - component: {fileID: 7031037555625250950}
   - component: {fileID: 4928087593905777}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Trajectory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

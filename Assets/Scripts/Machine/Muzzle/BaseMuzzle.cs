@@ -170,13 +170,19 @@ public abstract class BaseMuzzle : MonoBehaviour
         Data.distanceAttack = Config.distanceAttack;// * (1 / Machine.Wrapper.transform.localScale.x);
         Data.speedBullet = Option.Config.speedBullet;
 
-        if (_gameManager.LevelConfig.light < 1)
+        if (Tower.Parent == null)
         {
-            SpotLight.enabled = !Machine.MachineLevelData.isBot;
+            if (_gameManager.LevelConfig.light < 1)
+            {
+                SpotLight.enabled = !Machine.MachineLevelData.isBot;
+            } else
+            {
+                SpotLight.enabled = false;
+            } 
         } else
         {
-            SpotLight.enabled = false;
-        } 
+            SpotLight.gameObject.SetActive(false);
+        }
 
         _data.index = index;
 

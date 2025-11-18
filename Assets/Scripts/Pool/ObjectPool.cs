@@ -8,6 +8,7 @@ public class ObjectPool : MonoBehaviour
     private Queue<GameObject> pool = new Queue<GameObject>();
     public Queue<GameObject> Pool => pool;
     [SerializeField] private int count;
+    [SerializeField] private int countUsed;
     public List<GameObject> poolObjs = new List<GameObject>();
 
     void Start()
@@ -21,6 +22,7 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject obj = pool.Dequeue();
             obj.SetActive(true);
+            countUsed++;
             return obj;
         }
 

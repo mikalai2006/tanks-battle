@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Rendering;
-using System;
 
 
 #if UNITY_EDITOR
@@ -56,15 +55,22 @@ public class BaseTower : MonoBehaviour
 
         Machine = baseMachine;
 
-        DirectionLight.intensity = _gameManager.LevelConfig.light;
-        DirectionLight.enabled = false;//!Machine.MachineLevelData.isBot;
-        if (_gameManager.LevelConfig.light < 1)
+        if (!Parent)
         {
-            PointLight.enabled = true; // Machine.MachineLevelData.isBot;
+            DirectionLight.intensity = _gameManager.LevelConfig.light;
+            DirectionLight.enabled = false;//!Machine.MachineLevelData.isBot;
+            if (_gameManager.LevelConfig.light < 1)
+            {
+                PointLight.enabled = true; // Machine.MachineLevelData.isBot;
+            } else
+            {
+                PointLight.enabled = false;
+            } 
         } else
         {
-            PointLight.enabled = false;
-        } 
+            DirectionLight.gameObject.SetActive(false);
+            PointLight.gameObject.SetActive(false);
+        }
 
         voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
 

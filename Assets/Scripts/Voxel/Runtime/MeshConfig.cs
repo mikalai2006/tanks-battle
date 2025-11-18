@@ -8,7 +8,7 @@ namespace Mikalai2006.Voxel
         public SOVoxelData sOVoxelData;
         public Material _material;
         public bool existCollider;
-        // public TypeCollider typeCollider;
+        public TypeCollider typeCollider;
         public bool isGreedy;
         public bool isRigidbody;
         public bool isConvex;
@@ -30,13 +30,13 @@ namespace Mikalai2006.Voxel
         [Tooltip("Если он больше 0, то устанавливается для объекта")]
         [Range(0,1)] public float customScale;
         [Tooltip("Список новых цветов (если заданы цвета здесь, они перезапишут цвета из sOVoxelData используя соответствующие индексы) (В идеале число цветов здесь и в sOVoxelData должны совпадать)")]
-        public Color[] color;
+        public MeshConfigModify meshConfigModify;
     }
 
-    // public enum TypeCollider
-    // {
-    //     MeshCollider,
-    //     BoxCollider,
-    //     SphereCollider
-    // }
+    public enum TypeCollider
+    {
+        MeshCollider,
+        BoxCollider,
+        SphereCollider
+    }
 }
