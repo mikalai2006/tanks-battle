@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu]
 public class GameSetting : ScriptableObject
@@ -69,6 +70,7 @@ public class GameSetting : ScriptableObject
   public GameObject prefabVoxel;
   public GameObject sectorVoxel;
   public Material materialTransparent;
+  public Sprite icoDefault;
 
   // [Space(5)]
   // [Header("Конфигурации тайлов")]

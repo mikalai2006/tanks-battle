@@ -1,35 +1,34 @@
 
-using System.Collections.Generic;
 using UIToolkitLibrary;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
-public class HealthBarController : MonoBehaviour
+public class MessagesController : MonoBehaviour
 {
     GameManager gameManager => GameManager.Instance;
-    [Header("HealthBar Elements")]
+    [Header("Файл UI документа")]
+    [SerializeField] UIDocument m_HealthBarDoc;
+
+    [Header("Настройки элементов")]
     [SerializeField] string m_HealthBarName = "HealthBarBase";
     [SerializeField] string m_CharacterName = "Character Name";
-
-    [SerializeField] Vector2 m_WorldSize = new Vector2(1.2f, 0.6f);
-    [SerializeField] Vector3 offset = new Vector3(0f, 1f, 0);
-    [Tooltip("x - нижняя граница(от), y - верхняя граница(до), z - значение maxOffset")]
-    // [SerializeField] private List<Vector3> maxOffsets;
-    public Vector2 rangeLerp = new Vector2(4f, 10f);
-    public float delimiter;
     [SerializeField] bool m_ShowStat = true;
     [SerializeField] bool m_ShowNameplate = true;
     [SerializeField] StyleSheet m_StyleSheetOverride;
 
     [SerializeField] float m_LowHPPercent = 25;
     [SerializeField] Transform transformToFollow;
-
     [SerializeField]  HealthBarComponent m_HealthBar;
-    // [SerializeField] Sprite m_LowHPImage;
-    // [SerializeField] StyleBackground m_OriginalHPImage;
-    [SerializeField] UIDocument m_HealthBarDoc;
     Camera _camera;
+
+    [Header("Настройки позиционирования ")]
+    // [SerializeField] private List<Vector3> maxOffsets;
+    [SerializeField] Vector2 m_WorldSize = new Vector2(1.2f, 0.6f);
+    [SerializeField] Vector3 offset = new Vector3(0f, 1f, 0);
+    [Tooltip("x - нижняя граница(от), y - верхняя граница(до), z - значение maxOffset")]
+    public Vector2 rangeLerp = new Vector2(4f, 10f);
+    public float delimiter;
 
 
     // void OnEnable()

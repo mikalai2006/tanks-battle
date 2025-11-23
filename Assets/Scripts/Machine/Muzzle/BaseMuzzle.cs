@@ -534,7 +534,7 @@ public abstract class BaseMuzzle : MonoBehaviour
         }
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
+    public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
     {
         List<UniTask> tasks = new List<UniTask>(0);
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
@@ -543,7 +543,7 @@ public abstract class BaseMuzzle : MonoBehaviour
             {
                 Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
                 // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
             }
         }
         UniTask.WhenAll(tasks).Forget();

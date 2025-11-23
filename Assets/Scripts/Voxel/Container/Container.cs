@@ -213,6 +213,12 @@ namespace Mikalai2006.Voxel
             // }
 
             _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
+            
+            BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+            if (bm)
+            {
+                bm.RefreshHP();
+            }
         }
 
         public void SetData()
@@ -259,6 +265,11 @@ namespace Mikalai2006.Voxel
             }
 
             _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
+            BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+            if (bm)
+            {
+                bm.RefreshHP();
+            }
         }
 
         public void ClearData()
@@ -734,7 +745,7 @@ namespace Mikalai2006.Voxel
             return voxel;
         }
 
-        async public UniTask ExposionVoxels(Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode, Vector3 direction, Vector3 normal)
+        async public UniTask ExposionVoxels(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode, Vector3 direction, Vector3 normal)
         {
             if (!meshConfig.isDestructible)
             {
@@ -917,6 +928,17 @@ namespace Mikalai2006.Voxel
                 if (bm)
                 {
                     bm.RefreshHP();
+
+                    if (bm.Data.ContainerData.levelDestruction < 0.8f)
+                    {
+                        GameSceneEvents.AddInfoDamage(new AppInfoDamageData
+                        {
+                            kto = ktoStrelyal,
+                            komy = bm,
+                            userText = "",
+                            duration = 2f
+                        });
+                    }
                 }
 
 

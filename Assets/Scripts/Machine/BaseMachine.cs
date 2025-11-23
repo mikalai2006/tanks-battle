@@ -203,24 +203,24 @@ public abstract class BaseMachine : MonoBehaviour
     /// <param name="isDrawMesh">Рисовать ли измененный меш</param>
     /// <param name="explodeGameObject"></param>
     /// <param name="damageRadius">Радиус уничтожения вокселей</param>
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
+    public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
     {
         // for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         // {
         // }
         if (Body)
         {
-            Body.OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
+            Body.OnCollision(ktoStrelyal, _pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
         }
 
         for (int i = 0; i < Towers.Count; i++)
         {
-            Towers[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
+            Towers[i].OnCollision(ktoStrelyal, _pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
         }
 
         for (int i = 0; i < Caterpillars.Count; i++)
         {
-            Caterpillars[i].OnCollision(_pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
+            Caterpillars[i].OnCollision(ktoStrelyal, _pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
         }
     }
 
@@ -273,13 +273,14 @@ public abstract class BaseMachine : MonoBehaviour
         if (HealthBar)
         {
             HealthBar.SetHealth(1, 1);
+            GameSceneEvents.SetHP?.Invoke(this);
         }
 
         OnSetHP(1); // Config.hp
 
-        if (stateController.enabled == false)
+        if (HealthBar && stateController.enabled == false)
         {
-            HealthBar.enabled = false;
+            HealthBar.gameObject.SetActive(false);
         }
 
         data.timeBeforeAddTarget = stateController.enabled
@@ -338,7 +339,7 @@ public abstract class BaseMachine : MonoBehaviour
         // test.
         // Badge.OnSetNameText(Data.speed.ToString());
 
-        RefreshHP();
+        // RefreshHP();
     }
 
     public void OnSetHP(float hp)
@@ -405,7 +406,6 @@ public abstract class BaseMachine : MonoBehaviour
     {
         int countVoxels = 0;
         int countVoxelsDestructed = 0;
-
         if (Body)
         {
             ContainerData value = Body.RefreshHP();
@@ -444,6 +444,11 @@ public abstract class BaseMachine : MonoBehaviour
         // {
         //     OnChangeHPs?.Invoke(this);
         // }
+
+        if (!MachineLevelData.isBot)
+        {
+            GameSceneEvents.RefreshHP?.Invoke(this);
+        }
     }
 
     public void SetNavObstacle()

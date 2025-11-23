@@ -61,44 +61,50 @@ namespace UIToolkitLibrary
        // Constructor initializes the health bar elements
        public HealthBarComponent()
        {
-           // Title background element
-           m_TitleBackground = new VisualElement {name = IDNames.HealthBarTitleBackground};
-           m_TitleBackground.AddToClassList(ClassNames.HealthBarTitleBackground);
+            // Title background element
+            m_TitleBackground = new VisualElement {name = IDNames.HealthBarTitleBackground};
+            m_TitleBackground.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             m_TitleBackground.pickingMode = PickingMode.Ignore;
-           Add(m_TitleBackground);
+            m_TitleBackground.AddToClassList(ClassNames.HealthBarTitleBackground);
+            Add(m_TitleBackground);
            
-           // Title label
-           m_TitleLabel = new Label() {name = IDNames.HealthBarTitle};
-           m_TitleLabel.AddToClassList(ClassNames.HealthBarTitle);
-            m_TitleLabel.text = "Character Name Character Name ";
+            // Title label
+            m_TitleLabel = new Label() {name = IDNames.HealthBarTitle};
+            m_TitleLabel.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             m_TitleLabel.pickingMode = PickingMode.Ignore;
-           m_TitleBackground.Add(m_TitleLabel);
+            m_TitleLabel.AddToClassList(ClassNames.HealthBarTitle);
+            m_TitleLabel.text = "Character Name Character Name ";
+            m_TitleBackground.Add(m_TitleLabel);
 
             // Add container class for overall styling
             AddToClassList(ClassNames.HealthBarContainer);
             // this.style.flexShrink = 1;
             style.width = new StyleLength(250);
            
-           // Background element of the health bar
-           m_Background = new VisualElement {name = IDNames.HealthBarBackground};
-           m_Background.AddToClassList(ClassNames.HealthBarBackground);
+            // Background element of the health bar
+            m_Background = new VisualElement {name = IDNames.HealthBarBackground};
+            m_Background.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             m_Background.pickingMode = PickingMode.Ignore;
+            m_Background.AddToClassList(ClassNames.HealthBarBackground);
             // m_Background.style.flexShrink = 0;
             
            Add(m_Background);
 
-           // Progress bar element showing current health
-           m_Progress = new VisualElement {name = IDNames.HealthBarProgress};
-           m_Progress.AddToClassList(ClassNames.HealthBarProgress);
+            // Progress bar element showing current health
+            m_Progress = new VisualElement {name = IDNames.HealthBarProgress};
+            m_Progress.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             m_Progress.pickingMode = PickingMode.Ignore;
-           m_Background.Add(m_Progress);
+            m_Progress.AddToClassList(ClassNames.HealthBarProgress);
+            m_Progress.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
+            m_Background.Add(m_Progress);
 
-           // Label displaying current and maximum health
-           m_HealthStat = new Label() {name = IDNames.HealthBarStat};
-           m_HealthStat.AddToClassList(ClassNames.HealthBarLabel);
+            // Label displaying current and maximum health
+            m_HealthStat = new Label() {name = IDNames.HealthBarStat};
+            m_HealthStat.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             m_HealthStat.pickingMode = PickingMode.Ignore;
+            m_HealthStat.AddToClassList(ClassNames.HealthBarLabel);
             m_HealthStat.text = "200/300";
-           m_Progress.Add(m_HealthStat);
+            m_Progress.Add(m_HealthStat);
 
            BindElements();
        }

@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using Unity.Cinemachine;
 using Cysharp.Threading.Tasks;
 using Loader;
+using UIToolkitLibrary;
 
 public class LevelManager : MonoBehaviour
 {
@@ -108,6 +109,10 @@ public class LevelManager : MonoBehaviour
         wFCGenerator.OnUpdateColors();
         wFCGenerator.OnCreateVariantsPrefabs();
         await wFCGenerator.OnGenerateTiles(cancelToken);
+
+
+        // Показываем UI SideBar.
+        MainMenuUIEvents.GameSideBarShown?.Invoke();
     }
 
     private void OnSpawnObjects()

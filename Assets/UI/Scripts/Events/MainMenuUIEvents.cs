@@ -40,8 +40,10 @@ namespace UIToolkitLibrary
 
         public static Action InventoryScreenHidden;
 
-        // Show the GameScreen for gameplay
+        // Показать GameScreen для игрового процесса
         public static Action GameScreenShown;
+        //Показать GameSideBar для игрового процесса
+        public static Action GameSideBarShown;
 
         // Triggered when showing a new MenuScreen
         // public static Action<MenuScreen> CurrentScreenChanged;

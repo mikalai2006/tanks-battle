@@ -44,6 +44,15 @@ public class DataMachine
     }
 }
 
+// [Serializable]
+// public class DataHP
+// {
+//     public float hp;
+//     public float hpBody;
+//     public float hpTowers;
+//     public
+// }
+
 [Serializable]
 public class DataMuzzle
 {

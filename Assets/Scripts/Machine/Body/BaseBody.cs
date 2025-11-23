@@ -295,7 +295,7 @@ public class BaseBody : MonoBehaviour
         Machine.Data.directionMove = direction;
     }
 
-    public void OnCollision(Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
+    public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
     {
         for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
         {
@@ -303,7 +303,7 @@ public class BaseBody : MonoBehaviour
             {
                 Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
                 // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                voxelMeshRender.Containers[i].ExposionVoxels(localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
             }
         }
     }

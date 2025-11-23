@@ -20,6 +20,7 @@ MonoBehaviour:
     showOtherTrajectory: 0
     doubleClickThreshold: 0.2
     speedRotateCamera: {x: 2, y: 0.5}
+    chanceReflex: 0
   scaleObjects: 0.03125
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
@@ -109,6 +110,7 @@ MonoBehaviour:
   prefabVoxel: {fileID: 8765538014590554563, guid: 6e1da3befa2e5eb41ae0c256c49ad53b, type: 3}
   sectorVoxel: {fileID: 6423673945417182926, guid: ca8115febc395234ea9097c741744566, type: 3}
   materialTransparent: {fileID: 2100000, guid: 7fd9cedb25c36714c948511cb3fdc30f, type: 2}
+  icoDefault: {fileID: 783229399, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}
@@ -117,7 +119,7 @@ MonoBehaviour:
   colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
   DebugSettings:
-    mode: 1
+    mode: 2
     disableCreateTiles: 0
     logEnabled: 1
     ECSColliderSphere: 0

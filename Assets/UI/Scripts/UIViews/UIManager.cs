@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +20,7 @@ namespace UIToolkitLibrary
 
         UIView m_CurrentView;
         UIView m_PreviousView;
+        [SerializeField] WorldSpaceUIDocument uiDocumentPrefab;
 
         // List of all UIViews
         List<UIView> m_AllViews = new List<UIView>();
@@ -75,6 +75,7 @@ namespace UIToolkitLibrary
         void SubscribeToEvents()
         {
             MainMenuUIEvents.GameScreenShown += InitGame;
+            MainMenuUIEvents.GameSideBarShown += ShowSideBar;
             MainMenuUIEvents.HomeScreenShown += OnHomeScreenShown;
             // MainMenuUIEvents.CharScreenShown += OnCharScreenShown;
             // MainMenuUIEvents.InfoScreenShown += OnInfoScreenShown;
@@ -100,6 +101,7 @@ namespace UIToolkitLibrary
         void UnsubscribeFromEvents()
         {
             MainMenuUIEvents.GameScreenShown -= InitGame;
+            MainMenuUIEvents.GameSideBarShown -= ShowSideBar;
             MainMenuUIEvents.HomeScreenShown -= OnHomeScreenShown;
             // MainMenuUIEvents.CharScreenShown -= OnCharScreenShown;
             // MainMenuUIEvents.InfoScreenShown -= OnInfoScreenShown;
@@ -210,6 +212,7 @@ namespace UIToolkitLibrary
 
         void OnGarageScreenShown()
         {
+            Instantiate(uiDocumentPrefab, transform, true);
             ShowModalView(m_GarageView);
         }
 
@@ -271,9 +274,9 @@ namespace UIToolkitLibrary
             var gameLevelConfig = GameManager.Instance.Settings.levels.ElementAt(UnityEngine.Random.Range(0, GameManager.Instance.Settings.levels.Count-1));
             if (gameLevelConfig == null)
             {
-            _result.isOk = false;
-            _processCompletionSource.SetResult(_result);
-            return;
+                _result.isOk = false;
+                _processCompletionSource.SetResult(_result);
+                return;
             }
 
             GameManager.Instance.SetLevelConfig(gameLevelConfig);
@@ -304,6 +307,14 @@ namespace UIToolkitLibrary
             var operations = new Queue<ILoadingOperation>();
             operations.Enqueue(new GameInitOperation());
             await GameManager.Instance.LoaderBarProvider.LoadAndDestroy(operations);
+
+            // var uiManagerGameScene = new UIManagerGameSceneOperation();
+            // uiManagerGameScene.ShowAndHide().Forget();
+        }
+
+        private void ShowSideBar()
+        {
+            Debug.LogWarning("Show sideBar");
         }
 
         public async UniTask<DataDialogResult> ProcessAction()

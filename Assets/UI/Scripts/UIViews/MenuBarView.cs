@@ -118,6 +118,8 @@ namespace UIToolkitDemo
         void ClickGameButton(ClickEvent evt)
         {
             // ActivateButton(m_HomeScreenMenuButton);
+            
+            // Показываем сцену игрового процесса.
             MainMenuUIEvents.GameScreenShown?.Invoke();
           
             // MoveMarkerToClick(evt);

@@ -134,7 +134,7 @@ public class BaseBullet : MonoBehaviour
                     if (bm)
                     {
                         collisionsObjects.Add(collision.transform.gameObject);
-                        bm.OnCollision(contact.point, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal);
+                        bm.OnCollision(Machine, contact.point, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, contact.normal);
                         // collisionContainers.AddRange(bm.Body.GetComponentsInChildren<Container>());
                         // collisionContainers.AddRange(bm.Towers[0].GetComponentsInChildren<Container>());
                     }
@@ -154,7 +154,7 @@ public class BaseBullet : MonoBehaviour
                     for (int x = 0; x < collisionContainers.Count; x++)
                     {
 
-                        collisionContainers[x].ExposionVoxels(localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal).Forget();
+                        collisionContainers[x].ExposionVoxels(Machine, localPoint, true, collision.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal).Forget();
                         // for (int t=0; t < 100; t++) {
 
                         //     float forceMagnitude = 3 * 100;
@@ -263,7 +263,7 @@ public class BaseBullet : MonoBehaviour
                 for (int x = 0; x < collisionContainers.Count; x++)
                 {
 
-                    collisionContainers[x].ExposionVoxels(localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius,forward, hit.normal).Forget();
+                    collisionContainers[x].ExposionVoxels(Machine, localPoint, true, other.gameObject, ConfigMuzzle.Bullet.damageRadius,forward, hit.normal).Forget();
                 }
             }
 
@@ -476,8 +476,7 @@ public class BaseBullet : MonoBehaviour
                     // Debug.Log($"collisionContainers.Count={collisionContainers.Count}");
                     for (int x = 0; x < collisionContainers.Count; x++)
                     {
-
-                        collisionContainers[x].ExposionVoxels(localPoint, true, hit.collider.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal).Forget();
+                        collisionContainers[x].ExposionVoxels(Machine, localPoint, true, hit.collider.gameObject, ConfigMuzzle.Bullet.damageRadius, forward, hit.normal).Forget();
                         // for (int t=0; t < 100; t++) {
 
                         //     float forceMagnitude = 3 * 100;
@@ -532,7 +531,7 @@ public class BaseBullet : MonoBehaviour
         }
 
 
-        collisionsObjects.Clear();
+        // collisionsObjects.Clear();
         lifeTime = 0;
         isActive = false;
         // if (_targetMachine)
