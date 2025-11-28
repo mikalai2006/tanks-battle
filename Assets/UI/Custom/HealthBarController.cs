@@ -7,12 +7,15 @@ using UnityEngine.UIElements;
 public class HealthBarController : MonoBehaviour
 {
     GameManager gameManager => GameManager.Instance;
+    [SerializeField] private BaseMachine Machine;
     [Header("HealthBar Elements")]
     [SerializeField] string m_HealthBarName = "HealthBarBase";
     [SerializeField] string m_CharacterName = "Character Name";
     [SerializeField] bool m_ShowStat = true;
     [SerializeField] bool m_ShowNameplate = true;
     [SerializeField] StyleSheet m_StyleSheetOverride;
+    Label playerName;
+    VisualElement rankElement;
 
     [SerializeField] float m_LowHPPercent = 25;
     [SerializeField] Transform transformToFollow;
@@ -98,6 +101,13 @@ public class HealthBarController : MonoBehaviour
         VisualElement healthBarBg = m_HealthBar.Q<VisualElement>(HealthBarComponent.IDNames.HealthBarBackground);
         healthBarBg.style.backgroundColor = new StyleColor(gameManager.Theme.bgColor);
 
+        playerName = m_HealthBar.Q<Label>(HealthBarComponent.IDNames.HealthBarTitle);
+        playerName.text = Machine.MachineLevelData.name;
+
+        rankElement = m_HealthBar.Q<VisualElement>(HealthBarComponent.IDNames.HealthBarRank);
+        var rank = gameManager.Settings.ranks[Machine.MachineLevelData.rank];
+        rankElement.style.backgroundImage = new StyleBackground(rank.sprite);
+
         ShowNameAndStats(m_ShowNameplate, m_ShowStat);
         // MoveToWorldPosition(m_HealthBar, transformToFollow.position, m_WorldSize);
     }
@@ -126,6 +136,7 @@ public class HealthBarController : MonoBehaviour
         
         m_HealthBar.HealthData.CurrentHealth = health;
         m_HealthBar.HealthData.MaximumHealth = maxHealth;
+
     }
 
     
@@ -158,12 +169,11 @@ public class HealthBarController : MonoBehaviour
 
     void ShowNameAndStats(bool nameVisible, bool statVisible)
     {
-        VisualElement nameplate = m_HealthBar.Q<VisualElement>(HealthBarComponent.IDNames.HealthBarTitleBackground);
         VisualElement stat = m_HealthBar.Q<Label>(HealthBarComponent.IDNames.HealthBarStat);
 
-        if (nameplate != null)
+        if (playerName != null)
         {
-            nameplate.visible = nameVisible;
+            playerName.visible = nameVisible;
         }
 
         if (stat != null)

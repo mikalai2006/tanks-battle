@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: muzzle_t-1
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0.49803922, g: 0.5019608, b: 0.2509804, a: 1}
+  - color: {r: 0.7372549, g: 0.6627451, b: 0, a: 1}
     voxels:
     - {x: 19, y: 0, z: 0}
     - {x: 19, y: 0, z: 1}

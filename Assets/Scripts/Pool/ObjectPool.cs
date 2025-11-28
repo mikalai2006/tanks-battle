@@ -7,6 +7,7 @@ public class ObjectPool : MonoBehaviour
     private Queue<GameObject> pool = new Queue<GameObject>();
     public Queue<GameObject> Pool => pool;
     [SerializeField] private int count;
+    [SerializeField] private int poolLength;
     [SerializeField] private int countUsed;
     public List<GameObject> poolObjs = new List<GameObject>();
 
@@ -22,10 +23,19 @@ public class ObjectPool : MonoBehaviour
             GameObject obj = pool.Dequeue();
             obj.SetActive(true);
             countUsed++;
+            poolLength = pool.Count;
+
             return obj;
         }
 
-        return Instantiate(prefab);
+        GameObject objNew = CreateElement(poolLength);
+        ReturnObject(objNew);
+
+        objNew = pool.Dequeue();
+        countUsed++;
+
+        poolLength = pool.Count;
+        return objNew;
     }
 
     public void ReturnObject(GameObject obj)
@@ -72,12 +82,20 @@ public class ObjectPool : MonoBehaviour
         // }
     }
 
+    GameObject CreateElement(int index = 0)
+    {
+        GameObject obj = Instantiate(prefab, transform);
+        obj.name = $"Element-{index}";
+        return obj;
+    }
+
     public void InitPool()
     {
         for (int i = 0; i < count; i++)
         {
-            GameObject obj = Instantiate(prefab, transform);
-            obj.name = $"bullet-{i}";
+            // GameObject obj = Instantiate(prefab, transform);
+            // obj.name = $"bullet-{i}";
+            GameObject obj = CreateElement(i);
             ReturnObject(obj);
         }
     }

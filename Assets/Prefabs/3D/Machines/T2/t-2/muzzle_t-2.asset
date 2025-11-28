@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: muzzle_t-2
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0.65882355, g: 0.6039216, b: 0.31764707, a: 1}
+  - color: {r: 0, g: 0.5647059, b: 0.05882353, a: 1}
     voxels:
     - {x: 19, y: 0, z: 0}
     - {x: 19, y: 0, z: 1}
@@ -79,7 +79,7 @@ MonoBehaviour:
     - {x: 2, y: 2, z: 1}
     - {x: 1, y: 2, z: 1}
     - {x: 0, y: 2, z: 1}
-  - color: {r: 0.34901962, g: 0.38431373, b: 0.21176471, a: 1}
+  - color: {r: 0.13333334, g: 0.44313726, b: 0.16470589, a: 1}
     voxels:
     - {x: 16, y: 0, z: 1}
     - {x: 15, y: 0, z: 1}

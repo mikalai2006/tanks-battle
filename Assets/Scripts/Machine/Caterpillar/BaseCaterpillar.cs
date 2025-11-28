@@ -78,8 +78,11 @@ public class BaseCaterpillar : MonoBehaviour
                 if (voxelMeshRenders[x].Containers[i].IsDestructible())
                 {
                     Vector3 localPoint = voxelMeshRenders[x].Containers[i].transform.InverseTransformPoint(_pointCollision);
-                    // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                    tasks.Add(voxelMeshRenders[x].Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                    if (voxelMeshRenders[x].Containers[i].PointInCollider(_pointCollision))
+                    {
+                        Debug.Log($"<color=blue>Caterpillar OnCollision: {_pointCollision} / {localPoint}</color>");
+                        tasks.Add(voxelMeshRenders[x].Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                    }
                 }
             }
         }

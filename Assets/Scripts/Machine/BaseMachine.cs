@@ -255,6 +255,10 @@ public abstract class BaseMachine : MonoBehaviour
         // устанавливаем звук мотора.
         AudioSource.clip = Config.soundMove;
         AudioSource.Play();
+        if (!MachineLevelData.isBot)
+        {
+            isVisible = true;
+        }
         
         // if (stateController.enabled)
         // {

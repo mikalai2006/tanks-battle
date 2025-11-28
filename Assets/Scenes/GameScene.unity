@@ -166,16 +166,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -230,16 +233,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -403,16 +409,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -467,16 +476,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -777,16 +789,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -887,16 +902,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -951,16 +969,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -1019,16 +1040,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -1574,16 +1598,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -1723,16 +1750,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 88d395fa0bbb3134392aad198338b2b6, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -1787,16 +1817,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2075,16 +2108,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2239,16 +2275,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2382,16 +2421,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2630,16 +2672,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2694,16 +2739,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2758,16 +2806,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2860,16 +2911,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -2924,16 +2978,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -3513,16 +3570,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -3577,16 +3637,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -3641,16 +3704,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -3705,16 +3771,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -3906,16 +3975,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -3970,16 +4042,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4034,16 +4109,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4324,16 +4402,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4388,16 +4469,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4452,16 +4536,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4636,16 +4723,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4700,16 +4790,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4836,16 +4929,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -4900,16 +4996,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -5000,16 +5099,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -5301,16 +5403,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -5753,16 +5858,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -5893,16 +6001,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -5957,16 +6068,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6021,16 +6135,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6085,16 +6202,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6149,16 +6269,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6213,16 +6336,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6277,16 +6403,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6373,16 +6502,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6437,16 +6569,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6657,16 +6792,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6721,16 +6859,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6817,16 +6958,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6881,16 +7025,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -6945,16 +7092,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b4bc7c6a94b4e3247a1fe14d5ab71a33, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7039,6 +7189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7056810224777368569, guid: d95bbd4f2f66c664c84f92ac6f34d9c4, type: 3}
   count: 100
+  poolLength: 0
   countUsed: 0
   poolObjs: []
 --- !u!1 &555636676
@@ -7088,16 +7239,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7152,16 +7306,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7216,16 +7373,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7280,16 +7440,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7344,16 +7507,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7408,16 +7574,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7632,16 +7801,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7772,16 +7944,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7836,16 +8011,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -7957,16 +8135,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -8025,16 +8206,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -8728,16 +8912,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -8792,16 +8979,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -8856,16 +9046,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 503c1824ae587c746a823baa4d264a5f, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -8920,16 +9113,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -8984,16 +9180,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9150,16 +9349,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9290,16 +9492,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9390,16 +9595,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9530,16 +9738,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9594,16 +9805,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9695,16 +9909,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9759,16 +9976,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -9935,16 +10155,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10047,16 +10270,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10111,16 +10337,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10175,16 +10404,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10395,16 +10627,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10683,16 +10918,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10861,16 +11099,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -10925,16 +11166,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11034,16 +11278,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11098,16 +11345,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11194,16 +11444,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11391,16 +11644,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11531,16 +11787,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11595,16 +11854,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b4bc7c6a94b4e3247a1fe14d5ab71a33, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11659,16 +11921,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11723,16 +11988,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -11922,16 +12190,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12033,16 +12304,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12097,16 +12371,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12161,16 +12438,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12257,16 +12537,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12321,16 +12604,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12385,16 +12671,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12449,16 +12738,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -12934,16 +13226,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13255,16 +13550,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13415,16 +13713,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13639,16 +13940,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13779,16 +14083,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13843,16 +14150,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13907,16 +14217,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -13971,16 +14284,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14035,16 +14351,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14099,16 +14418,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14163,16 +14485,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14402,16 +14727,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14466,16 +14794,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14583,16 +14914,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14647,16 +14981,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14711,16 +15048,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14775,16 +15115,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -14919,16 +15262,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15059,16 +15405,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15202,16 +15551,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15422,16 +15774,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15562,16 +15917,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15705,16 +16063,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15845,16 +16206,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -15909,16 +16273,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16048,16 +16415,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16268,16 +16638,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16385,16 +16758,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16562,16 +16938,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16630,16 +17009,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16770,16 +17152,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16834,16 +17219,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -16930,16 +17318,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -17295,16 +17686,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -17483,16 +17877,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -17547,16 +17944,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -17774,16 +18174,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -17914,16 +18317,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -17978,16 +18384,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18046,16 +18455,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18190,16 +18602,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18330,16 +18745,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18394,16 +18812,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18690,16 +19111,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18830,16 +19254,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18894,16 +19321,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -18994,16 +19424,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19175,16 +19608,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19315,16 +19751,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19436,16 +19875,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19500,16 +19942,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19706,16 +20151,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19770,16 +20218,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19922,16 +20373,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -19986,16 +20440,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -20130,16 +20587,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -20270,16 +20730,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -20562,16 +21025,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -20626,16 +21092,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -20690,16 +21159,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -21056,16 +21528,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -21378,16 +21853,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -21587,16 +22065,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -21651,16 +22132,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -21719,16 +22203,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22016,16 +22503,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22080,16 +22570,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22144,16 +22637,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b4bc7c6a94b4e3247a1fe14d5ab71a33, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22284,16 +22780,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22348,16 +22847,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22412,16 +22914,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22587,16 +23092,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22683,16 +23191,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22880,16 +23391,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -22944,16 +23458,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23053,16 +23570,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23117,16 +23637,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23213,16 +23736,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23277,16 +23803,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23373,16 +23902,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23695,16 +24227,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23835,16 +24370,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -23899,16 +24437,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -24054,16 +24595,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -24277,16 +24821,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -24454,16 +25001,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b4bc7c6a94b4e3247a1fe14d5ab71a33, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -24655,16 +25205,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -24795,16 +25348,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -24859,16 +25415,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25182,16 +25741,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25246,16 +25808,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25314,16 +25879,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25486,16 +26054,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25550,16 +26121,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25614,16 +26188,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25678,16 +26255,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -25872,16 +26452,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26012,16 +26595,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26127,16 +26713,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26195,16 +26784,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26425,16 +27017,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26489,16 +27084,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: bbe0e9b896720294fa3f183a34ad9626, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26553,16 +27151,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26617,16 +27218,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26681,16 +27285,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26777,16 +27384,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -26894,16 +27504,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27034,16 +27647,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 10eb073de519317489822c2455b55b9b, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27206,16 +27822,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27402,16 +28021,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27542,16 +28164,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27606,16 +28231,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27674,16 +28302,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e10601ecedbdd2348b9d24c786756307, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27871,16 +28502,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27935,16 +28569,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 268b1fdffa24099449c34de16088119a, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -27999,16 +28636,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -28067,16 +28707,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -28207,16 +28850,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: a47daf265aab36a47bffdda7ab72f3f3, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -28346,16 +28992,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: e0f042ca7caf8454cb205366d23914c4, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -28485,16 +29134,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: b6e8f4c11f5fb484f8afb2798590b659, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 1
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -28534,16 +29186,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:
@@ -28740,16 +29395,19 @@ MonoBehaviour:
   Config:
     sOVoxelData: {fileID: 11400000, guid: 9d014e391e99aa24d94326e27ae98779, type: 2}
     _material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
+    isOneMesh: 0
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
     existCollider: 1
     typeCollider: 0
-    isGreedy: 1
-    isRigidbody: 0
     isConvex: 0
-    isOneMesh: 0
-    emissionValue: 0
-    isTile: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
     isDestructible: 0
-    shadowCastingMode: 0
     useGlobalScale: 0
     customScale: 0
     meshConfigModify:

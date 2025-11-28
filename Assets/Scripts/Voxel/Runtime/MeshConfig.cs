@@ -5,25 +5,39 @@ namespace Mikalai2006.Voxel
     [System.Serializable]
     public struct MeshConfig
     {
+        [Header("Опции меша")]
         public SOVoxelData sOVoxelData;
         public Material _material;
-        public bool existCollider;
-        public TypeCollider typeCollider;
-        public bool isGreedy;
-        public bool isRigidbody;
-        public bool isConvex;
         [Tooltip("Рендерит все объекты модели в один меш и использует цвет вершин. Нужно, чтобы материал поддерживал шейдер с Vertex Color")]
         public bool isOneMesh;
+        [Tooltip("Упрощение меша (Оптимизация количества вершин)")]
+        public bool isGreedy;
+        [Tooltip("Отбрасывать ли тени")]
+        public UnityEngine.Rendering.ShadowCastingMode shadowCastingMode;
+        [Tooltip("Если это тайл, то использовать пивот, как половина максимального измерения по X,Z. Например: 32x32x20 - пивот -> 15.5x0.5x15.5")]
+        public bool isTile;
+
+        [Space(5)]
+        [Header("Опции колайдера")]
+        public bool existCollider;
+        public TypeCollider typeCollider;
+        public bool isConvex;
+
+        [Space(5)]
+        [Header("Опции твердого тела")]
+        public bool isRigidbody;
+        public bool isKinematic;
+        public int mass;
+        public bool freezeRotation;
+        public RigidbodyConstraints constraints;
         // [Tooltip("Принудительное включение GPU Instances.Включение этой опции принудительно заставит меши использовать GPU Instances, если он активирован в материале")]
         // public bool enableGPUInstances;
-        public float emissionValue;
+        // public float emissionValue;
 
-        public bool isTile;
+        [Space(5)]
+        [Header("Другие опции")]
         [Tooltip("Указывает разрушаемый ли объект")]
         public bool isDestructible;
-        [Tooltip("Если это тайл, то использовать пивот, как половина максимального измерения по X,Z. Например: 32x32x20 - пивот -> 15.5x0.5x15.5")]
-        public UnityEngine.Rendering.ShadowCastingMode shadowCastingMode;
-
         [Header("Масштаб объекта")]
         [Tooltip("Устанавливать ли глобальный масштаб к Wrapper. Это нужно делать на объектах, которые не имеют много вложенных VoxelMeshRender.")]
         public bool useGlobalScale;

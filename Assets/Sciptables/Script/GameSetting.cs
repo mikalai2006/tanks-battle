@@ -32,6 +32,36 @@ public class GameSetting : ScriptableObject
   [Range(6,10)] public int maxRadiusCreateVoxels;
   [Tooltip("Количество вокселей, которые будут созданы за кадр")]
   [Range(10,1000)] public int countMaxCreateVoxelsByStep;
+  [Tooltip("Количество вокселей, которые будут созданы за кадр (для мобильных игр)")]
+  [Range(10,1000)] public int countMaxCreateVoxelsByStepMobile;
+
+  [Space(5)]
+  [Header("Настройки отладки")]
+  public DebugSettings DebugSettings;
+  
+  [Space(5)]
+  [Header("Плейгейм")]
+  [Tooltip("Поворачивать башню по ходу машины, если нет врага")]
+  public bool rotateTowerByBody;
+  [Tooltip("Время обнаружения противника от и до, сек")]
+  public Vector2 timeBeforeAddTarget;
+  [Tooltip("Расстояние на котором запрещена атака, слишком близко")]
+  [Range(0,3f)] public float distanceDisableAttack;
+  [Tooltip("Показывать ли зоны поиска и атаки для ботов")]
+  public bool drawAreaForBot;
+  [Tooltip("Коэффициент смещения угла поворота башни при попадании")]
+  [Range(0,10f)] public float koofChangeAngleTower;
+  [Tooltip("Скорость изменения размеров зон поиска и сектора атаки")]
+  [Range(1f,20f)] public float speedChangeAreaSize;
+  [Tooltip("Минимальный угол на котором стартует стрельба")]
+  [Range(5f, 30f)] public float angleStartShot;
+  [Tooltip("Захватывать ли ближайшего противника")]
+  public bool takeNearEnemy;
+  [Tooltip("Автонаведение на цель (не для ботов)")]
+  public bool autoTakeEnemy;
+  [Tooltip("Автовыстрелы при наведении на цель (не для ботов)")]
+  public bool autoShot;
+
 
   [Space(5)]
   [Header("System")]
@@ -86,9 +116,9 @@ public class GameSetting : ScriptableObject
   [Tooltip("Цвет текста при пополнении HP")]
   public Color colorTextDamagePlus;
 
-  [Space(5)]
-  [Header("Эффекты tilemap")]
-  public GameObject boomEffect;
+  // [Space(5)]
+  // [Header("Эффекты tilemap")]
+  // public GameObject boomEffect;
 
   
   [Space(5)]
@@ -100,45 +130,17 @@ public class GameSetting : ScriptableObject
   [Tooltip("Цвет уровня здоровья на маркере")]
   public Color colorMarkerProgress;
 
+  // [Space(5)]
+  // [Header("Редактор")]
+  // [Tooltip("Рисовать вспомогательные линии, которые показывают направление выстрела")]
+  // public bool drawLineAttack;
+  // public Sprite spriteArc5px;
 
-  [Space(5)]
-  [Header("Настройки отладки")]
-  public DebugSettings DebugSettings;
-  
-  [Space(5)]
-  [Header("Плейгейм")]
-  [Tooltip("Поворачивать башню по ходу машины, если нет врага")]
-  public bool rotateTowerByBody;
-  [Tooltip("Время обнаружения противника от и до, сек")]
-  public Vector2 timeBeforeAddTarget;
-  [Tooltip("Расстояние на котором запрещена атака, слишком близко")]
-  [Range(0,3f)] public float distanceDisableAttack;
-  [Tooltip("Показывать ли зоны поиска и атаки для ботов")]
-  public bool drawAreaForBot;
-  [Tooltip("Коэффициент смещения угла поворота башни при попадании")]
-  [Range(0,10f)] public float koofChangeAngleTower;
-  [Tooltip("Скорость изменения размеров зон поиска и сектора атаки")]
-  [Range(1f,20f)] public float speedChangeAreaSize;
-  [Tooltip("Минимальный угол на котором стартует стрельба")]
-  [Range(5f, 30f)] public float angleStartShot;
-  [Tooltip("Захватывать ли ближайшего противника")]
-  public bool takeNearEnemy;
-  [Tooltip("Автонаведение на цель (не для ботов)")]
-  public bool autoTakeEnemy;
-  [Tooltip("Автовыстрелы при наведении на цель (не для ботов)")]
-  public bool autoShot;
-
-  [Space(5)]
-  [Header("Редактор")]
-  [Tooltip("Рисовать вспомогательные линии, которые показывают направление выстрела")]
-  public bool drawLineAttack;
-  public Sprite spriteArc5px;
-
-  [Space(5)]
-  [Header("Particle System")]
-  public GameObject PopParticle;
-  public ParticleSystem PopBig;
-  public ParticleSystem PulseParticle;
+  // [Space(5)]
+  // [Header("Particle System")]
+  // public GameObject PopParticle;
+  // public ParticleSystem PopBig;
+  // public ParticleSystem PulseParticle;
 
   [Space(5)]
   [Header("Save&Load")]
@@ -165,21 +167,21 @@ public class GameSetting : ScriptableObject
   // public APIDirectory APIDirectory;
 
 
-  [Space(5)]
-  [Header("Ads")]
-  public int adsPerTime;
+  // [Space(5)]
+  // [Header("Ads")]
+  // public int adsPerTime;
 
   //   [Space(5)]
   //   [Header("Rate")]
   //   public int minRateForReview;
   //   public int countCoinForReview;
-  [Space(5)]
-  [Header("Test")]
-  [Tooltip("Ограничить переход на следующие уровни если не пройдены предыдущие в пазлах")]
-  public bool isDisableNextButton;
-  [Tooltip("Количество видимых следующих пазлов")]
-  public int countNextPuzzle;
-  public TileBase tileSquare;
+  // [Space(5)]
+  // [Header("Test")]
+  // [Tooltip("Ограничить переход на следующие уровни если не пройдены предыдущие в пазлах")]
+  // public bool isDisableNextButton;
+  // [Tooltip("Количество видимых следующих пазлов")]
+  // public int countNextPuzzle;
+  // public TileBase tileSquare;
 }
 
 // [System.Serializable]
@@ -253,6 +255,8 @@ public struct DebugSettings
   public Color gizmoTrajectoryColor;
   public bool gizmoMuzzleDistanseAttack;
   public Color gizmoMuzzleDistanseAttackColor;
+  public bool lineAttackDraw;
+  public Color lineAttackColor;
 }
 
 [Serializable]

@@ -56,7 +56,7 @@ public abstract class BaseMuzzle : MonoBehaviour
         cancelToken.Dispose();
     }
 
-    public virtual void Update()
+    public virtual void FixedUpdate()
     {
         if (!Machine)
         {
@@ -111,20 +111,22 @@ public abstract class BaseMuzzle : MonoBehaviour
         //     OnGoShot();
         // }
 
-        // устанавливаем дистанцию атаки.
-        // проверяем наличие бонуса дистанции атаки.
-        DataBonus bonusDistanceAttack = null;
-        Machine.Data.bonuses.TryGetValue(TypeBonus.DistanceAttack, out bonusDistanceAttack);
-        if (bonusDistanceAttack != null)
-        {
-            distanceAttack = Config.distanceAttack + bonusDistanceAttack.value;//* (1 / Machine.Wrapper.transform.localScale.x);
-            OnSetSizeSector(distanceAttack);
-        }
-        else
-        {
-            distanceAttack = Data.distanceAttack;
-            OnSetSizeSector(distanceAttack);
-        }
+
+        // // TODO: сделать берется бонус - добавляется, ставим таймер и по завершении удаляем бонус
+        // // устанавливаем дистанцию атаки.
+        // // проверяем наличие бонуса дистанции атаки.
+        // DataBonus bonusDistanceAttack = null;
+        // Machine.Data.bonuses.TryGetValue(TypeBonus.DistanceAttack, out bonusDistanceAttack);
+        // if (bonusDistanceAttack != null)
+        // {
+        //     distanceAttack = Config.distanceAttack + bonusDistanceAttack.value;//* (1 / Machine.Wrapper.transform.localScale.x);
+        //     OnSetSizeSector(distanceAttack);
+        // }
+        // else
+        // {
+        //     distanceAttack = Data.distanceAttack;
+        //     OnSetSizeSector(distanceAttack);
+        // }
 
         // Отслеживание противников.
         if (Tower.ObjectTarget)
@@ -154,8 +156,6 @@ public abstract class BaseMuzzle : MonoBehaviour
             OnSetAngleSector(Mathf.Max(5, Mathf.Abs(Mathf.DeltaAngle(Tower.Data.angleTower, Tower.Data.currentAngleTower))));
         }
     }
-
-    
     #endregion
 
     public void Init(BaseMachine _machine, BaseTower tower, GameMuzzleOption option, int index)
@@ -220,6 +220,9 @@ public abstract class BaseMuzzle : MonoBehaviour
         // SectorGO = Instantiate(_gameManager.Settings.sectorVoxel, transform.position, Quaternion.Euler(-90,0,0), Machine.WrapperTools.transform);
         // _rectSector = SectorGO.GetComponentInChildren<RectTransform>();
         // _spriteSector = SectorGO.GetComponentInChildren<Image>();
+
+        distanceAttack = Data.distanceAttack;
+        OnSetSizeSector(distanceAttack);
     }
 
     public void SetBusy(bool status)
@@ -542,8 +545,11 @@ public abstract class BaseMuzzle : MonoBehaviour
             if (voxelMeshRender.Containers[i].IsDestructible())
             {
                 Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
-                // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                if (voxelMeshRender.Containers[i].PointInCollider(_pointCollision))
+                {
+                    Debug.Log($"<color=blue>Muzzle OnCollision: {_pointCollision} / {localPoint}</color>");
+                    tasks.Add(voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                }
             }
         }
         UniTask.WhenAll(tasks).Forget();

@@ -89,9 +89,10 @@ namespace Mikalai2006.Voxel
             }
         }
 
+        
         // void OnCollisionEnter(Collision collision)
         // {
-        //     Debug.Log($"<color=green>Container is collision with trigger {collision.gameObject.name}</color>");
+        //     Debug.Log($"<color=blue>Container is collision with trigger {collision.gameObject.name}</color>");
         // }
         // void OnTriggerEnter(Collider collision)
         // {
@@ -101,6 +102,11 @@ namespace Mikalai2006.Voxel
         public virtual void SetConfig(MeshConfig config)
         {
             meshConfig = config;
+        }
+
+        public virtual bool PointInCollider(Vector3 point)
+        {
+            return false;
         }
 
         public virtual void Initialize(MeshConfig config, Vector3 position)
@@ -136,10 +142,10 @@ namespace Mikalai2006.Voxel
                 {
                     r = gameObject.AddComponent<Rigidbody>();
                 }
-                r.isKinematic = true;
-                r.mass = 1000;
-                r.freezeRotation = true;
-                r.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ;
+                r.isKinematic = config.isKinematic;
+                r.mass = config.mass > 0 ? config.mass : 1000;
+                r.freezeRotation = config.isKinematic;
+                r.constraints = config.constraints; // RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ
             }
 
             dataVoxels = new Dictionary<float3, Voxel>();
@@ -929,7 +935,7 @@ namespace Mikalai2006.Voxel
                 {
                     bm.RefreshHP();
 
-                    if (bm.Data.ContainerData.levelDestruction < 0.8f)
+                    if (bm.Data.ContainerData.levelDestruction > 0.85f)
                     {
                         GameSceneEvents.AddInfoDamage(new AppInfoDamageData
                         {
@@ -1389,7 +1395,10 @@ namespace Mikalai2006.Voxel
 
                 needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
                 List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
-                var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needCreateElements.Count);
+                var maxCount = Mathf.Min(
+                    GameManager.Instance.Settings.DebugSettings.mode == AppMode.Mobile ? GameManager.Instance.Settings.countMaxCreateVoxelsByStepMobile : GameManager.Instance.Settings.countMaxCreateVoxelsByStep,
+                    needCreateElements.Count
+                );
 
                 for (int i = 0; i < maxCount; i++)
                 {
@@ -1411,7 +1420,7 @@ namespace Mikalai2006.Voxel
                     });
                 }
 
-                // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. \r\nCount  = {listData.Count}");
                 // Debug.Log($"CreateGravityECS: {listData.Count}");
 
                 // await UniTask.NextFrame();
@@ -1487,7 +1496,10 @@ namespace Mikalai2006.Voxel
 
                 needGravityCreateElements = needGravityCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
                 List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
-                var maxCount = Mathf.Min(GameManager.Instance.Settings.countMaxCreateVoxelsByStep, needGravityCreateElements.Count); //needGravityCreateElements.Count; //Mathf.Min(200, needGravityCreateElements.Count);
+                var maxCount = Mathf.Min(
+                    GameManager.Instance.Settings.DebugSettings.mode == AppMode.Mobile ? GameManager.Instance.Settings.countMaxCreateVoxelsByStepMobile : GameManager.Instance.Settings.countMaxCreateVoxelsByStep,
+                    needGravityCreateElements.Count
+                ); //needGravityCreateElements.Count; //Mathf.Min(200, needGravityCreateElements.Count);
 
                 for (int i = 0; i < maxCount; i++)
                 {
@@ -1507,7 +1519,7 @@ namespace Mikalai2006.Voxel
 
                 // await UniTask.NextFrame();
                 await _levelManager.ECSManager.UpdateDataDots(listData);
-                Debug.Log($"Time GenerateDots: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateGravityECS: {maxCount}");
+                // Debug.Log($"Time GenerateDots: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateGravityECS: {maxCount}");
             }
         }
 

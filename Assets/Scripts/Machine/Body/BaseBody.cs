@@ -275,17 +275,20 @@ public class BaseBody : MonoBehaviour
 
     public virtual void Stop()
     {
-        isMove = false;
-
-        if (!Machine.Rb.isKinematic)
+        if (isMove)
         {
-            Machine.Rb.linearVelocity = Vector3.zero;
-            Machine.Rb.angularVelocity = Vector3.zero;
-        }
+            isMove = false;
 
-        for (int i = 0; i < Machine.Caterpillars.Count; i++)
-        {
-            Machine.Caterpillars[i].Stop();
+            if (!Machine.Rb.isKinematic)
+            {
+                Machine.Rb.linearVelocity = Vector3.zero;
+                Machine.Rb.angularVelocity = Vector3.zero;
+            }
+
+            for (int i = 0; i < Machine.Caterpillars.Count; i++)
+            {
+                Machine.Caterpillars[i].Stop();
+            }
         }
     }
 
@@ -302,8 +305,11 @@ public class BaseBody : MonoBehaviour
             if (voxelMeshRender.Containers[i].IsDestructible())
             {
                 Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
-                // Debug.Log($"<color=green>Body OnCollision: {_pointCollision} / {localPoint}</color>");
-                voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                if (voxelMeshRender.Containers[i].PointInCollider(_pointCollision))
+                {
+                    Debug.Log($"<color=blue>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+                    voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                }
             }
         }
     }

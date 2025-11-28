@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: body_t-2
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0.65882355, g: 0.6039216, b: 0.31764707, a: 1}
+  - color: {r: 0, g: 0.5660378, b: 0.060668536, a: 1}
     voxels:
     - {x: 26, y: 0, z: 6}
     - {x: 26, y: 0, z: 10}
@@ -2543,7 +2543,7 @@ MonoBehaviour:
     - {x: 1, y: 7, z: 21}
     - {x: 1, y: 7, z: 22}
     - {x: 1, y: 7, z: 23}
-  - color: {r: 0.34901962, g: 0.38431373, b: 0.21176471, a: 1}
+  - color: {r: 0.13176396, g: 0.4433962, b: 0.16422568, a: 1}
     voxels:
     - {x: 26, y: 0, z: 7}
     - {x: 26, y: 0, z: 8}

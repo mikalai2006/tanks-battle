@@ -39,6 +39,7 @@ public class BaseTower : MonoBehaviour
     // public float offset = 0;
     [SerializeField] protected VoxelMeshRender voxelMeshRender;
 
+#region Unity methods
     void Awake()
     {
         _data = new();
@@ -48,6 +49,251 @@ public class BaseTower : MonoBehaviour
     {
         // StartCoroutine(Follow());
     }
+    
+    void FixedUpdate()
+    {
+        if (Machine == null)
+        {
+            return;
+        }
+
+        // // проверяем наличие бонуса дистанции атаки.
+        // DataBonus bonusDistanceAttack = null;
+        // Machine.Data.bonuses.TryGetValue(TypeBonus.DistanceAttack, out bonusDistanceAttack);
+        // if (bonusDistanceAttack != null)
+        // {
+        //     distanceAttack = Option.Config.distanceAttack + bonusDistanceAttack.value;
+        //     OnSetSizeSector(distanceAttack);
+        // }
+        // else
+        // {
+        //     distanceAttack = Option.Config.distanceAttack;
+        //     OnSetSizeSector(distanceAttack);
+        // }
+
+
+        // // изменяем угол сектора и его размер.
+        // if (ObjectTarget != null && (!Machine.MachineLevelData.isBot || !ObjectTarget.MachineLevelData.isBot))
+        // {
+        //     OnSetAngleSector(Mathf.Max(5, Mathf.Abs(Mathf.DeltaAngle(Data.angleTower, Data.currentAngleTower))));
+        // }
+
+
+        if ((_gameManager.Settings.autoTakeEnemy || Machine.MachineLevelData.isBot) && Machine.AreaSearch.Targets != null)
+        {
+            // если есть возможные цели
+            List<BaseMachine> _vacantTargets = Machine.AreaSearch.Targets
+                .Where(t => t.Value.timeView >= Machine.Data.timeBeforeAddTarget || !Machine.MachineLevelData.isBot)
+                .Select(t => t.Key)
+                .ToList();
+            if (_vacantTargets.Count > 0) //  && !_objectTarget
+            {
+                // вычисляем дистанцию до существующей цели
+                float distanceExistTarget = _objectTarget ? Vector2.Distance(transform.position, _objectTarget.transform.position) : 0;
+                
+                // выбираем ближайшую из возможных
+                float minDistance = 0;
+                BaseMachine minDistanceMachine = null;
+                for (int i = 0; i < _vacantTargets.Count; i++)
+                {
+                    BaseMachine mach = _vacantTargets[i];
+
+                    if (!mach)
+                    {
+                        continue;
+                    }
+
+                    float dist = Vector2.Distance(transform.position, mach.transform.position);
+                    if (minDistance == 0 || (minDistance > dist && _gameManager.Settings.takeNearEnemy))
+                    {
+                        minDistance = dist;
+                        minDistanceMachine = mach;
+                    }
+                }
+
+                // если есть выбранная цель или выбранная ближе существующей
+                if (minDistanceMachine != null && (distanceExistTarget == 0 || distanceExistTarget > minDistance))
+                {
+                    OnSetTarget(minDistanceMachine);
+
+                    // if (stateController.enabled)
+                    // {
+                    //     stateController.ChangeState(stateController.chaseState);
+                    // }
+
+                }
+            }
+        }
+        // else
+        // {
+        //     if (!Machine.MachineLevelData.isBot)
+        //     {
+        //         float distanceRay = DistanceAttack;
+        //         float offsetRay = Machine.AreaMove.transform.localScale.x;
+        //         Vector3 dirTower = new Vector2(Mathf.Cos(Data.currentAngleTower * Mathf.Deg2Rad), Mathf.Sin(Data.currentAngleTower * Mathf.Deg2Rad));
+        //         Vector3 startRay = transform.position + offsetRay * dirTower;
+        //         RaycastHit2D hit = Physics2D.Raycast(startRay, dirTower, distanceRay, 1 << 7);
+
+        //         // string str = "";
+        //         // for (int i = 0; i < hits.Length; i++)
+        //         // {
+        //         //     var hit = hits[i];
+        //         if (hit && !hit.collider.CompareTag("TilemapWithCollider") && dirTower != Vector3.zero)
+        //         {
+        //             // Debug.Log($"hit {hit.collider}, {startRay}, {Data.directionTower}, {Config.distanceSearch}");
+
+
+        //             float dist = Vector3.Distance(hit.collider.transform.position, transform.position);
+        //             // str += hit.collider.gameObject.name;
+        //             // str += " dist=" + dist + "(" + distanceRay + ")";
+        //             // if (dist <= distanceRay)
+        //             // {
+        //             BaseMachine bm = hit.collider.GetComponentInParent<BaseMachine>();
+        //             AreaMove amove = hit.collider.GetComponent<AreaMove>();
+
+        //             if (bm && amove && bm != this && bm != ObjectTarget)
+        //             {
+        //                 // OnSetTarget(bm);
+        //                 // if (stateController)
+        //                 // {
+        //                 //     stateController.ChangeState(stateController.chaseState);
+        //                 //     stateController.chaseState.OnSetEnemy(bm);
+        //                 // }
+        //                 OnSetTarget(bm);
+        //                 // if (_gameManager.Settings.DebugSettings.gizmo)
+        //                 // Debug.DrawRay(startRay, dirTower * distanceRay, Color.yellow);
+        //             }
+        //         }
+        //         // else
+        //         // {
+        //         //     OnSetTarget(null);
+        //         //     Debug.DrawRay(startRay, dirTower * distanceRay, Color.magenta);
+        //         // }
+        //         // Debug.Log($"collision {str}");
+        //     }
+        // }
+
+        // если нет конечного автомата, проверяем есть ли противники в зоне досягаемости
+        // и если нет - убираем цель
+        if (Machine.AreaSearch.Targets != null && Machine.AreaSearch.Targets.Count == 0)
+        {
+            OnSetTarget(null);
+        }
+
+        // // если нет цели, отменяем выстрелы
+        // if (ObjectTarget == null)
+        // {
+        //     SetIsShot(false);
+        // }
+
+
+        // Отслеживание противников.
+        if (ObjectTarget)
+            {
+                // Если башня вращается, начинаем поворот в сторону врага.
+                if (Option.isRotate)
+                {
+                    // var direction = ObjectTarget.transform.position - transform.position;
+
+                    // // // your actual heading as upwards parameter
+                    // // Quaternion lookRotationTower = Quaternion.LookRotation(Vector3.forward, directionVectorTower);
+                    // float angleInRadians = Mathf.Atan2(direction.y, direction.x);
+
+                    if (Machine.MachineLevelData.isBot || _gameManager.Settings.autoTakeEnemy)
+                    {
+                        OnSetAngleTower(ObjectTarget.transform.position + new Vector3(0,6 * ObjectTarget.Wrapper.transform.localScale.y,0), true, Time.deltaTime); //angleInRadians * Mathf.Rad2Deg
+                    }
+                }
+                // если башня не вращается - указываем ей угол поворота = углу поворота базы машины (мгновенно).
+                // else
+                // {
+                //     OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
+                // }
+
+                // // считаем дистанцию до врага, если дистанция меньше или равна указанной в параметрах - атакуем врага.
+                // float dist = Vector3.Distance(ObjectTarget.transform.position, transform.position);
+                // if (dist <= DistanceAttack)
+                // {
+                //     OnAttackTarget();
+                //     // // SetIsShot(true);
+                //     // if (Application.isEditor)
+                //     // {
+                //     //     Badge.OnSetNameText(dist.ToString());
+                //     // }
+                // }
+                // else
+                // {
+                //     OnViewTarget(ObjectTarget);
+                //     // OnSetTarget(null);
+                // }
+            }
+            // else
+            // {
+            //     // if (_gameManager.Settings.rotateTowerByBody || !Option.isRotate)
+            //     // {
+            //     //     OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
+            //     // }
+            //     // // else
+            //     // // {
+            //     // //     if (Data.angleTower != Data.angleTowerByBody)
+            //     // //     {
+            //     // //         Data.angleTowerByBody = Data.angleTower = Tower.transform.rotation.eulerAngles.z; //body.transform.localEulerAngles.z - (body.transform.localEulerAngles.z - tower.transform.localEulerAngles.z);
+            //     // //     }
+            //     // //     // OnSetAngleTower(Data.angleTower);
+            //     // //     Tower.transform.rotation = Quaternion.Euler(0, 0, Data.angleTower);
+            //     // //     // Debug.Log($"set angle {Data.angleTower}");
+            //     // // }
+            // }
+    }
+
+    void Update()
+    {
+        if (!Machine)
+        {
+            return;
+        }
+
+        // наводим башню на центр экрана (если не активирован режим автонаводки)
+        if (Machine.MachineLevelData.isBot == false && !_gameManager.Settings.autoTakeEnemy)
+        {
+            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            Ray ray = Machine.LevelManager.Camera.ScreenPointToRay(screenCenterPoint);
+            Vector3 direction;
+            Vector3 point;
+            RaycastHit raycastHit;
+
+            if (Physics.Raycast(ray, out raycastHit, 999f, ~(ignoreMask)))
+            {
+                direction = raycastHit.point - transform.position;
+                point = raycastHit.point;
+            }
+            else
+            {
+                point = ray.GetPoint(999f); // Machine.levelManager.CameraHandler.TargetLook.transform.position;
+                direction = point - transform.position; //Machine.levelManager.CameraHandler.TargetLook.transform.position - transform.position;
+            }
+            // Debug.DrawRay(ray.origin, direction, Color.cyan);
+
+            // point = Machine.levelManager.CameraHandler.TargetLook.transform.position;
+            // Debug.DrawLine(point, transform.position, Color.white);
+            // Debug.Log($"ray {hit2.point}, direction={direction}");
+            // Quaternion lookRotation = Quaternion.LookRotation(direction);
+            OnSetAngleTower(point, true, Time.deltaTime);
+            // Debug.DrawRay(Machine.LevelManager.Camera.transform.position, point - Machine.LevelManager.Camera.transform.position, Color.magenta);
+            // targetPoint = point;
+        }
+    }
+
+    void LateUpdate()
+    {
+        // Записываем в данные угол поворота башни.
+        if (Data.currentAngleTower != transform.eulerAngles.y)
+        {
+            OnSetCurrentAngleTower(transform.rotation.eulerAngles.y);
+        }
+    }
+
+#endregion
 
     public void Init(BaseMachine baseMachine, GameTowerOption optConfig, int index)
     {
@@ -431,246 +677,6 @@ public class BaseTower : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Machine == null)
-        {
-            return;
-        }
-
-        // // проверяем наличие бонуса дистанции атаки.
-        // DataBonus bonusDistanceAttack = null;
-        // Machine.Data.bonuses.TryGetValue(TypeBonus.DistanceAttack, out bonusDistanceAttack);
-        // if (bonusDistanceAttack != null)
-        // {
-        //     distanceAttack = Option.Config.distanceAttack + bonusDistanceAttack.value;
-        //     OnSetSizeSector(distanceAttack);
-        // }
-        // else
-        // {
-        //     distanceAttack = Option.Config.distanceAttack;
-        //     OnSetSizeSector(distanceAttack);
-        // }
-
-
-        // // изменяем угол сектора и его размер.
-        // if (ObjectTarget != null && (!Machine.MachineLevelData.isBot || !ObjectTarget.MachineLevelData.isBot))
-        // {
-        //     OnSetAngleSector(Mathf.Max(5, Mathf.Abs(Mathf.DeltaAngle(Data.angleTower, Data.currentAngleTower))));
-        // }
-
-
-        if ((_gameManager.Settings.autoTakeEnemy || Machine.MachineLevelData.isBot) && Machine.AreaSearch.Targets != null)
-        {
-            // если есть возможные цели
-            List<BaseMachine> _vacantTargets = Machine.AreaSearch.Targets
-                .Where(t => t.Value >= Machine.Data.timeBeforeAddTarget || !Machine.MachineLevelData.isBot)
-                .Select(t => t.Key)
-                .ToList();
-            if (_vacantTargets.Count > 0) //  && !_objectTarget
-            {
-                // вычисляем дистанцию до существующей цели
-                float distanceExistTarget = _objectTarget ? Vector2.Distance(transform.position, _objectTarget.transform.position) : 0;
-                
-                // выбираем ближайшую из возможных
-                float minDistance = 0;
-                BaseMachine minDistanceMachine = null;
-                for (int i = 0; i < _vacantTargets.Count; i++)
-                {
-                    BaseMachine mach = _vacantTargets[i];
-
-                    if (!mach)
-                    {
-                        continue;
-                    }
-
-                    float dist = Vector2.Distance(transform.position, mach.transform.position);
-                    if (minDistance == 0 || (minDistance > dist && _gameManager.Settings.takeNearEnemy))
-                    {
-                        minDistance = dist;
-                        minDistanceMachine = mach;
-                    }
-                }
-
-                // если есть выбранная цель или выбранная ближе существующей
-                if (minDistanceMachine != null && (distanceExistTarget == 0 || distanceExistTarget > minDistance))
-                {
-                    OnSetTarget(minDistanceMachine);
-
-                    // if (stateController.enabled)
-                    // {
-                    //     stateController.ChangeState(stateController.chaseState);
-                    // }
-
-                }
-            }
-        }
-        // else
-        // {
-        //     if (!Machine.MachineLevelData.isBot)
-        //     {
-        //         float distanceRay = DistanceAttack;
-        //         float offsetRay = Machine.AreaMove.transform.localScale.x;
-        //         Vector3 dirTower = new Vector2(Mathf.Cos(Data.currentAngleTower * Mathf.Deg2Rad), Mathf.Sin(Data.currentAngleTower * Mathf.Deg2Rad));
-        //         Vector3 startRay = transform.position + offsetRay * dirTower;
-        //         RaycastHit2D hit = Physics2D.Raycast(startRay, dirTower, distanceRay, 1 << 7);
-
-        //         // string str = "";
-        //         // for (int i = 0; i < hits.Length; i++)
-        //         // {
-        //         //     var hit = hits[i];
-        //         if (hit && !hit.collider.CompareTag("TilemapWithCollider") && dirTower != Vector3.zero)
-        //         {
-        //             // Debug.Log($"hit {hit.collider}, {startRay}, {Data.directionTower}, {Config.distanceSearch}");
-
-
-        //             float dist = Vector3.Distance(hit.collider.transform.position, transform.position);
-        //             // str += hit.collider.gameObject.name;
-        //             // str += " dist=" + dist + "(" + distanceRay + ")";
-        //             // if (dist <= distanceRay)
-        //             // {
-        //             BaseMachine bm = hit.collider.GetComponentInParent<BaseMachine>();
-        //             AreaMove amove = hit.collider.GetComponent<AreaMove>();
-
-        //             if (bm && amove && bm != this && bm != ObjectTarget)
-        //             {
-        //                 // OnSetTarget(bm);
-        //                 // if (stateController)
-        //                 // {
-        //                 //     stateController.ChangeState(stateController.chaseState);
-        //                 //     stateController.chaseState.OnSetEnemy(bm);
-        //                 // }
-        //                 OnSetTarget(bm);
-        //                 // if (_gameManager.Settings.DebugSettings.gizmo)
-        //                 // Debug.DrawRay(startRay, dirTower * distanceRay, Color.yellow);
-        //             }
-        //         }
-        //         // else
-        //         // {
-        //         //     OnSetTarget(null);
-        //         //     Debug.DrawRay(startRay, dirTower * distanceRay, Color.magenta);
-        //         // }
-        //         // Debug.Log($"collision {str}");
-        //     }
-        // }
-
-        // если нет конечного автомата, проверяем есть ли противники в зоне досягаемости
-        // и если нет - убираем цель
-        if (Machine.AreaSearch.Targets != null && Machine.AreaSearch.Targets.Count == 0)
-        {
-            OnSetTarget(null);
-        }
-
-        // // если нет цели, отменяем выстрелы
-        // if (ObjectTarget == null)
-        // {
-        //     SetIsShot(false);
-        // }
-
-
-        // Отслеживание противников.
-        if (ObjectTarget)
-            {
-                // Если башня вращается, начинаем поворот в сторону врага.
-                if (Option.isRotate)
-                {
-                    // var direction = ObjectTarget.transform.position - transform.position;
-
-                    // // // your actual heading as upwards parameter
-                    // // Quaternion lookRotationTower = Quaternion.LookRotation(Vector3.forward, directionVectorTower);
-                    // float angleInRadians = Mathf.Atan2(direction.y, direction.x);
-
-                    if (Machine.MachineLevelData.isBot || _gameManager.Settings.autoTakeEnemy)
-                    {
-                        OnSetAngleTower(ObjectTarget.transform.position + new Vector3(0,6 * ObjectTarget.Wrapper.transform.localScale.y,0), true, Time.deltaTime); //angleInRadians * Mathf.Rad2Deg
-                    }
-                }
-                // если башня не вращается - указываем ей угол поворота = углу поворота базы машины (мгновенно).
-                // else
-                // {
-                //     OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
-                // }
-
-                // // считаем дистанцию до врага, если дистанция меньше или равна указанной в параметрах - атакуем врага.
-                // float dist = Vector3.Distance(ObjectTarget.transform.position, transform.position);
-                // if (dist <= DistanceAttack)
-                // {
-                //     OnAttackTarget();
-                //     // // SetIsShot(true);
-                //     // if (Application.isEditor)
-                //     // {
-                //     //     Badge.OnSetNameText(dist.ToString());
-                //     // }
-                // }
-                // else
-                // {
-                //     OnViewTarget(ObjectTarget);
-                //     // OnSetTarget(null);
-                // }
-            }
-            else
-            {
-                // if (_gameManager.Settings.rotateTowerByBody || !Option.isRotate)
-                // {
-                //     OnSetAngleTower(Parent == null ? Machine.Data.angleBody : parent.Data.currentAngleTower, Option.isRotate);
-                // }
-                // // else
-                // // {
-                // //     if (Data.angleTower != Data.angleTowerByBody)
-                // //     {
-                // //         Data.angleTowerByBody = Data.angleTower = Tower.transform.rotation.eulerAngles.z; //body.transform.localEulerAngles.z - (body.transform.localEulerAngles.z - tower.transform.localEulerAngles.z);
-                // //     }
-                // //     // OnSetAngleTower(Data.angleTower);
-                // //     Tower.transform.rotation = Quaternion.Euler(0, 0, Data.angleTower);
-                // //     // Debug.Log($"set angle {Data.angleTower}");
-                // // }
-            }
-
-
-
-
-
-        // наводим башню на центр экрана (если не автивирован режим автонаводки)
-        if (Machine.MachineLevelData.isBot == false && !_gameManager.Settings.autoTakeEnemy)
-        {
-            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-            Ray ray = Machine.LevelManager.Camera.ScreenPointToRay(screenCenterPoint);
-            Vector3 direction;
-            Vector3 point;
-            RaycastHit raycastHit;
-
-            if (Physics.Raycast(ray, out raycastHit, 999f, ~(ignoreMask)))
-            {
-                direction = raycastHit.point - transform.position;
-                point = raycastHit.point;
-            }
-            else
-            {
-                point = ray.GetPoint(999f); // Machine.levelManager.CameraHandler.TargetLook.transform.position;
-                direction = point - transform.position; //Machine.levelManager.CameraHandler.TargetLook.transform.position - transform.position;
-            }
-            // Debug.DrawRay(ray.origin, direction, Color.cyan);
-
-            // point = Machine.levelManager.CameraHandler.TargetLook.transform.position;
-            // Debug.DrawLine(point, transform.position, Color.white);
-            // Debug.Log($"ray {hit2.point}, direction={direction}");
-            // Quaternion lookRotation = Quaternion.LookRotation(direction);
-            OnSetAngleTower(point, true, Time.deltaTime);
-            // Debug.DrawRay(Machine.LevelManager.Camera.transform.position, point - Machine.LevelManager.Camera.transform.position, Color.magenta);
-            // targetPoint = point;
-        }
-    }
-
-    void LateUpdate()
-    {
-        
-        // Записываем в данные угол поворота башни.
-        if (Data.currentAngleTower != transform.eulerAngles.y)
-        {
-            OnSetCurrentAngleTower(transform.rotation.eulerAngles.y);
-        }
-    }
-
     // IEnumerator Follow()
     // {
     //     for (; ; ) //while(true)
@@ -783,9 +789,12 @@ public class BaseTower : MonoBehaviour
             var el = voxelMeshRender.Containers[i];
             if (el.IsDestructible())
             {
-                // Debug.Log($"<color=yellow>Tower OnCollision: {_pointCollision} / {el}</color>");
                 Vector3 localPoint = el.transform.InverseTransformPoint(_pointCollision);
-                tasks.Add(el.ExposionVoxels(Machine, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                if (el.PointInCollider(_pointCollision))
+                {
+                    Debug.Log($"<color=blue>Tower OnCollision: {_pointCollision} / {el}</color>");
+                    tasks.Add(el.ExposionVoxels(Machine, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal));
+                }
             }
         }
         UniTask.WhenAll(tasks).Forget();

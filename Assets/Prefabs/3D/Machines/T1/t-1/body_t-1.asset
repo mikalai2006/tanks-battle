@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: body_t-1
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0.65882355, g: 0.6039216, b: 0.31764707, a: 1}
+  - color: {r: 0.735849, g: 0.6646218, b: 0, a: 1}
     voxels:
     - {x: 27, y: 0, z: 5}
     - {x: 27, y: 0, z: 6}

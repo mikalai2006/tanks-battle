@@ -246,6 +246,13 @@ public class TopSideBarController : MonoBehaviour
         m_TopSideBar.TopSideBarData.MaximumHealth = 1;
 
         SetPlayerName(bm);
+        SetRank(bm);
+    }
+
+    void SetRank(BaseMachine bm)
+    {
+        var rank = gameManager.Settings.ranks[bm.MachineLevelData.rank];
+        m_TopSideBar.m_Rank.style.backgroundImage = new StyleBackground(rank.sprite);
     }
 
     void SetPlayerName(BaseMachine bm)

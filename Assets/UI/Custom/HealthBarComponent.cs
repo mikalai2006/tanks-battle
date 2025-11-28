@@ -24,13 +24,15 @@ namespace UIToolkitLibrary
        }
        public static class IDNames
        {
-           public static string HealthBarBackground = "HealthBarBackground";
-           public static string HealthBarProgress = "HealthBarProgress";
-           public static string HealthBarTitle = "HealthBarTitle";
-           public static string HealthBarLabel = "HealthBarLabel";
-           public static string HealthBarContainer = "HealthBarContainer";
-           public static string HealthBarTitleBackground = "HealthBarTitleBackground";
-           public static string HealthBarStat = "HealthBarStat";
+            public static string HealthBarWrapper = "HealthBarWrapper";
+            public static string HealthBarRank = "HealthBarRank";
+            public static string HealthBarBackground = "HealthBarBackground";
+            public static string HealthBarProgress = "HealthBarProgress";
+            public static string HealthBarTitle = "HealthBarTitle";
+            public static string HealthBarLabel = "HealthBarLabel";
+            public static string HealthBarContainer = "HealthBarContainer";
+            public static string HealthBarTitleBackground = "HealthBarTitleBackground";
+            public static string HealthBarStat = "HealthBarStat";
        }
 
         // Backing fields for health values
@@ -41,6 +43,8 @@ namespace UIToolkitLibrary
        VisualElement m_Progress;
        VisualElement m_Background;
        VisualElement m_TitleBackground;
+       VisualElement m_Wrapper;
+       VisualElement m_Rank;
 
        HealthData m_HealthData;
        
@@ -61,12 +65,35 @@ namespace UIToolkitLibrary
        // Constructor initializes the health bar elements
        public HealthBarComponent()
        {
+            // Add container class for overall styling
+            AddToClassList(ClassNames.HealthBarContainer);
+            // this.style.flexShrink = 1;
+            style.width = new StyleLength(250);
+            
+            m_Wrapper = new VisualElement {name = IDNames.HealthBarWrapper};
+            m_Wrapper.usageHints = UsageHints.GroupTransform;
+            m_Wrapper.pickingMode = PickingMode.Ignore;
+            m_Wrapper.style.flexDirection = FlexDirection.Row;
+            Add(m_Wrapper);
+            
+
+            m_Rank = new VisualElement {name = IDNames.HealthBarRank};
+            m_Rank.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
+            m_Rank.pickingMode = PickingMode.Ignore;
+            m_Rank.style.width = 50;
+            m_Rank.style.height = 50;
+            m_Wrapper.Add(m_Rank);
+
+            var generalCell = new VisualElement();
+            generalCell.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
+            generalCell.pickingMode = PickingMode.Ignore;
+
             // Title background element
             m_TitleBackground = new VisualElement {name = IDNames.HealthBarTitleBackground};
             m_TitleBackground.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             m_TitleBackground.pickingMode = PickingMode.Ignore;
             m_TitleBackground.AddToClassList(ClassNames.HealthBarTitleBackground);
-            Add(m_TitleBackground);
+            generalCell.Add(m_TitleBackground);
            
             // Title label
             m_TitleLabel = new Label() {name = IDNames.HealthBarTitle};
@@ -75,11 +102,6 @@ namespace UIToolkitLibrary
             m_TitleLabel.AddToClassList(ClassNames.HealthBarTitle);
             m_TitleLabel.text = "Character Name Character Name ";
             m_TitleBackground.Add(m_TitleLabel);
-
-            // Add container class for overall styling
-            AddToClassList(ClassNames.HealthBarContainer);
-            // this.style.flexShrink = 1;
-            style.width = new StyleLength(250);
            
             // Background element of the health bar
             m_Background = new VisualElement {name = IDNames.HealthBarBackground};
@@ -88,7 +110,7 @@ namespace UIToolkitLibrary
             m_Background.AddToClassList(ClassNames.HealthBarBackground);
             // m_Background.style.flexShrink = 0;
             
-           Add(m_Background);
+           generalCell.Add(m_Background);
 
             // Progress bar element showing current health
             m_Progress = new VisualElement {name = IDNames.HealthBarProgress};
@@ -105,6 +127,8 @@ namespace UIToolkitLibrary
             m_HealthStat.AddToClassList(ClassNames.HealthBarLabel);
             m_HealthStat.text = "200/300";
             m_Progress.Add(m_HealthStat);
+
+            m_Wrapper.Add(generalCell);
 
            BindElements();
        }

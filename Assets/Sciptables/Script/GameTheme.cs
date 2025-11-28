@@ -48,6 +48,9 @@ public class GameTheme : ScriptableObject
   public Color colorPrimary;
   public Color colorSecondary;
   public Color colorAccent;
+  
+  [Header("GameScreen")]
+  public Color colorWrapperGameScreen;
 
   [Header("InfoBox")]
   public Color colorBgInfoRow;

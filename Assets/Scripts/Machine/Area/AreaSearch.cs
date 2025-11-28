@@ -8,8 +8,8 @@ public class AreaSearch : MonoBehaviour
     private MeshRenderer meshRenderer;
     [SerializeField] GPUInstanceEnabler gPUInstanceEnabler;
     [SerializeField] BaseMachine machine;
-    [SerializeField] Dictionary<BaseMachine, float> targets;
-    public Dictionary<BaseMachine, float> Targets => targets;
+    [SerializeField] Dictionary<BaseMachine, AreaSearchData> targets;
+    public Dictionary<BaseMachine, AreaSearchData> Targets => targets;
     public List<BaseMachine> testTargets;
     private float distanceSearch = 0;
     public float DistanceSearch => distanceSearch;
@@ -34,51 +34,71 @@ public class AreaSearch : MonoBehaviour
         OnSetSize(distanceSearch);
     }
 
+    /// <summary>
+    /// Создание списка всех машин для последующего отслеживания данных
+    /// обнаружение ближайших врагов, кто в зоне атаки.
+    /// </summary>
+    public void OnSynMachineList()
+    {
+        if (targets.Count < machine.LevelManager.machines.Count)
+        {
+            Debug.LogWarning($"Создаем список всех машин в AreaSearch");
+
+            targets.Clear();
+
+            for (int i = 0; i < machine.LevelManager.machines.Count; i++)
+            {
+                targets.Add(machine.LevelManager.machines[i], new AreaSearchData{});
+            }
+        }
+    }
+
     public void OnSetSize(float _size)
     {
         float size = _size; // * (1 /_gameManager.Settings.scaleObjects);
         transform.localScale = new Vector3(size, 0.1f, size); // Vector3.Lerp(transform.localScale, new Vector3(size, 0.1f, size), _gameManager.Settings.speedChangeAreaSize * Time.deltaTime);
     }
 
-    private void OnAddMachine(BaseMachine _machine)
+    private void OnChangeStatusMachine(BaseMachine _machine, bool status)
     {
         if (_machine != null)
         {
             // float distance = Vector2.Distance(machine.transform.position, _machine.transform.position);
-            if (!targets.ContainsKey(_machine)) //  && distance <= machine.Config.distanceAttack - 1
+            if (targets.ContainsKey(_machine)) //  && distance <= machine.Config.distanceAttack - 1
             {
-                targets.Add(_machine, 0);
+                targets[_machine].timeView = 0;
+                targets[_machine].isVisible = status;
+                targets[_machine].distance = 0;
+            } else
+            {
+                Debug.LogWarning($"Не найдена машина в списке!");
             }
         }
     }
 
 
-    private void OnRemoveMachine(BaseMachine _machine)
-    {
-        if (_machine != null)
-        {
-            if (targets.ContainsKey(_machine))
-            {
-                // targets[_machine] = 0;
-                targets.Remove(_machine);
-            }
-        }
-    }
+    // private void OnRemoveMachine(BaseMachine _machine)
+    // {
+    //     if (_machine != null)
+    //     {
+    //         if (targets.ContainsKey(_machine))
+    //         {
+    //             // targets[_machine] = 0;
+    //             targets.Remove(_machine);
+    //         }
+    //     }
+    // }
 
     void FixedUpdate()
     {
-        // TODO 
-        for (int i = targets.Count - 1; i >= 0; i--)
-        {
-            if (targets.ElementAt(i).Key == null)
-            {
-                targets.Remove(targets.ElementAt(i).Key);
-            }
-        }
-
+        
         for (int i = 0; i < targets.Count; i++)
         {
-            targets[targets.ElementAt(i).Key] += Time.deltaTime;
+            // AreaSearchData areaSearchData = targets[targets.ElementAt(i).Key];
+            // areaSearchData.timeView += Time.deltaTime;
+            // targets[targets.ElementAt(i).Key] = areaSearchData;
+
+            targets[targets.ElementAt(i).Key].timeView += Time.fixedDeltaTime;
         }
 
         // // Test.
@@ -160,12 +180,13 @@ public class AreaSearch : MonoBehaviour
                 if (!isObstacle)
                 {
                     // Debug.DrawRay(startRay, direction, Color.green);
-                    OnAddMachine(_baseMachine);
+                    OnChangeStatusMachine(_baseMachine, true);
                 }
                 else
                 {
                     // Debug.DrawRay(startRay, direction, Color.red);
-                    OnRemoveMachine(_baseMachine);
+                    // OnRemoveMachine(_baseMachine);
+                    OnChangeStatusMachine(_baseMachine, false);
                 }
                 // Tilemap tm = hit.collider.GetComponent<Tilemap>();
                 // if (tm != null) {
@@ -195,6 +216,7 @@ public class AreaSearch : MonoBehaviour
     void OnTriggerExit(Collider collider)
     {
         var _baseMachine = collider.GetComponentInParent<BaseMachine>();
-        OnRemoveMachine(_baseMachine);
+        // OnRemoveMachine(_baseMachine);
+        OnChangeStatusMachine(_baseMachine, true);
     }
 }

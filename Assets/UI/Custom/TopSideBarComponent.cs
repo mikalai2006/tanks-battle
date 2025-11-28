@@ -47,7 +47,7 @@ namespace UIToolkitLibrary
        VisualElement m_Progress_Background;
        VisualElement m_Wrapper;
        VisualElement m_PlayerBox;
-       VisualElement m_Rank;
+       public VisualElement m_Rank;
        VisualElement m_InfoBox;
        Button m_ButtonExit;
        public Button ButtonExit => m_ButtonExit;
@@ -85,6 +85,14 @@ namespace UIToolkitLibrary
             m_Wrapper.pickingMode = PickingMode.Ignore;
             Add(m_Wrapper);
 
+            // Rank
+            m_Rank = new VisualElement {name = IDNames.TopSideBarRank};
+            m_Rank.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
+            m_Rank.pickingMode = PickingMode.Ignore;
+            m_Rank.AddToClassList(ClassNames.TopSideBarRank);
+            m_Rank.style.width = 50;
+            m_Rank.style.height = 50;
+            m_Wrapper.Add(m_Rank);
 
 #region PlayerBox
             m_PlayerBox = new VisualElement {name = IDNames.TopSideBarPlayerBox};
@@ -134,11 +142,6 @@ namespace UIToolkitLibrary
             m_TopSideBarStat.text = "200/300";
             m_Progress.Add(m_TopSideBarStat);
 
-            // Rank
-            m_Rank = new VisualElement {name = IDNames.TopSideBarRank};
-            m_Rank.pickingMode = PickingMode.Ignore;
-            m_Rank.AddToClassList(ClassNames.TopSideBarRank);
-            m_PlayerBox.Add(m_Rank);
 #endregion
 
             var mGridButtons = new VisualElement {name = "Buttons"};
@@ -200,7 +203,8 @@ namespace UIToolkitLibrary
         {
             Color colorBg = Color.black;
             colorBg.a = 0.2f;
-            m_PlayerBox.style.backgroundColor = new StyleColor(colorBg);
+
+            m_PlayerBox.style.backgroundColor = new StyleColor(_gameManager ? _gameManager.Theme.colorWrapperGameScreen : colorBg);
             
             // m_Wrapper.style.backgroundColor = new StyleColor(colorBg);
 

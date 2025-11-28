@@ -336,6 +336,22 @@ public static class Helpers
       return Vector3.Distance(point, sphereCenter) <= sphereRadius && Vector3.Distance(point, sphereCenter) > innerRadius;
   }
 
+  // /// <summary>
+  // /// Определяет находится ли точка внутри меш коллайдера.
+  // /// </summary>
+  // /// <param name="point"></param>
+  // /// <param name="meshCollider"></param>
+  // /// <returns></returns>
+  // static public bool IsPointInMeshColliderClosestPoint(Vector3 point, MeshCollider meshCollider)
+  // {
+  //     // Get the closest point on the collider to the given point.
+  //     Vector3 closestPoint = meshCollider.ClosestPoint(point);
+
+  //     // Check if the test point is inside the collider by comparing its distance to the closest point.
+  //     // If the distance is very small, the point is inside.
+  //     return (Vector3.Distance(point, closestPoint) < 0.001f);
+  // }
+
 }
 
 
