@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AreaSearch : MonoBehaviour
@@ -10,10 +9,11 @@ public class AreaSearch : MonoBehaviour
     [SerializeField] BaseMachine machine;
     [SerializeField] Dictionary<BaseMachine, AreaSearchData> targets;
     public Dictionary<BaseMachine, AreaSearchData> Targets => targets;
-    public List<BaseMachine> testTargets;
+    // public List<AreaSearchData> testTargets;
     private float distanceSearch = 0;
     public float DistanceSearch => distanceSearch;
 
+#region Unity methods
     void Awake()
     {
         targets = new();
@@ -22,87 +22,25 @@ public class AreaSearch : MonoBehaviour
         machine = GetComponentInParent<BaseMachine>();
     }
 
-    public void OnSetColor(Color color)
-    {
-        gPUInstanceEnabler.SetColor(color);
-    }
-
-    public void Init(GameMachine configMachine)
-    {
-        distanceSearch = configMachine.distanceSearch * 2;
-
-        OnSetSize(distanceSearch);
-    }
-
-    /// <summary>
-    /// Создание списка всех машин для последующего отслеживания данных
-    /// обнаружение ближайших врагов, кто в зоне атаки.
-    /// </summary>
-    public void OnSynMachineList()
-    {
-        if (targets.Count < machine.LevelManager.machines.Count)
-        {
-            Debug.LogWarning($"Создаем список всех машин в AreaSearch");
-
-            targets.Clear();
-
-            for (int i = 0; i < machine.LevelManager.machines.Count; i++)
-            {
-                targets.Add(machine.LevelManager.machines[i], new AreaSearchData{});
-            }
-        }
-    }
-
-    public void OnSetSize(float _size)
-    {
-        float size = _size; // * (1 /_gameManager.Settings.scaleObjects);
-        transform.localScale = new Vector3(size, 0.1f, size); // Vector3.Lerp(transform.localScale, new Vector3(size, 0.1f, size), _gameManager.Settings.speedChangeAreaSize * Time.deltaTime);
-    }
-
-    private void OnChangeStatusMachine(BaseMachine _machine, bool status)
-    {
-        if (_machine != null)
-        {
-            // float distance = Vector2.Distance(machine.transform.position, _machine.transform.position);
-            if (targets.ContainsKey(_machine)) //  && distance <= machine.Config.distanceAttack - 1
-            {
-                targets[_machine].timeView = 0;
-                targets[_machine].isVisible = status;
-                targets[_machine].distance = 0;
-            } else
-            {
-                Debug.LogWarning($"Не найдена машина в списке!");
-            }
-        }
-    }
-
-
-    // private void OnRemoveMachine(BaseMachine _machine)
-    // {
-    //     if (_machine != null)
-    //     {
-    //         if (targets.ContainsKey(_machine))
-    //         {
-    //             // targets[_machine] = 0;
-    //             targets.Remove(_machine);
-    //         }
-    //     }
-    // }
-
     void FixedUpdate()
     {
         
-        for (int i = 0; i < targets.Count; i++)
+        // for (int i = 0; i < targets.Count; i++)
+        foreach (KeyValuePair<BaseMachine, AreaSearchData> data in targets)
         {
             // AreaSearchData areaSearchData = targets[targets.ElementAt(i).Key];
             // areaSearchData.timeView += Time.deltaTime;
             // targets[targets.ElementAt(i).Key] = areaSearchData;
-
-            targets[targets.ElementAt(i).Key].timeView += Time.fixedDeltaTime;
+            if (data.Value.isVisible)
+            {
+                data.Value.timeView += Time.fixedDeltaTime;
+                data.Value.distance = Vector3.Distance(transform.position, machine.transform.position);
+            } else
+            {
+                data.Value.distance = 0;
+                data.Value.timeView = 0;
+            }
         }
-
-        // // Test.
-        // testTargets = Targets.Keys.ToList();
 
         // // проверяем наличие бонуса дистанции поиска.
         // machine.Data.bonuses.TryGetValue(TypeBonus.distanceSearch, out DataBonus bonusDistanceSearch);
@@ -217,6 +155,81 @@ public class AreaSearch : MonoBehaviour
     {
         var _baseMachine = collider.GetComponentInParent<BaseMachine>();
         // OnRemoveMachine(_baseMachine);
-        OnChangeStatusMachine(_baseMachine, true);
+        if (_baseMachine != null)
+        {
+            OnChangeStatusMachine(_baseMachine, false);
+        }
     }
+#endregion
+
+    public void OnSetColor(Color color)
+    {
+        gPUInstanceEnabler.SetColor(color);
+    }
+
+    public void Init(GameMachine configMachine)
+    {
+        distanceSearch = configMachine.distanceSearch * 2;
+
+        OnSetSize(distanceSearch);
+    }
+
+    /// <summary>
+    /// Создание списка всех машин для последующего отслеживания данных
+    /// обнаружение ближайших врагов, кто в зоне атаки.
+    /// </summary>
+    public void OnSynMachineList()
+    {
+        // if (targets.Count < machine.LevelManager.machines.Count)
+        // {
+
+        targets.Clear();
+
+        for (int i = 0; i < machine.LevelManager.machines.Count; i++)
+        {
+            targets.Add(machine.LevelManager.machines[i], new AreaSearchData{});
+        }
+
+        Debug.LogWarning($"Создаем список всех машин в AreaSearch ({targets.Count})");
+        // }
+
+        // // Test.
+        // testTargets = Targets.Values.ToList();
+    }
+
+    public void OnSetSize(float _size)
+    {
+        float size = _size; // * (1 /_gameManager.Settings.scaleObjects);
+        transform.localScale = new Vector3(size, 0.1f, size); // Vector3.Lerp(transform.localScale, new Vector3(size, 0.1f, size), _gameManager.Settings.speedChangeAreaSize * Time.deltaTime);
+    }
+
+    private void OnChangeStatusMachine(BaseMachine _machine, bool status)
+    {
+        if (_machine != null)
+        {
+            // float distance = Vector2.Distance(machine.transform.position, _machine.transform.position);
+            if (targets.ContainsKey(_machine)) //  && distance <= machine.Config.distanceAttack - 1
+            {
+                targets[_machine].timeView = 0;
+                targets[_machine].isVisible = status;
+                targets[_machine].distance = 0;
+            } else
+            {
+                Debug.LogWarning($"Не найдена машина {_machine.name} в списке!");
+            }
+        }
+    }
+
+
+    // private void OnRemoveMachine(BaseMachine _machine)
+    // {
+    //     if (_machine != null)
+    //     {
+    //         if (targets.ContainsKey(_machine))
+    //         {
+    //             // targets[_machine] = 0;
+    //             targets.Remove(_machine);
+    //         }
+    //     }
+    // }
 }

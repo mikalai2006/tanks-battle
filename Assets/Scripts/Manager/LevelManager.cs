@@ -313,6 +313,12 @@ public class LevelManager : MonoBehaviour
             }
         }
 
+        // создание списков машин для каждой машины.
+        foreach (var machine in machines)
+        {
+            machine.AreaSearch.OnSynMachineList();
+        }
+
         // spawn bonuses.
         // List<GridTileNode> vacantNodes = mapManager.gridTileHelper.GetEmptyNodes().OrderBy(t => UnityEngine.Random.value).ToList();
         // for (int i = 0; i < 15; i++)

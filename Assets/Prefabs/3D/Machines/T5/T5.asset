@@ -60,10 +60,7 @@ MonoBehaviour:
     colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   soundMove: {fileID: 8300000, guid: 71d39ac5da02fea4084632c39f81960e, type: 3}
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
-  speed: 100
   distanceSearch: 5
-  hp: 300
-  armour: 300
   references:
     version: 2
     RefIds: []

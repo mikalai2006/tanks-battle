@@ -486,7 +486,7 @@ public abstract class BaseMuzzle : MonoBehaviour
                 {
 
 
-                    float dist = Vector3.Distance(hit.collider.transform.position, transform.position);
+                    // float dist = Vector3.Distance(hit.collider.transform.position, transform.position);
                     // str += hit.collider.gameObject.name;
                     // str += " dist=" + dist + "(" + distanceRay + ")";
                     // if (dist <= distanceRay)

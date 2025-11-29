@@ -74,6 +74,13 @@ public abstract class BaseMachine : MonoBehaviour
     public NavMeshObstacle navMeshObstacle;
     public bool IsMove => Body != null && Body.IsMove;
 
+    [Space(5)]
+    [Header("Сервисные опции")]
+    Vector3 dirRayCamera;
+    float distanceRayCamera;
+    Plane[] planes;
+    RaycastHit hitRayCamera;
+
 #region Unity methods
     public virtual void Awake()
     {
@@ -83,6 +90,11 @@ public abstract class BaseMachine : MonoBehaviour
         stateController = GetComponent<StateController>();
 
         data = new();
+    }
+
+    void Start()
+    {
+        planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
     }
 
     void Update()
@@ -117,30 +129,30 @@ public abstract class BaseMachine : MonoBehaviour
 
         if (MachineLevelData.isBot)
         {
-            // проверяем видим ли компонент.
-            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
+            // проверяем видим ли компонент.            
             if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
             {
-                Vector3 dir = (transform.position - levelManager.Camera.transform.position).normalized;
-                float distance = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
+                dirRayCamera = (transform.position - levelManager.Camera.transform.position).normalized;
+                distanceRayCamera = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
 
                 // Debug.DrawLine(levelManager.Camera.transform.position, transform.position, Color.blue);
-                if (Physics.Raycast(levelManager.Camera.transform.position, dir, out RaycastHit hit, distance, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
+                if (Physics.Raycast(levelManager.Camera.transform.position, dirRayCamera, out hitRayCamera, distanceRayCamera, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
                 {
                     
                     // Debug.Log($"hit{hit.collider.name}");
-                    if (hit.transform != transform)
+                    if (hitRayCamera.transform != transform)
                     {
                         isVisible = false;
                     } else
                     {
                         isVisible = true;
                     }
-                    Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
-                } else
-                {
-                    Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
+                    // Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
                 }
+                // else
+                // {
+                //     Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
+                // }
             } else
             {
                 isVisible = false;

@@ -39,6 +39,14 @@ public class BaseTower : MonoBehaviour
     // public float offset = 0;
     [SerializeField] protected VoxelMeshRender voxelMeshRender;
 
+    [Space(5)]
+    [Header("Сервисные опции")]
+    Vector2 screenCenterPoint;
+    Ray ray;
+    Vector3 direction;
+    Vector3 point;
+    RaycastHit raycastHit;
+
 #region Unity methods
     void Awake()
     {
@@ -79,50 +87,66 @@ public class BaseTower : MonoBehaviour
         // }
 
 
-        if ((_gameManager.Settings.autoTakeEnemy || Machine.MachineLevelData.isBot) && Machine.AreaSearch.Targets != null)
+        if ((_gameManager.Settings.autoTakeEnemy || Machine.MachineLevelData.isBot) && Machine.AreaSearch.Targets.Count > 0)
         {
-            // если есть возможные цели
-            List<BaseMachine> _vacantTargets = Machine.AreaSearch.Targets
-                .Where(t => t.Value.timeView >= Machine.Data.timeBeforeAddTarget || !Machine.MachineLevelData.isBot)
-                .Select(t => t.Key)
-                .ToList();
-            if (_vacantTargets.Count > 0) //  && !_objectTarget
+            foreach (KeyValuePair<BaseMachine, AreaSearchData> data in Machine.AreaSearch.Targets)
             {
-                // вычисляем дистанцию до существующей цели
-                float distanceExistTarget = _objectTarget ? Vector2.Distance(transform.position, _objectTarget.transform.position) : 0;
-                
-                // выбираем ближайшую из возможных
-                float minDistance = 0;
-                BaseMachine minDistanceMachine = null;
-                for (int i = 0; i < _vacantTargets.Count; i++)
+                if (data.Value.isVisible)
                 {
-                    BaseMachine mach = _vacantTargets[i];
-
-                    if (!mach)
-                    {
-                        continue;
+                    if (_objectTarget == null
+                        || (
+                        data.Key != _objectTarget
+                        && data.Value.distance < Vector3.Distance(_objectTarget.transform.position, Machine.transform.position)
+                        && data.Value.timeView >= Machine.Data.timeBeforeAddTarget
+                        && _gameManager.Settings.takeNearEnemy
+                        )
+                    ) {
+                        OnSetTarget(data.Key);
                     }
-
-                    float dist = Vector2.Distance(transform.position, mach.transform.position);
-                    if (minDistance == 0 || (minDistance > dist && _gameManager.Settings.takeNearEnemy))
-                    {
-                        minDistance = dist;
-                        minDistanceMachine = mach;
-                    }
-                }
-
-                // если есть выбранная цель или выбранная ближе существующей
-                if (minDistanceMachine != null && (distanceExistTarget == 0 || distanceExistTarget > minDistance))
-                {
-                    OnSetTarget(minDistanceMachine);
-
-                    // if (stateController.enabled)
-                    // {
-                    //     stateController.ChangeState(stateController.chaseState);
-                    // }
-
                 }
             }
+            // // если есть возможные цели
+            // List<BaseMachine> _vacantTargets = Machine.AreaSearch.Targets
+            //     .Where(t => t.Value.timeView >= Machine.Data.timeBeforeAddTarget || !Machine.MachineLevelData.isBot)
+            //     .Select(t => t.Key)
+            //     .ToList();
+            // if (_vacantTargets.Count > 0) //  && !_objectTarget
+            // {
+            //     // вычисляем дистанцию до существующей цели
+            //     float distanceExistTarget = _objectTarget ? Vector2.Distance(transform.position, _objectTarget.transform.position) : 0;
+                
+            //     // выбираем ближайшую из возможных
+            //     float minDistance = 0;
+            //     BaseMachine minDistanceMachine = null;
+            //     for (int i = 0; i < _vacantTargets.Count; i++)
+            //     {
+            //         BaseMachine mach = _vacantTargets[i];
+
+            //         if (!mach)
+            //         {
+            //             continue;
+            //         }
+
+            //         float dist = Vector2.Distance(transform.position, mach.transform.position);
+            //         if (minDistance == 0 || (minDistance > dist && _gameManager.Settings.takeNearEnemy))
+            //         {
+            //             minDistance = dist;
+            //             minDistanceMachine = mach;
+            //         }
+            //     }
+
+            //     // если есть выбранная цель или выбранная ближе существующей
+            //     if (minDistanceMachine != null && (distanceExistTarget == 0 || distanceExistTarget > minDistance))
+            //     {
+            //         OnSetTarget(minDistanceMachine);
+
+            //         // if (stateController.enabled)
+            //         // {
+            //         //     stateController.ChangeState(stateController.chaseState);
+            //         // }
+
+            //     }
+            // }
         }
         // else
         // {
@@ -173,9 +197,8 @@ public class BaseTower : MonoBehaviour
         //     }
         // }
 
-        // если нет конечного автомата, проверяем есть ли противники в зоне досягаемости
-        // и если нет - убираем цель
-        if (Machine.AreaSearch.Targets != null && Machine.AreaSearch.Targets.Count == 0)
+        // если машина, которая была в цели для башни, стала невидимой - убираем ее из цели
+        if (_objectTarget != null && !Machine.AreaSearch.Targets[_objectTarget].isVisible)
         {
             OnSetTarget(null);
         }
@@ -256,11 +279,8 @@ public class BaseTower : MonoBehaviour
         // наводим башню на центр экрана (если не активирован режим автонаводки)
         if (Machine.MachineLevelData.isBot == false && !_gameManager.Settings.autoTakeEnemy)
         {
-            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-            Ray ray = Machine.LevelManager.Camera.ScreenPointToRay(screenCenterPoint);
-            Vector3 direction;
-            Vector3 point;
-            RaycastHit raycastHit;
+            screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            ray = Machine.LevelManager.Camera.ScreenPointToRay(screenCenterPoint);
 
             if (Physics.Raycast(ray, out raycastHit, 999f, ~(ignoreMask)))
             {

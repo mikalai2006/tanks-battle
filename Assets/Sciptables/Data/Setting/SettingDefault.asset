@@ -25,6 +25,37 @@ MonoBehaviour:
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
   countMaxCreateVoxelsByStepMobile: 200
+  DebugSettings:
+    mode: 1
+    disableCreateTiles: 0
+    logEnabled: 1
+    ECSColliderSphere: 0
+    muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
+    gizmoBodyForwards: 0
+    gizmoBodyLength: 5
+    gizmoBodyColor: {r: 0, g: 0.5930424, b: 1, a: 1}
+    gizmoTowersForwards: 0
+    gizmoTowersLength: 5
+    gizmoTowersColor: {r: 1, g: 0.6698078, b: 0, a: 1}
+    gizmoMuzzlesForwards: 0
+    gizmoMuzzleLength: 5
+    gizmoMuzzleColor: {r: 0.46724558, g: 1, b: 0, a: 1}
+    gizmoTrajectory: 0
+    gizmoTrajectoryColor: {r: 1, g: 0.027940515, b: 0, a: 1}
+    gizmoMuzzleDistanseAttack: 0
+    gizmoMuzzleDistanseAttackColor: {r: 1, g: 0, b: 0.7673602, a: 0.38431373}
+    lineAttackDraw: 0
+    lineAttackColor: {r: 0.3595678, g: 0.18569775, b: 0.3679245, a: 1}
+  rotateTowerByBody: 0
+  timeBeforeAddTarget: {x: 0.1, y: 0.3}
+  distanceDisableAttack: 2.39
+  drawAreaForBot: 0
+  koofChangeAngleTower: 5
+  speedChangeAreaSize: 15
+  angleStartShot: 30
+  takeNearEnemy: 1
+  autoTakeEnemy: 0
+  autoShot: 0
   gerbs:
   - {fileID: -1690008810, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1606978075, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
@@ -87,7 +118,7 @@ MonoBehaviour:
   - {fileID: 1123812706, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1934825213, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   levels:
-  - {fileID: 11400000, guid: 63f7498c09b8a8245a8df354dd4555dc, type: 2}
+  - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
@@ -115,44 +146,9 @@ MonoBehaviour:
   prefabTextDamage: {fileID: 602027428033052512, guid: b28413a58c052ac46a05c82f8ea0a3a6, type: 3}
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}
-  boomEffect: {fileID: 3862267629786060469, guid: 79b8d16096caabb46a3c8a6c351345a9, type: 3}
   offsetMarkerEdge: {x: 0.015, y: 0.025}
   colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
-  DebugSettings:
-    mode: 1
-    disableCreateTiles: 1
-    logEnabled: 1
-    ECSColliderSphere: 0
-    muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
-    gizmoBodyForwards: 0
-    gizmoBodyLength: 5
-    gizmoBodyColor: {r: 0, g: 0.5930424, b: 1, a: 1}
-    gizmoTowersForwards: 0
-    gizmoTowersLength: 5
-    gizmoTowersColor: {r: 1, g: 0.6698078, b: 0, a: 1}
-    gizmoMuzzlesForwards: 0
-    gizmoMuzzleLength: 5
-    gizmoMuzzleColor: {r: 0.46724558, g: 1, b: 0, a: 1}
-    gizmoTrajectory: 0
-    gizmoTrajectoryColor: {r: 1, g: 0.027940515, b: 0, a: 1}
-    gizmoMuzzleDistanseAttack: 0
-    gizmoMuzzleDistanseAttackColor: {r: 1, g: 0, b: 0.7673602, a: 0.38431373}
-  rotateTowerByBody: 0
-  timeBeforeAddTarget: {x: 0.1, y: 0.3}
-  distanceDisableAttack: 1.5
-  drawAreaForBot: 0
-  koofChangeAngleTower: 5
-  speedChangeAreaSize: 15
-  angleStartShot: 30
-  takeNearEnemy: 0
-  autoTakeEnemy: 0
-  autoShot: 1
-  drawLineAttack: 1
-  spriteArc5px: {fileID: 21300000, guid: 18f1e6a9be39adc45b92dc91a7cd348c, type: 3}
-  PopParticle: {fileID: 0}
-  PopBig: {fileID: 0}
-  PulseParticle: {fileID: 0}
   debounceTimeSave: 100
   nameSaveData: gamedata
   nameSaveUserInfo: userinfo
@@ -277,10 +273,6 @@ MonoBehaviour:
   - "\u0421\u043E\u0440\u043E\u043A\u0438\u043D\u0430 \u0410\u043D\u0438\u0441\u0438\u044F"
   - "\u0421\u043F\u0438\u0440\u0438\u0434\u043E\u043D\u043E\u0432\u0430 \u0421\u043E\u0444\u0438\u044F"
   spriteClose: {fileID: 0}
-  adsPerTime: 0
-  isDisableNextButton: 0
-  countNextPuzzle: 0
-  tileSquare: {fileID: 0}
   references:
     version: 2
     RefIds: []

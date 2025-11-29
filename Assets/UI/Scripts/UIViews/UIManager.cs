@@ -212,7 +212,7 @@ namespace UIToolkitLibrary
 
         void OnGarageScreenShown()
         {
-            Instantiate(uiDocumentPrefab, transform, true);
+            // Instantiate(uiDocumentPrefab, transform, true);
             ShowModalView(m_GarageView);
         }
 
