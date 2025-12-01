@@ -244,6 +244,8 @@ public class VoxParser : MonoBehaviour
                 sOVoxelData.ColorsRight[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Right, sOVoxelData);
                 sOVoxelData.ColorsLeft[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Left, sOVoxelData);
                 sOVoxelData.ColorsBack[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Back, sOVoxelData);
+                sOVoxelData.ColorsTop[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Top, sOVoxelData);
+                sOVoxelData.ColorsBottom[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Bottom, sOVoxelData);
             }
         }
     }
@@ -269,6 +271,14 @@ public class VoxParser : MonoBehaviour
         else if (direction == DirectionSideTile.Left)
         {
             position = new Vector3Int(0, y, column);
+        }
+        else if (direction == DirectionSideTile.Top)
+        {
+            position = new Vector3Int(column, TileSideVoxels - 1, y);
+        }
+        else if (direction == DirectionSideTile.Bottom)
+        {
+            position = new Vector3Int(column, 0, y);
         }
 
         Color color = Color.clear;

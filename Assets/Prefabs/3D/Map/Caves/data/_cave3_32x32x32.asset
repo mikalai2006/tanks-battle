@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: _cave3_32x32x32
   m_EditorClassIdentifier: 
   groups:
-  - color: {r: 0.5882353, g: 0.3882353, b: 0.18039216, a: 1}
+  - color: {r: 0.4509804, g: 0.34117648, b: 0.23137255, a: 1}
     voxels:
     - {x: 0, y: 0, z: 0}
     - {x: 1, y: 0, z: 0}
@@ -8419,7 +8419,7 @@ MonoBehaviour:
     - {x: 15, y: 30, z: 13}
     - {x: 0, y: 30, z: 14}
     - {x: 0, y: 30, z: 15}
-  - color: {r: 0.5647059, g: 0.7058824, b: 0.29411766, a: 1}
+  - color: {r: 0.45882353, g: 0.6117647, b: 0.14117648, a: 1}
     voxels:
     - {x: 19, y: 2, z: 15}
     - {x: 17, y: 2, z: 16}
@@ -8808,6 +8808,7 @@ MonoBehaviour:
     - {x: 15, y: 31, z: 13}
     - {x: 0, y: 31, z: 14}
     - {x: 0, y: 31, z: 15}
+  countVoxels: 0
   sizeVoxel: 1
   Pivot: {x: 16, y: 0, z: 16}
   Bounds: {x: 32, y: 32, z: 32}

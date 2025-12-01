@@ -17,7 +17,7 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: e02db173a839ed447b7f0911b5fe510f, type: 3}
     nameMap: area1
   saveTiled:
-    nameMap: area1
+    nameMap: area1000
     gridComponents:
     - uid: t4
       position: {x: 0, y: 0, z: 0}
@@ -10028,9 +10028,12 @@ MonoBehaviour:
   - {fileID: 3568825291301627716, guid: 7b46a77551d90b54aac958e4833f0f51, type: 3}
   TilePrefabs:
   - {fileID: 1602150319550486619, guid: 905374561352eed498e865c4a84225ab, type: 3}
+  - {fileID: 1602150319550486619, guid: 658e6bbde93cda145832894514f27e3d, type: 3}
+  - {fileID: 1602150319550486619, guid: aac2a300f44f18d478e5608f3d4c7dd4, type: 3}
   - {fileID: 1602150319550486619, guid: 466bb07903618ed44ac5d8a0aeebb379, type: 3}
   - {fileID: 1602150319550486619, guid: d6bc5b72919e96c458253e616aff414c, type: 3}
   - {fileID: 1602150319550486619, guid: ddf95f319a67c7e4fb48faf68c22ee80, type: 3}
+  - {fileID: 1602150319550486619, guid: a7eeb278f3326fd48a1bbf855615498f, type: 3}
   - {fileID: 1602150319550486619, guid: ad2c58075ea98d944ad0410c057d87b6, type: 3}
   - {fileID: 1602150319550486619, guid: 932003cbc7e39da478a8b312c9383fec, type: 3}
   TilePrefabsEmpty:

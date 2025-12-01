@@ -62,7 +62,7 @@ public class Tile3DEditor : Editor
         // }
 
         EditorGUILayout.Space(); // Add some space for separation
-        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(800)); // Example: fixed height of 200
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(1100)); // Example: fixed height of 200
 
 
         // Start a horizontal group for the grid
@@ -216,10 +216,85 @@ public class Tile3DEditor : Editor
         }
         GUILayout.Label($"Right ({target.ColorsRight.Length})", styleLabel);
         GUILayout.Space(defaultSpace);
+
+        // Section top
+        allSpace += defaultSpace + 14;
+        // var opt = new GUIStyle();
+        // opt.margin = new RectOffset(0,0,0,allSpace);
+        for (int row = 0; row < target.TileSideVoxels; row++)
+        {
+            GUILayout.BeginHorizontal(); // Start a horizontal group for each row
+            for (int column = 0; column < target.TileSideVoxels; column++)
+            {
+                // Calculate the position and size of the current rectangle
+                // Rect rect = GUILayoutUtility.GetRect(cellSize, cellSize, GUILayout.Width(cellSize), GUILayout.Height(cellSize));
+
+                Rect rect = new Rect();
+
+                // Adjust for padding and margin
+                rect.x += column * (cellSize + padding) + margin;
+                rect.y += allSpace - (row * (cellSize + padding) + margin);
+                rect.width = cellSize;
+                rect.height = cellSize;
+                Color color = (target.ColorsTop != null && target.ColorsTop.Length > 0) ? target.ColorsTop[row * target.TileSideVoxels + column].color: Color.clear; //target.GetVoxelColor(row, column, DirectionSideTile.Forward).color;
+                if (color == Color.clear)
+                {
+                    color = colorEmptyVoxel;
+                }
+                // Debug.Log($"r={row},c={column}::: rect.x={rect.x}, rect.y={rect.y}, rect.width={rect.width}, rect.height={rect.height}, color={color}");
+
+                // Draw the rectangle
+                EditorGUI.DrawRect(rect, color); // Replace GetColorForCell with your logic
+
+                // EditorGUI.LabelField(rect, new GUIContent("1", "This is a helpful tooltip for My Label."));
+            }
+            GUILayout.EndHorizontal(); // End the horizontal group for the row
+        }
+        var countTop = target.ColorsTop != null ? target.ColorsTop.Length : 0;
+        GUILayout.Label($"Top ({countTop})", styleLabel);
+        GUILayout.Space(defaultSpace);
+
+        
+        // Section bottom
+        allSpace += defaultSpace + 14;
+        // var opt = new GUIStyle();
+        // opt.margin = new RectOffset(0,0,0,allSpace);
+        for (int row = 0; row < target.TileSideVoxels; row++)
+        {
+            GUILayout.BeginHorizontal(); // Start a horizontal group for each row
+            for (int column = 0; column < target.TileSideVoxels; column++)
+            {
+                // Calculate the position and size of the current rectangle
+                // Rect rect = GUILayoutUtility.GetRect(cellSize, cellSize, GUILayout.Width(cellSize), GUILayout.Height(cellSize));
+
+                Rect rect = new Rect();
+
+                // Adjust for padding and margin
+                rect.x += column * (cellSize + padding) + margin;
+                rect.y += allSpace - (row * (cellSize + padding) + margin);
+                rect.width = cellSize;
+                rect.height = cellSize;
+                Color color = (target.ColorsBottom != null && target.ColorsBottom.Length > 0) ? target.ColorsBottom[row * target.TileSideVoxels + column].color: Color.clear; //target.GetVoxelColor(row, column, DirectionSideTile.Forward).color;
+                if (color == Color.clear)
+                {
+                    color = colorEmptyVoxel;
+                }
+                // Debug.Log($"r={row},c={column}::: rect.x={rect.x}, rect.y={rect.y}, rect.width={rect.width}, rect.height={rect.height}, color={color}");
+
+                // Draw the rectangle
+                EditorGUI.DrawRect(rect, color); // Replace GetColorForCell with your logic
+
+                // EditorGUI.LabelField(rect, new GUIContent("1", "This is a helpful tooltip for My Label."));
+            }
+            GUILayout.EndHorizontal(); // End the horizontal group for the row
+        }
+        var countBottom = target.ColorsBottom != null ? target.ColorsBottom.Length : 0;
+        GUILayout.Label($"Bottom ({countBottom})", styleLabel);
+        GUILayout.Space(defaultSpace);
         
         Handles.color = Color.yellow;
         var centerRects = target.TileSideVoxels/2 * (cellSize + padding + margin);
-        Handles.DrawLine(new Vector2(centerRects, 0), new Vector2(centerRects, 1000));
+        Handles.DrawLine(new Vector2(centerRects, 0), new Vector2(centerRects, 1100));
 
         // End the scroll view
         EditorGUILayout.EndScrollView();

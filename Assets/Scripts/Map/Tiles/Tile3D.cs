@@ -104,12 +104,16 @@ public class Tile3D : MonoBehaviour
             ColorsForward = Enumerable.Repeat(new Voxel() { color = Color.clear }, TileSideVoxels * TileSideVoxels).ToArray();
             ColorsLeft = Enumerable.Repeat(new Voxel() { color = Color.clear }, TileSideVoxels * TileSideVoxels).ToArray();
             ColorsBack = Enumerable.Repeat(new Voxel(){color=Color.clear}, TileSideVoxels*TileSideVoxels).ToArray();
+            ColorsTop = Enumerable.Repeat(new Voxel(){color=Color.clear}, TileSideVoxels*TileSideVoxels).ToArray();
+            ColorsBottom = Enumerable.Repeat(new Voxel(){color=Color.clear}, TileSideVoxels*TileSideVoxels).ToArray();
         } else
         {
-            ColorsRight = voxelMeshRender.Config.sOVoxelData.ColorsRight;
-            ColorsForward = voxelMeshRender.Config.sOVoxelData.ColorsForward;
-            ColorsLeft = voxelMeshRender.Config.sOVoxelData.ColorsLeft;
-            ColorsBack = voxelMeshRender.Config.sOVoxelData.ColorsBack;
+            ColorsRight = voxelMeshRender.Config.sOVoxelData.ColorsRight.ToArray();
+            ColorsForward = voxelMeshRender.Config.sOVoxelData.ColorsForward.ToArray();
+            ColorsLeft = voxelMeshRender.Config.sOVoxelData.ColorsLeft.ToArray();
+            ColorsBack = voxelMeshRender.Config.sOVoxelData.ColorsBack.ToArray();
+            ColorsTop = voxelMeshRender.Config.sOVoxelData.ColorsTop != null ? voxelMeshRender.Config.sOVoxelData.ColorsTop.ToArray() : new Voxel[TileSideVoxels * TileSideVoxels];
+            ColorsBottom = voxelMeshRender.Config.sOVoxelData.ColorsBottom != null ? voxelMeshRender.Config.sOVoxelData.ColorsBottom.ToArray() : new Voxel[TileSideVoxels * TileSideVoxels];
         }
 
         // CalculateSidesColors();
@@ -158,6 +162,9 @@ public class Tile3D : MonoBehaviour
                 colorsLeftNew[row * TileSideVoxels + column] = ColorsForward[row * TileSideVoxels + TileSideVoxels - column - 1];
             }
         }
+        Voxel[] colorsTopNew = Rotate90TopBottom(ColorsTop);
+        Voxel[] colorsBottomNew = Rotate90TopBottom(ColorsBottom);
+
         // colorsRightNew = ColorsForward;
         // colorsForwardNew = ColorsLeft;
         // colorsLeftNew = ColorsBack;
@@ -167,6 +174,46 @@ public class Tile3D : MonoBehaviour
         ColorsForward = colorsForwardNew;
         ColorsLeft = colorsLeftNew;
         ColorsBack = colorsBackNew;
+        
+        ColorsTop = colorsTopNew;
+        ColorsBottom = colorsBottomNew;
+    }
+
+    public Voxel[] Rotate90TopBottom(Voxel[] arrayVoxels)
+    {
+       // приводим массив одномерный к двумерному.
+        Voxel[,] temp = new Voxel[TileSideVoxels, TileSideVoxels];
+        for (int i = 0; i < arrayVoxels.Length; i++)
+        {
+            Vector2Int el = Helpers.From1DTo2D(i, TileSideVoxels);
+            temp[el[0], el[1]] = arrayVoxels[i];
+        }
+		
+		// reverse.
+		Voxel[,] tempReverseArray = new Voxel[temp.GetLength(0), temp.GetLength(1)];
+		for (int i = 0; i < temp.GetLength(0); i++)
+		{
+			for (int j = 0; j < temp.GetLength(1); j++)
+			{
+				tempReverseArray[i, j] = temp[temp.GetLength(0) - 1 - i, j];
+			}
+		}
+
+        // поворот на 90 град.
+        Voxel[,] transposedArray = new Voxel[TileSideVoxels, TileSideVoxels];
+        Voxel[] output = new Voxel[TileSideVoxels * TileSideVoxels];
+        for (int i = 0; i < TileSideVoxels; i++)
+        {
+            for (int j = 0; j < TileSideVoxels; j++)
+            {
+                // Меняем местами индексы при копировании
+                transposedArray[j, i] = tempReverseArray[i, j];
+                output[i * TileSideVoxels + j] = tempReverseArray[j, i];
+				// Console.WriteLine("ПРОФЕСИОНАЛНА ГИМНАЗИЯ {0}/{1}", transposedArray[j, i], temp[i, j]);
+            }
+        }
+
+        return output;
     }
 
     // public Voxel GetVoxelColor(int verticalLayer, int horizontalOffset, DirectionSideTile direction)
@@ -258,8 +305,8 @@ public class Tile3D : MonoBehaviour
         sOVoxelData.ColorsForward = new Voxel[TileSideVoxels * TileSideVoxels];
         sOVoxelData.ColorsLeft = new Voxel[TileSideVoxels * TileSideVoxels];
         sOVoxelData.ColorsBack = new Voxel[TileSideVoxels * TileSideVoxels];
-        // ColorsTop = new Voxel[TileSideVoxels * TileSideVoxels];
-        // ColorsBottom = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsTop = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsBottom = new Voxel[TileSideVoxels * TileSideVoxels];
 
         for (int row = 0; row < TileSideVoxels; row++)
         {
@@ -269,6 +316,8 @@ public class Tile3D : MonoBehaviour
                 sOVoxelData.ColorsRight[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Right, sOVoxelData);
                 sOVoxelData.ColorsLeft[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Left, sOVoxelData);
                 sOVoxelData.ColorsBack[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Back, sOVoxelData);
+                sOVoxelData.ColorsTop[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Top, sOVoxelData);
+                sOVoxelData.ColorsBottom[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Bottom, sOVoxelData);
             }
         }
     }
@@ -294,6 +343,14 @@ public class Tile3D : MonoBehaviour
         else if (direction == DirectionSideTile.Left)
         {
             position = new Vector3Int(0, y, column);
+        }
+        else if (direction == DirectionSideTile.Top)
+        {
+            position = new Vector3Int(column, TileSideVoxels - 1, y);
+        }
+        else if (direction == DirectionSideTile.Bottom)
+        {
+            position = new Vector3Int(column, 0, y);
         }
 
         // var index = sOVoxelData.voxels.FindIndex(x => x == position);

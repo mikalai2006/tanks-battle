@@ -28,7 +28,7 @@ MonoBehaviour:
   DebugSettings:
     mode: 1
     disableCreateTiles: 0
-    logEnabled: 1
+    logEnabled: 0
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
     gizmoBodyForwards: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   - {fileID: 1123812706, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1934825213, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   levels:
-  - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
+  - {fileID: 11400000, guid: a6bedbe5d7fd59e4b9fa30c5e8b23286, type: 2}
   machines:
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}

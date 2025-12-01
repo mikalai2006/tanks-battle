@@ -29,8 +29,8 @@ public class SOVoxelData : ScriptableObject
     [HideInInspector] public Voxel[] ColorsForward;
     [HideInInspector] public Voxel[] ColorsLeft;
     [HideInInspector] public Voxel[] ColorsBack;
-    // [HideInInspector] public Color[] ColorsTop;
-    // [HideInInspector] public Color[] ColorsBottom;
+    [HideInInspector] public Voxel[] ColorsTop;
+    [HideInInspector] public Voxel[] ColorsBottom;
 }
 
 

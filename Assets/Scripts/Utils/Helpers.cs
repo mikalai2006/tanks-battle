@@ -310,6 +310,19 @@ public static class Helpers
   }
 
   /// <summary>
+  /// Переводит индекс элемента массива из одномерного в двумерный
+  /// </summary>
+  /// <param name="x"></param>
+  /// <param name="y"></param>
+  /// <returns>1D index calulation</returns>
+  public static Vector2Int From1DTo2D(int index, int width)
+  {
+    var x = (int) Math.Floor((decimal)index / width);
+    var y = index % width;
+    return new Vector2Int(x, y);
+  }
+
+  /// <summary>
   /// Takes 1D index and returns 3D indexes based on it
   /// </summary>
   /// <param name="index"></param>

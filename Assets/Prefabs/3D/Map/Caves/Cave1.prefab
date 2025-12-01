@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    sOVoxelData: {fileID: 11400000, guid: b0e6f0d66d97c3941b29d50ea2dc3be4, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: cb5079c56d8dc4b4b958f83afdb9fe68, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -28818,7 +28818,7 @@ MonoBehaviour:
   ColorsTop: []
   ColorsBottom: []
   meshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 2dc851a4307087a41b84fda1ae162146, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: cb5079c56d8dc4b4b958f83afdb9fe68, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
