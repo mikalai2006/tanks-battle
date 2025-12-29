@@ -86,6 +86,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebacf855ad876d248b4c582473ae4fb9
+    m_Address: GarageScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f1b5c01fd0484b34d9dd1982e0a1c0d2
     m_Address: UIStartMenu
     m_ReadOnly: 0

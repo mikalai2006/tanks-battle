@@ -47,7 +47,10 @@ namespace Mikalai2006.Voxel
 
         private void Start()
         {
-            _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+            var objLevelManager = GameObject.FindGameObjectWithTag("LevelManager");
+            _levelManager = objLevelManager != null
+                ? GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>()
+                : null;
 
             needCreateElements = new Stack<Vector3>();
 

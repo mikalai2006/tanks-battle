@@ -19,6 +19,7 @@ public class GameMachine : ScriptableObject
   public GameBody body;
   public List<GameTowerOption> towers;
   public List<GameCaterpillarOption> catterpillars;
+  public List<GameWheelOption> wheels;
 
   [Space(5)]
   [Header("Аудио")]
@@ -99,6 +100,16 @@ public class GameCaterpillarOption
   public Color colorCat;
 }
 
+[Serializable]
+public class GameWheelOption
+{
+  [Tooltip("Конфигурация")]
+  public GameWheel Config;
+  [Tooltip("Смещение")]
+  public Vector3 offsetWheel;
+  [Tooltip("Цвет")]
+  public Color colorWheel;
+}
 
 [Serializable]
 public class GameMuzzleOption

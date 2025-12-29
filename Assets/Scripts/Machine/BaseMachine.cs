@@ -35,6 +35,8 @@ public abstract class BaseMachine : MonoBehaviour
     public List<BaseTower> Towers => towers;
     [SerializeField] List<BaseCaterpillar> caterpillars;
     public List<BaseCaterpillar> Caterpillars => caterpillars;
+    [SerializeField] List<BaseWheel> wheels;
+    public List<BaseWheel> Wheels => wheels;
 
 
     [Space(5)]
@@ -85,7 +87,6 @@ public abstract class BaseMachine : MonoBehaviour
     public virtual void Awake()
     {
         areaMove = GetComponentInChildren<AreaMove>();
-        rb = GetComponent<Rigidbody>();
         HealthBar = GetComponentInChildren<HealthBarController>();
         stateController = GetComponent<StateController>();
 
@@ -94,11 +95,25 @@ public abstract class BaseMachine : MonoBehaviour
 
     void Start()
     {
-        planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
+        rb = GetComponent<Rigidbody>();
+        
+        if (levelManager != null)
+        {
+            planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
+        }
     }
 
     void Update()
     {
+        // вращение колес, если машина движется.
+        if (IsMove && Wheels.Count > 0)
+        {
+            for (int i = 0; i < Wheels.Count; i++)
+            {
+                Wheels[i].transform.Rotate(Vector3.right, 5f * Body.Data.speed * Time.deltaTime);
+            }
+        }
+
         // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
         //     .Where(n => n.OccupiedUnit != null)
         //     .ToList();
@@ -127,7 +142,7 @@ public abstract class BaseMachine : MonoBehaviour
         //     data.timeAfterLastShot += Time.deltaTime;
         // }
 
-        if (MachineLevelData.isBot)
+        if (MachineLevelData.isBot && planes != null)
         {
             // проверяем видим ли компонент.            
             if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
@@ -234,6 +249,11 @@ public abstract class BaseMachine : MonoBehaviour
         {
             Caterpillars[i].OnCollision(ktoStrelyal, _pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
         }
+        
+        for (int i = 0; i < Wheels.Count; i++)
+        {
+           Wheels[i].OnCollision(ktoStrelyal, _pointCollision, isDrawMesh, explodeGameObject, damageRadius, direction, normal);
+        }
     }
 
     public void OnSetIndicator(IndicatorMachine im)
@@ -323,6 +343,15 @@ public abstract class BaseMachine : MonoBehaviour
             caterpillars.Add(_cat);
         }
 
+        // init wheels.
+        for (int i = 0; i < Config.wheels.Count; i++)
+        {
+            GameWheelOption _whConfig = Config.wheels.ElementAt(i);
+            var _wh = Instantiate(_whConfig.Config.prefab, CaterpillarWrapper.transform);
+            _wh.Init(this, _whConfig, i);
+            wheels.Add(_wh);
+        }
+
         // init towers.
         var parentTowers = Config.towers.FindAll(t => !t.isChildren);
         for (int i = 0; i < parentTowers.Count; i++)
@@ -368,7 +397,7 @@ public abstract class BaseMachine : MonoBehaviour
 
         // Badge.OnChangeData(this);
 
-        if (!stateController.enabled)
+        if (!stateController.enabled && levelManager != null)
         {
             levelManager.UiTopSide.OnChangeData(this);
         }
@@ -446,6 +475,14 @@ public abstract class BaseMachine : MonoBehaviour
         for (int i = 0; i < Caterpillars.Count; i++)
         {
             ContainerData value = Caterpillars[i].RefreshHP();
+            countVoxels += value.countVoxels;
+            countVoxelsDestructed += value.countVoxelsDestructible;
+        }
+        
+
+        for (int i = 0; i < Wheels.Count; i++)
+        {
+            ContainerData value = Wheels[i].RefreshHP();
             countVoxels += value.countVoxels;
             countVoxelsDestructed += value.countVoxelsDestructible;
         }

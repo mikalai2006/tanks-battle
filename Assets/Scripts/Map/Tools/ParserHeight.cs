@@ -5,7 +5,8 @@ using UnityEngine;
 public class ParserHeight : MonoBehaviour
 {
     public TextureHeightMapperSettings _settings;
-    public Dictionary<Vector2Int, Color> data;
+    public Dictionary<Vector2Int, int> heightMap;
+    // public Dictionary<Vector2Int, Color> data;
     public Vector2Int gridSize;
 
     public void SetConfig(TextureHeightMapperSettings settings)
@@ -15,7 +16,7 @@ public class ParserHeight : MonoBehaviour
 
     public void Init()
     {
-        data = new Dictionary<Vector2Int, Color>();
+        heightMap = new Dictionary<Vector2Int, int>();
 
         gridSize = new Vector2Int(_settings.texture.width, _settings.texture.height);
         
@@ -27,7 +28,7 @@ public class ParserHeight : MonoBehaviour
     //     GenerateHeightMap();
     // }
 
-    public Dictionary<Vector2Int, Color> GenerateHeightMap()
+    public Dictionary<Vector2Int, int> GenerateHeightMap()
     {
 
         for (var x = 0; x < gridSize.x; x++)
@@ -35,14 +36,17 @@ public class ParserHeight : MonoBehaviour
             for (var y = 0; y < gridSize.y; y++)
             {
                 var color = _settings.texture.GetPixel(x, y);
+
                 var position = new Vector2Int(x, y);
+
+                // var height = Mathf.RoundToInt(color.r * _settings.heightSize);
                 var height = Mathf.RoundToInt(color.r * _settings.heightSize);
-                data[position] = color; //Mathf.RoundToInt(height);
-                // Debug.Log($"pos: {position}, height: {data[position]}[{color.r}]");
+                heightMap[position] = Mathf.RoundToInt(height);
+                Debug.Log($"pos: {position}, height: {heightMap[position]}[{color.r}]");
             }
         }
 
-        return data;
+        return heightMap;
     }
 
 }
@@ -50,7 +54,7 @@ public class ParserHeight : MonoBehaviour
 [System.Serializable]
 public class TextureHeightMapperSettings
 {
-    public float heightSize;
+    public int heightSize;
     public Texture2D texture;
     public string nameMap;
 }

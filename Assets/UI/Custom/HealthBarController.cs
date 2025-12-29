@@ -46,7 +46,11 @@ public class HealthBarController : MonoBehaviour
     // }
     void Awake()
     {
-        _camera = GameObject.FindGameObjectWithTag("CameraGame").GetComponent<Camera>();
+        var cameraGO = GameObject.FindGameObjectWithTag("CameraGame");
+        if (cameraGO != null)
+        {
+            _camera = cameraGO.GetComponent<Camera>();
+        }
 
 
         HealthBarSetup();
@@ -63,6 +67,11 @@ public class HealthBarController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (_camera == null)
+        {
+            return;
+        }
+        
         Vector3 relativePos = _camera.transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(relativePos, -transform.up);
         rotation.x = 0;

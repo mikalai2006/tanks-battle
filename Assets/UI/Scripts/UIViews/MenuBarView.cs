@@ -67,7 +67,7 @@ namespace UIToolkitDemo
             m_HomeScreenMenuButton = m_TopElement.Q<Button>("menu__home-button");
             // m_CharScreenMenuButton = m_TopElement.Q<Button>("menu__char-button");
             // m_InfoScreenMenuButton = m_TopElement.Q<Button>("menu__info-button");
-            // m_ShopScreenMenuButton = m_TopElement.Q<Button>("menu__shop-button");
+            m_ShopScreenMenuButton = m_TopElement.Q<Button>("menu__shop-button");
             m_GarageScreenMenuButton = m_TopElement.Q<Button>("menu__garage-button");
 
             m_MenuMarker = m_TopElement.Q("menu__current-marker");
@@ -83,7 +83,7 @@ namespace UIToolkitDemo
             m_HomeScreenMenuButton.RegisterCallback<ClickEvent>(ClickHomeButton);
             // m_CharScreenMenuButton.RegisterCallback<ClickEvent>(ClickCharButton);
             // m_InfoScreenMenuButton.RegisterCallback<ClickEvent>(ClickInfoButton);
-            // m_ShopScreenMenuButton.RegisterCallback<ClickEvent>(ClickShopButton);
+            m_ShopScreenMenuButton.RegisterCallback<ClickEvent>(ClickShopButton);
             m_GarageScreenMenuButton.RegisterCallback<ClickEvent>(ClickGarageButton);
 
             // Waits for interface to build (GeometryChangedEvent), otherwise marker can miss target
@@ -98,7 +98,7 @@ namespace UIToolkitDemo
             m_HomeScreenMenuButton.UnregisterCallback<ClickEvent>(ClickHomeButton);
             // m_CharScreenMenuButton.UnregisterCallback<ClickEvent>(ClickCharButton);
             // m_InfoScreenMenuButton.UnregisterCallback<ClickEvent>(ClickInfoButton);
-            // m_ShopScreenMenuButton.UnregisterCallback<ClickEvent>(ClickShopButton);
+            m_ShopScreenMenuButton.UnregisterCallback<ClickEvent>(ClickShopButton);
             m_GarageScreenMenuButton.UnregisterCallback<ClickEvent>(ClickGarageButton);
 
             // m_MenuMarker.UnregisterCallback<GeometryChangedEvent>(OnGeometryChangedEvent);

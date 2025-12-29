@@ -11,6 +11,14 @@
                     <ui:VisualElement name="menu-home-icon" picking-mode="Ignore" class="menu__icon" style="background-image: url(&apos;flex-end&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit;" />
                     <ui:Label text="Mail" display-tooltip-when-elided="true" name="menu-home-label" enable-rich-text="false" picking-mode="Ignore" class="menu-label menu__label">
                         <Bindings>
+                            <UnityEngine.Localization.LocalizedString property="text" table="GUID:5bdcb541de5b4a3488fe7cac097efa66" entry="Id(68605415898906624)" />
+                        </Bindings>
+                    </ui:Label>
+                </ui:Button>
+                <ui:Button display-tooltip-when-elided="true" name="menu__shop-button" class="menu__button cursor-b">
+                    <ui:VisualElement name="menu-shop-icon" picking-mode="Ignore" class="menu__icon" style="background-image: url(&apos;flex-end&apos;); background-color: rgba(255, 255, 255, 0); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:Label text="Mail" display-tooltip-when-elided="true" name="menu-shop-label" enable-rich-text="false" picking-mode="Ignore" class="menu-label menu__label">
+                        <Bindings>
                             <UnityEngine.Localization.LocalizedString property="text" table="GUID:5bdcb541de5b4a3488fe7cac097efa66" entry="Id(9175921511612416)" />
                         </Bindings>
                     </ui:Label>

@@ -44,7 +44,7 @@ public class ParserHeightEditor : Editor
 
             var allSpace = target.gridSize.x * cellSize + target.gridSize.y * margin + 10;// + target.TileSideVoxels * padding;
 
-        if (target.data != null && target.data.Count > 0)
+        if (target.heightMap != null && target.heightMap.Count > 0)
         {
             // Section draw.
             for (int y = 0; y < target.gridSize.y; y++)
@@ -62,8 +62,8 @@ public class ParserHeightEditor : Editor
                     rect.y += allSpace - (y * (cellSize + padding) + margin);
                     rect.width = cellSize;
                     rect.height = cellSize;
-                    var color = target.data[new Vector2Int(x, y)];
-                    // Color color = new Color(valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, 1);
+                    var valueHeight = target.heightMap[new Vector2Int(x, y)];
+                    Color color = new Color(valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, valueHeight / target._settings.heightSize, 1);
                     // Debug.Log($"r={row},c={column}::: rect.x={rect.x}, rect.y={rect.y}, rect.width={rect.width}, rect.height={rect.height}, color={color}");
 
                     // Draw the rectangle

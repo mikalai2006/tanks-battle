@@ -15,6 +15,8 @@ namespace UIToolkitLibrary
 
         // Event triggered when the inventory screen appears
         public static Action ScreenEnabled;
+        
+        public static Action<BaseMachine> ClickButtonPrevNextInShop;
 
         // // Event triggered when selecting a gear item
         // public static Action<EquipmentSO> GearSelected;

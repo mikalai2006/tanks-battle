@@ -362,6 +362,37 @@ Transform:
   - {fileID: 1890139048}
   m_Father: {fileID: 1413615124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &13171124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13171125}
+  m_Layer: 1
+  m_Name: DebuggerWrapper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &13171125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13171124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1821311130}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &19280704
 GameObject:
   m_ObjectHideFlags: 0
@@ -10175,54 +10206,6 @@ MonoBehaviour:
   ConfigModify:
     colors: []
   Wrapper: {fileID: 0}
---- !u!1 &770267096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 770267098}
-  - component: {fileID: 770267097}
-  m_Layer: 0
-  m_Name: TileGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &770267097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770267096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dba76c897a038f2489f73e70692f5f9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelManager: {fileID: 835646171}
-  TilePrefabs: []
-  TilePrefabsEmpty: []
-  TilePrefabsInner: []
---- !u!4 &770267098
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770267096}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &800358413
 GameObject:
   m_ObjectHideFlags: 0
@@ -11031,7 +11014,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fa29797bb82d14b83018ae6ab641c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile3DGenerator: {fileID: 770267097}
   wFCGenerator: {fileID: 1821311129}
   mapManager: {fileID: 1556721295}
   globalLight: {fileID: 2130735481}
@@ -24874,6 +24856,9 @@ MonoBehaviour:
   TilePrefabs: []
   TilePrefabsEmpty: []
   TilePrefabsInner: []
+  TilePrefabsInnerTop: []
+  TileDebugger: {fileID: 1372487759109498908, guid: 9ed7f3d96b042dd4a85dea1001ac7539, type: 3}
+  TileDebuggerWrapper: {fileID: 13171124}
   gridComponents: []
 --- !u!4 &1821311130
 Transform:
@@ -24887,7 +24872,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 13171125}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1825572889
@@ -29563,6 +29549,5 @@ SceneRoots:
   - {fileID: 755099063}
   - {fileID: 1256926572}
   - {fileID: 1335075958}
-  - {fileID: 770267098}
   - {fileID: 1678519689}
   - {fileID: 116326620}

@@ -17,9 +17,9 @@ public class GridTileHelper
         private set { }
     }
 
-    public GridTileHelper(int width, int height, float cellSize = 1)
+    public GridTileHelper(int rows, int depth, int cols, float cellSize = 1)
     {
-        _gridTile = new GridTile<GridTileNode>(width, height, cellSize, this, (GridTile<GridTileNode> grid, GridTileHelper gridHelper, int x, int y) => new GridTileNode(grid, gridHelper, x, y));
+        _gridTile = new GridTile<GridTileNode>(rows, depth, cols, cellSize, this, (GridTile<GridTileNode> grid, GridTileHelper gridHelper, int row, int depth, int col) => new GridTileNode(grid, gridHelper, row, depth, col));
     }
 
 
@@ -28,11 +28,14 @@ public class GridTileHelper
         List<GridTileNode> list = new List<GridTileNode>(_gridTile.GetWidth() * _gridTile.GetHeight());
         if (_gridTile != null)
         {
-            for (int x = 0; x < _gridTile.GetWidth(); x++)
+            for (int depth = 0; depth < _gridTile.GetDepth(); depth++)
             {
-                for (int y = 0; y < _gridTile.GetHeight(); y++)
+                for (int row = 0; row < _gridTile.GetWidth(); row++)
                 {
-                    list.Add(_gridTile.GetGridObject(new Vector3Int(x, y)));
+                    for (int col = 0; col < _gridTile.GetHeight(); col++)
+                    {
+                        list.Add(_gridTile.GetGridObject(row, depth, col));
+                    }
                 }
             }
         }
@@ -50,6 +53,7 @@ public class GridTileHelper
         //Debug.Log($"AllCount {openList.Count}[close={closedList.Count}] | Count {listNodes.Count} rand index {indexRandomNode} ::: {listNodes[indexRandomNode].ToString()}");
         return listNodes[indexRandomNode];
     }
+
     public GridTileNode GetRandomTileNode(Dictionary<Vector3Int, GridTileNode> listNodes)
     {
         //List<GridTileNode> listNodesx = listNodes.Values.Where(x => x.countRelatedNeighbors > 2).ToList();
@@ -68,10 +72,10 @@ public class GridTileHelper
         // var nosky = LevelManager.Instance.Level.nosky;
         // GameManager.Instance.MapManager.ResetTestTileMap();
 
-        GridTileNode startNode = _gridTile.GetGridObject(start);
+        GridTileNode startNode = _gridTile.GetGridObjectByVector(start);
         // GridTileNode startNodeTrigger = startNode;
         // GridTileNode endNodeF = _gridTile.GetGridObject(end);
-        GridTileNode endNode = _gridTile.GetGridObject(end);
+        GridTileNode endNode = _gridTile.GetGridObjectByVector(end);
 
         BinaryHeap<GridTileNode> openSet = new BinaryHeap<GridTileNode>(_gridTile.GetWidth() * _gridTile.GetHeight());
         HashSet<GridTileNode> closedSet = new HashSet<GridTileNode>();
@@ -81,7 +85,7 @@ public class GridTileHelper
         {
             for (int z = 0; z < _gridTile.GetHeight(); z++)
             {
-                GridTileNode GridTileNode = _gridTile.GetGridObject(new Vector3Int(x, z));
+                GridTileNode GridTileNode = _gridTile.GetGridObjectByVector(new Vector3Int(x, z));
                 GridTileNode.gCost = int.MaxValue;
                 GridTileNode.CalculateFCost();
                 GridTileNode.cameFromNode = null;
@@ -312,59 +316,59 @@ public class GridTileHelper
     //     return closedSet.ToList();
     // }
 
-    public List<GridTileNode> GetNeighboursAtDistance(GridTileNode startNode, int distance, bool force = true)
-    {
-        List<GridTileNode> openListNodes = new List<GridTileNode>() { startNode };
-        List<GridTileNode> closedListNodes = new List<GridTileNode>();
-        //List<GridTileNode> removedListNodes = new List<GridTileNode>();
+    // public List<GridTileNode> GetNeighboursAtDistance(GridTileNode startNode, int distance, bool force = true)
+    // {
+    //     List<GridTileNode> openListNodes = new List<GridTileNode>() { startNode };
+    //     List<GridTileNode> closedListNodes = new List<GridTileNode>();
+    //     //List<GridTileNode> removedListNodes = new List<GridTileNode>();
 
-        while (openListNodes.Count > 0)
-        {
-            GridTileNode currentNode = openListNodes[0];
+    //     while (openListNodes.Count > 0)
+    //     {
+    //         GridTileNode currentNode = openListNodes[0];
 
-            openListNodes.Remove(currentNode);
-            closedListNodes.Add(currentNode);
+    //         openListNodes.Remove(currentNode);
+    //         closedListNodes.Add(currentNode);
 
-            foreach (GridTileNode neighbourNode in GetNeighbourList(currentNode, true))
-            {
-                //if (neighbourNode.Disable && !force)
-                //{
-                //    removedListNodes.Add(neighbourNode);
-                //    continue;
-                //}
+    //         foreach (GridTileNode neighbourNode in GetNeighbourList(currentNode, true))
+    //         {
+    //             //if (neighbourNode.Disable && !force)
+    //             //{
+    //             //    removedListNodes.Add(neighbourNode);
+    //             //    continue;
+    //             //}
 
-                //if (removedListNodes.Contains(neighbourNode)) continue;
-                if (closedListNodes.Contains(neighbourNode)) continue;
+    //             //if (removedListNodes.Contains(neighbourNode)) continue;
+    //             if (closedListNodes.Contains(neighbourNode)) continue;
 
-                //if (neighbourNode.keyArea != node.keyArea )
-                //{
-                //    removedListNodes.Add(neighbourNode);
-                //    continue;
-                //}
+    //             //if (neighbourNode.keyArea != node.keyArea )
+    //             //{
+    //             //    removedListNodes.Add(neighbourNode);
+    //             //    continue;
+    //             //}
 
-                //if (neighbourNode.OccupiedUnit != null && neighbourNode != node)
-                //{
-                //    if (exitTriggers.Contains(neighbourNode.OccupiedUnit.typeUnit))
-                //    {
-                //        //Debug.Log($"Exit OccupiedUnit::: {neighbourNode.OccupiedUnit.typeUnit}");
-                //        return new List<GridTileNode> { neighbourNode };
-                //    }
-                //}
+    //             //if (neighbourNode.OccupiedUnit != null && neighbourNode != node)
+    //             //{
+    //             //    if (exitTriggers.Contains(neighbourNode.OccupiedUnit.typeUnit))
+    //             //    {
+    //             //        //Debug.Log($"Exit OccupiedUnit::: {neighbourNode.OccupiedUnit.typeUnit}");
+    //             //        return new List<GridTileNode> { neighbourNode };
+    //             //    }
+    //             //}
 
 
-                if (
-                    !openListNodes.Contains(neighbourNode)
-                    && GetDistanceBetweeenPoints(startNode.position, neighbourNode.position) <= distance
-                    )
-                {
-                    openListNodes.Add(neighbourNode);
-                }
-            }
+    //             if (
+    //                 !openListNodes.Contains(neighbourNode)
+    //                 && GetDistanceBetweeenPoints(startNode.position, neighbourNode.position) <= distance
+    //                 )
+    //             {
+    //                 openListNodes.Add(neighbourNode);
+    //             }
+    //         }
 
-        }
+    //     }
 
-        return closedListNodes;
-    }
+    //     return closedListNodes;
+    // }
 
     public List<GridTileNode> GetNeighbourList(GridTileNode currentNode, bool isDiagonal = false)
     {
@@ -373,33 +377,33 @@ public class GridTileHelper
         if (currentNode.X - 1 >= 0)
         {
             //left
-            neighbourList.Add(GetNode(currentNode.X - 1, currentNode.Y));
+            neighbourList.Add(GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z));
             if (isDiagonal)
             {
                 // left down
-                if (currentNode.Y - 1 >= 0) neighbourList.Add(GetNode(currentNode.X - 1, currentNode.Y - 1));
+                if (currentNode.Z - 1 >= 0) neighbourList.Add(GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z - 1));
                 // left up
-                if (currentNode.Y + 1 < _gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.X - 1, currentNode.Y + 1));
+                if (currentNode.Z + 1 < _gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z + 1));
             }
         }
 
         if (currentNode.X + 1 < _gridTile.GetWidth())
         {
             // right
-            neighbourList.Add(GetNode(currentNode.X + 1, currentNode.Y));
+            neighbourList.Add(GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z));
             if (isDiagonal)
             {
                 // right down
-                if (currentNode.Y - 1 >= 0) neighbourList.Add(GetNode(currentNode.X + 1, currentNode.Y - 1));
+                if (currentNode.Z - 1 >= 0) neighbourList.Add(GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z - 1));
                 //right up
-                if (currentNode.Y + 1 < _gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.X + 1, currentNode.Y + 1));
+                if (currentNode.Z + 1 < _gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z + 1));
             }
         }
 
         // down
-        if (currentNode.Y - 1 >= 0) neighbourList.Add(GetNode(currentNode.X, currentNode.Y - 1));
+        if (currentNode.Z - 1 >= 0) neighbourList.Add(GetNode(currentNode.X, currentNode.Y, currentNode.Z - 1));
         // up
-        if (currentNode.Y + 1 < _gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.X, currentNode.Y + 1));
+        if (currentNode.Z + 1 < _gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.X, currentNode.Y, currentNode.Z + 1));
 
         return neighbourList;
     }
@@ -411,55 +415,84 @@ public class GridTileHelper
         if (currentNode.X - 1 >= 0)
         {
             //left
-            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y);
-            if (left.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(left);
+            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z);
+            if (left.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(left);
             if (isDiagonal)
             {
                 // left down
                 // if (currentNode.y - 1 >= 0) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
-                var leftDown = GetNode(currentNode.X - 1, currentNode.Y - 1);
-                if (leftDown != default && leftDown.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(leftDown);
+                var leftDown = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z - 1);
+                if (leftDown != default && leftDown.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(leftDown);
                 // left up
                 // if (currentNode.y + 1 < gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y + 1));
-                var leftUp = GetNode(currentNode.X - 1, currentNode.Y + 1);
-                if (leftUp != default && leftUp.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(leftUp);
+                var leftUp = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z + 1);
+                if (leftUp != default && leftUp.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(leftUp);
             }
         }
 
         if (currentNode.X + 1 < _gridTile.GetWidth())
         {
             // right
-            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y);
-            if (right.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(right);
+            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z);
+            if (right.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(right);
             if (isDiagonal)
             {
                 //// right down
                 //GridTileNode rightDown = GetNode(currentNode.x + 1, currentNode.y);
                 //if (currentNode.y - 1 >= 0) neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y - 1));
-                var rightDown = GetNode(currentNode.X + 1, currentNode.Y - 1);
-                if (rightDown != default && rightDown.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(rightDown);
+                var rightDown = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z - 1);
+                if (rightDown != default && rightDown.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(rightDown);
                 ////right up
                 //if (currentNode.y + 1 < gridTile.GetHeight()) neighbourList.Add(GetNode(currentNode.x + 1, currentNode.y + 1));
-                var rightUp = GetNode(currentNode.X + 1, currentNode.Y + 1);
-                if (rightUp != default && rightUp.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(rightUp);
+                var rightUp = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z + 1);
+                if (rightUp != default && rightUp.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(rightUp);
             }
         }
 
         // down
-        if (currentNode.Y - 1 >= 0)
+        if (currentNode.Z - 1 >= 0)
         {
-            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1);
-            if (down.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(down);
+            GridTileNode down = GetNode(currentNode.X, currentNode.Y, currentNode.Z - 1);
+            if (down.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(down);
         }
         // up
-        if (currentNode.Y + 1 < _gridTile.GetHeight())
+        if (currentNode.Z + 1 < _gridTile.GetHeight())
         {
 
-            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1);
-            if (up.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(up);
+            GridTileNode up = GetNode(currentNode.X, currentNode.Y, currentNode.Z + 1);
+            if (up.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop)) neighbourList.Add(up);
         }
 
+        // // top.
+        // if (currentNode.Y + 1 >= 0)
+        // {
+        //     GridTileNode top = GetNode(currentNode.X, currentNode.Y + 1, currentNode.Z);
+        //     if (top.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(top);
+        // }
+
+        // // bottom.
+        // if (currentNode.Y - 1 >= 0)
+        // {
+        //     GridTileNode bottom = GetNode(currentNode.X, currentNode.Y - 1, currentNode.Z);
+        //     if (bottom.HasAnyState(StateNode.Tiled | StateNode.TiledInner)) neighbourList.Add(bottom);
+        // }
+
         return neighbourList;
+    }
+
+    public GridTileNode GetNeighbourTiledTop(GridTileNode currentNode)
+    {
+        if (currentNode.Y + 1 >= 0)
+        {
+            GridTileNode top = GetNode(currentNode.X, currentNode.Y + 1, currentNode.Z);
+            if (top.HasAnyState(StateNode.Tiled | StateNode.TiledInner | StateNode.TiledTop | StateNode.TiledInnerTop))
+            {
+                return top;
+            }
+            ;
+        }
+
+        return default;
     }
 
     public List<GridTileNode> GetNeighbourListWithTypeGroundOrNone(GridTileNode currentNode)
@@ -469,7 +502,7 @@ public class GridTileHelper
         if (currentNode.X - 1 >= 0)
         {
             //left
-            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y);
+            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z);
             if (currentNode.TypeGround == left.TypeGround || left.TypeGround == TypeGround.None) neighbourList.Add(left);
             //// left down
             //if (currentNode.y - 1 >= 0) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
@@ -480,7 +513,7 @@ public class GridTileHelper
         if (currentNode.X + 1 < _gridTile.GetWidth())
         {
             // right
-            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y);
+            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z);
             if (currentNode.TypeGround == right.TypeGround || right.TypeGround == TypeGround.None) neighbourList.Add(right);
             //// right down
             //GridTileNode rightDown = GetNode(currentNode.x + 1, currentNode.y);
@@ -492,14 +525,14 @@ public class GridTileHelper
         // down
         if (currentNode.Y - 1 >= 0)
         {
-            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1);
+            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1, currentNode.Z);
             if (currentNode.TypeGround == down.TypeGround || down.TypeGround == TypeGround.None) neighbourList.Add(down);
         }
         // up
         if (currentNode.Y + 1 < _gridTile.GetHeight())
         {
 
-            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1);
+            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1, currentNode.Z);
             if (currentNode.TypeGround == up.TypeGround || up.TypeGround == TypeGround.None) neighbourList.Add(up);
         }
 
@@ -525,7 +558,7 @@ public class GridTileHelper
         if (currentNode.X - 1 >= 0)
         {
             //left
-            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y);
+            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z);
             if (currentNode.TypeGround == left.TypeGround) neighbourList.Add(left);
             //// left down
             //if (currentNode.y - 1 >= 0) neighbourList.Add(GetNode(currentNode.x - 1, currentNode.y - 1));
@@ -536,7 +569,7 @@ public class GridTileHelper
         if (currentNode.X + 1 < _gridTile.GetWidth())
         {
             // right
-            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y);
+            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z);
             if (currentNode.TypeGround == right.TypeGround) neighbourList.Add(right);
             //// right down
             //GridTileNode rightDown = GetNode(currentNode.x + 1, currentNode.y);
@@ -548,14 +581,14 @@ public class GridTileHelper
         // down
         if (currentNode.Y - 1 >= 0)
         {
-            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1);
+            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1, currentNode.Z);
             if (currentNode.TypeGround == down.TypeGround) neighbourList.Add(down);
         }
         // up
         if (currentNode.Y + 1 < _gridTile.GetHeight())
         {
 
-            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1);
+            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1, currentNode.Z);
             if (currentNode.TypeGround == up.TypeGround) neighbourList.Add(up);
         }
         return neighbourList;
@@ -572,12 +605,12 @@ public class GridTileHelper
         if (currentNode.X - 1 >= 0)
         {
             //left
-            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y);
+            GridTileNode left = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z);
             if (left.StateNode.HasFlag(StateNode.Disable)) neighbours.left.Add(left);
             // left down
             if (currentNode.Y - 1 >= 0)
             {
-                GridTileNode leftdown = GetNode(currentNode.X - 1, currentNode.Y - 1);
+                GridTileNode leftdown = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z - 1);
                 if (leftdown.StateNode.HasFlag(StateNode.Disable))
                 {
                     neighbours.left.Add(leftdown);
@@ -587,7 +620,7 @@ public class GridTileHelper
             // left up
             if (currentNode.Y + 1 < _gridTile.GetHeight())
             {
-                GridTileNode leftup = GetNode(currentNode.X - 1, currentNode.Y + 1);
+                GridTileNode leftup = GetNode(currentNode.X - 1, currentNode.Y, currentNode.Z + 1);
                 if (leftup.StateNode.HasFlag(StateNode.Disable))
                 {
                     neighbours.top.Add(leftup);
@@ -599,12 +632,12 @@ public class GridTileHelper
         if (currentNode.X + 1 < _gridTile.GetWidth())
         {
             // right
-            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y);
+            GridTileNode right = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z);
             if (right.StateNode.HasFlag(StateNode.Disable)) neighbours.right.Add(right);
             // right down
             if (currentNode.Y - 1 >= 0)
             {
-                GridTileNode rightDown = GetNode(currentNode.X + 1, currentNode.Y - 1);
+                GridTileNode rightDown = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z - 1);
                 if (rightDown.StateNode.HasFlag(StateNode.Disable))
                 {
                     neighbours.right.Add(rightDown);
@@ -614,7 +647,7 @@ public class GridTileHelper
             //right up
             if (currentNode.Y + 1 < _gridTile.GetHeight())
             {
-                GridTileNode rightUp = GetNode(currentNode.X + 1, currentNode.Y + 1);
+                GridTileNode rightUp = GetNode(currentNode.X + 1, currentNode.Y, currentNode.Z + 1);
                 if (rightUp.StateNode.HasFlag(StateNode.Disable))
                 {
                     neighbours.right.Add(rightUp);
@@ -626,13 +659,13 @@ public class GridTileHelper
         // down
         if (currentNode.Y - 1 >= 0)
         {
-            GridTileNode down = GetNode(currentNode.X, currentNode.Y - 1);
+            GridTileNode down = GetNode(currentNode.X, currentNode.Y, currentNode.Z - 1);
             if (down.StateNode.HasFlag(StateNode.Disable)) neighbours.bottom.Add(down);
         }
         // up
         if (currentNode.Y + 1 < _gridTile.GetHeight())
         {
-            GridTileNode up = GetNode(currentNode.X, currentNode.Y + 1);
+            GridTileNode up = GetNode(currentNode.X, currentNode.Y, currentNode.Z + 1);
             if (up.StateNode.HasFlag(StateNode.Disable)) neighbours.top.Add(up);
         }
         neighbours.count = neighbours.bottom.Count + neighbours.top.Count
@@ -640,14 +673,16 @@ public class GridTileHelper
         return neighbours;
     }
 
-    public GridTileNode GetNode(int x, int y)
+    public GridTileNode GetNode(int __row, int __depth, int __col)
     {
-        return _gridTile.GetGridObject(new Vector3Int(x, y));
+        // Debug.Log($"GetNode {__row}, {__depth}, {__col}");
+        return _gridTile.GetGridObject(__row, __depth, __col);
     }
-    public GridTileNode GetNode(Vector3Int pos)
-    {
-        return _gridTile.GetGridObject(pos);
-    }
+    
+    // public GridTileNode GetNode(Vector3Int pos)
+    // {
+    //     return _gridTile.GetGridObject(pos);
+    // }
 
     private List<GridTileNode> CalculatePath(GridTileNode endNode)
     {
@@ -693,24 +728,24 @@ public class GridTileHelper
         return Mathf.Sqrt(remaining);
     }
 
-    public int CalculateNeighbours(GridTileNode node)
-    {
-        List<GridTileNode> neighbours = GetNeighbourList(node, true);
-        int countWalkableNeighbours = 0;
-        for (int i = 0; i < neighbours.Count; i++)
-        {
-            // if (neighbours[i].Empty && neighbours[i].Enable && !neighbours[i].Protected)
-            if (
-                neighbours[i].StateNode.HasFlag(StateNode.Empty)
-                // && !neighbours[i].StateNode.HasFlag(StateNode.Protected)
-                )
-            {
-                countWalkableNeighbours++;
-            }
-        }
+    // public int CalculateNeighbours(GridTileNode node)
+    // {
+    //     List<GridTileNode> neighbours = GetNeighbourList(node, true);
+    //     int countWalkableNeighbours = 0;
+    //     for (int i = 0; i < neighbours.Count; i++)
+    //     {
+    //         // if (neighbours[i].Empty && neighbours[i].Enable && !neighbours[i].Protected)
+    //         if (
+    //             neighbours[i].StateNode.HasFlag(StateNode.Empty)
+    //             // && !neighbours[i].StateNode.HasFlag(StateNode.Protected)
+    //             )
+    //         {
+    //             countWalkableNeighbours++;
+    //         }
+    //     }
 
-        return countWalkableNeighbours;
-    }
+    //     return countWalkableNeighbours;
+    // }
 
     /// <summary>
     /// Mark node as disable

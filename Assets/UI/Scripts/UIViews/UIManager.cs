@@ -79,7 +79,7 @@ namespace UIToolkitLibrary
             MainMenuUIEvents.HomeScreenShown += OnHomeScreenShown;
             // MainMenuUIEvents.CharScreenShown += OnCharScreenShown;
             // MainMenuUIEvents.InfoScreenShown += OnInfoScreenShown;
-            // MainMenuUIEvents.ShopScreenShown += OnShopScreenShown;
+            MainMenuUIEvents.ShopScreenShown += OnShopScreenShown;
             MainMenuUIEvents.GarageScreenShown += OnGarageScreenShown;
 
             // MainMenuUIEvents.InventoryScreenShown += OnInventoryScreenShown;
@@ -105,7 +105,7 @@ namespace UIToolkitLibrary
             MainMenuUIEvents.HomeScreenShown -= OnHomeScreenShown;
             // MainMenuUIEvents.CharScreenShown -= OnCharScreenShown;
             // MainMenuUIEvents.InfoScreenShown -= OnInfoScreenShown;
-            // MainMenuUIEvents.ShopScreenShown -= OnShopScreenShown;
+            MainMenuUIEvents.ShopScreenShown -= OnShopScreenShown;
             MainMenuUIEvents.GarageScreenShown -= OnGarageScreenShown;
 
             // MainMenuUIEvents.InventoryScreenShown -= OnInventoryScreenShown;
@@ -124,18 +124,18 @@ namespace UIToolkitLibrary
             VisualElement root = m_MainMenuDocument.rootVisualElement;
 
 
-            root.style.backgroundImage = new StyleBackground(GameManager.Instance.Theme.bgImage);
-            var wrapper = root.Q<VisualElement>("Wrapper");
-            if (wrapper != null)
-            {
-                wrapper.style.backgroundColor = new StyleColor(GameManager.Instance.Theme.colorBg);
-            }
+            // root.style.backgroundImage = new StyleBackground(GameManager.Instance.Theme.bgImage);
+            // var wrapper = root.Q<VisualElement>("Wrapper");
+            // if (wrapper != null)
+            // {
+            //     wrapper.style.backgroundColor = new StyleColor(GameManager.Instance.Theme.colorBg);
+            // }
 
             // Create full-screen modal views: HomeView, CharView, InfoView, ShopView, MailView
             m_HomeView = new HomeView(root.Q<VisualElement>(k_HomeViewName), _localization); // Landing modal screen
             // m_CharView = new CharView(root.Q<VisualElement>(k_CharViewName)); // Character screen
             // m_InfoView = new InfoView(root.Q<VisualElement>(k_InfoViewName)); // Links and resources screen
-            // m_ShopView = new ShopView(root.Q<VisualElement>(k_ShopViewName)); // Shop screen
+            m_ShopView = new UIShopView(root.Q<VisualElement>(k_ShopViewName), _localization); // Shop screen
             // m_MailView = new MailView(root.Q<VisualElement>(k_MailViewName)); // Mail screen
             m_GarageView = new UIGarageView(root.Q<VisualElement>(k_Garage), _localization);
 
@@ -216,9 +216,13 @@ namespace UIToolkitLibrary
             ShowModalView(m_GarageView);
         }
 
-        void OnShopScreenShown()
+        async void OnShopScreenShown()
         {
             ShowModalView(m_ShopView);
+
+            var operations = new Queue<ILoadingOperation>();
+            operations.Enqueue(new GarageInitOperation());
+            await GameManager.Instance.LoaderBarProvider.LoadAndDestroy(operations);
         }
 
         void OnMachineInventaryScreenShown()

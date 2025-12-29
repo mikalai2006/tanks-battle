@@ -4,6 +4,7 @@ public class ConstantsApp
   {
     public const string SCENE_MAIN = "MainScene";
     public const string SCENE_GAME = "GameScene";
+    public const string SCENE_GARAGE = "GarageScene";
   }
 
   public class UILabels

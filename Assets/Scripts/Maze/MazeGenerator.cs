@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
-using UnityEngine.AI;
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField] MazeCell _mazeCellPrefab;

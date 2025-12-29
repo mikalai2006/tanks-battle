@@ -37,6 +37,16 @@ public class StateManager
     return statePlayer;
   }
 
+  public void AddMachine(string name)
+  {
+      statePlayer.machines.Add(new StateMachinePlayer
+      {
+          name = name
+      });
+
+    OnChangeState?.Invoke(statePlayer);
+  }
+
   public void InitDataAloneLevel()
   {
     stateLevel = new();
@@ -48,7 +58,7 @@ public class StateManager
     {
       MachineLevelData machine = new()
       {
-        id = _gameSetting.machines[UnityEngine.Random.Range(0, _gameSetting.machines.Count)].name, //_gameSetting.machines[i == 0 ? 0 : Mathf.Min(3, i)].name, // 
+        id = _gameSetting.machines[i == 0 ? 0 : UnityEngine.Random.Range(0, _gameSetting.machines.Count)].name, //_gameSetting.machines[i == 0 ? 0 : Mathf.Min(3, i)].name, // 
         gerbId = i == 0 ? statePlayer.gerbId : _gameSetting.gerbs[UnityEngine.Random.Range(0, _gameSetting.gerbs.Count - 1)].name,
         isBot = i != 0,
         name = i == 0 ? _gameManager.AppInfo.UserInfo.name : listRandomNames.ElementAt(i),
@@ -80,7 +90,7 @@ public class StateManager
   public void RefreshData(bool saveDb)
   {
 
-    OnChangeState.Invoke(statePlayer);
+    OnChangeState?.Invoke(statePlayer);
   }
 
   public StatePlayer GetData()

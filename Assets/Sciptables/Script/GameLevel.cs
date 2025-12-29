@@ -10,13 +10,19 @@ public class GameLevel : ScriptableObject
     [Header("Настройки карты")]
     public TextureHeightMapperSettings tileSettings;
     public SaveTiled saveTiled;
+    [Tooltip("x - rows, y - depth, z - cols")]
     public Vector3Int gridSize;
-    public List<VoxelMeshRender> TreePrefabs;
-    public List<VoxelMeshRender> HousePrefabs;
+    public int Depth => gridSize.y;
+    public int Rows => gridSize.x;
+    public int Cols => gridSize.z;
+    
     public List<Tile3D> TilePrefabs;
     public List<Tile3D> TilePrefabsEmpty;
     public List<Tile3D> TilePrefabsInner;
+    public List<Tile3D> TilePrefabsInnerTop;
     public VoxelMeshRender planePrefab;
+    public List<VoxelMeshRender> HousePrefabs;
+    public List<VoxelMeshRender> TreePrefabs;
 
     [Space(5)]
     [Header("Map")]

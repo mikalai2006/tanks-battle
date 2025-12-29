@@ -271,7 +271,7 @@ public class BaseTower : MonoBehaviour
 
     void Update()
     {
-        if (!Machine)
+        if (!Machine || !Machine.LevelManager)
         {
             return;
         }
@@ -321,7 +321,7 @@ public class BaseTower : MonoBehaviour
 
         Machine = baseMachine;
 
-        if (!Parent)
+        if (!Parent && _gameManager.LevelConfig != null)
         {
             DirectionLight.intensity = _gameManager.LevelConfig.light;
             DirectionLight.enabled = false;//!Machine.MachineLevelData.isBot;

@@ -394,7 +394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gPUInstanceEnabler: {fileID: 4052545773601728994}
   machine: {fileID: 7514235118787443334}
-  testTargets: []
 --- !u!1 &2844179306222782756
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +438,6 @@ GameObject:
   - component: {fileID: 8535509276932661411}
   - component: {fileID: 821768268780620034}
   - component: {fileID: 2574766474497793755}
-  - component: {fileID: 3700119585184557848}
   - component: {fileID: 6306202757877048792}
   m_Layer: 14
   m_Name: Tank
@@ -608,33 +606,6 @@ MonoBehaviour:
   Obstacle: {x: 0, y: 0, z: 0}
   Target: {x: 0, y: 0, z: 0}
   Path: []
---- !u!54 &3700119585184557848
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6403601510694640829}
-  serializedVersion: 5
-  m_Mass: 1000
-  m_LinearDamping: 1
-  m_AngularDamping: 1
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 116
-  m_CollisionDetection: 1
 --- !u!195 &6306202757877048792
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1307,4 +1278,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gPUInstanceEnabler: {fileID: 4052545773601728994}
   machine: {fileID: 7514235118787443334}
-  testTargets: []

@@ -282,6 +282,53 @@ public static class Helpers
         }
         return false;
     }
+  
+  /// <summary>
+  /// Преобразование 3D-координат (x, y, z) в 1D индекс
+  /// </summary>
+  /// <param name="row">Значение строки в 3-х-мерном массиве</param>
+  /// <param name="depth">Значение глубины в 3-х-мерном массива</param>
+  /// <param name="col">Значение столбца в 3-х-мерном массиве</param>
+  /// <param name="rowsCount">Количество строк в 3-х-мерном массиве</param>
+  /// <param name="depthMax">Глубина 3-х-мерного массива</param>
+  /// <param name="colsCount">Количество столбцов в 3-х-мерном массиве</param>
+  /// <returns>1D index calulation</returns>
+  public static int From3DTo1D(int row, int depth, int col, Vector3Int size)
+  {
+    //return (z * xMax * yMax) + (y * xMax) + x;
+
+    // Пример преобразования 3D-координат (d, r, c) в 1D индекс
+    // int d = 0; // Индекс глубины
+    // int r = 1; // Индекс строки
+    // int c = 2; // Индекс столбца
+
+    return (depth * size.x * size.z) + (row * size.z) + col;
+  }
+
+  /// <summary>
+  /// Преобразование 1D индекс в 3D-координаты (x, y, z)
+  /// </summary>
+  /// <param name="row">Значение строки в 3-х-мерном массиве</param>
+  /// <param name="depth">Значение глубины в 3-х-мерном массива</param>
+  /// <param name="col">Значение столбца в 3-х-мерном массиве</param>
+  /// <param name="rowsCount">Количество строк в 3-х-мерном массиве</param>
+  /// <param name="depthMax">Глубина 3-х-мерного массива</param>
+  /// <param name="colsCount">Количество столбцов в 3-х-мерном массиве</param>
+  /// <returns>1D index calulation</returns>
+  public static Vector3Int From1DTo3D(int index, int rowsCount, int depthCount, int colsCount)
+  {
+    // Рассчитайте координаты: Используйте формулу для преобразования одномерного индекса (например, oneDIndex) 
+    // в 3D индексы x, y, z:
+    // x = oneDIndex / (dimY * dimZ)
+    // y = (oneDIndex % (dimY * dimZ)) / dimZ
+    // z = oneDIndex % dimZ
+
+    return new Vector3Int(
+      index / (depthCount * colsCount),
+      (index % (depthCount * colsCount)) / colsCount,
+      index % colsCount
+    );
+  }
 
   /// <summary>
   /// Takes 3D indexes and returns a 1D index based on them

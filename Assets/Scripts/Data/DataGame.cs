@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class StatePlayer
@@ -13,13 +12,19 @@ public class StatePlayer
   public int rank;
   public int score;
   public int indexActiveMachine;
-  public List<string> machines;
+  public List<StateMachinePlayer> machines;
   public int coin;
 
   public StatePlayer()
   {
     machines = new();
   }
+}
+
+[Serializable]
+public class StateMachinePlayer
+{
+    public string name;
 }
 
 [Serializable]

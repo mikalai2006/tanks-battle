@@ -9,10 +9,12 @@ public enum StateNode
     Disable = 1 << 0,
     Empty = 1 << 1,
     Occupied = 1 << 2,
-    Tiled = 1 << 3, // red point
+    Tiled = 1 << 3,
     TiledInner = 1 << 4, // red point
     Tree = 1 << 5, // green point
     House = 1 << 6, // blue point
+    TiledTop = 1 << 7,
+    TiledInnerTop = 1 << 8
 }
 
 [Serializable]
@@ -23,6 +25,7 @@ public class GridTileNode : IHeapItem<GridTileNode>
     [SerializeField] public StateNode StateNode = StateNode.Empty;
     public int X;
     public int Y;
+    public int Z;
     public TypeGround TypeGround = TypeGround.None;
 
     [NonSerialized] public int level;
@@ -74,18 +77,19 @@ public class GridTileNode : IHeapItem<GridTileNode>
         tileOptions = tiles;
     }
 
-    public GridTileNode(GridTile<GridTileNode> grid, GridTileHelper gridHelper, int x, int y)
+    public GridTileNode(GridTile<GridTileNode> grid, GridTileHelper gridHelper, int rowNumber, int depthNumber, int colNumber)
     {
-        position = new Vector3Int(x, y, 0);
+        position = new Vector3Int(rowNumber, depthNumber, colNumber);
         _gridHelper = gridHelper;
         _grid = grid;
-        this.X = x;
-        this.Y = y;
+        this.X = rowNumber;
+        this.Y = depthNumber;
+        this.Z = colNumber;
     }
 
     public Vector3Int positionXZ()
     {
-        return new Vector3Int(X, 0, Y);
+        return new Vector3Int(X, Y, Z);
     }
 
     public bool HasAnyState(StateNode any)
@@ -152,7 +156,7 @@ public class GridTileNode : IHeapItem<GridTileNode>
     {
         return "GridTileNode:::" +
             // "keyArea=" + KeyArea + ",\n" +
-            "[x" + position.x + ",y" + position.y + "] \n" +
+            "[x" + position.x + ",y" + position.y + ",z" + position.z + "] \n" +
             "typeGround=" + TypeGround + ",\n" +
             "OccupiedUnit=" + OccupiedUnit?.ToString() + ",\n" +
             // "GuestedUnit=" + _guestedUnit?.ToString() + ",\n" +

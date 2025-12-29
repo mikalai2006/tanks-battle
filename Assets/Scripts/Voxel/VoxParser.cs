@@ -233,8 +233,8 @@ public class VoxParser : MonoBehaviour
         sOVoxelData.ColorsForward = new Voxel[TileSideVoxels * TileSideVoxels];
         sOVoxelData.ColorsLeft = new Voxel[TileSideVoxels * TileSideVoxels];
         sOVoxelData.ColorsBack = new Voxel[TileSideVoxels * TileSideVoxels];
-        // ColorsTop = new Voxel[TileSideVoxels * TileSideVoxels];
-        // ColorsBottom = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsTop = new Voxel[TileSideVoxels * TileSideVoxels];
+        sOVoxelData.ColorsBottom = new Voxel[TileSideVoxels * TileSideVoxels];
 
         for (int row = 0; row < TileSideVoxels; row++)
         {

@@ -28,7 +28,7 @@ MonoBehaviour:
   DebugSettings:
     mode: 1
     disableCreateTiles: 0
-    logEnabled: 0
+    logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
     gizmoBodyForwards: 0
@@ -118,8 +118,9 @@ MonoBehaviour:
   - {fileID: 1123812706, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1934825213, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   levels:
-  - {fileID: 11400000, guid: a6bedbe5d7fd59e4b9fa30c5e8b23286, type: 2}
+  - {fileID: 11400000, guid: 63f7498c09b8a8245a8df354dd4555dc, type: 2}
   machines:
+  - {fileID: 11400000, guid: df1dbefa263c43e4190d67228e940652, type: 2}
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
   - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
@@ -127,6 +128,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6abe5dfb79cf82340bf0e912a5081bbc, type: 2}
   - {fileID: 11400000, guid: 9ddc95e9a2516c44099c2b41c4fc8ffa, type: 2}
   - {fileID: 11400000, guid: bd5e43aa588fc974bb140b2b8f4bfd4d, type: 2}
+  - {fileID: 11400000, guid: d9800104ba703284684300cea21cce7d, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}

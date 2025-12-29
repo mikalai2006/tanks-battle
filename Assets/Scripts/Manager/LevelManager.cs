@@ -5,6 +5,7 @@ using Unity.Cinemachine;
 using Cysharp.Threading.Tasks;
 using Loader;
 using UIToolkitLibrary;
+using Unity.VisualScripting;
 
 public class LevelManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class LevelManager : MonoBehaviour
     public LoaderBarProvider LoaderBarProvider { get; private set; }
     private GameManager _gameManager => GameManager.Instance;
     private GameSetting _gameSetting => GameManager.Instance.Settings;
-    [SerializeField] public Tile3DGenerator tile3DGenerator;
+    // [SerializeField] public Tile3DGenerator tile3DGenerator;
     [SerializeField] public WFCGenerator wFCGenerator;
     [SerializeField] public MapManager mapManager;
     [SerializeField] public Light globalLight;
@@ -196,6 +197,14 @@ public class LevelManager : MonoBehaviour
                     BaseMachine obj = gObject.GetComponent<BaseMachine>();
                     if (obj != null)
                     {
+
+                    var r = gObject.AddComponent<Rigidbody>();
+                    // r.isKinematic = config.isKinematic;
+                    r.mass = 1000;
+                    r.freezeRotation = true;
+                    r.interpolation = RigidbodyInterpolation.Interpolate;
+                    r.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                    r.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
                     IndicatorMachine indicatorObject = Instantiate(
                         configMachine.indicatorPrefab,

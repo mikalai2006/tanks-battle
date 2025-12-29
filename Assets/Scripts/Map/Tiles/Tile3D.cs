@@ -112,6 +112,7 @@ public class Tile3D : MonoBehaviour
             ColorsForward = voxelMeshRender.Config.sOVoxelData.ColorsForward.ToArray();
             ColorsLeft = voxelMeshRender.Config.sOVoxelData.ColorsLeft.ToArray();
             ColorsBack = voxelMeshRender.Config.sOVoxelData.ColorsBack.ToArray();
+            // Debug.Log($"{name} ColorTop: {voxelMeshRender.Config.sOVoxelData.ColorsTop.Length}");
             ColorsTop = voxelMeshRender.Config.sOVoxelData.ColorsTop != null ? voxelMeshRender.Config.sOVoxelData.ColorsTop.ToArray() : new Voxel[TileSideVoxels * TileSideVoxels];
             ColorsBottom = voxelMeshRender.Config.sOVoxelData.ColorsBottom != null ? voxelMeshRender.Config.sOVoxelData.ColorsBottom.ToArray() : new Voxel[TileSideVoxels * TileSideVoxels];
         }

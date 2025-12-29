@@ -170,7 +170,7 @@ public abstract class BaseMuzzle : MonoBehaviour
         Data.distanceAttack = Config.distanceAttack;// * (1 / Machine.Wrapper.transform.localScale.x);
         Data.speedBullet = Option.Config.speedBullet;
 
-        if (Tower.Parent == null)
+        if (Tower.Parent == null && _gameManager.LevelConfig != null )
         {
             if (_gameManager.LevelConfig.light < 1)
             {

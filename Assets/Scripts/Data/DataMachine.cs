@@ -105,6 +105,16 @@ public class DataCaterpillar
 }
 
 [Serializable]
+public class DataWheel
+{
+    public int index;
+    public ContainerData containerData;
+    public DataWheel() {
+        containerData = new();
+    }
+}
+
+[Serializable]
 public class DataTower
 {
     public float speedRotateTower;

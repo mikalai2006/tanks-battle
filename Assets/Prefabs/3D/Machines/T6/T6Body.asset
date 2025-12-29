@@ -36,17 +36,25 @@ MonoBehaviour:
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: e43df6a91e914dc409420c06070d175a, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
-    existCollider: 1
-    isGreedy: 1
-    isRigidbody: 0
-    isConvex: 1
     isOneMesh: 1
-    isTile: 0
-    isDestructible: 1
+    isGreedy: 1
     shadowCastingMode: 0
+    isTile: 0
+    existCollider: 1
+    typeCollider: 0
+    isConvex: 1
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
+    isDestructible: 1
     useGlobalScale: 0
     customScale: 0
+    meshConfigModify:
+      colors: []
   colorBody: {r: 0, g: 0, b: 0, a: 0}
+  speed: 100
   references:
     version: 2
     RefIds: []
