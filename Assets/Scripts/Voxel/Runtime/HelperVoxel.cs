@@ -101,11 +101,16 @@ namespace Mikalai2006.Voxel
 
             for (int i = 0; i < list1.Length; i++)
             {
-                if (
+                // if (list1[i].color.b >= 255 && list2[i].color.b >= 255)
+                // {
+                //     Debug.Log($"{list1[i].color.b}-{list2[i].color.b}");
+                // }
+
+                if ((
                     list1[i].color.r != list2[i].color.r
                     || list1[i].color.g != list2[i].color.g
                     || list1[i].color.b != list2[i].color.b
-                    || list1[i].color.a != list2[i].color.a)
+                    || list1[i].color.a != list2[i].color.a) && list1[i].color.b != 255 && list2[i].color.b != 255)
                     return false;
             }
 

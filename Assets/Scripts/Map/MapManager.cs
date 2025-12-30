@@ -154,6 +154,8 @@ public class MapManager : MonoBehaviour
                         GridTileNode node = gridTileHelper.GetNode(row, depth, col);
 
                         node.StateNode = StateNode.Tiled;
+                        node.isTop = depth == _height - 1;
+
                         // map.SetTileFlags(node.position, TileFlags.None);
                         // map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
                         // map.SetTileFlags(node.position, TileFlags.LockAll);

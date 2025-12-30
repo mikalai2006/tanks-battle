@@ -24860,6 +24860,7 @@ MonoBehaviour:
   TileDebugger: {fileID: 1372487759109498908, guid: 9ed7f3d96b042dd4a85dea1001ac7539, type: 3}
   TileDebuggerWrapper: {fileID: 13171124}
   gridComponents: []
+  TilePlaceholderNone: {fileID: 1602150319550486619, guid: 0c23f8ea3c90b5a4da76b396f8427ed6, type: 3}
 --- !u!4 &1821311130
 Transform:
   m_ObjectHideFlags: 0

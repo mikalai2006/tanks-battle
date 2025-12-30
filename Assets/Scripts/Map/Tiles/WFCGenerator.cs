@@ -20,6 +20,7 @@ public class WFCGenerator : MonoBehaviour {
     public Tile3DDebugger TileDebugger;
     public GameObject TileDebuggerWrapper;
     public Cell3D[] gridComponents;
+    public Tile3D TilePlaceholderNone;
     System.Threading.CancellationTokenSource cts;
 
     int iterations = 0;
@@ -27,14 +28,50 @@ public class WFCGenerator : MonoBehaviour {
     void Awake()
     {
         cts = new CancellationTokenSource();
-        TilePrefabs = new List<Tile3D>(_gameManager.LevelConfig.TilePrefabs);
-        TilePrefabsEmpty = new List<Tile3D>(_gameManager.LevelConfig.TilePrefabsEmpty);
-        TilePrefabsInner = new List<Tile3D>(_gameManager.LevelConfig.TilePrefabsInner);
-        TilePrefabsInnerTop = new List<Tile3D>(_gameManager.LevelConfig.TilePrefabsInnerTop);
+        
+        TilePrefabs = new List<Tile3D>();
+        // TilePrefabs.AddRange(_gameManager.LevelConfig.TilePrefabs);
+        TilePrefabsEmpty = new List<Tile3D>();
+        TilePrefabsEmpty.AddRange(_gameManager.LevelConfig.TilePrefabsEmpty);
+        TilePrefabsInner = new List<Tile3D>();
+        // TilePrefabsInner.AddRange(_gameManager.LevelConfig.TilePrefabsInner);
+        TilePrefabsInnerTop = new List<Tile3D>();
+        // TilePrefabsInnerTop.AddRange(_gameManager.LevelConfig.TilePrefabsInnerTop);
+
+        
+        // создаем префабы.
+        foreach (var obj in _gameManager.LevelConfig.TilePrefabs)
+        {
+            var clone = Instantiate(obj, new Vector3(0,100,0), Quaternion.identity, transform);
+            clone.name = $"{obj.UID}";
+            clone.OnStart();
+            TilePrefabs.Add(clone);
+        }
+        
+        // создаем префабы inner.
+        foreach (var obj in _gameManager.LevelConfig.TilePrefabsInner)
+        {
+            var clone = Instantiate(obj, new Vector3(0,100,0), Quaternion.identity, transform);
+            clone.name = $"{obj.UID}";
+            clone.OnStart();
+            TilePrefabsInner.Add(clone);
+        }
+        foreach (var obj in _gameManager.LevelConfig.TilePrefabsInnerTop)
+        {
+            var clone = Instantiate(obj, new Vector3(0,100,0), Quaternion.identity, transform);
+            clone.name = $"{obj.UID}";
+            clone.OnStart();
+            TilePrefabsInnerTop.Add(clone);
+        }
     }
 
     void OnDestroy()
     {
+        TilePrefabs.Clear();
+        TilePrefabsEmpty.Clear();
+        TilePrefabsInner.Clear();
+        TilePrefabsInnerTop.Clear();
+
         cts.Cancel();
         cts.Dispose();
     }
@@ -132,6 +169,32 @@ public class WFCGenerator : MonoBehaviour {
     public void OnCreateVariantsPrefabs()
     {
         OnSetNotify?.Invoke("createVariantsTiles");
+        
+        // // создаем префабы.
+        // foreach (var obj in _gameManager.LevelConfig.TilePrefabs)
+        // {
+        //     var clone = Instantiate(obj, new Vector3(0,100,0), Quaternion.identity, transform);
+        //     clone.name = $"{obj.UID}";
+        //     clone.OnStart();
+        //     TilePrefabs.Add(clone);
+        // }
+        
+        // // создаем префабы inner.
+        // foreach (var obj in _gameManager.LevelConfig.TilePrefabsInner)
+        // {
+        //     var clone = Instantiate(obj, new Vector3(0,100,0), Quaternion.identity, transform);
+        //     clone.name = $"{obj.UID}";
+        //     clone.OnStart();
+        //     TilePrefabsInner.Add(clone);
+        // }
+        // foreach (var obj in _gameManager.LevelConfig.TilePrefabsInnerTop)
+        // {
+        //     var clone = Instantiate(obj, new Vector3(0,100,0), Quaternion.identity, transform);
+        //     clone.name = $"{obj.UID}";
+        //     clone.OnStart();
+        //     TilePrefabsInnerTop.Add(clone);
+        // }
+        
         int countBeforeAdding = _gameManager.LevelConfig.TilePrefabs.Count;
 
         for (int i = 0; i < countBeforeAdding; i++)
@@ -212,13 +275,14 @@ public class WFCGenerator : MonoBehaviour {
 
                 // TilePrefabs.AddRange(_gameManager.LevelConfig.TilePrefabs);
 
-
                 if (_gameManager.LevelConfig.saveTiled.nameMap == _gameManager.LevelConfig.tileSettings.nameMap)
                 {
                     OnSetNotify?.Invoke("loadMap");
                     // если в сохраненных тайлах находится карта с текущим именем,
                     // значит карта уже сгенерирована и осталось только создать игровые объекты.
                     var savedTiles = _gameManager.LevelConfig.saveTiled.gridComponents;
+
+                    var TiledsInners = TilePrefabsInner.Concat(TilePrefabsInnerTop).ToList();
 
                     Stack<Cell3D> stackCellNeedCreate = new Stack<Cell3D>();
                     for (int i = 0; i < savedTiles.Length; i++)
@@ -230,11 +294,12 @@ public class WFCGenerator : MonoBehaviour {
                         Cell3D loadCell = new Cell3D();
                         List<Tile3D> tileForCell = new List<Tile3D>();
 
+
                         switch (cell3DData.stateNode)
                         {
                             case (int)StateNode.TiledInner:
                                 node.StateNode = StateNode.TiledInner;
-                                tileForCell = TilePrefabsInner.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
+                                tileForCell = TiledsInners.FindAll(x => x.UID == cell3DData.uid && x.transform.rotation.eulerAngles.y == cell3DData.RotationY);
                                 break;
                             case (int)StateNode.Tiled:
                                 node.StateNode = StateNode.Tiled;
@@ -286,13 +351,16 @@ public class WFCGenerator : MonoBehaviour {
                     GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(row, depth, col);
                     Cell3D newCell = new Cell3D(); //Instantiate(_gameManager.LevelConfig.prefabPlaceholder, position, Quaternion.identity);
 
+                    newCell.isTop = node.isTop;
+
                     if (node.StateNode.HasFlag(StateNode.Tiled))
                     {
                         newCell.CreateCell(false, TilePrefabs, position, Vector3.zero);
                     }
                     else if (node.StateNode.HasFlag(StateNode.TiledInner))
                     {
-                        if (depth < _gameManager.LevelConfig.gridSize.y - 1)
+                        // if (depth < _gameManager.LevelConfig.gridSize.y - 1)
+                        if (!node.isTop)
                         {
                             newCell.CreateCell(true, TilePrefabsInner, position, Vector3.zero);
                         } else
@@ -301,6 +369,7 @@ public class WFCGenerator : MonoBehaviour {
                         }
 
                         node.isCollapsed = true;
+                        newCell.collapsed = true;
                         // Tile3D selectedTile = GetRandomTile(newCell.tileOptions);
                         // newCell.tileOptions = new Tile3D[] { selectedTile };
                         // var obj = Instantiate(newCell.tileOptions[0], newCell.position, newCell.tileOptions[0].transform.rotation, transform);
@@ -310,6 +379,7 @@ public class WFCGenerator : MonoBehaviour {
                     {
                         newCell.CreateCell(true, TilePrefabsEmpty, position, Vector3.zero);
                         node.isCollapsed = true;
+                        newCell.collapsed = true;
 
                         // Tile3D selectedTile = GetRandomTile(newCell.tileOptions);
                         // newCell.tileOptions = new Tile3D[] { selectedTile };
@@ -343,6 +413,8 @@ public class WFCGenerator : MonoBehaviour {
                 stackCellNeedCreate.Push(gridComponents[i]);
             }
         }
+
+        UpdateGeneration();
 
         await CreateTiles(cancelToken, stackCellNeedCreate);
 
@@ -390,32 +462,38 @@ public class WFCGenerator : MonoBehaviour {
     // IEnumerator CheckEntropy()
     async UniTask CheckEntropy(CancellationTokenSource cancelToken)
     {
+        int maxCountIteration = _gameManager.LevelConfig.gridSize.x * _gameManager.LevelConfig.gridSize.y * _gameManager.LevelConfig.gridSize.z;
+        
         List<Cell3D> tempGrid = new List<Cell3D>(gridComponents);
 
         tempGrid.RemoveAll(c => c.collapsed);
+        var nullOptions = tempGrid.RemoveAll(c => c.tileOptions.Length == 0);
+            Debug.Log($"nullOptions.Length={nullOptions}");
 
         tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
 
+        tempGrid.RemoveAll(a => a.tileOptions.Length != tempGrid[0].tileOptions.Length);
+
         if (tempGrid.Count > 0)
         {
+            // int arrLength = tempGrid[0].tileOptions.Length;
+            // int stopIndex = default;
 
+            // for (int i = 1; i < tempGrid.Count; i++)
+            // {
+            //     if (tempGrid[i].tileOptions.Length > arrLength)
 
-            int arrLength = tempGrid[0].tileOptions.Length;
-            int stopIndex = default;
+            //     {
+            //         stopIndex = i;
+            //         break;
+            //     }
+            // }
 
-            for (int i = 1; i < tempGrid.Count; i++)
-            {
-                if (tempGrid[i].tileOptions.Length > arrLength)
-                {
-                    stopIndex = i;
-                    break;
-                }
-            }
-
-            if (stopIndex > 0)
-            {
-                tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
-            }
+            // if (stopIndex > 0)
+            // {
+            //     tempGrid.RemoveRange(stopIndex, tempGrid.Count - stopIndex);
+            // }
+            Debug.Log($"tempGrid[0].tileOptions.Length={tempGrid[0].tileOptions.Length}/{tempGrid[0].collapsed}");
         
             // yield return new WaitForSeconds(0.0001f);
             await UniTask.Delay(System.TimeSpan.FromSeconds(0.01f));
@@ -426,7 +504,7 @@ public class WFCGenerator : MonoBehaviour {
 
             iterations++;
             OnAddProgress(0.0001f);
-            if(iterations < _gameManager.LevelConfig.gridSize.x * _gameManager.LevelConfig.gridSize.y * _gameManager.LevelConfig.gridSize.z)
+            if(iterations < maxCountIteration)
             {
                 // StartCoroutine(CheckEntropy());
                 await CheckEntropy(cancelToken);
@@ -449,14 +527,26 @@ public class WFCGenerator : MonoBehaviour {
         {
             int randIndex = UnityEngine.Random.Range(0, tempGrid.Count);
 
-            Cell3D cellToCollapse = tempGrid[randIndex];
+            Cell3D cellToCollapse = tempGrid[0];
 
             cellToCollapse.collapsed = true;
-
+            
             // Debug.Log($"Collapse.tileOptions.length= {cellToCollapse.tileOptions.Length} : tempGrid.Count= {tempGrid.Count}");
+            if (cellToCollapse.position.y > 0)
+            {
+                Tile3D[] availableTiles = cellToCollapse.tileOptions.Where(t => t.isTop == cellToCollapse.isTop).ToArray();
+                cellToCollapse.tileOptions = availableTiles;
+            }
             InstantiateTile(cellToCollapse);
 
             UpdateGeneration();
+        } else
+        {
+            // Tile3D foundTile = TilePlaceholderNone;
+            //     var obj = Instantiate(foundTile, cellToCollapse.position, foundTile.transform.rotation, transform);
+            //         obj.name = $"Placeholder_{cellToCollapse.position.x}x{cellToCollapse.position.y}x{cellToCollapse.position.z}__{selectedTile.name}__{cellToCollapse.rotation.y}";
+                
+                Debug.LogWarning($"Пропуск подбора!");
         }
     }
 
@@ -464,6 +554,13 @@ public class WFCGenerator : MonoBehaviour {
     {
         if (cellToCollapse.tileOptions.Length > 0)
         {
+            // Tile3D[] availableTiles = cellToCollapse.tileOptions.Where(t => t.isTop == cellToCollapse.isTop).ToArray();
+            
+            // if (cellToCollapse.isTop)
+            // {
+            //     availableTiles = cellToCollapse.tileOptions.Where(t => t.isTop).ToArray();
+            // }
+
             Tile3D selectedTile = GetRandomTile(cellToCollapse.tileOptions);
             
             if (selectedTile)
@@ -619,7 +716,7 @@ public class WFCGenerator : MonoBehaviour {
 
     private bool IsTilePossible(Tile3D tile, Vector3Int position)
     {
-        var dimensions = _gameManager.LevelConfig.gridSize.z;
+        // var dimensions = _gameManager.LevelConfig.gridSize.z;
         int x = position.x;
         int y = position.y;
         int z = position.z;
@@ -628,24 +725,24 @@ public class WFCGenerator : MonoBehaviour {
         // Debug.Log($"dismension={dimensions}, position={position}");
         
         // index = x - 1 + z * dimensions;
-        GridTileNode nodeRight = levelManager.mapManager.gridTileHelper.GetNode(x - 1, y, z);
-        if (nodeRight != default && nodeRight.isCollapsed)
+        GridTileNode nodeLeft = levelManager.mapManager.gridTileHelper.GetNode(x - 1, y, z);
+        if (nodeLeft != default && nodeLeft.isCollapsed)
         {
             index = Helpers.From3DTo1D(x - 1, y, z, _gameManager.LevelConfig.gridSize);
             // Debug.Log($"{x+z*dimensions}>>>>>>{DirectionSideTile.Right}>>>>>>>{index}");
             bool isAllRightImpossible = gridComponents[index].tileOptions // possibleTiles[position.x - 1, position.z]
-                .All(rightTile => !CanAppendTile(tile, rightTile, DirectionSideTile.Right));
+                .All(t => !CanAppendTile(tile, t, DirectionSideTile.Left));
             if (isAllRightImpossible) return false;
         }
         
         // index = x + 1 + z * dimensions;
-        GridTileNode nodeLeft = levelManager.mapManager.gridTileHelper.GetNode(x + 1, y, z);
-        if (nodeLeft != default && nodeLeft.isCollapsed)
+        GridTileNode nodeRight = levelManager.mapManager.gridTileHelper.GetNode(x + 1, y, z);
+        if (nodeRight != default && nodeRight.isCollapsed)
         {
             index = Helpers.From3DTo1D(x + 1, y, z, _gameManager.LevelConfig.gridSize);
             // Debug.Log($"{x+z*dimensions}>>>>>>{DirectionSideTile.Left}>>>>>>>{index}");
             bool isAllLeftImpossible = gridComponents[index].tileOptions // possibleTiles[position.x + 1, position.z]
-                .All(leftTile => !CanAppendTile(tile, leftTile, DirectionSideTile.Left));
+                .All(t => !CanAppendTile(tile, t, DirectionSideTile.Right));
             if (isAllLeftImpossible) return false;
         }
 
@@ -656,7 +753,7 @@ public class WFCGenerator : MonoBehaviour {
             index = Helpers.From3DTo1D(x, y, z - 1, _gameManager.LevelConfig.gridSize);
             // Debug.Log($"{x+z*dimensions}>>>>>>{DirectionSideTile.Forward}>>>>>>>{index}");
             bool isAllForwardImpossible = gridComponents[index].tileOptions // possibleTiles[position.x, position.z - 1]
-                .All(fwdTile => !CanAppendTile(tile, fwdTile, DirectionSideTile.Forward));
+                .All(t => !CanAppendTile(tile, t, DirectionSideTile.Forward));
             if (isAllForwardImpossible) return false;
         }
         
@@ -667,28 +764,28 @@ public class WFCGenerator : MonoBehaviour {
             index = Helpers.From3DTo1D(x, y, z + 1, _gameManager.LevelConfig.gridSize);
             // Debug.Log($"{x+z*dimensions}>>>>>>{DirectionSideTile.Back}>>>>>>>{index}");
             bool isAllBackImpossible = gridComponents[index].tileOptions // possibleTiles[position.x, position.z + 1]
-                .All(backTile => !CanAppendTile(tile, backTile, DirectionSideTile.Back));
+                .All(t => !CanAppendTile(tile, t, DirectionSideTile.Back));
             if (isAllBackImpossible) return false;
         }
 
         // check top node.
-        GridTileNode nodeTop = levelManager.mapManager.gridTileHelper.GetNode(x, y - 1, z);
-        if (nodeTop != default && nodeTop.isCollapsed)
+        GridTileNode nodeBottom = levelManager.mapManager.gridTileHelper.GetNode(x, y - 1, z);
+        if (nodeBottom != default && nodeBottom.isCollapsed)
         {
             index = Helpers.From3DTo1D(x, y - 1, z, _gameManager.LevelConfig.gridSize);
             bool isAllBackImpossible = gridComponents[index].tileOptions // possibleTiles[position.x, position.z + 1]
-                .All(topTile => !CanAppendTile(tile, topTile, DirectionSideTile.Top));
+                .All(t => !CanAppendTile(tile, t, DirectionSideTile.Bottom));
             if (isAllBackImpossible) return false;
         }
 
         
         // check bottom node.
-        GridTileNode nodeBottom = levelManager.mapManager.gridTileHelper.GetNode(x, y + 1, z);
-        if (nodeBottom != default && nodeBottom.isCollapsed)
+        GridTileNode nodeTop = levelManager.mapManager.gridTileHelper.GetNode(x, y + 1, z);
+        if (nodeTop != default && nodeTop.isCollapsed)
         {
             index = Helpers.From3DTo1D(x, y + 1, z, _gameManager.LevelConfig.gridSize);
             bool isAllBackImpossible = gridComponents[index].tileOptions // possibleTiles[position.x, position.z + 1]
-                .All(bottomTile => !CanAppendTile(tile, bottomTile, DirectionSideTile.Bottom));
+                .All(t => !CanAppendTile(tile, t, DirectionSideTile.Top));
             if (isAllBackImpossible) return false;
         }
 
@@ -697,14 +794,14 @@ public class WFCGenerator : MonoBehaviour {
 
     private bool CanAppendTile(Tile3D existingTile, Tile3D tileToAppend, DirectionSideTile direction)
     {
-        if (existingTile == null) return true;
+        // if (existingTile == null) return true;
 
-        if (direction == DirectionSideTile.Right)
+        if (direction == DirectionSideTile.Left)
         {
             return HelperVoxel.AreColorEqual(existingTile.ColorsLeft, tileToAppend.ColorsRight);
             //Enumerable.SequenceEqual(existingTile.ColorsRight, tileToAppend.ColorsLeft);
         }
-        else if (direction == DirectionSideTile.Left)
+        else if (direction == DirectionSideTile.Right)
         {
             return HelperVoxel.AreColorEqual(existingTile.ColorsRight, tileToAppend.ColorsLeft);
             // Enumerable.SequenceEqual(existingTile.ColorsLeft, tileToAppend.ColorsRight);
@@ -719,15 +816,13 @@ public class WFCGenerator : MonoBehaviour {
             return HelperVoxel.AreColorEqual(existingTile.ColorsBack, tileToAppend.ColorsForward);
             // Enumerable.SequenceEqual(existingTile.ColorsBack, tileToAppend.ColorsForward);
         }
-        else if (direction == DirectionSideTile.Bottom)
-        {
-            return HelperVoxel.AreColorEqual(existingTile.ColorsTop, tileToAppend.ColorsBottom);
-            // Enumerable.SequenceEqual(existingTile.ColorsBack, tileToAppend.ColorsForward);
-        }
         else if (direction == DirectionSideTile.Top)
         {
+            return HelperVoxel.AreColorEqual(existingTile.ColorsTop, tileToAppend.ColorsBottom);
+        }
+        else if (direction == DirectionSideTile.Bottom)
+        {
             return HelperVoxel.AreColorEqual(existingTile.ColorsBottom, tileToAppend.ColorsTop);
-            // Enumerable.SequenceEqual(existingTile.ColorsBack, tileToAppend.ColorsForward);
         }
         else
         {
@@ -746,6 +841,13 @@ public class WFCGenerator : MonoBehaviour {
             if (gridComponents[i].tileOptions.Length == 0)
             {
                 Debug.LogWarning($"Не удалось найти подходящий префаб для позиции: {gridComponents[i].position}! Индекс в массиве -  {i}");
+                
+            }
+
+            if (!gridComponents[i].collapsed)
+            {
+                 Tile3D foundTile = TilePlaceholderNone;
+                Instantiate(foundTile, gridComponents[i].position, foundTile.transform.rotation, transform);
             }
 
             GridTileNode node = levelManager.mapManager.gridTileHelper.GetNode(gridComponents[i].position.x, gridComponents[i].position.y, gridComponents[i].position.z);   

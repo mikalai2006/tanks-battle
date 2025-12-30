@@ -8,6 +8,7 @@ public class Cell3D // : MonoBehaviour
     public Tile3D[] tileOptions;
     public Vector3Int position;
     public Vector3 rotation;
+    public bool isTop;
 
     public void CreateCell(bool collapseState, List<Tile3D> tiles, Vector3Int _position, Vector3 _rotation)
     {
@@ -31,4 +32,5 @@ public struct Cell3DData
     public Vector3Int position;
     public float RotationY;
     public int stateNode;
+    public int top; // 0 - false, 1 - true
 }

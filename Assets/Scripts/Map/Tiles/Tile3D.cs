@@ -39,6 +39,7 @@ public class Tile3D : MonoBehaviour
 
     public Tile3D[] tileOptions;
     public bool isCollapsed;
+    public bool isTop;
     public void CreateNode(bool collapseState, List<Tile3D> tiles)
     {
         isCollapsed = collapseState;
@@ -100,6 +101,13 @@ public class Tile3D : MonoBehaviour
         
         if (isEmpty)
         {
+            // ColorsRight = new Voxel[0];
+            // ColorsForward = new Voxel[0];
+            // ColorsLeft = new Voxel[0];
+            // ColorsBack = new Voxel[0];
+            // ColorsTop = new Voxel[0];
+            // ColorsBottom = new Voxel[0];
+
             ColorsRight = Enumerable.Repeat(new Voxel() { color = Color.clear }, TileSideVoxels * TileSideVoxels).ToArray();
             ColorsForward = Enumerable.Repeat(new Voxel() { color = Color.clear }, TileSideVoxels * TileSideVoxels).ToArray();
             ColorsLeft = Enumerable.Repeat(new Voxel() { color = Color.clear }, TileSideVoxels * TileSideVoxels).ToArray();

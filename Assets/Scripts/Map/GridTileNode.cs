@@ -24,6 +24,7 @@ public class GridTileNode : IHeapItem<GridTileNode>
     [NonSerialized] private readonly GridTileHelper _gridHelper;
     [SerializeField] public StateNode StateNode = StateNode.Empty;
     public int X;
+    public bool isTop;
     public int Y;
     public int Z;
     public TypeGround TypeGround = TypeGround.None;

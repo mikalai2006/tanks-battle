@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    sOVoxelData: {fileID: 11400000, guid: dc864684a231dd7459612edd8daf45fd, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: ea68e61961898f24fb8969dda9bd42bf, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -136,10 +136,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: t3-1l
   TileSideVoxels: 32
-  Weight: 2
+  Weight: 25
   Rotation: 2
   voxelMeshRender: {fileID: 5619480829770901551}
   isEmpty: 0
+  isNotConnectWithEmpty: 1
   ColorsRight:
   - ID: 0
     color:
@@ -43155,7 +43156,7 @@ MonoBehaviour:
     type: 0
     IndexSubMesh: 0
   meshConfig:
-    sOVoxelData: {fileID: 11400000, guid: dc864684a231dd7459612edd8daf45fd, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: ea68e61961898f24fb8969dda9bd42bf, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1

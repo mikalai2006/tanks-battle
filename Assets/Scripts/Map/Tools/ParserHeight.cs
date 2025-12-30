@@ -42,7 +42,7 @@ public class ParserHeight : MonoBehaviour
                 // var height = Mathf.RoundToInt(color.r * _settings.heightSize);
                 var height = Mathf.RoundToInt(color.r * _settings.heightSize);
                 heightMap[position] = Mathf.RoundToInt(height);
-                Debug.Log($"pos: {position}, height: {heightMap[position]}[{color.r}]");
+                // Debug.Log($"pos: {position}, height: {heightMap[position]}[{color.r}]");
             }
         }
 

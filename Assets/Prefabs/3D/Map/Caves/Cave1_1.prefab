@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    sOVoxelData: {fileID: 11400000, guid: 543ee916aba9ba34bb3ed27ead29e450, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: e97871827a1dbdb4589ee7a6eceb27c2, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UID: t1_1
   TileSideVoxels: 32
-  Weight: 2
+  Weight: 24
   Rotation: 2
   voxelMeshRender: {fileID: 408697206462745271}
   isEmpty: 0
@@ -6863,112 +6863,112 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 15}
     type: 0
     IndexSubMesh: 0
@@ -7087,112 +7087,112 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
@@ -14032,448 +14032,448 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 1, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 2, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 3, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 4, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 5, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 6, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 7, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 8, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 9, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 10, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 11, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 12, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 13, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 14, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 15, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 16, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 17, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 18, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 19, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 20, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 21, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 22, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 23, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 24, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 25, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 26, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 27, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 28, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 29, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 30, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 31, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
@@ -21201,112 +21201,112 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 4283151504
     position: {x: 0, y: 30, z: 15}
     type: 0
     IndexSubMesh: 0
@@ -21425,112 +21425,112 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
@@ -28819,2121 +28819,2121 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 0}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 1}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 2}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 3}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 4}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 5}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 6}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 7}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 15, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 16, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 17, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 18, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 19, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 20, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 8}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
@@ -30982,182 +30982,182 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 9}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 10, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 11, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 12, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 13, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 14, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
@@ -31206,147 +31206,147 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 10}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
@@ -31430,147 +31430,147 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 11}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
@@ -31654,147 +31654,147 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 21, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 22, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 23, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 24, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 25, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 26, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 12}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
@@ -31920,105 +31920,105 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 13}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
@@ -32144,105 +32144,105 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 14}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 0, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 1, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 2, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 3, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 4, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 5, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 6, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 7, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 8, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 9, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
@@ -32368,35 +32368,35 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 28, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 29, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 30, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 31, y: 31, z: 15}
     type: 0
     IndexSubMesh: 0
@@ -39579,210 +39579,210 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 1, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 2, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 3, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 4, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 5, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 6, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 7, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 8, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 9, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 10, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 11, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 12, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 13, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 14, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 15, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 16, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 17, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 18, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 19, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 20, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 21, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 22, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 23, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 24, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 25, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 26, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 27, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 28, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 29, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 30, y: 0, z: 16}
     type: 0
     IndexSubMesh: 0
@@ -39803,210 +39803,210 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 1, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 2, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 3, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 4, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 5, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 6, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 7, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 8, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 9, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 10, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 11, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 12, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 13, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 14, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 15, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 16, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 17, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 18, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 19, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 20, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 21, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 22, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 23, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 24, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 25, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 26, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 27, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 28, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 29, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 30, y: 0, z: 17}
     type: 0
     IndexSubMesh: 0
@@ -40027,70 +40027,70 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 1, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 2, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 3, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 4, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 5, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 6, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 7, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 8, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 9, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 10, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
@@ -40125,112 +40125,112 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 15, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 16, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 17, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 18, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 19, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 20, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 21, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 22, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 23, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 24, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 25, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 26, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 27, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 28, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 29, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 30, y: 0, z: 18}
     type: 0
     IndexSubMesh: 0
@@ -40251,70 +40251,70 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 1, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 2, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 3, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 4, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 5, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 6, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 7, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 8, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 9, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 10, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
@@ -40349,14 +40349,14 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 15, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 16, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
@@ -40384,56 +40384,56 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 20, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 21, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 22, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 23, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 24, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 25, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 26, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 27, y: 0, z: 19}
     type: 0
     IndexSubMesh: 0
@@ -40608,56 +40608,56 @@ MonoBehaviour:
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 20, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 21, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 22, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 23, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 24, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 25, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4281230230
+      rgba: 0
     position: {x: 26, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
   - ID: 0
     color:
       serializedVersion: 2
-      rgba: 4283151504
+      rgba: 0
     position: {x: 27, y: 0, z: 20}
     type: 0
     IndexSubMesh: 0
@@ -43154,7 +43154,7 @@ MonoBehaviour:
     type: 0
     IndexSubMesh: 0
   meshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 9f7e075eaa20e23449b52c8b8296a71a, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: e97871827a1dbdb4589ee7a6eceb27c2, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -43175,3 +43175,4 @@ MonoBehaviour:
       colors: []
   tileOptions: []
   isCollapsed: 0
+  isTop: 1
