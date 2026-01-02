@@ -27,6 +27,11 @@ public class WFCGenerator : MonoBehaviour {
 
     void Awake()
     {
+        if (_gameManager.Settings.DebugSettings.disableCreateTiles)
+        {
+            return;
+        }
+
         cts = new CancellationTokenSource();
         
         TilePrefabs = new List<Tile3D>();
@@ -72,8 +77,11 @@ public class WFCGenerator : MonoBehaviour {
         TilePrefabsInner.Clear();
         TilePrefabsInnerTop.Clear();
 
-        cts.Cancel();
-        cts.Dispose();
+        if (cts != null)
+        {
+            cts.Cancel();
+            cts.Dispose();
+        }
     }
 
     public void OnUpdateColors()
@@ -214,12 +222,12 @@ public class WFCGenerator : MonoBehaviour {
             // }
             // tile.OnRefreshData();
 
-            switch (tile.Rotation)
+            switch (tile.meshConfig.sOVoxelData.Rotation)
             {
-                case Tile3D.RotationType.OnlyRotation:
+                case RotationType.OnlyRotation:
                     break;
 
-                case Tile3D.RotationType.TwoRotations:
+                case RotationType.TwoRotations:
                     // tile.Weight /= 2;
                     // if (tile.Weight <= 0) tile.Weight = 1;
 
@@ -231,7 +239,7 @@ public class WFCGenerator : MonoBehaviour {
                     TilePrefabs.Add(clone);
                     break;
 
-                case Tile3D.RotationType.FourRotations:
+                case RotationType.FourRotations:
                     // tile.Weight /= 4;
                     // if (tile.Weight <= 0) tile.Weight = 1;
 
@@ -468,7 +476,9 @@ public class WFCGenerator : MonoBehaviour {
 
         tempGrid.RemoveAll(c => c.collapsed);
         var nullOptions = tempGrid.RemoveAll(c => c.tileOptions.Length == 0);
-            Debug.Log($"nullOptions.Length={nullOptions}");
+        
+        // TODO
+        Debug.Log($"nullOptions.Length={nullOptions}");
 
         tempGrid.Sort((a, b) => { return a.tileOptions.Length - b.tileOptions.Length; });
 
@@ -532,11 +542,11 @@ public class WFCGenerator : MonoBehaviour {
             cellToCollapse.collapsed = true;
             
             // Debug.Log($"Collapse.tileOptions.length= {cellToCollapse.tileOptions.Length} : tempGrid.Count= {tempGrid.Count}");
-            if (cellToCollapse.position.y > 0)
-            {
+            // if (cellToCollapse.position.y > 0)
+            // {
+            // }
                 Tile3D[] availableTiles = cellToCollapse.tileOptions.Where(t => t.isTop == cellToCollapse.isTop).ToArray();
                 cellToCollapse.tileOptions = availableTiles;
-            }
             InstantiateTile(cellToCollapse);
 
             UpdateGeneration();

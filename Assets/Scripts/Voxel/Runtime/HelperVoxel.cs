@@ -117,6 +117,29 @@ namespace Mikalai2006.Voxel
             return true;
         }
         
+        /// <summary>
+        /// Есть ли цвета, отличные от прозрачного и заданного
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="list2"></param>
+        /// <returns></returns>
+        public static bool AreExistColors(Voxel[] list)
+        {
+            if (list.Length == 0)
+                return false;
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                if ((
+                    list[i].color.r > 0
+                    || list[i].color.g > 0
+                    || list[i].color.a > 0) && list[i].color.b != 255 )
+                    return true;
+            }
+
+            return false;
+        }
+
         // Метод для вычисления хеш-кода на основе содержимого массива
         public static int GetArrayHashCode<T>(T[] array)
         {

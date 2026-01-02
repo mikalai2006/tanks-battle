@@ -37,15 +37,17 @@ public class Tile3DEditor : Editor
 
         target.voxelMeshRender = voxelMeshRender;
 
-        if (GUILayout.Button("Refresh data"))
-        {
-            target.OnRefreshData();
-        }
+        target.TileSideVoxels = target.voxelMeshRender.Config.sOVoxelData.Bounds.x;
 
-        if (!Application.isPlaying)
-        {
-            target.OnStart();
-        }
+        // if (GUILayout.Button("Refresh data"))
+        // {
+        //     target.OnRefreshData();
+        // }
+
+        // if (!Application.isPlaying)
+        // {
+        //     target.OnStart();
+        // }
 
         if (target.ColorsForward == null || target.ColorsForward.Length == 0)
         {
@@ -108,7 +110,7 @@ public class Tile3DEditor : Editor
             }
             GUILayout.EndHorizontal(); // End the horizontal group for the row
         }
-        GUILayout.Label($"Forward ({target.ColorsForward.Length})", styleLabel);
+        GUILayout.Label($"Forward ({target.ColorsForward.Length} - negZ={target.tileSockets.negZ})", styleLabel);
         GUILayout.Space(allSpace);
 
         // Section back
@@ -142,7 +144,7 @@ public class Tile3DEditor : Editor
             }
             GUILayout.EndHorizontal(); // End the horizontal group for the row
         }
-        GUILayout.Label($"Back ({target.ColorsBack.Length})", styleLabel);
+        GUILayout.Label($"Back ({target.ColorsBack.Length} - posZ={target.tileSockets.posZ})", styleLabel);
         GUILayout.Space(defaultSpace);
 
         // Section left
@@ -178,7 +180,7 @@ public class Tile3DEditor : Editor
             }
             GUILayout.EndHorizontal(); // End the horizontal group for the row
         }
-        GUILayout.Label($"Left ({target.ColorsLeft.Length})", styleLabel);
+        GUILayout.Label($"Left ({target.ColorsLeft.Length} - negX={target.tileSockets.negX})", styleLabel);
         GUILayout.Space(defaultSpace);
 
         // Section right
@@ -214,7 +216,7 @@ public class Tile3DEditor : Editor
             }
             GUILayout.EndHorizontal(); // End the horizontal group for the row
         }
-        GUILayout.Label($"Right ({target.ColorsRight.Length})", styleLabel);
+        GUILayout.Label($"Right ({target.ColorsRight.Length} - posX={target.tileSockets.posX})", styleLabel);
         GUILayout.Space(defaultSpace);
 
         // Section top
@@ -251,7 +253,7 @@ public class Tile3DEditor : Editor
             GUILayout.EndHorizontal(); // End the horizontal group for the row
         }
         var countTop = target.ColorsTop != null ? target.ColorsTop.Length : 0;
-        GUILayout.Label($"Top ({countTop})", styleLabel);
+        GUILayout.Label($"Top ({countTop} - posY={target.tileSockets.posY})", styleLabel);
         GUILayout.Space(defaultSpace);
 
         
@@ -289,7 +291,7 @@ public class Tile3DEditor : Editor
             GUILayout.EndHorizontal(); // End the horizontal group for the row
         }
         var countBottom = target.ColorsBottom != null ? target.ColorsBottom.Length : 0;
-        GUILayout.Label($"Bottom ({countBottom})", styleLabel);
+        GUILayout.Label($"Bottom ({countBottom} - negY={target.tileSockets.negY})", styleLabel);
         GUILayout.Space(defaultSpace);
         
         Handles.color = Color.yellow;

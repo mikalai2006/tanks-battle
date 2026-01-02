@@ -20,20 +20,18 @@ public class Tile3D : MonoBehaviour
 
     public bool isEmpty;
 
-    public enum RotationType
-    {
-        OnlyRotation,
-        TwoRotations,
-        FourRotations
-    }
 
-    [HideInInspector]public Voxel[] ColorsRight;
+    [HideInInspector] public Voxel[] ColorsRight;
     [HideInInspector] public Voxel[] ColorsForward;
     [HideInInspector] public Voxel[] ColorsLeft;
     [HideInInspector] public Voxel[] ColorsBack;
     [HideInInspector] public Voxel[] ColorsTop;
     [HideInInspector] public Voxel[] ColorsBottom;
-    
+
+    [Tooltip("Розетки")]
+    public TileSockets tileSockets;
+    [Tooltip("Возможные соседи")]
+    public TileNeghboursList TileNeghboursList;
     
     [HideInInspector] public MeshConfig meshConfig;
 

@@ -27,7 +27,7 @@ MonoBehaviour:
   countMaxCreateVoxelsByStepMobile: 200
   DebugSettings:
     mode: 1
-    disableCreateTiles: 0
+    disableCreateTiles: 1
     logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}

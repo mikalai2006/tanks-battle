@@ -45,16 +45,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    sOVoxelData: {fileID: 11400000, guid: 99ea40d604293d646b6c8872553f3010, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 3033255c4cb358b4f86998a94fea5a33, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
-    existCollider: 1
-    isGreedy: 1
-    isRigidbody: 0
-    isConvex: 0
     isOneMesh: 1
-    isTile: 1
-    isDestructible: 0
+    isGreedy: 1
     shadowCastingMode: 0
+    isTile: 1
+    existCollider: 1
+    typeCollider: 0
+    isConvex: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
+    isDestructible: 0
     useGlobalScale: 1
     customScale: 0
+    meshConfigModify:
+      colors: []
+  ConfigModify:
+    colors: []
   Wrapper: {fileID: 839906782482287267}

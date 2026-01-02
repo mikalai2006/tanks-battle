@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    sOVoxelData: {fileID: 11400000, guid: e020152f41a97d549911290702fa6d28, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 82749f48a7266fe4e9fca1e4897b7342, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UID: t1_2
-  TileSideVoxels: 32
+  TileSideVoxels: 0
   Weight: 24
   Rotation: 2
   voxelMeshRender: {fileID: 408697206462745271}
@@ -43153,6 +43153,23 @@ MonoBehaviour:
     position: {x: 31, y: 0, z: 31}
     type: 0
     IndexSubMesh: 0
+  tileSockets:
+    name: 
+    rotation: 0
+    posX: 
+    negX: 
+    posY: 
+    negY: 
+    posZ: 
+    negZ: 
+    weight: 0
+  TileNeghboursList:
+    pX: []
+    nX: []
+    pY: []
+    nY: []
+    pZ: []
+    nZ: []
   meshConfig:
     sOVoxelData: {fileID: 11400000, guid: e020152f41a97d549911290702fa6d28, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}

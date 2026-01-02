@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Mikalai2006.Voxel;
 using UnityEngine;
@@ -18,25 +17,68 @@ public class SOVoxelData : ScriptableObject
     public Quaternion GlobalRotation;
     public Vector3Int LocalSize;
     public Vector3 LocalPosition;
+    
     public Quaternion LocalRotation;
 
     [Tooltip("Меш для начальной загрузки (позволяет использовать все возможности GPU Instancing до начала разрушения)")]
     public Mesh startMesh;
 
+    
+    public RotationType Rotation;
+
     [Space(15)]
     [Header("Tiledata")]
-    [HideInInspector]public Voxel[] ColorsRight;
+    [HideInInspector] public Voxel[] ColorsRight;
     [HideInInspector] public Voxel[] ColorsForward;
     [HideInInspector] public Voxel[] ColorsLeft;
     [HideInInspector] public Voxel[] ColorsBack;
     [HideInInspector] public Voxel[] ColorsTop;
     [HideInInspector] public Voxel[] ColorsBottom;
+    
+    [Tooltip("Розетки")]
+    public TileSockets tileSockets;
+    [Tooltip("Возможные соседи")]
+    public TileNeghboursList TileNeghboursList;
 }
 
 
-[Serializable]
+[System.Serializable]
 public struct SubmeshesData
 {
     public Color color;
     public List<Vector3Int> voxels;
+}
+
+
+[System.Serializable]
+public struct TileSockets
+{
+    public string name;
+    public int rotation;
+    public string posX;
+    public string negX;
+    public string posY;
+    public string negY;
+    public string posZ;
+    public string negZ;
+    public int weight;
+}
+
+[System.Serializable]
+public struct TileNeghboursList
+{
+    public string[] pX;
+    public string[] nX;
+    public string[] pY;
+    public string[] nY;
+    public string[] pZ;
+    public string[] nZ;
+}
+
+[System.Serializable]
+public enum RotationType
+{
+    OnlyRotation,
+    TwoRotations,
+    FourRotations
 }

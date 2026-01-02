@@ -221,6 +221,7 @@ MonoBehaviour:
   files: []
   isGlobalPosition: 1
   isCreateMesh: 0
+  isTiles: 1
   meshRenderer: {fileID: 339501022}
   meshFilter: {fileID: 339501023}
 --- !u!23 &339501022
@@ -278,7 +279,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339501019}
-  m_Mesh: {fileID: 4300000, guid: 0ed1031762f74e64b8abe1a360bbe7ae, type: 2}
+  m_Mesh: {fileID: 0}
 --- !u!1 &467708587
 GameObject:
   m_ObjectHideFlags: 0

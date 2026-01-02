@@ -107,8 +107,11 @@ public class LevelManager : MonoBehaviour
         // mapManager.OnCreateTestObjects();
         // MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
         // tile3DGenerator.CreateMap();
-        wFCGenerator.OnUpdateColors();
-        wFCGenerator.OnCreateVariantsPrefabs();
+        if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
+        {
+            wFCGenerator.OnUpdateColors();
+            wFCGenerator.OnCreateVariantsPrefabs();
+        }
         await wFCGenerator.OnGenerateTiles(cancelToken);
 
 

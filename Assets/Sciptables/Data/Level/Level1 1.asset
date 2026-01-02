@@ -17,7 +17,7 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: 8eea394bdfb65d348bcad31f74145795, type: 3}
     nameMap: area0
   saveTiled:
-    nameMap: sdfsdf
+    nameMap: area0
     gridComponents:
     - uid: t4-1l
       position: {x: 0, y: 0, z: 0}
@@ -1654,7 +1654,7 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 6, y: 0, z: 27}
       RotationY: 270
       stateNode: 8
@@ -1664,57 +1664,57 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 6, y: 0, z: 29}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 6, y: 0, z: 30}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 6, y: 0, z: 31}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 6, y: 0, z: 32}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 6, y: 0, z: 33}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 6, y: 0, z: 34}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 6, y: 0, z: 35}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 6, y: 0, z: 36}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 6, y: 0, z: 37}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 6, y: 0, z: 38}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 6, y: 0, z: 39}
       RotationY: 270
       stateNode: 8
@@ -1884,7 +1884,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 7, y: 0, z: 23}
       RotationY: 180
       stateNode: 8
@@ -1969,7 +1969,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 7, y: 0, z: 40}
       RotationY: 0
       stateNode: 8
@@ -2134,7 +2134,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 8, y: 0, z: 23}
       RotationY: 180
       stateNode: 8
@@ -2634,7 +2634,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 10, y: 0, z: 23}
       RotationY: 180
       stateNode: 8
@@ -2719,7 +2719,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 10, y: 0, z: 40}
       RotationY: 0
       stateNode: 8
@@ -2889,12 +2889,12 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 11, y: 0, z: 24}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 11, y: 0, z: 25}
       RotationY: 90
       stateNode: 8
@@ -2969,7 +2969,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 11, y: 0, z: 40}
       RotationY: 0
       stateNode: 8
@@ -3219,7 +3219,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 12, y: 0, z: 40}
       RotationY: 0
       stateNode: 8
@@ -3399,7 +3399,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 13, y: 0, z: 26}
       RotationY: 180
       stateNode: 8
@@ -3469,7 +3469,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 13, y: 0, z: 40}
       RotationY: 0
       stateNode: 8
@@ -3654,7 +3654,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 14, y: 0, z: 27}
       RotationY: 90
       stateNode: 8
@@ -3719,7 +3719,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 14, y: 0, z: 40}
       RotationY: 0
       stateNode: 8
@@ -3909,9 +3909,9 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: 
+    - uid: t1
       position: {x: 15, y: 0, z: 28}
-      RotationY: 0
+      RotationY: 180
       stateNode: 8
       top: 0
     - uid: t4
@@ -3959,7 +3959,7 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 15, y: 0, z: 38}
       RotationY: 90
       stateNode: 8
@@ -4159,7 +4159,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1-2l
+    - uid: t1_1
       position: {x: 16, y: 0, z: 28}
       RotationY: 180
       stateNode: 8
@@ -4204,7 +4204,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: 
+    - uid: t1_2
       position: {x: 16, y: 0, z: 37}
       RotationY: 0
       stateNode: 8
@@ -4409,7 +4409,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1-2l
+    - uid: t1_2
       position: {x: 17, y: 0, z: 28}
       RotationY: 180
       stateNode: 8
@@ -4454,7 +4454,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1-2l
+    - uid: t1_2
       position: {x: 17, y: 0, z: 37}
       RotationY: 0
       stateNode: 8
@@ -4659,7 +4659,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1-2l
+    - uid: t1_2
       position: {x: 18, y: 0, z: 28}
       RotationY: 180
       stateNode: 8
@@ -4704,7 +4704,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1-2l
+    - uid: t1
       position: {x: 18, y: 0, z: 37}
       RotationY: 0
       stateNode: 8
@@ -4909,52 +4909,52 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t3-2l
+    - uid: t3
       position: {x: 19, y: 0, z: 28}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1
       position: {x: 19, y: 0, z: 29}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1
       position: {x: 19, y: 0, z: 30}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1_2
       position: {x: 19, y: 0, z: 31}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1
       position: {x: 19, y: 0, z: 32}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1_1
       position: {x: 19, y: 0, z: 33}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1
       position: {x: 19, y: 0, z: 34}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1
       position: {x: 19, y: 0, z: 35}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t1_2
       position: {x: 19, y: 0, z: 36}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t3-2l
+    - uid: t3
       position: {x: 19, y: 0, z: 37}
       RotationY: 0
       stateNode: 8
@@ -6139,105 +6139,105 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 24}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 25}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 26}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 27}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 28}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 29}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 30}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 31}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 32}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 33}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 34}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 35}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 36}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 37}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 38}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 24, y: 0, z: 39}
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 24, y: 0, z: 40}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 41}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 24, y: 0, z: 42}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z2
       position: {x: 24, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 24, y: 0, z: 44}
@@ -6389,10 +6389,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 25, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 25, y: 0, z: 25}
@@ -6484,10 +6484,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 25, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 25, y: 0, z: 44}
@@ -6639,10 +6639,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 26, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 26, y: 0, z: 25}
@@ -6734,10 +6734,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 26, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 26, y: 0, z: 44}
@@ -6984,10 +6984,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 27, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 27, y: 0, z: 44}
@@ -7139,10 +7139,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 28, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 28, y: 0, z: 25}
@@ -7234,10 +7234,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 28, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 28, y: 0, z: 44}
@@ -7389,10 +7389,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 29, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 29, y: 0, z: 25}
@@ -7484,10 +7484,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 29, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 29, y: 0, z: 44}
@@ -7639,10 +7639,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 30, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 30, y: 0, z: 25}
@@ -7734,10 +7734,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 30, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 30, y: 0, z: 44}
@@ -7889,10 +7889,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 31, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 31, y: 0, z: 25}
@@ -7984,10 +7984,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 31, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 31, y: 0, z: 44}
@@ -8139,10 +8139,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 32, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 32, y: 0, z: 25}
@@ -8234,10 +8234,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 32, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 32, y: 0, z: 44}
@@ -8389,10 +8389,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 33, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 33, y: 0, z: 25}
@@ -8484,10 +8484,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 33, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 33, y: 0, z: 44}
@@ -8639,30 +8639,30 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 34, y: 0, z: 24}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 34, y: 0, z: 25}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 34, y: 0, z: 26}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 34, y: 0, z: 27}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z2
       position: {x: 34, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 34, y: 0, z: 29}
@@ -8734,10 +8734,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 34, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 34, y: 0, z: 44}
@@ -8909,10 +8909,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 35, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 35, y: 0, z: 29}
@@ -8984,10 +8984,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 35, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 35, y: 0, z: 44}
@@ -9159,10 +9159,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 36, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 36, y: 0, z: 29}
@@ -9234,10 +9234,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 36, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 36, y: 0, z: 44}
@@ -9409,10 +9409,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 37, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 37, y: 0, z: 29}
@@ -9484,10 +9484,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 37, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 37, y: 0, z: 44}
@@ -9659,10 +9659,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 38, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 38, y: 0, z: 29}
@@ -9734,10 +9734,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 38, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 38, y: 0, z: 44}
@@ -9909,10 +9909,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 39, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 39, y: 0, z: 29}
@@ -10159,10 +10159,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 40, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 40, y: 0, z: 29}
@@ -10234,10 +10234,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 40, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 40, y: 0, z: 44}
@@ -10409,10 +10409,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 41, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 41, y: 0, z: 29}
@@ -10484,10 +10484,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 41, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 41, y: 0, z: 44}
@@ -10659,10 +10659,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 42, y: 0, z: 28}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 42, y: 0, z: 29}
@@ -10734,10 +10734,10 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 42, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 90
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 42, y: 0, z: 44}
@@ -10909,85 +10909,85 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z2
       position: {x: 43, y: 0, z: 28}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 43, y: 0, z: 29}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 30}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 43, y: 0, z: 31}
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 32}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 43, y: 0, z: 33}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 43, y: 0, z: 34}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 35}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 36}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 37}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 38}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 39}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 180
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 43, y: 0, z: 40}
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t-1
+    - uid: z1
       position: {x: 43, y: 0, z: 41}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z0
       position: {x: 43, y: 0, z: 42}
       RotationY: 0
-      stateNode: 2
+      stateNode: 8
       top: 0
-    - uid: t-1
+    - uid: z2
       position: {x: 43, y: 0, z: 43}
-      RotationY: 0
-      stateNode: 2
+      RotationY: 270
+      stateNode: 8
       top: 0
     - uid: t-1
       position: {x: 43, y: 0, z: 44}
@@ -12259,7 +12259,7 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t2-1l
+    - uid: t2-3l
       position: {x: 48, y: 0, z: 48}
       RotationY: 90
       stateNode: 8
@@ -12779,7 +12779,7 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 1, y: 1, z: 2}
       RotationY: 90
       stateNode: 8
@@ -12794,7 +12794,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 5}
       RotationY: 90
       stateNode: 8
@@ -12809,12 +12809,12 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 8}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 9}
       RotationY: 90
       stateNode: 8
@@ -12829,7 +12829,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 1, y: 1, z: 12}
       RotationY: 90
       stateNode: 8
@@ -12839,7 +12839,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 14}
       RotationY: 90
       stateNode: 8
@@ -12849,7 +12849,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 1, y: 1, z: 16}
       RotationY: 90
       stateNode: 8
@@ -12859,7 +12859,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 18}
       RotationY: 90
       stateNode: 8
@@ -12874,7 +12874,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 1, y: 1, z: 21}
       RotationY: 90
       stateNode: 8
@@ -12889,27 +12889,27 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 24}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 25}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 26}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 27}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 1, y: 1, z: 28}
       RotationY: 90
       stateNode: 8
@@ -12919,47 +12919,47 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 30}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 1, y: 1, z: 31}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 1, y: 1, z: 32}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 33}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 34}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 1, y: 1, z: 35}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 1, y: 1, z: 36}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 1, y: 1, z: 37}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 38}
       RotationY: 90
       stateNode: 8
@@ -12979,7 +12979,7 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 42}
       RotationY: 90
       stateNode: 8
@@ -12994,17 +12994,17 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 1, y: 1, z: 45}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 1, y: 1, z: 46}
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 1, y: 1, z: 47}
       RotationY: 90
       stateNode: 8
@@ -13024,7 +13024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 2, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -13274,7 +13274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 3, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -13509,7 +13509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 3, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -13774,7 +13774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 5, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -14009,7 +14009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 5, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -14259,7 +14259,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 6, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -14274,7 +14274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 7, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -14524,7 +14524,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 8, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -14649,19 +14649,19 @@ MonoBehaviour:
       RotationY: 180
       stateNode: 8
       top: 0
-    - uid: t3-2l
+    - uid: t1-2l
       position: {x: 8, y: 1, z: 26}
       RotationY: 270
       stateNode: 8
       top: 0
     - uid: t3-2l
       position: {x: 8, y: 1, z: 27}
-      RotationY: 180
+      RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1-2l
+    - uid: t3-2l
       position: {x: 8, y: 1, z: 28}
-      RotationY: 270
+      RotationY: 180
       stateNode: 8
       top: 0
     - uid: t1-2l
@@ -14759,7 +14759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 8, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -14774,7 +14774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 9, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -14899,19 +14899,19 @@ MonoBehaviour:
       RotationY: 90
       stateNode: 8
       top: 0
-    - uid: t3-2l
+    - uid: t1-2l
       position: {x: 9, y: 1, z: 26}
-      RotationY: 0
+      RotationY: 90
       stateNode: 8
       top: 0
     - uid: t3-2l
       position: {x: 9, y: 1, z: 27}
-      RotationY: 90
+      RotationY: 0
       stateNode: 8
       top: 0
-    - uid: t2-2l
+    - uid: t1-2l
       position: {x: 9, y: 1, z: 28}
-      RotationY: 0
+      RotationY: 180
       stateNode: 8
       top: 0
     - uid: t4
@@ -15009,7 +15009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 9, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -15024,7 +15024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 10, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -15274,7 +15274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 11, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -15509,7 +15509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 11, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -15524,7 +15524,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 12, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -15759,7 +15759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 12, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -15774,7 +15774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 13, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -16009,7 +16009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 13, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -16024,7 +16024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 14, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -16274,7 +16274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 15, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -16509,7 +16509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 15, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -16759,7 +16759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 16, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -16774,7 +16774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 17, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -17009,7 +17009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 17, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -17024,7 +17024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 18, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -17259,7 +17259,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 18, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -17759,7 +17759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 20, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -17774,7 +17774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 21, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -18009,7 +18009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 21, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -18274,7 +18274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 23, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -18509,7 +18509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 23, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -18524,7 +18524,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 24, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -18759,7 +18759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 24, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -18774,7 +18774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 25, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -19024,7 +19024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 26, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -19274,7 +19274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 27, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -19509,7 +19509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 27, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -19759,7 +19759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 28, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -19774,7 +19774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 29, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -20009,7 +20009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 29, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -20024,7 +20024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 30, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -20274,7 +20274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 31, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -20509,7 +20509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 31, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -20759,7 +20759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 32, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -20774,7 +20774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 33, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -21009,7 +21009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 33, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -21509,7 +21509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 35, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -21774,7 +21774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 37, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -22009,7 +22009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 37, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -22024,7 +22024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 38, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -22259,7 +22259,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 38, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -22274,7 +22274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 39, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -22524,7 +22524,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 40, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -22759,7 +22759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 40, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -22774,7 +22774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 41, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -23009,7 +23009,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 41, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -23024,7 +23024,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 42, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -23259,7 +23259,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 42, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -23509,7 +23509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 43, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -23759,7 +23759,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 44, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -23774,7 +23774,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 45, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -24259,7 +24259,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 46, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -24274,7 +24274,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 16
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 47, y: 1, z: 1}
       RotationY: 0
       stateNode: 8
@@ -24509,7 +24509,7 @@ MonoBehaviour:
       RotationY: 0
       stateNode: 2
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 47, y: 1, z: 48}
       RotationY: 180
       stateNode: 8
@@ -24529,32 +24529,32 @@ MonoBehaviour:
       RotationY: 180
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 48, y: 1, z: 2}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 48, y: 1, z: 3}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 4}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 48, y: 1, z: 5}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 48, y: 1, z: 6}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 48, y: 1, z: 7}
       RotationY: 270
       stateNode: 8
@@ -24564,17 +24564,17 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 9}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 48, y: 1, z: 10}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 11}
       RotationY: 270
       stateNode: 8
@@ -24589,27 +24589,27 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 14}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 15}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 16}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 48, y: 1, z: 17}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 18}
       RotationY: 270
       stateNode: 8
@@ -24624,12 +24624,12 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 21}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 22}
       RotationY: 270
       stateNode: 8
@@ -24644,7 +24644,7 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 25}
       RotationY: 270
       stateNode: 8
@@ -24659,7 +24659,7 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1
       position: {x: 48, y: 1, z: 28}
       RotationY: 270
       stateNode: 8
@@ -24669,92 +24669,92 @@ MonoBehaviour:
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_2
+    - uid: t1_1
       position: {x: 48, y: 1, z: 30}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 31}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 32}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 33}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 48, y: 1, z: 34}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 35}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 36}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 37}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 38}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 39}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 48, y: 1, z: 40}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1
       position: {x: 48, y: 1, z: 41}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1_1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 42}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 43}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 44}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 45}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_2
       position: {x: 48, y: 1, z: 46}
       RotationY: 270
       stateNode: 8
       top: 0
-    - uid: t1
+    - uid: t1_1
       position: {x: 48, y: 1, z: 47}
       RotationY: 270
       stateNode: 8
@@ -25036,6 +25036,9 @@ MonoBehaviour:
   - {fileID: 1602150319550486619, guid: d438ea8d0b734bc4abaee83dde005aed, type: 3}
   - {fileID: 1602150319550486619, guid: 4458493835241d341a2e13349a289550, type: 3}
   - {fileID: 1602150319550486619, guid: d360d0d2c035eee41be2b83bc6294ee4, type: 3}
+  - {fileID: 1602150319550486619, guid: 3df889ed7334a544aa8ae87a173d7ee7, type: 3}
+  - {fileID: 1602150319550486619, guid: 51955eec206577048a0338446bad9ae4, type: 3}
+  - {fileID: 1602150319550486619, guid: 4224b28e3e9f4564797ec147a0c85089, type: 3}
   TilePrefabsEmpty:
   - {fileID: 1602150319550486619, guid: b5ef970c5be330848bfbddc9ef5cad0a, type: 3}
   TilePrefabsInner:
@@ -25054,9 +25057,9 @@ MonoBehaviour:
   noiseScaleKoof: 0.2
   noiseMaxKoof: 0.444
   light: 1
-  colorGround: {r: 0.8235294, g: 0.6901961, b: 0.23529412, a: 1}
+  colorGround: {r: 0.6792453, g: 0.62187254, b: 0.4261303, a: 1}
   colorWall: {r: 0.8235294, g: 0.6901961, b: 0.23529412, a: 1}
-  colorNature: {r: 0.8773585, g: 0.8585955, b: 0.83183515, a: 1}
+  colorNature: {r: 0.45882353, g: 0.6117647, b: 0.14117648, a: 1}
   typeLevel: 2
   countTeam: 0
   countPlayers: 10

@@ -14,7 +14,7 @@ namespace Mikalai2006.Voxel
         // [SerializeField] private Material _material;
         // [SerializeField] bool existCollider;
         // [SerializeField] private bool isGreedy = true;
-        [SerializeField] GameObject Wrapper;
+        [SerializeField] public GameObject Wrapper;
         // private CubePositionJob _job;
         // private NativeArray<float> _nativeCubeYOffsets;
         // private NativeArray<Matrix4x4> _nativeMatrices;
@@ -64,7 +64,10 @@ namespace Mikalai2006.Voxel
             }  else if (Config.useGlobalScale)
             {
                 // var maxBoundsSize = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z);
-                Wrapper.transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+                if (_gameManager)
+                {
+                    Wrapper.transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+                }
             }
 
             // int count = Config.sOVoxelData.voxels.Count;

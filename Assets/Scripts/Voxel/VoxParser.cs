@@ -20,6 +20,7 @@ public class VoxParser : MonoBehaviour
     [Tooltip("Если активировать, то не будут сжиматься модели. Будут записаны координаты как есть и ограничивающая рамка будет как задана в редакторе VoxelMagic")]
     [SerializeField] private bool isGlobalPosition;
     [SerializeField] private bool isCreateMesh;
+    [SerializeField] private bool isTiles;
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
     string OutputPath = "Assets/Prefabs/1Vox";
@@ -214,7 +215,10 @@ public class VoxParser : MonoBehaviour
             }
 
             // Create arrays colors for tileGenerator.
-            CreateArraysColors(ref asset);
+            if (isTiles)
+            {
+                asset = CreateArraysColors(asset);
+            }
 
             AssetDatabase.CreateAsset(asset, path);
             AssetDatabase.SaveAssets();
@@ -226,7 +230,7 @@ public class VoxParser : MonoBehaviour
 
     }
 
-    private void CreateArraysColors(ref SOVoxelData sOVoxelData) {
+    private SOVoxelData CreateArraysColors(SOVoxelData sOVoxelData) {
         var TileSideVoxels = Mathf.Max(sOVoxelData.Bounds.x, sOVoxelData.Bounds.y, sOVoxelData.Bounds.z);
 
         sOVoxelData.ColorsRight = new Voxel[TileSideVoxels * TileSideVoxels];
@@ -248,6 +252,8 @@ public class VoxParser : MonoBehaviour
                 sOVoxelData.ColorsBottom[row * TileSideVoxels + column] = GetVoxelColor(row, column, DirectionSideTile.Bottom, sOVoxelData);
             }
         }
+
+        return sOVoxelData;
     }
     
     public Voxel GetVoxelColor(int y, int column, DirectionSideTile direction, SOVoxelData sOVoxelData)

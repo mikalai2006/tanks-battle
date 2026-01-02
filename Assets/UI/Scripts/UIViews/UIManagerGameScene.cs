@@ -10,7 +10,7 @@ namespace UIToolkitLibrary
     {
         GameManager _gameManager => GameManager.Instance;
         private TaskCompletionSource<DataDialogResult> _processCompletionSource;
-        private DataDialogResult _result;
+        // private DataDialogResult _result;
         [SerializeField] private TopSideBarController topSideBarController; 
         void OnEnable()
         {
@@ -100,7 +100,7 @@ namespace UIToolkitLibrary
 
         public async UniTask<DataDialogResult> ProcessAction()
         {
-            _result = new DataDialogResult();
+            // _result = new DataDialogResult();
 
             // #if ysdk
             //         GetLeaderBoard();

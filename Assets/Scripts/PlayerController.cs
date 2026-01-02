@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private GameManager _gameManager => GameManager.Instance;
     [SerializeField] private InputActionReference moveActionToUse;
-    [SerializeField] public InputActionAsset playerInputActions;
+    // [SerializeField] public InputActionAsset playerInputActions;
     [SerializeField] private InputActionReference attackActionInput;
     // [SerializeField] private InputAction doubleTapAction;
     [SerializeField] private BaseMachine _machine;

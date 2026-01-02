@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    sOVoxelData: {fileID: 11400000, guid: ea68e61961898f24fb8969dda9bd42bf, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 156453cbe7e9aec47838bf22209c721a, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -135,12 +135,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UID: t3-1l
-  TileSideVoxels: 32
+  TileSideVoxels: 0
   Weight: 25
   Rotation: 2
   voxelMeshRender: {fileID: 5619480829770901551}
   isEmpty: 0
-  isNotConnectWithEmpty: 1
   ColorsRight:
   - ID: 0
     color:
@@ -43155,6 +43154,23 @@ MonoBehaviour:
     position: {x: 31, y: 0, z: 31}
     type: 0
     IndexSubMesh: 0
+  tileSockets:
+    name: 
+    rotation: 0
+    posX: 
+    negX: 
+    posY: 
+    negY: 
+    posZ: 
+    negZ: 
+    weight: 0
+  TileNeghboursList:
+    pX: []
+    nX: []
+    pY: []
+    nY: []
+    pZ: []
+    nZ: []
   meshConfig:
     sOVoxelData: {fileID: 11400000, guid: ea68e61961898f24fb8969dda9bd42bf, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
@@ -43177,6 +43193,7 @@ MonoBehaviour:
       colors: []
   tileOptions: []
   isCollapsed: 0
+  isTop: 0
 --- !u!114 &5262007138582421471
 MonoBehaviour:
   m_ObjectHideFlags: 0
