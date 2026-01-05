@@ -80,7 +80,7 @@ namespace UIToolkitLibrary
         //     ShowModalView(m_HomeView);
         // }
 
-        private async void OnGoToStartMenu()
+        private void OnGoToStartMenu()
         {
             AudioManager.Instance.Click();
 

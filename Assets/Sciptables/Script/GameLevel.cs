@@ -8,37 +8,32 @@ public class GameLevel : ScriptableObject
 {
     [Space(5)]
     [Header("Настройки карты")]
-    public TextureHeightMapperSettings tileSettings;
-    public SaveTiled saveTiled;
-    [Tooltip("x - rows, y - depth, z - cols")]
-    public Vector3Int gridSize;
-    public int Depth => gridSize.y;
-    public int Rows => gridSize.x;
-    public int Cols => gridSize.z;
-    
+    public LevelData levelData;
     public List<Tile3D> TilePrefabs;
-    public List<Tile3D> TilePrefabsEmpty;
-    public List<Tile3D> TilePrefabsInner;
-    public List<Tile3D> TilePrefabsInnerTop;
-    public VoxelMeshRender planePrefab;
-    public List<VoxelMeshRender> HousePrefabs;
-    public List<VoxelMeshRender> TreePrefabs;
+    public List<VoxelMeshRender> TreesPrefabs;
+    // public List<Tile3D> TilePrefabsEmpty;
+    // public List<Tile3D> TilePrefabsInner;
+    // public List<Tile3D> TilePrefabsInnerTop;
+    // public VoxelMeshRender planePrefab;
+    // public List<VoxelMeshRender> TreePrefabs;
 
     [Space(5)]
     [Header("Map")]
     // public TypeGround typeGround;
-    public RuleTile tileRuleCave;
-    public RuleTile tileLandscape;
+    // public RuleTile tileRuleCave;
+    // public RuleTile tileLandscape;
     // public RuleTile tileSecondLandscape;
     // public RuleTile tileBorder;
     // public List<RuleTile> tileObstcles;
     // [Range(0.1f, 1f)] public float noiseScaleObstacleKoof = 0.2f;
     // [Range(0.1f, 1f)] public float noiseObstacleMaxKoof = 0.4f;
-    [Range(0.1f, 1f)] public float noiseScaleKoof = 0.2f;
-    [Range(0.1f, 1f)] public float noiseMaxKoof = 0.4f;
+    // [Range(0.1f, 1f)] public float noiseScaleKoof = 0.2f;
+    // [Range(0.1f, 1f)] public float noiseMaxKoof = 0.4f;
     [Range(0f, 1f)] public float light;
 
     [Header("Цвета карты")]
+    [Tooltip("Цвета, в которые будут окрашены объекты на карте: 1 - земля, 2 - стены, 3 - природа")]
+    public List<ColorsModify> colorsModify;
     public Color colorGround;
     public Color colorWall;
     public Color colorNature;
@@ -60,11 +55,40 @@ public class GameLevel : ScriptableObject
 
 }
 
+// [Serializable]
+// public struct SaveTiled
+// {
+//     public string nameMap;
+//     public Cell3DData[] gridComponents;
+// }
+
 [Serializable]
-public struct SaveTiled
+public struct LevelData
 {
-    public string nameMap;
-    public Cell3DData[] gridComponents;
+    [Tooltip("Максимальная высота карты")]
+    public int maxHeight;
+    [Tooltip("x - rows, y - depth, z - cols")]
+    public Vector3Int size;
+    public List<LevelDataGroup> caves;
+    public List<LevelDataGroup> houses;
+    public List<LevelDataGroup> zabor;
+    public List<LevelDataGroup> trees;
+}
+
+[Serializable]
+public struct LevelDataGroup
+{
+    public int group;
+    public int team;
+    public List<Cell3DData> tiles;
+}
+
+[Serializable]
+public struct ColorsModify
+{
+    public TypeEntity typeEntity;
+    public Color input;
+    public Color output;
 }
 
 [Serializable]

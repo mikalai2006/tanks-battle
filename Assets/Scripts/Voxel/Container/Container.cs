@@ -18,6 +18,7 @@ namespace Mikalai2006.Voxel
         [SerializeField] private ContainerData _containerData;
         public ContainerData ContainerData => _containerData;
         [SerializeField] private MeshConfig meshConfig;
+        [SerializeField] private List<ColorsModify> _colorsModify;
         string meshName = "procedure";
         // private NativeArray<Vector3> vertices;
         // private NativeArray<int> triangles;
@@ -49,7 +50,9 @@ namespace Mikalai2006.Voxel
 
         void Awake()
         {
-            cancelTokenSrc = new System.Threading.CancellationTokenSource();           
+            cancelTokenSrc = new System.Threading.CancellationTokenSource();  
+
+            _colorsModify = new List<ColorsModify>();         
         }
 
         void OnEnable()
@@ -160,6 +163,11 @@ namespace Mikalai2006.Voxel
             _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
         }
 
+        public void SetColorsModify(List<ColorsModify> colorsModify)
+        {
+            _colorsModify = colorsModify;
+        }
+
         public void SetData(int indexGroup)
         {
             if (gPUInstanceEnabler != null)
@@ -201,9 +209,19 @@ namespace Mikalai2006.Voxel
             arrayVoxels = new NativeArray<Voxel>(meshConfig.sOVoxelData.Bounds.x * meshConfig.sOVoxelData.Bounds.y * meshConfig.sOVoxelData.Bounds.z, Allocator.Persistent);
 
             // parse list voxels and create data. 
+            Color groupColor = meshConfig.sOVoxelData.groups[indexGroup].color;
+
+            ColorsModify modifyColors = _colorsModify
+                .Find(x => x.typeEntity == meshConfig.sOVoxelData.typeEntity && HelperVoxel.AreColorsApproximatelyEqual(x.input, groupColor));
+
+            if (!modifyColors.Equals(default(ColorsModify)))
+            {
+                groupColor = modifyColors.output;
+            }
+            // Color groupColor = meshConfig.meshConfigModify.colors != null && meshConfig.meshConfigModify.colors.Count > indexGroup ? meshConfig.meshConfigModify.colors[indexGroup] : meshConfig.sOVoxelData.groups[indexGroup].color;
+            // Color groupColor = GameManager.Instance.LevelConfig.colors != null && GameManager.Instance.LevelConfig.colors.Count > indexGroup ? GameManager.Instance.LevelConfig.colors[indexGroup] : meshConfig.sOVoxelData.groups[indexGroup].color;
             for (int i = 0; i < voxelList.Length; i++)
             {
-                Color groupColor = meshConfig.meshConfigModify.colors != null && meshConfig.meshConfigModify.colors.Count > indexGroup ? meshConfig.meshConfigModify.colors[indexGroup] : meshConfig.sOVoxelData.groups[indexGroup].color;
                 var vox = new Voxel() // * scale
                 {
                     ID = 1,
@@ -240,10 +258,28 @@ namespace Mikalai2006.Voxel
             // create array voxels for jobs.
             arrayVoxels = new NativeArray<Voxel>(meshConfig.sOVoxelData.Bounds.x * meshConfig.sOVoxelData.Bounds.y * meshConfig.sOVoxelData.Bounds.z, Allocator.Persistent);
 
-            // parse list voxels and create data. 
+            // parse list voxels and create data.
             for (int j = 0; j < meshConfig.sOVoxelData.groups.Count; j++)
             {
-                Color color = meshConfig.meshConfigModify.colors != null && meshConfig.meshConfigModify.colors.Count > j ? meshConfig.meshConfigModify.colors[j] : meshConfig.sOVoxelData.groups[j].color;
+                Color color = meshConfig.sOVoxelData.groups[j].color;
+
+                ColorsModify modifyColors = _colorsModify
+                    .Find(x => x.typeEntity == meshConfig.sOVoxelData.typeEntity && HelperVoxel.AreColorsApproximatelyEqual(x.input, color));
+
+                // если есть цвет для изменения текущего
+                if (!modifyColors.Equals(default(ColorsModify)))
+                {
+                    // меняем цвет.
+                    color = modifyColors.output;
+                }
+
+                // if (meshConfig.isTile)
+                // {
+                //     color = GameManager.Instance.LevelConfig.colors != null && GameManager.Instance.LevelConfig.colors.Count > j ? GameManager.Instance.LevelConfig.colors[j] : ;
+                // } else
+                // {
+                //     color = meshConfig.meshConfigModify.colors != null && meshConfig.meshConfigModify.colors.Count > j ? meshConfig.meshConfigModify.colors[j] : meshConfig.sOVoxelData.groups[j].color;
+                // }
                 // TODO color.a = 1;
                 arrayVoxelColors[j + 1] = new VoxelColors()
                 {
@@ -360,7 +396,7 @@ namespace Mikalai2006.Voxel
 
             }
 
-            Debug.Log($"Time generate mesh {gameObject.name}: {(Time.realtimeSinceStartup - startTime) * 1000f} ms.\r\nData count ={dataVoxels.Count}, Create {meshData.vertices.Count} vertices, {meshData.triangles.Count} triangles");
+            // Debug.Log($"Time generate mesh {gameObject.name}: {(Time.realtimeSinceStartup - startTime) * 1000f} ms.\r\nData count ={dataVoxels.Count}, Create {meshData.vertices.Count} vertices, {meshData.triangles.Count} triangles");
 
             // var a = meshData.vertices.GroupBy(ff => ff).ToList();
             // Debug.Log($"uniqueVertice: {a.Count()}");
@@ -961,6 +997,7 @@ namespace Mikalai2006.Voxel
                 if (dataVoxels.Count() < 10)
                 {
                     transform.gameObject.SetActive(false);
+                    Debug.Log($"Мало вокселей! Отключаю {transform.gameObject.name}");
                 }
 
                 _needCreateElements.Dispose();

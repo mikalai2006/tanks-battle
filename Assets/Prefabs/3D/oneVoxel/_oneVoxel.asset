@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556ac51dc466a3b48b1649e1c1f18377, type: 3}
+  m_Script: {fileID: 11500000, guid: 18a39ac02706d7a4bb8e91338b5942ac, type: 3}
   m_Name: _oneVoxel
-  m_EditorClassIdentifier: Assembly-CSharp::SOVoxelDataTile
+  m_EditorClassIdentifier: Assembly-CSharp::SOVoxelData
   groups:
   - color: {r: 0.6, g: 0.8, b: 1, a: 1}
     voxels:
@@ -1626,8 +1626,6 @@ MonoBehaviour:
   LocalPosition: {x: 0, y: 0, z: 20}
   LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   startMesh: {fileID: 0}
-  uid: 
-  Weight: 50
   Rotation: 0
   ColorsRight:
   - ID: 0

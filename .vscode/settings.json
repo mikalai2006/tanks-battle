@@ -54,7 +54,10 @@
         "ProjectSettings/": true,
         "UserSettings/": true,
         "temp/": true,
-        "Temp/": true
+        "Temp/": true,
+        "RemoveDocs": true,
+        "Startup": true,
+        "UIElementsSchema": true
     },
     "files.associations": {
         "*.asset": "yaml",

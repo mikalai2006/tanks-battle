@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -62,3 +63,4 @@ public enum DirectionCreateCell
     Top = 5,
     Bottom = 6
 }
+#endif

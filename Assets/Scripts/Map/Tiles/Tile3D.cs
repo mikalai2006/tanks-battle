@@ -38,6 +38,8 @@ public class Tile3D : MonoBehaviour
     public Tile3D[] tileOptions;
     public bool isCollapsed;
     public bool isTop;
+    public bool isGround;
+
     public void CreateNode(bool collapseState, List<Tile3D> tiles)
     {
         isCollapsed = collapseState;

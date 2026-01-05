@@ -43,8 +43,8 @@ namespace Mikalai2006.Voxel
         public bool useGlobalScale;
         [Tooltip("Если он больше 0, то устанавливается для объекта")]
         [Range(0,1)] public float customScale;
-        [Tooltip("Список новых цветов (если заданы цвета здесь, они перезапишут цвета из sOVoxelData используя соответствующие индексы) (В идеале число цветов здесь и в sOVoxelData должны совпадать)")]
-        public MeshConfigModify meshConfigModify;
+        // [Tooltip("Список новых цветов (если заданы цвета здесь, они перезапишут цвета из sOVoxelData используя соответствующие индексы) (В идеале число цветов здесь и в sOVoxelData должны совпадать)")]
+        // public MeshConfigModify meshConfigModify;
     }
 
     public enum TypeCollider

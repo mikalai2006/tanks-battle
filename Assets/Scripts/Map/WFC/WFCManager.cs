@@ -1,103 +1,115 @@
-using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WFCManager : MonoBehaviour
 {
-    public WFCCreatorMap wFCCreatorMap;
-    public Vector3Int size;
-    public GameObject prefabCellPlaceholder;
-    public Button buttonCreateGrid;
-    public List<Tile3D> tilePrefabs;
 
-    public List<WFCToolsCell> toolsCells;
+    [Header("Общее")]
+    public Tile3D emptyTilePrefab;
+    public Tile3DDebugCell debugTilePrefab;
+    public GameObject prefabCellPlaceholder;
+    public Vector3 scaleTiles;
+    public Button buttonSave;
+    public Button buttonSaveAll;
+    public Button buttonLoad;
+
+    [SerializeField] public GameLevel gameLevel;
+    // public List<Cell3DData> saveZabor;
+    // public List<Cell3DData> saveCaves;
+    // public List<Cell3DData> saveHouses;
+
+    [Header("Скалы")]
+    public TextureHeightMapperSettings settingMapCaves;
+    [SerializeField] private WFCBuilder wFCBuilderCaves;
+    [Header("Постройки")]
+    public TextureHeightMapperSettings settingMapHouses;
+    [SerializeField] private WFCBuilder wFCBuilderHouses;
+    [Header("Забор")]
+    public TextureHeightMapperSettings settingMapZabor;
+    [SerializeField] private WFCBuilder wFCBuilderZabor;
+    [Header("Деревья")]
+    public TextureHeightMapperSettings settingMapTrees;
+    [SerializeField] private WFCBuilder wFCBuilderTrees;
+    
+
 
     void Awake()
     {
-        buttonCreateGrid.onClick.AddListener(() =>
+        buttonSave.onClick.AddListener(() =>
         {
-            Init();
-            CreateTools();
+            OnSaveSettings();
+        });
+        buttonSaveAll.onClick.AddListener(() =>
+        {
+            OnSaveAll();
+        });
+        buttonLoad.onClick.AddListener(() =>
+        {
+            Load();
         });
     }
 
-    void Init()
+    /// <summary>
+    /// Функция подготавливает и пишет в файл ScriptableObject данные для создания уровня.
+    /// </summary>
+    void OnSaveAll()
     {
-        wFCCreatorMap.InitializeGrid(tilePrefabs.ToArray());
-    }
-
-    void CreateTools()
-    {
-        ResetCellsTools();
-
-        for (int y = 0; y < 1; y++)
-        {
-            for (int x = 0; x < size.x; x++)
-            {
-                for (int z = 0; z < size.z; z++)
-                {
-                    Vector3 position = new Vector3(x,y,z);
-                    GameObject cellGameObject = Instantiate(prefabCellPlaceholder, position, Quaternion.identity, transform);
-                    
-                    cellGameObject.transform.localPosition = position;
-
-                    WFCToolsCell cell = cellGameObject.GetComponent<WFCToolsCell>();
-                    cell.Init(this);
-
-                    toolsCells.Add(cell);
-                }  
-            }  
-        }    
-    }
-
-    private void ResetCellsTools()
-    {
-        foreach (var item in toolsCells)
-        {
-            Destroy(item.gameObject);
-        }
-
-        toolsCells.Clear();
-    }
-
-    public void CreateCellTools(Vector3 position)
-    {
-        if (
-            position.x < 0 ||
-            position.x >= size.x ||
-            position.y < 0 ||
-            position.y >= size.y ||
-            position.z < 0 ||
-            position.z >= size.z
-        )
-        {
-            Debug.LogWarning($"Попытка создать тайл за пределами заданной сетки!");
-            return;
-        }
-
-        GameObject cellGameObject = Instantiate(prefabCellPlaceholder, position, Quaternion.identity, transform);
-        cellGameObject.transform.localPosition = position;
-
-        WFCToolsCell cell = cellGameObject.GetComponent<WFCToolsCell>();
-        cell.Init(this);
-        toolsCells.Add(cell);
+        wFCBuilderZabor.wFCCreator.OnSaveTiled();
+        wFCBuilderCaves.wFCCreator.OnSaveTiled();
+        wFCBuilderHouses.wFCCreator.OnSaveTiled();
+        wFCBuilderTrees.wFCCreator.OnSaveTiled();
         
-        // вставка префаба.
-        wFCCreatorMap.CreateTile(position);
-        // Tile3D tile3D = Instantiate(tilePrefabs[UnityEngine.Random.Range(0, tilePrefabs.Count)], position, Quaternion.identity, transform);
-        // tile3D.transform.localPosition = position - new Vector3(0, 0.5f, 0);
+        OnSaveSettings();
     }
 
-    public void RemoveCellTools(WFCToolsCell cellTools)
+    /// <summary>
+    /// Функция подготавливает и пишет в файл ScriptableObject префабы и размеры карты.
+    /// </summary>
+    private void OnSaveSettings()
     {
-        WFCToolsCell cellForRemove = toolsCells.Find(x => x == cellTools);
+        // определяем максимальную высоту.
+        int maxHeight = Mathf.Max(wFCBuilderCaves.size.y, wFCBuilderHouses.size.y, wFCBuilderZabor.size.y, wFCBuilderTrees.size.y);
 
-        if (cellForRemove)
+        // записываем сохраненные данные для тайлов.
+        var _gameLevel = gameLevel.levelData;
+        _gameLevel.maxHeight = maxHeight;
+        _gameLevel.size = wFCBuilderCaves.size;
+
+        // записываем все использованные префабы.
+        var tilePrefabs = new System.Collections.Generic.List<Tile3D>();
+        foreach (var item in wFCBuilderZabor.tilePrefabs)
         {
-            Destroy(cellForRemove.gameObject);
-            toolsCells.Remove(cellForRemove);
-
-            wFCCreatorMap.RemoveTile(cellTools.position);
+            tilePrefabs.Add(item);
         }
+        foreach (var item in wFCBuilderCaves.tilePrefabs)
+        {
+            tilePrefabs.Add(item);
+        }
+        foreach (var item in wFCBuilderHouses.tilePrefabs)
+        {
+            tilePrefabs.Add(item);
+        }
+        foreach (var item in wFCBuilderTrees.tilePrefabs)
+        {
+            tilePrefabs.Add(item);
+        }
+        gameLevel.TilePrefabs = tilePrefabs;
+        
+        EditorUtility.SetDirty(gameLevel);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+    }
+
+    private void Load()
+    {
+        wFCBuilderZabor.wFCCreator.Load();
+        wFCBuilderCaves.wFCCreator.Load();
+        wFCBuilderHouses.wFCCreator.Load();
+        wFCBuilderTrees.wFCCreator.Load();
     }
 }
+
+#endif

@@ -1,8 +1,10 @@
+#if UNITY_EDITOR
 using UnityEngine;
 
 public class WFCToolsCell : MonoBehaviour
 {
     public Vector3 position;
+    public int height;
     public bool isCollapsed;
     public GPUInstanceEnabler gPUInstanceEnabler;
     public Color defaultColor;
@@ -13,7 +15,7 @@ public class WFCToolsCell : MonoBehaviour
     public WFCToolsCellQuad Back;
     public WFCToolsCellQuad Top;
     public WFCToolsCellQuad Bottom;
-    public WFCManager wFCManager;
+    public WFCBuilder wFCManager;
 
     void Awake()
     {
@@ -84,8 +86,9 @@ public class WFCToolsCell : MonoBehaviour
         wFCManager.CreateCellTools(newPosition);
     }
 
-    public void Init(WFCManager _wFCManager)
+    public void Init(WFCBuilder _wFCManager)
     {
         wFCManager = _wFCManager;
     }
 }
+#endif

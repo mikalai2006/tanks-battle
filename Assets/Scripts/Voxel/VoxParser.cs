@@ -21,9 +21,11 @@ public class VoxParser : MonoBehaviour
     [SerializeField] private bool isGlobalPosition;
     [SerializeField] private bool isCreateMesh;
     [SerializeField] private bool isTiles;
+    [SerializeField] private TypeEntity typeEntity;
     public MeshRenderer meshRenderer;
     public MeshFilter meshFilter;
-    string OutputPath = "Assets/Prefabs/1Vox";
+    public string OutputPath = "Assets/Prefabs/1Vox";
+    public string customDir;
 
 
     void Start()
@@ -63,6 +65,32 @@ public class VoxParser : MonoBehaviour
         for (int m = 0; m < models.Length; m++)
         {
             var model = models[m];
+
+            // формируем данные для сохранения файла.
+            string[] namePathArray = pathFile.Split(new char[] { '/' });
+            string nameFolderModel = Path.GetFileNameWithoutExtension(namePathArray[namePathArray.Length - 1]);
+            string nameDirForAllModel = nameFolderModel;
+            if (customDir != "")
+            {
+                nameDirForAllModel = Path.GetFileNameWithoutExtension(customDir);
+            }
+
+            string modelName = models[m].Name;
+
+            if (!AssetDatabase.IsValidFolder($"{OutputPath}/{nameDirForAllModel}"))
+            {
+                AssetDatabase.CreateFolder($"{OutputPath}", nameDirForAllModel);
+            }
+            if (!AssetDatabase.IsValidFolder($"{OutputPath}/{nameDirForAllModel}/data"))
+            {
+                AssetDatabase.CreateFolder($"{OutputPath}/{nameDirForAllModel}", "data");
+            }
+            string path = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/{nameDirForAllModel}/data/{modelName}_{nameFolderModel}.asset");
+            // Debug.Log($"path={path}, OutputPath={OutputPath}, nameDirForAllModel={nameDirForAllModel}");
+            string pathMesh = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/{nameDirForAllModel}/data/{modelName}_{nameFolderModel}_mesh.asset");
+
+
+            // генерируем данные для модели.
             VoxReader.Voxel[] voxels = model.Voxels;
 
             Debug.Log($"Voxels: name={model.Name} count={voxels.Length}, global size = {model.GlobalSize}, isCopy={model.IsCopy}");
@@ -194,18 +222,8 @@ public class VoxParser : MonoBehaviour
             asset.LocalPosition = new UnityEngine.Vector3(model.LocalPosition.X, model.LocalPosition.Y, model.LocalPosition.Z);
             // asset.GlobalRotation = new UnityEngine.Vector3(model.GlobalRotation[0,0],);
             asset.sizeVoxel = 1f; // / Mathf.Min(CubeVoxels.size.x, CubeVoxels.size.y, CubeVoxels.size.z);
-            string[] namePathArray = pathFile.Split(new char[] { '/' });
-            string nameFolderModel = Path.GetFileNameWithoutExtension(namePathArray[namePathArray.Length - 1]);
-
-            string modelName = models[m].Name;
-
-            if (!AssetDatabase.IsValidFolder($"{OutputPath}/SO/{nameFolderModel}"))
-            {
-                AssetDatabase.CreateFolder($"{OutputPath}/SO", nameFolderModel);
-            }
-            string path = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/SO/{nameFolderModel}/{modelName}_{nameFolderModel}.asset");
-            string pathMesh = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/SO/{nameFolderModel}/{modelName}_{nameFolderModel}_mesh.asset");
-
+            
+            asset.typeEntity = typeEntity;
 
             // Create mesh.
             if (isCreateMesh)

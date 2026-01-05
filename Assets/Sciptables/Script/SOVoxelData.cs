@@ -23,6 +23,7 @@ public class SOVoxelData : ScriptableObject
     [Tooltip("Меш для начальной загрузки (позволяет использовать все возможности GPU Instancing до начала разрушения)")]
     public Mesh startMesh;
 
+    public TypeEntity typeEntity;
     
     public RotationType Rotation;
 
@@ -37,8 +38,8 @@ public class SOVoxelData : ScriptableObject
     
     [Tooltip("Розетки")]
     public TileSockets tileSockets;
-    [Tooltip("Возможные соседи")]
-    public TileNeghboursList TileNeghboursList;
+    // [Tooltip("Возможные соседи")]
+    // public TileNeghboursList TileNeghboursList;
 }
 
 

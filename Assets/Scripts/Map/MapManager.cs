@@ -11,14 +11,14 @@ public class MapManager : MonoBehaviour
     private GameManager _gameManager => GameManager.Instance;
     private LevelManager _levelManager;
     private GameSetting _gameSetting => GameManager.Instance.Settings;
-    [SerializeField] private ParserHeight ParserHeight;
+    // [SerializeField] private ParserHeight ParserHeight;
     public GridTileHelper gridTileHelper;
     [SerializeField] Tilemap map;
-    public Tilemap Map => map;
+    // public Tilemap Map => map;
     public GameObject plane;
-    [SerializeField] Tilemap mapBorder;
-    [SerializeField] Tilemap mapObjects;
-    [SerializeField] Tilemap mapDamages;
+    // [SerializeField] Tilemap mapBorder;
+    // [SerializeField] Tilemap mapObjects;
+    // [SerializeField] Tilemap mapDamages;
     public NavMeshSurface NavMeshSurface;
 
     public void OnInit(LevelManager levelManager)
@@ -46,11 +46,12 @@ public class MapManager : MonoBehaviour
 
     public void CreateMap()
     {
-        ParserHeight.SetConfig(_gameManager.LevelConfig.tileSettings);
-        ParserHeight.Init();
-        _gameManager.LevelConfig.gridSize = new Vector3Int(ParserHeight.gridSize.x, _gameManager.LevelConfig.tileSettings.heightSize, ParserHeight.gridSize.y);
+        OnSetNotify?.Invoke("createMap");
+        // ParserHeight.SetConfig(_gameManager.LevelConfig.tileSettings);
+        // ParserHeight.Init();
+        // _gameManager.LevelConfig.gridSize = new Vector3Int(ParserHeight.gridSize.x, _gameManager.LevelConfig.tileSettings.heightSize, ParserHeight.gridSize.y);
 
-        gridTileHelper = new GridTileHelper(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y, _gameManager.LevelConfig.gridSize.z);
+        gridTileHelper = new GridTileHelper(_gameManager.LevelConfig.levelData.size.x, _gameManager.LevelConfig.levelData.size.y, _gameManager.LevelConfig.levelData.size.z);
 
         // var scaleX = _gameManager.LevelConfig.gridSize.x - 10f;
         // var scaleZ = _gameManager.LevelConfig.gridSize.z - 10f;
@@ -60,10 +61,10 @@ public class MapManager : MonoBehaviour
         // obj.transform.localPosition = Vector3.zero;
 
         
-        var scaleX = _gameManager.LevelConfig.gridSize.x / 10f;
-        var scaleZ = _gameManager.LevelConfig.gridSize.z / 10f;
+        var scaleX = _gameManager.LevelConfig.levelData.size.x / 10f;
+        var scaleZ = _gameManager.LevelConfig.levelData.size.z / 10f;
         plane.transform.localScale = new Vector3(scaleX, 1, scaleZ);
-        plane.transform.position = new Vector3(0.5f * _gameManager.LevelConfig.gridSize.x - 0.5f, 0, 0.5f * _gameManager.LevelConfig.gridSize.z - 0.5f);
+        plane.transform.position = new Vector3(0.5f * _gameManager.LevelConfig.levelData.size.x - 0.5f, 0, 0.5f * _gameManager.LevelConfig.levelData.size.z - 0.5f);
         GPUInstanceEnabler gPUInstanceEnabler = plane.transform.GetComponent<GPUInstanceEnabler>();
         if (gPUInstanceEnabler)
         {
@@ -126,107 +127,107 @@ public class MapManager : MonoBehaviour
         // }
 
         // OnCreateNoise();
-        if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
-        {
-            OnCreateTiles();
-            OnCreateFixedTiles();
-        }
+        // if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
+        // {
+        //     OnCreateTiles();
+        //     OnCreateFixedTiles();
+        // }
     }
 
-    public void OnCreateTiles()
-    {
-        OnSetNotify?.Invoke("createTiles");
+    // public void OnCreateTiles()
+    // {
+    //     OnSetNotify?.Invoke("createTiles");
 
-        var tilesHeights = ParserHeight.GenerateHeightMap();
+    //     var tilesHeights = ParserHeight.GenerateHeightMap();
         
-            for (int row = 0; row < _gameManager.LevelConfig.gridSize.x; row++)
-            {
-                for (int col = 0; col < _gameManager.LevelConfig.gridSize.z; col++)
-                {
+    //         for (int row = 0; row < _gameManager.LevelConfig.levelData.size.x; row++)
+    //         {
+    //             for (int col = 0; col < _gameManager.LevelConfig.levelData.size.z; col++)
+    //             {
 
-                    int _height = tilesHeights[new Vector2Int(row, col)];
+    //                 int _height = tilesHeights[new Vector2Int(row, col)];
 
-                    if (_height > 0)
-                    {
-                        for (int depth = 0; depth < _height; depth++)
-                        {
+    //                 if (_height > 0)
+    //                 {
+    //                     for (int depth = 0; depth < _height; depth++)
+    //                     {
             
-                        GridTileNode node = gridTileHelper.GetNode(row, depth, col);
+    //                     GridTileNode node = gridTileHelper.GetNode(row, depth, col);
 
-                        node.StateNode = StateNode.Tiled;
-                        node.isTop = depth == _height - 1;
+    //                     node.StateNode = StateNode.Tiled;
+    //                     node.isTop = depth == _height - 1;
 
-                        // map.SetTileFlags(node.position, TileFlags.None);
-                        // map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
-                        // map.SetTileFlags(node.position, TileFlags.LockAll);
-                        }
+    //                     // map.SetTileFlags(node.position, TileFlags.None);
+    //                     // map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
+    //                     // map.SetTileFlags(node.position, TileFlags.LockAll);
+    //                     }
 
                         
-                        // for (int depth = 0; depth < _height; depth++)
-                        // {
-                        //     GridTileNode node = gridTileHelper.GetNode(row, depth, col);
+    //                     // for (int depth = 0; depth < _height; depth++)
+    //                     // {
+    //                     //     GridTileNode node = gridTileHelper.GetNode(row, depth, col);
 
-                        //     var allNeighbours = gridTileHelper.GetNeighbourListWithTiled(node, true);
+    //                     //     var allNeighbours = gridTileHelper.GetNeighbourListWithTiled(node, true);
 
-                        //     if (allNeighbours.Count >= 8 ||
-                        //         row == 0 ||
-                        //         row == _gameManager.LevelConfig.gridSize.x - 1 ||
-                        //         col == 0 ||
-                        //         col == _gameManager.LevelConfig.gridSize.z - 1
-                        //     )
-                        //     {
-                        //         if (depth < _height - 1)
-                        //         {
-                        //             node.StateNode = StateNode.TiledInner;
-                        //         } else
-                        //         {
-                        //             node.StateNode = StateNode.TiledInnerTop;
-                        //         }
-                        //     } else
-                        //     {
-                        //         if (depth < _height - 1)
-                        //         {
-                        //             node.StateNode = StateNode.Tiled;
-                        //         } else
-                        //         {
-                        //             node.StateNode = StateNode.TiledTop;
-                        //         }
-                        //     }
-                        // }
+    //                     //     if (allNeighbours.Count >= 8 ||
+    //                     //         row == 0 ||
+    //                     //         row == _gameManager.LevelConfig.gridSize.x - 1 ||
+    //                     //         col == 0 ||
+    //                     //         col == _gameManager.LevelConfig.gridSize.z - 1
+    //                     //     )
+    //                     //     {
+    //                     //         if (depth < _height - 1)
+    //                     //         {
+    //                     //             node.StateNode = StateNode.TiledInner;
+    //                     //         } else
+    //                     //         {
+    //                     //             node.StateNode = StateNode.TiledInnerTop;
+    //                     //         }
+    //                     //     } else
+    //                     //     {
+    //                     //         if (depth < _height - 1)
+    //                     //         {
+    //                     //             node.StateNode = StateNode.Tiled;
+    //                     //         } else
+    //                     //         {
+    //                     //             node.StateNode = StateNode.TiledTop;
+    //                     //         }
+    //                     //     }
+    //                     // }
 
                     
-                    // int redColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(row, col)].r * _gameManager.LevelConfig.tileSettings.heightSize);
+    //                 // int redColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(row, col)].r * _gameManager.LevelConfig.tileSettings.heightSize);
 
-                    // if (redColor > 0)
-                    // {
-                    //     node.StateNode = StateNode.Tiled;
-                    //     map.SetTileFlags(node.position, TileFlags.None);
-                    //     map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
-                    //     map.SetTileFlags(node.position, TileFlags.LockAll);
-                    // }
+    //                 // if (redColor > 0)
+    //                 // {
+    //                 //     node.StateNode = StateNode.Tiled;
+    //                 //     map.SetTileFlags(node.position, TileFlags.None);
+    //                 //     map.SetTile(node.position, _gameManager.LevelConfig.tileRuleCave);
+    //                 //     map.SetTileFlags(node.position, TileFlags.LockAll);
+    //                 // }
 
-                    // int greenColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(row, col)].g);
-                    // if (redColor == 0 && greenColor > 0)
-                    // {
-                    //     node.StateNode = StateNode.Tree;
-                    //     var treePrefab = _gameManager.LevelConfig.TreePrefabs[UnityEngine.Random.Range(0, _gameManager.LevelConfig.TreePrefabs.Count)];
-                    //     var obj = Instantiate(treePrefab, transform.position, Quaternion.identity, transform);
-                    //     obj.transform.localPosition = node.positionXZ();
-                    // }
+    //                 // int greenColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(row, col)].g);
+    //                 // if (redColor == 0 && greenColor > 0)
+    //                 // {
+    //                 //     node.StateNode = StateNode.Tree;
+    //                 //     var treePrefab = _gameManager.LevelConfig.TreePrefabs[UnityEngine.Random.Range(0, _gameManager.LevelConfig.TreePrefabs.Count)];
+    //                 //     var obj = Instantiate(treePrefab, transform.position, Quaternion.identity, transform);
+    //                 //     obj.transform.localPosition = node.positionXZ();
+    //                 // }
 
-                    // int blueColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(row, col)].b);
-                    // if (redColor == 0 && greenColor == 0 && blueColor > 0)
-                    // {
-                    //     node.StateNode = StateNode.Tree;
-                    //     var housePrefab = _gameManager.LevelConfig.HousePrefabs[UnityEngine.Random.Range(0, _gameManager.LevelConfig.HousePrefabs.Count)];
-                    //     var obj = Instantiate(housePrefab, transform.position, Quaternion.identity, transform);
-                    //     obj.transform.localPosition = node.positionXZ();
-                    // }
-                    // Debug.Log($"greenColor={greenColor}[{blueColor}]<{redColor}>");
-                }
-            }
-        }
-    }
+    //                 // int blueColor = Mathf.RoundToInt(tilesHeights[new Vector2Int(row, col)].b);
+    //                 // if (redColor == 0 && greenColor == 0 && blueColor > 0)
+    //                 // {
+    //                 //     node.StateNode = StateNode.Tree;
+    //                 //     var housePrefab = _gameManager.LevelConfig.HousePrefabs[UnityEngine.Random.Range(0, _gameManager.LevelConfig.HousePrefabs.Count)];
+    //                 //     var obj = Instantiate(housePrefab, transform.position, Quaternion.identity, transform);
+    //                 //     obj.transform.localPosition = node.positionXZ();
+    //                 // }
+    //                 // Debug.Log($"greenColor={greenColor}[{blueColor}]<{redColor}>");
+    //             }
+    //         }
+    //     }
+    // }
 
     // public void OnCreateNoise()
     // {
@@ -257,39 +258,39 @@ public class MapManager : MonoBehaviour
     //     }
     // }
 
-    public void OnCreateFixedTiles()
-    {
-        OnSetNotify?.Invoke("createFixedTiles");
-        for (int depth = 0; depth < _gameManager.LevelConfig.gridSize.y; depth++)
-        {
-            for (int row = 0; row < _gameManager.LevelConfig.gridSize.x; row++)
-            {
-                for (int col = 0; col < _gameManager.LevelConfig.gridSize.z; col++)
-                {
-                    GridTileNode node = gridTileHelper.GetNode(row, depth, col);
+    // public void OnCreateFixedTiles()
+    // {
+    //     OnSetNotify?.Invoke("createFixedTiles");
+    //     for (int depth = 0; depth < _gameManager.LevelConfig.gridSize.y; depth++)
+    //     {
+    //         for (int row = 0; row < _gameManager.LevelConfig.gridSize.x; row++)
+    //         {
+    //             for (int col = 0; col < _gameManager.LevelConfig.gridSize.z; col++)
+    //             {
+    //                 GridTileNode node = gridTileHelper.GetNode(row, depth, col);
                     
-                    if (node.StateNode.HasFlag(StateNode.Tiled)) {
-                        var allNeighbours = gridTileHelper.GetNeighbourListWithTiled(node, true);
-                        // Debug.Log($"allNeighbours {node.position}/{node.positionXZ()} {node.StateNode}: {allNeighbours.Count}");
+    //                 if (node.StateNode.HasFlag(StateNode.Tiled)) {
+    //                     var allNeighbours = gridTileHelper.GetNeighbourListWithTiled(node, true);
+    //                     // Debug.Log($"allNeighbours {node.position}/{node.positionXZ()} {node.StateNode}: {allNeighbours.Count}");
 
-                        if (allNeighbours.Count >= 8 ||
-                            row == 0 ||
-                            row == _gameManager.LevelConfig.gridSize.x - 1 ||
-                            col == 0 ||
-                            col == _gameManager.LevelConfig.gridSize.z - 1
-                        )
-                        {
-                            node.StateNode = StateNode.TiledInner;
-                            // map.SetTileFlags(node.position, TileFlags.None);
-                            // map.SetTile(node.position, _gameManager.LevelConfig.tileLandscape);
-                            // map.SetTileFlags(node.position, TileFlags.LockAll);
-                        }
+    //                     if (allNeighbours.Count >= 8 ||
+    //                         row == 0 ||
+    //                         row == _gameManager.LevelConfig.gridSize.x - 1 ||
+    //                         col == 0 ||
+    //                         col == _gameManager.LevelConfig.gridSize.z - 1
+    //                     )
+    //                     {
+    //                         node.StateNode = StateNode.TiledInner;
+    //                         // map.SetTileFlags(node.position, TileFlags.None);
+    //                         // map.SetTile(node.position, _gameManager.LevelConfig.tileLandscape);
+    //                         // map.SetTileFlags(node.position, TileFlags.LockAll);
+    //                     }
 
-                    }
-                }
-            }
-        }
-    }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     // public void OnCreateTestObjects()
     // {
     //     // Random value for noise.
@@ -322,21 +323,21 @@ public class MapManager : MonoBehaviour
     //     }
     // }
 
-    public void OnSetColor(GridTileNode node, Color color)
-    {
-        Vector3Int posTile = map.WorldToCell(node.position);
+    // public void OnSetColor(GridTileNode node, Color color)
+    // {
+    //     Vector3Int posTile = map.WorldToCell(node.position);
 
-        map.SetColor(posTile, color);
-    }
+    //     map.SetColor(posTile, color);
+    // }
 
     
     public Vector3 GetRandomNavmeshLocation(float sampleRadius)
     {
         // 1. Generate a random origin point near the NavMeshSurface's center
         Vector3 randomPoint = new Vector3(
-            UnityEngine.Random.Range(2f, _gameManager.LevelConfig.gridSize.x - 2),
+            UnityEngine.Random.Range(2f, _gameManager.LevelConfig.levelData.size.x - 2),
             1,
-            UnityEngine.Random.Range(2f, _gameManager.LevelConfig.gridSize.x - 2)
+            UnityEngine.Random.Range(2f, _gameManager.LevelConfig.levelData.size.x - 2)
         ); //UnityEngine.Random.insideUnitSphere * sampleRadius;
         // randomDirection.y = 1f;
         // Vector3 origin = transform.position + randomDirection; // Use the spawner's position or a known center

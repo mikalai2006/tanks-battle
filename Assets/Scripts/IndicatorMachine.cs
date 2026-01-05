@@ -22,7 +22,7 @@ public class IndicatorMachine : MonoBehaviour
         startScale = transform.localScale.x;
 
         // рассчитываем масштаб для одной единицы сетки игрового мира.
-        oneProcentScale = startScale / _gameManager.LevelConfig.gridSize.x;
+        oneProcentScale = startScale / _gameManager.LevelConfig.levelData.size.x;
 
         OnInit();
     }

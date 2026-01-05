@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +20,8 @@ public class ParserHeight : MonoBehaviour
         gridSize = new Vector2Int(_settings.texture.width, _settings.texture.height);
         
         _settings.nameMap = _settings.texture.name;
+
+        GenerateHeightMap();
     }
 
     // void Start()

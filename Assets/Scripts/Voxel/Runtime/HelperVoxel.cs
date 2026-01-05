@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -116,6 +117,24 @@ namespace Mikalai2006.Voxel
 
             return true;
         }
+
+        /// <summary>
+        /// Вспомогательная функция для сравнения двух цветов с заданным допуском.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="tolerance"></param>
+        /// <returns></returns>
+        public static bool AreColorsApproximatelyEqual(Color a, Color b, float tolerance = 0.001f)
+        {
+            // Check if the absolute difference of each channel is within the tolerance
+            if (!Mathf.Approximately(a.r, b.r)) return false;
+            if (!Mathf.Approximately(a.g, b.g)) return false;
+            if (!Mathf.Approximately(a.b, b.b)) return false;
+            if (!Mathf.Approximately(a.a, b.a)) return false;
+
+            return true;
+        }
         
         /// <summary>
         /// Есть ли цвета, отличные от прозрачного и заданного
@@ -157,5 +176,29 @@ namespace Mikalai2006.Voxel
             return hash;
         }
         #endregion
+    
+    public static Tile3D GetRandomTile(Tile3D[] availableTiles)
+    {
+        List<float> chances = new List<float>();
+        for (int i = 0; i < availableTiles.Length; i++)
+        {
+            chances.Add(availableTiles[i].Weight);
+        }
+
+        float value = UnityEngine.Random.Range(0, chances.Sum());
+        float sum = 0;
+
+        for (int i = 0; i < chances.Count; i++)
+        {
+            sum += chances[i];
+            if (value < sum)
+            {
+                return availableTiles[i];
+            }
+        }
+
+        return availableTiles[availableTiles.Length - 1];
     }
+    }
+
 }

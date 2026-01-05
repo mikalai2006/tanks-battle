@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Mikalai2006.Voxel
         // public Action OnSetData;
         GameManager _gameManager => GameManager.Instance;
         [SerializeField] public MeshConfig Config;
-        [SerializeField] public MeshConfigModify ConfigModify;
+        // [SerializeField] public MeshConfigModify ConfigModify;
         // [SerializeField] private SOVoxelData sOVoxelData;
         // [SerializeField] private Material _material;
         // [SerializeField] bool existCollider;
@@ -93,6 +92,11 @@ namespace Mikalai2006.Voxel
                 default:
                     container = cont.AddComponent<ContainerMesh>();
                 break;
+            }
+
+            if (_gameManager && _gameManager.LevelConfig)
+            {
+                container.SetColorsModify(_gameManager.LevelConfig.colorsModify);
             }
             
             containers[index] = container;
@@ -292,8 +296,8 @@ namespace Mikalai2006.Voxel
     // }
 }
 
-[System.Serializable]
-public struct MeshConfigModify
-{
-    public List<Color> colors;
-}
+// [System.Serializable]
+// public struct MeshConfigModify
+// {
+//     public List<Color> colors;
+// }

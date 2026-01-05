@@ -1,5 +1,8 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
+using System.Linq;
 using Mikalai2006.Voxel;
+using Unity.AI.Navigation;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,6 +18,8 @@ public class WFCCreatorTiles : MonoBehaviour
     public bool isClearColors;
     [Tooltip("Добавлять ли массивы цветов границ в каждый тайл (будет много весить)")]
     public bool isAddColorsToTile;
+    [Tooltip("Очищать ли файлы конфигураций")]
+    public bool isClearTilesConfigs;
 
     public void AnalyseSockets()
     {
@@ -38,6 +43,8 @@ public class WFCCreatorTiles : MonoBehaviour
                 ColorsLeft = configTile.ColorsLeft,
                 ColorsForward = configTile.ColorsForward,
                 ColorsBack = configTile.ColorsBack,
+                ColorsTop = configTile.ColorsTop,
+                ColorsBottom = configTile.ColorsBottom,
             };
 
             Tile3D pref = CreatePrefab(configTile, 0, configTile.tileSockets, colorsDefault);
@@ -54,9 +61,10 @@ public class WFCCreatorTiles : MonoBehaviour
                 CheckSocket(colors90.ColorsLeft, ref tileSockets90.negX);
                 CheckSocket(colors90.ColorsForward, ref tileSockets90.negZ);
                 CheckSocket(colors90.ColorsBack, ref tileSockets90.posZ);
-                tileSockets90.posY = GetSocketByPrefixRotate(configTile.tileSockets.posY, 90);
-                tileSockets90.negY = GetSocketByPrefixRotate(configTile.tileSockets.negY, 90);
-                // TileSockets tileSockets90 = Rotate90Sockets(pref.tileSockets);
+                CheckSocket(colors90.ColorsTop, ref tileSockets90.posY);
+                CheckSocket(colors90.ColorsBottom, ref tileSockets90.negY);
+                // tileSockets90.posY = GetSocketByPrefixRotate(configTile.tileSockets.posY, 90);
+                // tileSockets90.negY = GetSocketByPrefixRotate(configTile.tileSockets.negY, 90);
                 Tile3D pref90 = CreatePrefab(configTile, 90, tileSockets90, colors90);
 
                 // 180 градусов.
@@ -69,9 +77,10 @@ public class WFCCreatorTiles : MonoBehaviour
                 CheckSocket(colors180.ColorsLeft, ref tileSockets180.negX);
                 CheckSocket(colors180.ColorsForward, ref tileSockets180.negZ);
                 CheckSocket(colors180.ColorsBack, ref tileSockets180.posZ);
-                tileSockets180.posY = GetSocketByPrefixRotate(configTile.tileSockets.posY, 180);
-                tileSockets180.negY = GetSocketByPrefixRotate(configTile.tileSockets.negY, 180);
-                // TileSockets tileSockets180 = Rotate90Sockets(pref90.tileSockets);
+                CheckSocket(colors180.ColorsTop, ref tileSockets180.posY);
+                CheckSocket(colors180.ColorsBottom, ref tileSockets180.negY);
+                // tileSockets180.posY = GetSocketByPrefixRotate(configTile.tileSockets.posY, 180);
+                // tileSockets180.negY = GetSocketByPrefixRotate(configTile.tileSockets.negY, 180);
                 Tile3D pref180 = CreatePrefab(configTile, 180, tileSockets180, colors180);
 
                 // 270 градусов.
@@ -84,24 +93,38 @@ public class WFCCreatorTiles : MonoBehaviour
                 CheckSocket(colors270.ColorsLeft, ref tileSockets270.negX);
                 CheckSocket(colors270.ColorsForward, ref tileSockets270.negZ);
                 CheckSocket(colors270.ColorsBack, ref tileSockets270.posZ);
-                tileSockets270.posY = GetSocketByPrefixRotate(configTile.tileSockets.posY, 270);
-                tileSockets270.negY = GetSocketByPrefixRotate(configTile.tileSockets.negY, 270);
-                // TileSockets tileSockets270 = Rotate90Sockets(pref180.tileSockets);
+                CheckSocket(colors270.ColorsTop, ref tileSockets270.posY);
+                CheckSocket(colors270.ColorsBottom, ref tileSockets270.negY);
+                // tileSockets270.posY = GetSocketByPrefixRotate(configTile.tileSockets.posY, 270);
+                // tileSockets270.negY = GetSocketByPrefixRotate(configTile.tileSockets.negY, 270);
                 Tile3D pref270 = CreatePrefab(configTile, 270, tileSockets270, colors270);
-            }
-
-            // если нужно очищаем массивы цветов границ.
-            if (isClearColors)
-            {
-                configTile.ColorsRight = new Voxel[0];
-                configTile.ColorsLeft = new Voxel[0];
-                configTile.ColorsForward = new Voxel[0];
-                configTile.ColorsBack = new Voxel[0];
-                configTile.ColorsTop = new Voxel[0];
-                configTile.ColorsBottom = new Voxel[0];
             }
         }
 
+        // если нужно очищаем массивы цветов границ.
+        if (isClearColors)
+        {
+            for (int i = 0; i < tilesConfigs.Count; i++)
+            {
+                var cacheConfigTile = tilesConfigs[i];
+                cacheConfigTile.ColorsRight = new Voxel[0];
+                cacheConfigTile.ColorsLeft = new Voxel[0];
+                cacheConfigTile.ColorsForward = new Voxel[0];
+                cacheConfigTile.ColorsBack = new Voxel[0];
+                cacheConfigTile.ColorsTop = new Voxel[0];
+                cacheConfigTile.ColorsBottom = new Voxel[0];
+                tilesConfigs[i] = cacheConfigTile;
+                EditorUtility.SetDirty(tilesConfigs[i]);
+            }
+            
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        if (isClearTilesConfigs)
+        {
+            tilesConfigs.Clear();
+        }
     }
 
     /// <summary>
@@ -139,6 +162,9 @@ public class WFCCreatorTiles : MonoBehaviour
                 // colorsLeftNew[row * TileSideVoxels + column] = inputColors.ColorsForward[row * TileSideVoxels + column];
             }
         }
+        Voxel[] colorsTopNew = Rotate90TopBottom(inputColors.ColorsTop, configTile);
+        Voxel[] colorsBottomNew = Rotate90TopBottom(inputColors.ColorsBottom, configTile);
+
 
         return new ColorsBorders
         {
@@ -146,7 +172,47 @@ public class WFCCreatorTiles : MonoBehaviour
             ColorsLeft = colorsLeftNew,
             ColorsForward = colorsForwardNew,
             ColorsBack = colorsBackNew,
+            ColorsTop = colorsTopNew,
+            ColorsBottom = colorsBottomNew
         };
+    }
+
+    public Voxel[] Rotate90TopBottom(Voxel[] arrayVoxels, SOVoxelData configTile)
+    {
+        var TileSideVoxels = configTile.Bounds.x;
+       // приводим массив одномерный к двумерному.
+        Voxel[,] temp = new Voxel[TileSideVoxels, TileSideVoxels];
+        for (int i = 0; i < arrayVoxels.Length; i++)
+        {
+            Vector2Int el = Helpers.From1DTo2D(i, TileSideVoxels);
+            temp[el[0], el[1]] = arrayVoxels[i];
+        }
+		
+		// reverse.
+		Voxel[,] tempReverseArray = new Voxel[temp.GetLength(0), temp.GetLength(1)];
+		for (int i = 0; i < temp.GetLength(0); i++)
+		{
+			for (int j = 0; j < temp.GetLength(1); j++)
+			{
+				tempReverseArray[i, j] = temp[temp.GetLength(0) - 1 - i, j];
+			}
+		}
+
+        // поворот на 90 град.
+        Voxel[,] transposedArray = new Voxel[TileSideVoxels, TileSideVoxels];
+        Voxel[] output = new Voxel[TileSideVoxels * TileSideVoxels];
+        for (int i = 0; i < TileSideVoxels; i++)
+        {
+            for (int j = 0; j < TileSideVoxels; j++)
+            {
+                // Меняем местами индексы при копировании
+                transposedArray[j, i] = tempReverseArray[i, j];
+                output[i * TileSideVoxels + j] = tempReverseArray[j, i];
+				// Console.WriteLine("ПРОФЕСИОНАЛНА ГИМНАЗИЯ {0}/{1}", transposedArray[j, i], temp[i, j]);
+            }
+        }
+
+        return output;
     }
 
     string GetSocketByPrefixRotate(string nameSocket, int angle)
@@ -156,41 +222,41 @@ public class WFCCreatorTiles : MonoBehaviour
         return output;
     }
 
-    /// <summary>
-    /// поворот розеток на 90 градусов.
-    /// </summary>
-    /// <param name="tileSockets"></param>
-    /// <returns></returns>
-    TileSockets Rotate90Sockets(TileSockets tileSockets)
-    {
-        string newNegZ = tileSockets.posX;
-        string newPosX = tileSockets.posZ;
-        string newPosZ = tileSockets.negX;
-        string newNegX = tileSockets.negZ;
+    // /// <summary>
+    // /// поворот розеток на 90 градусов.
+    // /// </summary>
+    // /// <param name="tileSockets"></param>
+    // /// <returns></returns>
+    // TileSockets Rotate90Sockets(TileSockets tileSockets)
+    // {
+    //     string newNegZ = tileSockets.posX;
+    //     string newPosX = tileSockets.posZ;
+    //     string newPosZ = tileSockets.negX;
+    //     string newNegX = tileSockets.negZ;
         
 
         
-        int newAngle = tileSockets.rotation + 90;
-        string[] posYSlice = tileSockets.posY.Split("_");
-        string newPosY = posYSlice[0] != "-1" ? $"{posYSlice[0]}_{newAngle}" : "-1";
-        string[] negYSlice = tileSockets.negY.Split("_");
-        string newNegY = negYSlice[0] != "-1" ? $"{negYSlice[0]}_{newAngle}" : "-1";
+    //     int newAngle = tileSockets.rotation + 90;
+    //     string[] posYSlice = tileSockets.posY.Split("_");
+    //     string newPosY = posYSlice[0] != "-1" ? $"{posYSlice[0]}_{newAngle}" : "-1";
+    //     string[] negYSlice = tileSockets.negY.Split("_");
+    //     string newNegY = negYSlice[0] != "-1" ? $"{negYSlice[0]}_{newAngle}" : "-1";
 
 
 
-        return new TileSockets()
-        {
-            name = tileSockets.name,
-            posX = newPosX,
-            negX = newNegX,
-            posZ = newPosZ,
-            negZ = newNegZ,
-            posY = newPosY,
-            negY = newNegY,
-            rotation = newAngle,
-            weight = tileSockets.weight
-        };
-    }
+    //     return new TileSockets()
+    //     {
+    //         name = tileSockets.name,
+    //         posX = newPosX,
+    //         negX = newNegX,
+    //         posZ = newPosZ,
+    //         negZ = newNegZ,
+    //         posY = newPosY,
+    //         negY = newNegY,
+    //         rotation = newAngle,
+    //         weight = tileSockets.weight
+    //     };
+    // }
 
     Tile3D CreatePrefab(SOVoxelData inputConfig, int angle = 0, TileSockets tileSockets = default, ColorsBorders colorsBorders = default)
     {
@@ -206,6 +272,34 @@ public class WFCCreatorTiles : MonoBehaviour
         } else
         {
             newTile3D.tileSockets = inputConfig.tileSockets;
+        }
+
+        // определяем тайл для земли (0 уровень).
+        string[] namePathArray = inputConfig.name.Split("_");
+        if (namePathArray.Contains("ground"))
+        {
+            newTile3D.isGround = true;
+        } else if (namePathArray.Contains("top"))
+        {
+            newTile3D.isTop = true;
+        }
+
+        // определяем количество поворотов для тайла.
+        if (namePathArray[namePathArray.Length - 1] == "r4")
+        {
+            inputConfig.Rotation = RotationType.FourRotations;
+            newTile3D.Rotation = RotationType.FourRotations;
+        } else if (namePathArray[namePathArray.Length - 1] == "r2")
+        {
+            inputConfig.Rotation = RotationType.TwoRotations;
+            newTile3D.Rotation = RotationType.TwoRotations;
+        }
+
+         // определяем вес для тайла.
+        if (namePathArray[namePathArray.Length - 2] != "")
+        {
+            string weightString = namePathArray[namePathArray.Length - 2].Replace("w", ""); 
+            newTile3D.Weight = int.Parse(weightString);
         }
         
         GameObject wrapperPrefab = new GameObject("Wrapper");
@@ -233,6 +327,10 @@ public class WFCCreatorTiles : MonoBehaviour
             newTile3D.ColorsLeft = colorsBorders.ColorsLeft;
             newTile3D.ColorsRight = colorsBorders.ColorsRight;
         }
+
+        NavMeshModifier newNMM = wrapperPrefab.AddComponent<NavMeshModifier>();
+        newNMM.overrideArea = true;
+        newNMM.area = 1;
 
 
         // GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/ExistingPrefab.prefab");
@@ -299,3 +397,4 @@ public struct ColorsBorders
     public Voxel[] ColorsTop;
     public Voxel[] ColorsBottom;
 }
+#endif

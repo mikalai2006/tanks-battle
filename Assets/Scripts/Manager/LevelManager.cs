@@ -36,7 +36,6 @@ public class LevelManager : MonoBehaviour
     public CameraHandler CameraHandler => _cameraHandler;
     public CinemachineCamera cinemachineCamera;
     public CinemachineOrbitalFollow cinemachineOrbitalFollow;
-    public MazeGenerator MazeGenerator;
     private CreateMapOperation createMapOperation;
     public ECSManager ECSManager => _gameManager.ECSManager;
     System.Threading.CancellationTokenSource cancelToken;
@@ -105,13 +104,12 @@ public class LevelManager : MonoBehaviour
         mapManager.OnInit(this);
         mapManager.CreateMap();
         // mapManager.OnCreateTestObjects();
-        // MazeGenerator.Create(_gameManager.LevelConfig.gridSize.x, _gameManager.LevelConfig.gridSize.y);
         // tile3DGenerator.CreateMap();
-        if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
-        {
-            wFCGenerator.OnUpdateColors();
-            wFCGenerator.OnCreateVariantsPrefabs();
-        }
+        // if (!_gameManager.Settings.DebugSettings.disableCreateTiles)
+        // {
+        //     wFCGenerator.OnUpdateColors();
+        //     wFCGenerator.OnCreateVariantsPrefabs();
+        // }
         await wFCGenerator.OnGenerateTiles(cancelToken);
 
 
@@ -178,7 +176,7 @@ public class LevelManager : MonoBehaviour
                 //     && n.Y < _gameManager.LevelConfig.gridSize.y
                 //     && !n.StateNode.HasFlag(StateNode.Disable)
                 // ).OrderBy(t => UnityEngine.Random.value).First();
-                Vector3 pointSpawn = mapManager.GetRandomNavmeshLocation(_gameManager.LevelConfig.gridSize.x);
+                Vector3 pointSpawn = mapManager.GetRandomNavmeshLocation(_gameManager.LevelConfig.levelData.size.x);
 
 
                 if (pointSpawn != Vector3.zero)

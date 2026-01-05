@@ -1,6 +1,6 @@
+#if UNITY_EDITOR
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class WFCCameraController : MonoBehaviour
@@ -351,3 +351,4 @@ public class WFCCameraController : MonoBehaviour
     //     _machine.OnShot();
     // }
 }
+#endif
