@@ -55,6 +55,8 @@ public class LevelManager : MonoBehaviour
 
     async void Start()
     {
+        _gameManager.SetActiveCamera(Camera);
+
         await Init();
     }
 

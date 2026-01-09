@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
-public class BaseCaterpillar : MonoBehaviour
+public class BaseCaterpillar : MonoBehaviour, IColored
 {
     // [SerializeField] public List<Animator> animators;
     // [SerializeField] public SpriteRenderer sprite;
@@ -52,7 +52,14 @@ public class BaseCaterpillar : MonoBehaviour
         Parallel.For(0, voxelMeshRenders.Count, (i) =>
         {
             voxelMeshRenders[i].OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+
+            if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+            {
+                voxelMeshRenders[i].SetColorsModify(Machine.MachineLevelData.colorsModify);
+            }
         });
+
+        
 
         // sprite.sprite = Option.Config.sprite;
         // sprite.color = Option.Config.color;
@@ -142,5 +149,46 @@ public class BaseCaterpillar : MonoBehaviour
         _data.containerData = result;
 
         return result;
+    }
+    
+
+    public void ReDraw(List<ColorsModify> colors)
+    {
+        for (int i = 0; i < voxelMeshRenders.Count; i++)
+        {
+            voxelMeshRenders[i].UploadedAllMeshes(colors);
+        };
+    }
+    
+    public FillData OnFill(Vector3 _pointPointer)
+    {
+        FillData output = new FillData();
+
+        for (int x = 0; x < voxelMeshRenders.Count; x++)
+        {
+            for (int i = 0; i < voxelMeshRenders[x].Containers.Length; i++)
+            {
+                if (voxelMeshRenders[x].Containers[i].PointInCollider(_pointPointer))
+                {
+                    Vector3 localPoint = voxelMeshRenders[x].Containers[i].transform.InverseTransformPoint(_pointPointer);
+                    // voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                    Vector3Int pos = Helpers.RoundVector3(localPoint);
+
+                    Voxel voxel = voxelMeshRenders[x].Containers[i].GetVoxelMinDistance(pos);
+
+                    if (!voxel.color.Equals(Color.clear))
+                    {
+                        SubmeshesData submeshesData = Option.Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+
+                        Color32 groupColor32 = submeshesData.color;
+
+                        output.voxelGroupData = submeshesData;
+                    
+                        Debug.Log($"<color=purple>Caterpillar[{Machine.MachineLevelData.id}] OnPointer: {_pointPointer}:::{localPoint}:::{pos}|||{groupColor32}-{voxel.color}</color>");
+                    }
+                }
+            }
+        }
+        return output;
     }
 }

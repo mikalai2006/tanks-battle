@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -19,25 +20,27 @@ namespace UIToolkitLibrary
         /// stay in sync with the localization table keys (e.g. "Inventory_Rarity_Common") and maintain
         /// dropdown order.
         /// </summary>
-        public static readonly string[] RarityKeys = { "All", "Common", "Rare", "Special" };
-        public static readonly string[] SlotTypeKeys = { "All", "Weapon", "Shield", "Helmet", "Boots", "Gloves" };
-
+        // public static readonly string[] RarityKeys = { "All", "Common", "Rare", "Special" };
+        // public static readonly string[] SlotTypeKeys = { "All", "Weapon", "Shield", "Helmet", "Boots", "Gloves" };
+        // [SerializeField] private VisualTreeAsset _scrollElement;
         static class ClassNames
         {
             public static string MachineBox = "MachineBox";
-            public static string MachineBody = "Body";
-            public static string MachineCaterpillar = "Caterpillars";
-            public static string MachineTowers = "Towers";
-            public static string MachineMuzzles = "Muzzles";
+            public static string ButtonPrev = "Prev";
+            public static string ButtonNext = "Next";
+            public static string ButtonSell = "Sell";
+            public static string ButtonOpenColors = "OpenColors";
+            public static string DialogWrapper = "DialogWrapper";
         }
 
         ScrollView m_ScrollViewParent;
 
-        VisualElement m_Tabs;
+        Button m_Button_Prev;
+        Button m_Button_Next;
+        Button m_Button_Sell;
+        Button m_Button_OpenColors;
+        VisualElement m_DialogWrapper;
         VisualElement m_MachineBox;
-        VisualElement m_MachineBody;
-        VisualElement m_MachineCaterpillar;
-        VisualElement m_MachineTowers;
         VisualElement m_InventoryPanel;
 
         DropdownField m_InventoryRarityDropdown;
@@ -45,6 +48,7 @@ namespace UIToolkitLibrary
 
         // Template asset for each gear item 
         VisualTreeAsset m_GearItemAsset;
+        ColorModifyItem activeColorItem;
 
         // Actively checked gear
         // GearItemComponent m_SelectedGear;
@@ -82,51 +86,171 @@ namespace UIToolkitLibrary
         {
             base.SetVisualElements();
 
-            // create tabs.
-            m_Tabs = Root.Q<VisualElement>("Tabs");
-            var tabMachines = new Button();
-            tabMachines.AddToClassList("tabs-button");
-            tabMachines.text = await Helpers.GetLocaledString("tab_machines");
-            m_Tabs.Add(tabMachines);
+            m_Button_Next = m_TopElement.Q<Button>(ClassNames.ButtonNext);
+            m_Button_Prev = m_TopElement.Q<Button>(ClassNames.ButtonPrev);
+            m_Button_Sell = m_TopElement.Q<Button>(ClassNames.ButtonSell);
+            m_Button_OpenColors = m_TopElement.Q<Button>(ClassNames.ButtonOpenColors);
+            m_DialogWrapper = m_TopElement.Q<VisualElement>(ClassNames.DialogWrapper);
+
+            // // create tabs.
+            // m_Tabs = Root.Q<VisualElement>("Tabs");
+            // var tabMachines = new Button();
+            // tabMachines.AddToClassList("tabs-button");
+            // tabMachines.text = await Helpers.GetLocaledString("tab_colors");
+            // m_Tabs.Add(tabMachines);
 
             
 
-            m_MachineBox = m_TopElement.Q(ClassNames.MachineBox);
-            m_MachineBox.style.maxWidth = 128 * 5;
-            m_MachineBody = m_TopElement.Q(ClassNames.MachineBody);
-            m_MachineCaterpillar = m_TopElement.Q(ClassNames.MachineCaterpillar);
-            m_MachineTowers = m_TopElement.Q(ClassNames.MachineTowers);
+            // m_MachineBox = m_TopElement.Q(ClassNames.MachineBox);
+            // m_MachineBox.style.maxWidth = 128 * 5;
+            // m_MachineBody = m_TopElement.Q(ClassNames.MachineBody);
+            // m_MachineCaterpillar = m_TopElement.Q(ClassNames.MachineCaterpillar);
+            // m_MachineTowers = m_TopElement.Q(ClassNames.MachineTowers);
 
-            for (int i = 0; i < _gameManager.Settings.machines.Count; i++)
+            // for (int i = 0; i < _gameManager.Settings.machines.Count; i++)
+            // {
+            //     var machine = _gameManager.Settings.machines[i];
+
+            //     var mBox = new Button();
+            //     mBox.RegisterCallback<ClickEvent>((ClickEvent evt) => OnClickMachineItem(evt, machine));
+            //     mBox.AddToClassList("list-item");
+            //     // VisualElement GarageWrapper = Root.Q<VisualElement>("GarageWrapper");
+            //     // Debug.Log($"{GarageWrapper.style.width.value.value}");
+            //     // mBox.style.width = GarageWrapper.style.width.value.value / 2;
+            //     mBox.style.marginBottom = _gameManager.Theme.margin / 2;
+            //     mBox.style.marginTop = _gameManager.Theme.margin / 2;
+            //     mBox.style.marginLeft = _gameManager.Theme.margin / 2;
+            //     mBox.style.marginRight = _gameManager.Theme.margin / 2;
+            //     mBox.style.paddingTop = _gameManager.Theme.padding;
+            //     mBox.style.paddingBottom = _gameManager.Theme.padding;
+            //     mBox.style.paddingLeft = _gameManager.Theme.padding;
+            //     mBox.style.paddingRight = _gameManager.Theme.padding;
+            //     mBox.style.flexDirection = FlexDirection.Row;
+            //     mBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorListItemBg);
+
+            //     if (i == 2)
+            //     {
+            //         Color colActive = _gameManager.Theme.colorActive;
+            //         mBox.style.borderLeftColor = new StyleColor(colActive);
+            //         mBox.style.borderRightColor = new StyleColor(colActive);
+            //         mBox.style.borderTopColor = new StyleColor(colActive);
+            //         mBox.style.borderBottomColor = new StyleColor(colActive);
+            //         colActive.a = 0.1f;
+            //         mBox.style.backgroundColor = new StyleColor(colActive);
+            //     }
+
+
+
+            //     // VisualElement mach = DrawCurrentMachine(machine);
+            //     // // mach.style.marginTop = 25;
+            //     // // mach.style.marginRight = 25;
+            //     // mBox.Add(mach);
+
+            //     // add rank image.
+            //     VisualElement rankImage = new VisualElement();
+            //     rankImage.style.position = Position.Absolute;
+            //     rankImage.style.top = 5;
+            //     rankImage.style.right = 0;
+            //     rankImage.style.width = 40;
+            //     rankImage.style.height = 40;
+            //     rankImage.style.backgroundImage = new StyleBackground(machine.minRank.sprite);
+            //     mBox.Add(rankImage);
+
+            //     // draw machine description.
+            //     var mBoxInfoMachine = new VisualElement();
+            //     mBoxInfoMachine.style.position = Position.Absolute;
+            //     mBoxInfoMachine.style.left = 5;
+            //     mBoxInfoMachine.style.bottom = 0;
+            //     var mBoxTitle = new Label();
+            //     mBoxTitle.AddToClassList("list-item-title");
+            //     mBoxTitle.text = machine.text.title.GetLocalizedString();
+            //     mBoxInfoMachine.Add(mBoxTitle);
+            //     // var mBoxDescription = new Label();
+            //     // mBoxDescription.AddToClassList("description");
+            //     // mBoxDescription.text = machine.text.description.GetLocalizedString();
+            //     // mBoxInfoMachine.Add(mBoxDescription);
+            //     mBox.Add(mBoxInfoMachine);
+                
+            //     if (i == 3)
+            //     {
+            //         Color colActive = _gameManager.Theme.colorBg;
+            //         colActive.a = 0.9f;
+            //         var blockElement = new VisualElement();
+            //         blockElement.style.position = Position.Absolute;
+            //         blockElement.style.left = -3;
+            //         blockElement.style.right = -3;
+            //         blockElement.style.top = -3;
+            //         blockElement.style.bottom = -3;
+            //         blockElement.style.backgroundColor = new StyleColor(colActive);
+            //         blockElement.style.borderLeftColor = new StyleColor(colActive);
+            //         blockElement.style.borderRightColor = new StyleColor(colActive);
+            //         blockElement.style.borderTopColor = new StyleColor(colActive);
+            //         blockElement.style.borderBottomColor = new StyleColor(colActive);
+            //         blockElement.style.backgroundColor = new StyleColor(colActive);
+            //         mBox.Add(blockElement);
+            //     }
+
+            //     m_MachineBox.Add(mBox);
+
+            // }
+
+            // m_InventoryPanel = m_TopElement.Q("inventory__screen");
+            // m_InventoryRarityDropdown = m_TopElement.Q<DropdownField>("inventory__rarity-dropdown");
+            // m_InventorySlotTypeDropdown = m_TopElement.Q<DropdownField>("inventory__slot-type-dropdown");
+
+            // // define row elements under the scrollview
+            // m_ScrollViewParent = m_TopElement.Q<ScrollView>("inventory__scrollview");
+
+            // DrawColorsSide();
+
+            UpdateLocalizedText();
+        }
+
+        private VisualElement  DrawColorsSide()
+        {
+            VisualElement elWrapper = new VisualElement();
+            // m_DialogWrapper.Clear();
+            m_MachineBox = new ScrollView(); // m_TopElement.Q(ClassNames.MachineBox);
+            m_MachineBox.style.width = 128 * 5;
+            m_MachineBox.style.paddingLeft = 0;
+            m_MachineBox.style.paddingRight = 0;
+            var m_Content = m_MachineBox.Q("unity-content-container");
+            m_Content.pickingMode = PickingMode.Ignore;
+            m_Content.style.display = DisplayStyle.Flex;
+            m_Content.style.flexDirection = FlexDirection.Row;
+            m_Content.style.flexWrap = Wrap.Wrap;
+            m_Content.Clear();
+
+            for (int i = 0; i < _gameManager.Settings.colorsModify.Count; i++)
             {
-                var machine = _gameManager.Settings.machines[i];
+                var col = _gameManager.Settings.colorsModify[i];
 
                 var mBox = new Button();
-                mBox.RegisterCallback<ClickEvent>((ClickEvent evt) => OnClickMachineItem(evt, machine));
-                mBox.AddToClassList("list-item");
+                mBox.RegisterCallback<ClickEvent>((ClickEvent evt) => OnClickColor(evt, col));
+                mBox.AddToClassList("list-item-color");
                 // VisualElement GarageWrapper = Root.Q<VisualElement>("GarageWrapper");
                 // Debug.Log($"{GarageWrapper.style.width.value.value}");
                 // mBox.style.width = GarageWrapper.style.width.value.value / 2;
-                mBox.style.marginBottom = _gameManager.Theme.margin / 2;
-                mBox.style.marginTop = _gameManager.Theme.margin / 2;
-                mBox.style.marginLeft = _gameManager.Theme.margin / 2;
-                mBox.style.marginRight = _gameManager.Theme.margin / 2;
-                mBox.style.paddingTop = _gameManager.Theme.padding;
-                mBox.style.paddingBottom = _gameManager.Theme.padding;
-                mBox.style.paddingLeft = _gameManager.Theme.padding;
-                mBox.style.paddingRight = _gameManager.Theme.padding;
+                mBox.style.marginBottom = 0;
+                mBox.style.marginTop = 0;
+                mBox.style.marginLeft = 0;
+                mBox.style.marginRight = 0;
+                mBox.style.paddingTop = 0;
+                mBox.style.paddingBottom = 0;
+                mBox.style.paddingLeft = 0;
+                mBox.style.paddingRight = 0;
                 mBox.style.flexDirection = FlexDirection.Row;
                 mBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorListItemBg);
 
-                if (i == 2)
+                if (HelperVoxel.AreColorsApproximatelyEqual(activeColorItem.color, col.color))
                 {
                     Color colActive = _gameManager.Theme.colorActive;
                     mBox.style.borderLeftColor = new StyleColor(colActive);
                     mBox.style.borderRightColor = new StyleColor(colActive);
                     mBox.style.borderTopColor = new StyleColor(colActive);
                     mBox.style.borderBottomColor = new StyleColor(colActive);
-                    colActive.a = 0.1f;
-                    mBox.style.backgroundColor = new StyleColor(colActive);
+                    // colActive.a = 0.1f;
+                    // mBox.style.backgroundColor = new StyleColor(colActive);
                 }
 
 
@@ -138,181 +262,225 @@ namespace UIToolkitLibrary
 
                 // add rank image.
                 VisualElement rankImage = new VisualElement();
-                rankImage.style.position = Position.Absolute;
-                rankImage.style.top = 5;
-                rankImage.style.right = 0;
-                rankImage.style.width = 40;
-                rankImage.style.height = 40;
-                rankImage.style.backgroundImage = new StyleBackground(machine.minRank.sprite);
+                rankImage.style.position = Position.Relative;
+                rankImage.style.flexShrink = 1;
+                rankImage.style.flexGrow = 0;
+                // rankImage.style.top = 5;
+                // rankImage.style.right = 0;
+                rankImage.style.minHeight = 45;
+                rankImage.style.minWidth = 45;
+                rankImage.style.backgroundColor = new StyleColor(col.color);
                 mBox.Add(rankImage);
 
-                // draw machine description.
-                var mBoxInfoMachine = new VisualElement();
-                mBoxInfoMachine.style.position = Position.Absolute;
-                mBoxInfoMachine.style.left = 5;
-                mBoxInfoMachine.style.bottom = 0;
-                var mBoxTitle = new Label();
-                mBoxTitle.AddToClassList("list-item-title");
-                mBoxTitle.text = machine.text.title.GetLocalizedString();
-                mBoxInfoMachine.Add(mBoxTitle);
-                // var mBoxDescription = new Label();
-                // mBoxDescription.AddToClassList("description");
-                // mBoxDescription.text = machine.text.description.GetLocalizedString();
-                // mBoxInfoMachine.Add(mBoxDescription);
-                mBox.Add(mBoxInfoMachine);
+                // // draw machine description.
+                // var mBoxInfoMachine = new VisualElement();
+                // mBoxInfoMachine.style.position = Position.Absolute;
+                // mBoxInfoMachine.style.left = 5;
+                // mBoxInfoMachine.style.bottom = 0;
+                // var mBoxTitle = new Label();
+                // mBoxTitle.AddToClassList("list-item-title");
+                // mBoxTitle.text = col.cost.ToString(); //text.title.GetLocalizedString();
+                // mBoxInfoMachine.Add(mBoxTitle);
+                // // var mBoxDescription = new Label();
+                // // mBoxDescription.AddToClassList("description");
+                // // mBoxDescription.text = machine.text.description.GetLocalizedString();
+                // // mBoxInfoMachine.Add(mBoxDescription);
+                // mBox.Add(mBoxInfoMachine);
                 
-                if (i == 3)
-                {
-                    Color colActive = _gameManager.Theme.colorBg;
-                    colActive.a = 0.9f;
-                    var blockElement = new VisualElement();
-                    blockElement.style.position = Position.Absolute;
-                    blockElement.style.left = -3;
-                    blockElement.style.right = -3;
-                    blockElement.style.top = -3;
-                    blockElement.style.bottom = -3;
-                    blockElement.style.backgroundColor = new StyleColor(colActive);
-                    blockElement.style.borderLeftColor = new StyleColor(colActive);
-                    blockElement.style.borderRightColor = new StyleColor(colActive);
-                    blockElement.style.borderTopColor = new StyleColor(colActive);
-                    blockElement.style.borderBottomColor = new StyleColor(colActive);
-                    blockElement.style.backgroundColor = new StyleColor(colActive);
-                    mBox.Add(blockElement);
-                }
+                
+                // if (HelperVoxel.AreColorsApproximatelyEqual(activeColorItem.color, col.color))
+                // {
+                //     Color colActive = _gameManager.Theme.colorBg;
+                //     colActive.a = 0.9f;
+                //     var blockElement = new VisualElement();
+                //     blockElement.style.position = Position.Absolute;
+                //     blockElement.style.left = -3;
+                //     blockElement.style.right = -3;
+                //     blockElement.style.top = -3;
+                //     blockElement.style.bottom = -3;
+                //     blockElement.style.backgroundColor = new StyleColor(colActive);
+                //     blockElement.style.borderLeftColor = new StyleColor(colActive);
+                //     blockElement.style.borderRightColor = new StyleColor(colActive);
+                //     blockElement.style.borderTopColor = new StyleColor(colActive);
+                //     blockElement.style.borderBottomColor = new StyleColor(colActive);
+                //     blockElement.style.backgroundColor = new StyleColor(colActive);
+                //     mBox.Add(blockElement);
+                // }
 
-                m_MachineBox.Add(mBox);
+                m_Content.Add(mBox);
+                elWrapper.Add(m_MachineBox);
 
             }
 
-            m_InventoryPanel = m_TopElement.Q("inventory__screen");
-            m_InventoryRarityDropdown = m_TopElement.Q<DropdownField>("inventory__rarity-dropdown");
-            m_InventorySlotTypeDropdown = m_TopElement.Q<DropdownField>("inventory__slot-type-dropdown");
-
-            // define row elements under the scrollview
-            m_ScrollViewParent = m_TopElement.Q<ScrollView>("inventory__scrollview");
-
-            UpdateLocalizedText();
+            return elWrapper;
         }
 
-        private void OnClickMachineItem(ClickEvent evt, GameMachine machine)
+        void ClickPrev(ClickEvent evt)
         {
-            Debug.Log($"Click on the {machine.name}");
+            GarageUIEvents.ClickButtonPrevMachine?.Invoke();
+        }
+
+        void ClickNext(ClickEvent evt)
+        {
+            GarageUIEvents.ClickButtonNextMachine?.Invoke();
+        }
+
+        void ClickSell(ClickEvent evt)
+        {
+            GarageUIEvents.ClickButtonSellActiveMachine?.Invoke();
+        }
+
+        async void ClickChooseColor(ClickEvent evt)
+        {
+            var dialog = new DialogProvider(new DataDialog()
+            {
+                title = "Choose color for fill",
+                message = "Выберите цвет, нажав на него!",
+                showCancelButton = true,
+                innerElement = DrawColorsSide(),
+                width = 800,
+            });
+            GarageUIEvents.OpenColors?.Invoke();
+            var dataResultDialog = await dialog.ShowAndHide();
+            GarageUIEvents.CloseColors?.Invoke();
+        }
+
+
+        private void OnClickColor(ClickEvent evt, ColorModifyItem colorItem)
+        {
+            Debug.Log($"Click on the {colorItem.color}");
+
+            activeColorItem = colorItem;
             
-            GarageUIEvents.MachineItemClicked?.Invoke(machine);
+            GarageUIEvents.ClickByColor?.Invoke(colorItem);
+
+            UIEvents.NeedCloseDialogs?.Invoke();
+
+            DrawColorsSide();
         }
+        // private void OnClickMachineItem(ClickEvent evt, GameMachine machine)
+        // {
+        //     Debug.Log($"Click on the {machine.name}");
+            
+        //     GarageUIEvents.MachineItemClicked?.Invoke(machine);
+        // }
 
-        private VisualElement DrawCurrentMachine(GameMachine machine)
-        {
-            VisualElement mBox = new VisualElement();
-            mBox.style.flexGrow = 0;
-            mBox.style.flexShrink = 0;
-            mBox.style.justifyContent = Justify.Center;
-            mBox.style.alignContent = Align.Center;
-            mBox.style.alignItems = Align.Center;
-            mBox.style.alignSelf = Align.Center;
-            mBox.name = "Machine";
+        // private VisualElement DrawCurrentMachine(GameMachine machine)
+        // {
+        //     VisualElement mBox = new VisualElement();
+        //     mBox.style.flexGrow = 0;
+        //     mBox.style.flexShrink = 0;
+        //     mBox.style.justifyContent = Justify.Center;
+        //     mBox.style.alignContent = Align.Center;
+        //     mBox.style.alignItems = Align.Center;
+        //     mBox.style.alignSelf = Align.Center;
+        //     mBox.name = "Machine";
 
-            // float pixelsPerUnit = machine.body.spriteBody.pixelsPerUnit;
-            // var widthMachine = machine.body.spriteBody.bounds.size.x * pixelsPerUnit;
-            // var heightMachine = machine.body.spriteBody.bounds.size.y * pixelsPerUnit;
+        //     // float pixelsPerUnit = machine.body.spriteBody.pixelsPerUnit;
+        //     // var widthMachine = machine.body.spriteBody.bounds.size.x * pixelsPerUnit;
+        //     // var heightMachine = machine.body.spriteBody.bounds.size.y * pixelsPerUnit;
 
-            // // draw caterpillar.
-            // for (int j = 0; j < machine.catterpillars.Count; j++)
-            // {
-            //     var catConfig = machine.catterpillars[j];
-            //     VisualElement vC = new VisualElement();
-            //     vC.name = "Caterpillar";
-            //     vC.style.justifyContent = Justify.Center;
-            //     vC.style.alignContent = Align.Center;
-            //     vC.style.alignItems = Align.Center;
-            //     vC.style.alignSelf = Align.Center;
-            //     vC.style.flexShrink = 0;
-            //     vC.style.flexGrow = 0;
-            //     vC.style.justifyContent = Justify.Center;
-            //     vC.style.alignContent = Align.Center;
+        //     // // draw caterpillar.
+        //     // for (int j = 0; j < machine.catterpillars.Count; j++)
+        //     // {
+        //     //     var catConfig = machine.catterpillars[j];
+        //     //     VisualElement vC = new VisualElement();
+        //     //     vC.name = "Caterpillar";
+        //     //     vC.style.justifyContent = Justify.Center;
+        //     //     vC.style.alignContent = Align.Center;
+        //     //     vC.style.alignItems = Align.Center;
+        //     //     vC.style.alignSelf = Align.Center;
+        //     //     vC.style.flexShrink = 0;
+        //     //     vC.style.flexGrow = 0;
+        //     //     vC.style.justifyContent = Justify.Center;
+        //     //     vC.style.alignContent = Align.Center;
 
-            //     vC.style.backgroundImage = new StyleBackground(catConfig.Config.sprite);
-            //     float pixelsPerUnit3 = catConfig.Config.sprite.pixelsPerUnit;
-            //     vC.style.width = catConfig.Config.sprite.bounds.size.x * pixelsPerUnit3;
-            //     vC.style.height = catConfig.Config.sprite.bounds.size.y * pixelsPerUnit3;
-            //     vC.style.position = Position.Absolute;
-            //     vC.style.translate = new Translate(
-            //         new Length((catConfig.offsetCat.x * pixelsPerUnit3), LengthUnit.Pixel),
-            //         new Length(catConfig.offsetCat.y * pixelsPerUnit3, LengthUnit.Pixel)
-            //     );
-            //     vC.style.unityBackgroundImageTintColor = new StyleColor(catConfig.colorCat);
+        //     //     vC.style.backgroundImage = new StyleBackground(catConfig.Config.sprite);
+        //     //     float pixelsPerUnit3 = catConfig.Config.sprite.pixelsPerUnit;
+        //     //     vC.style.width = catConfig.Config.sprite.bounds.size.x * pixelsPerUnit3;
+        //     //     vC.style.height = catConfig.Config.sprite.bounds.size.y * pixelsPerUnit3;
+        //     //     vC.style.position = Position.Absolute;
+        //     //     vC.style.translate = new Translate(
+        //     //         new Length((catConfig.offsetCat.x * pixelsPerUnit3), LengthUnit.Pixel),
+        //     //         new Length(catConfig.offsetCat.y * pixelsPerUnit3, LengthUnit.Pixel)
+        //     //     );
+        //     //     vC.style.unityBackgroundImageTintColor = new StyleColor(catConfig.colorCat);
 
-            //     mBox.Add(vC);
-            // }
+        //     //     mBox.Add(vC);
+        //     // }
 
-            // // draw body.
-            // VisualElement mBody = new VisualElement();
-            // mBody.name = "Body";
-            // mBody.style.backgroundImage = new StyleBackground(machine.body.spriteBody);
-            // mBody.style.width = mBox.style.width = widthMachine;
-            // mBody.style.height = mBox.style.height = heightMachine;
-            // mBody.style.unityBackgroundImageTintColor = new StyleColor(machine.colorBody);
-            // mBox.Add(mBody);
+        //     // // draw body.
+        //     // VisualElement mBody = new VisualElement();
+        //     // mBody.name = "Body";
+        //     // mBody.style.backgroundImage = new StyleBackground(machine.body.spriteBody);
+        //     // mBody.style.width = mBox.style.width = widthMachine;
+        //     // mBody.style.height = mBox.style.height = heightMachine;
+        //     // mBody.style.unityBackgroundImageTintColor = new StyleColor(machine.colorBody);
+        //     // mBox.Add(mBody);
 
-            // // draw towers.
-            // for (int i = 0; i < machine.towers.Count; i++)
-            // {
-            //     var towerConfig = machine.towers[i];
-            //     VisualElement vE = new VisualElement();
-            //     vE.name = "Tower";
-            //     vE.style.flexShrink = 0;
-            //     vE.style.flexGrow = 0;
-            //     vE.style.justifyContent = Justify.Center;
-            //     vE.style.alignContent = Align.Center;
+        //     // // draw towers.
+        //     // for (int i = 0; i < machine.towers.Count; i++)
+        //     // {
+        //     //     var towerConfig = machine.towers[i];
+        //     //     VisualElement vE = new VisualElement();
+        //     //     vE.name = "Tower";
+        //     //     vE.style.flexShrink = 0;
+        //     //     vE.style.flexGrow = 0;
+        //     //     vE.style.justifyContent = Justify.Center;
+        //     //     vE.style.alignContent = Align.Center;
 
-            //     vE.style.backgroundImage = new StyleBackground(towerConfig.Config.spriteTower);
-            //     float pixelsPerUnit2 = towerConfig.Config.spriteTower.pixelsPerUnit;
-            //     vE.style.width = towerConfig.Config.spriteTower.bounds.size.x * pixelsPerUnit2;
-            //     vE.style.height = towerConfig.Config.spriteTower.bounds.size.y * pixelsPerUnit2;
-            //     vE.style.position = Position.Absolute;
-            //     // vE.style.left = 0;
-            //     // vE.style.right = 0;
-            //     // vE.style.top = 0;
-            //     // vE.style.bottom = 0;
-            //     var xTower = towerConfig.offsetTower.x * pixelsPerUnit2;
-            //     var yTower = towerConfig.offsetTower.y * pixelsPerUnit2;
-            //     vE.style.translate = new Translate(new Length(xTower, LengthUnit.Pixel), new Length(yTower, LengthUnit.Pixel));
-            //     vE.style.unityBackgroundImageTintColor = new StyleColor(towerConfig.colorTower);
-
-
-            //     for (int j = 0; j < towerConfig.muzzles.Count; j++)
-            //     {
-            //         var muzzleConfig = towerConfig.muzzles[j];
-            //         VisualElement vM = new VisualElement();
-            //         vM.name = "Muzzle";
-            //         vM.style.flexShrink = 0;
-            //         vM.style.flexGrow = 0;
-            //         vM.style.justifyContent = Justify.Center;
-            //         vM.style.alignContent = Align.Center;
-
-            //         vM.style.backgroundImage = new StyleBackground(muzzleConfig.Config.spriteMuzzle);
-            //         float pixelsPerUnit3 = muzzleConfig.Config.spriteMuzzle.pixelsPerUnit;
-            //         vM.style.width = muzzleConfig.Config.spriteMuzzle.bounds.size.x * pixelsPerUnit3;
-            //         vM.style.height = muzzleConfig.Config.spriteMuzzle.bounds.size.y * pixelsPerUnit3;
-            //         vM.style.position = Position.Absolute;
-            //         vM.style.translate = new Translate(
-            //             new Length((muzzleConfig.offsetMuzzle.x * pixelsPerUnit3) + (muzzleConfig.Config.spriteMuzzle.bounds.size.x / 2 * pixelsPerUnit3), LengthUnit.Pixel),
-            //             new Length(muzzleConfig.offsetMuzzle.y * pixelsPerUnit3, LengthUnit.Pixel)
-            //         );
-            //         vM.style.unityBackgroundImageTintColor = new StyleColor(muzzleConfig.Config.color);
-
-            //         vE.Add(vM);
-            //     }
+        //     //     vE.style.backgroundImage = new StyleBackground(towerConfig.Config.spriteTower);
+        //     //     float pixelsPerUnit2 = towerConfig.Config.spriteTower.pixelsPerUnit;
+        //     //     vE.style.width = towerConfig.Config.spriteTower.bounds.size.x * pixelsPerUnit2;
+        //     //     vE.style.height = towerConfig.Config.spriteTower.bounds.size.y * pixelsPerUnit2;
+        //     //     vE.style.position = Position.Absolute;
+        //     //     // vE.style.left = 0;
+        //     //     // vE.style.right = 0;
+        //     //     // vE.style.top = 0;
+        //     //     // vE.style.bottom = 0;
+        //     //     var xTower = towerConfig.offsetTower.x * pixelsPerUnit2;
+        //     //     var yTower = towerConfig.offsetTower.y * pixelsPerUnit2;
+        //     //     vE.style.translate = new Translate(new Length(xTower, LengthUnit.Pixel), new Length(yTower, LengthUnit.Pixel));
+        //     //     vE.style.unityBackgroundImageTintColor = new StyleColor(towerConfig.colorTower);
 
 
-            //     mBox.Add(vE);
-            // }
+        //     //     for (int j = 0; j < towerConfig.muzzles.Count; j++)
+        //     //     {
+        //     //         var muzzleConfig = towerConfig.muzzles[j];
+        //     //         VisualElement vM = new VisualElement();
+        //     //         vM.name = "Muzzle";
+        //     //         vM.style.flexShrink = 0;
+        //     //         vM.style.flexGrow = 0;
+        //     //         vM.style.justifyContent = Justify.Center;
+        //     //         vM.style.alignContent = Align.Center;
 
-            return mBox;
-        }
+        //     //         vM.style.backgroundImage = new StyleBackground(muzzleConfig.Config.spriteMuzzle);
+        //     //         float pixelsPerUnit3 = muzzleConfig.Config.spriteMuzzle.pixelsPerUnit;
+        //     //         vM.style.width = muzzleConfig.Config.spriteMuzzle.bounds.size.x * pixelsPerUnit3;
+        //     //         vM.style.height = muzzleConfig.Config.spriteMuzzle.bounds.size.y * pixelsPerUnit3;
+        //     //         vM.style.position = Position.Absolute;
+        //     //         vM.style.translate = new Translate(
+        //     //             new Length((muzzleConfig.offsetMuzzle.x * pixelsPerUnit3) + (muzzleConfig.Config.spriteMuzzle.bounds.size.x / 2 * pixelsPerUnit3), LengthUnit.Pixel),
+        //     //             new Length(muzzleConfig.offsetMuzzle.y * pixelsPerUnit3, LengthUnit.Pixel)
+        //     //         );
+        //     //         vM.style.unityBackgroundImageTintColor = new StyleColor(muzzleConfig.Config.color);
+
+        //     //         vE.Add(vM);
+        //     //     }
+
+
+        //     //     mBox.Add(vE);
+        //     // }
+
+        //     return mBox;
+        // }
 
         protected override void RegisterButtonCallbacks()
         {
+            m_Button_Next.RegisterCallback<ClickEvent>(ClickNext);
+            m_Button_Prev.RegisterCallback<ClickEvent>(ClickPrev);
+            m_Button_Sell.RegisterCallback<ClickEvent>(ClickSell);
+            m_Button_OpenColors.RegisterCallback<ClickEvent>(ClickChooseColor);
             // m_InventoryBackButton.RegisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
@@ -325,6 +493,10 @@ namespace UIToolkitLibrary
         // You can choose to unregister them if needed for specific scenarios.
         protected void UnregisterButtonCallbacks()
         {
+            m_Button_Next.UnregisterCallback<ClickEvent>(ClickNext);
+            m_Button_Prev.UnregisterCallback<ClickEvent>(ClickPrev);
+            m_Button_Sell.UnregisterCallback<ClickEvent>(ClickSell);
+            m_Button_OpenColors.UnregisterCallback<ClickEvent>(ClickChooseColor);
             // m_InventoryBackButton.UnregisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
@@ -358,7 +530,7 @@ namespace UIToolkitLibrary
         //     return gearType;
         // }
 
-       
+
         /// <summary>
         /// Updates filters based on dropdown selection. Uses array indices rather than string values
         /// to maintain correct mapping to localized display text.
@@ -367,10 +539,10 @@ namespace UIToolkitLibrary
         // {
         //     string gearTypeKey = SlotTypeKeys[m_InventorySlotTypeDropdown.index];
         //     string rarityKey = RarityKeys[m_InventoryRarityDropdown.index];
-        
+
         //     EquipmentType gearType = GetGearType(gearTypeKey);
         //     Rarity rarity = GetRarity(rarityKey);
-        
+
         //     InventoryEvents.GearFiltered?.Invoke(rarity, gearType);
         // }
 

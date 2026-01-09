@@ -210,10 +210,14 @@ namespace UIToolkitLibrary
             ShowModalView(m_InfoView);
         }
 
-        void OnGarageScreenShown()
+        async void OnGarageScreenShown()
         {
             // Instantiate(uiDocumentPrefab, transform, true);
             ShowModalView(m_GarageView);
+
+            var operations = new Queue<ILoadingOperation>();
+            operations.Enqueue(new GarageInitOperation());
+            await GameManager.Instance.LoaderBarProvider.LoadAndDestroy(operations);
         }
 
         async void OnShopScreenShown()
@@ -221,7 +225,7 @@ namespace UIToolkitLibrary
             ShowModalView(m_ShopView);
 
             var operations = new Queue<ILoadingOperation>();
-            operations.Enqueue(new GarageInitOperation());
+            operations.Enqueue(new ShopInitOperation());
             await GameManager.Instance.LoaderBarProvider.LoadAndDestroy(operations);
         }
 

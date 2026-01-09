@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace UIToolkitLibrary
 {
@@ -15,9 +15,13 @@ namespace UIToolkitLibrary
 
         // Event triggered when the inventory screen appears
         public static Action ScreenEnabled;
+        public static Action<ColorModifyItem> ClickByColor;
         
-        public static Action<BaseMachine> ClickButtonPrevNextInShop;
-
+        public static Action ClickButtonPrevMachine;
+        public static Action ClickButtonNextMachine;
+        public static Action ClickButtonSellActiveMachine;
+        public static Action OpenColors;
+        public static Action CloseColors;
         // // Event triggered when selecting a gear item
         // public static Action<EquipmentSO> GearSelected;
 

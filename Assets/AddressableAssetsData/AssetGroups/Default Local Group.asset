@@ -41,11 +41,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 88f57d6206f3216428febb73a1a7ac70
-    m_Address: UIMenuInGame
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 931bb25cac6b1d546ba85f2722a3fbfc
     m_Address: UITreeMachine
     m_ReadOnly: 0
@@ -66,8 +61,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab76ff3b6b2195b47b5373367365ff38
+    m_Address: ShopScene
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: abae52a9a31accb49a12ca3bca0b1ba9
     m_Address: UISettings
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: affa7054e7e146644a814db98098a2d0
+    m_Address: UIDialog
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

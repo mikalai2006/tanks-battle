@@ -71,4 +71,5 @@ public enum TypeEntity
     Zabor = 2,
     Cave = 3,
     Tree = 4,
+    Machine = 5,
 }

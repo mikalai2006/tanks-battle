@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -17,6 +16,7 @@ namespace UIToolkitLibrary
             public static string MachineMuzzles = "Muzzles";
             public static string ButtonPrev = "Prev";
             public static string ButtonNext = "Next";
+            public static string ButtonBuy = "Buy";
 
             public static string Name_Machine = "NameMachine";
             public static string Cost_Machine = "CostMachine";
@@ -26,6 +26,7 @@ namespace UIToolkitLibrary
 
         Button m_Button_Prev;
         Button m_Button_Next;
+        Button m_Button_Buy;
         Label m_Name_Machine;
         Label m_Cost_Machine;
         VisualElement m_MachineBox;
@@ -90,6 +91,7 @@ namespace UIToolkitLibrary
             
             m_Button_Next = m_TopElement.Q<Button>(ClassNames.ButtonNext);
             m_Button_Prev = m_TopElement.Q<Button>(ClassNames.ButtonPrev);
+            m_Button_Buy = m_TopElement.Q<Button>(ClassNames.ButtonBuy);
             m_Name_Machine = m_TopElement.Q<Label>(ClassNames.Name_Machine);
             m_Cost_Machine = m_TopElement.Q<Label>(ClassNames.Cost_Machine);
 
@@ -224,6 +226,11 @@ namespace UIToolkitLibrary
             return mBox;
         }
 
+        void ClickBuy(ClickEvent evt)
+        {
+            ShopUIEvents.ClickButtonBuyInShop?.Invoke();
+        }
+
         void ClickPrev(ClickEvent evt)
         {
             ShopUIEvents.ClickButtonPrevInShop?.Invoke();
@@ -237,6 +244,7 @@ namespace UIToolkitLibrary
         {
             m_Button_Next.RegisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.RegisterCallback<ClickEvent>(ClickPrev);
+            m_Button_Buy.RegisterCallback<ClickEvent>(ClickBuy);
             // m_InventoryBackButton.RegisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
@@ -251,6 +259,7 @@ namespace UIToolkitLibrary
         {
             m_Button_Next.UnregisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.UnregisterCallback<ClickEvent>(ClickPrev);
+            m_Button_Buy.UnregisterCallback<ClickEvent>(ClickBuy);
             // m_InventoryBackButton.UnregisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes

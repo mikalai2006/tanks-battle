@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEditor; 
 #endif
 
-public abstract class BaseMuzzle : MonoBehaviour
+public abstract class BaseMuzzle : MonoBehaviour, IColored
 {
     protected GameManager _gameManager => GameManager.Instance;
     // [SerializeField] private Animator _animator;
@@ -191,6 +191,10 @@ public abstract class BaseMuzzle : MonoBehaviour
 
         voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
 
+        if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+        {
+            voxelMeshRender.SetColorsModify(Machine.MachineLevelData.colorsModify);
+        }
         // sprite.color = Config.color;
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();
 
@@ -224,6 +228,7 @@ public abstract class BaseMuzzle : MonoBehaviour
         distanceAttack = Data.distanceAttack;
         OnSetSizeSector(distanceAttack);
     }
+
 
     public void SetBusy(bool status)
     {
@@ -593,6 +598,40 @@ public abstract class BaseMuzzle : MonoBehaviour
         // var position = Tower.transform.TransformPoint(point);
         
         // transform.localPosition = Tower.transform.InverseTransformPoint(position);
+    }
+
+    public void ReDraw(List<ColorsModify> colors)
+    {
+        voxelMeshRender.UploadedAllMeshes(colors);
+    }
+    
+    public FillData OnFill(Vector3 _pointPointer)
+    {
+        FillData output = new FillData();
+
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            if (voxelMeshRender.Containers[i].PointInCollider(_pointPointer))
+            {
+                Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointPointer);
+                // voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                Vector3Int pos = Helpers.RoundVector3(localPoint);
+
+                Voxel voxel = voxelMeshRender.Containers[i].GetVoxelMinDistance(pos);
+
+                if (!voxel.color.Equals(Color.clear))
+                {
+                    SubmeshesData submeshesData = Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+
+                    Color32 groupColor32 = submeshesData.color;
+
+                    output.voxelGroupData = submeshesData;
+                
+                    Debug.Log($"<color=purple>Body[{Machine.MachineLevelData.id}] OnPointer: {_pointPointer}:::{localPoint}:::{pos}|||{groupColor32}-{voxel.color}</color>");
+                }
+            }
+        }
+        return output;
     }
 
 #if UNITY_EDITOR

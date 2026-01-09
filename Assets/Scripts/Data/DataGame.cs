@@ -25,6 +25,8 @@ public class StatePlayer
 public class StateMachinePlayer
 {
     public string name;
+    public List<ColorsModify> colorsModifies;
+      
 }
 
 [Serializable]
@@ -47,7 +49,8 @@ public class MachineLevelData
   public string gerbId;
   public string name;
   public int rank;
-  public bool isBot; 
+  public bool isBot;
+  public List<ColorsModify> colorsModify;
 }
 
 

@@ -31,8 +31,8 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="p-1" style="flex-direction: row; justify-content: center; flex-shrink: 0;">
-                <ui:Button text="cancel" display-tooltip-when-elided="true" name="Cancel" class="button text-primary" />
-                <ui:Button text="ok" display-tooltip-when-elided="true" name="Ok" class="button text-primary" />
+                <ui:Button text="cancel" display-tooltip-when-elided="true" name="Cancel" class="button text-primary btn" />
+                <ui:Button text="ok" display-tooltip-when-elided="true" name="Ok" class="button text-primary btn" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

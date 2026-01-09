@@ -3,6 +3,7 @@ public class ConstantsApp
   public class Scenes
   {
     public const string SCENE_MAIN = "MainScene";
+    public const string SCENE_SHOP = "ShopScene";
     public const string SCENE_GAME = "GameScene";
     public const string SCENE_GARAGE = "GarageScene";
   }

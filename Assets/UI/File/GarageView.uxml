@@ -1,7 +1,25 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=0d2d1561a57b70a4798a0a6b1324eaab&amp;type=3#base" />
-    <ui:VisualElement name="GarageWrapper" style="flex-grow: 1; width: 415px;">
-        <ui:VisualElement name="Tabs" />
-        <ui:ScrollView name="MachineBox" />
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; height: 50%;">
+        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; flex-direction: row;">
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:Button text="Sell" name="Sell" />
+            <ui:Button text="OpenColors" name="OpenColors" />
+        </ui:VisualElement>
+        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
+        <ui:VisualElement name="DialogWrapper" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; left: 0; bottom: 0; right: 0; align-items: center; justify-content: center;">
+            <ui:VisualElement name="GarageWrapper" picking-mode="Ignore" style="width: 415px; flex-grow: 1;">
+                <ui:VisualElement name="Tabs" picking-mode="Ignore" />
+                <ui:ScrollView name="MachineBox" picking-mode="Ignore" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; height: 100%;">
+        <ui:VisualElement picking-mode="Ignore" style="flex-direction: row;">
+            <ui:Button text="&lt;Prev" name="Prev" />
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
+            <ui:Button text="Next&gt;" name="Next" />
+        </ui:VisualElement>
+        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
     </ui:VisualElement>
 </ui:UXML>

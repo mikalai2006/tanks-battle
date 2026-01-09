@@ -40,6 +40,22 @@ public class SOVoxelData : ScriptableObject
     public TileSockets tileSockets;
     // [Tooltip("Возможные соседи")]
     // public TileNeghboursList TileNeghboursList;
+
+
+    public SubmeshesData GetVoxelGroup(Vector3 position)
+    {
+        SubmeshesData output = default;
+        for (int i = 0; i < groups.Count; i++)
+        {
+            if (groups[i].voxels.Contains(Helpers.RoundVector3(position)))
+            {
+                output = groups[i];
+                break;
+            };
+        }
+
+        return output;
+    }
 }
 
 

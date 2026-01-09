@@ -384,6 +384,20 @@ public static class Helpers
     int x = idx % xMax;
     return new Vector3Int(x, y, z);
   }
+
+/// <summary>
+/// округление координат вектора
+/// </summary>
+/// <param name="vector"></param>
+/// <returns></returns>
+  public static Vector3Int RoundVector3(Vector3 vector)
+  {
+    return new Vector3Int(
+        Mathf.RoundToInt(vector.x),
+        Mathf.RoundToInt(vector.y),
+        Mathf.RoundToInt(vector.z)
+    );
+  }
   
   // Helper function to check if a point is inside a sphere
   public static bool IsInsideSphere(Vector3 point, Vector3 sphereCenter, float sphereRadius)

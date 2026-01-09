@@ -4,6 +4,7 @@
         <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
             <ui:Label text="Label" name="NameMachine" style="flex-grow: 1;" />
             <ui:Label text="Label" name="CostMachine" />
+            <ui:Button text="#buy" name="Buy" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; align-items: center;">

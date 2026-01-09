@@ -4,6 +4,7 @@ using Assets;
 using Cysharp.Threading.Tasks;
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public struct DataDialogResult
@@ -19,8 +20,10 @@ public struct DataDialog
   public string message;
   public Sprite sprite;
   public bool showCancelButton;
-  // public List<ShopItem<GameEntity>> entities;
-  // public List<ShopItem<GameBonus>> bonuses;
+  public VisualElement innerElement;
+  public int width;
+    // public List<ShopItem<GameEntity>> entities;
+    // public List<ShopItem<GameBonus>> bonuses;
 }
 
 

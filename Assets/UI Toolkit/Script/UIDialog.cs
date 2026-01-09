@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Events;
+using UIToolkitLibrary;
 
 public class UIDialog : UILocaleBase
 {
@@ -19,20 +20,29 @@ public class UIDialog : UILocaleBase
   private DataDialog _dataDialog;
   private DataDialogResult _dataResultDialog;
   private VisualElement _root;
+  protected VisualElement _wrapper;
 
   private void Awake()
   {
     GameManager.OnChangeTheme += ChangeTheme;
+    UIEvents.NeedCloseDialogs += OnClickCancel;
   }
 
   private void OnDestroy()
   {
     GameManager.OnChangeTheme -= ChangeTheme;
+    UIEvents.NeedCloseDialogs -= OnClickCancel;
   }
 
   private void Start()
   {
     _root = _uiDoc.rootVisualElement;
+
+    _wrapper = _root.Q<VisualElement>("DialogWrapper");
+
+    
+      _wrapper.transform.scale = new Vector3(0.1f, 0.1f, 0.1f);
+      _wrapper.experimental.animation.Scale(1f, 200);
 
     _headerText = _root.Q<Label>("HeaderText");
     _messageText = _root.Q<Label>("MessageText");
@@ -64,6 +74,11 @@ public class UIDialog : UILocaleBase
     _dataResultDialog = new DataDialogResult();
     _dataDialog = dataDialog;
 
+    if (_dataDialog.width > 0)
+    {
+      _wrapper.style.width = _dataDialog.width;
+    }
+
     if (!string.IsNullOrEmpty(_dataDialog.title)) _headerText.text = _dataDialog.title;
     if (!string.IsNullOrEmpty(_dataDialog.message)) _messageText.text = _dataDialog.message;
 
@@ -83,6 +98,12 @@ public class UIDialog : UILocaleBase
     }
 
     _listEntity.Clear();
+
+    if (_dataDialog.innerElement != null)
+    {
+      _listEntity.Add(_dataDialog.innerElement);
+    }
+
     // if (_dataDialog.entities != null && _dataDialog.entities.Count > 0)
     // {
     //   foreach (var entityItem in _dataDialog.entities)

@@ -87,8 +87,16 @@ public struct LevelDataGroup
 public struct ColorsModify
 {
     public TypeEntity typeEntity;
-    public Color input;
-    public Color output;
+    public Color32 input;
+    public Color32 output;
+}
+
+[Serializable]
+public struct FillData
+{
+    public SubmeshesData voxelGroupData;
+    public Color32 outputColor;
+
 }
 
 [Serializable]

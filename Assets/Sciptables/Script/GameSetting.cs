@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 [CreateAssetMenu]
 public class GameSetting : ScriptableObject
@@ -24,6 +23,7 @@ public class GameSetting : ScriptableObject
 
   [Space(5)]
   [Header("Настройки игры")]
+  public List<ColorModifyItem> colorsModify;
   public bool simpleMove;
   public PlayerOptions playerOptions;
   [Tooltip("Размер масштаба игровых объектов")]
@@ -148,6 +148,7 @@ public class GameSetting : ScriptableObject
   public int debounceTimeSave;
   public string nameSaveData;
   public string nameSaveUserInfo;
+  public string pathFileColors;
 
   [Space(5)]
   [Header("Texts")]
@@ -157,31 +158,31 @@ public class GameSetting : ScriptableObject
   [Space(5)]
   [Header("UI")]
   public Sprite spriteClose;
-  // [Space(5)]
-  // [Header("Shop")]
-  // public List<ShopItem<GameEntity>> ShopItems;
-  // public List<ShopItem<GameBonus>> ShopItemsBonus;
+    // [Space(5)]
+    // [Header("Shop")]
+    // public List<ShopItem<GameEntity>> ShopItems;
+    // public List<ShopItem<GameBonus>> ShopItemsBonus;
 
-  // [Space(5)]
-  // [Header("API Directory")]
-  // public APIDirectory APIDirectory;
+    // [Space(5)]
+    // [Header("API Directory")]
+    // public APIDirectory APIDirectory;
 
 
-  // [Space(5)]
-  // [Header("Ads")]
-  // public int adsPerTime;
+    // [Space(5)]
+    // [Header("Ads")]
+    // public int adsPerTime;
 
-  //   [Space(5)]
-  //   [Header("Rate")]
-  //   public int minRateForReview;
-  //   public int countCoinForReview;
-  // [Space(5)]
-  // [Header("Test")]
-  // [Tooltip("Ограничить переход на следующие уровни если не пройдены предыдущие в пазлах")]
-  // public bool isDisableNextButton;
-  // [Tooltip("Количество видимых следующих пазлов")]
-  // public int countNextPuzzle;
-  // public TileBase tileSquare;
+    //   [Space(5)]
+    //   [Header("Rate")]
+    //   public int minRateForReview;
+    //   public int countCoinForReview;
+    // [Space(5)]
+    // [Header("Test")]
+    // [Tooltip("Ограничить переход на следующие уровни если не пройдены предыдущие в пазлах")]
+    // public bool isDisableNextButton;
+    // [Tooltip("Количество видимых следующих пазлов")]
+    // public int countNextPuzzle;
+    // public TileBase tileSquare;
 }
 
 // [System.Serializable]
@@ -192,6 +193,20 @@ public class GameSetting : ScriptableObject
 //   // public string expression;
 //   public string pathExpression;
 // }
+
+[System.Serializable]
+public class RootObjectColorsItemFromJSON
+{
+    public ColorsItemFromJSON[] colors;
+}
+
+[System.Serializable]
+public struct ColorsItemFromJSON
+{
+  public string id;
+  public string name;
+}
+
 
 [System.Serializable]
 public struct ShopItem<T>
@@ -264,4 +279,12 @@ public enum AppMode
 {
     Desktop = 1,
     Mobile = 2
+}
+
+[Serializable]
+public struct ColorModifyItem
+{
+  public Color32 color;
+  public int cost;
+  public int rank;
 }

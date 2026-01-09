@@ -18,7 +18,7 @@ namespace Mikalai2006.Voxel
         [SerializeField] private ContainerData _containerData;
         public ContainerData ContainerData => _containerData;
         [SerializeField] private MeshConfig meshConfig;
-        [SerializeField] private List<ColorsModify> _colorsModify;
+        // [SerializeField] private ColorsModify[] _colorsModify;
         string meshName = "procedure";
         // private NativeArray<Vector3> vertices;
         // private NativeArray<int> triangles;
@@ -46,13 +46,14 @@ namespace Mikalai2006.Voxel
         // [SerializeField] private bool isGreedy = true;
         List<Vector3> prevContacts;
         [SerializeField] private LevelManager _levelManager;
+        VoxelMeshRender voxelMeshRender;
         private System.Threading.CancellationTokenSource cancelTokenSrc;
 
         void Awake()
         {
             cancelTokenSrc = new System.Threading.CancellationTokenSource();  
 
-            _colorsModify = new List<ColorsModify>();         
+            // _colorsModify = new ColorsModify[0];
         }
 
         void OnEnable()
@@ -62,8 +63,9 @@ namespace Mikalai2006.Voxel
 
         void OnDisable()
         {
-            arrayVoxels.Dispose();
-            arrayVoxelColors.Dispose();
+            ResetNativeData();
+            // arrayVoxels.Dispose();
+            // arrayVoxelColors.Dispose();
 
             cancelTokenSrc.Cancel();
             cancelTokenSrc.Dispose();
@@ -76,6 +78,25 @@ namespace Mikalai2006.Voxel
             // newVertices.Dispose();
             // newTriangles.Dispose();
             
+            // if (arrayVoxels.IsCreated)
+            // {
+            //     arrayVoxels.Dispose();
+            // }
+
+            // if (arrayVoxelColors.IsCreated) {
+            //     arrayVoxelColors.Dispose();
+            // }
+            ResetNativeData();
+
+            if (cancelTokenSrc != null && !cancelTokenSrc.IsCancellationRequested)
+            {
+                cancelTokenSrc.Cancel();
+                cancelTokenSrc.Dispose();
+            }
+        }
+
+        void ResetNativeData()
+        {
             if (arrayVoxels.IsCreated)
             {
                 arrayVoxels.Dispose();
@@ -83,12 +104,6 @@ namespace Mikalai2006.Voxel
 
             if (arrayVoxelColors.IsCreated) {
                 arrayVoxelColors.Dispose();
-            }
-
-            if (cancelTokenSrc != null && !cancelTokenSrc.IsCancellationRequested)
-            {
-                cancelTokenSrc.Cancel();
-                cancelTokenSrc.Dispose();
             }
         }
 
@@ -112,8 +127,10 @@ namespace Mikalai2006.Voxel
             return false;
         }
 
-        public virtual void Initialize(MeshConfig config, Vector3 position)
+        public virtual void Initialize(MeshConfig config, Vector3 position, VoxelMeshRender _vmr)
         {
+            voxelMeshRender = _vmr;
+
             prevContacts = new();
 
             SetConfig(config);
@@ -163,13 +180,15 @@ namespace Mikalai2006.Voxel
             _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
         }
 
-        public void SetColorsModify(List<ColorsModify> colorsModify)
-        {
-            _colorsModify = colorsModify;
-        }
+        // public void SetColorsModify(ColorsModify[] colorsModify)
+        // {
+        //     _colorsModify = colorsModify;
+        // }
 
         public void SetData(int indexGroup)
         {
+            ResetNativeData();
+
             if (gPUInstanceEnabler != null)
             {
                 gPUInstanceEnabler.SetColor(meshConfig.sOVoxelData.groups[indexGroup].color);
@@ -209,10 +228,9 @@ namespace Mikalai2006.Voxel
             arrayVoxels = new NativeArray<Voxel>(meshConfig.sOVoxelData.Bounds.x * meshConfig.sOVoxelData.Bounds.y * meshConfig.sOVoxelData.Bounds.z, Allocator.Persistent);
 
             // parse list voxels and create data. 
-            Color groupColor = meshConfig.sOVoxelData.groups[indexGroup].color;
+            Color32 groupColor = meshConfig.sOVoxelData.groups[indexGroup].color;
 
-            ColorsModify modifyColors = _colorsModify
-                .Find(x => x.typeEntity == meshConfig.sOVoxelData.typeEntity && HelperVoxel.AreColorsApproximatelyEqual(x.input, groupColor));
+            ColorsModify modifyColors = voxelMeshRender.colorsModify.Find(x => x.typeEntity == meshConfig.sOVoxelData.typeEntity && HelperVoxel.AreColorsApproximatelyEqual(x.input, groupColor));
 
             if (!modifyColors.Equals(default(ColorsModify)))
             {
@@ -247,6 +265,7 @@ namespace Mikalai2006.Voxel
 
         public void SetData()
         {
+            ResetNativeData();
             // if (propertyBlockChanger != null)
             // {
             //     propertyBlockChanger.SetData(meshConfig.emissionValue);
@@ -261,10 +280,9 @@ namespace Mikalai2006.Voxel
             // parse list voxels and create data.
             for (int j = 0; j < meshConfig.sOVoxelData.groups.Count; j++)
             {
-                Color color = meshConfig.sOVoxelData.groups[j].color;
+                Color32 color = meshConfig.sOVoxelData.groups[j].color;
 
-                ColorsModify modifyColors = _colorsModify
-                    .Find(x => x.typeEntity == meshConfig.sOVoxelData.typeEntity && HelperVoxel.AreColorsApproximatelyEqual(x.input, color));
+                ColorsModify modifyColors = voxelMeshRender.colorsModify.Find(x => x.typeEntity == meshConfig.sOVoxelData.typeEntity && HelperVoxel.AreColorsApproximatelyEqual(x.input, color));
 
                 // если есть цвет для изменения текущего
                 if (!modifyColors.Equals(default(ColorsModify)))
@@ -787,6 +805,27 @@ namespace Mikalai2006.Voxel
             return voxel;
         }
 
+        public Voxel GetVoxelMinDistance(Vector3 pos)
+        {
+            Voxel voxel = default;
+
+            if (pos.x < meshConfig.sOVoxelData.Bounds.x + 1 && pos.y < meshConfig.sOVoxelData.Bounds.y + 1 && pos.z < meshConfig.sOVoxelData.Bounds.z + 1)
+            {
+                float minDistance = 100;
+                for (int i = 0; i < arrayVoxels.Length; i++)
+                {
+                    float dist = Vector3.Distance(pos, arrayVoxels[i].position);
+                    if (dist < minDistance)
+                    {
+                        minDistance = dist;
+                        voxel = arrayVoxels[i];
+                    }
+                }
+            }
+
+            return voxel;
+        }
+
         async public UniTask ExposionVoxels(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject _explodeGameObject, float radiusExplode, Vector3 direction, Vector3 normal)
         {
             if (!meshConfig.isDestructible)
@@ -966,12 +1005,14 @@ namespace Mikalai2006.Voxel
                     }
                 }
 
-                BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
-                if (bm)
+                IHealthed obj = _explodeGameObject.transform.GetComponentInParent<IHealthed>();
+                if (obj != null)
                 {
-                    bm.RefreshHP();
+                    obj.RefreshHP();
 
-                    if (bm.Data.ContainerData.levelDestruction > 0.85f)
+                    BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
+                    
+                    if (bm != null && bm.Data.ContainerData.levelDestruction > 0.85f)
                     {
                         GameSceneEvents.AddInfoDamage(new AppInfoDamageData
                         {

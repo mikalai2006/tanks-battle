@@ -7,6 +7,7 @@ using Loader;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;
+using System.IO;
 
 public class GameManager : StaticInstance<GameManager>
 {
@@ -24,6 +25,7 @@ public class GameManager : StaticInstance<GameManager>
   public AppInfoContainer AppInfo { get; private set; }
   public GameSetting Settings;
   public GameLevel LevelConfig;
+  public Camera ActiveCamera { get; private set; }
   public GameTheme Theme { get; private set; }
   public AudioManager audioManager { get; private set; }
   public DataManager DataManager { get; private set; }
@@ -31,7 +33,7 @@ public class GameManager : StaticInstance<GameManager>
   public StateManager StateManager;// { get; private set; }
   public SceneInstance currentScene;
 
-    public LoaderBarProvider LoaderBarProvider { get; private set; }
+  public LoaderBarProvider LoaderBarProvider { get; private set; }
   public InitUserProvider InitUserProvider { get; private set; }
   public AssetProvider AssetProvider { get; private set; }
   public GameState State { get; private set; }
@@ -119,6 +121,44 @@ public class GameManager : StaticInstance<GameManager>
     // ChangeState(GameState.StartApp);
 
     // InputManager = new();
+
+    
+    if (File.Exists(Settings.pathFileColors))
+    {
+        string jsonContent = File.ReadAllText(Settings.pathFileColors);
+
+        RootObjectColorsItemFromJSON data = JsonUtility.FromJson<RootObjectColorsItemFromJSON>(jsonContent);
+
+        Debug.Log("Parse colors: " + data.colors.Length);
+
+        List<ColorModifyItem> newColorsForModify = new List<ColorModifyItem>();
+
+        foreach (var color in data.colors)
+        {
+          Color colorRGBA;
+          if (ColorUtility.TryParseHtmlString(color.name, out colorRGBA))
+          {
+              // Debug.Log("Parsed RGBA Color: " + colorRGBA.ToString()); 
+              Color32 color32 = colorRGBA;
+              
+              newColorsForModify.Add(new ColorModifyItem
+              {
+                color = color32,
+                cost = 0,
+                rank = 0
+              });
+          }
+          else
+          {
+              Debug.LogError("Failed to parse RGBA hex string.");
+          }
+          Settings.colorsModify = newColorsForModify;
+        }
+    }
+    else
+    {
+        Debug.LogError("Not found colors at path: " + Settings.pathFileColors);
+    }
   }
 
     void Update()
@@ -126,7 +166,7 @@ public class GameManager : StaticInstance<GameManager>
       Debug.unityLogger.logEnabled = Settings.DebugSettings.logEnabled;
     }
 
-    public void ChangeState(GameState newState, object Params = null)
+  public void ChangeState(GameState newState, object Params = null)
   {
     OnBeforeStateChanged?.Invoke(newState);
     Debug.Log($"GAME state => {newState}");
@@ -143,6 +183,7 @@ public class GameManager : StaticInstance<GameManager>
         HandleRunLevel();
         break;
       case GameState.CloseLevel:
+      case GameState.ChangeMenuItem:
         HandleCloseLevel();
         break;
       case GameState.StopDrag:
@@ -194,12 +235,18 @@ public class GameManager : StaticInstance<GameManager>
 
   private async void HandleRunLevel()
   {
-    await AssetProvider.UnloadAdditiveScene(currentScene);
+    if (currentScene.Scene.IsValid())
+    {
+      await AssetProvider.UnloadAdditiveScene(currentScene);
+    }
   }
   private async void HandleCloseLevel()
   {
     // LevelManager = null;
-    await AssetProvider.UnloadAdditiveScene(currentScene);
+    if (currentScene.Scene.IsValid())
+    {
+      await AssetProvider.UnloadAdditiveScene(currentScene);
+    }
   }
   private async void HandleCreateGame()
   {
@@ -291,6 +338,10 @@ public class GameManager : StaticInstance<GameManager>
   {
     LevelConfig = obj;
   }
+  public void SetActiveCamera(Camera cam)
+  {
+    ActiveCamera = cam;
+  }
 }
 
 [Serializable]
@@ -310,5 +361,6 @@ public enum GameState
   StartPause = 11,
   StopPause = 12,
   ShowThroph = 13,
-  CloseThroph = 14
+  CloseThroph = 14,
+  ChangeMenuItem = 15
 }

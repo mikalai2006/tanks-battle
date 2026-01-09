@@ -8,9 +8,9 @@ namespace Mikalai2006.Voxel
     {
         private SphereCollider sphereCollider;
 
-        public override void Initialize(MeshConfig config, Vector3 position)
+        public override void Initialize(MeshConfig config, Vector3 position, VoxelMeshRender vmr)
         {
-            base.Initialize(config, position);
+            base.Initialize(config, position, vmr);
 
             if (!config.existCollider)
             {

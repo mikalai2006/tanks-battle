@@ -30,7 +30,6 @@
     border-right-color: rgb(13, 76, 65);
     border-top-color: rgb(13, 76, 65);
     border-bottom-color: rgb(13, 76, 65);
-    width: 180px;
 }
 
 .list-item:hover {
@@ -95,4 +94,23 @@
 
 .tabs-button:active {
     background-color: rgba(17, 53, 67, 0.98);
+}
+
+.list-item-color {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(13, 76, 65);
+    border-right-color: rgb(13, 76, 65);
+    border-top-color: rgb(13, 76, 65);
+    border-bottom-color: rgb(13, 76, 65);
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }

@@ -1,12 +1,18 @@
 using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+
+
+
 
 #if UNITY_EDITOR
 using UnityEditor; 
 #endif
 
-public class BaseBody : MonoBehaviour
+public class BaseBody : MonoBehaviour, IColored
 {
     protected GameManager _gameManager => GameManager.Instance;
     [SerializeField] private SpriteRenderer _bodySprite;
@@ -76,6 +82,11 @@ public class BaseBody : MonoBehaviour
         // OnChangeData();
 
         voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
+
+        if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+        {
+            voxelMeshRender.SetColorsModify(Machine.MachineLevelData.colorsModify);
+        }
 
         // _bodySprite.color = Machine.Config.colorBody;
         // _bodySprite.sprite = Machine.Config.body.spriteBody;
@@ -292,10 +303,43 @@ public class BaseBody : MonoBehaviour
         }
     }
 
-
     public void OnSetDirectionMove(Vector3 direction)
     {
         Machine.Data.directionMove = direction;
+    }
+
+    public void ReDraw(List<ColorsModify> colors)
+    {
+        voxelMeshRender.UploadedAllMeshes(colors);
+    }
+    
+    public FillData OnFill(Vector3 _pointPointer)
+    {
+        FillData output = new FillData();
+
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            if (voxelMeshRender.Containers[i].PointInCollider(_pointPointer))
+            {
+                Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointPointer);
+                // voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                Vector3Int pos = Helpers.RoundVector3(localPoint);
+
+                Voxel voxel = voxelMeshRender.Containers[i].GetVoxelMinDistance(pos);
+
+                if (!voxel.color.Equals(Color.clear))
+                {
+                    SubmeshesData submeshesData = Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+
+                    Color32 groupColor32 = submeshesData.color;
+
+                    output.voxelGroupData = submeshesData;
+                
+                    Debug.Log($"<color=purple>Body[{Machine.MachineLevelData.id}] OnPointer: {_pointPointer}:::{localPoint}:::{pos}|||{groupColor32}-{voxel.color}</color>");
+                }
+            }
+        }
+        return output;
     }
 
     public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)

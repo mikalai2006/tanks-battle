@@ -45,5 +45,5 @@ MonoBehaviour:
   colorTextInfoRow: {r: 1, g: 1, b: 1, a: 1}
   colorBgInput: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   colorTextInput: {r: 1, g: 1, b: 1, a: 1}
-  colorBgButton: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  colorBgDialog: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+  colorBgButton: {r: 0.19215688, g: 0.25882354, b: 0.1764706, a: 1}
+  colorBgDialog: {r: 0.2901961, g: 0.3019608, b: 0.20000002, a: 1}

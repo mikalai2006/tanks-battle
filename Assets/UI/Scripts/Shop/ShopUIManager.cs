@@ -1,68 +1,96 @@
-using System;
 using System.Collections.Generic;
 using UIToolkitLibrary;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GarageUIManager : MonoBehaviour
+public class ShopUIManager : MonoBehaviour
 {
     GameManager gameManager => GameManager.Instance;
     [SerializeField] private Transform Wrapper;
     [SerializeField] private Camera Camera;
     [SerializeField] private CinemachineCamera CinemachineCamera;
-    List<BaseMachine> machines;
+    [SerializeField] private List<GameMachine> machinesConfigs;
+    List<BaseMachine> machinesGameObjects;
     int activeIndexMachine = 0;
+    [SerializeField] private InputActionReference mousePositionAction;
+    [SerializeField] private InputActionReference clickAction;
 
     void Start()
     {
-        machines = new List<BaseMachine>();
+        machinesGameObjects = new List<BaseMachine>();
+
+        gameManager.SetActiveCamera(Camera);
 
         Init();
 
         ShopUIEvents.ClickButtonNextInShop += OnNextMachine;
         ShopUIEvents.ClickButtonPrevInShop += OnPrevMachine;
+        ShopUIEvents.ClickButtonBuyInShop += OnBuyMachine;
     }
 
     void OnDestroy()
     {
         ShopUIEvents.ClickButtonNextInShop -= OnNextMachine;
         ShopUIEvents.ClickButtonPrevInShop -= OnPrevMachine;
+        ShopUIEvents.ClickButtonBuyInShop -= OnBuyMachine;
+    }
+
+    void OnEnable()
+    {
+        clickAction.action.Enable();
+        mousePositionAction.action.Enable();
+        // Subscribe to the performed event of the click action
+    }
+
+    void OnDisable()
+    {
+        clickAction.action.Disable();
+        mousePositionAction.action.Disable();
     }
 
     private void OnNextMachine()
     {
-        activeIndexMachine = Mathf.Min(machines.Count - 1, activeIndexMachine + 1);
+        activeIndexMachine = Mathf.Min(machinesGameObjects.Count - 1, activeIndexMachine + 1);
 
         OnFocusMachineByIndex(activeIndexMachine);
 
-        ShopUIEvents.FocusMachineInShop.Invoke(gameManager.Settings.machines[activeIndexMachine]);
+        ShopUIEvents.FocusMachineInShop.Invoke(machinesConfigs[activeIndexMachine]);
     }
+
+    private void OnBuyMachine()
+    {
+        GameMachine configMachine = machinesConfigs[activeIndexMachine];
+        
+        gameManager.StateManager.BuyMachine(configMachine);
+    }
+
     private void OnPrevMachine()
     {
         activeIndexMachine = Mathf.Max(0, activeIndexMachine - 1);
         
         OnFocusMachineByIndex(activeIndexMachine);
 
-        ShopUIEvents.FocusMachineInShop.Invoke(gameManager.Settings.machines[activeIndexMachine]);
+        ShopUIEvents.FocusMachineInShop.Invoke(machinesConfigs[activeIndexMachine]);
     }
 
     private void Init()
     {
-
         // gameManager.StateManager.AddMachine("T3");
         int index = 0;
 
-        foreach (var item in gameManager.Settings.machines)
+        if (gameManager?.Settings != null)
         {
-            GameMachine configMachine = gameManager.Settings.machines.Find(m => m.name == item.name);
+            machinesConfigs.AddRange(gameManager.Settings.machines);
+        }
+
+        foreach (var item in machinesConfigs)
+        {
+            GameMachine configMachine = machinesConfigs.Find(m => m.name == item.name);
 
             CreateMachine(configMachine, index, new MachineLevelData
             {
                 id = item.name,
-                gerbId = gameManager.StateManager.statePlayer.gerbId,
-                name = gameManager.AppInfo.UserInfo.name,
-                rank = gameManager.StateManager.statePlayer.rank,
             });
 
             index ++;
@@ -70,7 +98,7 @@ public class GarageUIManager : MonoBehaviour
 
         
         CinemachineBrain brain = Camera.GetComponent<CinemachineBrain>();
-        if (brain != null && machines.Count > 0)
+        if (brain != null && machinesGameObjects.Count > 0)
         {
             OnFocusMachineByIndex(activeIndexMachine);
         }
@@ -78,10 +106,10 @@ public class GarageUIManager : MonoBehaviour
 
     void OnFocusMachineByIndex(int index = 0)
     {
-        index = Mathf.Clamp(index, 0, gameManager.Settings.machines.Count - 1);
+        index = Mathf.Clamp(index, 0, machinesConfigs.Count - 1);
 
-        CinemachineCamera.Follow = machines[index].objectTargetCamera.transform;
-        CinemachineCamera.LookAt = machines[index].objectTargetCamera.transform;
+        CinemachineCamera.Follow = machinesGameObjects[index].objectTargetCamera.transform;
+        CinemachineCamera.LookAt = machinesGameObjects[index].objectTargetCamera.transform;
         
         CinemachineOrbitalFollow cinemachineOrbitalFollow = CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
         if (cinemachineOrbitalFollow)
@@ -103,10 +131,11 @@ public class GarageUIManager : MonoBehaviour
         BaseMachine obj = gObject.GetComponent<BaseMachine>();
         if (obj != null)
         {
-            machines.Add(obj);
+            machinesGameObjects.Add(obj);
 
             obj.GetComponent<PlayerController>().enabled = false;
             obj.GetComponent<PlayerInput>().enabled = false;
+            obj.AreaSearch.gameObject.SetActive(false);
             // obj.GetComponentInChildren<NavMeshAgent>().enabled = false;
             // var lightComponent = obj.GetComponentInChildren<Light>();
             // if (lightComponent)

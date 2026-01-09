@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Mikalai2006.Voxel
         // public Action OnSetData;
         GameManager _gameManager => GameManager.Instance;
         [SerializeField] public MeshConfig Config;
+        [SerializeField] public List<ColorsModify> colorsModify;
         // [SerializeField] public MeshConfigModify ConfigModify;
         // [SerializeField] private SOVoxelData sOVoxelData;
         // [SerializeField] private Material _material;
@@ -25,6 +27,11 @@ namespace Mikalai2006.Voxel
         // private RenderParams _rp;
         private Vector3 position = Vector3.zero;
 
+        void Awake()
+        {
+            colorsModify = new();
+        }
+
         private void Start()
         {
             Container[] existCntainers = GetComponentsInChildren<Container>();
@@ -36,6 +43,12 @@ namespace Mikalai2006.Voxel
             if (Wrapper == null)
             {
                 Wrapper = transform.gameObject;
+            }
+
+            BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+            if (_gameManager && _gameManager.LevelConfig && bm == false)
+            {
+                SetColorsModify(_gameManager.LevelConfig.colorsModify);
             }
 
             if (Config.isOneMesh)
@@ -93,14 +106,9 @@ namespace Mikalai2006.Voxel
                     container = cont.AddComponent<ContainerMesh>();
                 break;
             }
-
-            if (_gameManager && _gameManager.LevelConfig)
-            {
-                container.SetColorsModify(_gameManager.LevelConfig.colorsModify);
-            }
             
             containers[index] = container;
-            container.Initialize(Config, Vector3.zero);
+            container.Initialize(Config, Vector3.zero, this);
             container.transform.localScale = new Vector3(1, 1, 1);
             container.transform.SetPositionAndRotation(position, Quaternion.identity);
             if (Config.isTile)
@@ -173,6 +181,20 @@ namespace Mikalai2006.Voxel
             // // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(new Vector3(0f, 0.5f, 0f)));
         }
 
+        public void SetColorsModify(List<ColorsModify> _colorsModify)
+        {
+            // if (colorsModify.Count == 0)
+            // {
+            colorsModify.Clear();
+            colorsModify.AddRange(_colorsModify);
+            //     Debug.Log($"_colorsModify.count={_colorsModify.Count}/{colorsModify.Count}");
+            // } else
+            // {
+                
+            //     Debug.Log($"NOT _colorsModify.count={_colorsModify.Count}/{colorsModify.Count}");
+            // }
+        }
+
         private void UpdateMeshContainer(Container container, int index)
         {
             
@@ -198,8 +220,13 @@ namespace Mikalai2006.Voxel
             }
         }
 
-        public void UploadedAllMeshes()
+        public void UploadedAllMeshes(List<ColorsModify> colors = null)
         {
+            if (colors != null)
+            {
+                SetColorsModify(colors);
+            }
+            // Debug.Log($"Upload all meshes {name} {containers.Length}");
             if (containers != null)
             {
                 // Debug.Log($"Set color 3 UploadedAllMeshes lenght={containers.Length}");

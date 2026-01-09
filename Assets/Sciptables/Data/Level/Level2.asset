@@ -16155,23 +16155,47 @@ MonoBehaviour:
   light: 1
   colorsModify:
   - typeEntity: 3
-    input: {r: 0.5882353, g: 0.3882353, b: 0.18039216, a: 1}
-    output: {r: 0.8235294, g: 0.6901961, b: 0.23529412, a: 1}
+    input:
+      serializedVersion: 2
+      rgba: 0
+    output:
+      serializedVersion: 2
+      rgba: 4285374381
   - typeEntity: 2
-    input: {r: 1, g: 0.6, b: 0.2, a: 1}
-    output: {r: 0.41509432, g: 0.38639748, b: 0.28390884, a: 1}
+    input:
+      serializedVersion: 2
+      rgba: 0
+    output:
+      serializedVersion: 2
+      rgba: 4282167506
   - typeEntity: 1
-    input: {r: 0.8, g: 0.8, b: 0.2, a: 1}
-    output: {r: 0.5176471, g: 0.4392157, b: 1, a: 1}
+    input:
+      serializedVersion: 2
+      rgba: 0
+    output:
+      serializedVersion: 2
+      rgba: 0
   - typeEntity: 1
-    input: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
-    output: {r: 1, g: 0.3058511, b: 0, a: 1}
+    input:
+      serializedVersion: 2
+      rgba: 0
+    output:
+      serializedVersion: 2
+      rgba: 0
   - typeEntity: 4
-    input: {r: 0, g: 0.8666667, b: 0, a: 1}
-    output: {r: 0.67499995, g: 1, b: 0, a: 1}
+    input:
+      serializedVersion: 2
+      rgba: 0
+    output:
+      serializedVersion: 2
+      rgba: 4280369502
   - typeEntity: 4
-    input: {r: 0.39607844, g: 0.25490198, b: 0.25490198, a: 1}
-    output: {r: 0.44705883, g: 0.36078432, b: 0.25882354, a: 1}
+    input:
+      serializedVersion: 2
+      rgba: 0
+    output:
+      serializedVersion: 2
+      rgba: 4280589429
   colorGround: {r: 0.6784314, g: 0.62352943, b: 0.42745098, a: 1}
   colorWall: {r: 0.8235294, g: 0.6901961, b: 0.23529412, a: 1}
   colorNature: {r: 0.45882353, g: 0.6117647, b: 0.14117648, a: 1}

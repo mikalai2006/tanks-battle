@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 using UnityEditor; 
 #endif
 
-public class BaseTower : MonoBehaviour
+public class BaseTower : MonoBehaviour, IColored
 {
     protected GameManager _gameManager => GameManager.Instance;
     // [SerializeField] private Image _spriteSector;
@@ -340,6 +340,12 @@ public class BaseTower : MonoBehaviour
 
         voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
 
+        if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+        {
+            // Debug.Log($"set colorsModify {Machine.MachineLevelData.colorsModify.Count}");
+            voxelMeshRender.SetColorsModify(Machine.MachineLevelData.colorsModify);
+        }
+
         OnSetSpeedRotateTower(optConfig.Config.speedRotateTower);
         // OnSetAngleTower(0);
 
@@ -378,6 +384,7 @@ public class BaseTower : MonoBehaviour
 
         // ChangePosition(baseMachine);
     }
+
 
     public void SetBusy(bool status)
     {
@@ -801,6 +808,24 @@ public class BaseTower : MonoBehaviour
         }
     }
 
+    public void OnPointer(Vector3 _pointPointer)
+    {
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointPointer);
+
+            if (voxelMeshRender.Containers[i].PointInCollider(_pointPointer))
+            {
+                // voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                Vector3Int pos = Helpers.RoundVector3(localPoint);
+
+                Voxel voxel = voxelMeshRender.Containers[i].GetVoxelMinDistance(pos);
+                
+                Debug.Log($"<color=purple>Tower OnPointer: {_pointPointer}:::{localPoint}:::{pos}|||{voxel.type}-{voxel.ID}-{voxel.color}</color>");
+            }
+        }
+    }
+
     public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
     {
         List<UniTask> tasks = new List<UniTask>();
@@ -865,6 +890,40 @@ public class BaseTower : MonoBehaviour
         parent = tow;
     }
 
+    
+    public void ReDraw(List<ColorsModify> colors)
+    {
+        voxelMeshRender.UploadedAllMeshes(colors);
+    }
+
+    public FillData OnFill(Vector3 _pointPointer)
+    {
+        FillData output = new FillData();
+
+        for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
+        {
+            if (voxelMeshRender.Containers[i].PointInCollider(_pointPointer))
+            {
+                Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointPointer);
+                // voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
+                Vector3Int pos = Helpers.RoundVector3(localPoint);
+
+                Voxel voxel = voxelMeshRender.Containers[i].GetVoxelMinDistance(pos);
+
+                if (!voxel.color.Equals(Color.clear))
+                {
+                    SubmeshesData submeshesData = Option.Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+
+                    Color32 groupColor32 = submeshesData.color;
+
+                    output.voxelGroupData = submeshesData;
+                
+                    Debug.Log($"<color=purple>Body[{Machine.MachineLevelData.id}] OnPointer: {_pointPointer}:::{localPoint}:::{pos}|||{groupColor32}-{voxel.color}</color>");
+                }
+            }
+        }
+        return output;
+    }
     
 #if UNITY_EDITOR
     void OnDrawGizmos()

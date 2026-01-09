@@ -1404,6 +1404,8 @@ MonoBehaviour:
   LocalPosition: {x: 0, y: 0, z: 16}
   LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   startMesh: {fileID: 0}
+  typeEntity: 5
+  Rotation: 0
   ColorsRight:
   - ID: 0
     color:
@@ -10480,3 +10482,15 @@ MonoBehaviour:
     position: {x: 17, y: 17, z: 17}
     type: 0
     IndexSubMesh: 0
+  ColorsTop: []
+  ColorsBottom: []
+  tileSockets:
+    name: 
+    rotation: 0
+    posX: 
+    negX: 
+    posY: 
+    negY: 
+    posZ: 
+    negZ: 
+    weight: 0

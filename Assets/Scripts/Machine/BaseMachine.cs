@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
-public abstract class BaseMachine : MonoBehaviour
+public abstract class BaseMachine : MonoBehaviour, IHealthed
 {
     // public static event Action<BaseMachine> OnChangeData;
     // public static event System.Action<BaseMachine> OnChangeHPs;
@@ -15,7 +13,7 @@ public abstract class BaseMachine : MonoBehaviour
     protected GameManager _gameManager => GameManager.Instance;
     public AudioSource AudioSource;
     [HideInInspector] public GameMachine Config;
-    [HideInInspector] public MachineLevelData MachineLevelData;
+    public MachineLevelData MachineLevelData;
     [HideInInspector] public StateController stateController;
 
     [Space(5)]
@@ -221,6 +219,7 @@ public abstract class BaseMachine : MonoBehaviour
     //         Debug.Log($"<color=#FFA500FF>OnTriggerEnter {collider.name}<{collider.ClosestPoint(transform.position)}></color>");
     //     }
     // }
+
 #endregion
 
     /// <summary>
@@ -385,6 +384,30 @@ public abstract class BaseMachine : MonoBehaviour
         // Badge.OnSetNameText(Data.speed.ToString());
 
         // RefreshHP();
+    }
+
+    public void ReDraw(List<ColorsModify> colors)
+    {
+        Debug.Log($"ReDraw {name}");
+
+        Body.ReDraw(colors);
+
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            Towers[i].ReDraw(colors);
+            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+            {
+                Towers[i].Muzzles[j].ReDraw(colors);
+            }
+        }
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {
+            Caterpillars[i].ReDraw(colors);
+        }
+        for (int i = 0; i < Wheels.Count; i++)
+        {
+            Wheels[i].ReDraw(colors);
+        }
     }
 
     public void OnSetHP(float hp)

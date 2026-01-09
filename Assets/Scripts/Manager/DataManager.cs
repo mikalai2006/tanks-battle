@@ -153,7 +153,7 @@ public class DataManager : Singleton<DataManager>
 
       PlayerPrefs.SetString(_gameManager.Settings.nameSaveData, JsonUtility.ToJson(_stateGame));
 
-      // Debug.Log("Save state completed!");
+      Debug.Log("Save state completed!");
 
       if (saveDb)
       {

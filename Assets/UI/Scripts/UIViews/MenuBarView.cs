@@ -113,6 +113,7 @@ namespace UIToolkitDemo
             MainMenuUIEvents.HomeScreenShown?.Invoke();
           
             // MoveMarkerToClick(evt);
+            _gameManager.ChangeState(GameState.ChangeMenuItem);
         }
 
         void ClickGameButton(ClickEvent evt)
@@ -123,6 +124,7 @@ namespace UIToolkitDemo
             MainMenuUIEvents.GameScreenShown?.Invoke();
           
             // MoveMarkerToClick(evt);
+            _gameManager.ChangeState(GameState.ChangeMenuItem);
         }
         void ClickCharButton(ClickEvent evt)
         {
@@ -143,6 +145,8 @@ namespace UIToolkitDemo
             MainMenuUIEvents.ShopScreenShown?.Invoke();
             ActivateButton(m_ShopScreenMenuButton);
             // MoveMarkerToClick(evt);
+            
+            _gameManager.ChangeState(GameState.ChangeMenuItem);
         }
 
         void ClickGarageButton(ClickEvent evt)
@@ -150,6 +154,8 @@ namespace UIToolkitDemo
             MainMenuUIEvents.GarageScreenShown?.Invoke();
             ActivateButton(m_GarageScreenMenuButton);
             // MoveMarkerToClick(evt);
+
+            _gameManager.ChangeState(GameState.ChangeMenuItem);
         }
 
         // Activate a button, highlight its label and icon
