@@ -234,7 +234,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a7c2868437eddf248a6deb329de23d8e, type: 2}
+  - {fileID: 2100000, guid: 8e2fc2afe9fc85f4296aa4632548b9d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776110025}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
   m_Name: 
@@ -536,6 +536,7 @@ MonoBehaviour:
   Camera: {fileID: 1431250834}
   CinemachineCamera: {fileID: 776110026}
   machinesConfigs: []
+  CinemachineCameraInputController: {fileID: 776110029}
   mousePositionAction: {fileID: -1621502667287529507, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   clickAction: {fileID: -20906398463482965, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &1001899999

@@ -82,10 +82,37 @@ public abstract class UILocaleBase : MonoBehaviour
     }
 
     UQueryBuilder<VisualElement> builderBtn = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBtnEl = builderBtn.Class("btn").ToList();
+    List<VisualElement> listBtnEl = builderBtn.Class("button").ToList();
     foreach (var item in listBtnEl)
     {
       item.style.backgroundColor = _gameManager.Theme.colorBgButton;
+    }
+
+    UQueryBuilder<VisualElement> builderBtnSuccess = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBtnSuccessEl = builderBtnSuccess.Class("button_success").ToList();
+    foreach (var item in listBtnSuccessEl)
+    {
+        item.style.backgroundColor = _gameManager.Theme.colorCompleted;
+    }
+
+    UQueryBuilder<VisualElement> builderBgAccent = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgAccentEl = builderBgAccent.Class("bg_accent").ToList();
+    foreach (var item in listBgAccentEl)
+    {
+        item.style.backgroundColor = _gameManager.Theme.colorAccent;
+    }
+    UQueryBuilder<VisualElement> builderBgSecondary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgSceondaryEl = builderBgSecondary.Class("bg_secondary").ToList();
+    foreach (var item in listBgSceondaryEl)
+    {
+        item.style.backgroundColor = _gameManager.Theme.colorSecondary;
+    }
+
+    UQueryBuilder<VisualElement> builderBtnAccent = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBtnAccentEl = builderBtnAccent.Class("button_accent").ToList();
+    foreach (var item in listBtnAccentEl)
+    {
+        item.style.backgroundColor = _gameManager.Theme.colorAccent;
     }
 
     UQueryBuilder<VisualElement> builderLowBtns = new UQueryBuilder<VisualElement>(_box);

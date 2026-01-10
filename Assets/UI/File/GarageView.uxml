@@ -1,10 +1,19 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=0d2d1561a57b70a4798a0a6b1324eaab&amp;type=3#base" />
+    <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General" />
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; height: 50%;">
         <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; flex-direction: row;">
+            <ui:VisualElement picking-mode="Ignore" class="bg_accent">
+                <ui:Label text="Label" name="MachineName" class="font-bold text-lg font text-primary p-2" />
+            </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1;" />
-            <ui:Button text="Sell" name="Sell" />
-            <ui:Button text="OpenColors" name="OpenColors" />
+            <ui:Button text="#btn_sell" name="Sell" class="button" />
+            <ui:Button name="OpenColors" class="button" style="flex-direction: row;">
+                <ui:VisualElement class="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Use/fill256.png?fileID=2800000&amp;guid=3f0ca1033d0f8214293e14ba284e8e9f&amp;type=3#fill256&quot;);" />
+                <ui:Label text="#btn_open_colors" />
+            </ui:Button>
+            <ui:Button text="#btn_cancel_colors" name="CancelColor" class="button" />
+            <ui:VisualElement name="Hint" picking-mode="Ignore" class="hit_wrapper" style="position: absolute; top: 5px; left: 5px; right: 5px;" />
         </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
         <ui:VisualElement name="DialogWrapper" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; left: 0; bottom: 0; right: 0; align-items: center; justify-content: center;">
@@ -16,9 +25,9 @@
     </ui:VisualElement>
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; height: 100%;">
         <ui:VisualElement picking-mode="Ignore" style="flex-direction: row;">
-            <ui:Button text="&lt;Prev" name="Prev" />
+            <ui:Button text="&lt;" name="Prev" class="button" style="font-size: 50px;" />
             <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
-            <ui:Button text="Next&gt;" name="Next" />
+            <ui:Button text="&gt;" name="Next" class="button" style="font-size: 50px;" />
         </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
     </ui:VisualElement>

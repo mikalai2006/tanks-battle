@@ -1,0 +1,34 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General" />
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
+        <ui:VisualElement name="Ava" style="background-image: url(&quot;project://database/Assets/Sprites/Use/notAva.png?fileID=2800000&amp;guid=b391c3574b6bb264eb2b59a25d342a59&amp;type=3#notAva&quot;); width: 100px; height: 100px; align-items: center; align-self: center;" />
+        <ui:VisualElement name="NameBox" style="flex-grow: 1; flex-direction: row; margin-left: -34px; margin-right: -10px;">
+            <ui:VisualElement name="RankBg" style="background-image: url(&quot;project://database/Assets/Sprites/Use/rankBg.png?fileID=21300000&amp;guid=dde7fec3ef306b24d93992178622fab7&amp;type=3#rankBg&quot;); width: 83px; height: 80px; flex-shrink: 0; position: absolute; margin-left: -12px; -unity-background-image-tint-color: rgb(144, 91, 91); margin-top: -8px; display: none;" />
+            <ui:VisualElement picking-mode="Ignore" class="p-1" style="flex-grow: 1; flex-direction: row;">
+                <ui:VisualElement name="RankImage" style="background-image: url(&quot;project://database/Assets/Sprites/Use/rank.png?fileID=205552614&amp;guid=4c400c1f441623a4db66cae3d5b50846&amp;type=3#rank_5&quot;); width: 60px; height: 60px; flex-shrink: 0;" />
+                <ui:VisualElement style="flex-grow: 1;">
+                    <ui:Label text="Name" name="Name" class="font text-lg text-primary m-0 p-0" />
+                    <ui:Label text="Name" name="Rank" class="font text-secondary m-0 p-0" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement picking-mode="Ignore" name="CoinBox" class="p-1" style="align-items: center; flex-direction: row; margin-left: -34px; margin-right: -10px;">
+            <ui:VisualElement picking-mode="Ignore" style="background-image: url(&quot;project://database/Assets/Sprites/Use/CoinP128.png?fileID=2800000&amp;guid=765f2d276ed5c6942ab80d49d2d1fc6f&amp;type=3#CoinP128&quot;); width: 60px; height: 60px;" />
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
+                <ui:Label text="Name" name="Coin" class="font text-primary text-md" />
+            </ui:VisualElement>
+            <ui:Button name="AddCoin" class="button_circle button_success" style="background-image: url(&quot;project://database/Assets/Sprites/Use/Plus128.png?fileID=2800000&amp;guid=6e18fcdef86b1ae4d932ec4130009f5e&amp;type=3#Plus128&quot;);" />
+        </ui:VisualElement>
+        <ui:Button class="button" style="flex-direction: row; align-items: center; display: none;">
+            <ui:VisualElement picking-mode="Ignore" style="background-image: url(&quot;project://database/Assets/Sprites/Use/CoinP128.png?fileID=2800000&amp;guid=765f2d276ed5c6942ab80d49d2d1fc6f&amp;type=3#CoinP128&quot;); width: 30px; height: 30px;" />
+            <ui:Label text="Name" name="Coin1" class="font text-primary text-md" />
+        </ui:Button>
+        <ui:VisualElement picking-mode="Ignore" name="CubeBox" class="p-1 mb-2" style="align-items: center; flex-direction: row; margin-left: -34px; margin-right: -10px; margin-bottom: 0;">
+            <ui:VisualElement picking-mode="Ignore" style="background-image: url(&quot;project://database/Assets/Sprites/Use/cube256.png?fileID=2800000&amp;guid=1736769ddbec17d46bfdc70af54cd635&amp;type=3#cube256&quot;); width: 60px; height: 60px;" />
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
+                <ui:Label text="Name" name="Cube" class="font text-lg text-primary" />
+            </ui:VisualElement>
+            <ui:Button name="AddCube" class="button_circle button_success" style="background-image: url(&quot;project://database/Assets/Sprites/Use/Plus128.png?fileID=2800000&amp;guid=6e18fcdef86b1ae4d932ec4130009f5e&amp;type=3#Plus128&quot;);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

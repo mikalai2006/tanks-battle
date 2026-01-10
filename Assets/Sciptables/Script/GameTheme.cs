@@ -13,41 +13,42 @@ public class GameTheme : ScriptableObject
   public int padding;
   public int margin;
 
-  [Space(5)]
-  [Header("Game")]
-  public Sprite bgImage;
-  public Sprite timerProgressBg;
-  public Sprite timerProgress;
-  public Sprite timerBg;
-  public Sprite bgGrid;
-  public Sprite imageWarning;
-  public Color colorLockLine;
 
-  [Space(5)]
-  [Header("Hints")]
-  public Color colorHintCircleFrom;
-  public Color colorHintCircleTo;
-  public Color colorHintLineStart;
-  public Color colorHintLineEnd;
-  public Color colorHintStarBtn;
-  public Color colorHintStarBtnSecond;
 
-  [Space(5)]
-  [Header("Entity")]
-  public Color colorEntityBliss;
-  public Color colorEntitySymbol;
-  public Color entityColor;
+  // [Space(5)]
+  // [Header("Game")]
+  // public Sprite bgImage;
+  // public Sprite timerProgressBg;
+  // public Sprite timerProgress;
+  // public Sprite timerBg;
+  // public Sprite bgGrid;
+  // public Sprite imageWarning;
+  // public Color colorLockLine;
+
+  // [Space(5)]
+  // [Header("Hints")]
+  // public Color colorHintCircleFrom;
+  // public Color colorHintCircleTo;
+  // public Color colorHintLineStart;
+  // public Color colorHintLineEnd;
+  // public Color colorHintStarBtn;
+  // public Color colorHintStarBtnSecond;
+
+  // [Space(5)]
+  // [Header("Entity")]
+  // public Color colorEntityBliss;
+  // public Color colorEntitySymbol;
+  // public Color entityColor;
 
   [Space(5)]
   [Header("Game")]
   public Color colorActive;
   public Color colorCompleted;
   public Color bgColor;
-  public Color colorBgGrid;
-  // public Color colorBgControl;
   public Color colorPrimary;
   public Color colorSecondary;
   public Color colorAccent;
+  public Color colorHead;
   
   [Header("GameScreen")]
   public Color colorWrapperGameScreen;
@@ -58,6 +59,7 @@ public class GameTheme : ScriptableObject
 
   [Space(5)]
   [Header("UI")]
+  public Color colorBgHint;
   public Color colorBgInput;
   public Color colorTextInput;
   // public Color colorBgTopSide;

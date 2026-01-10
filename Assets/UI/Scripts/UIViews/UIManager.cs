@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Loader;
 using UIToolkitDemo;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.UIElements;
 
 namespace UIToolkitLibrary
@@ -13,9 +12,9 @@ namespace UIToolkitLibrary
     // High-level manager for the various parts of the Main Menu UI. Here we use one master UXML and one UIDocument.
  
     [RequireComponent(typeof(UIDocument))]
-    public class UIManager : MonoBehaviour
+    public class UIManager : UILocaleBase
     {
-        [SerializeField] public LocalizedStringTable _localization;
+        // [SerializeField] public LocalizedStringTable _localization;
         UIDocument m_MainMenuDocument;
 
         UIView m_CurrentView;
@@ -26,7 +25,7 @@ namespace UIToolkitLibrary
         List<UIView> m_AllViews = new List<UIView>();
 
         // Modal screens
-        UIView m_HomeView;  // Landing screen
+        // UIView m_HomeView;  // Landing screen
         UIView m_CharView;  // Character screen
         UIView m_InfoView;  // Resource links for more information
         UIView m_ShopView;  // Shop screen for gold/gem/potions
@@ -35,12 +34,13 @@ namespace UIToolkitLibrary
         // Overlay screens
         UIView m_MachineInfoView;
         UIView m_InventoryView;  // Inventory from character screen
-        UIView m_SettingsView;  // Overlay screen for settings
+        UIView m_SettingsView;
+        UIView m_UserInfo;
 
         // Toolbars
         UIView m_OptionsBarView;  // Quick access to gold/gem and Settings
         UIView m_MenuBarView;  // Navigation bar for menu screens
-        UIView m_LevelMeterView;  // Radial progress bar that show total character progression
+        VisualElement m_Aside;
 
         // VisualTree string IDs for UIViews; each represents one branch of the tree
         const string k_HomeViewName = "HomeScreen";
@@ -51,9 +51,10 @@ namespace UIToolkitLibrary
         const string k_MachineInfoView = "MachineInfo";
         const string k_InventoryViewName = "InventoryScreen";
         const string k_SettingsViewName = "SettingsScreen";
+        const string k_UserInfoView = "UserInfo";
         const string k_OptionsBarViewName = "OptionsBar";
         const string k_MenuBarViewName = "MenuBar";
-        const string k_LevelMeterViewName = "LevelMeter";
+        const string k_Aside = "Aside";
 
         
   private TaskCompletionSource<DataDialogResult> _processCompletionSource;
@@ -62,21 +63,31 @@ namespace UIToolkitLibrary
         void OnEnable()
         {
             m_MainMenuDocument = GetComponent<UIDocument>();
+            m_Aside = m_MainMenuDocument.rootVisualElement.Q<VisualElement>(k_Aside);
  
             SetupViews();
             
             SubscribeToEvents();
       
             // Start with the home screen
-            ShowModalView(m_HomeView);
+            // ShowModalView(m_GarageView);
+            OnGarageScreenShown();
 
+            ChangeTheme();
+
+            Initialize(m_MainMenuDocument.rootVisualElement);
+        }
+
+         private void ChangeTheme()
+        {
+            m_Aside.style.backgroundColor = new StyleColor(_gameManager.Theme.bgColor);
         }
 
         void SubscribeToEvents()
         {
             MainMenuUIEvents.GameScreenShown += InitGame;
             MainMenuUIEvents.GameSideBarShown += ShowSideBar;
-            MainMenuUIEvents.HomeScreenShown += OnHomeScreenShown;
+            // MainMenuUIEvents.HomeScreenShown += OnHomeScreenShown;
             // MainMenuUIEvents.CharScreenShown += OnCharScreenShown;
             // MainMenuUIEvents.InfoScreenShown += OnInfoScreenShown;
             MainMenuUIEvents.ShopScreenShown += OnShopScreenShown;
@@ -102,7 +113,7 @@ namespace UIToolkitLibrary
         {
             MainMenuUIEvents.GameScreenShown -= InitGame;
             MainMenuUIEvents.GameSideBarShown -= ShowSideBar;
-            MainMenuUIEvents.HomeScreenShown -= OnHomeScreenShown;
+            // MainMenuUIEvents.HomeScreenShown -= OnHomeScreenShown;
             // MainMenuUIEvents.CharScreenShown -= OnCharScreenShown;
             // MainMenuUIEvents.InfoScreenShown -= OnInfoScreenShown;
             MainMenuUIEvents.ShopScreenShown -= OnShopScreenShown;
@@ -117,6 +128,7 @@ namespace UIToolkitLibrary
         void Start()
         {
             Time.timeScale = 1f;
+            
         }
 
         void SetupViews()
@@ -132,7 +144,7 @@ namespace UIToolkitLibrary
             // }
 
             // Create full-screen modal views: HomeView, CharView, InfoView, ShopView, MailView
-            m_HomeView = new HomeView(root.Q<VisualElement>(k_HomeViewName), _localization); // Landing modal screen
+            // m_HomeView = new HomeView(root.Q<VisualElement>(k_HomeViewName), _localization); // Landing modal screen
             // m_CharView = new CharView(root.Q<VisualElement>(k_CharViewName)); // Character screen
             // m_InfoView = new InfoView(root.Q<VisualElement>(k_InfoViewName)); // Links and resources screen
             m_ShopView = new UIShopView(root.Q<VisualElement>(k_ShopViewName), _localization); // Shop screen
@@ -143,6 +155,7 @@ namespace UIToolkitLibrary
             // m_InventoryView = new InventoryView(root.Q<VisualElement>(k_InventoryViewName));  // Gear equipment overlay
             m_MachineInfoView = new UIMachineInfoView(root.Q<VisualElement>(k_MachineInfoView), _localization);
             // m_SettingsView = new SettingsView(root.Q<VisualElement>(k_SettingsViewName)); // Game settings overlay
+            m_UserInfo = new UserInfoView(root.Q<VisualElement>(k_UserInfoView), _localization);
 
             // // Toolbars 
             // LevelMeterData meterData = CharEvents.GetLevelMeterData.Invoke();
@@ -153,7 +166,7 @@ namespace UIToolkitLibrary
             m_MenuBarView = new MenuBarView(root.Q<VisualElement>(k_MenuBarViewName), _localization); // Screen selection toolbar
 
             // Track modal UI Views in a List for disposal 
-            m_AllViews.Add(m_HomeView);
+            // m_AllViews.Add(m_HomeView);
             m_AllViews.Add(m_MachineInfoView);
             m_AllViews.Add(m_MenuBarView);
             // m_AllViews.Add(m_CharView);
@@ -167,11 +180,12 @@ namespace UIToolkitLibrary
             // m_AllViews.Add(m_MenuBarView);
 
             // UI Views enabled by default
-            // m_GarageView.Show();
-            m_HomeView.Show();
+            m_GarageView.Show();
+            // m_HomeView.Show();
             m_MachineInfoView.Hide();
             // m_OptionsBarView.Show();
             m_MenuBarView.Show();
+            m_UserInfo.Show();
             // m_LevelMeterView.Show();
             Debug.Log("Init ui manager");
         }
@@ -195,10 +209,10 @@ namespace UIToolkitLibrary
         }
 
         // Modal screen methods. 
-        void OnHomeScreenShown()
-        {
-            ShowModalView(m_HomeView);
-        }
+        // void OnHomeScreenShown()
+        // {
+        //     ShowModalView(m_HomeView);
+        // }
 
         void OnCharScreenShown()
         {

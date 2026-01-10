@@ -85,7 +85,7 @@ namespace UIToolkitLibrary
         }
         
         
-        protected override async void SetVisualElements()
+        protected override void SetVisualElements()
         {
             base.SetVisualElements();
             

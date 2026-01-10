@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -9,20 +9,8 @@ using UnityEngine.UIElements;
 
 namespace UIToolkitLibrary
 {
-    /// <summary>
-    /// Manages inventory UI including filtering and selection state.
-    /// Filter dropdowns use localized strings.
-    /// </summary>
     public class UIGarageView : UIView
     {
-        /// <summary>
-        /// These arrays define the internal values used for filtering. Using arrays allows us to 
-        /// stay in sync with the localization table keys (e.g. "Inventory_Rarity_Common") and maintain
-        /// dropdown order.
-        /// </summary>
-        // public static readonly string[] RarityKeys = { "All", "Common", "Rare", "Special" };
-        // public static readonly string[] SlotTypeKeys = { "All", "Weapon", "Shield", "Helmet", "Boots", "Gloves" };
-        // [SerializeField] private VisualTreeAsset _scrollElement;
         static class ClassNames
         {
             public static string MachineBox = "MachineBox";
@@ -31,6 +19,8 @@ namespace UIToolkitLibrary
             public static string ButtonSell = "Sell";
             public static string ButtonOpenColors = "OpenColors";
             public static string DialogWrapper = "DialogWrapper";
+            public static string CancelColor = "CancelColor";
+            public static string MachineName = "MachineName";
         }
 
         ScrollView m_ScrollViewParent;
@@ -38,20 +28,18 @@ namespace UIToolkitLibrary
         Button m_Button_Prev;
         Button m_Button_Next;
         Button m_Button_Sell;
+        Button m_Button_CancelColor;
         Button m_Button_OpenColors;
         VisualElement m_DialogWrapper;
+        Label m_MachineName;
         VisualElement m_MachineBox;
         VisualElement m_InventoryPanel;
 
         DropdownField m_InventoryRarityDropdown;
         DropdownField m_InventorySlotTypeDropdown;
 
-        // Template asset for each gear item 
         VisualTreeAsset m_GearItemAsset;
         ColorModifyItem activeColorItem;
-
-        // Actively checked gear
-        // GearItemComponent m_SelectedGear;
 
         public UIGarageView(VisualElement topElement, LocalizedStringTable localization): base(topElement, localization)
         {
@@ -62,6 +50,8 @@ namespace UIToolkitLibrary
             LocalizationSettings.SelectedLocaleChanged += OnSelectedLocaleChanged;
             
             // m_GearItemAsset = Resources.Load("GearItem") as VisualTreeAsset;
+            
+            GarageUIEvents.OnFocusMachine += ChangeInfoMachine;
         }
 
         void OnSelectedLocaleChanged(Locale obj)
@@ -79,18 +69,25 @@ namespace UIToolkitLibrary
             LocalizationSettings.SelectedLocaleChanged -= OnSelectedLocaleChanged;
             
             UnregisterButtonCallbacks();
+
+            GarageUIEvents.OnFocusMachine -= ChangeInfoMachine;
         }
         
         
-        protected override async void SetVisualElements()
+        protected override void SetVisualElements()
         {
             base.SetVisualElements();
 
             m_Button_Next = m_TopElement.Q<Button>(ClassNames.ButtonNext);
             m_Button_Prev = m_TopElement.Q<Button>(ClassNames.ButtonPrev);
             m_Button_Sell = m_TopElement.Q<Button>(ClassNames.ButtonSell);
+
+            m_Button_CancelColor = m_TopElement.Q<Button>(ClassNames.CancelColor);
+            m_Button_CancelColor.style.display = DisplayStyle.None;
+
             m_Button_OpenColors = m_TopElement.Q<Button>(ClassNames.ButtonOpenColors);
             m_DialogWrapper = m_TopElement.Q<VisualElement>(ClassNames.DialogWrapper);
+            m_MachineName = m_TopElement.Q<Label>(ClassNames.MachineName);
 
             // // create tabs.
             // m_Tabs = Root.Q<VisualElement>("Tabs");
@@ -206,6 +203,11 @@ namespace UIToolkitLibrary
             UpdateLocalizedText();
         }
 
+        private void ChangeInfoMachine(BaseMachine machine)
+        {
+            m_MachineName.text = machine.Config.text.title.GetLocalizedString();
+        }
+
         private VisualElement  DrawColorsSide()
         {
             VisualElement elWrapper = new VisualElement();
@@ -226,7 +228,7 @@ namespace UIToolkitLibrary
                 var col = _gameManager.Settings.colorsModify[i];
 
                 var mBox = new Button();
-                mBox.RegisterCallback<ClickEvent>((ClickEvent evt) => OnClickColor(evt, col));
+                mBox.RegisterCallback<ClickEvent>(async (ClickEvent evt) => await OnClickColor(evt, col));
                 mBox.AddToClassList("list-item-color");
                 // VisualElement GarageWrapper = Root.Q<VisualElement>("GarageWrapper");
                 // Debug.Log($"{GarageWrapper.style.width.value.value}");
@@ -315,6 +317,8 @@ namespace UIToolkitLibrary
             return elWrapper;
         }
 
+
+
         void ClickPrev(ClickEvent evt)
         {
             GarageUIEvents.ClickButtonPrevMachine?.Invoke();
@@ -332,10 +336,12 @@ namespace UIToolkitLibrary
 
         async void ClickChooseColor(ClickEvent evt)
         {
+            string title = await Helpers.GetLocaledString("colors_title");
+            string descr = await Helpers.GetLocaledString("colors_description");
             var dialog = new DialogProvider(new DataDialog()
             {
-                title = "Choose color for fill",
-                message = "Выберите цвет, нажав на него!",
+                title = title,
+                message = descr,
                 showCancelButton = true,
                 innerElement = DrawColorsSide(),
                 width = 800,
@@ -346,7 +352,7 @@ namespace UIToolkitLibrary
         }
 
 
-        private void OnClickColor(ClickEvent evt, ColorModifyItem colorItem)
+        private async Task OnClickColor(ClickEvent evt, ColorModifyItem colorItem)
         {
             Debug.Log($"Click on the {colorItem.color}");
 
@@ -356,8 +362,55 @@ namespace UIToolkitLibrary
 
             UIEvents.NeedCloseDialogs?.Invoke();
 
-            DrawColorsSide();
+            // DrawColorsSide();
+            VisualElement hintElement = new VisualElement();
+            hintElement.style.flexDirection = FlexDirection.Row;
+            hintElement.style.flexWrap = Wrap.Wrap;
+
+            VisualElement hintColorElement = new VisualElement();
+            hintColorElement.style.width = 50;
+            hintColorElement.style.height = 50;
+            hintColorElement.style.backgroundColor = new StyleColor(activeColorItem.color);
+            hintElement.Add(hintColorElement);
+            
+            Label hint = new Label();
+            hint.text = await Helpers.GetLocaledString("colors_choose_detal");
+            hint.AddToClassList("font");
+            hint.AddToClassList("text-lg");
+            hintElement.Add(hint);
+
+            var mBtn = new Button();
+            mBtn.AddToClassList("button");
+            mBtn.text = await Helpers.GetLocaledString("btn_cancel_colors");
+            mBtn.RegisterCallback<ClickEvent>(OnCancelColorFill);
+            hintElement.Add(mBtn);
+
+            base.ShowHint(hintElement);
+
+            m_Button_OpenColors.style.display = DisplayStyle.None;
+            m_Button_CancelColor.style.display = DisplayStyle.Flex;
         }
+
+        private void OnCancelColorFill(ClickEvent evt)
+        {
+            OnCancelColorFill();
+
+            GarageUIEvents.FillCancel?.Invoke();
+        }
+
+        private void OnCancelColorFill()
+        {
+            m_Button_OpenColors.style.display = DisplayStyle.Flex;
+            m_Button_CancelColor.style.display = DisplayStyle.None;
+
+            activeColorItem = new ColorModifyItem()
+            {
+                color = Color.clear
+            };
+            base.HideHint();
+        }
+
+
         // private void OnClickMachineItem(ClickEvent evt, GameMachine machine)
         // {
         //     Debug.Log($"Click on the {machine.name}");
@@ -480,12 +533,15 @@ namespace UIToolkitLibrary
             m_Button_Next.RegisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.RegisterCallback<ClickEvent>(ClickPrev);
             m_Button_Sell.RegisterCallback<ClickEvent>(ClickSell);
+            m_Button_CancelColor.RegisterCallback<ClickEvent>(OnCancelColorFill);
             m_Button_OpenColors.RegisterCallback<ClickEvent>(ClickChooseColor);
             // m_InventoryBackButton.RegisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
             // m_InventoryRarityDropdown.RegisterValueChangedCallback(UpdateFilters);
             // m_InventorySlotTypeDropdown.RegisterValueChangedCallback(UpdateFilters);
+
+            GarageUIEvents.FillOk += OnCancelColorFill;
         }
 
         // Optional: Unregistering the button callbacks is not strictly necessary
@@ -496,14 +552,15 @@ namespace UIToolkitLibrary
             m_Button_Next.UnregisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.UnregisterCallback<ClickEvent>(ClickPrev);
             m_Button_Sell.UnregisterCallback<ClickEvent>(ClickSell);
+            m_Button_CancelColor.UnregisterCallback<ClickEvent>(OnCancelColorFill);
             m_Button_OpenColors.UnregisterCallback<ClickEvent>(ClickChooseColor);
             // m_InventoryBackButton.UnregisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
             // m_InventoryRarityDropdown.UnregisterValueChangedCallback(UpdateFilters);
             // m_InventorySlotTypeDropdown.UnregisterValueChangedCallback(UpdateFilters);
+            GarageUIEvents.FillOk -= OnCancelColorFill;
         }
-
         // // convert string to Rarity enum
         // Rarity GetRarity(string rarityString)
         // {

@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace UIToolkitLibrary
 {
@@ -17,11 +16,15 @@ namespace UIToolkitLibrary
         public static Action ScreenEnabled;
         public static Action<ColorModifyItem> ClickByColor;
         
+        public static Action<BaseMachine> OnFocusMachine;
         public static Action ClickButtonPrevMachine;
         public static Action ClickButtonNextMachine;
+        public static Action ClickButtonRotate;
         public static Action ClickButtonSellActiveMachine;
         public static Action OpenColors;
         public static Action CloseColors;
+        public static Action FillOk;
+        public static Action FillCancel;
         // // Event triggered when selecting a gear item
         // public static Action<EquipmentSO> GearSelected;
 

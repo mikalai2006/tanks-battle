@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Mikalai2006.Voxel;
 using UIToolkitLibrary;
@@ -12,11 +11,13 @@ public class GarageUIManager : MonoBehaviour
     [SerializeField] private Transform Wrapper;
     [SerializeField] private Camera Camera;
     [SerializeField] private CinemachineCamera CinemachineCamera;
+    [SerializeField] private CinemachineInputAxisController CinemachineCameraInputController;
     [SerializeField] private List<GameMachine> machinesConfigs;
     [SerializeField] List<BaseMachine> machinesGameObjects;
     [SerializeField] private int activeIndexMachine = 0;
     [SerializeField] private InputActionReference mousePositionAction;
     [SerializeField] private InputActionReference clickAction;
+    [SerializeField] private InputActionReference actionCamera;
     [SerializeField] private ColorModifyItem activeColorModifyItem;
     // CinemachineBrain brain;
     
@@ -37,6 +38,7 @@ public class GarageUIManager : MonoBehaviour
         GarageUIEvents.ClickByColor += ChooseColorModify;
         GarageUIEvents.OpenColors += OnDisable;
         GarageUIEvents.CloseColors += OnEnable;
+        GarageUIEvents.FillCancel += OnCancelColorModify;
     }
 
     void OnDestroy()
@@ -46,24 +48,34 @@ public class GarageUIManager : MonoBehaviour
         GarageUIEvents.ClickButtonSellActiveMachine -= OnSellActiveMachine;
         GarageUIEvents.ClickByColor -= ChooseColorModify;
         GarageUIEvents.OpenColors -= OnDisable;
-        GarageUIEvents.CloseColors += OnEnable;
+        GarageUIEvents.CloseColors -= OnEnable;
+        GarageUIEvents.FillCancel -= OnCancelColorModify;
     }
 
     void OnEnable()
     {
         clickAction.action.Enable();
         mousePositionAction.action.Enable();
-        // Subscribe to the performed event of the click action
+        
         clickAction.action.performed += OnClickPerformed;
+        clickAction.action.started += OnStartTouch;
+        clickAction.action.canceled += OnEndTouch;
     }
 
     void OnDisable()
     {
         clickAction.action.performed -= OnClickPerformed;
+        clickAction.action.started -= OnStartTouch;
+        clickAction.action.canceled -= OnEndTouch;
+
         clickAction.action.Disable();
         mousePositionAction.action.Disable();
     }
 
+    private void OnToggleInputCamera()
+    {
+        CinemachineCameraInputController.enabled = !CinemachineCameraInputController.enabled;
+    }
 
     private void ChooseColorModify(ColorModifyItem colorMI)
     {
@@ -145,7 +157,12 @@ public class GarageUIManager : MonoBehaviour
     {
         activeIndexMachine = Mathf.Clamp(index, 0, machinesConfigs.Count - 1);
 
-        ShopUIEvents.FocusMachineInShop.Invoke(machinesConfigs[activeIndexMachine]);
+        for (int i = 0; i < machinesGameObjects.Count; i++)
+        {
+            machinesGameObjects[i].transform.localPosition = new Vector3(machinesGameObjects[i].transform.localPosition.x, 100, machinesGameObjects[i].transform.localPosition.z);
+        }
+
+        machinesGameObjects[activeIndexMachine].transform.localPosition = new Vector3(machinesGameObjects[activeIndexMachine].transform.localPosition.x, 0, machinesGameObjects[activeIndexMachine].transform.localPosition.z);;
 
         gameManager.StateManager.SetActiveMachine(activeIndexMachine);
 
@@ -158,13 +175,15 @@ public class GarageUIManager : MonoBehaviour
             cinemachineOrbitalFollow.HorizontalAxis.Value = 90;
             cinemachineOrbitalFollow.VerticalAxis.Value = 15;
         }
+
+        GarageUIEvents.OnFocusMachine?.Invoke(machinesGameObjects[activeIndexMachine]);
     }
 
     void CreateMachine(GameMachine configMachine, int index, MachineLevelData data)
     {
         var gObject = Instantiate(
             configMachine.machinePrefab,
-            new Vector3(0, 0, -index),
+            new Vector3(0, 0, -index * 0.1f),
             Quaternion.identity,
             Wrapper
         );
@@ -192,9 +211,27 @@ public class GarageUIManager : MonoBehaviour
             // CameraHandler.OnSetCharacter(obj);
             obj.Init(configMachine, data);
 
-            obj.Body.OnSetAngleBody(-45);
+            foreach (var tower in obj.Towers)
+            {
+                tower.OnSetAngleTower(new Vector3(-1, 0.3f, 1), false, Time.deltaTime);
+            }
         }
 
+    }
+
+    private void OnStartTouch(InputAction.CallbackContext context)
+    {
+        OnToggleInputCamera();
+    }
+
+    private void OnEndTouch(InputAction.CallbackContext context)
+    {
+        OnToggleInputCamera();
+    }
+
+    private void OnCancelColorModify()
+    {
+        activeColorModifyItem.color = Color.clear;
     }
 
     private void OnClickPerformed(InputAction.CallbackContext context)
@@ -237,7 +274,9 @@ public class GarageUIManager : MonoBehaviour
 
                 bm.ReDraw(activeMachine.colorsModifies);
 
-                activeColorModifyItem.color = Color.clear;
+                OnCancelColorModify();
+
+                GarageUIEvents.FillOk?.Invoke();
             }
         }
     }

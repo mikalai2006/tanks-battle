@@ -26,7 +26,7 @@ namespace UIToolkitDemo
 
         // UI Buttons
         Button m_GameScreenMenuButton;
-        Button m_HomeScreenMenuButton;
+        // Button m_HomeScreenMenuButton;
         Button m_CharScreenMenuButton;
         Button m_InfoScreenMenuButton;
         Button m_ShopScreenMenuButton;
@@ -64,7 +64,7 @@ namespace UIToolkitDemo
             base.SetVisualElements();
 
             m_GameScreenMenuButton = m_TopElement.Q<Button>("menu__game-button");
-            m_HomeScreenMenuButton = m_TopElement.Q<Button>("menu__home-button");
+            // m_HomeScreenMenuButton = m_TopElement.Q<Button>("menu__home-button");
             // m_CharScreenMenuButton = m_TopElement.Q<Button>("menu__char-button");
             // m_InfoScreenMenuButton = m_TopElement.Q<Button>("menu__info-button");
             m_ShopScreenMenuButton = m_TopElement.Q<Button>("menu__shop-button");
@@ -80,7 +80,7 @@ namespace UIToolkitDemo
 
             // Register action when each button is clicked
             m_GameScreenMenuButton.RegisterCallback<ClickEvent>(ClickGameButton);
-            m_HomeScreenMenuButton.RegisterCallback<ClickEvent>(ClickHomeButton);
+            // m_HomeScreenMenuButton.RegisterCallback<ClickEvent>(ClickHomeButton);
             // m_CharScreenMenuButton.RegisterCallback<ClickEvent>(ClickCharButton);
             // m_InfoScreenMenuButton.RegisterCallback<ClickEvent>(ClickInfoButton);
             m_ShopScreenMenuButton.RegisterCallback<ClickEvent>(ClickShopButton);
@@ -95,7 +95,7 @@ namespace UIToolkitDemo
         // You can choose to unregister them if needed for specific scenarios.
         protected void UnregisterButtonCallbacks()
         {
-            m_HomeScreenMenuButton.UnregisterCallback<ClickEvent>(ClickHomeButton);
+            // m_HomeScreenMenuButton.UnregisterCallback<ClickEvent>(ClickHomeButton);
             // m_CharScreenMenuButton.UnregisterCallback<ClickEvent>(ClickCharButton);
             // m_InfoScreenMenuButton.UnregisterCallback<ClickEvent>(ClickInfoButton);
             m_ShopScreenMenuButton.UnregisterCallback<ClickEvent>(ClickShopButton);
@@ -109,7 +109,7 @@ namespace UIToolkitDemo
 
         void ClickHomeButton(ClickEvent evt)
         {
-            ActivateButton(m_HomeScreenMenuButton);
+            // ActivateButton(m_HomeScreenMenuButton);
             MainMenuUIEvents.HomeScreenShown?.Invoke();
           
             // MoveMarkerToClick(evt);
@@ -258,7 +258,7 @@ namespace UIToolkitDemo
         {
 
             if (m_ActiveButton == null)
-                m_ActiveButton = m_HomeScreenMenuButton;
+                m_ActiveButton = m_GameScreenMenuButton;
 
             ActivateButton(m_ActiveButton);
             MoveMarkerToElement(m_ActiveButton);

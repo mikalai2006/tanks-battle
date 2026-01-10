@@ -255,6 +255,86 @@ MonoBehaviour:
     m_Key: car3_d
     m_Metadata:
       m_Items: []
+  - m_Id: 82607345646784512
+    m_Key: btn_open_colors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82607431843926016
+    m_Key: btn_sell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82607951564328960
+    m_Key: btn_cancel_colors
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82609381842964480
+    m_Key: colors_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82609416118816768
+    m_Key: colors_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82613148344733696
+    m_Key: colors_choose_detal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82653120145739776
+    m_Key: rank_0_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82653287003541504
+    m_Key: rank_1_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82653365856456704
+    m_Key: rank_2_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654693844406272
+    m_Key: btn_buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654749007892480
+    m_Key: rank_3_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654841785896960
+    m_Key: rank_4_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654866347741184
+    m_Key: rank_5_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654880172167168
+    m_Key: rank_6_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654893321310208
+    m_Key: rank_7_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654911277125632
+    m_Key: rank_8_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654925734891520
+    m_Key: rank_9_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82654937814487040
+    m_Key: rank_10_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82655446839414784
+    m_Key: rank_11_t
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82655468343611392
+    m_Key: rank_12_t
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -40,9 +40,8 @@ public class UIDialog : UILocaleBase
 
     _wrapper = _root.Q<VisualElement>("DialogWrapper");
 
-    
-      _wrapper.transform.scale = new Vector3(0.1f, 0.1f, 0.1f);
-      _wrapper.experimental.animation.Scale(1f, 200);
+    _wrapper.style.scale = new Vector3(0.1f, 0.1f, 0.1f);
+    _wrapper.experimental.animation.Scale(1f, 200);
 
     _headerText = _root.Q<Label>("HeaderText");
     _messageText = _root.Q<Label>("MessageText");
@@ -66,7 +65,7 @@ public class UIDialog : UILocaleBase
   private void ChangeTheme()
   {
     _root.Q<VisualElement>("DialogWrapper").style.backgroundColor = new StyleColor(_gameManager.Theme.colorBgDialog);
-    _sprite.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.entityColor);
+    _sprite.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgDialog);
   }
 
   public async Task<DataDialogResult> ProcessAction(DataDialog dataDialog)

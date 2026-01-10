@@ -10,11 +10,6 @@ using UnityEngine.Localization;
 
 namespace UIToolkitLibrary
 {
-    /// <summary>
-    /// This is a base class for a functional unit of the UI. This can make up a full-screen interface or just
-    /// part of one.
-    /// </summary>
-
     public class UIView : IDisposable
     {
         protected GameManager _gameManager => GameManager.Instance;
@@ -26,6 +21,11 @@ namespace UIToolkitLibrary
         protected bool m_IsOverlay;
 
         protected VisualElement m_TopElement;
+        VisualElement m_Hint;
+        static class StyleClasses
+        {
+            public static string Hint = "Hint";
+        }
 
         // Properties
         public VisualElement Root => m_TopElement;
@@ -44,6 +44,10 @@ namespace UIToolkitLibrary
             _localization = localization;
 
             Initialize();
+
+            Theming(m_TopElement);
+
+            Localize(m_TopElement).Forget();
         }
 
         public virtual void Initialize()
@@ -52,6 +56,9 @@ namespace UIToolkitLibrary
             {
                 Hide();
             }
+
+            m_Hint = m_TopElement.Q<VisualElement>(StyleClasses.Hint);
+
             SetVisualElements();
             RegisterButtonCallbacks();
         }
@@ -86,6 +93,23 @@ namespace UIToolkitLibrary
 
         }
         
+        protected void ShowHint(VisualElement hint)
+        {
+            m_Hint.Clear();
+            m_Hint.style.display = DisplayStyle.Flex;
+            
+            m_Hint.AddToClassList("hint_wrapper");
+            m_Hint.style.backgroundColor = new StyleColor(_gameManager.Theme.colorBgHint);
+
+            m_Hint.Add(hint);
+        }
+
+        protected void HideHint()
+        {
+            m_Hint.style.display = DisplayStyle.None;
+            m_Hint.Clear();
+        }
+
         public async UniTask Localize(VisualElement root)
         {
             await LocalizationSettings.InitializationOperation.Task;
@@ -107,6 +131,99 @@ namespace UIToolkitLibrary
                 item.Element.text = entry.LocalizedValue;
             else
                 Debug.LogWarning($"No {op.Result.LocaleIdentifier.Code} translation for key: '{item.Key}'");
+            }
+        }
+
+        public void Theming(VisualElement _root)
+        {
+            var _box = _root;
+
+            UQueryBuilder<VisualElement> builder = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> list = builder.Class("text-primary").ToList();
+            foreach (var item in list)
+            {
+            item.style.color = _gameManager.Theme.colorPrimary;
+            }
+
+            UQueryBuilder<VisualElement> builderSecondary = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listSecondary = builderSecondary.Where(t => t.ClassListContains("text-secondary")).ToList();
+            foreach (var item in listSecondary)
+            {
+            item.style.color = _gameManager.Theme.colorSecondary;
+            }
+
+            UQueryBuilder<VisualElement> builderDrag = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listDragEl = builderDrag.Class("unity-base-slider__dragger").ToList();
+            foreach (var item in listDragEl)
+            {
+            item.style.backgroundColor = _gameManager.Theme.colorSecondary;
+            }
+
+            UQueryBuilder<VisualElement> builderInput = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listInputEl = builderInput.Class("unity-base-text-field__input").ToList();
+            foreach (var item in listInputEl)
+            {
+            item.style.backgroundColor = _gameManager.Theme.colorBgInput;
+            item.style.color = _gameManager.Theme.colorTextInput;
+            }
+
+            UQueryBuilder<VisualElement> builderPopup = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listPopupEl = builderPopup.Class("unity-base-popup-field__input").ToList();
+            foreach (var item in listPopupEl)
+            {
+            item.style.backgroundColor = _gameManager.Theme.colorBgInput;
+            item.style.color = _gameManager.Theme.colorTextInput;
+            }
+            UQueryBuilder<VisualElement> builderArrow = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listArrowEl = builderArrow.Class("unity-base-popup-field__arrow").ToList();
+            foreach (var item in listArrowEl)
+            {
+            item.style.unityBackgroundImageTintColor = _gameManager.Theme.colorTextInput;
+            }
+
+            UQueryBuilder<VisualElement> builderCheck = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listCheckEl = builderCheck.Class("unity-toggle__checkmark").ToList();
+            foreach (var item in listCheckEl)
+            {
+            item.style.backgroundColor = _gameManager.Theme.colorBgInput;
+            item.style.unityBackgroundImageTintColor = _gameManager.Theme.colorTextInput;
+            item.style.color = _gameManager.Theme.colorTextInput;
+            }
+
+            UQueryBuilder<VisualElement> builderBtn = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listBtnEl = builderBtn.Class("button").ToList();
+            foreach (var item in listBtnEl)
+            {
+            item.style.backgroundColor = _gameManager.Theme.colorBgButton;
+            }
+
+            
+            UQueryBuilder<VisualElement> builderBtnSuccess = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listBtnSuccessEl = builderBtnSuccess.Class("button_success").ToList();
+            foreach (var item in listBtnSuccessEl)
+            {
+                item.style.backgroundColor = _gameManager.Theme.colorCompleted;
+            }
+
+            UQueryBuilder<VisualElement> builderBtnAccent = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listBtnAccentEl = builderBtnAccent.Class("button_accent").ToList();
+            foreach (var item in listBtnAccentEl)
+            {
+                item.style.backgroundColor = _gameManager.Theme.colorAccent;
+            }
+
+            UQueryBuilder<VisualElement> builderLowBtns = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listLowBtns = builderLowBtns.Class("unity-scroller__low-button").ToList();
+            foreach (var item in listLowBtns)
+            {
+            item.style.unityBackgroundImageTintColor = _gameManager.Theme.colorTextInput;
+            }
+
+            UQueryBuilder<VisualElement> builderHighBtns = new UQueryBuilder<VisualElement>(_box);
+            List<VisualElement> listHighBtns = builderHighBtns.Class("unity-scroller__high-button").ToList();
+            foreach (var item in listHighBtns)
+            {
+            item.style.unityBackgroundImageTintColor = _gameManager.Theme.colorTextInput;
             }
         }
     }

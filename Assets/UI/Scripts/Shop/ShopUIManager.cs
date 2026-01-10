@@ -12,6 +12,7 @@ public class ShopUIManager : MonoBehaviour
     [SerializeField] private CinemachineCamera CinemachineCamera;
     [SerializeField] private List<GameMachine> machinesConfigs;
     List<BaseMachine> machinesGameObjects;
+    [SerializeField] private CinemachineInputAxisController CinemachineCameraInputController;
     int activeIndexMachine = 0;
     [SerializeField] private InputActionReference mousePositionAction;
     [SerializeField] private InputActionReference clickAction;
@@ -40,13 +41,23 @@ public class ShopUIManager : MonoBehaviour
     {
         clickAction.action.Enable();
         mousePositionAction.action.Enable();
-        // Subscribe to the performed event of the click action
+
+        clickAction.action.started += OnStartTouch;
+        clickAction.action.canceled += OnEndTouch;
     }
 
     void OnDisable()
     {
         clickAction.action.Disable();
         mousePositionAction.action.Disable();
+
+        clickAction.action.started -= OnStartTouch;
+        clickAction.action.canceled -= OnEndTouch;
+    }
+
+    private void OnToggleInputCamera()
+    {
+        CinemachineCameraInputController.enabled = !CinemachineCameraInputController.enabled;
     }
 
     private void OnNextMachine()
@@ -72,6 +83,16 @@ public class ShopUIManager : MonoBehaviour
         OnFocusMachineByIndex(activeIndexMachine);
 
         ShopUIEvents.FocusMachineInShop.Invoke(machinesConfigs[activeIndexMachine]);
+    }
+
+    private void OnStartTouch(InputAction.CallbackContext context)
+    {
+        OnToggleInputCamera();
+    }
+
+    private void OnEndTouch(InputAction.CallbackContext context)
+    {
+        OnToggleInputCamera();
     }
 
     private void Init()
