@@ -50,6 +50,8 @@ public class WFCBuilder : MonoBehaviour
 
     void Init()
     {
+        wFCCreator.SetConfig(ref ParserHeight);
+
         // генерируем карту высот из картинки.
         ParserHeight.Init();
 

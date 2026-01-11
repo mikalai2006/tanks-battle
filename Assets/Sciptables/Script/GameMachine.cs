@@ -16,7 +16,7 @@ public class GameMachine : ScriptableObject
 
   [Space(5)]
   [Header("Составные части")]
-  public GameBody body;
+  public GameBodyOption body;
   public List<GameTowerOption> towers;
   public List<GameCaterpillarOption> catterpillars;
   public List<GameWheelOption> wheels;
@@ -64,17 +64,21 @@ public class GameMachine : ScriptableObject
 
 
 [Serializable]
+public class GameBodyOption
+{
+  public GameBody Config;
+  [Tooltip("Смещение шасси")]
+  public Vector3 offsetBody;
+}
+
+[Serializable]
 public class GameTowerOption
 {
   public string ido;
-  // [Tooltip("Спрайт башни")]
-  // public Sprite spriteTower;
   [Tooltip("Конфигурация")]
   public GameTower Config;
   [Tooltip("Смещение башни")]
   public Vector3 offsetTower;
-  [Tooltip("Цвет башни машины")]
-  public Color colorTower;
   [Tooltip("Вращается ли башня")]
   public bool isRotate;
 
@@ -96,8 +100,6 @@ public class GameCaterpillarOption
   public GameCaterpillar Config;
   [Tooltip("Смещение")]
   public Vector3 offsetCat;
-  [Tooltip("Цвет")]
-  public Color colorCat;
 }
 
 [Serializable]
@@ -107,8 +109,6 @@ public class GameWheelOption
   public GameWheel Config;
   [Tooltip("Смещение")]
   public Vector3 offsetWheel;
-  [Tooltip("Цвет")]
-  public Color colorWheel;
 }
 
 [Serializable]

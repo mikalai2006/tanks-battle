@@ -426,6 +426,59 @@ public static class Helpers
   //     return (Vector3.Distance(point, closestPoint) < 0.001f);
   // }
 
+  public static List<Vector2> GenerateArchimedeanSpiral(double radiusIncrement, int numPoints)
+    {
+        var points = new List<Vector2>();
+        double currentRadius = 0;
+        double angle = 0;
+        double angleIncrement = 0.1; // Шаг по углу (чем меньше, тем глаже спираль)
+
+        for (int i = 0; i < numPoints; i++)
+        {
+            // Расчет радиуса для текущего шага
+            currentRadius = radiusIncrement * angle;
+
+            // Перевод в декартовы координаты
+            double x = currentRadius * Math.Cos(angle);
+            double y = currentRadius * Math.Sin(angle);
+
+            points.Add(new Vector2((float)x, (float)y));
+
+            // Увеличение угла для следующей точки
+            angle += angleIncrement;
+        }
+        return points;
+    }
+
+    // /// <summary>
+    // /// Добавление списка элементов в словарь аналогичных элементов.
+    // /// </summary>
+    // /// <typeparam name="TKey"></typeparam>
+    // /// <typeparam name="TValue"></typeparam>
+    // /// <param name="targetDictionary"></param>
+    // /// <param name="sourceCollection"></param>
+    // public static void AddRange<TKey, TValue>(
+    // Dictionary<TKey, TValue> targetDictionary, 
+    // IEnumerable<KeyValuePair<TKey, TValue>> sourceCollection)
+    // {
+    //   foreach (var item in sourceCollection)
+    //   {
+    //       if (!targetDictionary.ContainsKey(item.Key))
+    //       {
+    //         targetDictionary.Add(item.Key, item.Value);
+    //       }
+    //       else
+    //       {
+    //         // Handle the duplicate key case:
+    //         // Option A: Log a warning (as shown here)
+    //         Debug.LogWarning($"Skipping duplicate key: {item.Key}");
+    //         // Option B: Overwrite the existing value
+    //         // targetDictionary[item.Key] = item.Value;
+    //         // Option C: Throw an exception
+    //         // throw new System.ArgumentException($"Duplicate key found: {item.Key}");
+    //       }
+    //   }
+    // }
 }
 
 

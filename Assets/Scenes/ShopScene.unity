@@ -336,7 +336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776110025}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17527866, y: 0, z: 0, w: 0.9845189}
+  m_LocalRotation: {x: 0.15498824, y: -0.012899894, z: 0.0020239635, w: 0.98783004}
   m_LocalPosition: {x: 0, y: 0.60141164, z: -1.9074339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: 0.04166609, y: 0.116666734}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -800,7 +800,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 37088a31f09643b48ae750284eed0385, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -818,7 +818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431250832}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17527865, y: 0, z: 0, w: 0.9845189}
+  m_LocalRotation: {x: 0.15498826, y: -0.012899894, z: 0.002023964, w: 0.98783004}
   m_LocalPosition: {x: 0, y: 0.60141164, z: -1.9074339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

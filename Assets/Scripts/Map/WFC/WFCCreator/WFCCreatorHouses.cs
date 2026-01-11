@@ -14,9 +14,16 @@ public class WFCCreatorHouses : WFCCreator
         nextNumberGroup = 0;
     }
 
+    public override void SetConfig(ref ParserHeight parserHeight)
+    {
+        parserHeight._settings = wFCBuilder.wFCManager.settingMapHouses;
+
+        base.SetConfig(ref parserHeight);
+    }
+    
     public override void InitializeGrid(Tile3D[] prefabTiles, ParserHeight _parserHeight, TypeEntity typeCell)
     {
-        _parserHeight._settings = wFCBuilder.wFCManager.settingMapHouses;
+        // _parserHeight._settings = wFCBuilder.wFCManager.settingMapHouses;
 
         base.InitializeGrid(prefabTiles, _parserHeight, typeCell);
 

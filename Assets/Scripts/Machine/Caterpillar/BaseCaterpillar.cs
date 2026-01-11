@@ -43,7 +43,7 @@ public class BaseCaterpillar : MonoBehaviour, IColored
     }
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameCaterpillarOption config, int i)
+    public void Init(BaseMachine baseMachine, GameCaterpillarOption config, int i, DataDetail dataCat)
     {
         Machine = baseMachine;
 
@@ -53,9 +53,9 @@ public class BaseCaterpillar : MonoBehaviour, IColored
         {
             voxelMeshRenders[i].OnSetConfigMeshGenerator(Option.Config.MeshConfig);
 
-            if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+            if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
             {
-                voxelMeshRenders[i].SetColorsModify(Machine.MachineLevelData.colorsModify);
+                voxelMeshRenders[i].SetData(Machine.MachineLevelData.data, dataCat);
             }
         });
 

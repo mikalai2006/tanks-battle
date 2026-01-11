@@ -4,9 +4,16 @@ using UnityEditor;
 
 public class WFCCreatorZabor : WFCCreator
 {
+    public override void SetConfig(ref ParserHeight parserHeight)
+    {
+        parserHeight._settings = wFCBuilder.wFCManager.settingMapZabor;
+
+        base.SetConfig(ref parserHeight);
+    }
+
     public override void InitializeGrid(Tile3D[] prefabTiles, ParserHeight _parserHeight, TypeEntity typeCell)
     {
-        _parserHeight._settings = wFCBuilder.wFCManager.settingMapZabor;
+        // _parserHeight._settings = wFCBuilder.wFCManager.settingMapZabor;
 
         base.InitializeGrid(prefabTiles, _parserHeight, typeCell);
     }

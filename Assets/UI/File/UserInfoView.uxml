@@ -5,7 +5,7 @@
         <ui:VisualElement name="NameBox" style="flex-grow: 1; flex-direction: row; margin-left: -34px; margin-right: -10px;">
             <ui:VisualElement name="RankBg" style="background-image: url(&quot;project://database/Assets/Sprites/Use/rankBg.png?fileID=21300000&amp;guid=dde7fec3ef306b24d93992178622fab7&amp;type=3#rankBg&quot;); width: 83px; height: 80px; flex-shrink: 0; position: absolute; margin-left: -12px; -unity-background-image-tint-color: rgb(144, 91, 91); margin-top: -8px; display: none;" />
             <ui:VisualElement picking-mode="Ignore" class="p-1" style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement name="RankImage" style="background-image: url(&quot;project://database/Assets/Sprites/Use/rank.png?fileID=205552614&amp;guid=4c400c1f441623a4db66cae3d5b50846&amp;type=3#rank_5&quot;); width: 60px; height: 60px; flex-shrink: 0;" />
+                <ui:VisualElement name="RankImage" style="background-image: url(&quot;project://database/Assets/Sprites/Use/rank.png?fileID=205552614&amp;guid=4c400c1f441623a4db66cae3d5b50846&amp;type=3#rank_5&quot;); width: 60px; height: 60px; flex-shrink: 0; -unity-background-image-tint-color: rgb(238, 221, 130);" />
                 <ui:VisualElement style="flex-grow: 1;">
                     <ui:Label text="Name" name="Name" class="font text-lg text-primary m-0 p-0" />
                     <ui:Label text="Name" name="Rank" class="font text-secondary m-0 p-0" />

@@ -41,6 +41,16 @@ public enum VoxelType : byte
     Dirt,
     Stone,
     OakLog,
+    Red,
+    Blue,
+    Green,
+    Gray,
+    Silver,
+    Olive,
+    Yellow,
+    Magenta,
+    Black,
+    White,
     Destroyed
 }
 

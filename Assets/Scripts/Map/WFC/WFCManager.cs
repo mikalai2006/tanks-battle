@@ -74,9 +74,8 @@ public class WFCManager : MonoBehaviour
         int maxHeight = Mathf.Max(wFCBuilderCaves.size.y, wFCBuilderHouses.size.y, wFCBuilderZabor.size.y, wFCBuilderTrees.size.y);
 
         // записываем сохраненные данные для тайлов.
-        var _gameLevel = gameLevel.levelData;
-        _gameLevel.maxHeight = maxHeight;
-        _gameLevel.size = wFCBuilderCaves.size;
+        gameLevel.levelData.maxHeight = maxHeight;
+        gameLevel.levelData.size = wFCBuilderCaves.size;
 
         // записываем все использованные префабы.
         var tilePrefabs = new System.Collections.Generic.List<Tile3D>();

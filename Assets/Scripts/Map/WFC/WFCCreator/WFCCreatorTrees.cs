@@ -4,9 +4,17 @@ using UnityEditor;
 
 public class WFCCreatorTrees : WFCCreator
 {
+
+    public override void SetConfig(ref ParserHeight parserHeight)
+    {
+        parserHeight._settings = wFCBuilder.wFCManager.settingMapTrees;
+
+        base.SetConfig(ref parserHeight);
+    }
+    
     public override void InitializeGrid(Tile3D[] prefabTiles, ParserHeight _parserHeight, TypeEntity typeCell)
     {
-        _parserHeight._settings = wFCBuilder.wFCManager.settingMapTrees;
+        // _parserHeight._settings = wFCBuilder.wFCManager.settingMapTrees;
 
         base.InitializeGrid(prefabTiles, _parserHeight, typeCell);
     }

@@ -117,6 +117,11 @@ public class GarageUIManager : MonoBehaviour
         DrawMachines();
 
         var index = gameManager.StateManager.statePlayer != null ? gameManager.StateManager.statePlayer.indexActiveMachine : 0;
+
+        if (index > machinesGameObjects.Count)
+        {
+            index = 0;
+        }
         
         if (machinesGameObjects.Count > 0)
         {
@@ -144,7 +149,7 @@ public class GarageUIManager : MonoBehaviour
                 CreateMachine(configMachine, index, new MachineLevelData
                 {
                     id = item.name,
-                    colorsModify = item.colorsModifies,
+                    data = item.data
                 });
             }
             
@@ -155,7 +160,7 @@ public class GarageUIManager : MonoBehaviour
 
     void OnFocusMachineByIndex(int index = 0)
     {
-        activeIndexMachine = Mathf.Clamp(index, 0, machinesConfigs.Count - 1);
+        activeIndexMachine = Mathf.Clamp(index, 0, gameManager.StateManager.statePlayer.machines.Count - 1);
 
         for (int i = 0; i < machinesGameObjects.Count; i++)
         {
@@ -272,7 +277,7 @@ public class GarageUIManager : MonoBehaviour
                 //     colorsModify = activeMachine.colorsModifies,
                 // };
 
-                bm.ReDraw(activeMachine.colorsModifies);
+                bm.ReDraw(activeMachine.data.colorsModifies);
 
                 OnCancelColorModify();
 

@@ -19,6 +19,7 @@ public class Tile3D : MonoBehaviour
     [HideInInspector] public VoxelMeshRender voxelMeshRender;
 
     public bool isEmpty;
+    public bool isActive = true;
 
 
     [HideInInspector] public Voxel[] ColorsRight;
@@ -399,6 +400,11 @@ public class Tile3D : MonoBehaviour
         };
 
         return vox;
+    }
+
+    public void SetActive(bool v)
+    {
+        isActive = v;
     }
 }
 

@@ -1,7 +1,5 @@
-using System;
 using System.Threading.Tasks;
 using Mikalai2006.Voxel;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -74,7 +72,7 @@ namespace UIToolkitLibrary
         }
         
         
-        protected override void SetVisualElements()
+        async protected override void SetVisualElements()
         {
             base.SetVisualElements();
 
@@ -88,6 +86,36 @@ namespace UIToolkitLibrary
             m_Button_OpenColors = m_TopElement.Q<Button>(ClassNames.ButtonOpenColors);
             m_DialogWrapper = m_TopElement.Q<VisualElement>(ClassNames.DialogWrapper);
             m_MachineName = m_TopElement.Q<Label>(ClassNames.MachineName);
+
+            if (_gameManager.StateManager.statePlayer.machines.Count == 0)
+            {
+                m_Button_Next.style.display = DisplayStyle.None;
+                m_Button_Prev.style.display = DisplayStyle.None;
+                m_Button_Sell.style.display = DisplayStyle.None;
+                m_Button_OpenColors.style.display = DisplayStyle.None;
+                m_MachineName.style.display = DisplayStyle.None;
+
+                VisualElement hintElement = new VisualElement();
+                hintElement.style.flexDirection = FlexDirection.Row;
+                hintElement.style.flexWrap = Wrap.Wrap;
+                
+                Label hint = new Label();
+                hint.text = await Helpers.GetLocaledString("not_machine");
+                hint.AddToClassList("font");
+                hint.AddToClassList("text-lg");
+                hintElement.Add(hint);
+
+                var mBtn = new Button();
+                mBtn.AddToClassList("button");
+                mBtn.text = await Helpers.GetLocaledString("shop");
+                mBtn.clickable.clicked += () =>
+                {
+                    MainMenuUIEvents.ShopScreenShown?.Invoke();
+                };
+                hintElement.Add(mBtn);
+
+                base.ShowHint(hintElement);
+            }
 
             // // create tabs.
             // m_Tabs = Root.Q<VisualElement>("Tabs");
@@ -213,7 +241,7 @@ namespace UIToolkitLibrary
             VisualElement elWrapper = new VisualElement();
             // m_DialogWrapper.Clear();
             m_MachineBox = new ScrollView(); // m_TopElement.Q(ClassNames.MachineBox);
-            m_MachineBox.style.width = 128 * 5;
+            // m_MachineBox.style.width = 128 * 5;
             m_MachineBox.style.paddingLeft = 0;
             m_MachineBox.style.paddingRight = 0;
             var m_Content = m_MachineBox.Q("unity-content-container");
@@ -344,7 +372,8 @@ namespace UIToolkitLibrary
                 message = descr,
                 showCancelButton = true,
                 innerElement = DrawColorsSide(),
-                width = 800,
+                width = 400,
+                align = Align.FlexStart
             });
             GarageUIEvents.OpenColors?.Invoke();
             var dataResultDialog = await dialog.ShowAndHide();

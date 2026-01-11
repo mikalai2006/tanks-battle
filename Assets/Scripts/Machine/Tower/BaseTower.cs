@@ -16,10 +16,10 @@ public class BaseTower : MonoBehaviour, IColored
     // [SerializeField] private Image _spriteSector;
     // [SerializeField] private RectTransform _rectSector;
     // [SerializeField] GameObject SectorGO;
-    [SerializeField] GameObject MuzzlesBox;
+    [SerializeField] public GameObject MuzzlesBox;
     [SerializeField] GameObject Wrapper;
-    [SerializeField] List<BaseMuzzle> muzzles;
-    public List<BaseMuzzle> Muzzles => muzzles;
+    // [SerializeField] List<BaseMuzzle> muzzles;
+    public List<BaseMuzzle> Muzzles => Machine.Muzzles;
     [SerializeField] private SortingGroup sortingGroup;
     public GameTowerOption Option {get; private set ;}
     protected BaseMachine Machine;
@@ -315,7 +315,7 @@ public class BaseTower : MonoBehaviour, IColored
 
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameTowerOption optConfig, int index)
+    public void Init(BaseMachine baseMachine, GameTowerOption optConfig, int index, DataDetail dataTower)
     {
         Option = optConfig;
 
@@ -340,10 +340,10 @@ public class BaseTower : MonoBehaviour, IColored
 
         voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
 
-        if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+        if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
         {
             // Debug.Log($"set colorsModify {Machine.MachineLevelData.colorsModify.Count}");
-            voxelMeshRender.SetColorsModify(Machine.MachineLevelData.colorsModify);
+            voxelMeshRender.SetData(Machine.MachineLevelData.data, dataTower);
         }
 
         OnSetSpeedRotateTower(optConfig.Config.speedRotateTower);
@@ -365,14 +365,14 @@ public class BaseTower : MonoBehaviour, IColored
 
         transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
 
-        // инициализируем компоненты машины
-        for (int i = 0; i < optConfig.muzzles.Count; i++)
-        {
-            GameMuzzleOption _mConfig = optConfig.muzzles.ElementAt(i);
-            var _muz = Instantiate(_mConfig.Config.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
-            _muz.Init(baseMachine, this, _mConfig, i);
-            muzzles.Add(_muz);
-        }
+        // // создаем дуло.
+        // for (int i = 0; i < optConfig.muzzles.Count; i++)
+        // {
+        //     GameMuzzleOption _mConfig = optConfig.muzzles.ElementAt(i);
+        //     var _muz = Instantiate(_mConfig.Config.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+        //     _muz.Init(baseMachine, this, _mConfig, i);
+        //     muzzles.Add(_muz);
+        // }
 
         OnNotViewTarget(null);
 
@@ -478,11 +478,22 @@ public class BaseTower : MonoBehaviour, IColored
                 
             } else
             {
-                transform.rotation = Quaternion.Euler(
-                    Parent.transform.eulerAngles.x,
-                    Parent.transform.eulerAngles.y,
-                    Parent.transform.eulerAngles.z
-                );
+                if (Parent != null)
+                {
+                    transform.rotation = Quaternion.Euler(
+                        Parent.transform.eulerAngles.x,
+                        Parent.transform.eulerAngles.y,
+                        Parent.transform.eulerAngles.z
+                    );
+                } else
+                {
+                    transform.rotation = Quaternion.Euler(
+                        Machine.Body.transform.eulerAngles.x,
+                        Machine.Body.transform.eulerAngles.y,
+                        Machine.Body.transform.eulerAngles.z
+                    );
+                    
+                }
             }
 
             for (int j = 0; j < Muzzles.Count; j++)

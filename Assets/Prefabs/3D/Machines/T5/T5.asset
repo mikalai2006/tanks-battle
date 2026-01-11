@@ -36,12 +36,13 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
   customScale: 0.015
-  body: {fileID: 11400000, guid: 46238737845883a4285cf9977881f4f0, type: 2}
+  body:
+    Config: {fileID: 11400000, guid: 46238737845883a4285cf9977881f4f0, type: 2}
+    offsetBody: {x: 0, y: 0, z: 0}
   towers:
   - ido: 
     Config: {fileID: 11400000, guid: 3ff790064851c6c4f8534b945a69cc35, type: 2}
     offsetTower: {x: 0, y: 12, z: 0}
-    colorTower: {r: 0.6901382, g: 0.8018868, b: 0.12482201, a: 1}
     isRotate: 1
     muzzles:
     - Config: {fileID: 11400000, guid: 203f8f3a2b7f4b544a0471e2457d2b32, type: 2}
@@ -51,13 +52,10 @@ MonoBehaviour:
   catterpillars:
   - Config: {fileID: 11400000, guid: 1558f38028911334bb8ad4b779059f4d, type: 2}
     offsetCat: {x: 0, y: 4, z: 0}
-    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   - Config: {fileID: 11400000, guid: 8b6a052a910a69749b83768e1ea42aac, type: 2}
     offsetCat: {x: -9, y: 3.5, z: 0}
-    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   - Config: {fileID: 11400000, guid: 8b6a052a910a69749b83768e1ea42aac, type: 2}
     offsetCat: {x: 9, y: 3.5, z: 0}
-    colorCat: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   wheels: []
   soundMove: {fileID: 8300000, guid: 71d39ac5da02fea4084632c39f81960e, type: 3}
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}

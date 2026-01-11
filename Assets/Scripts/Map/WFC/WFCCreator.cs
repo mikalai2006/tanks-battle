@@ -26,6 +26,11 @@ public abstract class WFCCreator : MonoBehaviour
         auto = false;
     }
 
+    public virtual void SetConfig(ref ParserHeight parserHeight)
+    {
+        
+    }
+
     public virtual void InitializeGrid(Tile3D[] prefabTiles, ParserHeight _parserHeight, TypeEntity typeCell)
     {
         parserHeight = _parserHeight;

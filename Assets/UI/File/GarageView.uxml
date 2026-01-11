@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=0d2d1561a57b70a4798a0a6b1324eaab&amp;type=3#base" />
     <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General" />
-    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; height: 50%;">
+    <ui:VisualElement picking-mode="Ignore" class="p-2" style="flex-grow: 1; flex-shrink: 0; height: 50%;">
         <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; flex-direction: row;">
             <ui:VisualElement picking-mode="Ignore" class="bg_accent">
                 <ui:Label text="Label" name="MachineName" class="font-bold text-lg font text-primary p-2" />
@@ -23,7 +23,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; height: 100%;">
+    <ui:VisualElement picking-mode="Ignore" class="p-2" style="flex-grow: 1; flex-shrink: 0; height: 100%;">
         <ui:VisualElement picking-mode="Ignore" style="flex-direction: row;">
             <ui:Button text="&lt;" name="Prev" class="button" style="font-size: 50px;" />
             <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />

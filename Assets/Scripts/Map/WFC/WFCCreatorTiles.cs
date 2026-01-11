@@ -285,22 +285,23 @@ public class WFCCreatorTiles : MonoBehaviour
         }
 
         // определяем количество поворотов для тайла.
-        if (namePathArray[namePathArray.Length - 1] == "r4")
+        if (namePathArray[namePathArray.Length - 2] == "r4")
         {
             inputConfig.Rotation = RotationType.FourRotations;
             newTile3D.Rotation = RotationType.FourRotations;
-        } else if (namePathArray[namePathArray.Length - 1] == "r2")
+        } else if (namePathArray[namePathArray.Length - 2] == "r2")
         {
             inputConfig.Rotation = RotationType.TwoRotations;
             newTile3D.Rotation = RotationType.TwoRotations;
         }
 
-         // определяем вес для тайла.
-        if (namePathArray[namePathArray.Length - 2] != "")
+        // определяем вес для тайла.
+        if (namePathArray[namePathArray.Length - 3] != "")
         {
-            string weightString = namePathArray[namePathArray.Length - 2].Replace("w", ""); 
+            string weightString = namePathArray[namePathArray.Length - 3].Replace("w", ""); 
             newTile3D.Weight = int.Parse(weightString);
         }
+
         
         GameObject wrapperPrefab = new GameObject("Wrapper");
         wrapperPrefab.transform.parent = newObject.transform;
@@ -317,6 +318,9 @@ public class WFCCreatorTiles : MonoBehaviour
         newVMR.Config.typeCollider = TypeCollider.MeshCollider;
         newVMR.Config.isDestructible = true;
         newVMR.Config.useGlobalScale = true;
+
+        // определяем разрушаемый ли тайл.
+        newVMR.Config.isDestructible = namePathArray[namePathArray.Length - 1] == "d";
 
         if (!EqualityComparer<ColorsBorders>.Default.Equals(colorsBorders, default(ColorsBorders)) && isAddColorsToTile)
         {

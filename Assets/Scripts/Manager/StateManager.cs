@@ -7,7 +7,7 @@ using UnityEngine;
 public class StateManager
 {
   public static event Action<StatePlayer> OnChangeState;
- 
+
   private GameManager _gameManager => GameManager.Instance;
   private GameSetting _gameSetting => GameManager.Instance.Settings;
   public StatePlayer statePlayer;
@@ -60,12 +60,14 @@ public class StateManager
     {
       MachineLevelData machine = new()
       {
-        id = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].name : _gameSetting.machines[UnityEngine.Random.Range(0, _gameSetting.machines.Count)].name, //_gameSetting.machines[i == 0 ? 0 : Mathf.Min(3, i)].name, // 
+        id = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].name : _gameSetting.machines[UnityEngine.Random.Range(0, _gameSetting.machines.Count)].name, //_gameSetting.machines[i == 0 ? 0 : Mathf.Min(3, i)].name, //
         gerbId = i == 0 ? statePlayer.gerbId : _gameSetting.gerbs[UnityEngine.Random.Range(0, _gameSetting.gerbs.Count - 1)].name,
         isBot = i != 0,
         name = i == 0 ? _gameManager.AppInfo.UserInfo.name : listRandomNames.ElementAt(i),
         rank = i == 0 ? _gameManager.StateManager.statePlayer.rank : UnityEngine.Random.Range(0, _gameSetting.ranks.Count - 1),
-        colorsModify = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].colorsModifies : new System.Collections.Generic.List<ColorsModify>(),
+        data = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].data : new StateMachinePlayerData(),
+        // colorsModify = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].colorsModifies : new List<ColorsModify>(),
+        // destroyedVoxels = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].destroyVoxels : new List<Vector3Int>(),
       };
 
       stateLevel.machines.Add(machine);
@@ -100,7 +102,7 @@ public class StateManager
   {
     return statePlayer;
   }
-  
+
   public void Reset()
   {
     _gameManager.StateManager.statePlayer = new StatePlayer();
@@ -113,9 +115,100 @@ public class StateManager
   {
     statePlayer.coin -= 1000;
 
+    var data = new StateMachinePlayerData();
+    // init data body.
+    var itemBody = configMachine.body;
+    var newDataBody = new DataDetail()
+    {
+      nameConfig = itemBody.Config.name,
+      offset = itemBody.offsetBody,
+      number = 0
+    };
+    data.dataDetails.Add(newDataBody);
+
+    // init data caterpillars.
+    for (int i = 0; i < configMachine.catterpillars.Count; i++)
+    {
+      var item = configMachine.catterpillars[i];
+      var newData = new DataDetail()
+      {
+        nameConfig = item.Config.name,
+        offset = item.offsetCat,
+        number = i
+      };
+      data.dataDetails.Add(newData);
+    }
+    // init data wheels.
+    for (int i = 0; i < configMachine.wheels.Count; i++)
+    {
+      var item = configMachine.wheels[i];
+      var newData = new DataDetail()
+      {
+        nameConfig = item.Config.name,
+        offset = item.offsetWheel,
+        number = i
+      };
+      data.dataDetails.Add(newData);
+    }
+
+    // init data parent towers.
+    var parentTowers = configMachine.towers.FindAll(t => !t.isChildren);
+    for (int i = 0; i < parentTowers.Count; i++)
+    {
+      var item = parentTowers[i];
+      var newData = new DataDetail()
+      {
+        nameConfig = item.Config.name,
+        offset = item.offsetTower,
+        number = i
+      };
+      data.dataDetails.Add(newData);
+
+      // init data muzzles for tower.
+      for (int m = 0; m < item.muzzles.Count; m++)
+      {
+          GameMuzzleOption _mConfig = item.muzzles.ElementAt(m);
+          DataDetail dataMuzzle = new DataDetail()
+          {
+            nameConfig = _mConfig.Config.name,
+            number = m,
+            offset = _mConfig.offsetMuzzle
+          };
+          data.dataDetails.Add(dataMuzzle);
+      }
+      
+      // init data child towers.
+      if (item.children.Count > 0)
+      {
+        for (int j = 0; j < item.children.Count; j++)
+        {
+          GameTowerOption itemChild = configMachine.towers.Find(t => t.ido == item.children.ElementAt(j));
+          var newDataChild = new DataDetail()
+          {
+            nameConfig = itemChild.Config.name,
+            offset = itemChild.offsetTower,
+            number = i
+          };
+          data.dataDetails.Add(newDataChild);
+
+          for (int m = 0; m < itemChild.muzzles.Count; m++)
+          {
+              GameMuzzleOption _mConfig = itemChild.muzzles.ElementAt(m);
+              DataDetail dataMuzzle = new DataDetail()
+              {
+                nameConfig = _mConfig.Config.name,
+                number = m,
+                offset = _mConfig.offsetMuzzle
+              };
+              data.dataDetails.Add(dataMuzzle);
+          }
+        }
+      }
+    }
+
     statePlayer.machines.Add(new StateMachinePlayer()
     {
-      colorsModifies = new System.Collections.Generic.List<ColorsModify>(),
+      data = data,
       name = configMachine.name
     });
 
@@ -136,7 +229,7 @@ public class StateManager
       statePlayer.indexActiveMachine = 0;
 
       OnChangeState?.Invoke(statePlayer);
-      
+
       _gameManager.DataManager.Save(true);
     }
   }
@@ -158,15 +251,17 @@ public class StateManager
   /// <param name="input"></param>
   public List<ColorsModify> OnFillMachine(FillData input)
   {
-    
+
     StateMachinePlayer activeMachineData = statePlayer.machines[statePlayer.indexActiveMachine];
 
     // int indexForChange = -1;
 
-    List<ColorsModify> newColorsModify = new List<ColorsModify>(activeMachineData.colorsModifies);
-    
+    List<ColorsModify> newColorsModify = activeMachineData.data != null ?
+      new List<ColorsModify>(activeMachineData.data.colorsModifies) :
+      new List<ColorsModify>();
+
     Color32 color32 = input.voxelGroupData.color;
-  
+
     newColorsModify.RemoveAll( x => HelperVoxel.AreColorsApproximatelyEqual(x.input, color32));
 
     newColorsModify.Add(new ColorsModify
@@ -200,8 +295,8 @@ public class StateManager
     //       typeEntity = TypeEntity.Machine
     //     });
     // }
-    
-    statePlayer.machines[statePlayer.indexActiveMachine].colorsModifies = newColorsModify;
+
+    statePlayer.machines[statePlayer.indexActiveMachine].data.colorsModifies = newColorsModify;
     // if (indexForChange > -1)
     // {
     //   allColorsModify[indexForChange] = new ColorsModify()
@@ -223,9 +318,53 @@ public class StateManager
       Debug.LogWarning($"OnFillMachine: complete!");
 
       OnChangeState?.Invoke(statePlayer);
-      
+
       _gameManager.DataManager.Save(true);
 
-      return activeMachineData.colorsModifies;
+      return activeMachineData.data.colorsModifies;
+  }
+
+  public void SaveDestroyVoxelsMachine(List<RemoveVoxel> removeVoxels, DataDetail dataDetail)
+  {
+    StateMachinePlayer activeMachineData = statePlayer.machines[statePlayer.indexActiveMachine];
+
+    if (activeMachineData != null)
+    {
+      int indexChangeItem = statePlayer.machines[statePlayer.indexActiveMachine].data.dataDetails.FindIndex(x => x.nameConfig == dataDetail.nameConfig && x.number == dataDetail.number);
+
+      if (indexChangeItem > -1)
+      {
+        // if (statePlayer.machines[statePlayer.indexActiveMachine].data.dataDetails == null)
+        // {
+        //   statePlayer.machines[statePlayer.indexActiveMachine].data.destroyVoxels = new List<Vector3Int>();
+        // }
+
+        List<Vector3Int> vector3s = removeVoxels.Select(x => Vector3Int.RoundToInt(x.position)).ToList();
+
+        var existDestroyVoxels = statePlayer.machines[statePlayer.indexActiveMachine].data.dataDetails[indexChangeItem].destroyVoxels;
+        
+        foreach (var item in vector3s)
+        {
+            if (!existDestroyVoxels.ContainsKey(item))
+            {
+              existDestroyVoxels.Add(item, TypeEntity.Machine);
+            }
+            else
+            {
+              // Handle the duplicate key case:
+              // Option A: Log a warning (as shown here)
+              Debug.LogWarning($"Skipping duplicate key: {item}");
+              // Option B: Overwrite the existing value
+              // targetDictionary[item.Key] = item.Value;
+              // Option C: Throw an exception
+              // throw new System.ArgumentException($"Duplicate key found: {item.Key}");
+            }
+        }
+      }
+    }
+
+      OnChangeState?.Invoke(statePlayer);
+
+      _gameManager.DataManager.Save(true);
   }
 }

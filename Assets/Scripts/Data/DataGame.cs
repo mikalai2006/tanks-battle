@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class StatePlayer
@@ -24,9 +25,38 @@ public class StatePlayer
 [Serializable]
 public class StateMachinePlayer
 {
-    public string name;
-    public List<ColorsModify> colorsModifies;
-      
+  public string name;
+  public StateMachinePlayerData data;
+
+  public StateMachinePlayer()
+  {
+    data = new();
+  }
+}
+
+[Serializable]
+public class StateMachinePlayerData
+{
+  public List<ColorsModify> colorsModifies;
+  public List<DataDetail> dataDetails;
+  public StateMachinePlayerData()
+  {
+    colorsModifies = new();
+    dataDetails = new();
+  }
+}
+
+[Serializable]
+public class DataDetail
+{
+  public int number;
+  public string nameConfig;
+  public Vector3 offset;
+  public SerializeVector3 destroyVoxels;
+  public DataDetail()
+  {
+    destroyVoxels = new();
+  }
 }
 
 [Serializable]
@@ -50,7 +80,14 @@ public class MachineLevelData
   public string name;
   public int rank;
   public bool isBot;
-  public List<ColorsModify> colorsModify;
+  public StateMachinePlayerData data;
+  // public List<ColorsModify> colorsModify;
+  // public List<Vector3Int> destroyedVoxels;
+
+  public MachineLevelData()
+  {
+    data = new();
+  }
 }
 
 

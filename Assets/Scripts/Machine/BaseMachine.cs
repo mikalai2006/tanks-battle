@@ -24,6 +24,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     [SerializeField] protected GameObject TowerWrapper;
     [SerializeField] public GameObject MuzzleWrapper;
     [SerializeField] public GameObject CaterpillarWrapper;
+    [SerializeField] List<BaseMuzzle> muzzles;
+    public List<BaseMuzzle> Muzzles => muzzles;
 
     [Space(5)]
     [Header("Elements vehicle")]
@@ -326,19 +328,22 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         areaSearch.Init(Config);
 
         // инициализируем компоненты машины
-        if (Config.body)
+        if (Config.body != null)
         {
-            body = Instantiate(Config.body.prefab, BodyWrapper.transform);
-            body.Init(this);
+            DataDetail dataBody = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == Config.body.Config.name && t.number == 0);
 
+            body = Instantiate(Config.body.Config.prefab, BodyWrapper.transform);
+            body.Init(this, dataBody);
         }
 
         // init caterpillars.
         for (int i = 0; i < Config.catterpillars.Count; i++)
         {
             GameCaterpillarOption _catConfig = Config.catterpillars.ElementAt(i);
+            DataDetail dataCaterpillar = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _catConfig.Config.name && t.number == i);
+
             var _cat = Instantiate(_catConfig.Config.prefab, CaterpillarWrapper.transform);
-            _cat.Init(this, _catConfig, i);
+            _cat.Init(this, _catConfig, i, dataCaterpillar);
             caterpillars.Add(_cat);
         }
 
@@ -346,8 +351,10 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         for (int i = 0; i < Config.wheels.Count; i++)
         {
             GameWheelOption _whConfig = Config.wheels.ElementAt(i);
+            DataDetail dataWheel = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _whConfig.Config.name && t.number == i);
+
             var _wh = Instantiate(_whConfig.Config.prefab, CaterpillarWrapper.transform);
-            _wh.Init(this, _whConfig, i);
+            _wh.Init(this, _whConfig, i, dataWheel);
             wheels.Add(_wh);
         }
 
@@ -356,21 +363,48 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         for (int i = 0; i < parentTowers.Count; i++)
         {
             GameTowerOption _optConfig = parentTowers.ElementAt(i);
+            DataDetail dataTower = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optConfig.Config.name && t.number == i);
+
             var _tow = Instantiate(_optConfig.Config.prefab, TowerWrapper.transform);
-            _tow.Init(this, _optConfig, 10 + i);
+            _tow.Init(this, _optConfig, 10 + i, dataTower);
             towers.Add(_tow);
+
+            // создаем дуло.
+            for (int m = 0; m < _optConfig.muzzles.Count; m++)
+            {
+                GameMuzzleOption _mConfig = _optConfig.muzzles.ElementAt(m);
+                DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+
+                var _muz = Instantiate(_mConfig.Config.prefab, _tow.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+                _muz.Init(this, _tow, _mConfig, m, dataMuzzle);
+                muzzles.Add(_muz);
+            }
+
 
             if (_optConfig.children.Count > 0)
             {
                 for (int j = 0; j < _optConfig.children.Count; j++)
                 {
                     GameTowerOption _optChildConfig = Config.towers.Find(t => t.ido == _optConfig.children.ElementAt(j));
+                    DataDetail dataTowerChild = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optChildConfig.Config.name && t.number == j);
+
                     if (_optChildConfig != null)
                     {
                         var _towChild = Instantiate(_optChildConfig.Config.prefab, _tow.transform);
                         _towChild.OnSetParent(_tow);
-                        _towChild.Init(this, _optChildConfig, 10 + i + j);
+                        _towChild.Init(this, _optChildConfig, 10 + i + j, dataTowerChild);
                         towers.Add(_towChild);
+                        
+                        // создаем дуло.
+                        for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
+                        {
+                            GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
+                            DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+
+                            var _muz = Instantiate(_mConfig.Config.prefab, _tow.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+                            _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
+                            muzzles.Add(_muz);
+                        }
                     }
                 }
             }
@@ -554,6 +588,14 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         }
 
         Body.Stop();
+    }
+
+    public void OnSaveDestroyVoxels(List<RemoveVoxel> voxels, DataDetail dataDetail)
+    {
+        if (!MachineLevelData.isBot)
+        {
+            _gameManager.StateManager.SaveDestroyVoxelsMachine(voxels, dataDetail);
+        }
     }
 
 
@@ -743,10 +785,6 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     //     Body.OnCollision(collision.contacts[0].point, true, collision);
     // }
 
-    #endregion
-
-
-
     // #region Debug
     // void OnDrawGizmos()
     // {
@@ -780,4 +818,5 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     //     }
     // }
     // #endregion
+    #endregion
 }

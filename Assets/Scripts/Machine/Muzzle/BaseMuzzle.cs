@@ -158,7 +158,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     }
     #endregion
 
-    public void Init(BaseMachine _machine, BaseTower tower, GameMuzzleOption option, int index)
+    public void Init(BaseMachine _machine, BaseTower tower, GameMuzzleOption option, int index, DataDetail dataMuzzle)
     {
         Option = option;
 
@@ -191,9 +191,9 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
 
         voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
 
-        if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+        if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
         {
-            voxelMeshRender.SetColorsModify(Machine.MachineLevelData.colorsModify);
+            voxelMeshRender.SetData(Machine.MachineLevelData.data, dataMuzzle);
         }
         // sprite.color = Config.color;
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();

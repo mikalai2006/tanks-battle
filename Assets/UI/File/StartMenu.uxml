@@ -1,17 +1,15 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MachineDashboard" src="project://database/Assets/UI/File/GarageView.uxml?fileID=9197481963319205126&amp;guid=3fde7ba5540aa854a9deb8cde595d4fb&amp;type=3#GarageView" />
     <ui:Template name="ShopView" src="project://database/Assets/UI/File/ShopView.uxml?fileID=9197481963319205126&amp;guid=e87bbc8d787dd2a42ae3084bc7d0dab2&amp;type=3#ShopView" />
-    <ui:Template name="HomeView" src="project://database/Assets/UI/File/HomeView.uxml?fileID=9197481963319205126&amp;guid=1061802b2a8c8c34ea6944d95015a6d7&amp;type=3#HomeView" />
     <ui:Template name="UserInfoView" src="project://database/Assets/UI/File/UserInfoView.uxml?fileID=9197481963319205126&amp;guid=681a30b649b598f49a81142822cc0b95&amp;type=3#UserInfoView" />
     <ui:Template name="MenuBar" src="project://database/Assets/UI/File/MenuBar.uxml?fileID=9197481963319205126&amp;guid=033b56f2c7014ca4db173d3ff7fe7f5d&amp;type=3#MenuBar" />
     <ui:Template name="MachineInfoView" src="project://database/Assets/UI/File/MachineInfoView.uxml?fileID=9197481963319205126&amp;guid=0ffb67dfb403db6448c9c47c35b0febb&amp;type=3#MachineInfoView" />
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
         <ui:VisualElement name="Wrapper" picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; -unity-background-scale-mode: scale-and-crop;">
-            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-shrink: 0;">
                 <ui:Instance template="MachineDashboard" name="GarageScreen" style="flex-grow: 1;" />
                 <ui:Instance template="MachineDashboard" name="MachineInventory" style="display: none;" />
                 <ui:Instance template="ShopView" name="ShopScreen" style="flex-grow: 1;" />
-                <ui:Instance template="HomeView" name="HomeScreen" />
             </ui:VisualElement>
             <ui:VisualElement picking-mode="Ignore" name="Aside" style="flex-grow: 1; max-width: 300px; background-color: rgba(0, 0, 0, 0.2); padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;">
                 <ui:Instance template="UserInfoView" name="UserInfo" />

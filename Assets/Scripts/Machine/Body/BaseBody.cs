@@ -20,6 +20,7 @@ public class BaseBody : MonoBehaviour, IColored
     [SerializeField] private SpriteRenderer _damageSprite;
     protected BaseMachine Machine;
     protected GameBody Config;
+    protected GameBodyOption Option;
     [SerializeField] protected DataBody _data;
     public DataBody Data => _data;
     [SerializeField] protected bool isMove;
@@ -73,19 +74,23 @@ public class BaseBody : MonoBehaviour, IColored
     }
     #endregion
 
-    public void Init(BaseMachine _machine)
+    public void Init(BaseMachine _machine, DataDetail dataBody)
     {
         Machine = _machine;
 
-        Config = Machine.Config.body;
+        Option = Machine.Config.body;
+
+        Config = Machine.Config.body.Config;
+        
+        transform.localPosition = Option.offsetBody;
 
         // OnChangeData();
 
         voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
 
-        if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+        if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
         {
-            voxelMeshRender.SetColorsModify(Machine.MachineLevelData.colorsModify);
+            voxelMeshRender.SetData(Machine.MachineLevelData.data, dataBody);
         }
 
         // _bodySprite.color = Machine.Config.colorBody;

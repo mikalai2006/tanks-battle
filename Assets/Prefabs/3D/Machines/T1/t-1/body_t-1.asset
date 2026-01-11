@@ -2387,7 +2387,7 @@ MonoBehaviour:
     - {x: 0, y: 9, z: 17}
   countVoxels: 2368
   sizeVoxel: 1
-  Pivot: {x: 16, y: -2, z: 12}
+  Pivot: {x: 16, y: 0, z: 12}
   Bounds: {x: 32, y: 10, z: 24}
   GlobalSize: {x: 32, y: 32, z: 32}
   GlobalPosition: {x: 0, y: 0, z: 16}

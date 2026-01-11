@@ -105,13 +105,16 @@ public class ShopUIManager : MonoBehaviour
             machinesConfigs.AddRange(gameManager.Settings.machines);
         }
 
+        List<Vector2> pointSpiral = Helpers.GenerateArchimedeanSpiral(10, machinesConfigs.Count);
+
         foreach (var item in machinesConfigs)
         {
             GameMachine configMachine = machinesConfigs.Find(m => m.name == item.name);
 
-            CreateMachine(configMachine, index, new MachineLevelData
+            CreateMachine(configMachine, pointSpiral[index], new MachineLevelData
             {
                 id = item.name,
+                data = new StateMachinePlayerData(),
             });
 
             index ++;
@@ -140,11 +143,11 @@ public class ShopUIManager : MonoBehaviour
         }
     }
 
-    void CreateMachine(GameMachine configMachine, int index, MachineLevelData data)
+    void CreateMachine(GameMachine configMachine, Vector2 point, MachineLevelData data)
     {
         var gObject = Instantiate(
             configMachine.machinePrefab,
-            new Vector3(0, 0, -index),
+            new Vector3(-point.x, 0, -point.y),
             Quaternion.identity,
             Wrapper
         );

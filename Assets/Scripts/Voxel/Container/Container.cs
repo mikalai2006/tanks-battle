@@ -256,10 +256,13 @@ namespace Mikalai2006.Voxel
 
             _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
             
-            BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
-            if (bm)
+            // BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+            // if (bm)
+            // {
+            IHealthed obj = transform.GetComponentInParent<IHealthed>();
+            if (obj != null)
             {
-                bm.RefreshHP();
+                obj.RefreshHP();
             }
         }
 
@@ -308,27 +311,41 @@ namespace Mikalai2006.Voxel
 
                 for (int i = 0; i < meshConfig.sOVoxelData.groups[j].voxels.Count; i++)
                 {
-
+                    // если есть воксель в списке уничтоженных, помечаем его.
+                    VoxelType voxelType = (VoxelType)(j + 1);
                     Vector3Int pos = Vector3Int.FloorToInt(meshConfig.sOVoxelData.groups[j].voxels[i]);
+
+                    if (voxelMeshRender.destroyedVoxels.ContainsKey(pos))
+                    {
+                        voxelType = VoxelType.Destroyed;
+                    }
+
                     var vox = new Voxel() // * scale
                     {
                         ID = 1,
                         color = color, //meshConfig.sOVoxelData.colors.ElementAt(i),
-                        type = (VoxelType)(j + 1),
+                        type = voxelType, //(VoxelType)(j + 1),
                         position = pos,
                         IndexSubMesh = j,
                     };
-                    this[meshConfig.sOVoxelData.groups[j].voxels[i]] = vox;
 
-                    arrayVoxels[Helpers.To1D(pos.x, pos.y, pos.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = vox;
+                    if (!voxelMeshRender.destroyedVoxels.ContainsKey(pos))
+                    {
+                        this[meshConfig.sOVoxelData.groups[j].voxels[i]] = vox;
+
+                        arrayVoxels[Helpers.To1D(pos.x, pos.y, pos.z, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = vox;
+                    }
                 }
             }
 
             _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
-            BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
-            if (bm)
+            // BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+            // if (bm)
+            // {
+            IHealthed obj = transform.GetComponentInParent<IHealthed>();
+            if (obj != null)
             {
-                bm.RefreshHP();
+                obj.RefreshHP();
             }
         }
 
@@ -910,10 +927,17 @@ namespace Mikalai2006.Voxel
                 // Debug.Log($"Time JOB create data2: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
 
                 int countRemoved = 0;
+                List<RemoveVoxel> needRemoveElements = new();
                 for (int el = 0; el < collisionJob.needRemoveElements.Length; el++)
                 {
                     if (!collisionJob.needRemoveElements[el].Equals(float3.zero))
                     {
+                        needRemoveElements.Add(new RemoveVoxel()
+                        {
+                            position = collisionJob.needRemoveElements[el],
+                            color = dataVoxels[collisionJob.needRemoveElements[el]].color
+                        });
+
                         float3 pos = collisionJob.needRemoveElements[el];
                         dataVoxels.Remove(pos);
                         Vector3Int posInt = Vector3Int.FloorToInt(pos);
@@ -1008,6 +1032,7 @@ namespace Mikalai2006.Voxel
                 IHealthed obj = _explodeGameObject.transform.GetComponentInParent<IHealthed>();
                 if (obj != null)
                 {
+                    obj.OnSaveDestroyVoxels(needRemoveElements, voxelMeshRender._dataDetail);
                     obj.RefreshHP();
 
                     BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
@@ -1037,6 +1062,7 @@ namespace Mikalai2006.Voxel
 
                 if (dataVoxels.Count() < 10)
                 {
+                    voxelMeshRender.SetActive(false);
                     transform.gameObject.SetActive(false);
                     Debug.Log($"Мало вокселей! Отключаю {transform.gameObject.name}");
                 }
@@ -1057,84 +1083,6 @@ namespace Mikalai2006.Voxel
                 // Debug.Log($"groupY: {groupY.Count()}");
 
                 float maxY = -1f;
-                // for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
-                // {
-                //     var isY = arrayVoxels.FirstOrDefault(x => x.position.y == y && x.type != VoxelType.Destroyed && x.type != VoxelType.Air);
-
-                //     if (isY.type == default)
-                //     {
-                //         maxY = y;
-                //         break;
-                //     }
-                // }
-                // Debug.Log($"maxY={maxY}");
-
-                // // filter jobs.
-                // JobHandle lastJobHandle = default;
-                // for (int y = 0; y < meshConfig.sOVoxelData.Bounds.y; y++)
-                // {
-                //     NativeList<int> filteredIndices = new NativeList<int>(Allocator.TempJob);
-                //     FilterYJob filterJob = new FilterYJob
-                //     {
-                //         dataToFilter = arrayVoxels,
-                //         y = y
-                //     };
-
-                //     // ScheduleAppend добавит индексы, которые возвращают true в Execute, в filteredIndices.
-                //     lastJobHandle = filterJob.ScheduleAppend(filteredIndices, arrayVoxels.Length, lastJobHandle);
-                //     lastJobHandle.Complete(); // Дождитесь завершения работы.
-
-                //     // int countY = data.Where(v => (int)v.Key.y == y).Count();
-
-                //     if (filteredIndices.Length == 0)
-                //     {
-                //         maxY = y;
-                //     }
-
-                //     // if (maxY != -1)
-                //     // {
-                //     //     for (int i = 0; i < filteredIndices.Length; i++)
-                //     //     {
-                //     //         // airVoxels.Add(arrayVoxels[filteredIndices[i]].position, arrayVoxels[filteredIndices[i]]);
-                //     //         needGravityCreateElements.Push(new RemoveVoxel()
-                //     //         {
-                //     //             color = arrayVoxels[filteredIndices[i]].color,
-                //     //             position = arrayVoxels[filteredIndices[i]].position
-                //     //         });
-                //     //     }
-                //     // }
-
-                //     filteredIndices.Dispose();
-
-                //     if (maxY != -1)
-                //     {
-                //         break;
-                //     }
-                //     // // bool noBottomVoxel = false;
-                //     // int countVoxel = 0;
-
-                //     // for (int x = 0; x < meshConfig.sOVoxelData.Bounds.z; x++) // Проход по второму измерению (Y)
-                //     // {
-
-                //     //     for (int z = 0; z < meshConfig.sOVoxelData.Bounds.y; z++) // Проход по третьему измерению (Z)
-                //     //     {
-                //     //         Voxel voxel = arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
-                //     //         if (voxel.type.HasFlag(VoxelType.Destroyed))
-                //     //         {
-                //     //             noBottomVoxel = true;
-                //     //         }
-
-                //     //         if (noBottomVoxel && !voxel.type.HasFlag(VoxelType.Destroyed))
-                //     //         {
-                //     //             airVoxels.Add(voxel);
-                //     //             voxel.type = VoxelType.Destroyed;
-                //     //             // vox = default;
-                //     //             arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = voxel;
-                //     //         }
-                //     //     }
-                //     // }
-                // }
-
 
                 // find jobs.
                 JobHandle lastJobHandle = default;
@@ -1157,52 +1105,13 @@ namespace Mikalai2006.Voxel
                         maxY = y;
                     }
 
-                    // if (maxY != -1)
-                    // {
-                    //     for (int i = 0; i < filteredIndices.Length; i++)
-                    //     {
-                    //         // airVoxels.Add(arrayVoxels[filteredIndices[i]].position, arrayVoxels[filteredIndices[i]]);
-                    //         needGravityCreateElements.Push(new RemoveVoxel()
-                    //         {
-                    //             color = arrayVoxels[filteredIndices[i]].color,
-                    //             position = arrayVoxels[filteredIndices[i]].position
-                    //         });
-                    //     }
-                    // }
-
                     foundResult.Dispose();
 
                     if (maxY != -1)
                     {
                         break;
                     }
-                    // // bool noBottomVoxel = false;
-                    // int countVoxel = 0;
-
-                    // for (int x = 0; x < meshConfig.sOVoxelData.Bounds.z; x++) // Проход по второму измерению (Y)
-                    // {
-
-                    //     for (int z = 0; z < meshConfig.sOVoxelData.Bounds.y; z++) // Проход по третьему измерению (Z)
-                    //     {
-                    //         Voxel voxel = arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)];
-                    //         if (voxel.type.HasFlag(VoxelType.Destroyed))
-                    //         {
-                    //             noBottomVoxel = true;
-                    //         }
-
-                    //         if (noBottomVoxel && !voxel.type.HasFlag(VoxelType.Destroyed))
-                    //         {
-                    //             airVoxels.Add(voxel);
-                    //             voxel.type = VoxelType.Destroyed;
-                    //             // vox = default;
-                    //             arrayVoxels[Helpers.To1D(y, z, x, meshConfig.sOVoxelData.Bounds.x, meshConfig.sOVoxelData.Bounds.y)] = voxel;
-                    //         }
-                    //     }
-                    // }
                 }
-
-
-
 
                 List<RemoveVoxel> needGravityCreateElements = new();
 
@@ -1236,10 +1145,14 @@ namespace Mikalai2006.Voxel
                     // Обновляем данные о разрушенных вокселях.
                     _containerData.countVoxelsDestructible += airVoxels.Count();
                     
-                    BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
-                    if (bm)
+                    // BaseMachine bm = _explodeGameObject.transform.GetComponentInParent<BaseMachine>();
+                    // if (bm)
+                    // {
+                    IHealthed obj = _explodeGameObject.transform.GetComponentInParent<IHealthed>();
+                    if (obj != null)
                     {
-                        bm.RefreshHP();
+                        obj.OnSaveDestroyVoxels(needGravityCreateElements, voxelMeshRender._dataDetail);
+                        obj.RefreshHP();
                     }
                 }
 
@@ -1566,7 +1479,7 @@ namespace Mikalai2006.Voxel
 
         // }
 
-        async private UniTaskVoid CreateGravityECS(List<RemoveVoxel> needGravityCreateElements)
+        async private UniTask CreateGravityECS(List<RemoveVoxel> needGravityCreateElements)
         {
             if (!cancelTokenSrc.IsCancellationRequested)
             {

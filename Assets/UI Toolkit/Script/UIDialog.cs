@@ -72,6 +72,8 @@ public class UIDialog : UILocaleBase
   {
     _dataResultDialog = new DataDialogResult();
     _dataDialog = dataDialog;
+    
+    _wrapper.style.alignSelf = _dataDialog.align;
 
     if (_dataDialog.width > 0)
     {

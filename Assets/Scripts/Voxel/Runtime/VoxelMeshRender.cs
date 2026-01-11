@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ namespace Mikalai2006.Voxel
         GameManager _gameManager => GameManager.Instance;
         [SerializeField] public MeshConfig Config;
         [SerializeField] public List<ColorsModify> colorsModify;
+        [SerializeField] public Dictionary<Vector3, int> destroyedVoxels;
+        public DataDetail _dataDetail;
+        // public bool isActive = true;
         // [SerializeField] public MeshConfigModify ConfigModify;
         // [SerializeField] private SOVoxelData sOVoxelData;
         // [SerializeField] private Material _material;
@@ -30,6 +35,7 @@ namespace Mikalai2006.Voxel
         void Awake()
         {
             colorsModify = new();
+            destroyedVoxels = new();
         }
 
         private void Start()
@@ -183,16 +189,38 @@ namespace Mikalai2006.Voxel
 
         public void SetColorsModify(List<ColorsModify> _colorsModify)
         {
-            // if (colorsModify.Count == 0)
-            // {
+            if (_colorsModify == null) return;
+
             colorsModify.Clear();
             colorsModify.AddRange(_colorsModify);
-            //     Debug.Log($"_colorsModify.count={_colorsModify.Count}/{colorsModify.Count}");
-            // } else
-            // {
+        }
+
+        public void SetDestroyedVoxels(SerializeVector3 vector3Ints)
+        {
+            if (vector3Ints == null) return;
+
+            for (int i = 0; i < vector3Ints.Count; i++)
+            {
+                KeyValuePair<Vector3Int, TypeEntity> item = vector3Ints.ElementAt(i); 
                 
-            //     Debug.Log($"NOT _colorsModify.count={_colorsModify.Count}/{colorsModify.Count}");
-            // }
+                if (!destroyedVoxels.ContainsKey(item.Key))
+                {
+                    destroyedVoxels.Add(item.Key, 1);
+                }
+            }
+        }
+
+        public void SetData(StateMachinePlayerData data, DataDetail dataDetail)
+        {
+            if (data == null) return;
+
+            SetColorsModify(data.colorsModifies);
+            
+            if (dataDetail == null) return;
+
+            _dataDetail = dataDetail;
+
+            SetDestroyedVoxels(dataDetail.destroyVoxels);
         }
 
         private void UpdateMeshContainer(Container container, int index)
@@ -294,6 +322,16 @@ namespace Mikalai2006.Voxel
             //     }
             //     Debug.Log($"Set color 2 {Config.color[0]} ///{Config.sOVoxelData.groups[0].color}");
             // }
+        }
+
+        public void SetActive(bool v)
+        {
+            Tile3D tile3D = transform.GetComponentInParent<Tile3D>();
+            
+            if (tile3D != null)
+            {
+                tile3D.SetActive(v);
+            }
         }
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: wheel_c-3
   m_EditorClassIdentifier: Assembly-CSharp::SOVoxelData
   groups:
-  - color: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
+  - color: {r: 0.16037738, g: 0.14600393, b: 0.14600393, a: 1}
     voxels:
     - {x: 7, y: 0, z: 0}
     - {x: 7, y: 0, z: 1}
@@ -375,7 +375,7 @@ MonoBehaviour:
     - {x: 3, y: 10, z: 3}
     - {x: 3, y: 10, z: 4}
     - {x: 3, y: 10, z: 5}
-  - color: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
+  - color: {r: 0.9056604, g: 0.86721253, b: 0.86721253, a: 1}
     voxels:
     - {x: 6, y: 2, z: 2}
     - {x: 6, y: 2, z: 3}

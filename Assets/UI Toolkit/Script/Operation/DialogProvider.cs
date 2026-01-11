@@ -22,6 +22,7 @@ public struct DataDialog
   public bool showCancelButton;
   public VisualElement innerElement;
   public int width;
+  public Align align;
     // public List<ShopItem<GameEntity>> entities;
     // public List<ShopItem<GameBonus>> bonuses;
 }

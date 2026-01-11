@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
@@ -62,5 +63,34 @@ public class Tile3DGroup : MonoBehaviour, IHealthed
         result.levelDestruction = (float)result.countVoxelsDestructible / result.countVoxels;
 
         containerData = result;
+
+        CheckDestroyBottomTiles();
+    }
+
+    private void CheckDestroyBottomTiles()
+    {
+        // float startTime = Time.realtimeSinceStartup;
+        // var destroyTiles = tiles.Where(t => !t.isActive);
+
+        // for (int i = 0; i < destroyTiles.Count(); i++)
+        // {
+        //     var oneColumnTiles = tiles.Where(t => 
+        //         t.transform.localPosition.x == destroyTiles.ElementAt(i).transform.localPosition.x &&
+        //         t.transform.localPosition.z == destroyTiles.ElementAt(i).transform.localPosition.z
+        //     );
+        //     for (int j = 0; j < oneColumnTiles.Count(); j++)
+        //     {
+        //         Vector3Int cacheLocalPosition = Vector3Int.RoundToInt(oneColumnTiles.ElementAt(j).transform.localPosition);
+        //         oneColumnTiles.ElementAt(j).transform.localPosition =
+        //             new Vector3Int(cacheLocalPosition.x, cacheLocalPosition.y - 1, cacheLocalPosition.z);
+        //     }
+        // }
+        // Debug.Log($"Time CheckDestroyBottomTiles: {(Time.realtimeSinceStartup - startTime) * 1000f}.");
+
+    }
+
+    public void OnSaveDestroyVoxels(List<RemoveVoxel> voxels, DataDetail dataDetail)
+    {
+        Debug.LogWarning("OnSaveDestroyVoxels не реализована!");
     }
 }

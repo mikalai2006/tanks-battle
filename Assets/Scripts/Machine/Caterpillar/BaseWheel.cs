@@ -39,7 +39,7 @@ public class BaseWheel : MonoBehaviour, IColored
     // }
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameWheelOption config, int i)
+    public void Init(BaseMachine baseMachine, GameWheelOption config, int i, DataDetail dataWheel)
     {
         Machine = baseMachine;
 
@@ -49,9 +49,9 @@ public class BaseWheel : MonoBehaviour, IColored
         {
             voxelMeshRenders[i].OnSetConfigMeshGenerator(Option.Config.MeshConfig);
             
-            if (Machine.MachineLevelData != null && Machine.MachineLevelData.colorsModify != null && Machine.MachineLevelData.colorsModify.Count > 0)
+            if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
             {
-                voxelMeshRenders[i].SetColorsModify(Machine.MachineLevelData.colorsModify);
+                voxelMeshRenders[i].SetData(Machine.MachineLevelData.data, dataWheel);
             }
         });
 
