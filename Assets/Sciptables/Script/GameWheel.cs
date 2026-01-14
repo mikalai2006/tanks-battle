@@ -6,11 +6,10 @@ public class GameWheel : ScriptableObject
 {
   [Space(5)]
   [Header("Основная информация")]
-  public string idObject;
   public TextLocalize text;
   public BaseWheel prefab;
-  [Tooltip("Будет ли вращаться")]
-  public bool isRotate;
+  // [Tooltip("Будет ли вращаться")]
+  // public bool isRotate;
 
   [Space(5)]
   [Header("Настройки меша")]

@@ -7,7 +7,6 @@ public class GameTower : ScriptableObject
 {
   [Space(5)]
   [Header("Основная информация")]
-  public string idObject;
   public TextLocalize text;
   public BaseTower prefab;
   

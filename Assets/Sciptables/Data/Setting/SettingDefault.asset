@@ -937,7 +937,7 @@ MonoBehaviour:
     logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
-    gizmoBodyForwards: 0
+    gizmoBodyForwards: 1
     gizmoBodyLength: 5
     gizmoBodyColor: {r: 0, g: 0.5930424, b: 1, a: 1}
     gizmoTowersForwards: 0
@@ -1026,7 +1026,9 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
-  - {fileID: 11400000, guid: 135a4184cf8d3b840bcf297cbe59be13, type: 2}
+  - {fileID: 11400000, guid: 887131a7968fb5c43ad73d566ae1afea, type: 2}
+  - {fileID: 11400000, guid: 5f9446c89818a6b4088e94fc37be48df, type: 2}
+  - {fileID: 11400000, guid: 56194fb4b0f7c6f46a2a918aeae5f95e, type: 2}
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
   - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}

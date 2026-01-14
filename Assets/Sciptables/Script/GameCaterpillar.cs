@@ -6,7 +6,6 @@ public class GameCaterpillar : ScriptableObject
 {
   [Space(5)]
   [Header("Основная информация")]
-  public string idObject;
   public TextLocalize text;
   public BaseCaterpillar prefab;
   [Tooltip("Будет ли вращаться")]

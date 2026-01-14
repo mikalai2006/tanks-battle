@@ -985,6 +985,18 @@ MonoBehaviour:
     - {x: 0, y: 5, z: 10}
     - {x: 0, y: 5, z: 11}
     - {x: 0, y: 5, z: 12}
+    - {x: 16, y: 6, z: 6}
+    - {x: 16, y: 6, z: 7}
+    - {x: 16, y: 6, z: 8}
+    - {x: 16, y: 6, z: 9}
+    - {x: 16, y: 6, z: 10}
+    - {x: 16, y: 6, z: 11}
+    - {x: 15, y: 6, z: 6}
+    - {x: 15, y: 6, z: 7}
+    - {x: 15, y: 6, z: 8}
+    - {x: 15, y: 6, z: 9}
+    - {x: 15, y: 6, z: 10}
+    - {x: 15, y: 6, z: 11}
     - {x: 14, y: 6, z: 3}
     - {x: 14, y: 6, z: 6}
     - {x: 14, y: 6, z: 7}
@@ -1352,6 +1364,18 @@ MonoBehaviour:
     - {x: 0, y: 5, z: 16}
     - {x: 0, y: 5, z: 17}
     - {x: 0, y: 5, z: 18}
+    - {x: 16, y: 6, z: 4}
+    - {x: 16, y: 6, z: 5}
+    - {x: 16, y: 6, z: 12}
+    - {x: 16, y: 6, z: 13}
+    - {x: 16, y: 6, z: 14}
+    - {x: 16, y: 6, z: 15}
+    - {x: 15, y: 6, z: 4}
+    - {x: 15, y: 6, z: 5}
+    - {x: 15, y: 6, z: 12}
+    - {x: 15, y: 6, z: 13}
+    - {x: 15, y: 6, z: 14}
+    - {x: 15, y: 6, z: 15}
     - {x: 14, y: 6, z: 4}
     - {x: 14, y: 6, z: 5}
     - {x: 14, y: 6, z: 12}
@@ -1433,7 +1457,7 @@ MonoBehaviour:
     - {x: 0, y: 6, z: 16}
     - {x: 0, y: 6, z: 17}
     - {x: 0, y: 6, z: 18}
-  - color: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
+  - color: {r: 0.46666667, g: 0.46666667, b: 0.46666667, a: 1}
     voxels:
     - {x: 12, y: 7, z: 8}
     - {x: 12, y: 7, z: 9}
@@ -1479,15 +1503,15 @@ MonoBehaviour:
     - {x: 6, y: 7, z: 9}
     - {x: 6, y: 7, z: 10}
     - {x: 6, y: 7, z: 11}
-  countVoxels: 1460
+  countVoxels: 1484
   sizeVoxel: 1
   Pivot: {x: 8.5, y: 4, z: 10}
   Bounds: {x: 17, y: 8, z: 20}
   GlobalSize: {x: 32, y: 32, z: 32}
-  GlobalPosition: {x: 0, y: 0, z: 16}
+  GlobalPosition: {x: 0, y: 0, z: 18}
   GlobalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  LocalSize: {x: 0, y: 0, z: 16}
-  LocalPosition: {x: 0, y: 0, z: 16}
+  LocalSize: {x: 0, y: 0, z: 18}
+  LocalPosition: {x: 0, y: 0, z: 18}
   LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   startMesh: {fileID: 0}
   typeEntity: 5

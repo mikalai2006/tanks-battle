@@ -107,8 +107,6 @@ public class BaseBody : MonoBehaviour, IColored
             var maxHeight = Mathf.Max(heights);
 
             y += (float)maxHeight / 2f + 1f;
-
-            Debug.Log($"exist wheels: {y}");
         }
 
         if (Machine.Caterpillars.Count > 0 && y <= 0f) {
@@ -116,8 +114,6 @@ public class BaseBody : MonoBehaviour, IColored
             var maxHeight = Mathf.Max(heights);
 
             y += (float)maxHeight / 2f + 1f;
-            
-            Debug.Log($"exist cat: {y}");
         }
 
         y += Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f;
@@ -186,6 +182,7 @@ public class BaseBody : MonoBehaviour, IColored
     
     public virtual void Rotate(Vector2 moveDirection)
     {
+        float modifSpeedRotate = _gameManager.Settings.simpleMove ? 10f : 2.5f;
         if (Machine.stateController.enabled)
         {
             if (Machine.navMeshAgent.velocity != Vector3.zero)
@@ -202,28 +199,40 @@ public class BaseBody : MonoBehaviour, IColored
         }
         else
         {
-            if (Machine.Rb.linearVelocity != Vector3.zero)
+            // Quaternion stepRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
+            // rb.MoveRotation(stepRotation);
+            
+            if (_gameManager.Settings.simpleMove)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(Machine.Rb.linearVelocity);
-                // Debug.Log($"Rotate::::: {targetRotation}");
-                // Quaternion stepRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 100 * Time.fixedDeltaTime);
+                if (Machine.Rb.linearVelocity != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(Machine.Rb.linearVelocity);
+                    // if (Machine.Rb.linearVelocity != Vector3.zero && _gameManager.Settings.simpleMove)
+                    // // if (moveDirection != Vector2.zero)
+                    // {
+                    //     targetRotation = Quaternion.LookRotation(Machine.Rb.linearVelocity);
+                    // }
 
-                // rb.MoveRotation(stepRotation);
-                transform.rotation = Machine.CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
-                    transform.rotation,
-                    Quaternion.Euler(0, targetRotation.eulerAngles.y + Machine.OffsetRotate, 0),
-                    10f * Time.fixedDeltaTime
-                );
+                    transform.rotation = Machine.CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
+                        transform.rotation,
+                        Quaternion.Euler(0, targetRotation.eulerAngles.y + Machine.OffsetRotate, 0),
+                        modifSpeedRotate * Time.fixedDeltaTime
+                    ); 
+                }
+            } else //(!_gameManager.Settings.simpleMove)
+            {
+                float rotationAmountY = moveDirection.x * 100 * Time.fixedDeltaTime;
+                transform.Rotate(Vector3.up, rotationAmountY, Space.World);
+                Machine.CaterpillarWrapper.transform.Rotate(Vector3.up, rotationAmountY, Space.World);
+            }
 
                 // Debug.Log($"ROTATION::::: stepRotation={stepRotation}");
-            }
         }
     }
 
     public virtual void Move(Vector2 _moveDirection)
     {
         isMove = true;
-
         if (Machine.stateController.enabled)
         {
             Machine.Rb.linearVelocity = Machine.navMeshAgent.velocity;
@@ -237,26 +246,31 @@ public class BaseBody : MonoBehaviour, IColored
             Vector3 forward;
             Vector3 right;
 
+            Vector3 moveDirection = Vector3.zero;
             if (_gameManager.Settings.simpleMove)
             {
                 forward = Machine.LevelManager.cinemachineCamera.transform.forward;  //(transform.position - levelManager.cinemachineCamera.transform.position).normalized;
                 right = Machine.LevelManager.cinemachineCamera.transform.right;
+
+                moveDirection = (forward * _moveDirection.y + right * _moveDirection.x).normalized;
             }
             else
             {
                 forward = transform.forward;
                 right = transform.right;
+                moveDirection = (forward * _moveDirection.y).normalized;
             }
             ;
 
             forward.Normalize();
             right.Normalize();
 
-            Vector3 moveDirection = (forward * _moveDirection.y + right * _moveDirection.x).normalized;
+            if (_moveDirection.x != 0 || _gameManager.Settings.simpleMove)
+            {
+                Rotate(_gameManager.Settings.simpleMove == true ? moveDirection : _moveDirection);
 
-            Rotate(moveDirection);
-
-            OnSetDirectionMove(moveDirection);
+                OnSetDirectionMove(moveDirection);
+            }
 
             // OnSetNameText(moveDirection.ToString());
             // transform.Translate(moveDirection * speed * Time.deltaTime);
@@ -268,7 +282,10 @@ public class BaseBody : MonoBehaviour, IColored
             // rb.MovePosition((Vector3)transform.position + (moveDirection * speed * Time.deltaTime));
 
             // dynamic.
-            Machine.Rb.linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)) * _gameManager.Settings.scaleObjects;
+            if (_moveDirection.y != 0 || _gameManager.Settings.simpleMove)
+            {
+                Machine.Rb.linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)) * _gameManager.Settings.scaleObjects;
+            }
             // if (rb.linearVelocity.magnitude < 50f)
             // {
             //     rb.AddRelativeForce(moveDirection * (100f * Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)), ForceMode.Impulse); //linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0));

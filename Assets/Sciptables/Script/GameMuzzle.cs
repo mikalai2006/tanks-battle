@@ -6,7 +6,6 @@ public class GameMuzzle : ScriptableObject
 {
   [Space(5)]
   [Header("Основная информация")]
-  public string idObject;
   public TextLocalize text;
   public BaseMuzzle prefab;
   

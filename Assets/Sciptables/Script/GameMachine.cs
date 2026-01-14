@@ -7,10 +7,9 @@ public class GameMachine : ScriptableObject
 {
   [Space(5)]
   [Header("Основная информация")]
-  public string idObject;
   public TextLocalize text;
   public GameObject machinePrefab;
-  public Material material;
+  // public Material material;
   public IndicatorMachine indicatorPrefab;
   [Range(0,1f)] public float customScale;
 
