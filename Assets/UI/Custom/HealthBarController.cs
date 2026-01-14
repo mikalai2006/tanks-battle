@@ -32,7 +32,7 @@ public class HealthBarController : MonoBehaviour
     [Tooltip("x - нижняя граница(от), y - верхняя граница(до), z - значение maxOffset")]
     public Vector2 rangeLerp = new Vector2(4f, 10f);
     public float delimiter;
-    [SerializeField] private WorldSpaceUIDocument uiDocumentPrefab;
+    // [SerializeField] private WorldSpaceUIDocument uiDocumentPrefab;
 
 
     // void OnEnable()

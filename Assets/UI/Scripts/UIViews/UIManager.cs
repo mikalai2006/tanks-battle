@@ -19,7 +19,7 @@ namespace UIToolkitLibrary
 
         UIView m_CurrentView;
         UIView m_PreviousView;
-        [SerializeField] WorldSpaceUIDocument uiDocumentPrefab;
+        // [SerializeField] WorldSpaceUIDocument uiDocumentPrefab;
 
         // List of all UIViews
         List<UIView> m_AllViews = new List<UIView>();
@@ -78,6 +78,16 @@ namespace UIToolkitLibrary
             Initialize(m_MainMenuDocument.rootVisualElement);
         }
 
+        void OnDisable()
+        {
+            UnsubscribeFromEvents();
+
+            foreach (UIView view in m_AllViews)
+            {
+                view.Dispose();
+            }
+        }
+
          private void ChangeTheme()
         {
             m_Aside.style.backgroundColor = new StyleColor(_gameManager.Theme.bgColor);
@@ -97,16 +107,6 @@ namespace UIToolkitLibrary
             // MainMenuUIEvents.InventoryScreenHidden += OnInventoryScreenHidden;
             // MainMenuUIEvents.SettingsScreenShown += OnSettingsScreenShown;
             // MainMenuUIEvents.SettingsScreenHidden += OnSettingsScreenHidden;
-        }
-
-        void OnDisable()
-        {
-            UnsubscribeFromEvents();
-
-            foreach (UIView view in m_AllViews)
-            {
-                view.Dispose();
-            }
         }
 
         void UnsubscribeFromEvents()

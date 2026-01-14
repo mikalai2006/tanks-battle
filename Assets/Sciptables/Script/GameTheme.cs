@@ -48,7 +48,7 @@ public class GameTheme : ScriptableObject
   public Color colorPrimary;
   public Color colorSecondary;
   public Color colorAccent;
-  public Color colorHead;
+  // public Color colorHead;
   
   [Header("GameScreen")]
   public Color colorWrapperGameScreen;
@@ -61,8 +61,29 @@ public class GameTheme : ScriptableObject
   [Header("UI")]
   public Color colorBgHint;
   public Color colorBgInput;
+  public Color colorBgSecondary;
+  public Color colorBgPrimary;
+  public Color colorBgAccent;
+  public Color colorBgSuccess;
+  public Color colorButtonAccent;
+  public Color colorButtonSecondary;
+  public Color colorButtonPrimary;
+  public Color colorButtonSuccess;
   public Color colorTextInput;
   // public Color colorBgTopSide;
   public Color colorBgButton;
   public Color colorBgDialog;
+
+  [Space(5)]
+  [Header("Images")]
+  public Sprite spriteAva;
+  public Sprite spriteFill;
+  public Sprite spriteSettings;
+  public Sprite spriteCoin;
+  public Sprite spriteCubes;
+  public Sprite spritePlus;
+  public Sprite spriteAngar;
+  public Sprite spriteShop;
+  public Sprite spriteBattle;
+  public Sprite spriteArrow;
 }

@@ -37,6 +37,9 @@ namespace UIToolkitDemo
 
         // Represents the currently active menu
         VisualElement m_MenuMarker;
+        VisualElement m_SpriteAngar;
+        VisualElement m_SpriteBattle;
+        VisualElement m_SpriteShop;
 
         public MenuBarView(VisualElement topElement, LocalizedStringTable localization) : base(topElement, localization)
         {
@@ -70,7 +73,13 @@ namespace UIToolkitDemo
             m_ShopScreenMenuButton = m_TopElement.Q<Button>("menu__shop-button");
             m_GarageScreenMenuButton = m_TopElement.Q<Button>("menu__garage-button");
 
+            m_SpriteShop = m_TopElement.Q<VisualElement>(UINames.SpriteShop);
+            m_SpriteAngar = m_TopElement.Q<VisualElement>(UINames.SpriteAngar);
+            m_SpriteBattle = m_TopElement.Q<VisualElement>(UINames.SpriteBattle);
+
             m_MenuMarker = m_TopElement.Q("menu__current-marker");
+
+            Theming();
         }
 
         // Register callbacks for button clicks
@@ -287,6 +296,13 @@ namespace UIToolkitDemo
 
             // Move the marker to the 'Shop' button
             MoveMarkerToElement(m_ShopScreenMenuButton);
+        }
+
+        void Theming()
+        {
+            m_SpriteAngar.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteAngar);
+            m_SpriteShop.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteShop);
+            m_SpriteBattle.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteBattle);
         }
 
     }

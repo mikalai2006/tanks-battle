@@ -933,8 +933,8 @@ MonoBehaviour:
   countMaxCreateVoxelsByStepMobile: 200
   DebugSettings:
     mode: 1
-    disableCreateTiles: 0
-    logEnabled: 0
+    disableCreateTiles: 1
+    logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
     gizmoBodyForwards: 0
@@ -1026,6 +1026,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
+  - {fileID: 11400000, guid: 135a4184cf8d3b840bcf297cbe59be13, type: 2}
   - {fileID: 11400000, guid: 097ef990882615044b0edfde6f86845f, type: 2}
   - {fileID: 11400000, guid: 664cc3132446318419e5155008eb5f69, type: 2}
   - {fileID: 11400000, guid: b67a1cf8cbdc6c744800ac2e1e0c2fbe, type: 2}
@@ -1182,6 +1183,8 @@ MonoBehaviour:
   - "\u0421\u043E\u0440\u043E\u043A\u0438\u043D\u0430 \u0410\u043D\u0438\u0441\u0438\u044F"
   - "\u0421\u043F\u0438\u0440\u0438\u0434\u043E\u043D\u043E\u0432\u0430 \u0421\u043E\u0444\u0438\u044F"
   spriteClose: {fileID: 0}
+  prefabShopItemMachine: {fileID: 6450371266968446853, guid: c302763e41552a84bb5832529c810107, type: 3}
+  prefabGarageItemTower: {fileID: 4786594157107016139, guid: a10f9380da84b8e49b0fb5786c9cc4e1, type: 3}
   references:
     version: 2
     RefIds: []

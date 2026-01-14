@@ -339,6 +339,14 @@ MonoBehaviour:
     m_Key: not_machine
     m_Metadata:
       m_Items: []
+  - m_Id: 83752768860147712
+    m_Key: btn_tower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 83999561871085568
+    m_Key: btn_close
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

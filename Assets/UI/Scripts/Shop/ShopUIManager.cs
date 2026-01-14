@@ -3,6 +3,7 @@ using UIToolkitLibrary;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class ShopUIManager : MonoBehaviour
 {
@@ -11,15 +12,31 @@ public class ShopUIManager : MonoBehaviour
     [SerializeField] private Camera Camera;
     [SerializeField] private CinemachineCamera CinemachineCamera;
     [SerializeField] private List<GameMachine> machinesConfigs;
-    List<BaseMachine> machinesGameObjects;
+    List<UIShopItemView> shopItemGameObjects;
     [SerializeField] private CinemachineInputAxisController CinemachineCameraInputController;
     int activeIndexMachine = 0;
-    [SerializeField] private InputActionReference mousePositionAction;
+    public InputActionReference mousePositionAction;
     [SerializeField] private InputActionReference clickAction;
+
+    // // Assign in the Inspector:
+    // public UIManager uIManager;
+    // public Camera mainCamera; // The main camera in the scene
+    // public Camera renderTextureCamera; // The camera rendering to the RenderTexture
+
+    private System.Func<Vector2, Vector2> m_DefaultScreenToPanelSpaceFunction;
+
+    // void Awake()
+    // {
+    //     uIManager = GameObject.FindGameObjectWithTag("UIManager")?.GetComponent<UIManager>();
+
+    //     mainCamera = GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+    //     renderTextureCamera = GameObject.FindGameObjectWithTag("SecondCamera")?.GetComponent<Camera>();
+    // }
+
 
     void Start()
     {
-        machinesGameObjects = new List<BaseMachine>();
+        shopItemGameObjects = new List<UIShopItemView>();
 
         gameManager.SetActiveCamera(Camera);
 
@@ -62,7 +79,7 @@ public class ShopUIManager : MonoBehaviour
 
     private void OnNextMachine()
     {
-        activeIndexMachine = Mathf.Min(machinesGameObjects.Count - 1, activeIndexMachine + 1);
+        activeIndexMachine = Mathf.Min(shopItemGameObjects.Count - 1, activeIndexMachine + 1);
 
         OnFocusMachineByIndex(activeIndexMachine);
 
@@ -111,7 +128,7 @@ public class ShopUIManager : MonoBehaviour
         {
             GameMachine configMachine = machinesConfigs.Find(m => m.name == item.name);
 
-            CreateMachine(configMachine, pointSpiral[index], new MachineLevelData
+            CreateShopItem(configMachine, pointSpiral[index], new MachineLevelData
             {
                 id = item.name,
                 data = new StateMachinePlayerData(),
@@ -122,7 +139,7 @@ public class ShopUIManager : MonoBehaviour
 
         
         CinemachineBrain brain = Camera.GetComponent<CinemachineBrain>();
-        if (brain != null && machinesGameObjects.Count > 0)
+        if (brain != null && shopItemGameObjects.Count > 0)
         {
             OnFocusMachineByIndex(activeIndexMachine);
         }
@@ -132,8 +149,8 @@ public class ShopUIManager : MonoBehaviour
     {
         index = Mathf.Clamp(index, 0, machinesConfigs.Count - 1);
 
-        CinemachineCamera.Follow = machinesGameObjects[index].objectTargetCamera.transform;
-        CinemachineCamera.LookAt = machinesGameObjects[index].objectTargetCamera.transform;
+        CinemachineCamera.Follow = shopItemGameObjects[index].ObjectTargetCamera.transform;
+        CinemachineCamera.LookAt = shopItemGameObjects[index].ObjectTargetCamera.transform;
         
         CinemachineOrbitalFollow cinemachineOrbitalFollow = CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
         if (cinemachineOrbitalFollow)
@@ -143,40 +160,32 @@ public class ShopUIManager : MonoBehaviour
         }
     }
 
-    void CreateMachine(GameMachine configMachine, Vector2 point, MachineLevelData data)
+    void CreateShopItem(GameMachine configMachine, Vector2 point, MachineLevelData data)
     {
         var gObject = Instantiate(
-            configMachine.machinePrefab,
+            gameManager.Settings.prefabShopItemMachine,
             new Vector3(-point.x, 0, -point.y),
             Quaternion.identity,
             Wrapper
         );
 
-        BaseMachine obj = gObject.GetComponent<BaseMachine>();
+        UIShopItemView obj = gObject.GetComponent<UIShopItemView>();
         if (obj != null)
         {
-            machinesGameObjects.Add(obj);
+            shopItemGameObjects.Add(obj);
 
-            obj.GetComponent<PlayerController>().enabled = false;
-            obj.GetComponent<PlayerInput>().enabled = false;
-            obj.AreaSearch.gameObject.SetActive(false);
-            // obj.GetComponentInChildren<NavMeshAgent>().enabled = false;
-            // var lightComponent = obj.GetComponentInChildren<Light>();
-            // if (lightComponent)
-            // {
-            //     lightComponent.enabled = true;
-            // }
-            // obj.Areol.SetActive(true);
-            // obj.GetComponent<CameraFollow>().enabled = false;
-            // obj.GetComponent<CameraFollowFPS>().enabled = false;
-            obj.GetComponent<StateController>().enabled = false;
-            obj.GetComponentInChildren<HealthBarController>().gameObject.SetActive(false);
-
-            // CameraHandler.OnSetCharacter(obj);
             obj.Init(configMachine, data);
-
-            obj.Body.OnSetAngleBody(45);
         }
+
+        // targetPanelSettings = obj.GetComponentInChildren<UIDocument>().panelSettings;
+        // if (targetPanelSettings != null)
+        // {
+        //     targetPanelSettings.SetScreenToPanelSpaceFunction(ScreenCoordinatesToRenderTexture);
+        //     Debug.Log($"Found settings!");
+        // } else
+        // {
+        //     Debug.LogWarning($"Not found settings!");
+        // }
 
     }
 }

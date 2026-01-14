@@ -41,11 +41,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 931bb25cac6b1d546ba85f2722a3fbfc
-    m_Address: UITreeMachine
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93f69927866868b47976e83ca5cc9bc9
     m_Address: UIInitUser
     m_ReadOnly: 0

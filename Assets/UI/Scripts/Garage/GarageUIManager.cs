@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mikalai2006.Voxel;
 using UIToolkitLibrary;
 using Unity.Cinemachine;
@@ -9,9 +11,13 @@ public class GarageUIManager : MonoBehaviour
 {
     GameManager gameManager => GameManager.Instance;
     [SerializeField] private Transform Wrapper;
+    [SerializeField] private Transform Wrapper3dModels;
     [SerializeField] private Camera Camera;
     [SerializeField] private CinemachineCamera CinemachineCamera;
     [SerializeField] private CinemachineInputAxisController CinemachineCameraInputController;
+    // [SerializeField] private Camera CameraSecond;
+    // [SerializeField] private CinemachineCamera CinemachineCameraSecond;
+    // [SerializeField] private CinemachineInputAxisController CinemachineCameraSecondInputController;
     [SerializeField] private List<GameMachine> machinesConfigs;
     [SerializeField] List<BaseMachine> machinesGameObjects;
     [SerializeField] private int activeIndexMachine = 0;
@@ -19,38 +25,13 @@ public class GarageUIManager : MonoBehaviour
     [SerializeField] private InputActionReference clickAction;
     [SerializeField] private InputActionReference actionCamera;
     [SerializeField] private ColorModifyItem activeColorModifyItem;
+    List<GameTowerOption> dataTowers;
+    List<UIGarageTowerItemView> towersGameObjects;
+    [SerializeField] private int activeIndexTower = 0;
+    [SerializeField] private float step = 0.1f;
+    private DataDetail cacheTower;
     // CinemachineBrain brain;
     
-
-    void Start()
-    {
-        machinesGameObjects = new List<BaseMachine>();
-
-        gameManager.SetActiveCamera(Camera);
-
-        Init();
-        
-        // brain = Camera.GetComponent<CinemachineBrain>();
-
-        GarageUIEvents.ClickButtonNextMachine += OnNextMachine;
-        GarageUIEvents.ClickButtonPrevMachine += OnPrevMachine;
-        GarageUIEvents.ClickButtonSellActiveMachine += OnSellActiveMachine;
-        GarageUIEvents.ClickByColor += ChooseColorModify;
-        GarageUIEvents.OpenColors += OnDisable;
-        GarageUIEvents.CloseColors += OnEnable;
-        GarageUIEvents.FillCancel += OnCancelColorModify;
-    }
-
-    void OnDestroy()
-    {
-        GarageUIEvents.ClickButtonNextMachine -= OnNextMachine;
-        GarageUIEvents.ClickButtonPrevMachine -= OnPrevMachine;
-        GarageUIEvents.ClickButtonSellActiveMachine -= OnSellActiveMachine;
-        GarageUIEvents.ClickByColor -= ChooseColorModify;
-        GarageUIEvents.OpenColors -= OnDisable;
-        GarageUIEvents.CloseColors -= OnEnable;
-        GarageUIEvents.FillCancel -= OnCancelColorModify;
-    }
 
     void OnEnable()
     {
@@ -72,10 +53,125 @@ public class GarageUIManager : MonoBehaviour
         mousePositionAction.action.Disable();
     }
 
-    private void OnToggleInputCamera()
+    void Start()
     {
-        CinemachineCameraInputController.enabled = !CinemachineCameraInputController.enabled;
+        towersGameObjects = new ();
+
+        machinesGameObjects = new List<BaseMachine>();
+
+        gameManager.SetActiveCamera(Camera);
+
+        Init();
+        
+        // brain = Camera.GetComponent<CinemachineBrain>();
+
+        GarageUIEvents.ClickButtonNextMachine += OnNextMachine;
+        GarageUIEvents.ClickButtonPrevMachine += OnPrevMachine;
+        GarageUIEvents.ClickButtonSellActiveMachine += OnSellActiveMachine;
+        GarageUIEvents.ClickByColor += ChooseColorModify;
+        GarageUIEvents.OpenColors += OnDisable;
+        GarageUIEvents.CloseColors += OnEnable;
+        GarageUIEvents.FillCancel += OnCancelColorModify;
+
+        UIEvents.ClickButtonTower += OnClickButtonTower;
+        UIEvents.ClickButtonPrevTower += OnClickButtonPrevTower;
+        UIEvents.ClickButtonNextTower += OnClickButtonNextTower;
+        UIEvents.ClickButtonTowerClose += OnClickButtonTowerClose;
     }
+
+    void OnDestroy()
+    {
+        GarageUIEvents.ClickButtonNextMachine -= OnNextMachine;
+        GarageUIEvents.ClickButtonPrevMachine -= OnPrevMachine;
+        GarageUIEvents.ClickButtonSellActiveMachine -= OnSellActiveMachine;
+        GarageUIEvents.ClickByColor -= ChooseColorModify;
+        GarageUIEvents.OpenColors -= OnDisable;
+        GarageUIEvents.CloseColors -= OnEnable;
+        GarageUIEvents.FillCancel -= OnCancelColorModify;
+        
+        UIEvents.ClickButtonTower -= OnClickButtonTower;
+        UIEvents.ClickButtonPrevTower -= OnClickButtonPrevTower;
+        UIEvents.ClickButtonNextTower -= OnClickButtonNextTower;
+        UIEvents.ClickButtonTowerClose += OnClickButtonTowerClose;
+    }
+
+    private void OnClickButtonTowerClose()
+    {
+        int count = towersGameObjects.Count;
+        for (int i = 0; i < count; i++)
+        {
+            Destroy(towersGameObjects[i].gameObject);
+        }
+
+        towersGameObjects.Clear();
+
+        ReDrawTower(-1);
+    }
+
+    private void OnClickButtonNextTower()
+    {
+        activeIndexTower += 1;
+        activeIndexTower = Mathf.Clamp(activeIndexTower, 0, dataTowers.Count - 1);
+
+
+        Wrapper3dModels.transform.localPosition = new Vector3(
+            Wrapper3dModels.transform.localPosition.x,
+            0.15f + activeIndexTower * step,
+            Wrapper3dModels.transform.localPosition.z);
+
+        UIEvents.FocusTower?.Invoke(dataTowers[activeIndexTower]);
+
+        ReDrawTower(activeIndexTower);
+    }
+
+    private void OnClickButtonPrevTower()
+    {
+        activeIndexTower -= 1;
+
+        activeIndexTower = Mathf.Clamp(activeIndexTower, 0, dataTowers.Count - 1);
+
+        Wrapper3dModels.transform.localPosition = new Vector3(
+            Wrapper3dModels.transform.localPosition.x,
+            0.15f + activeIndexTower * step,
+            Wrapper3dModels.transform.localPosition.z);
+
+        UIEvents.FocusTower?.Invoke(dataTowers[activeIndexTower]);
+
+        ReDrawTower(activeIndexTower);
+    }
+
+    void ReDrawTower(int indexTower)
+    {
+        var tower = machinesGameObjects[activeIndexMachine].Towers.Find(x => x.Parent == null);
+
+        if (indexTower > -1)
+        {
+            DataDetail dataDetail = new DataDetail
+            {
+                nameConfig = dataTowers[indexTower].Config.name,
+                offset = tower.DataDetailTower.offset,
+                number = tower.DataDetailTower.number,
+            };
+
+            tower.ReDraw(dataTowers[indexTower], dataDetail);
+        } else
+        {
+            var conf = dataTowers.Find(x => x.Config.name == cacheTower.nameConfig);
+            tower.ReDraw(conf, cacheTower);
+        }
+        // machinesGameObjects[activeIndexMachine].CreateTower(dataTowers[activeIndexTower], dataDetail);
+    }
+
+    private void OnClickButtonTower()
+    {
+        var tower = machinesGameObjects[activeIndexMachine].Towers.Find(x => x.Parent == null);
+        cacheTower = tower.DataDetailTower;
+
+        CreateTowerItems();
+
+        OnClickButtonPrevTower();
+    }
+    
 
     private void ChooseColorModify(ColorModifyItem colorMI)
     {
@@ -222,16 +318,47 @@ public class GarageUIManager : MonoBehaviour
             }
         }
 
+        gObject.layer = Wrapper.gameObject.layer;
+        Transform[] children = gObject.GetComponentsInChildren<Transform>(true);
+        foreach (Transform child in children)
+        {
+            child.gameObject.layer = gObject.layer;
+        }
+
     }
 
     private void OnStartTouch(InputAction.CallbackContext context)
     {
-        OnToggleInputCamera();
+        Vector2 mousePosition = mousePositionAction.action.ReadValue<Vector2>();
+        
+        Ray ray = gameManager.ActiveCamera.ScreenPointToRay(mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Debug.Log($"hit.collider={hit.collider}");
+            BaseMachine bm = hit.collider.GetComponentInParent<BaseMachine>();
+
+            if (bm != null)
+            {
+                OnEnableInputCamera();
+            }
+        }
     }
 
     private void OnEndTouch(InputAction.CallbackContext context)
     {
-        OnToggleInputCamera();
+        OnDisableInputCamera();
+    }
+
+    private void OnEnableInputCamera()
+    {
+        CinemachineCameraInputController.enabled = true;
+    }
+
+    private void OnDisableInputCamera()
+    {
+        CinemachineCameraInputController.enabled = false;
     }
 
     private void OnCancelColorModify()
@@ -284,5 +411,58 @@ public class GarageUIManager : MonoBehaviour
                 GarageUIEvents.FillOk?.Invoke();
             }
         }
+    }
+
+    void CreateTowerItems()
+    {
+        var data = gameManager.Settings.machines.Select(x => x.towers).ToList();
+        dataTowers = new List<GameTowerOption>();
+        foreach (var item in data)
+        {
+            dataTowers.AddRange(item);
+        }
+
+        float i = 0f;
+        foreach (var item in dataTowers)
+        {
+            CreateTowerItem(item, new Vector2(0, i));
+            i += step;
+        }
+    }
+
+    void CreateTowerItem(GameTowerOption configTower, Vector2 point)
+    {
+        var gObject = Instantiate(
+            gameManager.Settings.prefabGarageItemTower,
+            Vector3.zero,
+            Quaternion.identity,
+            Wrapper3dModels
+        );
+        UIGarageTowerItemView obj = gObject.GetComponent<UIGarageTowerItemView>();
+        if (obj != null)
+        {
+            towersGameObjects.Add(obj);
+
+            obj.Init(configTower, 0, new DataDetail());
+        }
+
+        // targetPanelSettings = obj.GetComponentInChildren<UIDocument>().panelSettings;
+        // if (targetPanelSettings != null)
+        // {
+        //     targetPanelSettings.SetScreenToPanelSpaceFunction(ScreenCoordinatesToRenderTexture);
+        //     Debug.Log($"Found settings!");
+        // } else
+        // {
+        //     Debug.LogWarning($"Not found settings!");
+        // }
+
+        gObject.layer = Wrapper3dModels.gameObject.layer;
+        Transform[] children = gObject.GetComponentsInChildren<Transform>(true);
+        foreach (Transform child in children)
+        {
+            child.gameObject.layer = gObject.layer;
+        }
+
+        gObject.transform.SetLocalPositionAndRotation(new Vector3(point.x, -point.y, 0), Quaternion.Euler(0, 0, 0));
     }
 }

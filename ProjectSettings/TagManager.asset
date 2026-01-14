@@ -8,6 +8,8 @@ TagManager:
   - TilemapWithCollider
   - LevelManager
   - IgnoreCollision
+  - SecondCamera
+  - UIManager
   layers:
   - Default
   - TransparentFX

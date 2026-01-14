@@ -50,6 +50,38 @@ public abstract class UILocaleBase : MonoBehaviour
       item.style.backgroundColor = _gameManager.Theme.colorSecondary;
     }
 
+    // bg_secondary
+    UQueryBuilder<VisualElement> qBgSecondary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgSecondary = qBgSecondary.Class("bg_secondary").ToList();
+    foreach (var item in listBgSecondary)
+    {
+      item.style.backgroundColor = _gameManager.Theme.colorBgSecondary;
+    }
+    
+    // bg_accent
+    UQueryBuilder<VisualElement> qBgAccent = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgAccent = qBgAccent.Class("bg_accent").ToList();
+    foreach (var item in listBgAccent)
+    {
+      item.style.backgroundColor = _gameManager.Theme.colorBgAccent;
+    }
+
+    // bg_primary
+    UQueryBuilder<VisualElement> qBgPrimary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgPrimary = qBgPrimary.Class("bg_primary").ToList();
+    foreach (var item in listBgPrimary)
+    {
+      item.style.backgroundColor = _gameManager.Theme.colorBgPrimary;
+    }
+
+    // bg_success
+    UQueryBuilder<VisualElement> qBgSuccess = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgSuccess = qBgSuccess.Class("bg_success").ToList();
+    foreach (var item in listBgSuccess)
+    {
+      item.style.backgroundColor = _gameManager.Theme.colorBgSuccess;
+    }
+
     UQueryBuilder<VisualElement> builderInput = new UQueryBuilder<VisualElement>(_box);
     List<VisualElement> listInputEl = builderInput.Class("unity-base-text-field__input").ToList();
     foreach (var item in listInputEl)
@@ -81,38 +113,71 @@ public abstract class UILocaleBase : MonoBehaviour
       item.style.color = _gameManager.Theme.colorTextInput;
     }
 
-    UQueryBuilder<VisualElement> builderBtn = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBtnEl = builderBtn.Class("button").ToList();
+    UQueryBuilder<Button> builderBtn = new UQueryBuilder<Button>(_box);
+    List<Button> listBtnEl = builderBtn.Class("button").ToList();
     foreach (var item in listBtnEl)
     {
       item.style.backgroundColor = _gameManager.Theme.colorBgButton;
     }
 
-    UQueryBuilder<VisualElement> builderBtnSuccess = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBtnSuccessEl = builderBtnSuccess.Class("button_success").ToList();
-    foreach (var item in listBtnSuccessEl)
+    // button_secondary
+    UQueryBuilder<Button> qButtonSecondary = new UQueryBuilder<Button>(_box);
+    List<Button> listButtonSecondary = qButtonSecondary.Class("button_secondary").ToList();
+    foreach (var item in listButtonSecondary)
     {
-        item.style.backgroundColor = _gameManager.Theme.colorCompleted;
+      item.style.backgroundColor = _gameManager.Theme.colorButtonSecondary;
+    }
+    
+    // button_accent
+    UQueryBuilder<Button> qButtonAccent = new UQueryBuilder<Button>(_box);
+    List<Button> listButtonAccent = qButtonAccent.Class("button_accent").ToList();
+    foreach (var item in listButtonAccent)
+    {
+      item.style.backgroundColor = _gameManager.Theme.colorButtonAccent;
     }
 
-    UQueryBuilder<VisualElement> builderBgAccent = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgAccentEl = builderBgAccent.Class("bg_accent").ToList();
-    foreach (var item in listBgAccentEl)
+    // button_primary
+    UQueryBuilder<Button> qButtonPrimary = new UQueryBuilder<Button>(_box);
+    List<Button> listButtonPrimary = qButtonPrimary.Class("button_primary").ToList();
+    foreach (var item in listButtonPrimary)
     {
-        item.style.backgroundColor = _gameManager.Theme.colorAccent;
-    }
-    UQueryBuilder<VisualElement> builderBgSecondary = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgSceondaryEl = builderBgSecondary.Class("bg_secondary").ToList();
-    foreach (var item in listBgSceondaryEl)
-    {
-        item.style.backgroundColor = _gameManager.Theme.colorSecondary;
+      item.style.backgroundColor = _gameManager.Theme.colorButtonPrimary;
     }
 
-    UQueryBuilder<VisualElement> builderBtnAccent = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBtnAccentEl = builderBtnAccent.Class("button_accent").ToList();
-    foreach (var item in listBtnAccentEl)
+    // button_success
+    UQueryBuilder<Button> qButtonSuccess = new UQueryBuilder<Button>(_box);
+    List<Button> listButtonSuccess = qButtonSuccess.Class("button_success").ToList();
+    foreach (var item in listButtonSuccess)
     {
-        item.style.backgroundColor = _gameManager.Theme.colorAccent;
+      item.style.backgroundColor = _gameManager.Theme.colorButtonSuccess;
+    }
+
+    // UQueryBuilder<VisualElement> builderBgAccent = new UQueryBuilder<VisualElement>(_box);
+    // List<VisualElement> listBgAccentEl = builderBgAccent.Class("bg_accent").ToList();
+    // foreach (var item in listBgAccentEl)
+    // {
+    //     item.style.backgroundColor = _gameManager.Theme.colorAccent;
+    // }
+    // UQueryBuilder<VisualElement> builderBgSecondary = new UQueryBuilder<VisualElement>(_box);
+    // List<VisualElement> listBgSceondaryEl = builderBgSecondary.Class("bg_secondary").ToList();
+    // foreach (var item in listBgSceondaryEl)
+    // {
+    //     item.style.backgroundColor = _gameManager.Theme.colorSecondary;
+    // }
+
+    // UQueryBuilder<VisualElement> builderBtnAccent = new UQueryBuilder<VisualElement>(_box);
+    // List<VisualElement> listBtnAccentEl = builderBtnAccent.Class("button_accent").ToList();
+    // foreach (var item in listBtnAccentEl)
+    // {
+    //     item.style.backgroundColor = _gameManager.Theme.colorAccent;
+    // }
+
+    // bg_tint_secondary
+    UQueryBuilder<VisualElement> qBgTintSecondary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgTintSecondary = qBgTintSecondary.Class("bg_tint_secondary").ToList();
+    foreach (var item in listBgTintSecondary)
+    {
+      item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgSecondary);
     }
 
     UQueryBuilder<VisualElement> builderLowBtns = new UQueryBuilder<VisualElement>(_box);

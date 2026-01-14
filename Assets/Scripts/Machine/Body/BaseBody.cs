@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
-using System.Linq;
-using System;
 using System.Collections.Generic;
+using System.Linq;
+
+
 
 
 
@@ -19,8 +20,8 @@ public class BaseBody : MonoBehaviour, IColored
     [SerializeField] private SpriteRenderer _bodyGerbSprite;
     [SerializeField] private SpriteRenderer _damageSprite;
     protected BaseMachine Machine;
-    protected GameBody Config;
-    protected GameBodyOption Option;
+    public GameBody Config {get; private set;}
+    public GameBodyOption Option {get; private set;}
     [SerializeField] protected DataBody _data;
     public DataBody Data => _data;
     [SerializeField] protected bool isMove;
@@ -81,8 +82,6 @@ public class BaseBody : MonoBehaviour, IColored
         Option = Machine.Config.body;
 
         Config = Machine.Config.body.Config;
-        
-        transform.localPosition = Option.offsetBody;
 
         // OnChangeData();
 
@@ -100,6 +99,30 @@ public class BaseBody : MonoBehaviour, IColored
         OnSetSpeed(Config.speed);
         
         OnSetAngleBody(0);
+        
+        float y = 0f;
+        
+        if (Machine.Wheels.Count > 0) {
+            var heights = Machine.Wheels.Select(x => x.transform.localPosition.y).ToArray();
+            var maxHeight = Mathf.Max(heights);
+
+            y += (float)maxHeight / 2f + 1f;
+
+            Debug.Log($"exist wheels: {y}");
+        }
+
+        if (Machine.Caterpillars.Count > 0 && y <= 0f) {
+            var heights = Machine.Caterpillars.Select(x => x.transform.localPosition.y).ToArray();
+            var maxHeight = Mathf.Max(heights);
+
+            y += (float)maxHeight / 2f + 1f;
+            
+            Debug.Log($"exist cat: {y}");
+        }
+
+        y += Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f;
+
+        transform.localPosition = Option.offsetBody + new Vector3(0, y, 0);
     }
     
 

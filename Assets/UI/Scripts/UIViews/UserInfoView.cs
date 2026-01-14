@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UIToolkitLibrary;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -26,7 +27,11 @@ namespace UIToolkitDemo
         Label m_Coin;
         Label m_Cube;
         Label m_Rank;
+        VisualElement m_SpriteAva;
         VisualElement m_RankImage;
+        VisualElement m_SpriteCoin;
+        List<VisualElement> m_SpritesPlus;
+        VisualElement m_SpriteCubes;
         VisualElement m_RankBg;
         VisualElement m_CubeBox;
         VisualElement m_CoinBox;
@@ -58,6 +63,11 @@ namespace UIToolkitDemo
             m_NameBox = m_TopElement.Q<VisualElement>(ClassNames.NameBox);
             m_CubeBox = m_TopElement.Q<VisualElement>(ClassNames.CubeBox);
             m_CoinBox = m_TopElement.Q<VisualElement>(ClassNames.CoinBox);
+            m_SpriteCoin = m_TopElement.Q<VisualElement>(UINames.SpriteCoin);
+            m_SpriteCubes = m_TopElement.Q<VisualElement>(UINames.SpriteCubes);
+            m_SpriteAva = m_TopElement.Q<VisualElement>(UINames.SpriteAva);
+            UQueryBuilder<VisualElement> builder = new UQueryBuilder<VisualElement>(m_TopElement);
+            m_SpritesPlus = builder.Name(UINames.SpritePlus).ToList();
 
             DrawUserInoBlok();
         }
@@ -71,10 +81,31 @@ namespace UIToolkitDemo
             m_Cube.text = _gameManager.StateManager.statePlayer.coin.ToString();
 
             m_Rank.text = _gameManager.Settings.ranks[_gameManager.StateManager.statePlayer.rank].text.title.GetLocalizedString();
-            m_NameBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorHead);
-            m_RankBg.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorHead);
-            m_CubeBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorHead);
-            m_CoinBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorHead);
+            // m_RankBg.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorHead);
+            // m_NameBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorHead);
+            // m_CubeBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorHead);
+            // m_CoinBox.style.backgroundColor = new StyleColor(_gameManager.Theme.colorHead);
+
+            Theming();
+        }
+
+        private void Theming()
+        {
+            m_SpriteCoin.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteCoin);
+            m_SpriteCubes.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteCubes);
+            if (_gameManager.AppInfo.UserInfo.photo == "")
+            {
+                m_SpriteAva.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteAva);
+            } else
+            {
+                // m_SpriteAva.style.backgroundImage = new StyleBackground(_gameManager.AppInfo.UserInfo.photo);
+            }
+            m_SpriteCubes.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteCubes);
+            
+            foreach (var item in m_SpritesPlus)
+            {
+                item.style.backgroundImage = new StyleBackground(_gameManager.Theme.spritePlus);
+            }
         }
 
         /// <summary>

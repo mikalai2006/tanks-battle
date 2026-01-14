@@ -23,13 +23,29 @@ MonoBehaviour:
   colorPrimary: {r: 1, g: 1, b: 1, a: 1}
   colorSecondary: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   colorAccent: {r: 0.77647066, g: 0.5176471, b: 0.08627451, a: 1}
-  colorHead: {r: 0.11372549, g: 0.11372549, b: 0.11372549, a: 1}
   colorWrapperGameScreen: {r: 0.85882354, g: 0.3019608, b: 0.11372549, a: 0.9019608}
   colorBgInfoRow: {r: 0.3254902, g: 0.5019608, b: 0.07058824, a: 0.9019608}
   colorTextInfoRow: {r: 1, g: 1, b: 1, a: 1}
   colorBgHint: {r: 0.7924528, g: 0.6487969, b: 0.13830544, a: 1}
   colorBgInput: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+  colorBgSecondary: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+  colorBgPrimary: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+  colorBgAccent: {r: 0.7764706, g: 0.5176471, b: 0.08627451, a: 1}
+  colorBgSuccess: {r: 0.3254902, g: 0.5019608, b: 0.07058824, a: 0.9019608}
+  colorButtonAccent: {r: 1, g: 0.53333336, b: 0, a: 1}
+  colorButtonSecondary: {r: 0, g: 0, b: 0, a: 0}
+  colorButtonPrimary: {r: 1, g: 0.53171587, b: 0, a: 1}
+  colorButtonSuccess: {r: 0.3254902, g: 0.5019608, b: 0.07058824, a: 1}
   colorTextInput: {r: 1, g: 1, b: 1, a: 1}
   colorBgButton: {r: 0.1137255, g: 0.1137255, b: 0.1137255, a: 1}
   colorBgDialog: {r: 0.2901961, g: 0.3019608, b: 0.20000002, a: 1}
-  t2: {fileID: 0}
+  spriteAva: {fileID: 21300000, guid: 09a1fe00316b5f64c842b0af343e79a9, type: 3}
+  spriteFill: {fileID: 21300000, guid: da42dd2ad2ce82d46a6028ccba29f607, type: 3}
+  spriteSettings: {fileID: 0}
+  spriteCoin: {fileID: 21300000, guid: 765f2d276ed5c6942ab80d49d2d1fc6f, type: 3}
+  spriteCubes: {fileID: 21300000, guid: 1736769ddbec17d46bfdc70af54cd635, type: 3}
+  spritePlus: {fileID: 21300000, guid: 51ef68ccb3b02014ead816aeec2bcb6b, type: 3}
+  spriteAngar: {fileID: 21300000, guid: 6fb73554ceaea20459231ca8ee042f72, type: 3}
+  spriteShop: {fileID: 21300000, guid: 326b1996d5545f3418a1d62d22413950, type: 3}
+  spriteBattle: {fileID: 21300000, guid: 33bb4a7bc22dc4844a6f28d333c2ac56, type: 3}
+  spriteArrow: {fileID: 21300000, guid: aca749c5ff3da30429e55536669f44f9, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mikalai2006.Voxel;
@@ -327,15 +328,6 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         // устанавливаем настройки для области атаки.
         areaSearch.Init(Config);
 
-        // инициализируем компоненты машины
-        if (Config.body != null)
-        {
-            DataDetail dataBody = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == Config.body.Config.name && t.number == 0);
-
-            body = Instantiate(Config.body.Config.prefab, BodyWrapper.transform);
-            body.Init(this, dataBody);
-        }
-
         // init caterpillars.
         for (int i = 0; i < Config.catterpillars.Count; i++)
         {
@@ -358,6 +350,15 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             wheels.Add(_wh);
         }
 
+        // инициализируем компоненты машины
+        if (Config.body != null)
+        {
+            DataDetail dataBody = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == Config.body.Config.name && t.number == 0);
+
+            body = Instantiate(Config.body.Config.prefab, BodyWrapper.transform);
+            body.Init(this, dataBody);
+        }
+
         // init towers.
         var parentTowers = Config.towers.FindAll(t => !t.isChildren);
         for (int i = 0; i < parentTowers.Count; i++)
@@ -365,9 +366,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             GameTowerOption _optConfig = parentTowers.ElementAt(i);
             DataDetail dataTower = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optConfig.Config.name && t.number == i);
 
-            var _tow = Instantiate(_optConfig.Config.prefab, TowerWrapper.transform);
-            _tow.Init(this, _optConfig, 10 + i, dataTower);
-            towers.Add(_tow);
+            var _tow = CreateTower(_optConfig, dataTower);
 
             // создаем дуло.
             for (int m = 0; m < _optConfig.muzzles.Count; m++)
@@ -390,10 +389,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
                     if (_optChildConfig != null)
                     {
-                        var _towChild = Instantiate(_optChildConfig.Config.prefab, _tow.transform);
-                        _towChild.OnSetParent(_tow);
-                        _towChild.Init(this, _optChildConfig, 10 + i + j, dataTowerChild);
-                        towers.Add(_towChild);
+                        
+                        var _towChild = CreateTower(_optChildConfig, dataTowerChild);
                         
                         // создаем дуло.
                         for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
@@ -401,7 +398,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
                             GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
                             DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
 
-                            var _muz = Instantiate(_mConfig.Config.prefab, _tow.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+                            var _muz = Instantiate(_mConfig.Config.prefab, _towChild.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
                             _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
                             muzzles.Add(_muz);
                         }
@@ -596,6 +593,21 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         {
             _gameManager.StateManager.SaveDestroyVoxelsMachine(voxels, dataDetail);
         }
+    }
+
+    /// <summary>
+    /// пересоздание башни
+    /// </summary>
+    /// <param name="gameTowerOption"></param>
+    /// <param name="dataDetail"></param>
+    /// <exception cref="NotImplementedException"></exception>
+    public BaseTower CreateTower(GameTowerOption gameTowerOption, DataDetail dataDetail)
+    {
+        var _tow = Instantiate(gameTowerOption.Config.prefab, TowerWrapper.transform);
+        _tow.Init(this, gameTowerOption, dataDetail);
+        towers.Add(_tow);
+
+        return _tow;
     }
 
 

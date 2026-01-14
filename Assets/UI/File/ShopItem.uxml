@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General"/>
+    <ui:VisualElement name="Wrapper" class="p-4 bg_primary" style="flex-grow: 1;">
+        <ui:Label text="Name" name="LabelNameMachine" class="font text-md text-primary font-bold"/>
+        <ui:VisualElement picking-mode="Position" style="flex-grow: 1;">
+            <ui:Label text="Label" name="LabelPrice" class="text-md"/>
+        </ui:VisualElement>
+        <ui:Button text="#btn_buy" name="ButtonBuy" class="button_success button"/>
+        <ui:Button text="Button"/>
+    </ui:VisualElement>
+</ui:UXML>

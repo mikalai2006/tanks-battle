@@ -158,10 +158,13 @@ public class GameSetting : ScriptableObject
   [Space(5)]
   [Header("UI")]
   public Sprite spriteClose;
-    // [Space(5)]
-    // [Header("Shop")]
-    // public List<ShopItem<GameEntity>> ShopItems;
-    // public List<ShopItem<GameBonus>> ShopItemsBonus;
+
+  [Space(5)]
+  [Header("Shop")]
+  public GameObject prefabShopItemMachine;
+  public GameObject prefabGarageItemTower;
+  // public List<ShopItem<GameEntity>> ShopItems;
+  // public List<ShopItem<GameBonus>> ShopItemsBonus;
 
     // [Space(5)]
     // [Header("API Directory")]

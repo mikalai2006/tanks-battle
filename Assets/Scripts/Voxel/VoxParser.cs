@@ -85,9 +85,15 @@ public class VoxParser : MonoBehaviour
             {
                 AssetDatabase.CreateFolder($"{OutputPath}/{nameDirForAllModel}", "data");
             }
-            string path = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/{nameDirForAllModel}/data/{modelName}_{nameFolderModel}.asset");
+
+            string nameFile = $"{nameFolderModel}_{modelName}";
+            if (isTiles)
+            {
+                nameFile = $"{modelName}_{nameFolderModel}";
+            }
+            string path = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/{nameDirForAllModel}/data/{nameFile}.asset");
             // Debug.Log($"path={path}, OutputPath={OutputPath}, nameDirForAllModel={nameDirForAllModel}");
-            string pathMesh = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/{nameDirForAllModel}/data/{modelName}_{nameFolderModel}_mesh.asset");
+            string pathMesh = AssetDatabase.GenerateUniqueAssetPath($"{OutputPath}/{nameDirForAllModel}/data/{nameFile}_mesh.asset");
 
 
             // генерируем данные для модели.

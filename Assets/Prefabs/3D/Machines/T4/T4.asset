@@ -46,17 +46,17 @@ MonoBehaviour:
     isRotate: 1
     muzzles:
     - Config: {fileID: 11400000, guid: fef3fa0bb148674468c4daee60b42d8c, type: 2}
-      offsetMuzzle: {x: 6, y: 0, z: 0}
+      offsetMuzzle: {x: 6, y: -1, z: 0}
     children:
     - 1
     isChildren: 0
   - ido: 1
     Config: {fileID: 11400000, guid: 22c645a4daa41b246b08a915d0a0a5e2, type: 2}
-    offsetTower: {x: 5, y: 4, z: 0}
+    offsetTower: {x: 4, y: 16, z: 0}
     isRotate: 0
     muzzles:
     - Config: {fileID: 11400000, guid: 3f1ff767f05ec7b4b843802799310610, type: 2}
-      offsetMuzzle: {x: 2, y: 4.5, z: -5}
+      offsetMuzzle: {x: 0, y: 0, z: 0}
     children: []
     isChildren: 1
   catterpillars:

@@ -51,6 +51,21 @@ namespace Mikalai2006.Voxel
                 Wrapper = transform.gameObject;
             }
 
+            // Debug.Log($"CreateContainer {gameObject.name}");
+            Wrapper.transform.localRotation = Config.sOVoxelData.GlobalRotation;
+
+            if (Config.customScale > 0) {
+                Wrapper.transform.localScale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
+            }  else if (Config.useGlobalScale)
+            {
+                // var maxBoundsSize = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z);
+                if (_gameManager)
+                {
+                    Wrapper.transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+                }
+            }
+
+
             BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
             if (_gameManager && _gameManager.LevelConfig && bm == false)
             {
@@ -74,19 +89,6 @@ namespace Mikalai2006.Voxel
 
         private void CreateContainer(int index)
         {
-            // Debug.Log($"CreateContainer {gameObject.name}");
-            Wrapper.transform.localRotation = Config.sOVoxelData.GlobalRotation;
-
-            if (Config.customScale > 0) {
-                Wrapper.transform.localScale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
-            }  else if (Config.useGlobalScale)
-            {
-                // var maxBoundsSize = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z);
-                if (_gameManager)
-                {
-                    Wrapper.transform.localScale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
-                }
-            }
 
             // int count = Config.sOVoxelData.voxels.Count;
             // position = new Vector3(UnityEngine.Random.Range(0, 150), 0.5f, UnityEngine.Random.Range(0, 180));
@@ -115,16 +117,7 @@ namespace Mikalai2006.Voxel
             
             containers[index] = container;
             container.Initialize(Config, Vector3.zero, this);
-            container.transform.localScale = new Vector3(1, 1, 1);
-            container.transform.SetPositionAndRotation(position, Quaternion.identity);
-            if (Config.isTile)
-            {
-                var maxAxis = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z) / 2f;
-                container.transform.SetLocalPositionAndRotation((-1 * new Vector3(maxAxis, 0.5f, maxAxis)) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);           
-            } else
-            {
-                container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
-            }
+            SetTransforms(container);
             // // container.gameObject.isStatic = true;
 
             // // SceneTools.LoopPositions((i, p) =>
@@ -187,6 +180,20 @@ namespace Mikalai2006.Voxel
             // // Graphics.RenderMesh(_rp, _mesh, 0, Matrix4x4.Translate(new Vector3(0f, 0.5f, 0f)));
         }
 
+        public void SetTransforms(Container container)
+        {
+            container.transform.localScale = new Vector3(1, 1, 1);
+            container.transform.SetPositionAndRotation(position, Quaternion.identity);
+            if (Config.isTile)
+            {
+                var maxAxis = Mathf.Max(Config.sOVoxelData.Bounds.x, Config.sOVoxelData.Bounds.y, Config.sOVoxelData.Bounds.z) / 2f;
+                container.transform.SetLocalPositionAndRotation((-1 * new Vector3(maxAxis, 0.5f, maxAxis)) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);           
+            } else
+            {
+                container.transform.SetLocalPositionAndRotation((-1 * Config.sOVoxelData.Pivot) + (Vector3.one * Config.sOVoxelData.sizeVoxel / 2), Quaternion.identity);
+            }
+        }
+
         public void SetColorsModify(List<ColorsModify> _colorsModify)
         {
             if (_colorsModify == null) return;
@@ -212,20 +219,21 @@ namespace Mikalai2006.Voxel
 
         public void SetData(StateMachinePlayerData data, DataDetail dataDetail)
         {
-            if (data == null) return;
-
-            SetColorsModify(data.colorsModifies);
+            if (data != null)
+            {
+                SetColorsModify(data.colorsModifies);
+            }
             
-            if (dataDetail == null) return;
+            if (dataDetail != null)
+            {
+                _dataDetail = dataDetail;
 
-            _dataDetail = dataDetail;
-
-            SetDestroyedVoxels(dataDetail.destroyVoxels);
+                SetDestroyedVoxels(dataDetail.destroyVoxels);
+            }
         }
 
         private void UpdateMeshContainer(Container container, int index)
         {
-            
             if (Config.isOneMesh)
             {
                 container.SetData();
@@ -261,6 +269,22 @@ namespace Mikalai2006.Voxel
                 for (int index = 0; index < containers.Length; index++)
                 {
                     UpdateMeshContainer(containers[index], index);
+                }
+            }
+        }
+
+        public void UploadedAllMeshes(DataDetail dataDetail)
+        {
+            if (dataDetail != null)
+            {
+                SetData(null, dataDetail);
+            }
+            if (containers != null)
+            {
+                for (int index = 0; index < containers.Length; index++)
+                {
+                    UpdateMeshContainer(containers[index], index);
+                    SetTransforms(containers[index]);
                 }
             }
         }

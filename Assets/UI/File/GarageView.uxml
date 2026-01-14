@@ -1,34 +1,63 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=0d2d1561a57b70a4798a0a6b1324eaab&amp;type=3#base" />
-    <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General" />
-    <ui:VisualElement picking-mode="Ignore" class="p-2" style="flex-grow: 1; flex-shrink: 0; height: 50%;">
-        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; flex-direction: row;">
-            <ui:VisualElement picking-mode="Ignore" class="bg_accent">
-                <ui:Label text="Label" name="MachineName" class="font-bold text-lg font text-primary p-2" />
-            </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1;" />
-            <ui:Button text="#btn_sell" name="Sell" class="button" />
-            <ui:Button name="OpenColors" class="button" style="flex-direction: row;">
-                <ui:VisualElement class="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Use/fill256.png?fileID=2800000&amp;guid=3f0ca1033d0f8214293e14ba284e8e9f&amp;type=3#fill256&quot;);" />
-                <ui:Label text="#btn_open_colors" />
+    <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General"/>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="Overlay3Models" style="align-items: center; width: 330px;">
+            <ui:Button text=" " name="ButtonPrevTower" class="button" style="font-size: 50px; rotate: 90deg;">
+                <ui:VisualElement name="SpriteArrow" class="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;); rotate: 180deg;"/>
             </ui:Button>
-            <ui:Button text="#btn_cancel_colors" name="CancelColor" class="button" />
-            <ui:VisualElement name="Hint" picking-mode="Ignore" class="hit_wrapper" style="position: absolute; top: 5px; left: 5px; right: 5px;" />
+            <ui:VisualElement style="flex-grow: 1;"/>
+            <ui:Button text="" name="ButtonNextTower" class="button" style="font-size: 50px; rotate: 90deg;">
+                <ui:VisualElement name="SpriteArrow" class="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;);"/>
+            </ui:Button>
         </ui:VisualElement>
-        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
-        <ui:VisualElement name="DialogWrapper" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; left: 0; bottom: 0; right: 0; align-items: center; justify-content: center;">
-            <ui:VisualElement name="GarageWrapper" picking-mode="Ignore" style="width: 415px; flex-grow: 1;">
-                <ui:VisualElement name="Tabs" picking-mode="Ignore" />
-                <ui:ScrollView name="MachineBox" picking-mode="Ignore" />
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:VisualElement style="flex-grow: 0; flex-shrink: 0; height: 100%;">
+                <ui:VisualElement picking-mode="Ignore" class="p-2" style="flex-grow: 1; flex-shrink: 0;">
+                    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; flex-direction: row;">
+                        <ui:VisualElement style="flex-grow: 1; align-items: flex-end;">
+                            <ui:VisualElement picking-mode="Ignore" class="bg_accent">
+                                <ui:Label text="Label" name="MachineName" class="font-bold text-lg font text-primary p-2"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;"/>
+                    <ui:VisualElement name="DialogWrapper" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; left: 3px; bottom: 0; right: -2px; align-items: center; justify-content: center;">
+                        <ui:VisualElement name="GarageWrapper" picking-mode="Ignore" style="width: 415px; flex-grow: 1;">
+                            <ui:VisualElement name="Tabs" picking-mode="Ignore"/>
+                            <ui:ScrollView name="MachineBox" picking-mode="Ignore"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement picking-mode="Ignore" class="p-2" style="flex-grow: 1;">
+                    <ui:VisualElement picking-mode="Ignore" style="flex-direction: row;">
+                        <ui:Button text=" " name="ButtonPrev" class="button" style="font-size: 50px;">
+                            <ui:VisualElement name="SpriteArrow" class="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;); rotate: 180deg;"/>
+                        </ui:Button>
+                        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;"/>
+                        <ui:Button text="" name="ButtonNext" class="button" style="font-size: 50px;">
+                            <ui:VisualElement name="SpriteArrow" class="icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;);"/>
+                        </ui:Button>
+                    </ui:VisualElement>
+                    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;"/>
+                </ui:VisualElement>
+                <ui:VisualElement picking-mode="Ignore">
+                    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row;">
+                        <ui:Button text="#btn_tower" name="ButtonTower" class="button"/>
+                        <ui:Button text="#btn_close" name="ButtonTowerClose" class="button"/>
+                        <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
+                            <ui:Button text="#btn_sell" name="ButtonSell" class="button"/>
+                            <ui:Button name="ButtonOpenColors" class="button" style="flex-direction: row;">
+                                <ui:Image name="SpriteFill" class="icon" style="background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;);"/>
+                                <ui:Label text="#btn_open_colors" class="p-0 m-0"/>
+                            </ui:Button>
+                            <ui:Button text="#btn_cancel_colors" name="ButtonCancelColor" class="button"/>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 5px; left: 5px; right: 5px; height: 100%;">
+                <ui:VisualElement name="Hint" picking-mode="Ignore" class="hit_wrapper" style="position: relative;"/>
             </ui:VisualElement>
         </ui:VisualElement>
-    </ui:VisualElement>
-    <ui:VisualElement picking-mode="Ignore" class="p-2" style="flex-grow: 1; flex-shrink: 0; height: 100%;">
-        <ui:VisualElement picking-mode="Ignore" style="flex-direction: row;">
-            <ui:Button text="&lt;" name="Prev" class="button" style="font-size: 50px;" />
-            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
-            <ui:Button text="&gt;" name="Next" class="button" style="font-size: 50px;" />
-        </ui:VisualElement>
-        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;" />
     </ui:VisualElement>
 </ui:UXML>

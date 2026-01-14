@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Rendering;
+using System;
+
 
 
 #if UNITY_EDITOR
@@ -22,6 +24,7 @@ public class BaseTower : MonoBehaviour, IColored
     public List<BaseMuzzle> Muzzles => Machine.Muzzles;
     [SerializeField] private SortingGroup sortingGroup;
     public GameTowerOption Option {get; private set ;}
+    public DataDetail DataDetailTower {get; private set ;}
     protected BaseMachine Machine;
     [SerializeField] private BaseMachine _objectTarget;
     public BaseMachine ObjectTarget => _objectTarget;
@@ -271,7 +274,7 @@ public class BaseTower : MonoBehaviour, IColored
 
     void Update()
     {
-        if (!Machine || !Machine.LevelManager)
+        if (Machine == null || Machine.LevelManager == null)
         {
             return;
         }
@@ -315,11 +318,13 @@ public class BaseTower : MonoBehaviour, IColored
 
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameTowerOption optConfig, int index, DataDetail dataTower)
+    public void Init(BaseMachine baseMachine, GameTowerOption optConfig, DataDetail dataTower)
     {
         Option = optConfig;
 
         Machine = baseMachine;
+
+        DataDetailTower = dataTower;
 
         if (!Parent && _gameManager.LevelConfig != null)
         {
@@ -340,11 +345,7 @@ public class BaseTower : MonoBehaviour, IColored
 
         voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
 
-        if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
-        {
-            // Debug.Log($"set colorsModify {Machine.MachineLevelData.colorsModify.Count}");
-            voxelMeshRender.SetData(Machine.MachineLevelData.data, dataTower);
-        }
+        voxelMeshRender.SetData(Machine != null && Machine.MachineLevelData != null && Machine.MachineLevelData.data != null ? Machine.MachineLevelData.data : null, dataTower);
 
         OnSetSpeedRotateTower(optConfig.Config.speedRotateTower);
         // OnSetAngleTower(0);
@@ -363,7 +364,18 @@ public class BaseTower : MonoBehaviour, IColored
 
         // OnSetSizeSector(distanceAttack);
 
-        transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
+        if (DataDetailTower != null)
+        {
+            transform.localPosition = new Vector3(DataDetailTower.offset.x, DataDetailTower.offset.y, DataDetailTower.offset.z);
+        } else
+        {
+            transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
+        }
+        MuzzlesBox.transform.localPosition = new Vector3(
+            Option.Config.MeshConfig.sOVoxelData.Bounds.x / 2f - 1f, 
+            0,
+            0
+        );
 
         // // создаем дуло.
         // for (int i = 0; i < optConfig.muzzles.Count; i++)
@@ -594,6 +606,8 @@ public class BaseTower : MonoBehaviour, IColored
     /// <param name="lastTarget">Последняя машина, которая видела текущую машину</param>
     public void OnNotViewTarget(BaseMachine lastTarget)
     {
+        if (Machine == null) return;
+
         if (_gameManager.Settings.drawAreaForBot || (lastTarget != null && !lastTarget.MachineLevelData.isBot) || !Machine.MachineLevelData.isBot)
         {
             for (int i = 0; i < Muzzles.Count; i++)
@@ -879,13 +893,18 @@ public class BaseTower : MonoBehaviour, IColored
         // // (x', y') - новые координаты точки после поворота.
         // var angle = Parent == null ? baseMachine.Body.transform.rotation.eulerAngles.y : Parent.transform.rotation.eulerAngles.y; // parent.Data.currentAngleTower;
         // // var offsetParentTower = Vector2.zero; // Parent == null ? Vector2.zero : parent.Option.offsetTower;
-        var point = Option.offsetTower;
+        var point = DataDetailTower != null ? DataDetailTower.offset : Option.offsetTower;
         // // var x1 = (point.x - offsetParentTower.x) * Mathf.Cos(angle * Mathf.Deg2Rad) - (point.z - offsetParentTower.y) * Mathf.Sin(angle * Mathf.Deg2Rad) + offsetParentTower.x;
         // // var z1 = (point.x - offsetParentTower.x) * Mathf.Sin(angle * Mathf.Deg2Rad) + (point.z - offsetParentTower.y) * Mathf.Cos(angle * Mathf.Deg2Rad) + offsetParentTower.y;
         // var x1 = point.x + Mathf.Cos(angle) * 1;
         // var z1 = point.z + Mathf.Sin(angle) * 1;
         // var n = baseMachine.Body.transform.TransformPoint(point);
+        var y = Parent == null ? (baseMachine.Body.Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + baseMachine.Body.transform.position.y : (Parent.Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + Parent.transform.position.y;
+        
+        point.y = point.y + y + (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) - 1f;
+
         transform.position = Parent == null ? baseMachine.Body.transform.TransformPoint(point) : Parent.transform.TransformPoint(point);
+        // transform.position = new Vector3(pos.x, pos.y + y + (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) - 1f, pos.z);
     }
 
     public void OnDamageEffect(float v)
@@ -905,6 +924,14 @@ public class BaseTower : MonoBehaviour, IColored
     public void ReDraw(List<ColorsModify> colors)
     {
         voxelMeshRender.UploadedAllMeshes(colors);
+    }
+
+    public void ReDraw(GameTowerOption option, DataDetail dataDetail)
+    {
+        Option = option;
+
+        voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+        voxelMeshRender.UploadedAllMeshes(dataDetail);
     }
 
     public FillData OnFill(Vector3 _pointPointer)

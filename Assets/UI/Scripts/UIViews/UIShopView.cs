@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -14,35 +15,19 @@ namespace UIToolkitLibrary
             public static string MachineCaterpillar = "Caterpillars";
             public static string MachineTowers = "Towers";
             public static string MachineMuzzles = "Muzzles";
-            public static string ButtonPrev = "Prev";
-            public static string ButtonNext = "Next";
-            public static string ButtonBuy = "Buy";
 
             public static string Name_Machine = "NameMachine";
             public static string Cost_Machine = "CostMachine";
         }
-
-        ScrollView m_ScrollViewParent;
 
         Button m_Button_Prev;
         Button m_Button_Next;
         Button m_Button_Buy;
         Label m_Name_Machine;
         Label m_Cost_Machine;
-        VisualElement m_MachineBox;
-        VisualElement m_MachineBody;
-        VisualElement m_MachineCaterpillar;
-        VisualElement m_MachineTowers;
-        VisualElement m_InventoryPanel;
-
-        DropdownField m_InventoryRarityDropdown;
-        DropdownField m_InventorySlotTypeDropdown;
-
-        // Template asset for each gear item 
-        VisualTreeAsset m_GearItemAsset;
-
-        // Actively checked gear
-        // GearItemComponent m_SelectedGear;
+        // Image m_ImageRenderTexture;
+        // RenderTexture renderTexture;
+        List<VisualElement> m_SpritesArrow;
 
         public UIShopView(VisualElement topElement, LocalizedStringTable localization): base(topElement, localization)
         {
@@ -89,11 +74,21 @@ namespace UIToolkitLibrary
         {
             base.SetVisualElements();
             
-            m_Button_Next = m_TopElement.Q<Button>(ClassNames.ButtonNext);
-            m_Button_Prev = m_TopElement.Q<Button>(ClassNames.ButtonPrev);
-            m_Button_Buy = m_TopElement.Q<Button>(ClassNames.ButtonBuy);
+            m_Button_Next = m_TopElement.Q<Button>(UINames.ButtonNext);
+            m_Button_Prev = m_TopElement.Q<Button>(UINames.ButtonPrev);
+            m_Button_Buy = m_TopElement.Q<Button>(UINames.ButtonBuy);
             m_Name_Machine = m_TopElement.Q<Label>(ClassNames.Name_Machine);
             m_Cost_Machine = m_TopElement.Q<Label>(ClassNames.Cost_Machine);
+            // m_ImageRenderTexture = m_TopElement.Q<Image>(UINames.ImageRenderTexture);
+            // if (m_ImageRenderTexture != null)
+            // {
+            //     StyleBackground styleBackground = m_ImageRenderTexture.resolvedStyle.backgroundImage;
+            //     renderTexture = styleBackground.value.renderTexture;
+            // }
+
+            
+            UQueryBuilder<VisualElement> builder = new UQueryBuilder<VisualElement>(m_TopElement);
+            m_SpritesArrow = builder.Name(UINames.SpriteArrow).ToList();
 
             // // create tabs.
             // m_Tabs = Root.Q<VisualElement>("Tabs");
@@ -203,6 +198,7 @@ namespace UIToolkitLibrary
             // m_ScrollViewParent = m_TopElement.Q<ScrollView>("inventory__scrollview");
 
             UpdateLocalizedText();
+            Theming();
         }
 
         private void OnClickMachineItem(ClickEvent evt, GameMachine machine)
@@ -245,6 +241,16 @@ namespace UIToolkitLibrary
             m_Button_Next.RegisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.RegisterCallback<ClickEvent>(ClickPrev);
             m_Button_Buy.RegisterCallback<ClickEvent>(ClickBuy);
+
+            // if (m_ImageRenderTexture != null)
+            // {
+            //     m_ImageRenderTexture.RegisterCallback<PointerDownEvent>(OnPointerDownHandler);
+            //     m_ImageRenderTexture.RegisterCallback<PointerUpEvent>(OnPointerUpHandler);
+            //     m_ImageRenderTexture.RegisterCallback<ClickEvent>(OnClickHandler);
+            //     m_ImageRenderTexture.RegisterCallback<PointerEnterEvent>(OnPointerEnterHandler);
+            //     m_ImageRenderTexture.RegisterCallback<PointerLeaveEvent>(OnPointerLeaveHandler);
+            //     m_ImageRenderTexture.RegisterCallback<PointerMoveEvent>(OnPointerMoveEvent);
+            // }
             // m_InventoryBackButton.RegisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
@@ -265,6 +271,16 @@ namespace UIToolkitLibrary
             // register callbacks when value in a dropdown field changes
             // m_InventoryRarityDropdown.UnregisterValueChangedCallback(UpdateFilters);
             // m_InventorySlotTypeDropdown.UnregisterValueChangedCallback(UpdateFilters);
+            
+            // if (m_ImageRenderTexture != null)
+            // {
+            //     m_ImageRenderTexture.UnregisterCallback<PointerDownEvent>(OnPointerDownHandler);
+            //     m_ImageRenderTexture.UnregisterCallback<PointerUpEvent>(OnPointerUpHandler);
+            //     m_ImageRenderTexture.UnregisterCallback<ClickEvent>(OnClickHandler);
+            //     m_ImageRenderTexture.UnregisterCallback<PointerEnterEvent>(OnPointerEnterHandler);
+            //     m_ImageRenderTexture.UnregisterCallback<PointerLeaveEvent>(OnPointerLeaveHandler);
+            //     m_ImageRenderTexture.UnregisterCallback<PointerMoveEvent>(OnPointerMoveEvent);
+            // }
         }
 
         void CloseWindow(ClickEvent evt)
@@ -293,23 +309,63 @@ namespace UIToolkitLibrary
             RegisterButtonCallbacks();
         }
 
-        // Load a list of Equipment ScriptableObjects to show in the Inventory
-        // void OnInventoryUpdated(List<EquipmentSO> gearToLoad)
+
+        // private void OnPointerDownHandler(PointerDownEvent evt)
         // {
-        //     ShowGearItems(gearToLoad);
+        //     Debug.Log("Pointer Down on element! Target: " + evt.target);
+        //     // You can access pointer details like button index (0 for left, 1 for right) or position
+        //     if (evt.button == 0) // Left mouse button
+        //     {
+        //         // Do something
+        //     }
+        // }
+        
+        // private void OnPointerUpHandler(PointerUpEvent evt)
+        // {
+        //     Debug.Log("Pointer Up on element! Target: " + evt.target);
         // }
 
-        // Add a check mark on a GearItem to show selection
-        // void OnGearItemClicked(GearItemComponent gearItem)
+        // private void OnClickHandler(ClickEvent evt)
         // {
+        //     Debug.Log("Click Event fired! Target: " + evt.target);
+        // }
+        
+        // private void OnPointerEnterHandler(PointerEnterEvent evt)
+        // {
+        //     Debug.Log("Pointer entered element!");
+        // }
 
-        //     AudioManager.PlayAltButtonSound();
+        // private void OnPointerLeaveHandler(PointerLeaveEvent evt)
+        // {
+        //     Debug.Log("Pointer left element!");
+        // }
+        // private void OnPointerMoveEvent(PointerMoveEvent evt)
+        // {
+        //     Debug.Log("Move! Target: " + evt.position);
+        //     Vector2 localPosition = m_ImageRenderTexture.WorldToLocal(evt.position);
+        //     Vector2 remappedPosition = RemapToRenderTextureSpace(localPosition);
+        //     Debug.Log($"Move! localPosition: {localPosition}, remappedPosition: {remappedPosition}");
+        // }
 
-        //     // deselect previously selected
-        //     SelectGearItem(m_SelectedGear, false);
+        // private Vector2 RemapToRenderTextureSpace(Vector2 localPosition)
+        // {
+        //     float elementWidth = m_ImageRenderTexture.resolvedStyle.width;
+        //     float elementHeight = m_ImageRenderTexture.resolvedStyle.height;
+        //     int renderTextureWidth = renderTexture.width;
+        //     int renderTextureHeight = renderTexture.height;
 
-        //     // select the new gear item
-        //     SelectGearItem(gearItem, true);
+        //     // Calculate scaling
+        //     float scaleX = renderTextureWidth / elementWidth;
+        //     float scaleY = renderTextureHeight / elementHeight;
+
+        //     // Remap coordinates (UI Toolkit uses top-left origin, camera/render texture might use bottom-left. 
+        //     // A common issue is needing to flip the Y axis)
+        //     Vector2 remapped = new Vector2(
+        //         localPosition.x * scaleX,
+        //         renderTextureHeight - (localPosition.y * scaleY) // Flip Y
+        //     );
+
+        //     return remapped;
         // }
 
         void UpdateLocalizedText()
@@ -343,5 +399,12 @@ namespace UIToolkitLibrary
 
         }
         
+        private void Theming()
+        {
+            foreach (var item in m_SpritesArrow)
+            {
+                item.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteArrow);
+            }
+        }
     }
 }

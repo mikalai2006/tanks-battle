@@ -9,7 +9,7 @@ public class BaseCaterpillar : MonoBehaviour, IColored
     // [SerializeField] public List<Animator> animators;
     // [SerializeField] public SpriteRenderer sprite;
     [SerializeField] public List<TrailRenderer> trails;
-    GameCaterpillarOption Option;
+    public GameCaterpillarOption Option {get; private set;}
     BaseMachine Machine;
     [SerializeField] GameObject Wrapper;
     [SerializeField] protected DataCaterpillar _data;
@@ -64,14 +64,14 @@ public class BaseCaterpillar : MonoBehaviour, IColored
         // sprite.sprite = Option.Config.sprite;
         // sprite.color = Option.Config.color;
 
-        transform.localPosition = Option.offsetCat;
-
         // Debug.Log($"CaterpillarBox.transform.childCount={CaterpillarBox.transform.childCount}");
         for (int j = 0; j < Wrapper.transform.childCount; j++)
         {
             wheels.Add(Wrapper.transform.GetChild(j).gameObject);
-            // Wrapper.transform.GetChild(j).GetChild(0).transform.localPosition = new Vector3(0.5f,0.5f,0.5f);
+            // Wrapper.transform.GetChild(j).GetChild(0).transform.localPosition = new Vector3(0, 1f, 0);
         }
+
+        transform.localPosition = Option.offsetCat + new Vector3(0, Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f + (wheels.Count > 2 ? 1f : 0), 0);
 
     }
 

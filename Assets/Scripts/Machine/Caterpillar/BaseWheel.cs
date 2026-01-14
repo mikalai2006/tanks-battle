@@ -7,7 +7,7 @@ using UnityEngine;
 public class BaseWheel : MonoBehaviour, IColored
 {
     [SerializeField] public List<TrailRenderer> trails;
-    GameWheelOption Option;
+    public GameWheelOption Option {get ; private set;}
     BaseMachine Machine;
     [SerializeField] GameObject Wrapper;
     [SerializeField] protected DataWheel _data;
@@ -58,7 +58,14 @@ public class BaseWheel : MonoBehaviour, IColored
         // sprite.sprite = Option.Config.sprite;
         // sprite.color = Option.Config.color;
 
-        transform.localPosition = Option.offsetWheel;
+        if (Machine.Caterpillars.Count > 0)
+        {
+            transform.localPosition = Option.offsetWheel + new Vector3(0, 1f, 0);
+        } else
+        {
+            transform.localPosition = Option.offsetWheel;
+        }
+
     }
 
     public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)

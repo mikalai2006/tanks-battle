@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -12,12 +15,7 @@ namespace UIToolkitLibrary
         static class ClassNames
         {
             public static string MachineBox = "MachineBox";
-            public static string ButtonPrev = "Prev";
-            public static string ButtonNext = "Next";
-            public static string ButtonSell = "Sell";
-            public static string ButtonOpenColors = "OpenColors";
             public static string DialogWrapper = "DialogWrapper";
-            public static string CancelColor = "CancelColor";
             public static string MachineName = "MachineName";
         }
 
@@ -25,13 +23,20 @@ namespace UIToolkitLibrary
 
         Button m_Button_Prev;
         Button m_Button_Next;
+        Button m_Button_PrevTower;
+        Button m_Button_NextTower;
         Button m_Button_Sell;
         Button m_Button_CancelColor;
         Button m_Button_OpenColors;
+        Button m_Button_Tower;
+        Button m_Button_TowerClose;
         VisualElement m_DialogWrapper;
         Label m_MachineName;
         VisualElement m_MachineBox;
         VisualElement m_InventoryPanel;
+        Image m_SpriteFill;
+        VisualElement m_Overlay3Models;
+        List<VisualElement> m_SpritesArrow;
 
         DropdownField m_InventoryRarityDropdown;
         DropdownField m_InventorySlotTypeDropdown;
@@ -76,16 +81,29 @@ namespace UIToolkitLibrary
         {
             base.SetVisualElements();
 
-            m_Button_Next = m_TopElement.Q<Button>(ClassNames.ButtonNext);
-            m_Button_Prev = m_TopElement.Q<Button>(ClassNames.ButtonPrev);
-            m_Button_Sell = m_TopElement.Q<Button>(ClassNames.ButtonSell);
+            m_Button_Next = m_TopElement.Q<Button>(UINames.ButtonNext);
+            m_Button_Prev = m_TopElement.Q<Button>(UINames.ButtonPrev);
+            m_Button_PrevTower = m_TopElement.Q<Button>(UINames.Button_PrevTower);
+            m_Button_NextTower = m_TopElement.Q<Button>(UINames.Button_NextTower);
+            m_Button_Sell = m_TopElement.Q<Button>(UINames.ButtonSell);
 
-            m_Button_CancelColor = m_TopElement.Q<Button>(ClassNames.CancelColor);
+            m_Button_CancelColor = m_TopElement.Q<Button>(UINames.ButtonCancelColor);
             m_Button_CancelColor.style.display = DisplayStyle.None;
 
-            m_Button_OpenColors = m_TopElement.Q<Button>(ClassNames.ButtonOpenColors);
+            m_Button_Tower = m_TopElement.Q<Button>(UINames.ButtonTower);
+            m_Button_TowerClose = m_TopElement.Q<Button>(UINames.ButtonTowerClose);
+
+            m_Button_OpenColors = m_TopElement.Q<Button>(UINames.ButtonOpenColors);
             m_DialogWrapper = m_TopElement.Q<VisualElement>(ClassNames.DialogWrapper);
             m_MachineName = m_TopElement.Q<Label>(ClassNames.MachineName);
+            m_SpriteFill = m_TopElement.Q<Image>(UINames.SpriteFill);
+
+            m_Overlay3Models = m_TopElement.Q<VisualElement>(UINames.Overlay3Models);
+            ClickButtonTowerClose();
+
+            
+            UQueryBuilder<VisualElement> builder = new UQueryBuilder<VisualElement>(m_TopElement);
+            m_SpritesArrow = builder.Name(UINames.SpriteArrow).ToList();
 
             if (_gameManager.StateManager.statePlayer.machines.Count == 0)
             {
@@ -116,6 +134,8 @@ namespace UIToolkitLibrary
 
                 base.ShowHint(hintElement);
             }
+
+            Theming();
 
             // // create tabs.
             // m_Tabs = Root.Q<VisualElement>("Tabs");
@@ -404,6 +424,7 @@ namespace UIToolkitLibrary
             
             Label hint = new Label();
             hint.text = await Helpers.GetLocaledString("colors_choose_detal");
+            hint.style.whiteSpace =  WhiteSpace.Normal;
             hint.AddToClassList("font");
             hint.AddToClassList("text-lg");
             hintElement.Add(hint);
@@ -564,6 +585,10 @@ namespace UIToolkitLibrary
             m_Button_Sell.RegisterCallback<ClickEvent>(ClickSell);
             m_Button_CancelColor.RegisterCallback<ClickEvent>(OnCancelColorFill);
             m_Button_OpenColors.RegisterCallback<ClickEvent>(ClickChooseColor);
+            m_Button_Tower.RegisterCallback<ClickEvent>(ClickButtonTower);
+            m_Button_TowerClose.RegisterCallback<ClickEvent>(ClickButtonTowerClose);
+            m_Button_PrevTower.RegisterCallback<ClickEvent>(ClickPrevTower);
+            m_Button_NextTower.RegisterCallback<ClickEvent>(ClickNextTower);
             // m_InventoryBackButton.RegisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
@@ -571,6 +596,7 @@ namespace UIToolkitLibrary
             // m_InventorySlotTypeDropdown.RegisterValueChangedCallback(UpdateFilters);
 
             GarageUIEvents.FillOk += OnCancelColorFill;
+            UIEvents.FocusTower += OnFocusTower;
         }
 
         // Optional: Unregistering the button callbacks is not strictly necessary
@@ -583,13 +609,91 @@ namespace UIToolkitLibrary
             m_Button_Sell.UnregisterCallback<ClickEvent>(ClickSell);
             m_Button_CancelColor.UnregisterCallback<ClickEvent>(OnCancelColorFill);
             m_Button_OpenColors.UnregisterCallback<ClickEvent>(ClickChooseColor);
+            m_Button_Tower.UnregisterCallback<ClickEvent>(ClickButtonTower);
+            m_Button_TowerClose.UnregisterCallback<ClickEvent>(ClickButtonTowerClose);
+            m_Button_PrevTower.UnregisterCallback<ClickEvent>(ClickPrevTower);
+            m_Button_NextTower.UnregisterCallback<ClickEvent>(ClickNextTower);
             // m_InventoryBackButton.UnregisterCallback<ClickEvent>(CloseWindow);
 
             // register callbacks when value in a dropdown field changes
             // m_InventoryRarityDropdown.UnregisterValueChangedCallback(UpdateFilters);
             // m_InventorySlotTypeDropdown.UnregisterValueChangedCallback(UpdateFilters);
             GarageUIEvents.FillOk -= OnCancelColorFill;
+            UIEvents.FocusTower -= OnFocusTower;
         }
+
+
+
+        private void OnFocusTower(GameTowerOption option)
+        {
+            Debug.Log($"Focus {option.Config.name}");
+            FocusTower(option).Forget();
+        }
+
+        private void ClickPrevTower(ClickEvent evt)
+        {
+            UIEvents.ClickButtonPrevTower?.Invoke();
+        }
+
+        private void ClickNextTower(ClickEvent evt)
+        {
+            UIEvents.ClickButtonNextTower?.Invoke();
+        }
+
+        private void ClickButtonTower(ClickEvent evt)
+        {
+            UIEvents.ClickButtonTower?.Invoke();
+
+            m_Button_Tower.style.display = DisplayStyle.None;
+            m_Button_TowerClose.style.display = DisplayStyle.Flex;
+            m_Overlay3Models.style.display = DisplayStyle.Flex;
+        }
+
+        private void ClickButtonTowerClose(ClickEvent evt)
+        {
+            UIEvents.ClickButtonTowerClose?.Invoke();
+
+            ClickButtonTowerClose();
+        }
+
+        private void ClickButtonTowerClose()
+        {
+
+            m_Overlay3Models.style.display = DisplayStyle.None;
+            m_Button_TowerClose.style.display = DisplayStyle.None;
+            m_Button_Tower.style.display = DisplayStyle.Flex;
+
+            base.HideHint();
+        }
+
+        private async UniTask FocusTower(GameTowerOption option)
+        {
+            VisualElement hintElement = new VisualElement();
+            hintElement.style.flexDirection = FlexDirection.Row;
+            hintElement.style.flexWrap = Wrap.Wrap;
+
+            VisualElement hintColorElement = new VisualElement();
+            hintColorElement.style.width = 200;
+            hintColorElement.style.height = 20;
+            hintColorElement.style.backgroundColor = new StyleColor(activeColorItem.color);
+            hintElement.Add(hintColorElement);
+            
+            Label hint = new Label();
+            hint.text = option.Config.name;
+            hint.style.whiteSpace =  WhiteSpace.Normal;
+            hint.AddToClassList("font");
+            hint.AddToClassList("text-lg");
+            hintElement.Add(hint);
+
+            var mBtn = new Button();
+            mBtn.AddToClassList("button");
+            mBtn.text = await Helpers.GetLocaledString("btn_cancel_colors");
+            mBtn.RegisterCallback<ClickEvent>(ClickButtonTowerClose);
+            hintElement.Add(mBtn);
+
+            base.ShowHint(hintElement);
+        }
+
         // // convert string to Rarity enum
         // Rarity GetRarity(string rarityString)
         // {
@@ -766,6 +870,17 @@ namespace UIToolkitLibrary
             // };
             // m_InventorySlotTypeDropdown.UpdateLocalizedChoices( slotTypeChoices, SlotTypeKeys[m_InventorySlotTypeDropdown.index], SlotTypeKeys);
 
+        }
+
+        
+        private void Theming()
+        {
+            foreach (var item in m_SpritesArrow)
+            {
+                item.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteArrow);
+            }
+            
+            m_SpriteFill.style.backgroundImage = new StyleBackground(_gameManager.Theme.spriteFill);
         }
         
     }

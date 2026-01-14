@@ -21,7 +21,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     [SerializeField] protected GameObject pointEffects;
     public GameObject PointEffects => pointEffects;
     [SerializeField] protected GameMuzzleOption Option;
-    [SerializeField] protected GameMuzzle Config => Option.Config;
+    protected GameMuzzle Config => Option.Config;
     // [SerializeField] protected SpriteRenderer sprite;
     // protected ParticleSystem[] particlesBoom;
     [SerializeField] protected DataMuzzle _data;
@@ -58,7 +58,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
 
     public virtual void FixedUpdate()
     {
-        if (!Machine)
+        if (Machine == null)
         {
             return;
         }
@@ -191,42 +191,48 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
 
         voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
 
-        if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
-        {
-            voxelMeshRender.SetData(Machine.MachineLevelData.data, dataMuzzle);
-        }
+        voxelMeshRender.SetData(Machine!= null && Machine.MachineLevelData != null && Machine.MachineLevelData.data != null ? Machine.MachineLevelData.data : null, dataMuzzle);
         // sprite.color = Config.color;
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();
 
-        Delay = _data.index * delayTime;
+
+        transform.localPosition = Option.offsetMuzzle;// + new Vector3(Option.Config.MeshConfig.sOVoxelData.Bounds.x - 2f, 0, 0);
+
+        if (Machine != null)
+        {
+            Delay = _data.index * delayTime;
+            
+            OnSetTimeBetweenShot(Delay);
+            // OnStopShot();
+
+            pointEffects.transform.localPosition = new Vector3(Config.MeshConfig.sOVoxelData.Bounds.x + _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.x, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.y, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.z);
+
+            pivot.transform.localPosition = new Vector3(-Config.MeshConfig.sOVoxelData.Bounds.x, 0, 0);
+
+            MaxDistanceObject.transform.localPosition = new Vector3(Data.distanceAttack * (1 / _gameManager.Settings.scaleObjects), 0, 0);
+
+            // transform.localRotation = Quaternion.Euler(0, 0, 0);
         
-        OnSetTimeBetweenShot(Delay);
-        // OnStopShot();
+            trajectoryGO.SetActive(!Machine.MachineLevelData.isBot);
 
-        transform.localPosition = Option.offsetMuzzle;
+            SectorGO.transform.localPosition = new Vector3(
+                SectorGO.transform.localPosition.x,
+                -(transform.position.y * (1 / Machine.Config.customScale)) + 0.05f,
+                SectorGO.transform.localPosition.z
+            );
 
-        pointEffects.transform.localPosition = new Vector3(Config.MeshConfig.sOVoxelData.Bounds.x + _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.x, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.y, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.z);
+            // SectorGO = Instantiate(_gameManager.Settings.sectorVoxel, transform.position, Quaternion.Euler(-90,0,0), Machine.WrapperTools.transform);
+            // _rectSector = SectorGO.GetComponentInChildren<RectTransform>();
+            // _spriteSector = SectorGO.GetComponentInChildren<Image>();
 
-        pivot.transform.localPosition = new Vector3(-Config.MeshConfig.sOVoxelData.Bounds.x, 0, 0);
+            distanceAttack = Data.distanceAttack;
+            OnSetSizeSector(distanceAttack);
 
-        MaxDistanceObject.transform.localPosition = new Vector3(Data.distanceAttack * (1 / _gameManager.Settings.scaleObjects), 0, 0);
-
-        // transform.localRotation = Quaternion.Euler(0, 0, 0);
-        
-        trajectoryGO.SetActive(!Machine.MachineLevelData.isBot);
-
-        SectorGO.transform.localPosition = new Vector3(
-            SectorGO.transform.localPosition.x,
-            -(transform.position.y * (1 / Machine.Config.customScale)) + 0.05f,
-            SectorGO.transform.localPosition.z
-        );
-
-        // SectorGO = Instantiate(_gameManager.Settings.sectorVoxel, transform.position, Quaternion.Euler(-90,0,0), Machine.WrapperTools.transform);
-        // _rectSector = SectorGO.GetComponentInChildren<RectTransform>();
-        // _spriteSector = SectorGO.GetComponentInChildren<Image>();
-
-        distanceAttack = Data.distanceAttack;
-        OnSetSizeSector(distanceAttack);
+        } else
+        {
+            trajectoryGO.SetActive(false);
+            SectorGO.SetActive(false);
+        }
     }
 
 
