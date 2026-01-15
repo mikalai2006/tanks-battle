@@ -12,5 +12,10 @@ namespace UIToolkitLibrary
         public static Action ClickButtonPrevTower;
         public static Action ClickButtonNextTower;
         public static Action<GameTowerOption>  FocusTower;
+        public static Action ClickShopButtonNotMenuBar;
+        public static Action UIShopPrevMachine;
+        public static Action UIShopNextMachine;
+        public static Action UIShopClickBuyMachine;
+        public static Action<GameMachine> UIShopFocusMachine;
     }
 }

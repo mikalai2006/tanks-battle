@@ -60,7 +60,7 @@ public abstract class UILocaleBase : MonoBehaviour
     
     // bg_accent
     UQueryBuilder<VisualElement> qBgAccent = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgAccent = qBgAccent.Class("bg_accent").ToList();
+    List<VisualElement> listBgAccent = qBgAccent.Class("bg-accent").ToList();
     foreach (var item in listBgAccent)
     {
       item.style.backgroundColor = _gameManager.Theme.colorBgAccent;
@@ -68,7 +68,7 @@ public abstract class UILocaleBase : MonoBehaviour
 
     // bg_primary
     UQueryBuilder<VisualElement> qBgPrimary = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgPrimary = qBgPrimary.Class("bg_primary").ToList();
+    List<VisualElement> listBgPrimary = qBgPrimary.Class("bg-primary").ToList();
     foreach (var item in listBgPrimary)
     {
       item.style.backgroundColor = _gameManager.Theme.colorBgPrimary;
@@ -76,7 +76,7 @@ public abstract class UILocaleBase : MonoBehaviour
 
     // bg_success
     UQueryBuilder<VisualElement> qBgSuccess = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgSuccess = qBgSuccess.Class("bg_success").ToList();
+    List<VisualElement> listBgSuccess = qBgSuccess.Class("bg-success").ToList();
     foreach (var item in listBgSuccess)
     {
       item.style.backgroundColor = _gameManager.Theme.colorBgSuccess;
@@ -122,7 +122,7 @@ public abstract class UILocaleBase : MonoBehaviour
 
     // button_secondary
     UQueryBuilder<Button> qButtonSecondary = new UQueryBuilder<Button>(_box);
-    List<Button> listButtonSecondary = qButtonSecondary.Class("button_secondary").ToList();
+    List<Button> listButtonSecondary = qButtonSecondary.Class("button-secondary").ToList();
     foreach (var item in listButtonSecondary)
     {
       item.style.backgroundColor = _gameManager.Theme.colorButtonSecondary;
@@ -130,7 +130,7 @@ public abstract class UILocaleBase : MonoBehaviour
     
     // button_accent
     UQueryBuilder<Button> qButtonAccent = new UQueryBuilder<Button>(_box);
-    List<Button> listButtonAccent = qButtonAccent.Class("button_accent").ToList();
+    List<Button> listButtonAccent = qButtonAccent.Class("button-accent").ToList();
     foreach (var item in listButtonAccent)
     {
       item.style.backgroundColor = _gameManager.Theme.colorButtonAccent;
@@ -138,7 +138,7 @@ public abstract class UILocaleBase : MonoBehaviour
 
     // button_primary
     UQueryBuilder<Button> qButtonPrimary = new UQueryBuilder<Button>(_box);
-    List<Button> listButtonPrimary = qButtonPrimary.Class("button_primary").ToList();
+    List<Button> listButtonPrimary = qButtonPrimary.Class("button-primary").ToList();
     foreach (var item in listButtonPrimary)
     {
       item.style.backgroundColor = _gameManager.Theme.colorButtonPrimary;
@@ -146,7 +146,7 @@ public abstract class UILocaleBase : MonoBehaviour
 
     // button_success
     UQueryBuilder<Button> qButtonSuccess = new UQueryBuilder<Button>(_box);
-    List<Button> listButtonSuccess = qButtonSuccess.Class("button_success").ToList();
+    List<Button> listButtonSuccess = qButtonSuccess.Class("button-success").ToList();
     foreach (var item in listButtonSuccess)
     {
       item.style.backgroundColor = _gameManager.Theme.colorButtonSuccess;
@@ -174,7 +174,7 @@ public abstract class UILocaleBase : MonoBehaviour
 
     // bg_tint_secondary
     UQueryBuilder<VisualElement> qBgTintSecondary = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgTintSecondary = qBgTintSecondary.Class("bg_tint_secondary").ToList();
+    List<VisualElement> listBgTintSecondary = qBgTintSecondary.Class("bg-tint-secondary").ToList();
     foreach (var item in listBgTintSecondary)
     {
       item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgSecondary);

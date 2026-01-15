@@ -3,10 +3,8 @@
     <ui:VisualElement picking-mode="Ignore" name="" style="flex-grow: 1;">
         <ui:Image name="ImageRenderTexture" style="position: absolute; top: 0; bottom: 0; right: 0; left: 0; background-image: url(&quot;project://database/Assets/UI/RenderingTextures/ShopView.renderTexture?fileID=8400000&amp;guid=37088a31f09643b48ae750284eed0385&amp;type=2#ShopView&quot;); display: none;"/>
         <ui:VisualElement picking-mode="Ignore">
-            <ui:Label text="Shop View" name="Label" picking-mode="Ignore"/>
             <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row;">
-                <ui:Label text="Label" name="NameMachine" style="flex-grow: 1;"/>
-                <ui:Label text="Label" name="CostMachine"/>
+                <ui:VisualElement name="InfoBox" style="flex-grow: 1;"/>
                 <ui:Button text="#btn_buy" name="ButtonBuy" class="button"/>
             </ui:VisualElement>
         </ui:VisualElement>
@@ -24,7 +22,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore">
-            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; display: none;">
                 <ui:Button text="#btn_tower" name="ButtonTower" class="button"/>
             </ui:VisualElement>
         </ui:VisualElement>

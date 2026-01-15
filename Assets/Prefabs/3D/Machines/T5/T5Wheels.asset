@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52864495aabc34247803b26f8b61eb93, type: 3}
   m_Name: T5Wheels
   m_EditorClassIdentifier: 
-  idObject: T5Wheels
   text:
     title:
       m_TableReference:
@@ -37,14 +36,19 @@ MonoBehaviour:
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 5d4c4c723dcdb974ba3ca2845fec3db9, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
-    existCollider: 1
-    isGreedy: 1
-    isRigidbody: 0
-    isConvex: 1
     isOneMesh: 1
-    isTile: 0
-    isDestructible: 1
+    isGreedy: 1
     shadowCastingMode: 0
+    isTile: 0
+    existCollider: 1
+    typeCollider: 0
+    isConvex: 1
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
+    isDestructible: 1
     useGlobalScale: 0
     customScale: 0
   references:

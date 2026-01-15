@@ -48,6 +48,7 @@ namespace UIToolkitDemo
 
             // Update the active menu marker if clicking the OptionsBarView's gold/gem icons
             MainMenuUIEvents.OptionsBarShopScreenShown += OnOptionsBarShopScreenShown;
+            UIEvents.ClickShopButtonNotMenuBar += ShowShop;
         }
 
         public override void Dispose()
@@ -57,6 +58,7 @@ namespace UIToolkitDemo
             // Unsubscribe from events
             // MediaQueryEvents.AspectRatioUpdated -= OnAspectRatioUpdated;
             MainMenuUIEvents.OptionsBarShopScreenShown -= OnOptionsBarShopScreenShown;
+            UIEvents.ClickShopButtonNotMenuBar -= ShowShop;
 
             UnregisterButtonCallbacks();
         }
@@ -150,6 +152,11 @@ namespace UIToolkitDemo
         }
 
         void ClickShopButton(ClickEvent evt)
+        {
+            ShowShop();
+        }
+
+        void ShowShop()
         {
             MainMenuUIEvents.ShopScreenShown?.Invoke();
             ActivateButton(m_ShopScreenMenuButton);

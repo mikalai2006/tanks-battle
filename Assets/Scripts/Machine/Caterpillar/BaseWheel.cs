@@ -63,7 +63,8 @@ public class BaseWheel : MonoBehaviour, IColored
             transform.localPosition = Option.offsetWheel + new Vector3(0, 1f, 0);
         } else
         {
-            transform.localPosition = Option.offsetWheel;
+            transform.localPosition = Option.offsetWheel + new Vector3(0, Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f, 0);
+            // Option.offsetWheel;
         }
 
     }

@@ -42,16 +42,16 @@ public class ShopUIManager : MonoBehaviour
 
         Init();
 
-        ShopUIEvents.ClickButtonNextInShop += OnNextMachine;
-        ShopUIEvents.ClickButtonPrevInShop += OnPrevMachine;
-        ShopUIEvents.ClickButtonBuyInShop += OnBuyMachine;
+        UIEvents.UIShopNextMachine += OnNextMachine;
+        UIEvents.UIShopPrevMachine += OnPrevMachine;
+        UIEvents.UIShopClickBuyMachine += OnBuyMachine;
     }
 
     void OnDestroy()
     {
-        ShopUIEvents.ClickButtonNextInShop -= OnNextMachine;
-        ShopUIEvents.ClickButtonPrevInShop -= OnPrevMachine;
-        ShopUIEvents.ClickButtonBuyInShop -= OnBuyMachine;
+        UIEvents.UIShopNextMachine -= OnNextMachine;
+        UIEvents.UIShopPrevMachine -= OnPrevMachine;
+        UIEvents.UIShopClickBuyMachine -= OnBuyMachine;
     }
 
     void OnEnable()
@@ -83,7 +83,7 @@ public class ShopUIManager : MonoBehaviour
 
         OnFocusMachineByIndex(activeIndexMachine);
 
-        ShopUIEvents.FocusMachineInShop.Invoke(machinesConfigs[activeIndexMachine]);
+        UIEvents.UIShopFocusMachine.Invoke(machinesConfigs[activeIndexMachine]);
     }
 
     private void OnBuyMachine()
@@ -99,7 +99,7 @@ public class ShopUIManager : MonoBehaviour
         
         OnFocusMachineByIndex(activeIndexMachine);
 
-        ShopUIEvents.FocusMachineInShop.Invoke(machinesConfigs[activeIndexMachine]);
+        UIEvents.UIShopFocusMachine.Invoke(machinesConfigs[activeIndexMachine]);
     }
 
     private void OnStartTouch(InputAction.CallbackContext context)

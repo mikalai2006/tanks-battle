@@ -27,13 +27,13 @@
     background-color: rgb(181, 185, 170);
 }
 
-.bg_accent {
+.bg-accent {
 }
 
-.bg_primary {
+.bg-primary {
 }
 
-.bg_secondary {
+.bg-secondary {
 }
 
 .b-rounded {
@@ -43,7 +43,7 @@
     border-bottom-right-radius: 10px;
 }
 
-.button_circle {
+.button-circle {
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     border-top-right-radius: 50%;
@@ -67,7 +67,7 @@
     height: 40px;
 }
 
-.button_circle:active {
+.button-circle:active {
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     border-top-right-radius: 50%;
@@ -90,56 +90,11 @@
     -unity-font-style: bold;
 }
 
-.level_blok {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    margin-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: rgb(233, 233, 233);
-    background-color: rgba(0, 0, 0, 0.07);
-}
 
-.level_section {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    color: rgb(255, 255, 255);
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    background-color: rgba(0, 0, 0, 0.16);
-}
 
-.level_blok_progress_wrap {
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-}
 
-.level_blok_progress_bar {
-    height: 100%;
-    padding-left: 2px;
-    padding-right: 2px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    background-color: rgb(180, 140, 18);
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
+
+
 
 .text-md {
     font-size: 14px;
@@ -264,9 +219,6 @@
     color: rgb(255, 255, 255);
 }
 
-.box_item {
-}
-
 .rounded {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -309,13 +261,13 @@
     border-bottom-right-radius: 5px;
 }
 
-.button_close {
+.button-close {
     font-size: 22px;
     -unity-text-align: middle-center;
     -unity-font-style: bold;
 }
 
-.button_user {
+.button-user {
     flex-direction: row;
     background-color: rgba(0, 0, 0, 0);
     border-top-left-radius: 5px;
@@ -325,7 +277,7 @@
     -unity-font-style: normal;
 }
 
-.button_circle_long {
+.button-circle_long {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -349,7 +301,7 @@
     overflow: visible;
 }
 
-.button_circle_long:active {
+.button-circle_long:active {
     border-left-width: 2px;
     border-right-width: 2px;
     border-top-width: 2px;
@@ -369,20 +321,20 @@
 .progress-bar {
 }
 
-.bg_opacity50 {
+.bg-opacity50 {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.button_success {
+.button-success {
 }
 
-.button_accent {
+.button-accent {
 }
 
-.bg_tint_secondary {
+.bg-tint-secondary {
 }
 
-.button_rectangle {
+.button-rectangle {
     -unity-font-style: bold;
     background-color: rgba(0, 0, 0, 0.05);
     color: rgb(255, 255, 255);
@@ -398,7 +350,7 @@
     border-left-width: 0;
 }
 
-.button_rectangle:active {
+.button-rectangle:active {
     border-top-width: 0;
     border-right-width: 0;
     border-bottom-width: 0;
@@ -406,4 +358,8 @@
     scale: 0.9 0.9 0;
     transition-property: scale;
     transition-duration: 50ms;
+}
+
+.font-normal {
+    -unity-font-style: normal;
 }

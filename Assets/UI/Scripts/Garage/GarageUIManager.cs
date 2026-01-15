@@ -51,11 +51,15 @@ public class GarageUIManager : MonoBehaviour
 
         clickAction.action.Disable();
         mousePositionAction.action.Disable();
+
+        // OnClickButtonTowerClose();
     }
 
     void Start()
     {
         towersGameObjects = new ();
+
+        dataTowers= new ();
 
         machinesGameObjects = new List<BaseMachine>();
 
@@ -92,7 +96,7 @@ public class GarageUIManager : MonoBehaviour
         UIEvents.ClickButtonTower -= OnClickButtonTower;
         UIEvents.ClickButtonPrevTower -= OnClickButtonPrevTower;
         UIEvents.ClickButtonNextTower -= OnClickButtonNextTower;
-        UIEvents.ClickButtonTowerClose += OnClickButtonTowerClose;
+        UIEvents.ClickButtonTowerClose -= OnClickButtonTowerClose;
     }
 
     private void OnClickButtonTowerClose()
@@ -100,12 +104,19 @@ public class GarageUIManager : MonoBehaviour
         int count = towersGameObjects.Count;
         for (int i = 0; i < count; i++)
         {
-            Destroy(towersGameObjects[i].gameObject);
+            if (towersGameObjects[i] != null)
+            {
+                Destroy(towersGameObjects[i].gameObject);
+            }
         }
 
         towersGameObjects.Clear();
 
         ReDrawTower(-1);
+
+        dataTowers.Clear();
+
+        Wrapper3dModels.gameObject.SetActive(false);
     }
 
     private void OnClickButtonNextTower()
@@ -156,8 +167,20 @@ public class GarageUIManager : MonoBehaviour
             tower.ReDraw(dataTowers[indexTower], dataDetail);
         } else
         {
-            var conf = dataTowers.Find(x => x.Config.name == cacheTower.nameConfig);
-            tower.ReDraw(conf, cacheTower);
+            if (cacheTower != null)
+            {
+                var conf = dataTowers.FirstOrDefault(x => x.Config.name == cacheTower.nameConfig);
+
+                if (conf != null)
+                {
+                    // Debug.Log($"conf={conf.Config.name},cacheTower={cacheTower.nameConfig}");
+
+                    tower.ReDraw(conf, cacheTower);
+                } else
+                {
+                    Debug.LogWarning($"not found conf={conf},cacheTower={cacheTower.nameConfig}");
+                }
+            }
         }
         // machinesGameObjects[activeIndexMachine].CreateTower(dataTowers[activeIndexTower], dataDetail);
     }
@@ -170,6 +193,8 @@ public class GarageUIManager : MonoBehaviour
         CreateTowerItems();
 
         OnClickButtonPrevTower();
+        
+        Wrapper3dModels.gameObject.SetActive(true);
     }
     
 
@@ -223,6 +248,8 @@ public class GarageUIManager : MonoBehaviour
         {
             OnFocusMachineByIndex(index);
         }
+
+        Wrapper3dModels.gameObject.SetActive(false);
     }
 
     private void DrawMachines()
@@ -258,6 +285,12 @@ public class GarageUIManager : MonoBehaviour
     {
         activeIndexMachine = Mathf.Clamp(index, 0, gameManager.StateManager.statePlayer.machines.Count - 1);
 
+        gameManager.StateManager.SetActiveMachine(activeIndexMachine);
+        if (gameManager.StateManager.statePlayer.machines.Count <= 0)
+        {
+            return;
+        }
+
         for (int i = 0; i < machinesGameObjects.Count; i++)
         {
             machinesGameObjects[i].transform.localPosition = new Vector3(machinesGameObjects[i].transform.localPosition.x, 100, machinesGameObjects[i].transform.localPosition.z);
@@ -265,7 +298,6 @@ public class GarageUIManager : MonoBehaviour
 
         machinesGameObjects[activeIndexMachine].transform.localPosition = new Vector3(machinesGameObjects[activeIndexMachine].transform.localPosition.x, 0, machinesGameObjects[activeIndexMachine].transform.localPosition.z);;
 
-        gameManager.StateManager.SetActiveMachine(activeIndexMachine);
 
         CinemachineCamera.Follow = machinesGameObjects[activeIndexMachine].objectTargetCamera.transform;
         CinemachineCamera.LookAt = machinesGameObjects[activeIndexMachine].objectTargetCamera.transform;

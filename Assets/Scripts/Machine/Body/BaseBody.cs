@@ -233,6 +233,7 @@ public class BaseBody : MonoBehaviour, IColored
     public virtual void Move(Vector2 _moveDirection)
     {
         isMove = true;
+
         if (Machine.stateController.enabled)
         {
             Machine.Rb.linearVelocity = Machine.navMeshAgent.velocity;
@@ -282,9 +283,12 @@ public class BaseBody : MonoBehaviour, IColored
             // rb.MovePosition((Vector3)transform.position + (moveDirection * speed * Time.deltaTime));
 
             // dynamic.
-            if (_moveDirection.y != 0 || _gameManager.Settings.simpleMove)
+            if ((_moveDirection.y != 0 && !_gameManager.Settings.simpleMove) || _gameManager.Settings.simpleMove)
             {
                 Machine.Rb.linearVelocity = moveDirection * (Data.speed + (bonusSpeed != null ? bonusSpeed.value : 0)) * _gameManager.Settings.scaleObjects;
+            } else
+            {
+                Machine.Rb.linearVelocity = Vector3.zero;
             }
             // if (rb.linearVelocity.magnitude < 50f)
             // {

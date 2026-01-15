@@ -186,6 +186,15 @@ public class PlayerController : MonoBehaviour
             //     _machine.Rotate(Vector3.zero);
             // }
 
+            // для мобильных устройств, вырезаем поворот на малом значении ввода джойстика (если активна опция simplemove)
+            if (_gameManager.Settings.DebugSettings.mode == AppMode.Mobile && !_gameManager.Settings.simpleMove)
+            {
+                // Debug.Log($"moveDirection1={moveDirection}");
+                if (moveDirection.x < 0.7f && moveDirection.x > -0.7f)
+                {
+                    moveDirection.x = 0;
+                }
+            }
             _machine.Move(moveDirection);
         }
         else

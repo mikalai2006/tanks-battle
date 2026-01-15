@@ -366,7 +366,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             GameTowerOption _optConfig = parentTowers.ElementAt(i);
             DataDetail dataTower = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optConfig.Config.name && t.number == i);
 
-            var _tow = CreateTower(_optConfig, dataTower);
+            var _tow = CreateTower(_optConfig, dataTower, TowerWrapper.transform);
 
             // создаем дуло.
             for (int m = 0; m < _optConfig.muzzles.Count; m++)
@@ -390,7 +390,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
                     if (_optChildConfig != null)
                     {
                         
-                        var _towChild = CreateTower(_optChildConfig, dataTowerChild);
+                        var _towChild = CreateTower(_optChildConfig, dataTowerChild, _tow.transform);
+                        _towChild.OnSetParent(_tow);
                         
                         // создаем дуло.
                         for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
@@ -503,6 +504,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     /// </summary>
     public void RefreshHP()
     {
+        if (transform == null) return;
+
         int countVoxels = 0;
         int countVoxelsDestructed = 0;
         if (Body)
@@ -601,9 +604,9 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     /// <param name="gameTowerOption"></param>
     /// <param name="dataDetail"></param>
     /// <exception cref="NotImplementedException"></exception>
-    public BaseTower CreateTower(GameTowerOption gameTowerOption, DataDetail dataDetail)
+    public BaseTower CreateTower(GameTowerOption gameTowerOption, DataDetail dataDetail, Transform parent)
     {
-        var _tow = Instantiate(gameTowerOption.Config.prefab, TowerWrapper.transform);
+        var _tow = Instantiate(gameTowerOption.Config.prefab, parent);
         _tow.Init(this, gameTowerOption, dataDetail);
         towers.Add(_tow);
 

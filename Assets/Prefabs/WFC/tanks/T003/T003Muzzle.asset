@@ -33,7 +33,7 @@ MonoBehaviour:
       m_LocalVariables: []
   prefab: {fileID: 6956179497362671940, guid: 0afcb59b404efa440965a04db8f6959c, type: 3}
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 1ca78e99fb586e54f922fb3ab3777e36, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 727135e75f912f5498632f8d0c9c6096, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1

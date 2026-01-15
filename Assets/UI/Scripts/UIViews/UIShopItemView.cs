@@ -9,9 +9,6 @@ public class UIShopItemView : UILocaleBase
   BaseMachine baseMachine;
   private VisualElement m_Root;
   private VisualElement m_Wrapper;
-  private Button m_ButtonBuy;
-  private Label m_LabelName;
-  private Label m_LabelPrice;
   public GameObject ObjectTargetCamera;
 
   public void Awake()
@@ -21,12 +18,7 @@ public class UIShopItemView : UILocaleBase
     
     m_Root = _uiDoc.rootVisualElement;
 
-    m_ButtonBuy = m_Root.Q<Button>(UINames.ButtonBuy);
-    m_LabelName = m_Root.Q<Label>(UINames.LabelNameMachine);
-    m_LabelPrice = m_Root.Q<Label>(UINames.LabelPrice);
     m_Wrapper = m_Root.Q<VisualElement>(UINames.VisualElementWrapper);
-
-
   }
 
     // void OnEnable()
@@ -112,23 +104,12 @@ public class UIShopItemView : UILocaleBase
 
   public void Init(GameMachine _config, MachineLevelData dataInput)
   {
-    m_ButtonBuy.clicked += () =>
-    {
-      // UIEvents.ClickButtonBuyInShop?.Invoke(baseMachine.Config);
-      Debug.Log("Click Buy");
-    };
-
     CreateMachine(_config, dataInput);
 
     Initialize(m_Root);
   }
 
-    private void ClickBuy(ClickEvent evt)
-    {
-      Debug.Log("Click Buy");
-    }
-
-    void Update()
+  void Update()
   {
       if (_gameManager.ActiveCamera == null)
       {
@@ -167,9 +148,5 @@ public class UIShopItemView : UILocaleBase
 
             obj.Body.OnSetAngleBody(45);
         }
-
-
-      m_LabelName.text = configMachine.name;
-      m_LabelPrice.text = "1000";
     }
 }

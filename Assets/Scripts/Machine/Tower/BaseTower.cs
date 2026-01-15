@@ -364,18 +364,7 @@ public class BaseTower : MonoBehaviour, IColored
 
         // OnSetSizeSector(distanceAttack);
 
-        if (DataDetailTower != null)
-        {
-            transform.localPosition = new Vector3(DataDetailTower.offset.x, DataDetailTower.offset.y, DataDetailTower.offset.z);
-        } else
-        {
-            transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
-        }
-        MuzzlesBox.transform.localPosition = new Vector3(
-            Option.Config.MeshConfig.sOVoxelData.Bounds.x / 2f - 1f, 
-            0,
-            0
-        );
+        SetRelativePoints();
 
         // // создаем дуло.
         // for (int i = 0; i < optConfig.muzzles.Count; i++)
@@ -395,6 +384,25 @@ public class BaseTower : MonoBehaviour, IColored
         // );
 
         // ChangePosition(baseMachine);
+    }
+
+    /// <summary>
+    /// Устанавливает точки привязки и позиции базовых элементов.
+    /// </summary>
+    void SetRelativePoints()
+    {
+        if (DataDetailTower != null)
+        {
+            transform.localPosition = new Vector3(DataDetailTower.offset.x, DataDetailTower.offset.y, DataDetailTower.offset.z);
+        } else
+        {
+            transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
+        }
+        MuzzlesBox.transform.localPosition = new Vector3(
+            Option.Config.MeshConfig.sOVoxelData.Bounds.x / 2f - 1f, 
+            0,
+            0
+        );
     }
 
 
@@ -928,7 +936,11 @@ public class BaseTower : MonoBehaviour, IColored
 
     public void ReDraw(GameTowerOption option, DataDetail dataDetail)
     {
+        if (this == null) return;
+
         Option = option;
+
+        SetRelativePoints();
 
         voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
         voxelMeshRender.UploadedAllMeshes(dataDetail);

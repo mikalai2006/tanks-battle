@@ -105,37 +105,9 @@ namespace UIToolkitLibrary
             UQueryBuilder<VisualElement> builder = new UQueryBuilder<VisualElement>(m_TopElement);
             m_SpritesArrow = builder.Name(UINames.SpriteArrow).ToList();
 
-            if (_gameManager.StateManager.statePlayer.machines.Count == 0)
-            {
-                m_Button_Next.style.display = DisplayStyle.None;
-                m_Button_Prev.style.display = DisplayStyle.None;
-                m_Button_Sell.style.display = DisplayStyle.None;
-                m_Button_OpenColors.style.display = DisplayStyle.None;
-                m_MachineName.style.display = DisplayStyle.None;
-
-                VisualElement hintElement = new VisualElement();
-                hintElement.style.flexDirection = FlexDirection.Row;
-                hintElement.style.flexWrap = Wrap.Wrap;
-                
-                Label hint = new Label();
-                hint.text = await Helpers.GetLocaledString("not_machine");
-                hint.AddToClassList("font");
-                hint.AddToClassList("text-lg");
-                hintElement.Add(hint);
-
-                var mBtn = new Button();
-                mBtn.AddToClassList("button");
-                mBtn.text = await Helpers.GetLocaledString("shop");
-                mBtn.clickable.clicked += () =>
-                {
-                    MainMenuUIEvents.ShopScreenShown?.Invoke();
-                };
-                hintElement.Add(mBtn);
-
-                base.ShowHint(hintElement);
-            }
-
             Theming();
+
+            await OnRefreshUI();
 
             // // create tabs.
             // m_Tabs = Root.Q<VisualElement>("Tabs");
@@ -249,6 +221,49 @@ namespace UIToolkitLibrary
             // DrawColorsSide();
 
             UpdateLocalizedText();
+        }
+
+        async private UniTask OnRefreshUI()
+        {
+            
+            if (_gameManager.StateManager.statePlayer.machines.Count == 0)
+            {
+                m_Button_Next.style.display = DisplayStyle.None;
+                m_Button_Prev.style.display = DisplayStyle.None;
+                m_Button_Sell.style.display = DisplayStyle.None;
+                m_Button_OpenColors.style.display = DisplayStyle.None;
+                m_MachineName.style.display = DisplayStyle.None;
+                m_Button_Tower.style.display = DisplayStyle.None;
+
+                VisualElement hintElement = new VisualElement();
+                hintElement.style.flexDirection = FlexDirection.Row;
+                hintElement.style.flexWrap = Wrap.Wrap;
+                
+                Label hint = new Label();
+                hint.text = await Helpers.GetLocaledString("not_machine");
+                hint.AddToClassList("font");
+                hint.AddToClassList("text-lg");
+                hintElement.Add(hint);
+
+                var mBtn = new Button();
+                mBtn.AddToClassList("button");
+                mBtn.text = await Helpers.GetLocaledString("shop");
+                mBtn.clickable.clicked += () =>
+                {
+                    UIEvents.ClickShopButtonNotMenuBar?.Invoke();
+                };
+                hintElement.Add(mBtn);
+
+                base.ShowHint(hintElement);
+            } else
+            {
+                m_Button_Next.style.display = DisplayStyle.Flex;
+                m_Button_Prev.style.display = DisplayStyle.Flex;
+                m_Button_Sell.style.display = DisplayStyle.Flex;
+                m_Button_OpenColors.style.display = DisplayStyle.Flex;
+                m_MachineName.style.display = DisplayStyle.Flex;
+                m_Button_Tower.style.display = DisplayStyle.Flex;
+            }
         }
 
         private void ChangeInfoMachine(BaseMachine machine)
@@ -380,6 +395,8 @@ namespace UIToolkitLibrary
         void ClickSell(ClickEvent evt)
         {
             GarageUIEvents.ClickButtonSellActiveMachine?.Invoke();
+            
+            OnRefreshUI().Forget();
         }
 
         async void ClickChooseColor(ClickEvent evt)
@@ -626,7 +643,7 @@ namespace UIToolkitLibrary
 
         private void OnFocusTower(GameTowerOption option)
         {
-            Debug.Log($"Focus {option.Config.name}");
+            // Debug.Log($"Focus {option.Config.name}");
             FocusTower(option).Forget();
         }
 
@@ -645,6 +662,8 @@ namespace UIToolkitLibrary
             UIEvents.ClickButtonTower?.Invoke();
 
             m_Button_Tower.style.display = DisplayStyle.None;
+            m_Button_Sell.style.display = DisplayStyle.None;
+            m_Button_OpenColors.style.display = DisplayStyle.None;
             m_Button_TowerClose.style.display = DisplayStyle.Flex;
             m_Overlay3Models.style.display = DisplayStyle.Flex;
         }
@@ -658,6 +677,8 @@ namespace UIToolkitLibrary
 
         private void ClickButtonTowerClose()
         {
+            m_Button_Sell.style.display = DisplayStyle.Flex;
+            m_Button_OpenColors.style.display = DisplayStyle.Flex;
 
             m_Overlay3Models.style.display = DisplayStyle.None;
             m_Button_TowerClose.style.display = DisplayStyle.None;
@@ -796,14 +817,25 @@ namespace UIToolkitLibrary
         //     m_InventoryPanel.experimental.animation.Scale(1f, 200);
         // }
 
-        void CloseWindow(ClickEvent evt)
+        // void CloseWindow(ClickEvent evt)
+        // {
+        //     Hide();
+        // }
+
+        public override void Show()
         {
-            Hide();
+            base.Show();
+
+            OnRefreshUI().Forget();
         }
 
         public override void Hide()
         {
             base.Hide();
+            
+            base.HideHint();
+
+            ClickButtonTowerClose();
 
             // AudioManager.PlayDefaultButtonSound();
 

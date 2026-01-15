@@ -8964,7 +8964,7 @@ MonoBehaviour:
   meshRenderer: {fileID: 1593322073}
   meshFilter: {fileID: 1593322074}
   OutputPath: Assets/Prefabs/WFC
-  customDir: tanks
+  customDir: cars2
 --- !u!4 &1593322076
 Transform:
   m_ObjectHideFlags: 0

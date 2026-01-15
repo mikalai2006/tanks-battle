@@ -31,10 +31,10 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 296304405608595272, guid: e2a09be11c35b8044a71f5fc4ca5e62d, type: 3}
+  prefab: {fileID: 6115482910943606435, guid: 6f717b22193090446a2f4d8f1b2a5fb3, type: 3}
   isRotate: 1
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: be4d52d8d4c541d459e49e834458be31, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 413e2e0391591c74098443236b4c9ed8, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1

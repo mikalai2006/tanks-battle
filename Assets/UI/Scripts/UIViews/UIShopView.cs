@@ -10,12 +10,6 @@ namespace UIToolkitLibrary
     {
         static class ClassNames
         {
-            public static string MachineBox = "MachineBox";
-            public static string MachineBody = "Body";
-            public static string MachineCaterpillar = "Caterpillars";
-            public static string MachineTowers = "Towers";
-            public static string MachineMuzzles = "Muzzles";
-
             public static string Name_Machine = "NameMachine";
             public static string Cost_Machine = "CostMachine";
         }
@@ -23,10 +17,7 @@ namespace UIToolkitLibrary
         Button m_Button_Prev;
         Button m_Button_Next;
         Button m_Button_Buy;
-        Label m_Name_Machine;
-        Label m_Cost_Machine;
-        // Image m_ImageRenderTexture;
-        // RenderTexture renderTexture;
+        VisualElement m_VisualElementInfoBox;
         List<VisualElement> m_SpritesArrow;
 
         public UIShopView(VisualElement topElement, LocalizedStringTable localization): base(topElement, localization)
@@ -41,7 +32,7 @@ namespace UIToolkitLibrary
             
             // m_GearItemAsset = Resources.Load("GearItem") as VisualTreeAsset;
 
-            ShopUIEvents.FocusMachineInShop += FocusMachineInShop;
+            UIEvents.UIShopFocusMachine += FocusMachineInShop;
         }
 
         public override void Dispose()
@@ -55,13 +46,44 @@ namespace UIToolkitLibrary
             
             UnregisterButtonCallbacks();
 
-            ShopUIEvents.FocusMachineInShop -= FocusMachineInShop;
+            UIEvents.UIShopFocusMachine -= FocusMachineInShop;
         }
 
         private void FocusMachineInShop(GameMachine machine)
         {
-            m_Name_Machine.text = machine.text.title.GetLocalizedString();
-            m_Cost_Machine.text = "1000";
+            if (m_VisualElementInfoBox == null) {
+                m_VisualElementInfoBox = m_TopElement.Q<VisualElement>(UINames.VisualElementInfoBox);
+            }
+
+            // отрисовка информации об активной машине.
+            m_VisualElementInfoBox.Clear();
+
+            VisualElement visualElementInfoMachine = new VisualElement();
+            visualElementInfoMachine.style.flexDirection = FlexDirection.Row;
+            
+            VisualElement BoxNameMachine = new VisualElement();
+            BoxNameMachine.AddToClassList("bg-accent");
+            visualElementInfoMachine.Add(BoxNameMachine);
+            
+            Label nameMachine = new Label();
+            nameMachine.AddToClassList("font");
+            nameMachine.AddToClassList("text-primary");
+            nameMachine.AddToClassList("text-lg");
+            nameMachine.AddToClassList("font-bold");
+            nameMachine.text = machine.text.title.GetLocalizedString();
+            BoxNameMachine.Add(nameMachine);
+            
+            Label costMachine = new Label();
+            costMachine.AddToClassList("font");
+            costMachine.AddToClassList("text-primary");
+            costMachine.AddToClassList("text-lg");
+            costMachine.AddToClassList("font-bold");
+            costMachine.text = "1000";
+            visualElementInfoMachine.Add(costMachine);
+
+            m_VisualElementInfoBox.Add(visualElementInfoMachine);
+
+            Theming(m_VisualElementInfoBox);
         }
 
         void OnSelectedLocaleChanged(Locale obj)
@@ -77,8 +99,6 @@ namespace UIToolkitLibrary
             m_Button_Next = m_TopElement.Q<Button>(UINames.ButtonNext);
             m_Button_Prev = m_TopElement.Q<Button>(UINames.ButtonPrev);
             m_Button_Buy = m_TopElement.Q<Button>(UINames.ButtonBuy);
-            m_Name_Machine = m_TopElement.Q<Label>(ClassNames.Name_Machine);
-            m_Cost_Machine = m_TopElement.Q<Label>(ClassNames.Cost_Machine);
             // m_ImageRenderTexture = m_TopElement.Q<Image>(UINames.ImageRenderTexture);
             // if (m_ImageRenderTexture != null)
             // {
@@ -224,18 +244,19 @@ namespace UIToolkitLibrary
 
         void ClickBuy(ClickEvent evt)
         {
-            ShopUIEvents.ClickButtonBuyInShop?.Invoke();
+            UIEvents.UIShopClickBuyMachine?.Invoke();
         }
 
         void ClickPrev(ClickEvent evt)
         {
-            ShopUIEvents.ClickButtonPrevInShop?.Invoke();
+            UIEvents.UIShopPrevMachine?.Invoke();
         }
 
         void ClickNext(ClickEvent evt)
         {
-            ShopUIEvents.ClickButtonNextInShop?.Invoke();
+            UIEvents.UIShopNextMachine?.Invoke();
         }
+
         protected override void RegisterButtonCallbacks()
         {
             m_Button_Next.RegisterCallback<ClickEvent>(ClickNext);

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c7be78c00d5a04586b70a0c3d67129, type: 3}
+  m_Name: C003WheelRight
+  m_EditorClassIdentifier: Assembly-CSharp::GameWheel
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  prefab: {fileID: 7199497904731161277, guid: 1454037e8af2da749ac8cf527f705c31, type: 3}
+  MeshConfig:
+    sOVoxelData: {fileID: 11400000, guid: 786b5635ec4b3da48a421473479733b0, type: 2}
+    _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
+    isOneMesh: 1
+    isGreedy: 1
+    shadowCastingMode: 0
+    isTile: 0
+    existCollider: 1
+    typeCollider: 0
+    isConvex: 1
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
+    isDestructible: 1
+    useGlobalScale: 0
+    customScale: 0
+  references:
+    version: 2
+    RefIds: []

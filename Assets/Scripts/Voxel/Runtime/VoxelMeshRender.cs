@@ -283,8 +283,9 @@ namespace Mikalai2006.Voxel
             {
                 for (int index = 0; index < containers.Length; index++)
                 {
-                    UpdateMeshContainer(containers[index], index);
                     SetTransforms(containers[index]);
+                    
+                    UpdateMeshContainer(containers[index], index);
                 }
             }
         }

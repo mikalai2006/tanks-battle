@@ -6,7 +6,7 @@ static class UINames
     public static string ButtonSell = "ButtonSell";
     public static string VisualElementWrapper = "Wrapper";
     public static string LabelPrice = "LabelPrice";
-    public static string LabelNameMachine = "LabelNameMachine";
+    public static string VisualElementInfoBox = "InfoBox";
 
     public static string SpriteCoin = "SpriteCoin";
     public static string SpriteCubes = "SpriteCubes";
