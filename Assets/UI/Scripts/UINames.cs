@@ -29,4 +29,14 @@ static class UINames
 
     public static string Button_PrevTower = "ButtonPrevTower";
     public static string Button_NextTower = "ButtonNextTower";
+
+    public static string Aside = "Aside";
+    public static string MenuBar = "MenuBar";
+    public static string ShopScreen = "ShopScreen";
+    public static string GarageScreen = "GarageScreen";
+    public static string UserInfo = "UserInfo";
+    public static string BoxRepair = "BoxRepair";
+    public static string ButtonRepair = "ButtonRepair";
+    public static string ButtonRepairAdv = "ButtonRepairByAdv";
+    public static string TextRepair = "TextRepair";
 }

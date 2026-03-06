@@ -4,11 +4,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-
-
-
-
-
 #if UNITY_EDITOR
 using UnityEditor; 
 #endif
@@ -23,6 +18,7 @@ public class BaseBody : MonoBehaviour, IColored
     public GameBody Config {get; private set;}
     public GameBodyOption Option {get; private set;}
     [SerializeField] protected DataBody _data;
+    public Vector3 Bounds {get; private set; }
     public DataBody Data => _data;
     [SerializeField] protected bool isMove;
     public bool IsMove => isMove;
@@ -34,17 +30,24 @@ public class BaseBody : MonoBehaviour, IColored
         _data = new();
     }
     
-    void FixedUpdate()
+    // void FixedUpdate()
+    // {
+    //     // синхронизируем позицию каждой башни
+    //     for (int i = 0; i < Machine.Towers.Count; i++)
+    //     {
+    //         Machine.Towers[i].ChangePosition(Machine);
+    //     }
+    // }
+
+    void Update()
     {
+
         // синхронизируем позицию каждой башни
         for (int i = 0; i < Machine.Towers.Count; i++)
         {
             Machine.Towers[i].ChangePosition(Machine);
         }
-    }
 
-    void Update()
-    {
         // запись угла поворота в данные.
         if (Data.currentAngleBody != transform.localEulerAngles.y)
         {
@@ -136,7 +139,7 @@ public class BaseBody : MonoBehaviour, IColored
     {
         transform.rotation = Quaternion.Euler(0, angle + Machine.OffsetRotate, 0);
         // TowerBox.transform.rotation = Quaternion.Euler(0, 0, angle + offset);
-        Machine.Areol.transform.rotation = Quaternion.Euler(0, angle + Machine.OffsetRotate, 0);
+        // Machine.Areol.transform.rotation = Quaternion.Euler(0, angle + Machine.OffsetRotate, 0);
         Machine.CaterpillarWrapper.transform.rotation = Quaternion.Euler(0, angle + Machine.OffsetRotate, 0);
 
         _data.angleBody = transform.eulerAngles.y;
@@ -154,7 +157,7 @@ public class BaseBody : MonoBehaviour, IColored
 
         // var rot = Body.transform.rotation;
         // _objAreol.transform.localEulerAngles = new Vector3(90, rot.eulerAngles.y, rot.eulerAngles.z);
-        Machine.Areol.transform.forward = direction;
+        // Machine.Areol.transform.forward = direction;
 
         _data.angleBody = transform.eulerAngles.y;
 
@@ -187,14 +190,13 @@ public class BaseBody : MonoBehaviour, IColored
         {
             if (Machine.navMeshAgent.velocity != Vector3.zero)
             {
-                
-            Quaternion targetRotation = Quaternion.LookRotation(Machine.navMeshAgent.velocity);
+                Quaternion targetRotation = Quaternion.LookRotation(Machine.navMeshAgent.velocity);
 
-            transform.rotation = Machine.CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.Euler(0, targetRotation.eulerAngles.y + Machine.OffsetRotate, 0),
-                10f * Time.fixedDeltaTime
-            );
+                transform.rotation = Machine.CaterpillarWrapper.transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.Euler(0, targetRotation.eulerAngles.y + Machine.OffsetRotate, 0),
+                    10f * Time.fixedDeltaTime
+                );
             }
         }
         else
@@ -260,8 +262,7 @@ public class BaseBody : MonoBehaviour, IColored
                 forward = transform.forward;
                 right = transform.right;
                 moveDirection = (forward * _moveDirection.y).normalized;
-            }
-            ;
+            };
 
             forward.Normalize();
             right.Normalize();
@@ -345,10 +346,10 @@ public class BaseBody : MonoBehaviour, IColored
                 Machine.Rb.angularVelocity = Vector3.zero;
             }
 
-            for (int i = 0; i < Machine.Caterpillars.Count; i++)
-            {
-                Machine.Caterpillars[i].Stop();
-            }
+            // for (int i = 0; i < Machine.Caterpillars.Count; i++)
+            // {
+            //     Machine.Caterpillars[i].Stop();
+            // }
         }
     }
 
@@ -400,7 +401,7 @@ public class BaseBody : MonoBehaviour, IColored
                 Vector3 localPoint = voxelMeshRender.Containers[i].transform.InverseTransformPoint(_pointCollision);
                 if (voxelMeshRender.Containers[i].PointInCollider(_pointCollision))
                 {
-                    Debug.Log($"<color=blue>Body OnCollision: {_pointCollision} / {localPoint}</color>");
+                    // Debug.Log($"<color=blue>Body OnCollision: {_pointCollision} / {localPoint}</color>");
                     voxelMeshRender.Containers[i].ExposionVoxels(ktoStrelyal, localPoint, isDrawMesh, explodeGameObject, damageRadius, direction, normal).Forget();
                 }
             }
@@ -426,6 +427,8 @@ public class BaseBody : MonoBehaviour, IColored
 
         if (voxelMeshRender.Containers != null)
         {
+            // Debug.Log($"voxelMeshRender.Containers.length={voxelMeshRender.Containers.Length}");
+            
             for (int i = 0; i < voxelMeshRender.Containers.Length; i++)
             {
                 result.countVoxelsDestructible += voxelMeshRender.Containers[i].ContainerData.countVoxelsDestructible;

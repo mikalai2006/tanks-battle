@@ -920,7 +920,7 @@ MonoBehaviour:
       rgba: 4282660663
     cost: 0
     rank: 0
-  simpleMove: 0
+  simpleMove: 1
   playerOptions:
     showTrajectory: 0
     showOtherTrajectory: 0
@@ -932,11 +932,14 @@ MonoBehaviour:
   countMaxCreateVoxelsByStep: 1000
   countMaxCreateVoxelsByStepMobile: 200
   DebugSettings:
-    mode: 2
+    mode: 1
     disableCreateTiles: 0
-    logEnabled: 0
+    logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
+    gizmoWheels: 1
+    gizmoWheelsLength: 0.1
+    gizmoWheelsColor: {r: 0.68571484, g: 1, b: 0, a: 1}
     gizmoBodyForwards: 1
     gizmoBodyLength: 5
     gizmoBodyColor: {r: 0, g: 0.5930424, b: 1, a: 1}
@@ -1032,6 +1035,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3361d81c76b683f4c947db9d1c856930, type: 2}
   - {fileID: 11400000, guid: 331d79f0dc5061645a9e719d9555aba6, type: 2}
   - {fileID: 11400000, guid: 3d797c3e1aa82504e98c586f11620dda, type: 2}
+  - {fileID: 11400000, guid: b09711ae570cbab48bb5e98342963ace, type: 2}
+  - {fileID: 11400000, guid: 1ca1035475927f846b8d32b80537f4ce, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}
@@ -1052,7 +1057,7 @@ MonoBehaviour:
   colorTextDamage: {r: 1, g: 0.007843138, b: 0, a: 1}
   colorTextDamagePlus: {r: 0.77578473, g: 1, b: 0, a: 1}
   offsetMarkerEdge: {x: 0.015, y: 0.025}
-  colorMarkerBg: {r: 0.7264151, g: 0.20659508, b: 0.10622107, a: 1}
+  colorMarkerBg: {r: 0.26312745, g: 0.559812, b: 0.764151, a: 1}
   colorMarkerProgress: {r: 0.37254903, g: 0.5568628, b: 0.08235294, a: 1}
   debounceTimeSave: 100
   nameSaveData: gamedata

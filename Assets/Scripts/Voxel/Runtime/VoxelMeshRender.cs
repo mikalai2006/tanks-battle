@@ -66,11 +66,11 @@ namespace Mikalai2006.Voxel
             }
 
 
-            BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
-            if (_gameManager && _gameManager.LevelConfig && bm == false)
-            {
-                SetColorsModify(_gameManager.LevelConfig.colorsModify);
-            }
+            // BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+            // if (_gameManager && _gameManager.LevelConfig && bm == false)
+            // {
+            //     SetColorsModify(_gameManager.LevelConfig.colorsModify);
+            // }
 
             if (Config.isOneMesh)
             {

@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class HealthBarController : MonoBehaviour
 {
     GameManager gameManager => GameManager.Instance;
+    [SerializeField] Transform transformMachine;
     [SerializeField] private BaseMachine Machine;
     [Header("HealthBar Elements")]
     [SerializeField] string m_HealthBarName = "HealthBarBase";
@@ -63,6 +64,28 @@ public class HealthBarController : MonoBehaviour
         //     new Vector3(11, 20, 15),
         //     new Vector3(21, 30, 25),
         // };
+    }
+
+    void OnBecameVisible()
+    {
+        if (!Application.isPlaying) return;
+
+        BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+        if (bm)
+        {
+            bm.SetInCamera(true);
+        }
+    }
+
+    void OnBecameInvisible()
+    {
+        if (!Application.isPlaying) return;
+
+        BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
+        if (bm)
+        {
+            bm.SetInCamera(false);
+        }
     }
 
     void FixedUpdate()
@@ -195,10 +218,11 @@ public class HealthBarController : MonoBehaviour
     // moves health bar to match world position
     void MoveToWorldPosition(VisualElement element, Vector3 worldPosition, Vector2 worldSize)
     {
-        BaseMachine bm = transformToFollow.GetComponent<BaseMachine>();
+        // BaseMachine bm = transformMachine.GetComponent<BaseMachine>();
+
         var distance = Vector3.Distance(_camera.transform.position, transformToFollow.transform.position);
 
-        if (bm.isVisible)
+        if (Machine.isVisible)
         {
             var lerpStep = distance / delimiter;
 

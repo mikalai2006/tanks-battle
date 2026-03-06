@@ -32,7 +32,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
-  indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  indicatorPrefab: {fileID: 5558526086462227690, guid: 67dc364665ae5a24d8436be3d4b49049, type: 3}
   customScale: 0.015
   body:
     Config: {fileID: 11400000, guid: 8c51c230e5f69714e87dba3d8e516c6e, type: 2}
@@ -52,11 +52,23 @@ MonoBehaviour:
     offsetCat: {x: -9, y: 0, z: 0}
   - Config: {fileID: 11400000, guid: e6973d98021f9d24bacdccf27fd05f8d, type: 2}
     offsetCat: {x: 9, y: 0, z: 0}
-  - Config: {fileID: 11400000, guid: 34ce3f39f077c1049ba651508111a35c, type: 2}
-    offsetCat: {x: -9, y: 0, z: 0}
-  - Config: {fileID: 11400000, guid: 34ce3f39f077c1049ba651508111a35c, type: 2}
-    offsetCat: {x: 9, y: 0, z: 0}
-  wheels: []
+  wheels:
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: -10, y: 0, z: -9}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: -10, y: 0, z: 9}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: -10, y: 0, z: 3}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: -10, y: 0, z: -3}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: 10, y: 0, z: -9}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: 10, y: 0, z: 9}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: 10, y: 0, z: 3}
+  - Config: {fileID: 11400000, guid: 0320d844d9fd7244d89cd9f2d15a6f17, type: 2}
+    offsetWheel: {x: 10, y: 0, z: -3}
   soundMove: {fileID: 8300000, guid: 71d39ac5da02fea4084632c39f81960e, type: 3}
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   distanceSearch: 5

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52864495aabc34247803b26f8b61eb93, type: 3}
+  m_Script: {fileID: 11500000, guid: 52c7be78c00d5a04586b70a0c3d67129, type: 3}
   m_Name: T003Wheel
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameWheel
   text:
     title:
       m_TableReference:
@@ -31,8 +31,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 6115482910943606435, guid: 6f717b22193090446a2f4d8f1b2a5fb3, type: 3}
-  isRotate: 1
+  prefab: {fileID: 7199497904731161277, guid: 1454037e8af2da749ac8cf527f705c31, type: 3}
   MeshConfig:
     sOVoxelData: {fileID: 11400000, guid: 413e2e0391591c74098443236b4c9ed8, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}

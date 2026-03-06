@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5373363839002778423}
   - component: {fileID: 8439107706118267708}
   - component: {fileID: 5627196944041542168}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   _dataDetail:
     number: 0
     nameConfig: 
+    type: 0
     offset: {x: 0, y: 0, z: 0}
     destroyVoxels:
       values: []
@@ -101,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2505102858028534723}
   - component: {fileID: 3075877895146200915}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: _cave_level_002.1_w50_r4_d__270
   m_TagString: Untagged
   m_Icon: {fileID: 0}

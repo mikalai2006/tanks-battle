@@ -70,7 +70,7 @@ namespace UIToolkitLibrary
             nameMachine.AddToClassList("text-primary");
             nameMachine.AddToClassList("text-lg");
             nameMachine.AddToClassList("font-bold");
-            nameMachine.text = machine.text.title.GetLocalizedString();
+            nameMachine.text = machine.text.title.GetLocalizedString() + $"({machine.name})";
             BoxNameMachine.Add(nameMachine);
             
             Label costMachine = new Label();

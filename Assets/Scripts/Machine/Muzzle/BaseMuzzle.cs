@@ -58,12 +58,11 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
 
     public virtual void FixedUpdate()
     {
+        transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, Tower.transform.eulerAngles.y, Tower.transform.eulerAngles.z);
         if (Machine == null)
         {
             return;
         }
-
-        transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, Tower.transform.eulerAngles.y, Tower.transform.eulerAngles.z);
 
         // if (_data.timeBeforeShot <= Delay && isBusy)
         // {
@@ -338,7 +337,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
 
     public void OnSetRotation(Vector3 pointCenterScreen, float speedRotate)
     {
-        ChangePosition();
+        // ChangePosition();
         // var offset = Machine.LevelManager.Camera.WorldToScreenPoint(new Vector3(0,0,Option.offsetMuzzle.z));
         // Debug.Log($"forward={transform.forward}");
         // Vector2 screenCenterPoint = new Vector2(Screen.width / 2f - offset.x, Screen.height / 2f);
@@ -593,18 +592,18 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
         return result;
     }
 
-    public void ChangePosition()
-    {
-        // if (!Tower)
-        // {
-        //     return;
-        // }
+    // public void ChangePosition()
+    // {
+    //     // if (!Tower)
+    //     // {
+    //     //     return;
+    //     // }
 
-        // var point = Option.offsetMuzzle;
-        // var position = Tower.transform.TransformPoint(point);
+    //     // var point = Option.offsetMuzzle;
+    //     // var position = Tower.transform.TransformPoint(point);
         
-        // transform.localPosition = Tower.transform.InverseTransformPoint(position);
-    }
+    //     // transform.localPosition = Tower.transform.InverseTransformPoint(position);
+    // }
 
     public void ReDraw(List<ColorsModify> colors)
     {

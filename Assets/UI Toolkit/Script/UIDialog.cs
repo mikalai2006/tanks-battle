@@ -40,8 +40,9 @@ public class UIDialog : UILocaleBase
 
     _wrapper = _root.Q<VisualElement>("DialogWrapper");
 
-    _wrapper.style.scale = new Vector3(0.1f, 0.1f, 0.1f);
-    _wrapper.experimental.animation.Scale(1f, 200);
+    // _wrapper.style.scale = new Vector3(0.1f, 0.1f, 0.1f);
+    _wrapper.style.translate = new StyleTranslate(new Translate(-400, 0));
+    _wrapper.experimental.animation.Position(new Vector3(0,0,0), 200).Ease(UnityEngine.UIElements.Experimental.Easing.OutSine); //.Scale(1f, 200);
 
     _headerText = _root.Q<Label>("HeaderText");
     _messageText = _root.Q<Label>("MessageText");

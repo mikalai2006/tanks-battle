@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e7243a5f8f3ec44b5c6b60b18dd71d, type: 3}
   m_Name: T4
   m_EditorClassIdentifier: 
-  idObject: T4
   text:
     title:
       m_TableReference:
@@ -33,7 +32,6 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
-  material: {fileID: 2100000, guid: 9507a97772851094f887801a7ce7f650, type: 2}
   indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
   customScale: 0.015
   body:
@@ -49,10 +47,20 @@ MonoBehaviour:
       offsetMuzzle: {x: 6, y: -1, z: 0}
     children:
     - 1
+    - 2
     isChildren: 0
   - ido: 1
     Config: {fileID: 11400000, guid: 22c645a4daa41b246b08a915d0a0a5e2, type: 2}
     offsetTower: {x: 4, y: 16, z: 0}
+    isRotate: 0
+    muzzles:
+    - Config: {fileID: 11400000, guid: 3f1ff767f05ec7b4b843802799310610, type: 2}
+      offsetMuzzle: {x: 0, y: 0, z: 0}
+    children: []
+    isChildren: 1
+  - ido: 2
+    Config: {fileID: 11400000, guid: 22c645a4daa41b246b08a915d0a0a5e2, type: 2}
+    offsetTower: {x: -4, y: 16, z: 0}
     isRotate: 0
     muzzles:
     - Config: {fileID: 11400000, guid: 3f1ff767f05ec7b4b843802799310610, type: 2}

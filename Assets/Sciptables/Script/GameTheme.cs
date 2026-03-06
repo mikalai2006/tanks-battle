@@ -59,6 +59,10 @@ public class GameTheme : ScriptableObject
 
   [Space(5)]
   [Header("UI")]
+  [Range(0, 20)] public int widthOutline;
+  public Color colorOutlineWhite;
+  public Color colorOutlineBlack;
+  public Color colorWhite;
   public Color colorBgHint;
   public Color colorBgInput;
   public Color colorBgSecondary;

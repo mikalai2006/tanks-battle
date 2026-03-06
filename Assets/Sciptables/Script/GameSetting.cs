@@ -260,6 +260,9 @@ public struct DebugSettings
   public Vector3 muzzleOffsetEffectPoint;
 
   [Header("Gizmos")]
+  public bool gizmoWheels;
+  public float gizmoWheelsLength;
+  public Color gizmoWheelsColor;
   public bool gizmoBodyForwards;
   public float gizmoBodyLength;
   public Color gizmoBodyColor;

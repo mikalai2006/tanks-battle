@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7727407778873225098}
   - component: {fileID: 3836279430873740440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: _cave_ground_003.1.1_w1_r4_d__270
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3664413573757294413}
   - component: {fileID: 5354725718097924959}
   - component: {fileID: 7942504444106642688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,6 +164,7 @@ MonoBehaviour:
   _dataDetail:
     number: 0
     nameConfig: 
+    type: 0
     offset: {x: 0, y: 0, z: 0}
     destroyVoxels:
       values: []

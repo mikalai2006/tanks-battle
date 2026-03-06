@@ -4,8 +4,13 @@ using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor; 
+#endif
+
 public class BaseWheel : MonoBehaviour, IColored
 {
+    protected GameManager _gameManager => GameManager.Instance;
     [SerializeField] public List<TrailRenderer> trails;
     public GameWheelOption Option {get ; private set;}
     BaseMachine Machine;
@@ -13,6 +18,9 @@ public class BaseWheel : MonoBehaviour, IColored
     [SerializeField] protected DataWheel _data;
     public DataWheel Data => _data;
     [SerializeField] protected List<VoxelMeshRender> voxelMeshRenders;
+    [SerializeField] Vector3 lastPosition;
+    [SerializeField] Vector3 lastRotation;
+    [SerializeField] float forwardThreshold = 0.01f; // Минимальная скорость
 
 #region Unity methods
     void Awake()
@@ -37,6 +45,53 @@ public class BaseWheel : MonoBehaviour, IColored
     //         }
     //     }
     // }
+
+     void Start()
+    {
+        lastPosition = Machine.transform.position;
+    }
+
+    void Update()
+    {
+        if (Machine.IsMove)
+        {
+            // 1. Вычисляем вектор движения
+            Vector3 movementDirection = (Machine.transform.position - lastPosition) / Time.deltaTime;
+            // Debug.Log($"movementDirection={movementDirection}, movementDirection.magnitude={movementDirection.magnitude}");
+            if (movementDirection.magnitude > forwardThreshold)
+            {
+                // 2. Сравниваем направление движения с локальным "вперед"
+                float dotProduct = Vector3.Dot(movementDirection.normalized, Machine.Body.transform.forward);
+
+                if (dotProduct > 0)
+                {
+                    transform.Rotate(Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
+                }
+                else if (dotProduct < 0)
+                {
+                    transform.Rotate(-Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
+                }
+            } else
+            {
+                // 3. Определяем угол поворота
+                float diffAngle = Mathf.DeltaAngle(lastRotation.y, Machine.Body.transform.rotation.eulerAngles.y);
+                // Debug.Log($"Need check rotation! lastRotation={lastRotation}, rotation={Machine.Body.transform.rotation.eulerAngles}, diffAngle={diffAngle}");
+                
+                if (diffAngle >= 0)
+                {
+                    transform.Rotate(Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
+                }
+                else if (diffAngle < 0)
+                {
+                    transform.Rotate(-Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
+                }
+            }
+
+            // 4. Обновляем позицию и вращение для следующего кадра
+            lastPosition = Machine.transform.position;
+            lastRotation = Machine.Body.transform.rotation.eulerAngles;
+        }
+    }
 #endregion
 
     public void Init(BaseMachine baseMachine, GameWheelOption config, int i, DataDetail dataWheel)
@@ -60,7 +115,7 @@ public class BaseWheel : MonoBehaviour, IColored
 
         if (Machine.Caterpillars.Count > 0)
         {
-            transform.localPosition = Option.offsetWheel + new Vector3(0, 1f, 0);
+            transform.localPosition = Option.offsetWheel + new Vector3(0, (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + 1f, 0);
         } else
         {
             transform.localPosition = Option.offsetWheel + new Vector3(0, Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f, 0);
@@ -185,4 +240,22 @@ public class BaseWheel : MonoBehaviour, IColored
         }
         return output;
     }
+
+    
+#if UNITY_EDITOR
+    void OnDrawGizmos()
+    {
+        Color color = _gameManager ? _gameManager.Settings.DebugSettings.gizmoWheelsColor : Color.yellow;
+        bool isDraw = _gameManager ? _gameManager.Settings.DebugSettings.gizmoWheels : true;
+        float length = _gameManager ? _gameManager.Settings.DebugSettings.gizmoWheelsLength : 30;
+        if (isDraw)
+        {
+            Gizmos.color = color;
+            Gizmos.DrawRay(transform.position, transform.forward * length);
+            // Gizmos.DrawGUITexture(new Rect(new Vector3(0,0,0), new Vector2(10,2)));
+            Vector3 textPosition = transform.position + transform.forward * 1;
+            Handles.Label(textPosition, "wheel forward");
+        }
+    }
+#endif
 }

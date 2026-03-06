@@ -11,13 +11,13 @@
                 <ui:Instance template="MachineDashboard" name="MachineInventory" picking-mode="Ignore" style="display: none;"/>
                 <ui:Instance template="ShopView" name="ShopScreen" picking-mode="Ignore" style="flex-grow: 1;"/>
             </ui:VisualElement>
-            <ui:VisualElement picking-mode="Ignore" name="Aside" style="flex-grow: 1; max-width: 300px; background-color: rgba(0, 0, 0, 0.2); border-left-color: rgba(0, 0, 0, 0.2); border-left-width: 1px;">
+            <ui:VisualElement picking-mode="Ignore" name="Aside" class="border-l border-primary bg-primary" style="flex-grow: 1; max-width: 300px;">
                 <ui:Instance template="UserInfoView" name="UserInfo"/>
                 <ui:VisualElement style="flex-grow: 1;">
                     <ui:Instance template="MenuBar" name="MenuBar" picking-mode="Ignore" style="flex-grow: 1;"/>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="MachineInfo" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.78); align-items: center; justify-content: center;">
+            <ui:VisualElement name="MachineInfo" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0, 0, 0, 0.78); align-items: center; justify-content: center; display: none;">
                 <ui:Instance template="MachineInfoView" picking-mode="Ignore" style="flex-grow: 1; width: 100%;"/>
             </ui:VisualElement>
         </ui:VisualElement>

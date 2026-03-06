@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Mikalai2006.Voxel;
@@ -25,8 +26,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     [SerializeField] protected GameObject TowerWrapper;
     [SerializeField] public GameObject MuzzleWrapper;
     [SerializeField] public GameObject CaterpillarWrapper;
-    [SerializeField] List<BaseMuzzle> muzzles;
-    public List<BaseMuzzle> Muzzles => muzzles;
+    // [SerializeField] List<BaseMuzzle> muzzles;
+    // public List<BaseMuzzle> Muzzles => muzzles;
 
     [Space(5)]
     [Header("Elements vehicle")]
@@ -42,6 +43,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
     [Space(5)]
     [Header("Data")]
+    public bool inCamera;
     public bool isVisible;
     [SerializeField] protected int offset = 90;
     public int OffsetRotate => offset;
@@ -53,8 +55,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
     [Space(5)]
     [Header("Other")]
-    [SerializeField] private GameObject _objAreol;
-    public GameObject Areol => _objAreol;
+    // [SerializeField] private GameObject _objAreol;
+    // public GameObject Areol => _objAreol;
     // [SerializeField] private BaseMachine _objectTarget;
     // public BaseMachine ObjectTarget => _objectTarget;
     [SerializeField] protected Rigidbody rb;
@@ -83,6 +85,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     float distanceRayCamera;
     Plane[] planes;
     RaycastHit hitRayCamera;
+    bool isRunningCoroutineCheckVisible;
 
 #region Unity methods
     public virtual void Awake()
@@ -106,14 +109,14 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
     void Update()
     {
-        // вращение колес, если машина движется.
-        if (IsMove && Wheels.Count > 0)
-        {
-            for (int i = 0; i < Wheels.Count; i++)
-            {
-                Wheels[i].transform.Rotate(Vector3.right, 5f * Body.Data.speed * Time.deltaTime);
-            }
-        }
+        // // вращение колес, если машина движется.
+        // if (IsMove && Wheels.Count > 0)
+        // {
+        //     for (int i = 0; i < Wheels.Count; i++)
+        //     {
+        //         Wheels[i].transform.Rotate(Vector3.right, 5f * Body.Data.speed * Time.deltaTime);
+        //     }
+        // }
 
         // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
         //     .Where(n => n.OccupiedUnit != null)
@@ -143,47 +146,51 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         //     data.timeAfterLastShot += Time.deltaTime;
         // }
 
-        if (MachineLevelData.isBot && planes != null)
-        {
-            // проверяем видим ли компонент.            
-            if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
-            {
-                dirRayCamera = (transform.position - levelManager.Camera.transform.position).normalized;
-                distanceRayCamera = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
+        // if (MachineLevelData.isBot)
+        // {
+        //     if (planes != null) {
+        //         // проверяем видим ли компонент.            
+        //         if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
+        //         {
+        //             dirRayCamera = (transform.position - levelManager.Camera.transform.position).normalized;
+        //             distanceRayCamera = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
 
-                // Debug.DrawLine(levelManager.Camera.transform.position, transform.position, Color.blue);
-                if (Physics.Raycast(levelManager.Camera.transform.position, dirRayCamera, out hitRayCamera, distanceRayCamera, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
-                {
-                    
-                    // Debug.Log($"hit{hit.collider.name}");
-                    if (hitRayCamera.transform != transform)
-                    {
-                        isVisible = false;
-                    } else
-                    {
-                        isVisible = true;
-                    }
-                    // Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
-                }
-                // else
-                // {
-                //     Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
-                // }
-            } else
-            {
-                isVisible = false;
-            }
-
-            if (isVisible) {
-                _indicator.gameObject.SetActive(false);
-                isVisible = true;
-            }
-            else
-            {
-                _indicator.gameObject.SetActive(true);
-                isVisible = false;
-            }
-        }
+        //             // Debug.DrawLine(levelManager.Camera.transform.position, transform.position, Color.blue);
+        //             if (Physics.Raycast(levelManager.Camera.transform.position, dirRayCamera, out hitRayCamera, distanceRayCamera, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
+        //             {
+                        
+        //                 // Debug.Log($"hit{hit.collider.name}");
+        //                 if (hitRayCamera.transform != transform)
+        //                 {
+        //                     isVisible = false;
+        //                 } else
+        //                 {
+        //                     isVisible = true;
+        //                 }
+        //                 // Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
+        //             }
+        //             // else
+        //             // {
+        //             //     Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
+        //             // }
+        //         } else
+        //         {
+        //             isVisible = false;
+        //         }
+        //     } else
+        //     {
+        //         Debug.LogWarning("Not found planes!");
+        //     }
+        //     // if (isVisible) {
+        //     //     _indicator.gameObject.SetActive(false);
+        //     //     isVisible = true;
+        //     // }
+        //     // else
+        //     // {
+        //     //     _indicator.gameObject.SetActive(true);
+        //     //     isVisible = false;
+        //     // }
+        // }
 
 
         // // считаем время действия бонусов.
@@ -204,9 +211,10 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         // }
     }
 
+
     // void OnCollisionEnter(Collision collision)
     // {
-        
+
     //     Container voxelContainer = collision.collider.GetComponent<Container>();
     //     if (voxelContainer != null)
     //     {
@@ -223,7 +231,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     //     }
     // }
 
-#endregion
+    #endregion
 
     /// <summary>
     /// Функция обходит все комплектующие машины и проверяет на воксели в локальной точке (точке сопрокосновения со снарядом).
@@ -263,7 +271,6 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         _indicator = im;
     }
 
-
     public void Init(GameMachine _config, MachineLevelData dataInput)
     {
         LevelManager _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
@@ -288,7 +295,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
         // устанавливаем звук мотора.
         AudioSource.clip = Config.soundMove;
-        AudioSource.Play();
+        // AudioSource.Play();
         if (!MachineLevelData.isBot)
         {
             isVisible = true;
@@ -368,16 +375,16 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
             var _tow = CreateTower(_optConfig, dataTower, TowerWrapper.transform);
 
-            // создаем дуло.
-            for (int m = 0; m < _optConfig.muzzles.Count; m++)
-            {
-                GameMuzzleOption _mConfig = _optConfig.muzzles.ElementAt(m);
-                DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+            // // создаем дуло.
+            // for (int m = 0; m < _optConfig.muzzles.Count; m++)
+            // {
+            //     GameMuzzleOption _mConfig = _optConfig.muzzles.ElementAt(m);
+            //     DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
 
-                var _muz = Instantiate(_mConfig.Config.prefab, _tow.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
-                _muz.Init(this, _tow, _mConfig, m, dataMuzzle);
-                muzzles.Add(_muz);
-            }
+            //     var _muz = Instantiate(_mConfig.Config.prefab, _tow.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+            //     _muz.Init(this, _tow, _mConfig, m, dataMuzzle);
+            //     muzzles.Add(_muz);
+            // }
 
 
             if (_optConfig.children.Count > 0)
@@ -393,16 +400,16 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
                         var _towChild = CreateTower(_optChildConfig, dataTowerChild, _tow.transform);
                         _towChild.OnSetParent(_tow);
                         
-                        // создаем дуло.
-                        for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
-                        {
-                            GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
-                            DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+                        // // создаем дуло.
+                        // for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
+                        // {
+                        //     GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
+                        //     DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
 
-                            var _muz = Instantiate(_mConfig.Config.prefab, _towChild.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
-                            _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
-                            muzzles.Add(_muz);
-                        }
+                        //     var _muz = Instantiate(_mConfig.Config.prefab, _towChild.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+                        //     _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
+                        //     muzzles.Add(_muz);
+                        // }
                     }
                 }
             }
@@ -611,6 +618,62 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         towers.Add(_tow);
 
         return _tow;
+    }
+
+    public void SetInCamera(bool status)
+    {
+        if (!MachineLevelData.isBot) return;
+
+        inCamera = status;
+
+        if (status == true && !isRunningCoroutineCheckVisible)
+        {
+            StartCoroutine(CheckVisibleMachine());
+        } else
+        {
+            Indicator.gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Корутина определяет находится ли объект машины в прямой видимости.
+    /// </summary>
+    IEnumerator CheckVisibleMachine()
+    {
+        isRunningCoroutineCheckVisible = true;
+
+        Indicator.gameObject.SetActive(false);
+
+        // Ключевое условие: работает, пока переменная true
+        while (inCamera)
+        {
+            // Проводим линию от наблюдателя к цели
+            // Linecast возвращает true, если что-то попалось на пути
+            // (Indicator.Target.Body.transform.position + new Vector3(0,1.4f,0))
+            // LevelManager.Camera.transform.position
+            var startObject = Indicator.Target.Towers.First();
+            if (Physics.Linecast(startObject.transform.position + (startObject.transform.forward * 0.5f), transform.position+ new Vector3(0,0.1f,0), out RaycastHit hit, ~LayerMask.GetMask("Bullet", "AreaSearch", "Nature"))) //LayerMask.GetMask("Wall", "Machine") & 
+            {
+                // Debug.DrawLine(startObject.transform.position + (startObject.transform.forward * .5f), transform.position+ new Vector3(0,0.1f,0), Color.yellow, 5);
+                // Если объект, в который попали, - это наша цель, значит, она видна
+                if (hit.transform == transform)
+                {
+                    Indicator.gameObject.SetActive(false);
+                } else
+                {
+                    // Если попали во что-то другое, цель скрыта
+                    Indicator.gameObject.SetActive(true);
+                    // Debug.Log($"Попали в {hit.transform.name}");
+                }
+            }
+            // // Если ничего не попалось, цель видна
+            // Indicator.gameObject.SetActive(false);
+
+            // Задержка или возврат управления, чтобы не зависнуть
+            yield return new WaitForSeconds(0.10f);
+        }
+
+        isRunningCoroutineCheckVisible = false;
     }
 
 

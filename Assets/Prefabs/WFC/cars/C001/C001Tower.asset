@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52864495aabc34247803b26f8b61eb93, type: 3}
-  m_Name: T003.1Wheel
+  m_Script: {fileID: 11500000, guid: 9505e0a3fb63c974db87401cabf26aa7, type: 3}
+  m_Name: C001Tower
   m_EditorClassIdentifier: 
   text:
     title:
@@ -31,10 +31,9 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 6115482910943606435, guid: 6f717b22193090446a2f4d8f1b2a5fb3, type: 3}
-  isRotate: 1
+  prefab: {fileID: 8372265709631624150, guid: dcffc923e008def4f9d5c16ef5b04b17, type: 3}
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: 413e2e0391591c74098443236b4c9ed8, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 6b3ed4d4dab2a574697b9e95ed8bf005, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -51,6 +50,8 @@ MonoBehaviour:
     isDestructible: 1
     useGlobalScale: 0
     customScale: 0
+  minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
+  speedRotateTower: 10
   references:
     version: 2
     RefIds: []

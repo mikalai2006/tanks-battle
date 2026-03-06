@@ -1,5 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/Styles/General.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#General"/>
+    <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#base"/>
+    <Style src="project://database/Assets/UI/Styles/tailwindcss_base.uss?fileID=7433441132597879392&amp;guid=355bdeddf02e75247b03301baba68a71&amp;type=3#tailwindcss_base"/>
     <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
         <ui:VisualElement name="Overlay3Models" style="align-items: center; width: 330px;">
             <ui:Button text=" " name="ButtonPrevTower" class="button" style="font-size: 50px; rotate: 90deg;">
@@ -16,11 +17,19 @@
                     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; flex-direction: row;">
                         <ui:VisualElement style="flex-grow: 1; align-items: flex-end;">
                             <ui:VisualElement picking-mode="Ignore" class="bg_accent">
-                                <ui:Label text="Label" name="MachineName" class="font-bold text-lg font text-primary p-2"/>
+                                <ui:Label text="Label" name="MachineName" class="font-bold font text-primary p-2 text-2xl"/>
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
-                    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;"/>
+                    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; align-items: flex-start;">
+                        <ui:VisualElement name="BoxRepair" class="p-4 bg-accent" style="flex-grow: 0; align-items: flex-start;">
+                            <ui:Label text="Label" name="TextRepair" class="m-1 text-lg font-bold"/>
+                            <ui:VisualElement style="flex-grow: 0; flex-direction: row; flex-shrink: 0;">
+                                <ui:Button text="#btn_repair" name="ButtonRepair" class="button text-primary"/>
+                                <ui:Button text="#btn_repair_adv" name="ButtonRepairByAdv" class="button text-primary"/>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
                     <ui:VisualElement name="DialogWrapper" picking-mode="Ignore" style="flex-grow: 1; position: absolute; top: 0; left: 3px; bottom: 0; right: -2px; align-items: center; justify-content: center;">
                         <ui:VisualElement name="GarageWrapper" picking-mode="Ignore" style="width: 415px; flex-grow: 1;">
                             <ui:VisualElement name="Tabs" picking-mode="Ignore"/>
@@ -42,15 +51,15 @@
                 </ui:VisualElement>
                 <ui:VisualElement picking-mode="Ignore">
                     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; flex-direction: row;">
-                        <ui:Button text="#btn_tower" name="ButtonTower" class="button"/>
-                        <ui:Button text="#btn_close" name="ButtonTowerClose" class="button"/>
+                        <ui:Button text="#btn_tower" name="ButtonTower" class="button text-primary"/>
+                        <ui:Button text="#btn_close" name="ButtonTowerClose" class="button text-primary"/>
                         <ui:VisualElement style="flex-grow: 0; flex-direction: row;">
-                            <ui:Button text="#btn_sell" name="ButtonSell" class="button"/>
+                            <ui:Button text="#btn_sell" name="ButtonSell" class="button text-primary"/>
                             <ui:Button name="ButtonOpenColors" class="button" style="flex-direction: row;">
                                 <ui:Image name="SpriteFill" class="icon" style="background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;);"/>
-                                <ui:Label text="#btn_open_colors" class="p-0 m-0"/>
+                                <ui:Label text="#btn_open_colors" class="p-0 m-0 text-primary"/>
                             </ui:Button>
-                            <ui:Button text="#btn_cancel_colors" name="ButtonCancelColor" class="button"/>
+                            <ui:Button text="#btn_cancel_colors" name="ButtonCancelColor" class="button text-primary"/>
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>

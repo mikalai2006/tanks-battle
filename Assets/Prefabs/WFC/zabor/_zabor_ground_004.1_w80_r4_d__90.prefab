@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4943600386807408434}
   - component: {fileID: 8225324145090542669}
   - component: {fileID: 7747450376957479268}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   _dataDetail:
     number: 0
     nameConfig: 
+    type: 0
     offset: {x: 0, y: 0, z: 0}
     destroyVoxels:
       values: []
@@ -101,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3413976356301451963}
   - component: {fileID: 896065347512937995}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: _zabor_ground_004.1_w80_r4_d__90
   m_TagString: Untagged
   m_Icon: {fileID: 0}

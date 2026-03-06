@@ -150,6 +150,17 @@ namespace UIToolkitLibrary
             mGridButtons.style.alignItems = Align.FlexEnd;
             m_Wrapper.Add(mGridButtons);
 
+#region Schema
+            var mSchema = new VisualElement {name = "Schema"};
+            mSchema.style.position = Position.Absolute;
+            
+            mSchema.style.flexGrow = 1;
+            mSchema.style.flexShrink = 0;
+            mSchema.style.alignItems = Align.FlexEnd;
+            mGridButtons.Add(mSchema);
+#endregion
+
+
 #region Buttons
             // Button Exit.
             m_ButtonExit = new Button {name = IDNames.TopSideBarBtnExit};

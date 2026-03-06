@@ -32,29 +32,14 @@ namespace UIToolkitLibrary
         UIView m_GarageView;
 
         // Overlay screens
-        UIView m_MachineInfoView;
+        // UIView m_MachineInfoView;
         UIView m_InventoryView;  // Inventory from character screen
         UIView m_SettingsView;
         UIView m_UserInfo;
 
         // Toolbars
-        UIView m_OptionsBarView;  // Quick access to gold/gem and Settings
         UIView m_MenuBarView;  // Navigation bar for menu screens
         VisualElement m_Aside;
-
-        // VisualTree string IDs for UIViews; each represents one branch of the tree
-        const string k_HomeViewName = "HomeScreen";
-        const string k_InfoViewName = "InfoScreen";
-        const string k_CharViewName = "CharScreen";
-        const string k_ShopViewName = "ShopScreen";
-        const string k_Garage = "GarageScreen";
-        const string k_MachineInfoView = "MachineInfo";
-        const string k_InventoryViewName = "InventoryScreen";
-        const string k_SettingsViewName = "SettingsScreen";
-        const string k_UserInfoView = "UserInfo";
-        const string k_OptionsBarViewName = "OptionsBar";
-        const string k_MenuBarViewName = "MenuBar";
-        const string k_Aside = "Aside";
 
         
   private TaskCompletionSource<DataDialogResult> _processCompletionSource;
@@ -63,7 +48,7 @@ namespace UIToolkitLibrary
         void OnEnable()
         {
             m_MainMenuDocument = GetComponent<UIDocument>();
-            m_Aside = m_MainMenuDocument.rootVisualElement.Q<VisualElement>(k_Aside);
+            m_Aside = m_MainMenuDocument.rootVisualElement.Q<VisualElement>(UINames.Aside);
  
             SetupViews();
             
@@ -90,7 +75,7 @@ namespace UIToolkitLibrary
 
          private void ChangeTheme()
         {
-            m_Aside.style.backgroundColor = new StyleColor(_gameManager.Theme.bgColor);
+            
         }
 
         void SubscribeToEvents()
@@ -147,15 +132,15 @@ namespace UIToolkitLibrary
             // m_HomeView = new HomeView(root.Q<VisualElement>(k_HomeViewName), _localization); // Landing modal screen
             // m_CharView = new CharView(root.Q<VisualElement>(k_CharViewName)); // Character screen
             // m_InfoView = new InfoView(root.Q<VisualElement>(k_InfoViewName)); // Links and resources screen
-            m_ShopView = new UIShopView(root.Q<VisualElement>(k_ShopViewName), _localization); // Shop screen
+            m_ShopView = new UIShopView(root.Q<VisualElement>(UINames.ShopScreen), _localization); // Shop screen
             // m_MailView = new MailView(root.Q<VisualElement>(k_MailViewName)); // Mail screen
-            m_GarageView = new UIGarageView(root.Q<VisualElement>(k_Garage), _localization);
+            m_GarageView = new UIGarageView(root.Q<VisualElement>(UINames.GarageScreen), _localization);
 
             // // Overlay views (popup modal with background)
             // m_InventoryView = new InventoryView(root.Q<VisualElement>(k_InventoryViewName));  // Gear equipment overlay
-            m_MachineInfoView = new UIMachineInfoView(root.Q<VisualElement>(k_MachineInfoView), _localization);
+            // m_MachineInfoView = new UIMachineInfoView(root.Q<VisualElement>(k_MachineInfoView), _localization);
             // m_SettingsView = new SettingsView(root.Q<VisualElement>(k_SettingsViewName)); // Game settings overlay
-            m_UserInfo = new UserInfoView(root.Q<VisualElement>(k_UserInfoView), _localization);
+            m_UserInfo = new UserInfoView(root.Q<VisualElement>(UINames.UserInfo), _localization);
 
             // // Toolbars 
             // LevelMeterData meterData = CharEvents.GetLevelMeterData.Invoke();
@@ -163,11 +148,11 @@ namespace UIToolkitLibrary
             // m_LevelMeterView.Initialize();
 
             // m_OptionsBarView = new OptionsBarView(root.Q<VisualElement>(k_OptionsBarViewName)); // Settings/Shop toolbar
-            m_MenuBarView = new MenuBarView(root.Q<VisualElement>(k_MenuBarViewName), _localization); // Screen selection toolbar
+            m_MenuBarView = new MenuBarView(root.Q<VisualElement>(UINames.MenuBar), _localization); // Screen selection toolbar
 
             // Track modal UI Views in a List for disposal 
             // m_AllViews.Add(m_HomeView);
-            m_AllViews.Add(m_MachineInfoView);
+            // m_AllViews.Add(m_MachineInfoView);
             m_AllViews.Add(m_MenuBarView);
             // m_AllViews.Add(m_CharView);
             // m_AllViews.Add(m_InfoView);
@@ -182,7 +167,7 @@ namespace UIToolkitLibrary
             // UI Views enabled by default
             m_GarageView.Show();
             // m_HomeView.Show();
-            m_MachineInfoView.Hide();
+            // m_MachineInfoView.Hide();
             // m_OptionsBarView.Show();
             m_MenuBarView.Show();
             m_UserInfo.Show();

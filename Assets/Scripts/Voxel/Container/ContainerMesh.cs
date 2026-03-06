@@ -17,7 +17,7 @@ namespace Mikalai2006.Voxel
             {
                 meshCollider.enabled = false;
             }
-            else
+            else if (_levelManager != null)
             {
                 meshCollider.convex = config.isConvex;
                 // meshCollider.providesContacts = true;

@@ -16,7 +16,7 @@ namespace UIToolkitLibrary
         public static Action ScreenEnabled;
         public static Action<ColorModifyItem> ClickByColor;
         
-        public static Action<BaseMachine> OnFocusMachine;
+        // public static Action<BaseMachine> OnFocusMachine;
         public static Action ClickButtonPrevMachine;
         public static Action ClickButtonNextMachine;
         public static Action ClickButtonRotate;

@@ -61,6 +61,11 @@ public class Tile3D : MonoBehaviour
             Debug.Log($"<color=red>Ошибка тайла {gameObject.name}: Не найден компонент VoxelMeshRender</color>");
             return;
         }
+
+        if (gameManager != null)
+        {
+            voxelMeshRender.SetColorsModify(gameManager.LevelConfig.colorsModify);
+        }
         // else
         // {
         //     Debug.Log("Start Tile3D");

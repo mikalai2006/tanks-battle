@@ -45,7 +45,7 @@ namespace Mikalai2006.Voxel
         // private SOVoxelData _sOVoxelData;
         // [SerializeField] private bool isGreedy = true;
         List<Vector3> prevContacts;
-        [SerializeField] private LevelManager _levelManager;
+        [SerializeField] protected LevelManager _levelManager;
         VoxelMeshRender voxelMeshRender;
         private System.Threading.CancellationTokenSource cancelTokenSrc;
 
@@ -53,6 +53,7 @@ namespace Mikalai2006.Voxel
         {
             cancelTokenSrc = new System.Threading.CancellationTokenSource();  
 
+            gameObject.isStatic = gameObject.transform.parent.gameObject.isStatic;
             // _colorsModify = new ColorsModify[0];
         }
 
@@ -339,6 +340,7 @@ namespace Mikalai2006.Voxel
             }
 
             _containerData.countVoxels = meshConfig.sOVoxelData.countVoxels;
+            _containerData.countVoxelsDestructible = voxelMeshRender.destroyedVoxels.Count;
             // BaseMachine bm = transform.GetComponentInParent<BaseMachine>();
             // if (bm)
             // {
@@ -1796,13 +1798,5 @@ namespace Mikalai2006.Voxel
         //         }
         // }
 
-    }
-    
-    [Serializable]
-    public struct ContainerData
-    {
-        public int countVoxels;
-        public int countVoxelsDestructible;
-        public float levelDestruction;
     }
 }

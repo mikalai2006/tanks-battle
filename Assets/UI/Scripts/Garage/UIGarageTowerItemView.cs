@@ -143,22 +143,23 @@ public class UIGarageTowerItemView : UILocaleBase
         {
             baseTower.Init(null, config, data);
             baseTower.transform.localPosition = Vector3.zero;
+            baseTower.OnSetAngleTower(new Vector3(0.305000007f,-0.247999996f,-0.342000008f), true, Time.deltaTime);
 
-            foreach (var item in config.muzzles)
-            {
-              var muzzleGO = Instantiate(
-                  item.Config.prefab,
-                  Vector3.zero,
-                  Quaternion.identity,
-                  baseTower.MuzzlesBox.transform
-              );
-              BaseMuzzle baseMuzzle = muzzleGO.GetComponent<BaseMuzzle>();
-              if (baseMuzzle != null)
-              {
-                baseMuzzle.Init(null, baseTower, item, 0, data);
-              }
-              baseMuzzle.transform.localRotation = Quaternion.Euler(0, 90, 0);
-            }
+            // foreach (var item in config.muzzles)
+            // {
+            //   var muzzleGO = Instantiate(
+            //       item.Config.prefab,
+            //       Vector3.zero,
+            //       Quaternion.identity,
+            //       baseTower.MuzzlesBox.transform
+            //   );
+            //   BaseMuzzle baseMuzzle = muzzleGO.GetComponent<BaseMuzzle>();
+            //   if (baseMuzzle != null)
+            //   {
+            //     baseMuzzle.Init(null, baseTower, item, 0, data);
+            //   }
+            //   baseMuzzle.transform.localRotation = Quaternion.Euler(0, 90, 0);
+            // }
         }
 
       towerGO.transform.localPosition = new Vector3(0, 0, -0.1f);

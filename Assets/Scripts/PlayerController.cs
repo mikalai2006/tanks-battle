@@ -166,10 +166,10 @@ public class PlayerController : MonoBehaviour
         {
             _machine.OnShot();
         }
-    }
+    // }
 
-    void FixedUpdate()
-    {
+    // void FixedUpdate()
+    // {
         // if (_machine.Badge != null)
         // {
         //     _machine.Badge.OnSetNameText(moveDirection.ToString());

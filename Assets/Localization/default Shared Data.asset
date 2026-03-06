@@ -48,7 +48,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 29696433410048
-    m_Key: 
+    m_Key: btn_battle
     m_Metadata:
       m_Items: []
   - m_Id: 30008116334592
@@ -345,6 +345,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 83999561871085568
     m_Key: btn_close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631420357713920
+    m_Key: btn_repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 102631455547924480
+    m_Key: btn_repair_adv
     m_Metadata:
       m_Items: []
   m_Metadata:

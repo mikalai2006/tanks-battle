@@ -29,6 +29,7 @@ public class DataMachine
     // public List<BaseTower> towers;
     [Tooltip("Данные вокселей - разрушения")]
     public ContainerData ContainerData;
+    public ContainerDataDetails ContainerDataDetails;
 
     // [Tooltip("Время от последнего выстрела")]
     // public float timeAfterLastShot;
@@ -38,12 +39,30 @@ public class DataMachine
     public DataMachine()
     {
         this.ContainerData = new();
+        this.ContainerDataDetails = new();
         this.bonuses = new();
         // towers = new();
         // bonusesValue = new();
     }
 }
 
+    
+[Serializable]
+public struct ContainerData
+{
+    public int countVoxels;
+    public int countVoxelsDestructible;
+    public float levelDestruction;
+}
+
+[Serializable]
+public struct ContainerDataDetails
+{
+    public ContainerData body;
+    public ContainerData tower;
+    public ContainerData wheels;
+    public ContainerData muzzle;
+}
 // [Serializable]
 // public class DataHP
 // {

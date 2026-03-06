@@ -26,11 +26,15 @@ MonoBehaviour:
   colorWrapperGameScreen: {r: 0.85882354, g: 0.3019608, b: 0.11372549, a: 0.9019608}
   colorBgInfoRow: {r: 0.3254902, g: 0.5019608, b: 0.07058824, a: 0.9019608}
   colorTextInfoRow: {r: 1, g: 1, b: 1, a: 1}
+  widthOutline: 2
+  colorOutlineWhite: {r: 1, g: 1, b: 1, a: 1}
+  colorOutlineBlack: {r: 0, g: 0, b: 0, a: 0.8156863}
+  colorWhite: {r: 1, g: 1, b: 1, a: 1}
   colorBgHint: {r: 0.7924528, g: 0.6487969, b: 0.13830544, a: 1}
   colorBgInput: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   colorBgSecondary: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
   colorBgPrimary: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
-  colorBgAccent: {r: 0.7764706, g: 0.5176471, b: 0.08627451, a: 1}
+  colorBgAccent: {r: 1, g: 0.5882353, b: 0.21960786, a: 1}
   colorBgSuccess: {r: 0.3254902, g: 0.5019608, b: 0.07058824, a: 0.9019608}
   colorButtonAccent: {r: 1, g: 0.53333336, b: 0, a: 1}
   colorButtonSecondary: {r: 0, g: 0, b: 0, a: 0}

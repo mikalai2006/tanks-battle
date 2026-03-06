@@ -6,7 +6,10 @@ namespace UIToolkitLibrary
     {
         public static Action NeedCloseDialogs;
 
+        public static Action<StateMachinePlayer> OnFocusMachineInGarage;
         public static Action<GameMachine> ClickButtonBuyInShop;
+        public static Action ClickButtonRepair;
+        public static Action ClickButtonRepairByAdv;
         public static Action ClickButtonTower;
         public static Action ClickButtonTowerClose;
         public static Action ClickButtonPrevTower;

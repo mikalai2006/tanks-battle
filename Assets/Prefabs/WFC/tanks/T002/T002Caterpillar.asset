@@ -34,7 +34,7 @@ MonoBehaviour:
   prefab: {fileID: 296304405608595272, guid: f7e0ec108305b2b418a0b85d151f84eb, type: 3}
   isRotate: 0
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: e3e3b7c38c35aff45970e375bad9813f, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: a6cbe330c69b1df41b22069f77c2718a, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1

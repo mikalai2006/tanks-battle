@@ -450,6 +450,38 @@ public static class Helpers
         return points;
     }
 
+/// <summary>
+/// Возвращает кол-во вокселей из конфига машины.
+/// </summary>
+/// <param name="gameMachine"></param>
+/// <returns></returns>
+    public static int GetCountVoxels(GameMachine gameMachine)
+    {
+      int countVoxels = gameMachine.body.Config.MeshConfig.sOVoxelData.countVoxels;
+
+      foreach (var towerOption in gameMachine.towers)
+      {
+        countVoxels += towerOption.Config.MeshConfig.sOVoxelData.countVoxels;
+        
+        foreach (var muzzleOption in towerOption.muzzles)
+        {
+          countVoxels += muzzleOption.Config.MeshConfig.sOVoxelData.countVoxels;
+        } 
+      }
+      
+      foreach (var caterpillarOption in gameMachine.catterpillars)
+      {
+        countVoxels += caterpillarOption.Config.MeshConfig.sOVoxelData.countVoxels;
+      } 
+
+      foreach (var wheelOption in gameMachine.wheels)
+      {
+        countVoxels += wheelOption.Config.MeshConfig.sOVoxelData.countVoxels;
+      } 
+
+      return countVoxels;
+    }
+
     // /// <summary>
     // /// Добавление списка элементов в словарь аналогичных элементов.
     // /// </summary>

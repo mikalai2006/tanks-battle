@@ -214,12 +214,14 @@ public class LevelManager : MonoBehaviour
                         Vector3.zero,
                         Quaternion.identity,
                         objectSpawnIndicators.transform
+                        // obj.WrapperTools.transform
                     );
                     if (indicatorObject != null)
                     {
                         obj.OnSetIndicator(indicatorObject);
                         indicatorObject.OnSetMachine(obj);
                         OnAddIndicator(indicatorObject);
+                        // indicatorObject.OnSetTarget(obj);
                     }
 
 
@@ -312,6 +314,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // установка настроек для индикаторов машин на карте.
+        // устанавливаем машину с камерой
         BaseMachine targetIndicator = machines.Find(m => !m.MachineLevelData.isBot);
         if (targetIndicator != null)
         {

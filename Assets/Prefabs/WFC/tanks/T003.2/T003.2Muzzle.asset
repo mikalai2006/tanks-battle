@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52864495aabc34247803b26f8b61eb93, type: 3}
-  m_Name: T003.1Caterpillar
+  m_Script: {fileID: 11500000, guid: 8df57a86d86a7084aab1ff303ee5938f, type: 3}
+  m_Name: T003.2Muzzle
   m_EditorClassIdentifier: 
   text:
     title:
@@ -31,10 +31,9 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 296304405608595272, guid: f7e0ec108305b2b418a0b85d151f84eb, type: 3}
-  isRotate: 0
+  prefab: {fileID: 6956179497362671940, guid: 0afcb59b404efa440965a04db8f6959c, type: 3}
   MeshConfig:
-    sOVoxelData: {fileID: 11400000, guid: e3e3b7c38c35aff45970e375bad9813f, type: 2}
+    sOVoxelData: {fileID: 11400000, guid: 727135e75f912f5498632f8d0c9c6096, type: 2}
     _material: {fileID: 2100000, guid: 4ed815933d842f14ba97a24395a971d8, type: 2}
     isOneMesh: 1
     isGreedy: 1
@@ -51,6 +50,14 @@ MonoBehaviour:
     isDestructible: 1
     useGlobalScale: 0
     customScale: 0
+  soundShot: {fileID: 8300000, guid: 3aa3eab7a8ce7174386e2951ab7ed82c, type: 3}
+  fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
+  Bullet: {fileID: 11400000, guid: 71c2729b0226e924c8ff69521de58b83, type: 2}
+  material: {fileID: 2100000, guid: aea35b8f4d6187847be7fad4fe70f981, type: 2}
+  distanceAttack: 30
+  timeBetweenShot: 1
+  speedBullet: 30
+  color: {r: 0, g: 0.61455005, b: 0.7924528, a: 1}
   references:
     version: 2
     RefIds: []

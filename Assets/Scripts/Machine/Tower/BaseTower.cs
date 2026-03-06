@@ -20,8 +20,8 @@ public class BaseTower : MonoBehaviour, IColored
     // [SerializeField] GameObject SectorGO;
     [SerializeField] public GameObject MuzzlesBox;
     [SerializeField] GameObject Wrapper;
-    // [SerializeField] List<BaseMuzzle> muzzles;
-    public List<BaseMuzzle> Muzzles => Machine.Muzzles;
+    [SerializeField] List<BaseMuzzle> muzzles;
+    public List<BaseMuzzle> Muzzles => muzzles;
     [SerializeField] private SortingGroup sortingGroup;
     public GameTowerOption Option {get; private set ;}
     public DataDetail DataDetailTower {get; private set ;}
@@ -374,6 +374,29 @@ public class BaseTower : MonoBehaviour, IColored
         //     _muz.Init(baseMachine, this, _mConfig, i);
         //     muzzles.Add(_muz);
         // }
+        
+        // создаем дуло.
+        for (int m = 0; m < Option.muzzles.Count; m++)
+        {
+            GameMuzzleOption _mConfig = Option.muzzles.ElementAt(m);
+
+            DataDetail dataMuzzle = new DataDetail
+            {
+                nameConfig = _mConfig.Config.name,
+                number = m,
+                offset = _mConfig.offsetMuzzle,
+            };
+
+            if (Machine != null)
+            {
+                dataMuzzle = Machine.MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+            }
+
+            var _muz = Instantiate(_mConfig.Config.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+            _muz.Init(Machine, this, _mConfig, m, dataMuzzle);
+            muzzles.Add(_muz);
+        }
+        
 
         OnNotViewTarget(null);
 
@@ -480,7 +503,10 @@ public class BaseTower : MonoBehaviour, IColored
             if (Option.isRotate)
             {
                 DataBonus bonusSpeedTower = null;
-                Machine.Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
+                if (Machine != null)
+                {
+                    Machine.Data.bonuses.TryGetValue(TypeBonus.SpeedTower, out bonusSpeedTower);
+                }
                 //Tower.transform.rotation = Quaternion.Euler(0, 0, angle);
 
                 // Machine.WrapperCamera.transform.rotation = Quaternion.Lerp(
@@ -507,11 +533,14 @@ public class BaseTower : MonoBehaviour, IColored
                     );
                 } else
                 {
-                    transform.rotation = Quaternion.Euler(
-                        Machine.Body.transform.eulerAngles.x,
-                        Machine.Body.transform.eulerAngles.y,
-                        Machine.Body.transform.eulerAngles.z
-                    );
+                    if (Machine != null)
+                    {
+                        transform.rotation = Quaternion.Euler(
+                            Machine.Body.transform.eulerAngles.x,
+                            Machine.Body.transform.eulerAngles.y,
+                            Machine.Body.transform.eulerAngles.z
+                        );
+                    } 
                     
                 }
             }

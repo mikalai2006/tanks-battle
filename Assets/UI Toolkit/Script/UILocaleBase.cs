@@ -171,15 +171,6 @@ public abstract class UILocaleBase : MonoBehaviour
     // {
     //     item.style.backgroundColor = _gameManager.Theme.colorAccent;
     // }
-
-    // bg_tint_secondary
-    UQueryBuilder<VisualElement> qBgTintSecondary = new UQueryBuilder<VisualElement>(_box);
-    List<VisualElement> listBgTintSecondary = qBgTintSecondary.Class("bg-tint-secondary").ToList();
-    foreach (var item in listBgTintSecondary)
-    {
-      item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgSecondary);
-    }
-
     UQueryBuilder<VisualElement> builderLowBtns = new UQueryBuilder<VisualElement>(_box);
     List<VisualElement> listLowBtns = builderLowBtns.Class("unity-scroller__low-button").ToList();
     foreach (var item in listLowBtns)
@@ -192,6 +183,102 @@ public abstract class UILocaleBase : MonoBehaviour
     foreach (var item in listHighBtns)
     {
       item.style.unityBackgroundImageTintColor = _gameManager.Theme.colorTextInput;
+    }
+
+    // tints
+
+    // bg-tint-secondary
+    UQueryBuilder<VisualElement> qBgTintSecondary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgTintSecondary = qBgTintSecondary.Class("bg-tint-secondary").ToList();
+    foreach (var item in listBgTintSecondary)
+    {
+      item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgSecondary);
+    }
+    
+    // bg-tint-accent
+    UQueryBuilder<VisualElement> qBgTintAccent = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgTintAccent = qBgTintAccent.Class("bg-tint-accent").ToList();
+    foreach (var item in listBgTintAccent)
+    {
+      item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgAccent);
+    }
+    
+    // bg-tint-primary
+    UQueryBuilder<VisualElement> qBgTintPrimary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgTintPrimary = qBgTintPrimary.Class("bg-tint-primary").ToList();
+    foreach (var item in listBgTintPrimary)
+    {
+      item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorBgPrimary);
+    }
+    
+    // bg-tint-white
+    UQueryBuilder<VisualElement> qBgTintWhite = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBgTintWhite = qBgTintWhite.Class("bg-tint-white").ToList();
+    foreach (var item in listBgTintWhite)
+    {
+      item.style.unityBackgroundImageTintColor = new StyleColor(_gameManager.Theme.colorWhite);
+    }
+
+    // outlines
+    // outline-black
+    UQueryBuilder<Label> qOutlineBlack = new UQueryBuilder<Label>(_box);
+    List<Label> listOutlineBlack = qOutlineBlack.Class("outline-black").ToList();
+    foreach (var item in listOutlineBlack)
+    {
+      item.style.unityTextOutlineColor = new StyleColor(_gameManager.Theme.colorOutlineBlack);
+      item.style.unityTextOutlineWidth = _gameManager.Theme.widthOutline;
+    }
+    // outline-white
+    UQueryBuilder<Label> qOutlineWhite = new UQueryBuilder<Label>(_box);
+    List<Label> listOutlineWhite = qOutlineWhite.Class("outline-white").ToList();
+    foreach (var item in listOutlineWhite)
+    {
+      item.style.unityTextOutlineColor = new StyleColor(_gameManager.Theme.colorOutlineWhite);
+      item.style.unityTextOutlineWidth = _gameManager.Theme.widthOutline;
+    }
+
+
+    // borders
+
+    // border-accent
+    UQueryBuilder<VisualElement> qBorderAccent = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBorderAccent = qBorderAccent.Class("border-accent").ToList();
+    foreach (var item in listBorderAccent)
+    {
+      item.style.borderTopColor = _gameManager.Theme.colorBgAccent;
+      item.style.borderBottomColor = _gameManager.Theme.colorBgAccent;
+      item.style.borderLeftColor = _gameManager.Theme.colorBgAccent;
+      item.style.borderRightColor = _gameManager.Theme.colorBgAccent;
+    }
+    // border-secondary
+    UQueryBuilder<VisualElement> qBorderSecondary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBorderSecondary = qBorderSecondary.Class("border-secondary").ToList();
+    foreach (var item in listBorderSecondary)
+    {
+      item.style.borderTopColor = _gameManager.Theme.colorBgSecondary;
+      item.style.borderBottomColor = _gameManager.Theme.colorBgSecondary;
+      item.style.borderLeftColor = _gameManager.Theme.colorBgSecondary;
+      item.style.borderRightColor = _gameManager.Theme.colorBgSecondary;
+    }
+    // border-primary
+    UQueryBuilder<VisualElement> qBorderPrimary = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBorderPrimary = qBorderPrimary.Class("border-primary").ToList();
+    foreach (var item in listBorderPrimary)
+    {
+      item.style.borderTopColor = _gameManager.Theme.colorBgPrimary;
+      item.style.borderBottomColor = _gameManager.Theme.colorBgPrimary;
+      item.style.borderLeftColor = _gameManager.Theme.colorBgPrimary;
+      item.style.borderRightColor = _gameManager.Theme.colorBgPrimary;
+    }
+    // border-success
+    UQueryBuilder<VisualElement> qBorderSuccess = new UQueryBuilder<VisualElement>(_box);
+    List<VisualElement> listBorderSuccess = qBorderSuccess.Class("border-success").ToList();
+    foreach (var item in listBorderSuccess)
+    {
+      item.style.borderTopColor = _gameManager.Theme.colorBgSuccess;
+      item.style.borderBottomColor = _gameManager.Theme.colorBgSuccess;
+      item.style.borderLeftColor = _gameManager.Theme.colorBgSuccess;
+      item.style.borderRightColor = _gameManager.Theme.colorBgSuccess;
     }
   }
 

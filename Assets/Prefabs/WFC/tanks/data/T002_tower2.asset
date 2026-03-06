@@ -1266,8 +1266,6 @@ MonoBehaviour:
     - {x: 6, y: 6, z: 14}
     - {x: 6, y: 6, z: 15}
     - {x: 6, y: 6, z: 16}
-    - {x: 3, y: 6, z: 4}
-    - {x: 3, y: 6, z: 15}
     - {x: 15, y: 7, z: 4}
     - {x: 15, y: 7, z: 5}
     - {x: 15, y: 7, z: 10}
@@ -1353,12 +1351,6 @@ MonoBehaviour:
     - {x: 7, y: 7, z: 13}
     - {x: 7, y: 7, z: 14}
     - {x: 7, y: 7, z: 15}
-    - {x: 3, y: 7, z: 4}
-    - {x: 3, y: 7, z: 15}
-    - {x: 3, y: 8, z: 4}
-    - {x: 3, y: 8, z: 15}
-    - {x: 3, y: 9, z: 4}
-    - {x: 3, y: 9, z: 15}
   - color: {r: 0.65882355, g: 0.6039216, b: 0.31764707, a: 1}
     voxels:
     - {x: 8, y: 0, z: 8}
@@ -1759,10 +1751,10 @@ MonoBehaviour:
     - {x: 8, y: 8, z: 9}
     - {x: 8, y: 8, z: 10}
     - {x: 8, y: 8, z: 11}
-  countVoxels: 1740
+  countVoxels: 1732
   sizeVoxel: 1
-  Pivot: {x: 9.5, y: 5, z: 10}
-  Bounds: {x: 19, y: 10, z: 20}
+  Pivot: {x: 9.5, y: 4.5, z: 10}
+  Bounds: {x: 19, y: 9, z: 20}
   GlobalSize: {x: 32, y: 32, z: 32}
   GlobalPosition: {x: 0, y: 0, z: 18}
   GlobalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}

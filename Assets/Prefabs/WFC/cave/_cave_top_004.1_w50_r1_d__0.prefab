@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883650337305107889}
   - component: {fileID: 1582917513758051207}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: _cave_top_004.1_w50_r1_d__0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tile3D
   UID: 
-  TileSideVoxels: 5
+  TileSideVoxels: 32
   Weight: 50
   Rotation: 0
-  voxelMeshRender: {fileID: 0}
+  voxelMeshRender: {fileID: 4823323123872947131}
   isEmpty: 0
   isActive: 1
   ColorsRight: []
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6912478919517352381}
   - component: {fileID: 4823323123872947131}
   - component: {fileID: 6082642955438102627}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,6 +164,7 @@ MonoBehaviour:
   _dataDetail:
     number: 0
     nameConfig: 
+    type: 0
     offset: {x: 0, y: 0, z: 0}
     destroyVoxels:
       values: []

@@ -116,12 +116,14 @@ public class StateManager
     statePlayer.coin -= 1000;
 
     var data = new StateMachinePlayerData();
+
     // init data body.
     var itemBody = configMachine.body;
     var newDataBody = new DataDetail()
     {
       nameConfig = itemBody.Config.name,
       offset = itemBody.offsetBody,
+      type = VehicleDetailType.Body,
       number = 0
     };
     data.dataDetails.Add(newDataBody);
@@ -134,6 +136,7 @@ public class StateManager
       {
         nameConfig = item.Config.name,
         offset = item.offsetCat,
+        type = VehicleDetailType.Caterpillar,
         number = i
       };
       data.dataDetails.Add(newData);
@@ -146,6 +149,7 @@ public class StateManager
       {
         nameConfig = item.Config.name,
         offset = item.offsetWheel,
+        type = VehicleDetailType.Wheel,
         number = i
       };
       data.dataDetails.Add(newData);
@@ -160,6 +164,7 @@ public class StateManager
       {
         nameConfig = item.Config.name,
         offset = item.offsetTower,
+        type = VehicleDetailType.Tower,
         number = i
       };
       data.dataDetails.Add(newData);
@@ -171,8 +176,9 @@ public class StateManager
           DataDetail dataMuzzle = new DataDetail()
           {
             nameConfig = _mConfig.Config.name,
-            number = m,
-            offset = _mConfig.offsetMuzzle
+            offset = _mConfig.offsetMuzzle,
+            type = VehicleDetailType.Muzzle,
+            number = m
           };
           data.dataDetails.Add(dataMuzzle);
       }
@@ -187,6 +193,7 @@ public class StateManager
           {
             nameConfig = itemChild.Config.name,
             offset = itemChild.offsetTower,
+            type = VehicleDetailType.Tower,
             number = i
           };
           data.dataDetails.Add(newDataChild);
@@ -197,8 +204,9 @@ public class StateManager
               DataDetail dataMuzzle = new DataDetail()
               {
                 nameConfig = _mConfig.Config.name,
-                number = m,
-                offset = _mConfig.offsetMuzzle
+                offset = _mConfig.offsetMuzzle,
+                type = VehicleDetailType.Muzzle,
+                number = m
               };
               data.dataDetails.Add(dataMuzzle);
           }
@@ -232,6 +240,22 @@ public class StateManager
 
       _gameManager.DataManager.Save(true);
     }
+  }
+
+  public void RepairMachine(int index, int cost)
+  {
+      statePlayer.coin -= cost;
+
+      var configMachine = statePlayer.machines[index];
+      
+      foreach (var item in statePlayer.machines[index].data.dataDetails)
+      {
+        item.destroyVoxels.Clear();
+      }
+
+      OnChangeState?.Invoke(statePlayer);
+
+      _gameManager.DataManager.Save(true);
   }
 
   /// <summary>

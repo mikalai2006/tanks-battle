@@ -81,6 +81,8 @@ public class GarageUIManager : MonoBehaviour
         UIEvents.ClickButtonPrevTower += OnClickButtonPrevTower;
         UIEvents.ClickButtonNextTower += OnClickButtonNextTower;
         UIEvents.ClickButtonTowerClose += OnClickButtonTowerClose;
+
+        UIEvents.ClickButtonRepair += OnClickButtonRepair;
     }
 
     void OnDestroy()
@@ -97,6 +99,20 @@ public class GarageUIManager : MonoBehaviour
         UIEvents.ClickButtonPrevTower -= OnClickButtonPrevTower;
         UIEvents.ClickButtonNextTower -= OnClickButtonNextTower;
         UIEvents.ClickButtonTowerClose -= OnClickButtonTowerClose;
+
+        UIEvents.ClickButtonRepair -= OnClickButtonRepair;
+    }
+
+    /// <summary>
+    /// Удаляем поврежденные воксели у активной машины.
+    /// </summary>
+    private void OnClickButtonRepair()
+    {
+        gameManager.StateManager.RepairMachine(activeIndexMachine, 1);
+
+        DrawMachine(gameManager.StateManager.statePlayer.machines[activeIndexMachine], activeIndexMachine);
+        
+        OnFocusMachineByIndex(activeIndexMachine);
     }
 
     private void OnClickButtonTowerClose()
@@ -160,7 +176,7 @@ public class GarageUIManager : MonoBehaviour
             DataDetail dataDetail = new DataDetail
             {
                 nameConfig = dataTowers[indexTower].Config.name,
-                offset = tower.DataDetailTower.offset,
+                offset = dataTowers[indexTower].offsetTower,
                 number = tower.DataDetailTower.number,
             };
 
@@ -187,6 +203,7 @@ public class GarageUIManager : MonoBehaviour
 
     private void OnClickButtonTower()
     {
+        Debug.Log($"Press towers");
         var tower = machinesGameObjects[activeIndexMachine].Towers.Find(x => x.Parent == null);
         cacheTower = tower.DataDetailTower;
 
@@ -260,25 +277,49 @@ public class GarageUIManager : MonoBehaviour
 
             machinesGameObjects.RemoveAt(i);
         }
-        
+
         int index = 0;
 
         foreach (var item in gameManager.StateManager.statePlayer.machines)
         {
-            GameMachine configMachine = machinesConfigs.Find(m => m.name == item.name);
+            machinesGameObjects.Add(default);
 
-            if (configMachine != null)
-            {
-                CreateMachine(configMachine, index, new MachineLevelData
-                {
-                    id = item.name,
-                    data = item.data
-                });
-            }
+            DrawMachine(item, index);
+
+            // GameMachine configMachine = machinesConfigs.Find(m => m.name == item.name);
+
+            // if (configMachine != null)
+            // {
+            //     CreateMachine(configMachine, index, new MachineLevelData
+            //     {
+            //         id = item.name,
+            //         data = item.data
+            //     });
+            // }
             
             index ++;
         }
 
+    }
+
+    private void DrawMachine(StateMachinePlayer stateMachinePlayer, int index = -1)
+    {
+        int _index = index != -1 ? index : activeIndexMachine;
+
+        // удаляем игровые объекты машины.
+        if (machinesGameObjects[_index] != null)
+        {
+            Destroy(machinesGameObjects[_index].gameObject);
+        }
+
+        // создаем новые игровые объекты.
+        GameMachine configMachine = machinesConfigs.Find(m => m.name == stateMachinePlayer.name);
+
+        CreateMachine(configMachine, _index, new MachineLevelData
+        {
+            id = stateMachinePlayer.name,
+            data = stateMachinePlayer.data
+        });
     }
 
     void OnFocusMachineByIndex(int index = 0)
@@ -309,7 +350,7 @@ public class GarageUIManager : MonoBehaviour
             cinemachineOrbitalFollow.VerticalAxis.Value = 15;
         }
 
-        GarageUIEvents.OnFocusMachine?.Invoke(machinesGameObjects[activeIndexMachine]);
+        UIEvents.OnFocusMachineInGarage?.Invoke(gameManager.StateManager.statePlayer.machines[activeIndexMachine]);
     }
 
     void CreateMachine(GameMachine configMachine, int index, MachineLevelData data)
@@ -324,7 +365,8 @@ public class GarageUIManager : MonoBehaviour
         BaseMachine obj = gObject.GetComponent<BaseMachine>();
         if (obj != null)
         {
-            machinesGameObjects.Add(obj);
+            // machinesGameObjects.Add(obj);
+            machinesGameObjects[index] = obj;
 
             obj.GetComponent<PlayerController>().enabled = false;
             obj.GetComponent<PlayerInput>().enabled = false;
@@ -411,14 +453,14 @@ public class GarageUIManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             // Log the name of the object hit
-            // Debug.Log($"Clicked on {hit.point}: " + hit.collider.gameObject.name);
+            Debug.Log($"Clicked on {hit.point}: " + hit.collider.gameObject.name);
 
             // You can add further logic here, e.g., call a method on the hit object
             // hit.collider.GetComponent<YourCustomScript>()?.HandleClick();
             IColored coloredObject = hit.collider.GetComponentInParent<IColored>();
             BaseMachine bm = hit.collider.GetComponentInParent<BaseMachine>();
 
-            // Debug.DrawLine(hit.point, gameManager.ActiveCamera.transform.position, Color.yellow, 5);
+            Debug.DrawLine(hit.point, gameManager.ActiveCamera.transform.position, Color.yellow, 5);
 
             if (coloredObject != null && !HelperVoxel.AreColorsApproximatelyEqual(activeColorModifyItem.color, Color.clear))
             {

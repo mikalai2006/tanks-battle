@@ -23,24 +23,39 @@ public class BaseCaterpillar : MonoBehaviour, IColored
         _data= new();
         wheels = new();
         // sprite = GetComponent<SpriteRenderer>();
-        Stop();
+        // Stop();
     }
 
-    void Start()
-    {
-        Stop();
-    }
+    // void Start()
+    // {
+    //     Stop();
+    // }
 
-    void Update()
-    {
-        if (Option.Config.isRotate && Machine.IsMove)
-        {
-            for (int i = 0; i < wheels.Count; i++)
-            {
-                wheels[i].transform.Rotate(Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
-            }
-        }
-    }
+    // void Update()
+    // {
+    //     if (Option.Config.isRotate && Machine.IsMove)
+    //     {
+    //         for (int i = 0; i < wheels.Count; i++)
+    //         {
+    //             // 1. Вращение колеса (вперед/назад)
+    //             // Получаем скорость в локальном пространстве, чтобы понять, едем ли мы вперед или назад
+    //             float localVelocityZ = Machine.Rb.transform.InverseTransformDirection(Machine.Rb.linearVelocity).x;
+                
+    //             // Вычисляем угловую скорость (v = omega * r => omega = v / r)
+    //             float rotationSpeed = (localVelocityZ / 1) * Mathf.Rad2Deg;
+                
+    //             // Вращаем колесо вокруг локальной оси X
+    //             wheels[i].transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime);
+
+    //             // // 2. Поворот колеса (рулевое управление - опционально)
+    //             // float steer = Input.GetAxis("Horizontal") * steeringAngle;
+    //             // transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, steer, 0);
+    
+
+    //             // wheels[i].transform.Rotate(Vector3.right, 5f * Machine.Body.Data.speed * Time.deltaTime);
+    //         }
+    //     }
+    // }
 #endregion
 
     public void Init(BaseMachine baseMachine, GameCaterpillarOption config, int i, DataDetail dataCat)
@@ -109,17 +124,17 @@ public class BaseCaterpillar : MonoBehaviour, IColored
         // }
     }
     
-    public void Stop()
-    {
-        // // foreach (Animator animator in animators)
-        // // {
-        // //     animator.SetBool("move", false);
-        // // }
-        // foreach (TrailRenderer trail in trails)
-        // {
-        //     trail.emitting = false;
-        // }
-    }
+    // public void Stop()
+    // {
+    //     // // foreach (Animator animator in animators)
+    //     // // {
+    //     // //     animator.SetBool("move", false);
+    //     // // }
+    //     // foreach (TrailRenderer trail in trails)
+    //     // {
+    //     //     trail.emitting = false;
+    //     // }
+    // }
     
     /// <summary>
     /// Функция расчета ХР для шасси машины.

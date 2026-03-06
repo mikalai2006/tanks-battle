@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Mikalai2006.Voxel;
@@ -30,6 +31,10 @@ namespace UIToolkitLibrary
         Button m_Button_OpenColors;
         Button m_Button_Tower;
         Button m_Button_TowerClose;
+        Button m_Button_Repair;
+        Button m_Button_Repair_ADV;
+        VisualElement m_Box_Repair;
+        Label m_Text_Repair;
         VisualElement m_DialogWrapper;
         Label m_MachineName;
         VisualElement m_MachineBox;
@@ -54,7 +59,7 @@ namespace UIToolkitLibrary
             
             // m_GearItemAsset = Resources.Load("GearItem") as VisualTreeAsset;
             
-            GarageUIEvents.OnFocusMachine += ChangeInfoMachine;
+            UIEvents.OnFocusMachineInGarage += ChangeInfoMachine;
         }
 
         void OnSelectedLocaleChanged(Locale obj)
@@ -73,7 +78,7 @@ namespace UIToolkitLibrary
             
             UnregisterButtonCallbacks();
 
-            GarageUIEvents.OnFocusMachine -= ChangeInfoMachine;
+            UIEvents.OnFocusMachineInGarage -= ChangeInfoMachine;
         }
         
         
@@ -89,6 +94,11 @@ namespace UIToolkitLibrary
 
             m_Button_CancelColor = m_TopElement.Q<Button>(UINames.ButtonCancelColor);
             m_Button_CancelColor.style.display = DisplayStyle.None;
+
+            m_Button_Repair = m_TopElement.Q<Button>(UINames.ButtonRepair);
+            m_Button_Repair_ADV = m_TopElement.Q<Button>(UINames.ButtonRepairAdv);
+            m_Box_Repair = m_TopElement.Q<VisualElement>(UINames.BoxRepair);
+            m_Text_Repair = m_TopElement.Q<Label>(UINames.TextRepair);
 
             m_Button_Tower = m_TopElement.Q<Button>(UINames.ButtonTower);
             m_Button_TowerClose = m_TopElement.Q<Button>(UINames.ButtonTowerClose);
@@ -266,12 +276,45 @@ namespace UIToolkitLibrary
             }
         }
 
-        private void ChangeInfoMachine(BaseMachine machine)
+        private void ChangeInfoMachine(StateMachinePlayer machine)
         {
-            m_MachineName.text = machine.Config.text.title.GetLocalizedString();
+            // выводим имя машины.
+            m_MachineName.text = machine.name;
+
+            // находим активную машину в конфигах.
+            GameMachine gameMachine = _gameManager.Settings.machines.Find(x => x.name == machine.name);
+
+            if (gameMachine == null) return;
+
+            // находим сколько всего вокселей в машине.
+            int countVoxels = Helpers.GetCountVoxels(gameMachine);
+            
+
+            // находим разрушенные воксели.
+            List<Vector3Int> destroyVoxels = new ();
+
+            for (int i = 0; i < machine.data.dataDetails.Count; i++)
+            {
+                destroyVoxels.AddRange(machine.data.dataDetails.ElementAt(i).destroyVoxels.Keys);
+
+                // for (int k = 0; k < machine.data.dataDetails.ElementAt(i).destroyVoxels.Count; k++)
+                // {
+                //     KeyValuePair<Vector3Int, TypeEntity> el = machine.data.dataDetails.ElementAt(i).destroyVoxels.ElementAt(k);
+                //     destroyVoxels[el.Key] = el.Value;
+                // }
+            }
+
+            if (destroyVoxels.Count > 0)
+            {
+                m_Box_Repair.style.display = DisplayStyle.Flex;
+                m_Text_Repair.text = $"Повреждено {destroyVoxels.Count} вокс. из {countVoxels}. {destroyVoxels.Count  * 100/ countVoxels}%";
+            } else
+            {
+                m_Box_Repair.style.display = DisplayStyle.None;
+            }
         }
 
-        private VisualElement  DrawColorsSide()
+        private VisualElement DrawColorsSide()
         {
             VisualElement elWrapper = new VisualElement();
             // m_DialogWrapper.Clear();
@@ -597,13 +640,15 @@ namespace UIToolkitLibrary
 
         protected override void RegisterButtonCallbacks()
         {
+            m_Button_Repair.RegisterCallback<ClickEvent>(ClickButtonRepair);
+            m_Button_Repair_ADV.RegisterCallback<ClickEvent>(ClickButtonRepairByAdv);
+            m_Button_Tower.RegisterCallback<ClickEvent>(ClickButtonTower);
+            m_Button_TowerClose.RegisterCallback<ClickEvent>(ClickButtonTowerClose);
             m_Button_Next.RegisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.RegisterCallback<ClickEvent>(ClickPrev);
             m_Button_Sell.RegisterCallback<ClickEvent>(ClickSell);
             m_Button_CancelColor.RegisterCallback<ClickEvent>(OnCancelColorFill);
             m_Button_OpenColors.RegisterCallback<ClickEvent>(ClickChooseColor);
-            m_Button_Tower.RegisterCallback<ClickEvent>(ClickButtonTower);
-            m_Button_TowerClose.RegisterCallback<ClickEvent>(ClickButtonTowerClose);
             m_Button_PrevTower.RegisterCallback<ClickEvent>(ClickPrevTower);
             m_Button_NextTower.RegisterCallback<ClickEvent>(ClickNextTower);
             // m_InventoryBackButton.RegisterCallback<ClickEvent>(CloseWindow);
@@ -621,6 +666,8 @@ namespace UIToolkitLibrary
         // You can choose to unregister them if needed for specific scenarios.
         protected void UnregisterButtonCallbacks()
         {
+            m_Button_Repair.UnregisterCallback<ClickEvent>(ClickButtonRepair);
+            m_Button_Repair_ADV.UnregisterCallback<ClickEvent>(ClickButtonRepairByAdv);
             m_Button_Next.UnregisterCallback<ClickEvent>(ClickNext);
             m_Button_Prev.UnregisterCallback<ClickEvent>(ClickPrev);
             m_Button_Sell.UnregisterCallback<ClickEvent>(ClickSell);
@@ -639,8 +686,6 @@ namespace UIToolkitLibrary
             UIEvents.FocusTower -= OnFocusTower;
         }
 
-
-
         private void OnFocusTower(GameTowerOption option)
         {
             // Debug.Log($"Focus {option.Config.name}");
@@ -655,6 +700,17 @@ namespace UIToolkitLibrary
         private void ClickNextTower(ClickEvent evt)
         {
             UIEvents.ClickButtonNextTower?.Invoke();
+        }
+
+        private void ClickButtonRepair(ClickEvent evt)
+        {
+            UIEvents.ClickButtonRepair?.Invoke();
+            
+        }
+
+        private void ClickButtonRepairByAdv(ClickEvent evt)
+        {
+            UIEvents.ClickButtonRepairByAdv?.Invoke();
         }
 
         private void ClickButtonTower(ClickEvent evt)

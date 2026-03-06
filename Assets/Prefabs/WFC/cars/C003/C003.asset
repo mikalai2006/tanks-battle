@@ -32,7 +32,7 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
-  indicatorPrefab: {fileID: 7081407871890506928, guid: 112b13d833c43604bb9db7b932b07845, type: 3}
+  indicatorPrefab: {fileID: 5558526086462227690, guid: 67dc364665ae5a24d8436be3d4b49049, type: 3}
   customScale: 0.015
   body:
     Config: {fileID: 11400000, guid: 0a4cfc7d016918d49b370aef842ae5a4, type: 2}
