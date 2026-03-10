@@ -16,7 +16,8 @@ public class BaseBody : MonoBehaviour, IColored
     [SerializeField] private SpriteRenderer _damageSprite;
     protected BaseMachine Machine;
     public GameBody Config {get; private set;}
-    public GameBodyOption Option {get; private set;}
+    // public GameBodyOption Option {get; private set;}
+    public DataDetail DataDetail {get; private set ;}
     [SerializeField] protected DataBody _data;
     public Vector3 Bounds {get; private set; }
     public DataBody Data => _data;
@@ -41,6 +42,10 @@ public class BaseBody : MonoBehaviour, IColored
 
     void Update()
     {
+        if (Machine == null || Machine.IsSleep)
+        {
+            return;
+        }
 
         // синхронизируем позицию каждой башни
         for (int i = 0; i < Machine.Towers.Count; i++)
@@ -82,9 +87,14 @@ public class BaseBody : MonoBehaviour, IColored
     {
         Machine = _machine;
 
-        Option = Machine.Config.body;
+        // Option = Machine.Config.body;
 
         Config = Machine.Config.body.Config;
+
+        DataDetail = dataBody;
+
+        // устанавливаем звук мотора.
+        Machine.AudioSource.clip = Config.soundMove;
 
         // OnChangeData();
 
@@ -102,7 +112,16 @@ public class BaseBody : MonoBehaviour, IColored
         OnSetSpeed(Config.speed);
         
         OnSetAngleBody(0);
-        
+
+        SetRelativePoints();
+    }
+
+    
+    /// <summary>
+    /// Устанавливает точки привязки и позиции базовых элементов.
+    /// </summary>
+    void SetRelativePoints()
+    {
         float y = 0f;
         
         if (Machine.Wheels.Count > 0) {
@@ -119,9 +138,17 @@ public class BaseBody : MonoBehaviour, IColored
             y += (float)maxHeight / 2f + 1f;
         }
 
-        y += Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f;
+        // if (DataDetailBody != null)
+        // {
+        //     transform.localPosition = new Vector3(DataDetailBody.offset.x, DataDetailBody.offset.y, DataDetailBody.offset.z);
+        // } else
+        // {
+        //     transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
+        // }
 
-        transform.localPosition = Option.offsetBody + new Vector3(0, y, 0);
+        y += Config.MeshConfig.sOVoxelData.Bounds.y / 2f;
+
+        transform.localPosition = DataDetail.offset + new Vector3(0, y, 0);
     }
     
 
@@ -361,6 +388,19 @@ public class BaseBody : MonoBehaviour, IColored
     public void ReDraw(List<ColorsModify> colors)
     {
         voxelMeshRender.UploadedAllMeshes(colors);
+    }
+    public void ReDraw(DataDetail dataDetail)
+    {
+        if (this == null) return;
+
+        List<GameBody> allConfigs = _gameManager.ResourceSystem.GetAllBody();
+
+        Config = allConfigs.FirstOrDefault(x => x.name == dataDetail.nameConfig);;
+
+        SetRelativePoints();
+
+        voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
+        voxelMeshRender.UploadedAllMeshes(dataDetail);
     }
     
     public FillData OnFill(Vector3 _pointPointer)

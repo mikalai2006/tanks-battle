@@ -183,7 +183,7 @@ public class LevelManager : MonoBehaviour
 
                 if (pointSpawn != Vector3.zero)
                 {
-                    GameMachine configMachine = _gameSetting.machines.Find(m => m.name == data.id);
+                    GameMachine configMachine = _gameManager.ResourceSystem.GetAllMachines().Find(m => m.name == data.id);
 
                     // Addressables.InstantiateAsync
                     var gObject = Instantiate(

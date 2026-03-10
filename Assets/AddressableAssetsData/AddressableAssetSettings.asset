@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: cb267895b8768114189540c196400a31
   m_currentHash:
     serializedVersion: 2
-    Hash: 2dca2dfcddd97cdf7c0642a356807b07
+    Hash: 7f642c1e855e1dfcb3a1bcaf7b333ca3
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -106,6 +106,13 @@ MonoBehaviour:
     - Locale
     - Locale-ru
     - theme
+    - shop_tower
+    - tower
+    - muzzle
+    - body
+    - caterpillar
+    - wheel
+    - machine
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 43176884db0140b45b7a0308d5d86ed5, type: 2}

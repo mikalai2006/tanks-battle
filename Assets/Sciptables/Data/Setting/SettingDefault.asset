@@ -933,7 +933,7 @@ MonoBehaviour:
   countMaxCreateVoxelsByStepMobile: 200
   DebugSettings:
     mode: 1
-    disableCreateTiles: 0
+    disableCreateTiles: 1
     logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
@@ -1029,14 +1029,15 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: d96b5b117c20b504f827f43ff18e4ee3, type: 2}
   machines:
+  - {fileID: 11400000, guid: a824e54ae4724ed4d9a01af7fef99e01, type: 2}
   - {fileID: 11400000, guid: 887131a7968fb5c43ad73d566ae1afea, type: 2}
   - {fileID: 11400000, guid: 5f9446c89818a6b4088e94fc37be48df, type: 2}
   - {fileID: 11400000, guid: 56194fb4b0f7c6f46a2a918aeae5f95e, type: 2}
   - {fileID: 11400000, guid: 3361d81c76b683f4c947db9d1c856930, type: 2}
   - {fileID: 11400000, guid: 331d79f0dc5061645a9e719d9555aba6, type: 2}
   - {fileID: 11400000, guid: 3d797c3e1aa82504e98c586f11620dda, type: 2}
-  - {fileID: 11400000, guid: b09711ae570cbab48bb5e98342963ace, type: 2}
   - {fileID: 11400000, guid: 1ca1035475927f846b8d32b80537f4ce, type: 2}
+  - {fileID: 11400000, guid: b09711ae570cbab48bb5e98342963ace, type: 2}
   ranks:
   - {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
   - {fileID: 11400000, guid: 85aa99471f8ebc84db15232c8cdd4870, type: 2}

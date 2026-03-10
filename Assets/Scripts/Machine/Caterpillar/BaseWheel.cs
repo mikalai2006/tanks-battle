@@ -12,8 +12,9 @@ public class BaseWheel : MonoBehaviour, IColored
 {
     protected GameManager _gameManager => GameManager.Instance;
     [SerializeField] public List<TrailRenderer> trails;
-    public GameWheelOption Option {get ; private set;}
+    public GameWheel Config {get ; private set;}
     BaseMachine Machine;
+    protected DataDetail DataDetail;
     [SerializeField] GameObject Wrapper;
     [SerializeField] protected DataWheel _data;
     public DataWheel Data => _data;
@@ -53,6 +54,11 @@ public class BaseWheel : MonoBehaviour, IColored
 
     void Update()
     {
+        if (Machine == null  || Machine.IsSleep)
+        {
+            return;
+        }
+        
         if (Machine.IsMove)
         {
             // 1. Вычисляем вектор движения
@@ -94,15 +100,17 @@ public class BaseWheel : MonoBehaviour, IColored
     }
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameWheelOption config, int i, DataDetail dataWheel)
+    public void Init(BaseMachine baseMachine, GameWheel config, int i, DataDetail dataWheel)
     {
         Machine = baseMachine;
 
-        Option = config;
+        DataDetail = dataWheel;
+
+        Config = config;
 
         Parallel.For(0, voxelMeshRenders.Count, (i) =>
         {
-            voxelMeshRenders[i].OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+            voxelMeshRenders[i].OnSetConfigMeshGenerator(Config.MeshConfig);
             
             if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
             {
@@ -110,18 +118,22 @@ public class BaseWheel : MonoBehaviour, IColored
             }
         });
 
-        // sprite.sprite = Option.Config.sprite;
-        // sprite.color = Option.Config.color;
+        SetRelativePoints();
+    }
 
+    
+    /// <summary>
+    /// Устанавливает точки привязки и позиции базовых элементов.
+    /// </summary>
+    void SetRelativePoints()
+    {
         if (Machine.Caterpillars.Count > 0)
         {
-            transform.localPosition = Option.offsetWheel + new Vector3(0, (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + 1f, 0);
+            transform.localPosition = DataDetail.offset + new Vector3(0, (Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + 1f, 0);
         } else
         {
-            transform.localPosition = Option.offsetWheel + new Vector3(0, Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f, 0);
-            // Option.offsetWheel;
+            transform.localPosition = DataDetail.offset + new Vector3(0, Config.MeshConfig.sOVoxelData.Bounds.y / 2f, 0);
         }
-
     }
 
     public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
@@ -227,7 +239,7 @@ public class BaseWheel : MonoBehaviour, IColored
 
                     if (!voxel.color.Equals(Color.clear))
                     {
-                        SubmeshesData submeshesData = Option.Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+                        SubmeshesData submeshesData = Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
 
                         Color32 groupColor32 = submeshesData.color;
 

@@ -41,5 +41,6 @@ public enum VehicleDetailType
     Caterpillar = 2,
     Body = 3,
     Tower = 4,
-    Muzzle = 5
+    Muzzle = 5,
+    Elements = 6
 }

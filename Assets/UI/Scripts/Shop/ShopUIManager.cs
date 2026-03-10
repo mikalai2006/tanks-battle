@@ -119,7 +119,7 @@ public class ShopUIManager : MonoBehaviour
 
         if (gameManager?.Settings != null)
         {
-            machinesConfigs.AddRange(gameManager.Settings.machines);
+            machinesConfigs.AddRange(gameManager.ResourceSystem.GetAllMachines());
         }
 
         List<Vector2> pointSpiral = Helpers.GenerateArchimedeanSpiral(10, machinesConfigs.Count);
@@ -131,7 +131,7 @@ public class ShopUIManager : MonoBehaviour
             CreateShopItem(configMachine, pointSpiral[index], new MachineLevelData
             {
                 id = item.name,
-                data = new StateMachinePlayerData(),
+                data = Helpers.GetStateMachinePlayerData(configMachine),
             });
 
             index ++;

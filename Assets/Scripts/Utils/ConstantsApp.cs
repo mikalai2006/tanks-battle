@@ -33,6 +33,13 @@ public class ConstantsApp
     public const string LABEL_ENTITY = "entity";
     public const string LABEL_BONUS = "bonus";
     public const string LABEL_THEME = "theme";
+    public const string SHOP_TOWER = "shop_tower";
+    public const string TOWER = "tower";
+    public const string MUZZLE = "muzzle";
+    public const string BODY = "body";
+    public const string MACHINE = "machine";
+    public const string WHEEL = "wheel";
+    public const string CATERPILLAR = "caterpillar";
   }
 
   public class Helps

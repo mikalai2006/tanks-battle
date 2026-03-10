@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -112,10 +111,38 @@ public class ResourceSystem : StaticInstance<ResourceSystem>
 //   }
 //   #endregion
 
-  #region managers theme
+  #region managers
   public List<GameTheme> GetAllTheme()
   {
     return GetAllAssetsByLabel<GameTheme>(ConstantsApp.Labels.LABEL_THEME);
+  }
+  public List<GameTowerShop> GetAllShopTower()
+  {
+    return GetAllAssetsByLabel<GameTowerShop>(ConstantsApp.Labels.SHOP_TOWER);
+  }
+  public List<GameTower> GetAllTower()
+  {
+    return GetAllAssetsByLabel<GameTower>(ConstantsApp.Labels.TOWER);
+  }
+  public List<GameMuzzle> GetAllMuzzles()
+  {
+    return GetAllAssetsByLabel<GameMuzzle>(ConstantsApp.Labels.MUZZLE);
+  }
+  public List<GameCaterpillar> GetAllCaterpillar()
+  {
+    return GetAllAssetsByLabel<GameCaterpillar>(ConstantsApp.Labels.CATERPILLAR);
+  }
+  public List<GameWheel> GetAllWheel()
+  {
+    return GetAllAssetsByLabel<GameWheel>(ConstantsApp.Labels.WHEEL);
+  }
+  public List<GameBody> GetAllBody()
+  {
+    return GetAllAssetsByLabel<GameBody>(ConstantsApp.Labels.BODY);
+  }
+  public List<GameMachine> GetAllMachines()
+  {
+    return GetAllAssetsByLabel<GameMachine>(ConstantsApp.Labels.MACHINE);
   }
   #endregion
 }

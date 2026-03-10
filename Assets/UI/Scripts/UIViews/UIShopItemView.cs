@@ -1,4 +1,5 @@
 
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -143,6 +144,68 @@ public class UIShopItemView : UILocaleBase
             obj.GetComponent<PlayerInput>().enabled = false;
             obj.GetComponent<StateController>().enabled = false;
             obj.GetComponentInChildren<HealthBarController>().gameObject.SetActive(false);
+
+            // if (data.data.dataDetails.Count == 0)
+            // {
+            //     data.data.dataDetails.Add(new DataDetail()
+            //     {
+            //       nameConfig = configMachine.body.Config.name,
+            //       number = 0,
+            //       offset = configMachine.body.offsetBody,
+            //       type = VehicleDetailType.Body
+            //     });
+
+            //     for (int i = 0; i < configMachine.catterpillars.Count; i++)
+            //     {
+            //       var item = configMachine.catterpillars.ElementAt(i);
+            //       data.data.dataDetails.Add(new DataDetail()
+            //       {
+            //         nameConfig = item.Config.name,
+            //         number = i,
+            //         offset = item.offsetCat,
+            //         type = VehicleDetailType.Caterpillar,
+            //       });
+            //     }
+
+            //     for (int i = 0; i < configMachine.wheels.Count; i++)
+            //     {
+            //       var item = configMachine.wheels.ElementAt(i);
+            //       data.data.dataDetails.Add(new DataDetail()
+            //       {
+            //         nameConfig = item.Config.name,
+            //         number = i,
+            //         offset = item.offsetWheel,
+            //         type = VehicleDetailType.Wheel,
+            //       });
+            //     }
+
+
+            //     for (int i = 0; i < configMachine.towers.Count; i++)
+            //     {
+            //       var item = configMachine.towers.ElementAt(i);
+            //       data.data.dataDetails.Add(new DataDetail()
+            //       {
+            //         nameConfig = item.Config.name,
+            //         number = i,
+            //         offset = item.offsetTower,
+            //         type = VehicleDetailType.Tower,
+            //         ido = item.ido,
+            //         parentId = item.parentId,
+            //       });
+
+            //       for (int j = 0; j < item.muzzles.Count; j++)
+            //       {
+            //         var itemMuzzle = item.muzzles.ElementAt(j);
+            //         data.data.dataDetails.Add(new DataDetail()
+            //         {
+            //           nameConfig = itemMuzzle.Config.name,
+            //           number = j,
+            //           offset = itemMuzzle.offsetMuzzle,
+            //           type = VehicleDetailType.Muzzle
+            //         });
+            //       }
+            //     }
+            // }
 
             obj.Init(configMachine, data);
 

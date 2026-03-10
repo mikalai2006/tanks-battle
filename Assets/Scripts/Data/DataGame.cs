@@ -49,6 +49,8 @@ public class StateMachinePlayerData
 [Serializable]
 public class DataDetail
 {
+  public string ido;
+  public string parentId;
   public int number;
   public string nameConfig;
   public VehicleDetailType type;

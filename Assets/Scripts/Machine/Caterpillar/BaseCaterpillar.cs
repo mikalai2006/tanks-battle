@@ -9,8 +9,9 @@ public class BaseCaterpillar : MonoBehaviour, IColored
     // [SerializeField] public List<Animator> animators;
     // [SerializeField] public SpriteRenderer sprite;
     [SerializeField] public List<TrailRenderer> trails;
-    public GameCaterpillarOption Option {get; private set;}
+    public GameCaterpillar Config {get; private set;}
     BaseMachine Machine;
+    private DataDetail DataDetail;
     [SerializeField] GameObject Wrapper;
     [SerializeField] protected DataCaterpillar _data;
     public DataCaterpillar Data => _data;
@@ -58,15 +59,17 @@ public class BaseCaterpillar : MonoBehaviour, IColored
     // }
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameCaterpillarOption config, int i, DataDetail dataCat)
+    public void Init(BaseMachine baseMachine, GameCaterpillar config, int i, DataDetail dataCat)
     {
         Machine = baseMachine;
 
-        Option = config;
+        Config = config;
+
+        DataDetail = dataCat;
 
         Parallel.For(0, voxelMeshRenders.Count, (i) =>
         {
-            voxelMeshRenders[i].OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+            voxelMeshRenders[i].OnSetConfigMeshGenerator(Config.MeshConfig);
 
             if (Machine.MachineLevelData != null && Machine.MachineLevelData.data != null)
             {
@@ -86,8 +89,15 @@ public class BaseCaterpillar : MonoBehaviour, IColored
             // Wrapper.transform.GetChild(j).GetChild(0).transform.localPosition = new Vector3(0, 1f, 0);
         }
 
-        transform.localPosition = Option.offsetCat + new Vector3(0, Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f + (wheels.Count > 2 ? 1f : 0), 0);
+        SetRelativePoints();
+    }
 
+    /// <summary>
+    /// Устанавливает точки привязки и позиции базовых элементов.
+    /// </summary>
+    void SetRelativePoints()
+    {
+        transform.localPosition = DataDetail.offset + new Vector3(0, Config.MeshConfig.sOVoxelData.Bounds.y / 2f + (wheels.Count > 2 ? 1f : 0), 0);
     }
 
     public void OnCollision(BaseMachine ktoStrelyal, Vector3 _pointCollision, bool isDrawMesh, GameObject explodeGameObject, int damageRadius, Vector3 direction, Vector3 normal)
@@ -193,7 +203,7 @@ public class BaseCaterpillar : MonoBehaviour, IColored
 
                     if (!voxel.color.Equals(Color.clear))
                     {
-                        SubmeshesData submeshesData = Option.Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+                        SubmeshesData submeshesData = Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
 
                         Color32 groupColor32 = submeshesData.color;
 

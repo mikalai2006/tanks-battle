@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace UIToolkitLibrary
 {
@@ -12,9 +13,10 @@ namespace UIToolkitLibrary
         public static Action ClickButtonRepairByAdv;
         public static Action ClickButtonTower;
         public static Action ClickButtonTowerClose;
+        public static Action ClickButtonBuyActiveTower;
         public static Action ClickButtonPrevTower;
         public static Action ClickButtonNextTower;
-        public static Action<GameTowerOption>  FocusTower;
+        public static Action<GameTowerShop>  FocusTower;
         public static Action ClickShopButtonNotMenuBar;
         public static Action UIShopPrevMachine;
         public static Action UIShopNextMachine;

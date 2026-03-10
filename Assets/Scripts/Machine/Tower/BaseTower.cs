@@ -23,8 +23,8 @@ public class BaseTower : MonoBehaviour, IColored
     [SerializeField] List<BaseMuzzle> muzzles;
     public List<BaseMuzzle> Muzzles => muzzles;
     [SerializeField] private SortingGroup sortingGroup;
-    public GameTowerOption Option {get; private set ;}
-    public DataDetail DataDetailTower {get; private set ;}
+    public GameTower Config {get; private set ;}
+    public DataDetail DataDetail {get; private set ;}
     protected BaseMachine Machine;
     [SerializeField] private BaseMachine _objectTarget;
     public BaseMachine ObjectTarget => _objectTarget;
@@ -63,7 +63,7 @@ public class BaseTower : MonoBehaviour, IColored
     
     void FixedUpdate()
     {
-        if (Machine == null)
+        if (Machine == null || Machine.IsSleep)
         {
             return;
         }
@@ -217,7 +217,7 @@ public class BaseTower : MonoBehaviour, IColored
         if (ObjectTarget)
             {
                 // Если башня вращается, начинаем поворот в сторону врага.
-                if (Option.isRotate)
+                if (Data.isRotate)
                 {
                     // var direction = ObjectTarget.transform.position - transform.position;
 
@@ -274,7 +274,12 @@ public class BaseTower : MonoBehaviour, IColored
 
     void Update()
     {
-        if (Machine == null || Machine.LevelManager == null)
+        if (Machine.LevelManager == null)
+        {
+            ChangePosition(Machine);
+        }
+
+        if (Machine == null || Machine.LevelManager == null || Machine.IsSleep)
         {
             return;
         }
@@ -318,13 +323,13 @@ public class BaseTower : MonoBehaviour, IColored
 
 #endregion
 
-    public void Init(BaseMachine baseMachine, GameTowerOption optConfig, DataDetail dataTower)
+    public void Init(BaseMachine baseMachine, GameTower config, DataDetail dataTower)
     {
-        Option = optConfig;
+        Config = config;
 
         Machine = baseMachine;
 
-        DataDetailTower = dataTower;
+        DataDetail = dataTower;
 
         if (!Parent && _gameManager.LevelConfig != null)
         {
@@ -343,11 +348,11 @@ public class BaseTower : MonoBehaviour, IColored
             PointLight.gameObject.SetActive(false);
         }
 
-        voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+        voxelMeshRender.OnSetConfigMeshGenerator(Config.MeshConfig);
 
         voxelMeshRender.SetData(Machine != null && Machine.MachineLevelData != null && Machine.MachineLevelData.data != null ? Machine.MachineLevelData.data : null, dataTower);
 
-        OnSetSpeedRotateTower(optConfig.Config.speedRotateTower);
+        OnSetSpeedRotateTower(config.speedRotateTower);
         // OnSetAngleTower(0);
 
         // sortingGroup.sortingOrder = index;
@@ -366,36 +371,44 @@ public class BaseTower : MonoBehaviour, IColored
 
         SetRelativePoints();
 
-        // // создаем дуло.
-        // for (int i = 0; i < optConfig.muzzles.Count; i++)
-        // {
-        //     GameMuzzleOption _mConfig = optConfig.muzzles.ElementAt(i);
-        //     var _muz = Instantiate(_mConfig.Config.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
-        //     _muz.Init(baseMachine, this, _mConfig, i);
-        //     muzzles.Add(_muz);
-        // }
-        
         // создаем дуло.
-        for (int m = 0; m < Option.muzzles.Count; m++)
+        var allMuzzles = Machine.MachineLevelData.data.dataDetails.FindAll(t => t.type == VehicleDetailType.Muzzle && t.parentId == DataDetail.ido);
+        for (int i = 0; i < allMuzzles.Count; i++)
         {
-            GameMuzzleOption _mConfig = Option.muzzles.ElementAt(m);
-
-            DataDetail dataMuzzle = new DataDetail
-            {
-                nameConfig = _mConfig.Config.name,
-                number = m,
-                offset = _mConfig.offsetMuzzle,
-            };
-
-            if (Machine != null)
-            {
-                dataMuzzle = Machine.MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
-            }
-
-            var _muz = Instantiate(_mConfig.Config.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
-            _muz.Init(Machine, this, _mConfig, m, dataMuzzle);
+            GameMuzzle _mConfig = _gameManager.ResourceSystem.GetAllMuzzles().First(t => t.name == allMuzzles.ElementAt(i).nameConfig);
+            var _muz = Instantiate(_mConfig.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+            _muz.Init(baseMachine, this, _mConfig, i, allMuzzles.ElementAt(i));
             muzzles.Add(_muz);
         }
+        
+        // // создаем дуло.
+        // for (int m = 0; m < Option.muzzles.Count; m++)
+        // {
+        //     GameMuzzleOption _mConfig = Option.muzzles.ElementAt(m);
+
+        //     // DataDetail dataMuzzle = new DataDetail
+        //     // {
+        //     //     nameConfig = _mConfig.Config.name,
+        //     //     number = m,
+        //     //     offset = _mConfig.offsetMuzzle,
+        //     // };
+
+        //     // if (Machine != null)
+        //     // {
+        //     // }
+            
+        //     DataDetail dataMuzzle = Machine.MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+        //     if (dataMuzzle != default)
+        //     {
+                
+        //     var _muz = Instantiate(_mConfig.Config.prefab, MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+        //     _muz.Init(Machine, this, _mConfig, m, dataMuzzle);
+        //     muzzles.Add(_muz);
+        //     } else
+        //     {
+        //         Debug.Log($"ERRRORRRR Machine.MachineLevelData.data.dataDetails={Machine.MachineLevelData.data.dataDetails.Count}-{_mConfig.Config.name}-{Machine.Config.name}-{m}");
+        //     }
+        // }
         
 
         OnNotViewTarget(null);
@@ -414,15 +427,16 @@ public class BaseTower : MonoBehaviour, IColored
     /// </summary>
     void SetRelativePoints()
     {
-        if (DataDetailTower != null)
+        if (DataDetail != null)
         {
-            transform.localPosition = new Vector3(DataDetailTower.offset.x, DataDetailTower.offset.y, DataDetailTower.offset.z);
-        } else
-        {
-            transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
+            transform.localPosition = new Vector3(DataDetail.offset.x, DataDetail.offset.y, DataDetail.offset.z);
         }
+        // else
+        // {
+        //     transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
+        // }
         MuzzlesBox.transform.localPosition = new Vector3(
-            Option.Config.MeshConfig.sOVoxelData.Bounds.x / 2f - 1f, 
+            Config.MeshConfig.sOVoxelData.Bounds.x / 2f - 1f, 
             0,
             0
         );
@@ -500,7 +514,7 @@ public class BaseTower : MonoBehaviour, IColored
             OnSetDirectionTower(angle);
 
             float speedRotation = 1;
-            if (Option.isRotate)
+            if (Data.isRotate)
             {
                 DataBonus bonusSpeedTower = null;
                 if (Machine != null)
@@ -914,10 +928,6 @@ public class BaseTower : MonoBehaviour, IColored
 
     public void ChangePosition(BaseMachine baseMachine)
     {
-        if (!baseMachine.Body)
-        {
-            return;
-        }
         // // if (Parent != null) {
         // //     return;
         // // }
@@ -930,23 +940,39 @@ public class BaseTower : MonoBehaviour, IColored
         // // (x', y') - новые координаты точки после поворота.
         // var angle = Parent == null ? baseMachine.Body.transform.rotation.eulerAngles.y : Parent.transform.rotation.eulerAngles.y; // parent.Data.currentAngleTower;
         // // var offsetParentTower = Vector2.zero; // Parent == null ? Vector2.zero : parent.Option.offsetTower;
-        var point = DataDetailTower != null ? DataDetailTower.offset : Option.offsetTower;
+        var point = DataDetail.offset; // DataDetail != null ? DataDetail.offset : 
         // // var x1 = (point.x - offsetParentTower.x) * Mathf.Cos(angle * Mathf.Deg2Rad) - (point.z - offsetParentTower.y) * Mathf.Sin(angle * Mathf.Deg2Rad) + offsetParentTower.x;
         // // var z1 = (point.x - offsetParentTower.x) * Mathf.Sin(angle * Mathf.Deg2Rad) + (point.z - offsetParentTower.y) * Mathf.Cos(angle * Mathf.Deg2Rad) + offsetParentTower.y;
         // var x1 = point.x + Mathf.Cos(angle) * 1;
         // var z1 = point.z + Mathf.Sin(angle) * 1;
         // var n = baseMachine.Body.transform.TransformPoint(point);
-        var y = Parent == null ? (baseMachine.Body.Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + baseMachine.Body.transform.position.y : (Parent.Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + Parent.transform.position.y;
+        float y = 0;
         
-        point.y = point.y + y + (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) - 1f;
+        if (baseMachine.Body != null)
+        {
+            y = Parent == null ? (baseMachine.Body.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + baseMachine.Body.transform.position.y : (Parent.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + Parent.transform.position.y;
+        }
 
-        transform.position = Parent == null ? baseMachine.Body.transform.TransformPoint(point) : Parent.transform.TransformPoint(point);
-        // transform.position = new Vector3(pos.x, pos.y + y + (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) - 1f, pos.z);
+        if (Parent != null)
+        {
+            y = (Parent.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) + Parent.transform.position.y;
+        };
+        
+        point.y = point.y + y + (Config.MeshConfig.sOVoxelData.Bounds.y / 2f) - 1f;
+
+        if (baseMachine.Body != null)
+        {
+            transform.position = Parent == null ? baseMachine.Body.transform.TransformPoint(point) : Parent.transform.TransformPoint(point);
+            // transform.position = new Vector3(pos.x, pos.y + y + (Option.Config.MeshConfig.sOVoxelData.Bounds.y / 2f) - 1f, pos.z);
+        } else
+        {
+            transform.localPosition = point;
+        }
     }
 
     public void OnDamageEffect(float v)
     {
-        if (Option.isRotate)
+        if (Data.isRotate)
         {
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + UnityEngine.Random.Range(-v * _gameManager.Settings.koofChangeAngleTower, v * _gameManager.Settings.koofChangeAngleTower), 0);
         }
@@ -963,17 +989,17 @@ public class BaseTower : MonoBehaviour, IColored
         voxelMeshRender.UploadedAllMeshes(colors);
     }
 
-    public void ReDraw(GameTowerOption option, DataDetail dataDetail)
-    {
-        if (this == null) return;
+    // public void ReDraw(GameTowerOption option, DataDetail dataDetail)
+    // {
+    //     if (this == null) return;
 
-        Option = option;
+    //     Option = option;
 
-        SetRelativePoints();
+    //     SetRelativePoints();
 
-        voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
-        voxelMeshRender.UploadedAllMeshes(dataDetail);
-    }
+    //     voxelMeshRender.OnSetConfigMeshGenerator(Option.Config.MeshConfig);
+    //     voxelMeshRender.UploadedAllMeshes(dataDetail);
+    // }
 
     public FillData OnFill(Vector3 _pointPointer)
     {
@@ -991,7 +1017,7 @@ public class BaseTower : MonoBehaviour, IColored
 
                 if (!voxel.color.Equals(Color.clear))
                 {
-                    SubmeshesData submeshesData = Option.Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
+                    SubmeshesData submeshesData = Config.MeshConfig.sOVoxelData.GetVoxelGroup(voxel.position);
 
                     Color32 groupColor32 = submeshesData.color;
 

@@ -20,8 +20,8 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     [SerializeField] protected GameObject pivot;
     [SerializeField] protected GameObject pointEffects;
     public GameObject PointEffects => pointEffects;
-    [SerializeField] protected GameMuzzleOption Option;
-    protected GameMuzzle Config => Option.Config;
+    [SerializeField] protected GameMuzzle Config;
+    protected DataDetail DataDetail {get; private set ;}
     // [SerializeField] protected SpriteRenderer sprite;
     // protected ParticleSystem[] particlesBoom;
     [SerializeField] protected DataMuzzle _data;
@@ -40,7 +40,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     [SerializeField] protected bool isBusy;
     public bool IsBusy => isBusy;
     protected float distanceAttack;
-    protected Vector3 targetPosition;
+    // protected Vector3 targetPosition;
     protected System.Threading.CancellationTokenSource cancelToken;
 
     #region Unity methods
@@ -56,12 +56,24 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
         cancelToken.Dispose();
     }
 
+#if UNITY_EDITOR
+    void Update()
+    {
+        SetRelativePoints();
+    }
+#endif
+
     public virtual void FixedUpdate()
     {
-        transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, Tower.transform.eulerAngles.y, Tower.transform.eulerAngles.z);
-        if (Machine == null)
+        if (Machine == null || Machine.IsSleep)
         {
             return;
+        }
+
+        // Заглушка, если используется ствол не на поле битвы.
+        if (Machine.LevelManager != null)
+        {
+            transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, Tower.transform.eulerAngles.y, Tower.transform.eulerAngles.z);
         }
 
         // if (_data.timeBeforeShot <= Delay && isBusy)
@@ -157,17 +169,19 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     }
     #endregion
 
-    public void Init(BaseMachine _machine, BaseTower tower, GameMuzzleOption option, int index, DataDetail dataMuzzle)
+    public void Init(BaseMachine _machine, BaseTower tower, GameMuzzle config, int index, DataDetail dataMuzzle)
     {
-        Option = option;
+        Config = config;
 
         Tower = tower;
 
         Machine = _machine;
+
+        DataDetail = dataMuzzle;
         
         Data.timeBetweenShot = Config.timeBetweenShot;
         Data.distanceAttack = Config.distanceAttack;// * (1 / Machine.Wrapper.transform.localScale.x);
-        Data.speedBullet = Option.Config.speedBullet;
+        Data.speedBullet = Config.speedBullet;
 
         if (Tower.Parent == null && _gameManager.LevelConfig != null )
         {
@@ -194,8 +208,10 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
         // sprite.color = Config.color;
         // particlesBoom = particlesBoomGameObject.GetComponentsInChildren<ParticleSystem>();
 
+        SetRelativePoints();
 
-        transform.localPosition = Option.offsetMuzzle;// + new Vector3(Option.Config.MeshConfig.sOVoxelData.Bounds.x - 2f, 0, 0);
+        // Устанавливаем начальный угол поворота.
+        transform.localRotation = Quaternion.Euler(0, 90, 0);
 
         if (Machine != null)
         {
@@ -231,7 +247,17 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
         {
             trajectoryGO.SetActive(false);
             SectorGO.SetActive(false);
+            decal.SetActive(false);
         }
+
+    }
+    
+    /// <summary>
+    /// Устанавливает точки привязки и позиции базовых элементов.
+    /// </summary>
+    void SetRelativePoints()
+    {
+        transform.localPosition = DataDetail.offset; // Option.offsetMuzzle;// + new Vector3(Option.Config.MeshConfig.sOVoxelData.Bounds.x - 2f, 0, 0);
     }
 
 
@@ -359,6 +385,12 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
             _data.pointTarget = MaxDistanceObject.transform.position; //transform.position + distanceAndDirection;
             castPoint = pointCenterScreen;
         };
+
+        // // Заглушка, если используется ствол не на поле битвы.
+        // if (Machine.LevelManager == null)
+        // {
+        //     castPoint = MaxDistanceObject.transform.position;
+        // }
 
         decal.transform.position = _data.pointTarget - distanceAndDirection.normalized * 0.1f;
         decal.transform.rotation = Quaternion.LookRotation(-distanceAndDirection.normalized);

@@ -69,6 +69,7 @@ public class GameTheme : ScriptableObject
   public Color colorBgPrimary;
   public Color colorBgAccent;
   public Color colorBgSuccess;
+  // public Color colorTintAccent;
   public Color colorButtonAccent;
   public Color colorButtonSecondary;
   public Color colorButtonPrimary;

@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.AI;
+using WebSocketSharp;
 
 public abstract class BaseMachine : MonoBehaviour, IHealthed
 {
@@ -45,6 +44,18 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     [Header("Data")]
     public bool inCamera;
     public bool isVisible;
+    private bool _isSleep;
+    public bool IsSleep
+    {
+        get => _isSleep;
+        set
+        {
+            if (_isSleep != value)
+            {
+                _isSleep = value;
+            }
+        }
+    }
     [SerializeField] protected int offset = 90;
     public int OffsetRotate => offset;
     [SerializeField] protected DataMachine data = new();
@@ -107,109 +118,109 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         }
     }
 
-    void Update()
-    {
-        // // вращение колес, если машина движется.
-        // if (IsMove && Wheels.Count > 0)
-        // {
-        //     for (int i = 0; i < Wheels.Count; i++)
-        //     {
-        //         Wheels[i].transform.Rotate(Vector3.right, 5f * Body.Data.speed * Time.deltaTime);
-        //     }
-        // }
+    // void Update()
+    // {
+    //     // // вращение колес, если машина движется.
+    //     // if (IsMove && Wheels.Count > 0)
+    //     // {
+    //     //     for (int i = 0; i < Wheels.Count; i++)
+    //     //     {
+    //     //         Wheels[i].transform.Rotate(Vector3.right, 5f * Body.Data.speed * Time.deltaTime);
+    //     //     }
+    //     // }
 
-        // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
-        //     .Where(n => n.OccupiedUnit != null)
-        //     .ToList();
-        // if (occupiedNodes.Count > 0)
-        // {
-        //     Debug.Log($"OccupiedNodes = {occupiedNodes.Count()}/{occupiedNodes[0].ToString()}");
-        // }
+    //     // var occupiedNodes = levelManager.mapManager.gridTileHelper.GetAllGridNodes()
+    //     //     .Where(n => n.OccupiedUnit != null)
+    //     //     .ToList();
+    //     // if (occupiedNodes.Count > 0)
+    //     // {
+    //     //     Debug.Log($"OccupiedNodes = {occupiedNodes.Count()}/{occupiedNodes[0].ToString()}");
+    //     // }
 
 
-        // else
-        // {
-        //     // если можно стрелять.
-        //     if (Data.isShot)
-        //     {
-        //         // у машины-цели подсвечиваем зону.
-        //         ObjectTarget.AreaAttack.OnSetColor(_gameManager.Settings.colorAreaAttackAttack);
-        //         // у себя сектор обстрела.
-        //         Tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackAttack);
-        //     }
+    //     // else
+    //     // {
+    //     //     // если можно стрелять.
+    //     //     if (Data.isShot)
+    //     //     {
+    //     //         // у машины-цели подсвечиваем зону.
+    //     //         ObjectTarget.AreaAttack.OnSetColor(_gameManager.Settings.colorAreaAttackAttack);
+    //     //         // у себя сектор обстрела.
+    //     //         Tower.OnSetColorSector(_gameManager.Settings.colorAreaAttackAttack);
+    //     //     }
 
-        // }
+    //     // }
 
-        // // обновляем время последнего выстрела.
-        // if (data.timeAfterLastShot <= Config.timeDelayNextMuzzle)
-        // {
-        //     data.timeAfterLastShot += Time.deltaTime;
-        // }
+    //     // // обновляем время последнего выстрела.
+    //     // if (data.timeAfterLastShot <= Config.timeDelayNextMuzzle)
+    //     // {
+    //     //     data.timeAfterLastShot += Time.deltaTime;
+    //     // }
 
-        // if (MachineLevelData.isBot)
-        // {
-        //     if (planes != null) {
-        //         // проверяем видим ли компонент.            
-        //         if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
-        //         {
-        //             dirRayCamera = (transform.position - levelManager.Camera.transform.position).normalized;
-        //             distanceRayCamera = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
+    //     // if (MachineLevelData.isBot)
+    //     // {
+    //     //     if (planes != null) {
+    //     //         // проверяем видим ли компонент.            
+    //     //         if (GeometryUtility.TestPlanesAABB(planes, areaMove.Collider.bounds))
+    //     //         {
+    //     //             dirRayCamera = (transform.position - levelManager.Camera.transform.position).normalized;
+    //     //             distanceRayCamera = Vector3.Distance(levelManager.Camera.transform.position, transform.position);
 
-        //             // Debug.DrawLine(levelManager.Camera.transform.position, transform.position, Color.blue);
-        //             if (Physics.Raycast(levelManager.Camera.transform.position, dirRayCamera, out hitRayCamera, distanceRayCamera, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
-        //             {
+    //     //             // Debug.DrawLine(levelManager.Camera.transform.position, transform.position, Color.blue);
+    //     //             if (Physics.Raycast(levelManager.Camera.transform.position, dirRayCamera, out hitRayCamera, distanceRayCamera, LayerMask.GetMask("Wall", "Machine") & ~LayerMask.GetMask("AreaSearch")))
+    //     //             {
                         
-        //                 // Debug.Log($"hit{hit.collider.name}");
-        //                 if (hitRayCamera.transform != transform)
-        //                 {
-        //                     isVisible = false;
-        //                 } else
-        //                 {
-        //                     isVisible = true;
-        //                 }
-        //                 // Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
-        //             }
-        //             // else
-        //             // {
-        //             //     Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
-        //             // }
-        //         } else
-        //         {
-        //             isVisible = false;
-        //         }
-        //     } else
-        //     {
-        //         Debug.LogWarning("Not found planes!");
-        //     }
-        //     // if (isVisible) {
-        //     //     _indicator.gameObject.SetActive(false);
-        //     //     isVisible = true;
-        //     // }
-        //     // else
-        //     // {
-        //     //     _indicator.gameObject.SetActive(true);
-        //     //     isVisible = false;
-        //     // }
-        // }
+    //     //                 // Debug.Log($"hit{hit.collider.name}");
+    //     //                 if (hitRayCamera.transform != transform)
+    //     //                 {
+    //     //                     isVisible = false;
+    //     //                 } else
+    //     //                 {
+    //     //                     isVisible = true;
+    //     //                 }
+    //     //                 // Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.yellow);
+    //     //             }
+    //     //             // else
+    //     //             // {
+    //     //             //     Debug.DrawRay(levelManager.Camera.transform.position, dir * distance, Color.white);
+    //     //             // }
+    //     //         } else
+    //     //         {
+    //     //             isVisible = false;
+    //     //         }
+    //     //     } else
+    //     //     {
+    //     //         Debug.LogWarning("Not found planes!");
+    //     //     }
+    //     //     // if (isVisible) {
+    //     //     //     _indicator.gameObject.SetActive(false);
+    //     //     //     isVisible = true;
+    //     //     // }
+    //     //     // else
+    //     //     // {
+    //     //     //     _indicator.gameObject.SetActive(true);
+    //     //     //     isVisible = false;
+    //     //     // }
+    //     // }
 
 
-        // // считаем время действия бонусов.
-        // for (int i = 0; i < Data.bonuses.Count; i++)
-        // {
-        //     Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
+    //     // // считаем время действия бонусов.
+    //     // for (int i = 0; i < Data.bonuses.Count; i++)
+    //     // {
+    //     //     Data.bonuses.ElementAt(i).Value.time -= Time.deltaTime;
 
-        //     if (Data.bonuses.ElementAt(i).Value.time <= 0)
-        //     {
-        //         TypeBonus key = Data.bonuses.ElementAt(i).Key;
-        //         Data.bonuses.Remove(key);
+    //     //     if (Data.bonuses.ElementAt(i).Value.time <= 0)
+    //     //     {
+    //     //         TypeBonus key = Data.bonuses.ElementAt(i).Key;
+    //     //         Data.bonuses.Remove(key);
 
-        //         if (levelManager.UiTopSide.Target == this)
-        //         {
-        //             levelManager.UiTopSide.OnRemoveUIBonus(key);
-        //         }
-        //     }
-        // }
-    }
+    //     //         if (levelManager.UiTopSide.Target == this)
+    //     //         {
+    //     //             levelManager.UiTopSide.OnRemoveUIBonus(key);
+    //     //         }
+    //     //     }
+    //     // }
+    // }
 
 
     // void OnCollisionEnter(Collision collision)
@@ -271,7 +282,41 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         _indicator = im;
     }
 
-    public void Init(GameMachine _config, MachineLevelData dataInput)
+    // public void Initialize(MachineLevelData machineLevelData, GameMachine config)
+    // {
+    //     // Инициализируем менеджер уровня.
+    //     LevelManager _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
+    //     if (_levelManager != null)
+    //     {
+    //         levelManager = _levelManager;
+    //     }
+
+    //     // Сохраняем конфиг.
+    //     Config = config;
+
+    //     // Сохраняем данные машины для уровня.
+    //     MachineLevelData = machineLevelData;
+
+    //     // Сохраняем данные для частей машины.
+    //     DataMachine = machineLevelData.data;
+
+    //     // устанавливаем масштаб для машины.
+    //     var scale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+    //     if (Config.customScale > 0)
+    //     {
+    //         scale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
+    //     }
+    //     Wrapper.transform.localScale = scale;
+
+    //     // Если машина реального игрока, помечаем ее как видимая.
+    //     if (!MachineLevelData.isBot)
+    //     {
+    //         isVisible = true;
+    //     }
+
+    // }
+
+    public void Init(GameMachine _config, MachineLevelData dataInput, Vector3 scale = default)
     {
         LevelManager _levelManager = GameObject.FindGameObjectWithTag("LevelManager")?.GetComponent<LevelManager>();
         if (_levelManager != null)
@@ -282,10 +327,13 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         Config = _config;
 
         // устанавливаем масштаб для машины.
-        var scale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
-        if (Config.customScale > 0)
+        if (scale == default)
         {
-            scale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
+            scale = new Vector3(_gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects, _gameManager.Settings.scaleObjects);
+            if (Config.customScale > 0)
+            {
+                scale = new Vector3(Config.customScale, Config.customScale, Config.customScale);
+            }
         }
         Wrapper.transform.localScale = scale;
 
@@ -293,8 +341,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
         // Badge.Init(MachineLevelData);
 
-        // устанавливаем звук мотора.
-        AudioSource.clip = Config.soundMove;
+        // // устанавливаем звук мотора.
+        // AudioSource.clip = Config.soundMove;
         // AudioSource.Play();
         if (!MachineLevelData.isBot)
         {
@@ -335,45 +383,148 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         // устанавливаем настройки для области атаки.
         areaSearch.Init(Config);
 
-        // init caterpillars.
-        for (int i = 0; i < Config.catterpillars.Count; i++)
-        {
-            GameCaterpillarOption _catConfig = Config.catterpillars.ElementAt(i);
-            DataDetail dataCaterpillar = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _catConfig.Config.name && t.number == i);
+        // Инициализируем детали машины.
+        InitDetails(dataInput);
 
-            var _cat = Instantiate(_catConfig.Config.prefab, CaterpillarWrapper.transform);
+        // for (int i = 0; i < Config.catterpillars.Count; i++)
+        // {
+        //     GameCaterpillarOption _catConfig = Config.catterpillars.ElementAt(i);
+        //     DataDetail dataCaterpillar = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _catConfig.Config.name && t.number == i);
+
+        //     var _cat = Instantiate(_catConfig.Config.prefab, CaterpillarWrapper.transform);
+        //     _cat.Init(this, _catConfig, i, dataCaterpillar);
+        //     caterpillars.Add(_cat);
+        // }
+
+        // // init wheels.
+        // for (int i = 0; i < Config.wheels.Count; i++)
+        // {
+        //     GameWheelOption _whConfig = Config.wheels.ElementAt(i);
+        //     DataDetail dataWheel = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _whConfig.Config.name && t.number == i);
+
+        //     var _wh = Instantiate(_whConfig.Config.prefab, CaterpillarWrapper.transform);
+        //     _wh.Init(this, _whConfig, i, dataWheel);
+        //     wheels.Add(_wh);
+        // }
+
+        // // инициализируем компоненты машины
+        // if (Config.body != null)
+        // {
+        //     DataDetail dataBody = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == Config.body.Config.name && t.number == 0);
+
+        //     body = Instantiate(Config.body.Config.prefab, BodyWrapper.transform);
+        //     body.Init(this, dataBody);
+        // }
+
+        // // init towers.
+        // var parentTowers = Config.towers.FindAll(t => !t.isChildren);
+        // for (int i = 0; i < parentTowers.Count; i++)
+        // {
+        //     GameTowerOption _optConfig = parentTowers.ElementAt(i);
+        //     DataDetail dataTower = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optConfig.Config.name && t.number == i);
+
+        //     var _tow = CreateTower(_optConfig, dataTower, TowerWrapper.transform);
+
+        //     // // создаем дуло.
+        //     // for (int m = 0; m < _optConfig.muzzles.Count; m++)
+        //     // {
+        //     //     GameMuzzleOption _mConfig = _optConfig.muzzles.ElementAt(m);
+        //     //     DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+
+        //     //     var _muz = Instantiate(_mConfig.Config.prefab, _tow.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+        //     //     _muz.Init(this, _tow, _mConfig, m, dataMuzzle);
+        //     //     muzzles.Add(_muz);
+        //     // }
+
+
+        //     if (_optConfig.children.Count > 0)
+        //     {
+        //         for (int j = 0; j < _optConfig.children.Count; j++)
+        //         {
+        //             GameTowerOption _optChildConfig = Config.towers.Find(t => t.ido == _optConfig.children.ElementAt(j));
+        //             DataDetail dataTowerChild = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optChildConfig.Config.name && t.number == j);
+
+        //             if (_optChildConfig != null)
+        //             {
+                        
+        //                 var _towChild = CreateTower(_optChildConfig, dataTowerChild, _tow.transform);
+        //                 _towChild.OnSetParent(_tow);
+                        
+        //                 // // создаем дуло.
+        //                 // for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
+        //                 // {
+        //                 //     GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
+        //                 //     DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+
+        //                 //     var _muz = Instantiate(_mConfig.Config.prefab, _towChild.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+        //                 //     _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
+        //                 //     muzzles.Add(_muz);
+        //                 // }
+        //             }
+        //         }
+        //     }
+        // }
+
+        // // установка герба.
+        // Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
+        // body.OnSetSpriteGerb(logo);
+
+        // test.
+        // Badge.OnSetNameText(Data.speed.ToString());
+
+        // RefreshHP();
+    }
+
+    public void InitDetails(MachineLevelData dataInput)
+    {
+        // Получаем все конфиги всех деталей.
+        var allCaterpillars = _gameManager.ResourceSystem.GetAllCaterpillar();
+        var allWheels = _gameManager.ResourceSystem.GetAllWheel();
+        var allMuzzles = _gameManager.ResourceSystem.GetAllMuzzles();
+        var allBodys = _gameManager.ResourceSystem.GetAllBody();
+
+        // init caterpillars.
+        var allConfigCaterpillars = dataInput.data.dataDetails.FindAll(x => x.type == VehicleDetailType.Caterpillar);
+        for (int i = 0; i < allConfigCaterpillars.Count; i++)
+        {
+            GameCaterpillar _catConfig = allCaterpillars.First(x => x.name == allConfigCaterpillars.ElementAt(i).nameConfig);
+            DataDetail dataCaterpillar = allConfigCaterpillars.ElementAt(i); //dataInput.data.dataDetails.FirstOrDefault(t => t.nameConfig == _catConfig.Config.name && t.number == i);
+
+            var _cat = Instantiate(_catConfig.prefab, CaterpillarWrapper.transform);
             _cat.Init(this, _catConfig, i, dataCaterpillar);
             caterpillars.Add(_cat);
         }
 
         // init wheels.
-        for (int i = 0; i < Config.wheels.Count; i++)
+        var allConfigWheels = dataInput.data.dataDetails.FindAll(x => x.type == VehicleDetailType.Wheel);
+        for (int i = 0; i < allConfigWheels.Count; i++)
         {
-            GameWheelOption _whConfig = Config.wheels.ElementAt(i);
-            DataDetail dataWheel = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _whConfig.Config.name && t.number == i);
+            GameWheel _whConfig = allWheels.First(x => x.name == allConfigWheels.ElementAt(i).nameConfig);
+            DataDetail dataWheel = allConfigWheels.ElementAt(i); //dataInput.data.dataDetails.FirstOrDefault(t => t.nameConfig == _whConfig.Config.name && t.number == i);
 
-            var _wh = Instantiate(_whConfig.Config.prefab, CaterpillarWrapper.transform);
+            var _wh = Instantiate(_whConfig.prefab, CaterpillarWrapper.transform);
             _wh.Init(this, _whConfig, i, dataWheel);
             wheels.Add(_wh);
         }
 
         // инициализируем компоненты машины
-        if (Config.body != null)
+        var allConfigBodys = dataInput.data.dataDetails.FindAll(x => x.type == VehicleDetailType.Body);
+        for (int i = 0; i < allConfigBodys.Count; i++)
         {
-            DataDetail dataBody = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == Config.body.Config.name && t.number == 0);
+            GameBody _bConfig = allBodys.First(x => x.name == allConfigBodys.ElementAt(i).nameConfig);
+            DataDetail dataBody = allConfigBodys.ElementAt(i);//dataInput.data.dataDetails.FirstOrDefault(t => t.nameConfig == _bConfig.Config.name && t.number == 0);
 
-            body = Instantiate(Config.body.Config.prefab, BodyWrapper.transform);
+            body = Instantiate(_bConfig.prefab, BodyWrapper.transform);
             body.Init(this, dataBody);
         }
 
         // init towers.
-        var parentTowers = Config.towers.FindAll(t => !t.isChildren);
-        for (int i = 0; i < parentTowers.Count; i++)
+        var allDataTowers = dataInput.data.dataDetails.FindAll(t => t.type == VehicleDetailType.Tower && string.IsNullOrEmpty(t.parentId));
+        for (int i = 0; i < allDataTowers.Count; i++)
         {
-            GameTowerOption _optConfig = parentTowers.ElementAt(i);
-            DataDetail dataTower = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optConfig.Config.name && t.number == i);
+            DataDetail dataTower = allDataTowers.ElementAt(i); //dataInput.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optConfig.Config.name && t.number == i);
 
-            var _tow = CreateTower(_optConfig, dataTower, TowerWrapper.transform);
+            var _tow = CreateTower(dataTower, TowerWrapper.transform);
 
             // // создаем дуло.
             // for (int m = 0; m < _optConfig.muzzles.Count; m++)
@@ -386,43 +537,30 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             //     muzzles.Add(_muz);
             // }
 
-
-            if (_optConfig.children.Count > 0)
+            var allDataTowersNested = dataInput.data.dataDetails.FindAll(t => t.type == VehicleDetailType.Tower && !string.IsNullOrEmpty(t.parentId) && t.parentId == allDataTowers.ElementAt(i).ido);
+            if (allDataTowersNested.Count > 0)
             {
-                for (int j = 0; j < _optConfig.children.Count; j++)
+                for (int j = 0; j < allDataTowersNested.Count; j++)
                 {
-                    GameTowerOption _optChildConfig = Config.towers.Find(t => t.ido == _optConfig.children.ElementAt(j));
-                    DataDetail dataTowerChild = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optChildConfig.Config.name && t.number == j);
+                    // GameTowerOption _optChildConfig = Config.towers.First(x => x.Config.name == allDataTowersNested.ElementAt(j).nameConfig);
+                    DataDetail dataTowerChild = allDataTowersNested.ElementAt(j); // dataInput.data.dataDetails.FirstOrDefault(t => t.nameConfig == _optChildConfig.Config.name && t.number == allConfigTowersNested.ElementAt(j).number);
 
-                    if (_optChildConfig != null)
-                    {
-                        
-                        var _towChild = CreateTower(_optChildConfig, dataTowerChild, _tow.transform);
-                        _towChild.OnSetParent(_tow);
-                        
-                        // // создаем дуло.
-                        // for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
-                        // {
-                        //     GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
-                        //     DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
+                    var _towChild = CreateTower(dataTowerChild, _tow.transform);
+                    _towChild.OnSetParent(_tow);
+                    
+                    // // создаем дуло.
+                    // for (int m = 0; m < _optChildConfig.muzzles.Count; m++)
+                    // {
+                    //     GameMuzzleOption _mConfig = _optChildConfig.muzzles.ElementAt(m);
+                    //     DataDetail dataMuzzle = MachineLevelData.data.dataDetails.FirstOrDefault(t => t.nameConfig == _mConfig.Config.name && t.number == m);
 
-                        //     var _muz = Instantiate(_mConfig.Config.prefab, _towChild.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
-                        //     _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
-                        //     muzzles.Add(_muz);
-                        // }
-                    }
+                    //     var _muz = Instantiate(_mConfig.Config.prefab, _towChild.MuzzlesBox.transform); // Machine.MuzzleWrapper.transform
+                    //     _muz.Init(this, _towChild, _mConfig, m, dataMuzzle);
+                    //     muzzles.Add(_muz);
+                    // }
                 }
             }
         }
-
-        // // установка герба.
-        // Sprite logo = _gameManager.Settings.gerbs.Find(l => l.name == dataInput.gerbId);
-        // body.OnSetSpriteGerb(logo);
-
-        // test.
-        // Badge.OnSetNameText(Data.speed.ToString());
-
-        // RefreshHP();
     }
 
     public void ReDraw(List<ColorsModify> colors)
@@ -448,6 +586,14 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             Wheels[i].ReDraw(colors);
         }
     }
+
+    // public void ReDraw(StateMachinePlayerData stateMachinePlayerData)
+    // {
+    //     Debug.Log($"ReDraw {name} with dataDetails");
+
+
+    // }
+
 
     public void OnSetHP(float hp)
     {
@@ -610,11 +756,14 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     /// </summary>
     /// <param name="gameTowerOption"></param>
     /// <param name="dataDetail"></param>
-    /// <exception cref="NotImplementedException"></exception>
-    public BaseTower CreateTower(GameTowerOption gameTowerOption, DataDetail dataDetail, Transform parent)
+    public BaseTower CreateTower(DataDetail dataDetail, Transform parent)
     {
-        var _tow = Instantiate(gameTowerOption.Config.prefab, parent);
-        _tow.Init(this, gameTowerOption, dataDetail);
+        var allTowers = _gameManager.ResourceSystem.GetAllTower();
+        // Debug.Log($"dataDetail.nameConfig={dataDetail.nameConfig}");
+        GameTower configTower = allTowers.First(t => t.name == dataDetail.nameConfig);
+
+        var _tow = Instantiate(configTower.prefab, parent);
+        _tow.Init(this, configTower, dataDetail);
         towers.Add(_tow);
 
         return _tow;

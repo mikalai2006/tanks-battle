@@ -72,4 +72,5 @@ public enum TypeEntity
     Cave = 3,
     Tree = 4,
     Machine = 5,
+    Elements = 6
 }

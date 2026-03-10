@@ -8960,11 +8960,11 @@ MonoBehaviour:
   isGlobalPosition: 0
   isCreateMesh: 0
   isTiles: 0
-  typeEntity: 5
+  typeEntity: 6
   meshRenderer: {fileID: 1593322073}
   meshFilter: {fileID: 1593322074}
   OutputPath: Assets/Prefabs/WFC
-  customDir: tanks2
+  customDir: elements
 --- !u!4 &1593322076
 Transform:
   m_ObjectHideFlags: 0

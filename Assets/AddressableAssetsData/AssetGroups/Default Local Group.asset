@@ -36,10 +36,34 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7250703f5a197524d8c69a2f33798882
+    m_Address: Assets/Prefabs/WFC/_wheels
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - wheel
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7611736f2b9bc6241b84377cc1764bfe
+    m_Address: Assets/Prefabs/WFC/muzzles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - muzzle
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83b64df99202cab46a5d8ea9624746be
+    m_Address: Assets/Sciptables/Data/TowerShop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - shop_tower
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93f69927866868b47976e83ca5cc9bc9
     m_Address: UIInitUser
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 972e8bd73ed1c4144971c8e6937f7723
+    m_Address: Assets/Prefabs/WFC/bodys
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - body
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 99c9720ab356a0642a771bea13969a05
     m_Address: GameScene
@@ -66,10 +90,22 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b43b9a1f6020dbf489c3ee0f0e3b8f2c
+    m_Address: Assets/Prefabs/WFC/towers
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - tower
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4fa1c66e86c37b42b9bbf3cb5c75800
     m_Address: Assets/Prefabs/Bullet/bullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb877d365f2976b42a25949d5607cb09
+    m_Address: Assets/Prefabs/WFC/machines
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - machine
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bfd0915870db58d47a4b7dfcf30302ee
     m_Address: UIManager
@@ -80,6 +116,12 @@ MonoBehaviour:
     m_Address: Assets/Sciptables/Data/Audio
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e523166dbebe6324582a27313612682b
+    m_Address: Assets/Prefabs/WFC/_caterpillars
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - caterpillar
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ebacf855ad876d248b4c582473ae4fb9
     m_Address: GarageScene

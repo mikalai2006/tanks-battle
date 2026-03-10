@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mikalai2006.Voxel;
 using UnityEngine;
+using WebSocketSharp;
 
 public class StateManager
 {
@@ -58,14 +59,17 @@ public class StateManager
 
     for (int i = 0; i < _gameManager.LevelConfig.countPlayers; i++)
     {
+      var allMachines = _gameManager.ResourceSystem.GetAllMachines();
+      var randomMachine = allMachines[UnityEngine.Random.Range(0, allMachines.Count)];
+
       MachineLevelData machine = new()
       {
-        id = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].name : _gameSetting.machines[UnityEngine.Random.Range(0, _gameSetting.machines.Count)].name, //_gameSetting.machines[i == 0 ? 0 : Mathf.Min(3, i)].name, //
+        id = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].name : randomMachine.name,
         gerbId = i == 0 ? statePlayer.gerbId : _gameSetting.gerbs[UnityEngine.Random.Range(0, _gameSetting.gerbs.Count - 1)].name,
         isBot = i != 0,
         name = i == 0 ? _gameManager.AppInfo.UserInfo.name : listRandomNames.ElementAt(i),
         rank = i == 0 ? _gameManager.StateManager.statePlayer.rank : UnityEngine.Random.Range(0, _gameSetting.ranks.Count - 1),
-        data = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].data : new StateMachinePlayerData(),
+        data = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].data : Helpers.GetStateMachinePlayerData(randomMachine),
         // colorsModify = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].colorsModifies : new List<ColorsModify>(),
         // destroyedVoxels = i == 0 ? statePlayer.machines[statePlayer.indexActiveMachine].destroyVoxels : new List<Vector3Int>(),
       };
@@ -111,112 +115,18 @@ public class StateManager
     OnChangeState?.Invoke(statePlayer);
   }
 
+  public void BuyTower(GameTowerShop shopConfig)
+  {
+    
+  }
+
   public void BuyMachine(GameMachine configMachine)
   {
     statePlayer.coin -= 1000;
 
-    var data = new StateMachinePlayerData();
-
-    // init data body.
-    var itemBody = configMachine.body;
-    var newDataBody = new DataDetail()
-    {
-      nameConfig = itemBody.Config.name,
-      offset = itemBody.offsetBody,
-      type = VehicleDetailType.Body,
-      number = 0
-    };
-    data.dataDetails.Add(newDataBody);
-
-    // init data caterpillars.
-    for (int i = 0; i < configMachine.catterpillars.Count; i++)
-    {
-      var item = configMachine.catterpillars[i];
-      var newData = new DataDetail()
-      {
-        nameConfig = item.Config.name,
-        offset = item.offsetCat,
-        type = VehicleDetailType.Caterpillar,
-        number = i
-      };
-      data.dataDetails.Add(newData);
-    }
-    // init data wheels.
-    for (int i = 0; i < configMachine.wheels.Count; i++)
-    {
-      var item = configMachine.wheels[i];
-      var newData = new DataDetail()
-      {
-        nameConfig = item.Config.name,
-        offset = item.offsetWheel,
-        type = VehicleDetailType.Wheel,
-        number = i
-      };
-      data.dataDetails.Add(newData);
-    }
-
-    // init data parent towers.
-    var parentTowers = configMachine.towers.FindAll(t => !t.isChildren);
-    for (int i = 0; i < parentTowers.Count; i++)
-    {
-      var item = parentTowers[i];
-      var newData = new DataDetail()
-      {
-        nameConfig = item.Config.name,
-        offset = item.offsetTower,
-        type = VehicleDetailType.Tower,
-        number = i
-      };
-      data.dataDetails.Add(newData);
-
-      // init data muzzles for tower.
-      for (int m = 0; m < item.muzzles.Count; m++)
-      {
-          GameMuzzleOption _mConfig = item.muzzles.ElementAt(m);
-          DataDetail dataMuzzle = new DataDetail()
-          {
-            nameConfig = _mConfig.Config.name,
-            offset = _mConfig.offsetMuzzle,
-            type = VehicleDetailType.Muzzle,
-            number = m
-          };
-          data.dataDetails.Add(dataMuzzle);
-      }
-      
-      // init data child towers.
-      if (item.children.Count > 0)
-      {
-        for (int j = 0; j < item.children.Count; j++)
-        {
-          GameTowerOption itemChild = configMachine.towers.Find(t => t.ido == item.children.ElementAt(j));
-          var newDataChild = new DataDetail()
-          {
-            nameConfig = itemChild.Config.name,
-            offset = itemChild.offsetTower,
-            type = VehicleDetailType.Tower,
-            number = i
-          };
-          data.dataDetails.Add(newDataChild);
-
-          for (int m = 0; m < itemChild.muzzles.Count; m++)
-          {
-              GameMuzzleOption _mConfig = itemChild.muzzles.ElementAt(m);
-              DataDetail dataMuzzle = new DataDetail()
-              {
-                nameConfig = _mConfig.Config.name,
-                offset = _mConfig.offsetMuzzle,
-                type = VehicleDetailType.Muzzle,
-                number = m
-              };
-              data.dataDetails.Add(dataMuzzle);
-          }
-        }
-      }
-    }
-
     statePlayer.machines.Add(new StateMachinePlayer()
     {
-      data = data,
+      data = Helpers.GetStateMachinePlayerData(configMachine),
       name = configMachine.name
     });
 

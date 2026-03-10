@@ -24,6 +24,12 @@ public class GameBody : ScriptableObject
   [Header("Параметры")]
   [Tooltip("Скорость")]
   [Range(0.2f, 1000f)] public float speed;
+
+  
+  [Space(5)]
+  [Header("Аудио")]
+  [Tooltip("Звук мотора")]
+  public AudioClip soundMove;
   // [Space(5)]
   // [Header("Допустимые улучшения")]
   // [Tooltip("Список улучшений")]

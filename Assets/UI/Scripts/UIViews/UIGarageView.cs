@@ -34,6 +34,7 @@ namespace UIToolkitLibrary
         Button m_Button_Repair;
         Button m_Button_Repair_ADV;
         VisualElement m_Box_Repair;
+        VisualElement m_Box_NextPrev;
         Label m_Text_Repair;
         VisualElement m_DialogWrapper;
         Label m_MachineName;
@@ -98,6 +99,7 @@ namespace UIToolkitLibrary
             m_Button_Repair = m_TopElement.Q<Button>(UINames.ButtonRepair);
             m_Button_Repair_ADV = m_TopElement.Q<Button>(UINames.ButtonRepairAdv);
             m_Box_Repair = m_TopElement.Q<VisualElement>(UINames.BoxRepair);
+            m_Box_NextPrev = m_TopElement.Q<VisualElement>(UINames.BoxNextPrev);
             m_Text_Repair = m_TopElement.Q<Label>(UINames.TextRepair);
 
             m_Button_Tower = m_TopElement.Q<Button>(UINames.ButtonTower);
@@ -282,7 +284,7 @@ namespace UIToolkitLibrary
             m_MachineName.text = machine.name;
 
             // находим активную машину в конфигах.
-            GameMachine gameMachine = _gameManager.Settings.machines.Find(x => x.name == machine.name);
+            GameMachine gameMachine = _gameManager.ResourceSystem.GetAllMachines().Find(x => x.name == machine.name);
 
             if (gameMachine == null) return;
 
@@ -686,7 +688,7 @@ namespace UIToolkitLibrary
             UIEvents.FocusTower -= OnFocusTower;
         }
 
-        private void OnFocusTower(GameTowerOption option)
+        private void OnFocusTower(GameTowerShop option)
         {
             // Debug.Log($"Focus {option.Config.name}");
             FocusTower(option).Forget();
@@ -717,6 +719,7 @@ namespace UIToolkitLibrary
         {
             UIEvents.ClickButtonTower?.Invoke();
 
+            m_Box_NextPrev.style.display = DisplayStyle.None;
             m_Button_Tower.style.display = DisplayStyle.None;
             m_Button_Sell.style.display = DisplayStyle.None;
             m_Button_OpenColors.style.display = DisplayStyle.None;
@@ -731,8 +734,34 @@ namespace UIToolkitLibrary
             ClickButtonTowerClose();
         }
 
+        async private void ClickButtonBuy(ClickEvent evt)
+        {
+
+            string title = await Helpers.GetLocaledString("message");
+            string descr = await Helpers.GetLocaledString("message_price_button_success");
+            var dialog = new DialogProvider(new DataDialog()
+            {
+                title = title,
+                message = descr,
+                showCancelButton = true,
+                width = 400,
+                align = Align.Center
+            });
+            var dataResultDialog = await dialog.ShowAndHide();
+
+            if (dataResultDialog.isOk)
+            {
+                UIEvents.ClickButtonBuyActiveTower?.Invoke();
+                ClickButtonTowerClose(evt);
+            } else
+            {
+                
+            }
+        }
+
         private void ClickButtonTowerClose()
         {
+            m_Box_NextPrev.style.display = DisplayStyle.Flex;
             m_Button_Sell.style.display = DisplayStyle.Flex;
             m_Button_OpenColors.style.display = DisplayStyle.Flex;
 
@@ -743,7 +772,7 @@ namespace UIToolkitLibrary
             base.HideHint();
         }
 
-        private async UniTask FocusTower(GameTowerOption option)
+        private async UniTask FocusTower(GameTowerShop option)
         {
             VisualElement hintElement = new VisualElement();
             hintElement.style.flexDirection = FlexDirection.Row;
@@ -752,21 +781,28 @@ namespace UIToolkitLibrary
             VisualElement hintColorElement = new VisualElement();
             hintColorElement.style.width = 200;
             hintColorElement.style.height = 20;
-            hintColorElement.style.backgroundColor = new StyleColor(activeColorItem.color);
+            hintColorElement.AddToClassList("panel-secondary");
             hintElement.Add(hintColorElement);
             
             Label hint = new Label();
-            hint.text = option.Config.name;
+            hint.text = option.name;
             hint.style.whiteSpace =  WhiteSpace.Normal;
             hint.AddToClassList("font");
             hint.AddToClassList("text-lg");
             hintElement.Add(hint);
 
             var mBtn = new Button();
-            mBtn.AddToClassList("button");
+            mBtn.AddToClassList("button button-secondary");
             mBtn.text = await Helpers.GetLocaledString("btn_cancel_colors");
             mBtn.RegisterCallback<ClickEvent>(ClickButtonTowerClose);
             hintElement.Add(mBtn);
+
+            
+            var mBtnBuy = new Button();
+            mBtnBuy.AddToClassList("button button-primary");
+            mBtnBuy.text = await Helpers.GetLocaledString("btn_buy");
+            mBtnBuy.RegisterCallback<ClickEvent>(ClickButtonBuy);
+            hintElement.Add(mBtnBuy);
 
             base.ShowHint(hintElement);
         }

@@ -241,16 +241,16 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: 2d87c02f5e9b3174cac8fffd7881031a, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: c36bfc84e7690e5449f194e18d1abc6a, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 10fdef6e2d1da2c40b06404458d4f182, type: 3}
   m_SortingOrder: 0
   m_Position: 0
-  m_WorldSpaceSizeMode: 0
-  m_WorldSpaceWidth: 250
-  m_WorldSpaceHeight: 250
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 440
+  m_WorldSpaceHeight: 130
+  m_PivotReferenceSize: 1
+  m_Pivot: 4
   m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &8797385942140708394
 GameObject:
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c1dfa0fa03cbb4697d20b1f7b2b2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transformMachine: {fileID: 0}
   Machine: {fileID: 0}
   m_HealthBarName: HealthBarBase
   m_CharacterName: Default Name
@@ -325,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: 4dad467ac3d21684b8087a1eca89090e, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: c51102ea060f01745810248c20574d95, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 10fdef6e2d1da2c40b06404458d4f182, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 0

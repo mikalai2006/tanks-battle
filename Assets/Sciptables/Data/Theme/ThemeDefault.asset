@@ -41,10 +41,10 @@ MonoBehaviour:
   colorButtonPrimary: {r: 1, g: 0.53171587, b: 0, a: 1}
   colorButtonSuccess: {r: 0.3254902, g: 0.5019608, b: 0.07058824, a: 1}
   colorTextInput: {r: 1, g: 1, b: 1, a: 1}
-  colorBgButton: {r: 0.1137255, g: 0.1137255, b: 0.1137255, a: 1}
+  colorBgButton: {r: 0.1137255, g: 0.1137255, b: 0.1137255, a: 0.47058824}
   colorBgDialog: {r: 0.2901961, g: 0.3019608, b: 0.20000002, a: 1}
   spriteAva: {fileID: 21300000, guid: 09a1fe00316b5f64c842b0af343e79a9, type: 3}
-  spriteFill: {fileID: 21300000, guid: da42dd2ad2ce82d46a6028ccba29f607, type: 3}
+  spriteFill: {fileID: 21300000, guid: 48c7451105bf267438603bae60f9d6a8, type: 3}
   spriteSettings: {fileID: 0}
   spriteCoin: {fileID: 21300000, guid: 765f2d276ed5c6942ab80d49d2d1fc6f, type: 3}
   spriteCubes: {fileID: 21300000, guid: 1736769ddbec17d46bfdc70af54cd635, type: 3}

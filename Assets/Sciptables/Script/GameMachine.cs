@@ -20,10 +20,6 @@ public class GameMachine : ScriptableObject
   public List<GameCaterpillarOption> catterpillars;
   public List<GameWheelOption> wheels;
 
-  [Space(5)]
-  [Header("Аудио")]
-  [Tooltip("Звук мотора")]
-  public AudioClip soundMove;
 
   // [Space(5)]
   // [Header("Цвета")]
@@ -83,12 +79,15 @@ public class GameTowerOption
 
   [Tooltip("Стволы башни")]
   public List<GameMuzzleOption> muzzles;
-  public List<string> children;
-  public bool isChildren;
+  // public List<string> children;
+  // public bool isChildren;
+  public string parentId;
+  // public string uuid;
 
   public GameTowerOption()
   {
-    children = new();
+    // children = new();
+    // uuid = Guid.NewGuid().ToString();
   }
 }
 

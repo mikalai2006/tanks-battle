@@ -482,6 +482,96 @@ public static class Helpers
       return countVoxels;
     }
 
+  /// <summary>
+  /// Используя конфигурацию машины, возвращает данные для спавна.
+  /// </summary>
+  /// <param name="configMachine"></param>
+  public static StateMachinePlayerData GetStateMachinePlayerData(GameMachine configMachine)
+  {
+     var data = new StateMachinePlayerData();
+
+    // init data body.
+    data.dataDetails.Add(new DataDetail()
+    {
+      nameConfig = configMachine.body.Config.name,
+      offset = configMachine.body.offsetBody,
+      type = VehicleDetailType.Body,
+      number = 0
+    });
+
+    // init data caterpillars.
+    for (int i = 0; i < configMachine.catterpillars.Count; i++)
+    {
+      var item = configMachine.catterpillars[i];
+      var newData = new DataDetail()
+      {
+        nameConfig = item.Config.name,
+        offset = item.offsetCat,
+        type = VehicleDetailType.Caterpillar,
+        number = i
+      };
+      data.dataDetails.Add(newData);
+    }
+
+    // init data wheels.
+    for (int i = 0; i < configMachine.wheels.Count; i++)
+    {
+      var item = configMachine.wheels[i];
+      data.dataDetails.Add(new DataDetail()
+      {
+        nameConfig = item.Config.name,
+        offset = item.offsetWheel,
+        type = VehicleDetailType.Wheel,
+        number = i
+      });
+    }
+
+    // init data towers.
+    for (int i = 0; i < configMachine.towers.Count; i++)
+    {
+      var item = configMachine.towers.ElementAt(i);
+      var uid = System.Guid.NewGuid().ToString();
+      data.dataDetails.Add(new DataDetail()
+      {
+        nameConfig = item.Config.name,
+        number = i,
+        offset = item.offsetTower,
+        type = VehicleDetailType.Tower,
+        ido = string.IsNullOrEmpty(item.ido) ? uid : item.ido,
+        parentId = item.parentId,
+      });
+
+      // init data muzzles.
+      for (int j = 0; j < item.muzzles.Count; j++)
+      {
+        var itemMuzzle = item.muzzles.ElementAt(j);
+        data.dataDetails.Add(new DataDetail()
+        {
+          nameConfig = itemMuzzle.Config.name,
+          number = j,
+          offset = itemMuzzle.offsetMuzzle,
+          type = VehicleDetailType.Muzzle,
+          parentId = string.IsNullOrEmpty(item.ido) ? uid : item.ido
+        });
+      }
+    }
+
+    return data;
+  }
+
+
+  // /// <summary>
+  // /// Создает игровой объект машины и возвращает его.
+  // /// </summary>
+  // /// <param name="configMachine"></param>
+  // /// <param name="stateMachinePlayer"></param>
+  // /// <returns></returns>
+  // public static BaseMachine CreateMachine(GameMachine configMachine, StateMachinePlayerData stateMachinePlayerData, Transform parent)
+  // {
+    
+
+  // }
+
     // /// <summary>
     // /// Добавление списка элементов в словарь аналогичных элементов.
     // /// </summary>
@@ -511,7 +601,10 @@ public static class Helpers
     //       }
     //   }
     // }
+
 }
+
+
 
 
 [System.Serializable]

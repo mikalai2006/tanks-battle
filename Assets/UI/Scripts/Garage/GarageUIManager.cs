@@ -25,13 +25,26 @@ public class GarageUIManager : MonoBehaviour
     [SerializeField] private InputActionReference clickAction;
     [SerializeField] private InputActionReference actionCamera;
     [SerializeField] private ColorModifyItem activeColorModifyItem;
-    List<GameTowerOption> dataTowers;
+    List<GameTowerShop> dataTowers;
     List<UIGarageTowerItemView> towersGameObjects;
-    [SerializeField] private int activeIndexTower = 0;
-    [SerializeField] private float step = 0.1f;
-    private DataDetail cacheTower;
+    [SerializeField] private int activeIndexTower = -1;
+    [SerializeField] private float step = 0.4f;
+    [SerializeField] private float offsetWrapperModels = 0.09f;
+    // private List<DataDetail> cacheDataDetails;
     // CinemachineBrain brain;
-    
+    private int _previousWidth;
+    private int _previousHeight;
+
+    void Update()
+    {
+        if (_previousWidth != Screen.width || _previousHeight != Screen.height)
+        {
+            _previousWidth = Screen.width;
+            _previousHeight = Screen.height;
+            // Invoke the event when the size changes
+            Wrapper3dModels.transform.position = Camera.ViewportToWorldPoint(new Vector3(0f, 0.55f, 1f));
+        }
+    }
 
     void OnEnable()
     {
@@ -57,6 +70,16 @@ public class GarageUIManager : MonoBehaviour
 
     void Start()
     {
+        CinemachineOrbitalFollow cinemachineOrbitalFollow = CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
+        if (cinemachineOrbitalFollow)
+        {
+            cinemachineOrbitalFollow.HorizontalAxis.Value = 90;
+            cinemachineOrbitalFollow.VerticalAxis.Value = 15;
+        }
+
+
+        // cacheDataDetails = new();
+
         towersGameObjects = new ();
 
         dataTowers= new ();
@@ -83,6 +106,7 @@ public class GarageUIManager : MonoBehaviour
         UIEvents.ClickButtonTowerClose += OnClickButtonTowerClose;
 
         UIEvents.ClickButtonRepair += OnClickButtonRepair;
+        UIEvents.ClickButtonBuyActiveTower += OnClickButtonBuyActiveTower;
     }
 
     void OnDestroy()
@@ -101,6 +125,12 @@ public class GarageUIManager : MonoBehaviour
         UIEvents.ClickButtonTowerClose -= OnClickButtonTowerClose;
 
         UIEvents.ClickButtonRepair -= OnClickButtonRepair;
+        UIEvents.ClickButtonBuyActiveTower -= OnClickButtonBuyActiveTower;
+    }
+
+    private void OnClickButtonBuyActiveTower()
+    {
+        // gameManager.StateManager.BuyTower();
     }
 
     /// <summary>
@@ -113,6 +143,29 @@ public class GarageUIManager : MonoBehaviour
         DrawMachine(gameManager.StateManager.statePlayer.machines[activeIndexMachine], activeIndexMachine);
         
         OnFocusMachineByIndex(activeIndexMachine);
+    }
+
+
+    private void OnClickButtonTower()
+    {
+        var activeMachine = machinesGameObjects[activeIndexMachine];
+
+        // Сохраняем в кеш исходные данные машины.
+        // cacheDataDetails.Clear();
+        // cacheDataDetails.AddRange(activeMachine.MachineLevelData.data.dataDetails);
+        
+        // Создаем игровые объекты башен.
+        CreateTowerItems();
+
+        // Имитируем клик по первой башне.
+        // OnClickButtonPrevTower();
+        
+        Wrapper3dModels.gameObject.SetActive(true);
+        
+        Wrapper3dModels.transform.localPosition = new Vector3(
+            Wrapper3dModels.transform.localPosition.x,
+            offsetWrapperModels,
+            Wrapper3dModels.transform.localPosition.z);
     }
 
     private void OnClickButtonTowerClose()
@@ -132,86 +185,147 @@ public class GarageUIManager : MonoBehaviour
 
         dataTowers.Clear();
 
+        // cacheDataDetails.Clear();
+
         Wrapper3dModels.gameObject.SetActive(false);
+
+        activeIndexTower = -1;
     }
 
     private void OnClickButtonNextTower()
     {
         activeIndexTower += 1;
-        activeIndexTower = Mathf.Clamp(activeIndexTower, 0, dataTowers.Count - 1);
+        FocusTower(activeIndexTower);
+        // activeIndexTower = Mathf.Clamp(activeIndexTower, 0, dataTowers.Count - 1);
 
 
-        Wrapper3dModels.transform.localPosition = new Vector3(
-            Wrapper3dModels.transform.localPosition.x,
-            0.15f + activeIndexTower * step,
-            Wrapper3dModels.transform.localPosition.z);
+        // Wrapper3dModels.transform.localPosition = new Vector3(
+        //     Wrapper3dModels.transform.localPosition.x,
+        //     0.1f + activeIndexTower * step,
+        //     Wrapper3dModels.transform.localPosition.z);
 
-        UIEvents.FocusTower?.Invoke(dataTowers[activeIndexTower]);
+        // UIEvents.FocusTower?.Invoke(dataTowers[activeIndexTower]);
 
-        ReDrawTower(activeIndexTower);
+        // ReDrawTower(activeIndexTower);
     }
 
     private void OnClickButtonPrevTower()
     {
         activeIndexTower -= 1;
 
-        activeIndexTower = Mathf.Clamp(activeIndexTower, 0, dataTowers.Count - 1);
+        FocusTower(activeIndexTower);
+    }
+
+    void FocusTower(int index)
+    {
+        activeIndexTower = Mathf.Clamp(index, 0, dataTowers.Count - 1);
 
         Wrapper3dModels.transform.localPosition = new Vector3(
             Wrapper3dModels.transform.localPosition.x,
-            0.15f + activeIndexTower * step,
+            offsetWrapperModels + activeIndexTower * step,
             Wrapper3dModels.transform.localPosition.z);
 
-        UIEvents.FocusTower?.Invoke(dataTowers[activeIndexTower]);
+        UIEvents.FocusTower?.Invoke(dataTowers.ElementAt(activeIndexTower));
 
+        for (int i = 0; i < towersGameObjects.Count; i++)
+        {
+            towersGameObjects.ElementAt(i).SetFocus(i == activeIndexTower);
+        }
+
+        // Перерисовываем башню.
         ReDrawTower(activeIndexTower);
     }
 
     void ReDrawTower(int indexTower)
     {
-        var tower = machinesGameObjects[activeIndexMachine].Towers.Find(x => x.Parent == null);
+        List<DataDetail> newDataDetails = new();
 
         if (indexTower > -1)
         {
-            DataDetail dataDetail = new DataDetail
+            // из данных в кэше берем все кроме башен и стволов.
+            newDataDetails.AddRange(gameManager.StateManager.statePlayer.machines[activeIndexMachine].data.dataDetails
+                .FindAll(x => x.type != VehicleDetailType.Tower && x.type != VehicleDetailType.Muzzle));
+
+            // добавляем данные новой башни и ствола(ов).
+            for (int i = 0; i < dataTowers[indexTower].items.Count; i++)
             {
-                nameConfig = dataTowers[indexTower].Config.name,
-                offset = dataTowers[indexTower].offsetTower,
-                number = tower.DataDetailTower.number,
-            };
+                var item = dataTowers[indexTower].items.ElementAt(i);
+                var uid = System.Guid.NewGuid().ToString();
 
-            tower.ReDraw(dataTowers[indexTower], dataDetail);
-        } else
-        {
-            if (cacheTower != null)
-            {
-                var conf = dataTowers.FirstOrDefault(x => x.Config.name == cacheTower.nameConfig);
-
-                if (conf != null)
+                newDataDetails.Add(new DataDetail
                 {
-                    // Debug.Log($"conf={conf.Config.name},cacheTower={cacheTower.nameConfig}");
-
-                    tower.ReDraw(conf, cacheTower);
-                } else
+                    nameConfig = item.Config.name,
+                    offset = item.offsetTower,
+                    ido = string.IsNullOrEmpty(item.ido) ? uid : item.ido,
+                    number = i,
+                    parentId = item.parentId,
+                    type = VehicleDetailType.Tower
+                });
+                
+                for (int j = 0; j < item.muzzles.Count; j++)
                 {
-                    Debug.LogWarning($"not found conf={conf},cacheTower={cacheTower.nameConfig}");
+                    var itemM = item.muzzles.ElementAt(j);
+
+                    newDataDetails.Add(new DataDetail
+                    {
+                        nameConfig = itemM.Config.name,
+                        offset = itemM.offsetMuzzle,
+                        number = j,
+                        type = VehicleDetailType.Muzzle,
+                        parentId = string.IsNullOrEmpty(item.ido) ? uid : item.ido
+                    });
                 }
             }
+        } else
+        {
+            // if (cacheDataDetails != null)
+            // {
+            //     List<GameTowerOption> allConfigs = new();
+                
+            //     var a = gameManager.Settings.machines.Select(x => x.towers).ToList();
+                
+            //     foreach (var item in a)
+            //     {
+            //         allConfigs.AddRange(item);
+            //     }
+
+            //     foreach (var item in cacheDataDetails)
+            //     {
+            //         var conf = allConfigs.FirstOrDefault(x => x.Config.name == item.nameConfig);
+
+            //         if (conf != null)
+            //         {
+            //             // Debug.Log($"conf={conf.Config.name},cacheTower={cacheTower.nameConfig}");
+            //             foreach (var item2 in cacheDataDetails)
+            //             {
+            //                 tower.ReDraw(conf, item2);
+            //             }
+            //         } else
+            //         {
+            //             Debug.LogWarning($"not found conf={conf},cacheTower={item.nameConfig}");
+            //         }
+            //     }
+            // }
+            newDataDetails.AddRange(gameManager.StateManager.statePlayer.machines[activeIndexMachine].data.dataDetails);
         }
-        // machinesGameObjects[activeIndexMachine].CreateTower(dataTowers[activeIndexTower], dataDetail);
-    }
 
-    private void OnClickButtonTower()
-    {
-        Debug.Log($"Press towers");
-        var tower = machinesGameObjects[activeIndexMachine].Towers.Find(x => x.Parent == null);
-        cacheTower = tower.DataDetailTower;
+        var activeMachine = machinesGameObjects[activeIndexMachine];
 
-        CreateTowerItems();
+        var activeStateMachinePlayer = gameManager.StateManager.statePlayer.machines[activeIndexMachine];
 
-        OnClickButtonPrevTower();
-        
-        Wrapper3dModels.gameObject.SetActive(true);
+        // CreateMachine(activeMachine.Config, activeIndexMachine, activeMachine.MachineLevelData);
+        StateMachinePlayer stateMachinePlayer = new StateMachinePlayer() {
+            name = activeStateMachinePlayer.name,
+            data = new StateMachinePlayerData
+                {
+                    colorsModifies = activeStateMachinePlayer.data.colorsModifies,
+                    dataDetails = newDataDetails
+                }
+        };
+
+        DrawMachine(stateMachinePlayer);
+
+        OnFocusMachineByIndex(activeIndexMachine);
     }
     
 
@@ -247,9 +361,9 @@ public class GarageUIManager : MonoBehaviour
     {
         // gameManager.StateManager.AddMachine("T3");
 
-        if (gameManager?.Settings != null)
+        if (gameManager?.ResourceSystem != null)
         {
-            machinesConfigs.AddRange(gameManager.Settings.machines);
+            machinesConfigs.AddRange(gameManager.ResourceSystem.GetAllMachines());
         }
 
         DrawMachines();
@@ -318,6 +432,7 @@ public class GarageUIManager : MonoBehaviour
         CreateMachine(configMachine, _index, new MachineLevelData
         {
             id = stateMachinePlayer.name,
+            name = stateMachinePlayer.name,
             data = stateMachinePlayer.data
         });
     }
@@ -343,12 +458,12 @@ public class GarageUIManager : MonoBehaviour
         CinemachineCamera.Follow = machinesGameObjects[activeIndexMachine].objectTargetCamera.transform;
         CinemachineCamera.LookAt = machinesGameObjects[activeIndexMachine].objectTargetCamera.transform;
         
-        CinemachineOrbitalFollow cinemachineOrbitalFollow = CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
-        if (cinemachineOrbitalFollow)
-        {
-            cinemachineOrbitalFollow.HorizontalAxis.Value = 90;
-            cinemachineOrbitalFollow.VerticalAxis.Value = 15;
-        }
+        // CinemachineOrbitalFollow cinemachineOrbitalFollow = CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
+        // if (cinemachineOrbitalFollow)
+        // {
+        //     cinemachineOrbitalFollow.HorizontalAxis.Value = 90;
+        //     cinemachineOrbitalFollow.VerticalAxis.Value = 15;
+        // }
 
         UIEvents.OnFocusMachineInGarage?.Invoke(gameManager.StateManager.statePlayer.machines[activeIndexMachine]);
     }
@@ -362,10 +477,16 @@ public class GarageUIManager : MonoBehaviour
             Wrapper
         );
 
+        if (machinesGameObjects.ElementAt(index) != null)
+        {
+            Destroy(machinesGameObjects.ElementAt(index).gameObject);
+        }
+
         BaseMachine obj = gObject.GetComponent<BaseMachine>();
         if (obj != null)
         {
             // machinesGameObjects.Add(obj);
+            machinesGameObjects[index] = null;
             machinesGameObjects[index] = obj;
 
             obj.GetComponent<PlayerController>().enabled = false;
@@ -489,12 +610,7 @@ public class GarageUIManager : MonoBehaviour
 
     void CreateTowerItems()
     {
-        var data = gameManager.Settings.machines.Select(x => x.towers).ToList();
-        dataTowers = new List<GameTowerOption>();
-        foreach (var item in data)
-        {
-            dataTowers.AddRange(item);
-        }
+        dataTowers = gameManager.ResourceSystem.GetAllShopTower(); // gameManager.Settings.machines.Select(x => x.towers).ToList();
 
         float i = 0f;
         foreach (var item in dataTowers)
@@ -504,7 +620,7 @@ public class GarageUIManager : MonoBehaviour
         }
     }
 
-    void CreateTowerItem(GameTowerOption configTower, Vector2 point)
+    void CreateTowerItem(GameTowerShop configsTowers, Vector2 point)
     {
         var gObject = Instantiate(
             gameManager.Settings.prefabGarageItemTower,
@@ -512,12 +628,15 @@ public class GarageUIManager : MonoBehaviour
             Quaternion.identity,
             Wrapper3dModels
         );
+
         UIGarageTowerItemView obj = gObject.GetComponent<UIGarageTowerItemView>();
         if (obj != null)
         {
             towersGameObjects.Add(obj);
 
-            obj.Init(configTower, 0, new DataDetail());
+            var configActiveMachine = gameManager.ResourceSystem.GetAllMachines().Find(x => x.name == gameManager.StateManager.statePlayer.machines[activeIndexMachine].name);
+
+            obj.Init(configsTowers, configActiveMachine);
         }
 
         // targetPanelSettings = obj.GetComponentInChildren<UIDocument>().panelSettings;

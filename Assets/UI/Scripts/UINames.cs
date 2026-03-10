@@ -1,11 +1,14 @@
 static class UINames
 {
+    public static string LabelPrice = "LabelPrice";
+    public static string LabelName = "LabelName";
+    public static string LabelDescription = "LabelDescription";
+    public static string ImageCoin = "ImageCoin";
     public static string ButtonBuy = "ButtonBuy";
     public static string ButtonPrev = "ButtonPrev";
     public static string ButtonNext = "ButtonNext";
     public static string ButtonSell = "ButtonSell";
     public static string VisualElementWrapper = "Wrapper";
-    public static string LabelPrice = "LabelPrice";
     public static string VisualElementInfoBox = "InfoBox";
 
     public static string SpriteCoin = "SpriteCoin";
@@ -36,6 +39,7 @@ static class UINames
     public static string GarageScreen = "GarageScreen";
     public static string UserInfo = "UserInfo";
     public static string BoxRepair = "BoxRepair";
+    public static string BoxNextPrev = "BoxNextPrev";
     public static string ButtonRepair = "ButtonRepair";
     public static string ButtonRepairAdv = "ButtonRepairByAdv";
     public static string TextRepair = "TextRepair";

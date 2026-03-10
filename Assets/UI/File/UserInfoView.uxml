@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#base"/>
     <Style src="project://database/Assets/UI/Styles/tailwindcss_base.uss?fileID=7433441132597879392&amp;guid=355bdeddf02e75247b03301baba68a71&amp;type=3#tailwindcss_base"/>
-    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;">
+    <ui:VisualElement picking-mode="Ignore" class="panel" style="flex-grow: 1;">
         <ui:VisualElement class="flex-row items-center justify-center p-2" style="flex-grow: 1; flex-direction: row;">
             <ui:VisualElement name="SpriteAva" style="background-image: url(&quot;project://database/Assets/Sprites/Placeholder.png?fileID=2800000&amp;guid=52e2e5bc9595d0149b1bea9ad4aa1487&amp;type=3#Placeholder&quot;); width: 100px; height: 100px; align-items: center; align-self: center;"/>
         </ui:VisualElement>

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Mikalai2006.Voxel;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -147,6 +146,8 @@ public class DataTower
     [Tooltip("Стволы башни")]
     public List<BaseMuzzle> muzzles;
     public ContainerData containerData;
+    public bool isRotate;
+
     public DataTower() {
         muzzles = new();
         containerData = new();

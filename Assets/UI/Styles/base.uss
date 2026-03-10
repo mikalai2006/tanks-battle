@@ -1,5 +1,4 @@
 .button {
-    background-color: rgba(0, 0, 0, 0.15);
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
@@ -8,6 +7,13 @@
     border-right-color: rgba(0, 0, 0, 0);
     border-top-color: rgba(0, 0, 0, 0);
     border-bottom-color: rgba(0, 0, 0, 0);
+    background-image: url("project://database/Assets/Sprites/Use/UI_Button.png?fileID=2800000&guid=e6ba8eee9a25e2b439a2963a12c90632&type=3#UI_Button");
+    -unity-slice-left: 25;
+    -unity-slice-top: 25;
+    -unity-slice-right: 25;
+    -unity-slice-bottom: 25;
+    -unity-slice-scale: 0.4px;
+    -unity-font-style: bold;
 }
 
 .button:active {
@@ -15,18 +21,155 @@
     transition-duration: 50ms;
 }
 
-.button:hover {
-    translate: 5px 0;
-    transition-duration: 50ms;
+.button-secondary {
+    color: var(--color-secondary-300);
+    background-color: var(--color-secondary-900-50);
+    -unity-background-image-tint-color: var(--color-secondary-300);
 }
 
-.bg-accent {
+.button-secondary:hover,
+.button-secondary:active {
+    color: var(--color-secondary-100);
+    -unity-background-image-tint-color: var(--color-secondary-100);
 }
 
-.bg-primary {
+.button-accent {
+    color: var(--color-accent-100);
+    background-color: var(--color-secondary-900-50);
+    -unity-background-image-tint-color: var(--color-accent-200);
 }
 
-.bg-secondary {
+.button-accent:hover,
+.button-accent:active {
+    color: var(--color-accent-500);
+    -unity-background-image-tint-color: var(--color-accent-500);
+}
+
+.button-primary {
+    color: var(--color-primary-50);
+    background-color: var(--color-secondary-900-50);
+    -unity-background-image-tint-color: var(--color-primary-50);
+}
+
+.button-primary:hover,
+.button-primary:active {
+    color: var(--color-primary-500);
+    -unity-background-image-tint-color: var(--color-primary-500);
+}
+
+.button-primary-fill {
+    color: var(--color-white);
+    background-color: var(--color-primary-500);
+    -unity-background-image-tint-color: var(--color-white);
+}
+
+.button-primary-fill:hover,
+.button-primary-fill:active {
+    background-color: var(--color-primary-600);
+}
+
+.button-accent-fill {
+    color: var(--color-black);
+    background-color: var(--color-accent-500);
+    -unity-background-image-tint-color: var(--color-white);
+}
+
+.button-accent-fill:hover,
+.button-accent-fill:active {
+    background-color: var(--color-accent-600);
+}
+
+.button-green {
+    color: var(--color-green-50);
+    background-color: var(--color-secondary-900-50);
+    -unity-background-image-tint-color: var(--color-green-50);
+}
+
+.button-green:hover,
+.button-green:active {
+    color: var(--color-green-500);
+    -unity-background-image-tint-color: var(--color-green-500);
+}
+
+.button-green-fill {
+    color: var(--color-black);
+    background-color: var(--color-green-500);
+    -unity-background-image-tint-color: var(--color-green-100);
+}
+
+.button-green-fill:hover,
+.button-green-fill:active {
+    background-color: var(--color-green-600);
+}
+
+.icon {
+    width: 35px;
+    height: 35px;
+}
+
+.icon-black {
+    -unity-background-image-tint-color: var(--color-black);
+}
+
+.button-primary .icon {
+    -unity-background-image-tint-color: var(--color-primary-100);
+}
+
+.button-primary:hover .icon,
+.button-primary:active .icon {
+    -unity-background-image-tint-color: var(--color-primary-500);
+}
+
+.button-secondary .icon {
+    -unity-background-image-tint-color: var(--color-secondary-300);
+}
+
+.button-secondary:hover .icon,
+.button-secondary:active .icon {
+    -unity-background-image-tint-color: var(--color-secondary-100);
+}
+
+.button-accent .icon {
+    -unity-background-image-tint-color: var(--color-accent-100);
+}
+
+.button-accent:hover .icon,
+.button-accent:active .icon {
+    -unity-background-image-tint-color: var(--color-accent-500);
+}
+
+.button-green .icon {
+    -unity-background-image-tint-color: var(--color-green-100);
+}
+
+.button-green:hover .icon,
+.button-green:active .icon {
+    -unity-background-image-tint-color: var(--color-green-500);
+}
+
+.button-green-fill .icon {
+    -unity-background-image-tint-color: var(--color-green-800);
+}
+
+.button-green-fill:hover .icon,
+.button-green-fill:active .icon {
+    -unity-background-image-tint-color: var(--color-green-900);
+}
+
+.panel {
+    background-color: var(--color-secondary-900-50);
+}
+
+.panel-secondary {
+    background-color: var(--color-secondary-500);
+}
+
+.panel-accent {
+    background-color: var(--color-accent-bg-500);
+}
+
+.panel-primary {
+    background-color: var(--color-primary-bg-500);
 }
 
 .button-circle {
@@ -68,21 +211,24 @@
     border-bottom-color: rgba(0, 0, 0, 0.31);
 }
 
-.icon {
-    width: 25px;
-    height: 25px;
+.text-secondary {
+    color: var(--color-secondary-500);
 }
 
-.text-secondary {
-    color: rgb(0, 0, 0);
+.text-white {
+    color: var(--color-white);
+}
+
+.text-primary {
+    color: var(--color-primary-500);
+}
+
+.text-accent {
+    color: var(--color-accent-500);
 }
 
 .text-shadow {
     text-shadow: 1px 1px 1px rgb(0, 0, 0);
-}
-
-.text-primary {
-    color: rgb(255, 255, 255);
 }
 
 .transparent {
@@ -195,4 +341,13 @@
     scale: 0.9 0.9 0;
     transition-property: scale;
     transition-duration: 50ms;
+}
+
+.w-four-twelfths {
+}
+
+.icon-small {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
