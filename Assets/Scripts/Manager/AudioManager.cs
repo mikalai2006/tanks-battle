@@ -25,6 +25,10 @@ public class AudioManager : StaticInstance<AudioManager>
 
   public void PlayClipEffect(AudioClip clip)
   {
+    // if (EffectSource.isPlaying)
+    // {
+    //   EffectSource.Stop();
+    // }
     EffectSource.PlayOneShot((AudioClip)clip);
     // AudioSource.PlayClipAtPoint(clip, transform.position, GameSetting.Audio.volumeEffect);
   }

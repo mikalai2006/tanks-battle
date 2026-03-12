@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235de7640e091a7449fb477bc13720f0, type: 3}
   m_Name: Bullet5
   m_EditorClassIdentifier: 
-  idObject: bullet5
   text:
     title:
       m_TableReference:
@@ -32,9 +31,28 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-  prefab: {fileID: 6598650879790203170, guid: b4fa1c66e86c37b42b9bbf3cb5c75800, type: 3}
-  speed: 12
-  damage: 5
+  material: {fileID: 0}
+  MeshConfig:
+    sOVoxelData: {fileID: 0}
+    _material: {fileID: 0}
+    isOneMesh: 0
+    isGreedy: 0
+    shadowCastingMode: 0
+    isTile: 0
+    existCollider: 0
+    typeCollider: 0
+    isConvex: 0
+    isRigidbody: 0
+    isKinematic: 0
+    mass: 0
+    freezeRotation: 0
+    constraints: 0
+    isDestructible: 0
+    useGlobalScale: 0
+    customScale: 0
+  lifeTime: 0.1
+  damageRadius: 1
+  countCollisions: 1
   effectBoom: {fileID: 3862267629786060469, guid: 79b8d16096caabb46a3c8a6c351345a9, type: 3}
   particleBoom: {fileID: 173993176318110863, guid: e0a35134ec4ab79469ecdb91736391d2, type: 3}
   references:

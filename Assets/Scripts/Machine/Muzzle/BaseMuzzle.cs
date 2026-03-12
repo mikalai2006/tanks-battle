@@ -14,6 +14,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     // [SerializeField] private Animator _animator;
     protected BaseMachine Machine;
     [SerializeField] protected GameObject Wrapper;
+    public AudioSource audioSource;
     [SerializeField] GameObject SectorGO;
     [SerializeField] private Image _spriteSector;
     [SerializeField] private RectTransform _rectSector;
@@ -35,7 +36,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     [SerializeField] private LayerMask ignoreMask;
     [SerializeField] protected Light SpotLight;
     [Tooltip("Задержка выстрела ствола (для орудия с несколькими стволами, чтобы создать эффект последовательности)")]
-    protected float delayTime = 0.2f;
+    protected float delayTime = .3f;
     [SerializeField] protected float Delay;
     [SerializeField] protected bool isBusy;
     public bool IsBusy => isBusy;
@@ -439,12 +440,14 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
                 return;
             }
 
+            await UniTask.Delay(System.TimeSpan.FromSeconds(Delay), cancellationToken: cancelToken.Token);
+
             if (Machine.isVisible)
             {
-                _gameManager.audioManager.PlayClipEffect(Config.soundShot);
+                //_gameManager.audioManager.PlayClipEffect(Config.soundShot);
+                audioSource.PlayOneShot((AudioClip)Config.soundShot);
             }
 
-            await UniTask.Delay(System.TimeSpan.FromSeconds(Delay), cancellationToken: cancelToken.Token);
             // // for (int i = 0; i < particlesBoom.Length; i++)
             // // {
             // //     particlesBoom[i].gameObject.SetActive(true);
