@@ -168,6 +168,7 @@ public class ShopUIManager : MonoBehaviour
             Quaternion.identity,
             Wrapper
         );
+        gObject.name = $"shop_{configMachine.name}_{data.id}";
 
         UIShopItemView obj = gObject.GetComponent<UIShopItemView>();
         if (obj != null)

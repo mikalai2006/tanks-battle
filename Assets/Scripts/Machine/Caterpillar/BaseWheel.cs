@@ -125,7 +125,7 @@ public class BaseWheel : MonoBehaviour, IColored
     /// <summary>
     /// Устанавливает точки привязки и позиции базовых элементов.
     /// </summary>
-    void SetRelativePoints()
+    public void SetRelativePoints()
     {
         if (Machine.Caterpillars.Count > 0)
         {

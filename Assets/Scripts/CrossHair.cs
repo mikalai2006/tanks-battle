@@ -5,11 +5,18 @@ public class CrossHair : MonoBehaviour
 {
     public BaseMachine baseMachine;
     public Parts[] parts;
+    private RectTransform rectTransform;
 
     [SerializeField] float currentSpread = 0;
     float t = 0;
     float curSpread;
     [SerializeField] private float speedSpread;
+
+    void Start()
+    {
+        rectTransform = GetComponent<RectTransform>();
+        rectTransform.position = new Vector3(rectTransform.position.x, Screen.height * 0.7f, rectTransform.position.z);
+    }
 
     void Update()
     {

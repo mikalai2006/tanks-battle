@@ -666,6 +666,12 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             ContainerData value = Body.RefreshHP();
             countVoxels += value.countVoxels;
             countVoxelsDestructed += value.countVoxelsDestructible;
+            
+            if (Body.Data.containerData.levelDestruction == 1)
+            {
+                Body.gameObject.SetActive(false);
+                body = null;
+            }
         }
 
         for (int i = 0; i < Towers.Count; i++)
@@ -687,6 +693,12 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             ContainerData value = Caterpillars[i].RefreshHP();
             countVoxels += value.countVoxels;
             countVoxelsDestructed += value.countVoxelsDestructible;
+
+            if (Caterpillars[i].Data.containerData.levelDestruction == 1)
+            {
+                Caterpillars[i].gameObject.SetActive(false);
+                Caterpillars.Remove(Caterpillars[i]);
+            }
         }
         
 
@@ -695,6 +707,12 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             ContainerData value = Wheels[i].RefreshHP();
             countVoxels += value.countVoxels;
             countVoxelsDestructed += value.countVoxelsDestructible;
+            
+            if (Wheels[i].Data.containerData.levelDestruction == 1)
+            {
+                Wheels[i].gameObject.SetActive(false);
+                Wheels.Remove(Wheels[i]);
+            }
         }
 
         Data.ContainerData.countVoxels = countVoxels;
@@ -707,6 +725,30 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         // {
         //     OnChangeHPs?.Invoke(this);
         // }
+
+        // обновляем привязки и позиции элементов.
+        if (Body != null) {
+            Body.SetRelativePoints();
+        }
+        for (int i = 0; i < Towers.Count; i++)
+        {
+            Towers[i].SetRelativePoints();
+            for (int j = 0; j < Towers[i].Muzzles.Count; j++)
+            {
+                Towers[i].Muzzles[j].SetRelativePoints();
+            }
+        }
+
+        for (int i = 0; i < Caterpillars.Count; i++)
+        {
+            Caterpillars[i].SetRelativePoints();
+        }
+
+        for (int i = 0; i < Wheels.Count; i++)
+        {
+            Wheels[i].SetRelativePoints();
+        }
+
 
         if (!MachineLevelData.isBot)
         {
@@ -725,6 +767,12 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
     public virtual void Move(Vector3 moveDirection)
     {
+        if (wheels.Count == 0)
+        {
+            Stop();
+            return;
+        }
+
         if (!Body)
         {
             return;

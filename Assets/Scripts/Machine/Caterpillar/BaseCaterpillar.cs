@@ -95,7 +95,7 @@ public class BaseCaterpillar : MonoBehaviour, IColored
     /// <summary>
     /// Устанавливает точки привязки и позиции базовых элементов.
     /// </summary>
-    void SetRelativePoints()
+    public void SetRelativePoints()
     {
         transform.localPosition = DataDetail.offset + new Vector3(0, Config.MeshConfig.sOVoxelData.Bounds.y / 2f + (wheels.Count > 2 ? 1f : 0), 0);
     }

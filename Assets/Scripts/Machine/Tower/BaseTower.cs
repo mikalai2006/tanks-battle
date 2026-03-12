@@ -274,7 +274,7 @@ public class BaseTower : MonoBehaviour, IColored
 
     void Update()
     {
-        if (Machine.LevelManager == null)
+        if (Machine.LevelManager == null || Machine.Body == null)
         {
             ChangePosition(Machine);
         }
@@ -287,7 +287,7 @@ public class BaseTower : MonoBehaviour, IColored
         // наводим башню на центр экрана (если не активирован режим автонаводки)
         if (Machine.MachineLevelData.isBot == false && !_gameManager.Settings.autoTakeEnemy)
         {
-            screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height * 0.7f);
             ray = Machine.LevelManager.Camera.ScreenPointToRay(screenCenterPoint);
 
             if (Physics.Raycast(ray, out raycastHit, 999f, ~(ignoreMask)))
@@ -371,6 +371,12 @@ public class BaseTower : MonoBehaviour, IColored
 
         SetRelativePoints();
 
+        // TODO
+        if (Parent == null)
+        {
+            Data.isRotate = true;
+        }
+
         // создаем дуло.
         var allMuzzles = Machine.MachineLevelData.data.dataDetails.FindAll(t => t.type == VehicleDetailType.Muzzle && t.parentId == DataDetail.ido);
         for (int i = 0; i < allMuzzles.Count; i++)
@@ -425,7 +431,7 @@ public class BaseTower : MonoBehaviour, IColored
     /// <summary>
     /// Устанавливает точки привязки и позиции базовых элементов.
     /// </summary>
-    void SetRelativePoints()
+    public void SetRelativePoints()
     {
         if (DataDetail != null)
         {
@@ -436,9 +442,9 @@ public class BaseTower : MonoBehaviour, IColored
         //     transform.localPosition = new Vector3(Option.offsetTower.x, Option.offsetTower.y, Option.offsetTower.z);
         // }
         MuzzlesBox.transform.localPosition = new Vector3(
-            Config.MeshConfig.sOVoxelData.Bounds.x / 2f - 1f, 
+            0, 
             0,
-            0
+            Config.MeshConfig.sOVoxelData.Bounds.z / 2f - 1f
         );
     }
 

@@ -240,6 +240,7 @@ public class UIGarageTowerItemView : UILocaleBase
           Quaternion.identity,
           transform
       );
+      gObject.name = $"{configMachine.name}_{data.name}";
 
       // var towerGO = Instantiate(
       //     gameTowerOption.Config.prefab,

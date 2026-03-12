@@ -733,7 +733,7 @@ namespace Mikalai2006.Voxel
                 //     meshCollider.sharedMesh = meshFilter.sharedMesh; //meshData.mesh;
                 // }
 #if UNITY_EDITOR
-                // Debug.Log($"Time greedy mesh {gameObject.name}: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
+                Debug.Log($"Time greedy mesh {gameObject.name}: {(Time.realtimeSinceStartup - startTime) * 1000f} ms");
 #endif
             return mesh;
             }

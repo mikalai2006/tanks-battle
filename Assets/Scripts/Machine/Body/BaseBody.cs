@@ -120,7 +120,7 @@ public class BaseBody : MonoBehaviour, IColored
     /// <summary>
     /// Устанавливает точки привязки и позиции базовых элементов.
     /// </summary>
-    void SetRelativePoints()
+    public void SetRelativePoints()
     {
         float y = 0f;
         

@@ -20,7 +20,7 @@ public class ResourceSystem : StaticInstance<ResourceSystem>
     List<Object> list = new List<Object>();
     foreach (var asset in createdObjs)
     {
-      Debug.Log($"list name = {asset.GetType()}");
+      // Debug.Log($"list name = {asset.GetType()}");
       list.Add(asset);
     }
     if (!ResourceAssets.ContainsKey(assetNameOrLabel))

@@ -211,7 +211,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
         SetRelativePoints();
 
         // Устанавливаем начальный угол поворота.
-        transform.localRotation = Quaternion.Euler(0, 90, 0);
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         if (Machine != null)
         {
@@ -220,11 +220,11 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
             OnSetTimeBetweenShot(Delay);
             // OnStopShot();
 
-            pointEffects.transform.localPosition = new Vector3(Config.MeshConfig.sOVoxelData.Bounds.x + _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.x, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.y, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.z);
+            pointEffects.transform.localPosition = new Vector3(_gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.x, _gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.y, Config.MeshConfig.sOVoxelData.Bounds.z +_gameManager.Settings.DebugSettings.muzzleOffsetEffectPoint.z);
 
-            pivot.transform.localPosition = new Vector3(-Config.MeshConfig.sOVoxelData.Bounds.x, 0, 0);
+            pivot.transform.localPosition = new Vector3(0, 0, -Config.MeshConfig.sOVoxelData.Bounds.z);
 
-            MaxDistanceObject.transform.localPosition = new Vector3(Data.distanceAttack * (1 / _gameManager.Settings.scaleObjects), 0, 0);
+            MaxDistanceObject.transform.localPosition = new Vector3(0, 0, Data.distanceAttack * (1 / _gameManager.Settings.scaleObjects));
 
             // transform.localRotation = Quaternion.Euler(0, 0, 0);
         
@@ -255,7 +255,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
     /// <summary>
     /// Устанавливает точки привязки и позиции базовых элементов.
     /// </summary>
-    void SetRelativePoints()
+    public void SetRelativePoints()
     {
         transform.localPosition = DataDetail.offset; // Option.offsetMuzzle;// + new Vector3(Option.Config.MeshConfig.sOVoxelData.Bounds.x - 2f, 0, 0);
     }
@@ -377,6 +377,7 @@ public abstract class BaseMuzzle : MonoBehaviour, IColored
         Vector3 castPoint;
         if (Physics.Linecast(pointEffects.transform.position, endPoint, out hit, ~(ignoreMask)))
         {
+            // Debug.Log($"hit name = {hit.collider.name}");
             _data.pointTarget = hit.point;
             castPoint = pointCenterScreen;
         }

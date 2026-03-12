@@ -35,7 +35,7 @@ namespace Mikalai2006.Voxel
         {
             Mesh mesh = await base.UploadMeshGreedy(isDrawMesh);
             
-            if (meshFilter.sharedMesh.vertices.Length > 3)
+            if (meshFilter != null && meshFilter.sharedMesh != null && meshFilter.sharedMesh.vertices.Length > 3)
             {
                 // meshData.mesh.Optimize();
                 meshCollider.sharedMesh = meshFilter.sharedMesh; //meshData.mesh;

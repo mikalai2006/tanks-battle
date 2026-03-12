@@ -32,32 +32,16 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
   items:
-  - ido: usf
-    Config: {fileID: 11400000, guid: eca6b0b9f9518514f8d54ca8770fc1bc, type: 2}
+  - ido: 
+    Config: {fileID: 11400000, guid: 327b969028c3b9543ac4da6cfc1c7186, type: 2}
     offsetTower: {x: 0, y: 0, z: -6}
     isRotate: 1
     muzzles:
-    - Config: {fileID: 11400000, guid: ae4713e08a3b9074babf1a5c45c20094, type: 2}
-      offsetMuzzle: {x: 0, y: -1, z: -2}
-    - Config: {fileID: 11400000, guid: ae4713e08a3b9074babf1a5c45c20094, type: 2}
-      offsetMuzzle: {x: 0, y: -1, z: 2}
+    - Config: {fileID: 11400000, guid: 4730e2eaf7748974582f9adbf2e75af6, type: 2}
+      offsetMuzzle: {x: 2, y: 0, z: 0}
+    - Config: {fileID: 11400000, guid: 4730e2eaf7748974582f9adbf2e75af6, type: 2}
+      offsetMuzzle: {x: -2, y: 0, z: 0}
     parentId: 
-  - ido: 
-    Config: {fileID: 11400000, guid: 01787aed4eac9cb4eb138cc1b30dc88a, type: 2}
-    offsetTower: {x: 5, y: 0, z: 1}
-    isRotate: 0
-    muzzles:
-    - Config: {fileID: 11400000, guid: 49190a3b6af9274438758c6de19ea72f, type: 2}
-      offsetMuzzle: {x: 0, y: 0, z: 0}
-    parentId: usf
-  - ido: 
-    Config: {fileID: 11400000, guid: 01787aed4eac9cb4eb138cc1b30dc88a, type: 2}
-    offsetTower: {x: -5, y: 0, z: 1}
-    isRotate: 1
-    muzzles:
-    - Config: {fileID: 11400000, guid: 49190a3b6af9274438758c6de19ea72f, type: 2}
-      offsetMuzzle: {x: 0, y: 0, z: 0}
-    parentId: usf
   cost: 2500
   references:
     version: 2

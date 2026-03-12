@@ -933,11 +933,11 @@ MonoBehaviour:
   countMaxCreateVoxelsByStepMobile: 200
   DebugSettings:
     mode: 1
-    disableCreateTiles: 1
+    disableCreateTiles: 0
     logEnabled: 1
     ECSColliderSphere: 0
-    muzzleOffsetEffectPoint: {x: 8, y: 0, z: 0}
-    gizmoWheels: 1
+    muzzleOffsetEffectPoint: {x: 0, y: 0, z: 5}
+    gizmoWheels: 0
     gizmoWheelsLength: 0.1
     gizmoWheelsColor: {r: 0.68571484, g: 1, b: 0, a: 1}
     gizmoBodyForwards: 1
@@ -949,11 +949,11 @@ MonoBehaviour:
     gizmoMuzzlesForwards: 0
     gizmoMuzzleLength: 5
     gizmoMuzzleColor: {r: 0.46724558, g: 1, b: 0, a: 1}
-    gizmoTrajectory: 0
+    gizmoTrajectory: 1
     gizmoTrajectoryColor: {r: 1, g: 0.027940515, b: 0, a: 1}
     gizmoMuzzleDistanseAttack: 0
     gizmoMuzzleDistanseAttackColor: {r: 1, g: 0, b: 0.7673602, a: 0.38431373}
-    lineAttackDraw: 0
+    lineAttackDraw: 1
     lineAttackColor: {r: 0.3595678, g: 0.18569775, b: 0.3679245, a: 1}
   rotateTowerByBody: 0
   timeBeforeAddTarget: {x: 0.1, y: 0.3}

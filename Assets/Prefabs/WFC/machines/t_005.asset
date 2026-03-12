@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e7243a5f8f3ec44b5c6b60b18dd71d, type: 3}
+  m_Name: t_005
+  m_EditorClassIdentifier: 
+  text:
+    title:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 9487801564258304
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    description:
+      m_TableReference:
+        m_TableCollectionName: GUID:5bdcb541de5b4a3488fe7cac097efa66
+      m_TableEntryReference:
+        m_KeyId: 9487855435898880
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+  machinePrefab: {fileID: 6403601510694640829, guid: b6e4ffc1e4c514a49a5a989f2cceec31, type: 3}
+  indicatorPrefab: {fileID: 5558526086462227690, guid: 67dc364665ae5a24d8436be3d4b49049, type: 3}
+  customScale: 0.015
+  body:
+    Config: {fileID: 11400000, guid: b62ddfd7ec517994b8245795330bacb0, type: 2}
+    offsetBody: {x: 0, y: 0, z: 0}
+  towers:
+  - ido: t003.tower.1
+    Config: {fileID: 11400000, guid: 327b969028c3b9543ac4da6cfc1c7186, type: 2}
+    offsetTower: {x: 0, y: 0, z: -6}
+    isRotate: 1
+    muzzles:
+    - Config: {fileID: 11400000, guid: cf92d076ffd240543aa0011dcbacac81, type: 2}
+      offsetMuzzle: {x: 2, y: 0, z: 0}
+    - Config: {fileID: 11400000, guid: cf92d076ffd240543aa0011dcbacac81, type: 2}
+      offsetMuzzle: {x: -2, y: 0, z: 0}
+    parentId: 
+  - ido: 
+    Config: {fileID: 11400000, guid: 7689e39aac66f7f4dad9a103a8651aa1, type: 2}
+    offsetTower: {x: 5, y: 0, z: 0}
+    isRotate: 1
+    muzzles:
+    - Config: {fileID: 11400000, guid: 49190a3b6af9274438758c6de19ea72f, type: 2}
+      offsetMuzzle: {x: 0, y: 0, z: 0}
+    parentId: t003.tower.1
+  catterpillars: []
+  wheels:
+  - Config: {fileID: 11400000, guid: c0562aa3d0f2c7b4697818c9216b740a, type: 2}
+    offsetWheel: {x: -10, y: 0, z: -9}
+  - Config: {fileID: 11400000, guid: c0562aa3d0f2c7b4697818c9216b740a, type: 2}
+    offsetWheel: {x: -10, y: 0, z: 9}
+  - Config: {fileID: 11400000, guid: c0562aa3d0f2c7b4697818c9216b740a, type: 2}
+    offsetWheel: {x: -10, y: 0, z: 0}
+  - Config: {fileID: 11400000, guid: c0562aa3d0f2c7b4697818c9216b740a, type: 2}
+    offsetWheel: {x: 10, y: 0, z: 0}
+  - Config: {fileID: 11400000, guid: c0562aa3d0f2c7b4697818c9216b740a, type: 2}
+    offsetWheel: {x: 10, y: 0, z: -9}
+  - Config: {fileID: 11400000, guid: c0562aa3d0f2c7b4697818c9216b740a, type: 2}
+    offsetWheel: {x: 10, y: 0, z: 9}
+  minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
+  distanceSearch: 5
+  references:
+    version: 2
+    RefIds: []
