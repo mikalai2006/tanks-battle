@@ -196,7 +196,7 @@ public class HealthBarController : MonoBehaviour
         }
 
 
-        m_HealthBar.HealthData.CurrentHealth = health;
+        m_HealthBar.HealthData.CurrentHealth = Mathf.Round(health * 100f) / 100f;;
     }
 
     void ShowNameAndStats(bool nameVisible, bool statVisible)

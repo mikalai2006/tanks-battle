@@ -156,11 +156,11 @@ public class UITopSide : MonoBehaviour
         }
     }
 
-    public void OnChangeData(BaseMachine machine)
-    {
-        var oneProcentHP = maxWidth / 1; //machine.Config.hp;
-        progressHP.sizeDelta = new Vector2(oneProcentHP * (1 - machine.Data.ContainerData.levelDestruction), progressHP.sizeDelta.y);
-    }
+    // public void OnChangeData(BaseMachine machine)
+    // {
+    //     var oneProcentHP = maxWidth / 1; //machine.Config.hp;
+    //     progressHP.sizeDelta = new Vector2(oneProcentHP * (1 - machine.Data.ContainerData.levelDestruction), progressHP.sizeDelta.y);
+    // }
 
     public void OnToStartMenu()
     {

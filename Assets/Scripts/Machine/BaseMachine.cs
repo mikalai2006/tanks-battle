@@ -605,10 +605,10 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
         // Badge.OnChangeData(this);
 
-        if (!stateController.enabled && levelManager != null)
-        {
-            levelManager.UiTopSide.OnChangeData(this);
-        }
+        // if (!stateController.enabled && levelManager != null)
+        // {
+        //     levelManager.UiTopSide.OnChangeData(this);
+        // }
     }
 
 
@@ -720,7 +720,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
         Data.ContainerData.levelDestruction = (float)countVoxelsDestructed / countVoxels;
 
-        OnSetHP(1 - Data.ContainerData.levelDestruction);
+        OnSetHP(1f - Data.ContainerData.levelDestruction);
+        Debug.Log($"setHealth: {name}: {1f - Data.ContainerData.levelDestruction}");
         // if (MachineLevelData.isBot)
         // {
         //     OnChangeHPs?.Invoke(this);

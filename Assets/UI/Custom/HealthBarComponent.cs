@@ -87,6 +87,7 @@ namespace UIToolkitLibrary
             var generalCell = new VisualElement();
             generalCell.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
             generalCell.pickingMode = PickingMode.Ignore;
+            generalCell.style.flexGrow = 1;
 
             // Title background element
             m_TitleBackground = new VisualElement {name = IDNames.HealthBarTitleBackground};
