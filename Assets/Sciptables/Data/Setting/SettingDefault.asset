@@ -927,13 +927,14 @@ MonoBehaviour:
     doubleClickThreshold: 0.2
     speedRotateCamera: {x: 2, y: 0.5}
     chanceReflex: 0
+    MobileFPS: 60
   scaleObjects: 0.03125
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
   countMaxCreateVoxelsByStepMobile: 200
   DebugSettings:
     mode: 1
-    disableCreateTiles: 1
+    disableCreateTiles: 0
     logEnabled: 1
     ECSColliderSphere: 0
     muzzleOffsetEffectPoint: {x: 0, y: 0, z: 5}
@@ -943,17 +944,17 @@ MonoBehaviour:
     gizmoBodyForwards: 1
     gizmoBodyLength: 5
     gizmoBodyColor: {r: 0, g: 0.5930424, b: 1, a: 1}
-    gizmoTowersForwards: 0
+    gizmoTowersForwards: 1
     gizmoTowersLength: 5
     gizmoTowersColor: {r: 1, g: 0.6698078, b: 0, a: 1}
-    gizmoMuzzlesForwards: 0
+    gizmoMuzzlesForwards: 1
     gizmoMuzzleLength: 5
     gizmoMuzzleColor: {r: 0.46724558, g: 1, b: 0, a: 1}
-    gizmoTrajectory: 1
+    gizmoTrajectory: 0
     gizmoTrajectoryColor: {r: 1, g: 0.027940515, b: 0, a: 1}
     gizmoMuzzleDistanseAttack: 0
     gizmoMuzzleDistanseAttackColor: {r: 1, g: 0, b: 0.7673602, a: 0.38431373}
-    lineAttackDraw: 1
+    lineAttackDraw: 0
     lineAttackColor: {r: 0.3595678, g: 0.18569775, b: 0.3679245, a: 1}
   rotateTowerByBody: 0
   timeBeforeAddTarget: {x: 0.1, y: 0.3}

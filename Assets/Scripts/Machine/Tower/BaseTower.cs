@@ -425,7 +425,7 @@ public class BaseTower : MonoBehaviour, IColored
         //     SectorGO.transform.localPosition.z
         // );
 
-        // ChangePosition(baseMachine);
+        ChangePosition(baseMachine);
     }
 
     /// <summary>

@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +18,13 @@ public class IndicatorMachine : MonoBehaviour
     [SerializeField] private float oneProcentScale;
     [SerializeField] private Vector3 offset;
     [SerializeField] private TMPro.TextMeshProUGUI text;
+    private CancellationTokenSource cancelTokenSource;
     // private bool isRunningCoroutine;
     // Camera _camera;
 
     void Awake()
     {
+        cancelTokenSource = new CancellationTokenSource();
         bg = GetComponent<Image>();
         rectTransform = GetComponent<RectTransform>();
     }
@@ -37,6 +41,14 @@ public class IndicatorMachine : MonoBehaviour
         // oneProcentScale = startScale / _gameManager.LevelConfig.levelData.size.x;
 
         OnInit();
+    }
+    private void OnDestroy()
+    {
+        if (!cancelTokenSource.Token.IsCancellationRequested)
+        {
+        cancelTokenSource.Cancel();
+        cancelTokenSource.Dispose();
+        }
     }
 
     void Update()
@@ -83,8 +95,17 @@ public class IndicatorMachine : MonoBehaviour
 
         rectTransform.position = pos;
 
-        text.text = ((int)(Vector3.Distance(Machine.transform.position, Target.transform.position) / (_gameManager.Settings.scaleObjects * 8))).ToString();
+    }
 
+
+    async UniTask Refresh(CancellationToken token)
+    {
+
+        while(!token.IsCancellationRequested) {
+
+        text.text = ((int)(Vector3.Distance(Machine.transform.position, Target.transform.position) / (_gameManager.Settings.scaleObjects * 8))).ToString();
+    
+        await UniTask.Delay(System.TimeSpan.FromSeconds(0.05f), cancellationToken: token);
     }
 
     // public void SetStatus(bool status)
@@ -127,12 +148,15 @@ public class IndicatorMachine : MonoBehaviour
     //     Debug.Log("Корутина остановлена");
     //     isRunningCoroutine = false;
     // }
+    }
 
     public void OnInit()
     {
         // progressHP.color = _gameManager.Settings.colorMarkerProgress;
         bg.color = _gameManager.Settings.colorMarkerBg;
         transform.localPosition = Vector3.zero;
+
+        Refresh(cancelTokenSource.Token).Forget();
     }
 
     public void OnChangeData()

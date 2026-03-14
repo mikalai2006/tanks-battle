@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4411003218629265675}
   - component: {fileID: 8524277150814736428}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: _house2_ground_002.3_w40_r4_d__270
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3253325775378320630}
   - component: {fileID: 4039697623306918604}
   - component: {fileID: 5880755217629937359}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,8 +162,11 @@ MonoBehaviour:
     customScale: 0
   colorsModify: []
   _dataDetail:
+    ido: 
+    parentId: 
     number: 0
     nameConfig: 
+    type: 0
     offset: {x: 0, y: 0, z: 0}
     destroyVoxels:
       values: []

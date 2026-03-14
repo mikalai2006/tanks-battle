@@ -8,3 +8,12 @@
 34	1727	7946998785716298	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	712c8b6b20ae3e7c
 71	1768	7946998786189425	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	f6ad664bbab0f769
 1778	1946	7946998788109300	F:/UnityProject/Tanks/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6i179635/obj/arm64-v8a/libgame.so	2a5751628354098b
+37	3515	7950819068230543	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	372c14725da0c7b
+50	3542	7950819068492625	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	560b72291b740505
+7	3592	7950819068965322	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	224c6d7b61f2fdb2
+85	3636	7950819069402707	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	131d40e55a3f381d
+17	3678	7950819069880872	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f4241467a6d25c37
+60	4021	7950819073280346	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	1a1e7ceef1667b1e
+26	4210	7950819075170331	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	712c8b6b20ae3e7c
+72	4297	7950819076101657	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	f6ad664bbab0f769
+4297	4505	7950819078209354	F:/UnityProject/Tanks/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/6i179635/obj/arm64-v8a/libgame.so	2a5751628354098b

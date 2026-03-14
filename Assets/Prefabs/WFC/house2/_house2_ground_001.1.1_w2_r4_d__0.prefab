@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 215358630634191094}
   - component: {fileID: 6831700691266361060}
   - component: {fileID: 6409654027495042496}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Wrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,8 +65,11 @@ MonoBehaviour:
     customScale: 0
   colorsModify: []
   _dataDetail:
+    ido: 
+    parentId: 
     number: 0
     nameConfig: 
+    type: 0
     offset: {x: 0, y: 0, z: 0}
     destroyVoxels:
       values: []
@@ -101,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8110008936486087762}
   - component: {fileID: 3499271768137374072}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: _house2_ground_001.1.1_w2_r4_d__0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,10 +140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tile3D
   UID: 
-  TileSideVoxels: 5
+  TileSideVoxels: 32
   Weight: 2
   Rotation: 2
-  voxelMeshRender: {fileID: 0}
+  voxelMeshRender: {fileID: 6831700691266361060}
   isEmpty: 0
   isActive: 1
   ColorsRight: []

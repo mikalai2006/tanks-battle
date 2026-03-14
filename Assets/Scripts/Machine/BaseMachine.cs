@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using WebSocketSharp;
 
 public abstract class BaseMachine : MonoBehaviour, IHealthed
 {
@@ -72,6 +72,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     // public BaseMachine ObjectTarget => _objectTarget;
     [SerializeField] protected Rigidbody rb;
     public Rigidbody Rb => rb;
+    [SerializeField] private GameObject areaMoveGameObject;
+    public GameObject AreaMoveGameObject => areaMoveGameObject;
     [SerializeField] private AreaMove areaMove;
     public AreaMove AreaMove => areaMove;
     [SerializeField] private AreaSearch areaSearch;
@@ -97,10 +99,13 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     Plane[] planes;
     RaycastHit hitRayCamera;
     bool isRunningCoroutineCheckVisible;
+    private CancellationTokenSource cancelTokenSource;
 
 #region Unity methods
     public virtual void Awake()
     {
+        cancelTokenSource = new CancellationTokenSource();
+
         areaMove = GetComponentInChildren<AreaMove>();
         HealthBar = GetComponentInChildren<HealthBarController>();
         stateController = GetComponent<StateController>();
@@ -117,6 +122,15 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             planes = GeometryUtility.CalculateFrustumPlanes(levelManager.Camera.isActiveAndEnabled ? levelManager.Camera : Camera);
         }
     }
+
+  private void OnDestroy()
+  {
+    if (!cancelTokenSource.Token.IsCancellationRequested)
+    {
+      cancelTokenSource.Cancel();
+      cancelTokenSource.Dispose();
+    }
+  }
 
     // void Update()
     // {
@@ -721,7 +735,7 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         Data.ContainerData.levelDestruction = (float)countVoxelsDestructed / countVoxels;
 
         OnSetHP(1f - Data.ContainerData.levelDestruction);
-        Debug.Log($"setHealth: {name}: {1f - Data.ContainerData.levelDestruction}");
+        // Debug.Log($"setHealth: {name}: {1f - Data.ContainerData.levelDestruction}");
         // if (MachineLevelData.isBot)
         // {
         //     OnChangeHPs?.Invoke(this);
@@ -826,7 +840,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
         if (status == true && !isRunningCoroutineCheckVisible)
         {
-            StartCoroutine(CheckVisibleMachine());
+            // StartCoroutine(CheckVisibleMachine());
+            CheckVisibleMachine(cancelTokenSource.Token).Forget();
         } else
         {
             Indicator.gameObject.SetActive(true);
@@ -836,14 +851,15 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     /// <summary>
     /// Корутина определяет находится ли объект машины в прямой видимости.
     /// </summary>
-    IEnumerator CheckVisibleMachine()
+    // IEnumerator CheckVisibleMachine()
+    async UniTask CheckVisibleMachine(CancellationToken token)
     {
         isRunningCoroutineCheckVisible = true;
 
         Indicator.gameObject.SetActive(false);
 
         // Ключевое условие: работает, пока переменная true
-        while (inCamera)
+        while (inCamera && !token.IsCancellationRequested)
         {
             // Проводим линию от наблюдателя к цели
             // Linecast возвращает true, если что-то попалось на пути
@@ -868,7 +884,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             // Indicator.gameObject.SetActive(false);
 
             // Задержка или возврат управления, чтобы не зависнуть
-            yield return new WaitForSeconds(0.10f);
+            // yield return new WaitForSeconds(0.10f);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(0.50f), cancellationToken: token);
         }
 
         isRunningCoroutineCheckVisible = false;

@@ -163,8 +163,8 @@ public class GameSetting : ScriptableObject
   [Header("Shop")]
   public GameObject prefabShopItemMachine;
   public GameObject prefabGarageItemTower;
-  // public List<ShopItem<GameEntity>> ShopItems;
-  // public List<ShopItem<GameBonus>> ShopItemsBonus;
+    // public List<ShopItem<GameEntity>> ShopItems;
+    // public List<ShopItem<GameBonus>> ShopItemsBonus;
 
     // [Space(5)]
     // [Header("API Directory")]
@@ -246,6 +246,8 @@ public struct PlayerOptions
   public Vector2 speedRotateCamera;
   [Tooltip("Шанс рикошета (1 - все рикошет, 0 - без рикошета)")]
   [Range(0f, 1)] public float chanceReflex;
+  [Tooltip("FPS на моб. устройствах")]
+  public int MobileFPS;
 }
 
 [Serializable]

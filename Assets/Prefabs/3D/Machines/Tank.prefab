@@ -411,6 +411,7 @@ MonoBehaviour:
     tileOptions: []
     isCollapsed: 0
   rb: {fileID: 0}
+  areaMoveGameObject: {fileID: 7770836912408043383}
   areaMove: {fileID: 175650237751590751}
   areaSearch: {fileID: 279585366477845030}
   _camera: {fileID: 0}
@@ -929,7 +930,7 @@ GameObject:
   - component: {fileID: 175650237751590751}
   - component: {fileID: 5972597299674871714}
   m_Layer: 7
-  m_Name: areaMove
+  m_Name: areaMove_object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1064,7 +1065,7 @@ GameObject:
   - component: {fileID: 4052545773601728994}
   - component: {fileID: 279585366477845030}
   m_Layer: 12
-  m_Name: areaSearch
+  m_Name: areaSearch_object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1101,7 +1102,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9133335379730408812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1192,4 +1193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gPUInstanceEnabler: {fileID: 4052545773601728994}
-  machine: {fileID: 7514235118787443334}
+  Machine: {fileID: 0}
+  findLayers:
+    serializedVersion: 2
+    m_Bits: 115328
+  testTargets: []

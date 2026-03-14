@@ -67,6 +67,21 @@ public class PlayerController : MonoBehaviour
             // }
         }
 
+        if (_gameManager.Settings.autoTakeEnemy)
+        {
+            _machine.LevelManager.cinemachineOrbitalFollow.Radius = 0.6f;
+            _machine.LevelManager.cinemachineOrbitalFollow.TargetOffset = new Vector3(0, 3, 0);
+            _machine.LevelManager.cinemachineCamera.Lens = new Unity.Cinemachine.LensSettings
+            {
+                FieldOfView = 25f,
+                NearClipPlane = 0.1f,
+                FarClipPlane = 5000,
+                Dutch = 0,
+                ModeOverride = Unity.Cinemachine.LensSettings.OverrideModes.None,
+            };
+        }
+
+
         // вешаем событие на нажатие правого джойстика.
         JoystickController.RunPointerDown += OnPointerDownRightJoystick;
     }
@@ -102,19 +117,19 @@ public class PlayerController : MonoBehaviour
         //     moveDirection.Normalize();
         // }
 
-        if (_gameManager.Settings.autoTakeEnemy)
-        {
-            _machine.LevelManager.cinemachineOrbitalFollow.Radius = 0.6f;
-            _machine.LevelManager.cinemachineOrbitalFollow.TargetOffset = new Vector3(0, 3, 0);
-            _machine.LevelManager.cinemachineCamera.Lens = new Unity.Cinemachine.LensSettings
-            {
-                FieldOfView = 30f,
-                NearClipPlane = 0.1f,
-                FarClipPlane = 5000,
-                Dutch = 0,
-                ModeOverride = Unity.Cinemachine.LensSettings.OverrideModes.None,
-            };
-        }
+        // if (_gameManager.Settings.autoTakeEnemy)
+        // {
+        //     _machine.LevelManager.cinemachineOrbitalFollow.Radius = 0.6f;
+        //     _machine.LevelManager.cinemachineOrbitalFollow.TargetOffset = new Vector3(0, 3, 0);
+        //     _machine.LevelManager.cinemachineCamera.Lens = new Unity.Cinemachine.LensSettings
+        //     {
+        //         FieldOfView = 25f,
+        //         NearClipPlane = 0.1f,
+        //         FarClipPlane = 5000,
+        //         Dutch = 0,
+        //         ModeOverride = Unity.Cinemachine.LensSettings.OverrideModes.None,
+        //     };
+        // }
 
         // захватываем позицию мыши или джойстика управления башней.
         if (!_machine.MachineLevelData.isBot) // && !_gameManager.Settings.autoTakeEnemy

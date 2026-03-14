@@ -912,7 +912,7 @@ namespace Mikalai2006.Voxel
                 JobHandle collisionJobHandle = collisionJob.ScheduleByRef(points.Length, 1);
                 collisionJobHandle.Complete(); // Or use dependency
 
-                // Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
+                Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
                 List<RemoveVoxel> needCreateElements = new();
                 for (int el = 0; el < collisionJob._needCreateElements.Length; el++)
                 {

@@ -402,7 +402,7 @@ public static class Helpers
   // Helper function to check if a point is inside a sphere
   public static bool IsInsideSphere(Vector3 point, Vector3 sphereCenter, float sphereRadius)
   {
-      return Vector3.Distance(point, sphereCenter) <= sphereRadius;
+      return (point - sphereCenter).sqrMagnitude <= (sphereRadius * sphereRadius); //Vector3.Distance(point, sphereCenter) <= sphereRadius;
   }
   // Helper function to check if a point is inside a sphere and on the border
   public static bool IsInsideSphereBorder(Vector3 point, Vector3 sphereCenter, float sphereRadius, float innerRadius)
