@@ -6,6 +6,8 @@ using Cysharp.Threading.Tasks;
 using Loader;
 using UIToolkitLibrary;
 using Unity.VisualScripting;
+using System.Linq;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -395,7 +397,50 @@ public class LevelManager : MonoBehaviour
         obj.Init(configBonus);
     }
 
-//     public void LoadedAsset(AsyncOperationHandle<GameObject> handle, GameMachine configMachine, MachineLevelData data, GridTileNode node)
+    
+    public async UniTask CreateECS(List<RemoveVoxel> needCreateElements, float radiusExplode, Vector3 direction, Vector3 normal, Transform container)
+    {
+        if (!cancelToken.IsCancellationRequested)
+        {
+            float startTime = Time.realtimeSinceStartup;
+
+            needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
+            List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
+            var maxCount = Mathf.Min(
+                GameManager.Instance.Settings.DebugSettings.mode == AppMode.Mobile ? GameManager.Instance.Settings.countMaxCreateVoxelsByStepMobile : GameManager.Instance.Settings.countMaxCreateVoxelsByStep,
+                needCreateElements.Count
+            );
+
+            for (int i = 0; i < maxCount; i++)
+            {
+                var reflexDirection = Vector3.Reflect(direction, normal);
+                var rot = Quaternion.Euler(
+                    UnityEngine.Random.Range(0, 90),
+                    UnityEngine.Random.Range(0, 90),
+                    UnityEngine.Random.Range(0, 90)
+                );
+                var dir = rot * reflexDirection;
+                listData.Add(new ECSDataSpawn
+                {
+                    color = needCreateElements[i].color,
+                    direction = i % 60 != 0 ?  dir.normalized : UnityEngine.Random.onUnitSphere.normalized, // UnityEngine.Random.onUnitSphere,
+                    forceAmount = UnityEngine.Random.Range(radiusExplode, 150 * radiusExplode),
+                    lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
+                    position = container.TransformPoint(needCreateElements[i].position),
+                    scale = GameManager.Instance.Settings.scaleObjects
+                });
+            }
+
+            // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. \r\nCount  = {listData.Count}");
+            // Debug.Log($"CreateGravityECS: {listData.Count}");
+
+            // await UniTask.NextFrame();
+            ECSManager.UpdateDataDots(listData).Forget();
+            // Debug.Log($"Time CreateESC: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateECS: {maxCount}");
+        }
+    }
+
+    //     public void LoadedAsset(AsyncOperationHandle<GameObject> handle, GameMachine configMachine, MachineLevelData data, GridTileNode node)
     //     {
     //         if (handle.Status == AsyncOperationStatus.Succeeded)
     //         {

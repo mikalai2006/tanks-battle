@@ -56,7 +56,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: aea35b8f4d6187847be7fad4fe70f981, type: 2}
   distanceAttack: 30
   timeBetweenShot: 1
-  speedBullet: 30
+  speedBullet: 40
   color: {r: 0, g: 0.61455005, b: 0.7924528, a: 1}
   references:
     version: 2

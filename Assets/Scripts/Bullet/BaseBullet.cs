@@ -50,27 +50,27 @@ public class BaseBullet : MonoBehaviour
             OnBoom(null);
         }
         
-        if (endPosition != Vector3.zero)
-        {
-            currentDistance = Vector3.Distance(transform.position, endPosition);
-            // Debug.Log($"currentDistance={currentDistance} [{hitDistance}]<{Vector3.Distance(transform.position, startPosition)}>");
-            if (currentDistance <= 1)
-            {
-                OnCreateContact(hit);
-            }
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (!isActive) return;
-
-        // if (rb.isKinematic)
+        // if (endPosition != Vector3.zero)
         // {
-        //     Vector3 targetPosition = rb.position + (forward * Muzzle.Data.speedBullet * 100f * Time.fixedDeltaTime); // Example: moving forward
-        //     rb.MovePosition(targetPosition);
+        //     currentDistance = Vector3.Distance(transform.position, endPosition);
+        //     // Debug.Log($"currentDistance={currentDistance} [{hitDistance}]<{Vector3.Distance(transform.position, startPosition)}>");
+        //     if (currentDistance <= 1)
+        //     {
+        //         OnCreateContact(hit);
+        //     }
         // }
     }
+
+    // void FixedUpdate()
+    // {
+    //     if (!isActive) return;
+
+    //     // if (rb.isKinematic)
+    //     // {
+    //     //     Vector3 targetPosition = rb.position + (forward * Muzzle.Data.speedBullet * 100f * Time.fixedDeltaTime); // Example: moving forward
+    //     //     rb.MovePosition(targetPosition);
+    //     // }
+    // }
 
     
     void OnCollisionEnter(Collision collision)
@@ -398,41 +398,41 @@ public class BaseBullet : MonoBehaviour
         //         }
         // #endif
         
-        // var ra = Random.value;
-        if (!Helpers.GetChance(_gameManager.Settings.playerOptions.chanceReflex))
-        {
-            if (Physics.Raycast(transform.position, forward, out hit, Muzzle.Data.distanceAttack, ~(ignoreMask)))
-            {
-                Container voxelContainer = hit.collider.gameObject.GetComponent<Container>();
-                if (voxelContainer != null && voxelContainer.IsDestructible())
-                {
-                    startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                    endPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-                    hitDistance = Vector3.Distance(startPosition, endPosition);
-                    if (!Machine.MachineLevelData.isBot)
-                    {
-                        Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}>[distance={hitDistance}]</color>");
-                    }
-                } else
-                {
-                    if (!Machine.MachineLevelData.isBot)
-                    {
-                        Debug.Log($"<color=#7ccf00>Raycast ударил в объект {hit.collider.name}<{hit.point}> без Container или он не разрушаемый</color>");
-                    }
-                }
+        // // var ra = Random.value;
+        // if (!Helpers.GetChance(_gameManager.Settings.playerOptions.chanceReflex))
+        // {
+        //     if (Physics.Raycast(transform.position, forward, out hit, Muzzle.Data.distanceAttack, ~(ignoreMask)))
+        //     {
+        //         Container voxelContainer = hit.collider.gameObject.GetComponent<Container>();
+        //         if (voxelContainer != null && voxelContainer.IsDestructible())
+        //         {
+        //             startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        //             endPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+        //             hitDistance = Vector3.Distance(startPosition, endPosition);
+        //             if (!Machine.MachineLevelData.isBot)
+        //             {
+        //                 Debug.Log($"<color=#FFA500FF>Raycast ударил в объект {hit.collider.name}<{hit.point}>[distance={hitDistance}]</color>");
+        //             }
+        //         } else
+        //         {
+        //             if (!Machine.MachineLevelData.isBot)
+        //             {
+        //                 Debug.Log($"<color=#7ccf00>Raycast ударил в объект {hit.collider.name}<{hit.point}> без Container или он не разрушаемый</color>");
+        //             }
+        //         }
 
-                // Vector3 localPoint = hit.collider.gameObject.transform.parent.InverseTransformPoint(hit.point);
+        //         // Vector3 localPoint = hit.collider.gameObject.transform.parent.InverseTransformPoint(hit.point);
 
-                // Vector3 worldPointCollisionWithOffset = hit.point + forward;
-                // Vector3 localPoint2 = hit.collider.gameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
-                // Debug.Log($"point = {hit.point}, localPositionPoint={localPoint}, worldPointCollisionWithOffset={worldPointCollisionWithOffset}, localPoint2={localPoint2}");
+        //         // Vector3 worldPointCollisionWithOffset = hit.point + forward;
+        //         // Vector3 localPoint2 = hit.collider.gameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
+        //         // Debug.Log($"point = {hit.point}, localPositionPoint={localPoint}, worldPointCollisionWithOffset={worldPointCollisionWithOffset}, localPoint2={localPoint2}");
 
-            }
-            // Debug.DrawRay(startPosition, forward * ConfigMuzzle.distanceAttack, Color.white, 3);
-        } else
-        {
-            Debug.Log($"<color=#7ccf00>РИКОШЕТ</color>");
-        }
+        //     }
+        //     // Debug.DrawRay(startPosition, forward * ConfigMuzzle.distanceAttack, Color.white, 3);
+        // } else
+        // {
+        //     Debug.Log($"<color=#7ccf00>РИКОШЕТ</color>");
+        // }
 
 
         if (!rb.isKinematic)

@@ -857,22 +857,59 @@ namespace Mikalai2006.Voxel
                 float startTime = Time.realtimeSinceStartup;
 
                 pointCollision = _pointCollision;
+                
+                float3[] keys = dataVoxels.Keys.ToArray();
+                NativeArray<float3> points = new NativeArray<float3>(keys, Allocator.Persistent);
 
-                // проверяем - было ли попадание в это место.
-                for (int i = 0; i < prevContacts.Count; i++)
-                {
-                    if (Helpers.IsInsideSphere(pointCollision, prevContacts[i], radiusExplode))
+                // если элемент с выпуклым коллайдером и является meshCollider.
+                if (voxelMeshRender.Config.typeCollider == TypeCollider.MeshCollider && voxelMeshRender.Config.isConvex) {
+                    // ищем ближайшую точку в меше.
+                    var distances = new NativeArray<float>(points.Length, Allocator.Persistent);
+                    var job = new FindNearestJob
                     {
-                        Vector3 worldPoint = _explodeGameObject.transform.parent.TransformPoint(pointCollision);
-                        var normalizeVector = direction.normalized;
-                        float scaleValue = _explodeGameObject.transform.lossyScale.x;
-                        // Debug.Log($"scale={_explodeGameObject.transform.lossyScale}");
-                        Vector3 worldPointCollisionWithOffset = worldPoint + (normalizeVector * radiusExplode * scaleValue);
-                        pointCollision = _explodeGameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
-                        // Debug.Log($"point  collision {_pointCollision} => new point => {pointCollision}[direction={direction}/{normalizeVector}]");
+                        points = points,
+                        targetPosition = pointCollision,
+                        distances = distances
+                    };
+
+                    // Запуск параллельно: 64 - размер батча (количество элементов на поток)
+                    JobHandle handle = job.Schedule(points.Length, 64);
+                    handle.Complete(); // Ожидание завершения
+
+                    // Поиск минимального расстояния в основном потоке
+                    int nearestIndex = 0;
+                    float minDistance = float.MaxValue;
+                    for (int i = 0; i < distances.Length; i++)
+                    {
+                        if (distances[i] < minDistance)
+                        {
+                            minDistance = distances[i];
+                            nearestIndex = i;
+                        }
                     }
+
+                    pointCollision = points[nearestIndex];
+
+                    // Debug.Log($"Ближайшая точка: {points[nearestIndex]} найдена за {(Time.realtimeSinceStartup - startTime) * 1000f} ms. (исх. {pointCollision})");
+
+                    distances.Dispose();
+
+                    // // проверяем - было ли попадание в это место.
+                    // for (int i = 0; i < prevContacts.Count; i++)
+                    // {
+                    //     if (Helpers.IsInsideSphere(pointCollision, prevContacts[i], radiusExplode))
+                    //     {
+                    //         Vector3 worldPoint = _explodeGameObject.transform.parent.TransformPoint(pointCollision);
+                    //         var normalizeVector = direction.normalized;
+                    //         float scaleValue = _explodeGameObject.transform.lossyScale.x;
+                    //         // Debug.Log($"scale={_explodeGameObject.transform.lossyScale}");
+                    //         Vector3 worldPointCollisionWithOffset = woraldPoint + (normalizeVector * radiusExplode * scaleValue);
+                    //         pointCollision = _explodeGameObject.transform.parent.InverseTransformPoint(worldPointCollisionWithOffset);
+                    //         // Debug.Log($"point  collision {_pointCollision} => new point => {pointCollision}[direction={direction}/{normalizeVector}]");
+                    //     }
+                    // }
+                    // prevContacts.Add(pointCollision);
                 }
-                prevContacts.Add(pointCollision);
 
                 // explodeGameObject = _explodeGameObject;
 
@@ -894,10 +931,8 @@ namespace Mikalai2006.Voxel
                 //         new Vector3(x, y, z-1)
                 //     };
 
-                float3[] keys = dataVoxels.Keys.ToArray();
                 NativeArray<float3> _needCreateElements = new NativeArray<float3>(keys.Length, Allocator.Persistent);
                 NativeArray<float3> _needRemoveElements = new NativeArray<float3>(keys.Length, Allocator.Persistent);
-                NativeArray<float3> points = new NativeArray<float3>(keys, Allocator.Persistent);
                 // points.CopyFrom(keys);
 
                 var collisionJob = new CheckCollisionJob
@@ -912,7 +947,7 @@ namespace Mikalai2006.Voxel
                 JobHandle collisionJobHandle = collisionJob.ScheduleByRef(points.Length, 1);
                 collisionJobHandle.Complete(); // Or use dependency
 
-                Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
+                // Debug.Log($"Time JOB create data1: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. Count point={points.Count()}. ");
                 List<RemoveVoxel> needCreateElements = new();
                 for (int el = 0; el < collisionJob._needCreateElements.Length; el++)
                 {
@@ -1058,7 +1093,7 @@ namespace Mikalai2006.Voxel
                     // Debug.Log("Time upload mesh: " + (Time.realtimeSinceStartup - temp).ToString("f6"));
                     // Debug.Log($"needCreateElements {needCreateElements.Count} voxels!");
                     // StartCoroutine(createGO());
-                    await CreateECS(needCreateElements, Mathf.Min(radiusExplode, GameManager.Instance.Settings.maxRadiusCreateVoxels), direction, normal);
+                    _levelManager.CreateECS(needCreateElements, Mathf.Min(radiusExplode, GameManager.Instance.Settings.maxRadiusCreateVoxels), direction, normal, transform).Forget();
                 }
 
 
@@ -1380,47 +1415,47 @@ namespace Mikalai2006.Voxel
         //     return list;
         // }
 
-        public async UniTask CreateECS(List<RemoveVoxel> needCreateElements, float radiusExplode, Vector3 direction, Vector3 normal)
-        {
-            if (!cancelTokenSrc.IsCancellationRequested)
-            {
-                float startTime = Time.realtimeSinceStartup;
+        // public async UniTask CreateECS(List<RemoveVoxel> needCreateElements, float radiusExplode, Vector3 direction, Vector3 normal)
+        // {
+        //     if (!cancelTokenSrc.IsCancellationRequested)
+        //     {
+        //         float startTime = Time.realtimeSinceStartup;
 
-                needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
-                List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
-                var maxCount = Mathf.Min(
-                    GameManager.Instance.Settings.DebugSettings.mode == AppMode.Mobile ? GameManager.Instance.Settings.countMaxCreateVoxelsByStepMobile : GameManager.Instance.Settings.countMaxCreateVoxelsByStep,
-                    needCreateElements.Count
-                );
+        //         needCreateElements = needCreateElements.OrderBy(t => UnityEngine.Random.value).ToList();
+        //         List<ECSDataSpawn> listData = new List<ECSDataSpawn>();
+        //         var maxCount = Mathf.Min(
+        //             GameManager.Instance.Settings.DebugSettings.mode == AppMode.Mobile ? GameManager.Instance.Settings.countMaxCreateVoxelsByStepMobile : GameManager.Instance.Settings.countMaxCreateVoxelsByStep,
+        //             needCreateElements.Count
+        //         );
 
-                for (int i = 0; i < maxCount; i++)
-                {
-                    var reflexDirection = Vector3.Reflect(direction, normal);
-                    var rot = Quaternion.Euler(
-                        UnityEngine.Random.Range(0, 90),
-                        UnityEngine.Random.Range(0, 90),
-                        UnityEngine.Random.Range(0, 90)
-                    );
-                    var dir = rot * reflexDirection;
-                    listData.Add(new ECSDataSpawn
-                    {
-                        color = needCreateElements[i].color,
-                        direction = i % 50 != 0 ?  dir.normalized : UnityEngine.Random.onUnitSphere.normalized, // UnityEngine.Random.onUnitSphere,
-                        forceAmount = UnityEngine.Random.Range(radiusExplode, 100 * radiusExplode),
-                        lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
-                        position = transform.TransformPoint(needCreateElements[i].position),
-                        scale = GameManager.Instance.Settings.scaleObjects
-                    });
-                }
+        //         for (int i = 0; i < maxCount; i++)
+        //         {
+        //             var reflexDirection = Vector3.Reflect(direction, normal);
+        //             var rot = Quaternion.Euler(
+        //                 UnityEngine.Random.Range(0, 180),
+        //                 UnityEngine.Random.Range(0, 180),
+        //                 UnityEngine.Random.Range(0, 180)
+        //             );
+        //             var dir = rot * reflexDirection;
+        //             listData.Add(new ECSDataSpawn
+        //             {
+        //                 color = needCreateElements[i].color,
+        //                 direction = i % 50 != 0 ?  dir.normalized : UnityEngine.Random.onUnitSphere.normalized, // UnityEngine.Random.onUnitSphere,
+        //                 forceAmount = UnityEngine.Random.Range(radiusExplode, 100 * radiusExplode),
+        //                 lifetimeRemaining = UnityEngine.Random.Range(.3f, 1f),
+        //                 position = transform.TransformPoint(needCreateElements[i].position),
+        //                 scale = GameManager.Instance.Settings.scaleObjects
+        //             });
+        //         }
 
-                // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. \r\nCount  = {listData.Count}");
-                // Debug.Log($"CreateGravityECS: {listData.Count}");
+        //         // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. \r\nCount  = {listData.Count}");
+        //         // Debug.Log($"CreateGravityECS: {listData.Count}");
 
-                // await UniTask.NextFrame();
-                _levelManager.ECSManager.UpdateDataDots(listData).Forget();
-                // Debug.Log($"Time CreateESC: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateECS: {maxCount}");
-            }
-        }
+        //         // await UniTask.NextFrame();
+        //         _levelManager.ECSManager.UpdateDataDots(listData).Forget();
+        //         // Debug.Log($"Time CreateESC: {(Time.realtimeSinceStartup - startTime) * 1000f} ms, CreateECS: {maxCount}");
+        //     }
+        // }
 
         // public async UniTask CreateObjectsAsync()
         // {
