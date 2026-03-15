@@ -363,6 +363,14 @@ MonoBehaviour:
     m_Key: message_price_button_success
     m_Metadata:
       m_Items: []
+  - m_Id: 105907685143552000
+    m_Key: btn_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 105907737853370368
+    m_Key: btn_wheel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

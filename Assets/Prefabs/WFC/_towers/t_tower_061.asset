@@ -51,7 +51,7 @@ MonoBehaviour:
     useGlobalScale: 0
     customScale: 0
   minRank: {fileID: 11400000, guid: dd829ef5fd3460f4c887342a07bd1d19, type: 2}
-  speedRotateTower: 10
+  speedRotateTower: 0.5
   references:
     version: 2
     RefIds: []

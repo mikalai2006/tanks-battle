@@ -165,6 +165,7 @@ namespace UIToolkitLibrary
             // Button Exit.
             m_ButtonExit = new Button {name = IDNames.TopSideBarBtnExit};
             m_ButtonExit.text = "Выход";
+            m_ButtonExit.AddToClassList("button button-primary");
             m_ButtonExit.AddToClassList(ClassNames.TopSideBarBtnExit);
             m_ButtonExit.pickingMode = PickingMode.Position;
             mGridButtons.Add(m_ButtonExit);

@@ -51,7 +51,7 @@ MonoBehaviour:
     useGlobalScale: 0
     customScale: 0.03
   lifeTime: 3
-  damageRadius: 10
+  damageRadius: 4
   countCollisions: 1
   effectBoom: {fileID: 3862267629786060469, guid: 79b8d16096caabb46a3c8a6c351345a9, type: 3}
   particleBoom: {fileID: 173993176318110863, guid: e0a35134ec4ab79469ecdb91736391d2, type: 3}

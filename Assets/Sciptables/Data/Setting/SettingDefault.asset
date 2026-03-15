@@ -927,7 +927,7 @@ MonoBehaviour:
     doubleClickThreshold: 0.2
     speedRotateCamera: {x: 2, y: 0.5}
     chanceReflex: 0
-    MobileFPS: 60
+    MobileFPS: 50
   scaleObjects: 0.03125
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
@@ -936,7 +936,7 @@ MonoBehaviour:
     mode: 1
     disableCreateTiles: 0
     logEnabled: 1
-    ECSColliderSphere: 0
+    ECSColliderSphere: 1
     muzzleOffsetEffectPoint: {x: 0, y: 0, z: 5}
     gizmoWheels: 0
     gizmoWheelsLength: 0.1

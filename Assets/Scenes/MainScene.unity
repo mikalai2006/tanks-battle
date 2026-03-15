@@ -945,7 +945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   Material: {fileID: 2100000, guid: 0d6c8f73d7ca8d64984fd7cd0237d235, type: 2}
-  EntityCountGenerate: 100000
+  EntityCountGenerate: 30000
   EntityCountUpdate: 0
   forceAmount: {x: 100, y: 1000}
   lifeTimeRange: {x: 1, y: 5}

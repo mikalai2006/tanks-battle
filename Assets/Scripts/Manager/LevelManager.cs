@@ -431,7 +431,7 @@ public class LevelManager : MonoBehaviour
                 });
             }
 
-            // Debug.Log($"Time CreateGravityECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. \r\nCount  = {listData.Count}");
+            Debug.Log($"Time CreateECS: {(Time.realtimeSinceStartup - startTime) * 1000f} ms. \r\nCount  = {listData.Count}");
             // Debug.Log($"CreateGravityECS: {listData.Count}");
 
             // await UniTask.NextFrame();

@@ -116,7 +116,9 @@
 }
 
 .button-primary:hover .icon,
-.button-primary:active .icon {
+.button-primary:active .icon,
+.button-primary:hover .icon2_1,
+.button-primary:active .icon2_1 {
     -unity-background-image-tint-color: var(--color-primary-500);
 }
 
@@ -125,7 +127,9 @@
 }
 
 .button-secondary:hover .icon,
-.button-secondary:active .icon {
+.button-secondary:active .icon,
+.button-secondary:hover .icon2_1,
+.button-secondary:active .icon2_1 {
     -unity-background-image-tint-color: var(--color-secondary-100);
 }
 
@@ -134,7 +138,9 @@
 }
 
 .button-accent:hover .icon,
-.button-accent:active .icon {
+.button-accent:active .icon,
+.button-accent:hover .icon2_1,
+.button-accent:active .icon2_1 {
     -unity-background-image-tint-color: var(--color-accent-500);
 }
 
@@ -350,4 +356,15 @@
     width: 20px;
     height: 20px;
     flex-shrink: 0;
+}
+
+.icon-big {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.icon2_1 {
+    width: 100px;
+    height: 50px;
 }

@@ -50,7 +50,7 @@ MonoBehaviour:
     isDestructible: 1
     useGlobalScale: 0
     customScale: 0
-  soundShot: {fileID: 8300000, guid: 3aa3eab7a8ce7174386e2951ab7ed82c, type: 3}
+  soundShot: {fileID: 8300000, guid: c4a1d61b73254b9489c0d344e9ea5b82, type: 3}
   fireEffect: {fileID: 1528843350133427584, guid: 88bc4b22906409a428bbae5e6e1e893a, type: 3}
   Bullet: {fileID: 11400000, guid: 64290cba6e7858d48bf1e053bbd8ceed, type: 2}
   material: {fileID: 2100000, guid: aea35b8f4d6187847be7fad4fe70f981, type: 2}

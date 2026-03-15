@@ -25,9 +25,9 @@ public class AreaSearch : MonoBehaviour
         cancelTokenSource = new CancellationTokenSource();
 
         targets = new();
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.enabled = false;
         Machine = GetComponentInParent<BaseMachine>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.enabled = !Machine.MachineLevelData.isBot;
     }
 
     private void OnDestroy()

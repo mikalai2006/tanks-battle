@@ -220,119 +220,119 @@ public class PlayerController : MonoBehaviour
             _machine.Stop();
         }
 
-        // обработка вращения башни.
-        if (!_machine.MachineLevelData.isBot && !_gameManager.Settings.autoTakeEnemy && rotateDirection != Vector3.zero)
-        {
-            if (_gameManager.Settings.DebugSettings.mode == AppMode.Mobile)
-            {
-                // // android.
-                // if (_machine.levelManager.cinemachineOrbitalFollow != null)
-                // {
-                //     if (_machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == -180)
-                //     {
-                //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = 180;
-                //     } else if (_machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == 180)
-                //     {
-                //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = -180;
-                //     }
-                //     _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = Mathf.Clamp(
-                //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value + rotateDirection.x,
-                //         -180,
-                //         180
-                //     );
-                //     _machine.levelManager.cinemachineOrbitalFollow.VerticalAxis.Value = Mathf.Clamp(
-                //         _machine.levelManager.cinemachineOrbitalFollow.VerticalAxis.Value - rotateDirection.z,
-                //         -10,
-                //         25
-                //     );
-                // }
-                // _machine.levelManager.UiTopSide.OnChangeCrossPosition(direction);
+        // // обработка вращения башни.
+        // if (!_machine.MachineLevelData.isBot && !_gameManager.Settings.autoTakeEnemy && rotateDirection != Vector3.zero)
+        // {
+        //     if (_gameManager.Settings.DebugSettings.mode == AppMode.Mobile)
+        //     {
+        //         // // android.
+        //         // if (_machine.levelManager.cinemachineOrbitalFollow != null)
+        //         // {
+        //         //     if (_machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == -180)
+        //         //     {
+        //         //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = 180;
+        //         //     } else if (_machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value == 180)
+        //         //     {
+        //         //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = -180;
+        //         //     }
+        //         //     _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value = Mathf.Clamp(
+        //         //         _machine.levelManager.cinemachineOrbitalFollow.HorizontalAxis.Value + rotateDirection.x,
+        //         //         -180,
+        //         //         180
+        //         //     );
+        //         //     _machine.levelManager.cinemachineOrbitalFollow.VerticalAxis.Value = Mathf.Clamp(
+        //         //         _machine.levelManager.cinemachineOrbitalFollow.VerticalAxis.Value - rotateDirection.z,
+        //         //         -10,
+        //         //         25
+        //         //     );
+        //         // }
+        //         // _machine.levelManager.UiTopSide.OnChangeCrossPosition(direction);
 
-                // // Vector3 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
-                // // Vector3 worldPosition = Camera.ScreenToWorldPoint(_machine.levelManager.UiTopSide.CrossObjectTransform.position);
-                // // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
+        //         // // Vector3 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
+        //         // // Vector3 worldPosition = Camera.ScreenToWorldPoint(_machine.levelManager.UiTopSide.CrossObjectTransform.position);
+        //         // // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
 
-                // // Vector3 worldPoint;
-                // // RectTransformUtility.ScreenPointToWorldPointInRectangle(_machine.levelManager.UiTopSide.CrossObjectTransform, screenPoint, Camera, out worldPoint);
+        //         // // Vector3 worldPoint;
+        //         // // RectTransformUtility.ScreenPointToWorldPointInRectangle(_machine.levelManager.UiTopSide.CrossObjectTransform, screenPoint, Camera, out worldPoint);
 
-                // Ray ray = Camera.ScreenPointToRay(_machine.levelManager.UiTopSide.CrossObjectTransform.position);
-                // if (Physics.Raycast(ray, out RaycastHit hit))
-                // {
-                //     Vector3 targetPosition = hit.point;
-                //     directionRotation = targetPosition - transform.position;
-                //     //direction.y = 0;
-                //     Debug.DrawRay(Camera.transform.position, directionRotation);
-                //     // Debug.Log($"Camera name: {Camera.name}, POINT={hit.point}");
+        //         // Ray ray = Camera.ScreenPointToRay(_machine.levelManager.UiTopSide.CrossObjectTransform.position);
+        //         // if (Physics.Raycast(ray, out RaycastHit hit))
+        //         // {
+        //         //     Vector3 targetPosition = hit.point;
+        //         //     directionRotation = targetPosition - transform.position;
+        //         //     //direction.y = 0;
+        //         //     Debug.DrawRay(Camera.transform.position, directionRotation);
+        //         //     // Debug.Log($"Camera name: {Camera.name}, POINT={hit.point}");
 
-                // }
+        //         // }
 
-                // // Vector3 directionToTarget = worldPoint - transform.position;
-                // // Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-                // // Debug.Log($"targetRotation={targetRotation.eulerAngles}, worldPoint={worldPoint}");
-            }
-            // else
-            // {
-            //     // WEBGL.
-            //     Vector3 positionMouse = Mouse.current.position.ReadValue();
+        //         // // Vector3 directionToTarget = worldPoint - transform.position;
+        //         // // Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        //         // // Debug.Log($"targetRotation={targetRotation.eulerAngles}, worldPoint={worldPoint}");
+        //     }
+        //     // else
+        //     // {
+        //     //     // WEBGL.
+        //     //     Vector3 positionMouse = Mouse.current.position.ReadValue();
 
-            //     // positionMouse.z = Camera.transform.position.z;
+        //     //     // positionMouse.z = Camera.transform.position.z;
 
-            //     Vector3 positionMouseWorld = Camera.ScreenToWorldPoint(positionMouse);
-            //     // Debug.Log($"positionMouseWorld = {positionMouseWorld}, positionMouse={positionMouse}");
+        //     //     Vector3 positionMouseWorld = Camera.ScreenToWorldPoint(positionMouse);
+        //     //     // Debug.Log($"positionMouseWorld = {positionMouseWorld}, positionMouse={positionMouse}");
 
-            //     _machine.levelManager.UiTopSide.OnSetCrossPosition(positionMouse);
+        //     //     _machine.levelManager.UiTopSide.OnSetCrossPosition(positionMouse);
 
-            //     // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
+        //     //     // Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera, _machine.levelManager.UiTopSide.CrossObjectTransform.position);
 
-            //     // Vector3 worldPoint;
-            //     // RectTransformUtility.ScreenPointToWorldPointInRectangle(_machine.levelManager.UiTopSide.CrossObjectTransform, screenPoint, Camera, out worldPoint);
+        //     //     // Vector3 worldPoint;
+        //     //     // RectTransformUtility.ScreenPointToWorldPointInRectangle(_machine.levelManager.UiTopSide.CrossObjectTransform, screenPoint, Camera, out worldPoint);
 
-            //     Ray ray = Camera.ScreenPointToRay(positionMouse);
-            //     // positionMouse.z = transform.position.z - _camera.transform.position.z; //_camera.farClipPlane * .5f;;
-            //     // Vector3 worldPoint = _camera.ScreenToWorldPoint(positionMouse);
-            //     // // Calculate the direction vector from the object to the mouse
-            //     // direction = worldPoint - transform.position;
-            //     // Debug.Log($"worldPoint= {worldPoint}, positionMouse= {positionMouse}, direction={direction}");
-            //     if (Physics.Raycast(ray, out RaycastHit hit))
-            //     {
-            //         Vector3 targetPosition = hit.point;
-            //         direction = targetPosition - transform.position;
-            //         //direction.y = 0;
-            //         Debug.DrawRay(Camera.transform.position, direction, Color.magenta);
-            //         // Debug.Log($"Camera name: {Camera.name}, hit name={hit.collider.name}, POINT={hit.point}");
-            //     }
-            // }
+        //     //     Ray ray = Camera.ScreenPointToRay(positionMouse);
+        //     //     // positionMouse.z = transform.position.z - _camera.transform.position.z; //_camera.farClipPlane * .5f;;
+        //     //     // Vector3 worldPoint = _camera.ScreenToWorldPoint(positionMouse);
+        //     //     // // Calculate the direction vector from the object to the mouse
+        //     //     // direction = worldPoint - transform.position;
+        //     //     // Debug.Log($"worldPoint= {worldPoint}, positionMouse= {positionMouse}, direction={direction}");
+        //     //     if (Physics.Raycast(ray, out RaycastHit hit))
+        //     //     {
+        //     //         Vector3 targetPosition = hit.point;
+        //     //         direction = targetPosition - transform.position;
+        //     //         //direction.y = 0;
+        //     //         Debug.DrawRay(Camera.transform.position, direction, Color.magenta);
+        //     //         // Debug.Log($"Camera name: {Camera.name}, hit name={hit.collider.name}, POINT={hit.point}");
+        //     //     }
+        //     // }
 
-            // if (direction != Vector3.zero)
-            // {
-            //     Debug.Log($"direction={direction}");
-            //     // // Calculate the angle in degrees
-            //     // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            //     Quaternion lookRotation = Quaternion.LookRotation(direction);
-
-
-            //     // Debug.Log($"angle = {angle}, direction= {direction}");
-            //     for (int i = 0; i < _machine.Towers.Count; i++)
-            //     {
-            //         // _machine.Towers[i].OnSetAngleTower(angle);
-            //         _machine.Towers[i].OnSetAngleTower(lookRotation.eulerAngles.y);
-            //     }
-            // }
-            // if (rotateDirection != Vector3.zero)
-            // {
-            //     // Debug.Log($"direction={direction}");
-            //     // // Calculate the angle in degrees
-            //     // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            //     // Quaternion lookRotation = Quaternion.LookRotation(direction);
+        //     // if (direction != Vector3.zero)
+        //     // {
+        //     //     Debug.Log($"direction={direction}");
+        //     //     // // Calculate the angle in degrees
+        //     //     // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        //     //     Quaternion lookRotation = Quaternion.LookRotation(direction);
 
 
-            //     // Debug.Log($"angle = {angle}, direction= {direction}");
-            //     for (int i = 0; i < _machine.Towers.Count; i++)
-            //     {
-            //         _machine.Towers[i].OnSetAngleTower(rotateDirection);
-            //     }
-            // }
-        }
+        //     //     // Debug.Log($"angle = {angle}, direction= {direction}");
+        //     //     for (int i = 0; i < _machine.Towers.Count; i++)
+        //     //     {
+        //     //         // _machine.Towers[i].OnSetAngleTower(angle);
+        //     //         _machine.Towers[i].OnSetAngleTower(lookRotation.eulerAngles.y);
+        //     //     }
+        //     // }
+        //     // if (rotateDirection != Vector3.zero)
+        //     // {
+        //     //     // Debug.Log($"direction={direction}");
+        //     //     // // Calculate the angle in degrees
+        //     //     // float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        //     //     // Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+
+        //     //     // Debug.Log($"angle = {angle}, direction= {direction}");
+        //     //     for (int i = 0; i < _machine.Towers.Count; i++)
+        //     //     {
+        //     //         _machine.Towers[i].OnSetAngleTower(rotateDirection);
+        //     //     }
+        //     // }
+        // }
     }
     
 

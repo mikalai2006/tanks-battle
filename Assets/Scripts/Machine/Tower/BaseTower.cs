@@ -519,7 +519,7 @@ public class BaseTower : MonoBehaviour, IColored
         {
             OnSetDirectionTower(angle);
 
-            float speedRotation = 1;
+            float speedRotation = 0.2f;
             if (Data.isRotate)
             {
                 DataBonus bonusSpeedTower = null;
