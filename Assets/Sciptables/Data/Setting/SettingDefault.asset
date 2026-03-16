@@ -928,6 +928,7 @@ MonoBehaviour:
     speedRotateCamera: {x: 2, y: 0.5}
     chanceReflex: 0
     MobileFPS: 50
+    delayFrameRefreshHud: 1
   scaleObjects: 0.03125
   maxRadiusCreateVoxels: 10
   countMaxCreateVoxelsByStep: 1000
@@ -966,6 +967,7 @@ MonoBehaviour:
   takeNearEnemy: 1
   autoTakeEnemy: 0
   autoShot: 0
+  offsetHud: {x: 0, y: 0.5, z: 0}
   gerbs:
   - {fileID: -1690008810, guid: 4a06dee038f38864980f5c69508583d0, type: 3}
   - {fileID: -1606978075, guid: 4a06dee038f38864980f5c69508583d0, type: 3}

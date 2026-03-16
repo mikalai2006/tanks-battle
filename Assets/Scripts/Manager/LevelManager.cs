@@ -5,9 +5,7 @@ using Unity.Cinemachine;
 using Cysharp.Threading.Tasks;
 using Loader;
 using UIToolkitLibrary;
-using Unity.VisualScripting;
 using System.Linq;
-using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public LoaderBarProvider LoaderBarProvider { get; private set; }
     private GameManager _gameManager => GameManager.Instance;
     private GameSetting _gameSetting => GameManager.Instance.Settings;
+    [SerializeField] IndicatorManager IndicatorManager;
     // [SerializeField] public Tile3DGenerator tile3DGenerator;
     [SerializeField] public WFCGenerator wFCGenerator;
     [SerializeField] public MapManager mapManager;
@@ -211,21 +210,27 @@ public class LevelManager : MonoBehaviour
                     r.collisionDetectionMode = CollisionDetectionMode.Continuous;
                     r.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
-                    IndicatorMachine indicatorObject = Instantiate(
-                        configMachine.indicatorPrefab,
-                        Vector3.zero,
-                        Quaternion.identity,
-                        objectSpawnIndicators.transform
-                        // obj.WrapperTools.transform
-                    );
-                    if (indicatorObject != null)
+                    // IndicatorMachine indicatorObject = Instantiate(
+                    //     configMachine.indicatorPrefab,
+                    //     Vector3.zero,
+                    //     Quaternion.identity,
+                    //     objectSpawnIndicators.transform
+                    //     // obj.WrapperTools.transform
+                    // );
+                    // if (indicatorObject != null)
+                    // {
+                    //     obj.OnSetIndicator(indicatorObject);
+                    //     indicatorObject.OnSetMachine(obj);
+                    //     OnAddIndicator(indicatorObject);
+                    //     // indicatorObject.OnSetTarget(obj);
+                    // }
+                    
+                    // indicators UI Toolkit.
+                    if (data.isBot)
                     {
-                        obj.OnSetIndicator(indicatorObject);
-                        indicatorObject.OnSetMachine(obj);
-                        OnAddIndicator(indicatorObject);
-                        // indicatorObject.OnSetTarget(obj);
+                        IndicatorManager.AddIndicator(obj);
+                        obj.OnSetIndicatorManager(IndicatorManager);
                     }
-
 
 
                         // Debug.Log($"load {obj.name}/{team.index}");
@@ -320,14 +325,16 @@ public class LevelManager : MonoBehaviour
         BaseMachine targetIndicator = machines.Find(m => !m.MachineLevelData.isBot);
         if (targetIndicator != null)
         {
-            for (int i = 0; i < indicators.Count; i++)
-            {
-                IndicatorMachine ind = indicators[i].GetComponentInChildren<IndicatorMachine>();
-                if (ind != null)
-                {
-                    ind.OnSetTarget(targetIndicator);
-                }
-            }
+            // for (int i = 0; i < indicators.Count; i++)
+            // {
+            //     IndicatorMachine ind = indicators[i].GetComponentInChildren<IndicatorMachine>();
+            //     if (ind != null)
+            //     {
+            //         ind.OnSetTarget(targetIndicator);
+            //     }
+            // }
+            IndicatorManager.SetTarget(targetIndicator);
+            IndicatorManager.Init();
         }
 
         // создание списков машин для каждой машины.
@@ -359,7 +366,8 @@ public class LevelManager : MonoBehaviour
 
     public void OnRemoveMachine(BaseMachine _mach)
     {
-        OnRemoveIndicator(_mach.Indicator);
+        // OnRemoveIndicator(_mach.Indicator);
+        IndicatorManager.RemoveIndicator(_mach);
 
         if (machines.Contains(_mach))
         {
@@ -367,22 +375,22 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void OnAddIndicator(IndicatorMachine im)
-    {
-        if (!indicators.Contains(im))
-        {
-            indicators.Add(im);
-        }
-    }
+    // public void OnAddIndicator(IndicatorMachine im)
+    // {
+    //     if (!indicators.Contains(im))
+    //     {
+    //         indicators.Add(im);
+    //     }
+    // }
 
-    public void OnRemoveIndicator(IndicatorMachine im)
-    {
-        if (indicators.Contains(im))
-        {
-            im.DestroyGameObject();
-            indicators.Remove(im);
-        }
-    }
+    // public void OnRemoveIndicator(IndicatorMachine im)
+    // {
+    //     if (indicators.Contains(im))
+    //     {
+    //         im.DestroyGameObject();
+    //         indicators.Remove(im);
+    //     }
+    // }
 
     public void OnSpawnBonus(GridTileNode node, GameBonus configBonus)
     {

@@ -61,6 +61,8 @@ public class GameSetting : ScriptableObject
   public bool autoTakeEnemy;
   [Tooltip("Автовыстрелы при наведении на цель (не для ботов)")]
   public bool autoShot;
+  [Tooltip("Смещение маркера HUD")]
+  public Vector3 offsetHud;
 
 
   [Space(5)]
@@ -248,6 +250,8 @@ public struct PlayerOptions
   [Range(0f, 1)] public float chanceReflex;
   [Tooltip("FPS на моб. устройствах")]
   public int MobileFPS;
+  [Tooltip("Сколько кадров ждать обновления позиции HUD маркера (1 - обновление каждый кадр)")]
+  public int delayFrameRefreshHud;
 }
 
 [Serializable]

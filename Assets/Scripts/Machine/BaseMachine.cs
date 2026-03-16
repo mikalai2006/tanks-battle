@@ -85,8 +85,10 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
 
     [Space(5)]
     [Header("Можно скрыть эти опции")]
-    [SerializeField] private IndicatorMachine _indicator;
-    public IndicatorMachine Indicator => _indicator;
+    // [SerializeField] private IndicatorMachine _indicator;
+    // public IndicatorMachine Indicator => _indicator;
+    [SerializeField] private IndicatorManager _indicatorManager;
+    public IndicatorManager IndicatorManager => _indicatorManager;
     [SerializeField] HealthBarController HealthBar;
     public NavMeshAgent navMeshAgent;
     public NavMeshObstacle navMeshObstacle;
@@ -291,10 +293,14 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
         }
     }
 
-    public void OnSetIndicator(IndicatorMachine im)
+    public void OnSetIndicatorManager(IndicatorManager im)
     {
-        _indicator = im;
+        _indicatorManager = im;
     }
+    // public void OnSetIndicator(IndicatorMachine im)
+    // {
+    //     _indicator = im;
+    // }
 
     // public void Initialize(MachineLevelData machineLevelData, GameMachine config)
     // {
@@ -844,7 +850,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             CheckVisibleMachine(cancelTokenSource.Token).Forget();
         } else
         {
-            Indicator.gameObject.SetActive(true);
+            // Indicator.gameObject.SetActive(true);
+            IndicatorManager.SetShowIndicator(this);
         }
     }
 
@@ -856,7 +863,8 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
     {
         isRunningCoroutineCheckVisible = true;
 
-        Indicator.gameObject.SetActive(false);
+        // Indicator.gameObject.SetActive(false);
+        IndicatorManager.SetHideIndicator(this);
 
         // Ключевое условие: работает, пока переменная true
         while (inCamera && !token.IsCancellationRequested)
@@ -865,18 +873,21 @@ public abstract class BaseMachine : MonoBehaviour, IHealthed
             // Linecast возвращает true, если что-то попалось на пути
             // (Indicator.Target.Body.transform.position + new Vector3(0,1.4f,0))
             // LevelManager.Camera.transform.position
-            var startObject = Indicator.Target.Towers.First();
+            // var startObject = Indicator.Target.Towers.First();
+            var startObject = IndicatorManager.Target.Towers.First();
             if (Physics.Linecast(startObject.transform.position + (startObject.transform.forward * 0.5f), transform.position+ new Vector3(0,0.1f,0), out RaycastHit hit, ~LayerMask.GetMask("Bullet", "AreaSearch", "Nature"))) //LayerMask.GetMask("Wall", "Machine") & 
             {
                 // Debug.DrawLine(startObject.transform.position + (startObject.transform.forward * .5f), transform.position+ new Vector3(0,0.1f,0), Color.yellow, 5);
                 // Если объект, в который попали, - это наша цель, значит, она видна
                 if (hit.transform == transform)
                 {
-                    Indicator.gameObject.SetActive(false);
+                    // Indicator.gameObject.SetActive(false);
+                    IndicatorManager.SetHideIndicator(this);
                 } else
                 {
                     // Если попали во что-то другое, цель скрыта
-                    Indicator.gameObject.SetActive(true);
+                    // Indicator.gameObject.SetActive(true);
+                    IndicatorManager.SetShowIndicator(this);
                     // Debug.Log($"Попали в {hit.transform.name}");
                 }
             }

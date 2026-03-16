@@ -1,0 +1,9 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Styles/root.uss?fileID=7433441132597879392&amp;guid=4ddc5132678afbf408db7c41bc4e926d&amp;type=3#root"/>
+    <Style src="project://database/Assets/UI/Styles/tailwindcss_base.uss?fileID=7433441132597879392&amp;guid=355bdeddf02e75247b03301baba68a71&amp;type=3#tailwindcss_base"/>
+    <Style src="project://database/Assets/UI/Styles/base.uss?fileID=7433441132597879392&amp;guid=92cb09e88af8a8641b907a6c643b8511&amp;type=3#base"/>
+    <ui:VisualElement picking-mode="Ignore" name="Wrapper" style="flex-grow: 1; flex-shrink: 0; width: 100%; height: 100%; flex-direction: row;">
+        <ui:VisualElement class="panel-primary" style="width: 50px; height: 50px; flex-shrink: 0; translate: 17px 0; display: none;"/>
+        <ui:VisualElement class="panel-primary" style="width: 50px; height: 50px; flex-shrink: 0; translate: 0 -22px; display: none;"/>
+    </ui:VisualElement>
+</ui:UXML>
