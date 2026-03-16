@@ -862,7 +862,7 @@ namespace Mikalai2006.Voxel
                 NativeArray<float3> points = new NativeArray<float3>(keys, Allocator.Persistent);
 
                 // если элемент с выпуклым коллайдером и является meshCollider.
-                if (voxelMeshRender.Config.typeCollider == TypeCollider.MeshCollider && voxelMeshRender.Config.isConvex) {
+                if (voxelMeshRender.Config.typeCollider == TypeCollider.MeshCollider && voxelMeshRender.Config.isConvex && points.Length > 0) {
                     // ищем ближайшую точку в меше.
                     var distances = new NativeArray<float>(points.Length, Allocator.Persistent);
                     var job = new FindNearestJob

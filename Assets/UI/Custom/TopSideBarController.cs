@@ -1,5 +1,4 @@
 
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UIToolkitLibrary;
 using UnityEngine;
@@ -20,7 +19,7 @@ public class TopSideBarController : MonoBehaviour
     [SerializeField] float m_LowHPPercent = 25;
     // [SerializeField] Transform transformToFollow;
     [SerializeField] TopSideBarComponent m_TopSideBar;
-    [SerializeField] UIDocument m_RootDoc;
+    [SerializeField] private UIDocument m_RootDoc;
     [SerializeField] VisualTreeAsset m_assetInfoItem;
     [SerializeField] VisualElement m_BonusBox;
     [SerializeField] VisualElement m_InfoBox;
@@ -99,7 +98,7 @@ public class TopSideBarController : MonoBehaviour
 
     void SetupController()
     {
-        m_RootDoc = GetComponent<UIDocument>();
+        // m_RootDoc = GetComponent<UIDocument>();
         
         VisualElement rootElement = m_RootDoc.rootVisualElement;
         rootElement.usageHints = UsageHints.DynamicTransform & UsageHints.DynamicColor;
